@@ -1,0 +1,79 @@
+.alt-moves-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.alt-moves-card:hover,
+.alt-moves-card:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--pill-off, #3d4256);
+}
+.alt-moves-card canvas {
+  display: block;
+  width: 100%;
+  height: 4.6rem;
+  margin-top: 0.35rem;
+  flex: 1 1 auto;
+}
+.alt-moves-modal-panel {
+  width: min(1120px, 100%);
+  max-height: min(92vh, 860px);
+}
+.alt-moves-title-main {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ink);
+}
+.alt-moves-title-sub {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: none;
+}
+.alt-moves-chart-wrap {
+  width: 100%;
+  height: min(58vh, 520px);
+  min-height: 280px;
+}
+.alt-moves-chart-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.alt-moves-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.7rem;
+  margin-top: 0.85rem;
+}
+.alt-moves-key button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0.12rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.alt-moves-key button.is-off {
+  color: var(--muted);
+  opacity: 0.45;
+}
+.alt-moves-swatch {
+  width: 0.7rem;
+  height: 0.18rem;
+  border-radius: 2px;
+  background: currentColor;
+  flex-shrink: 0;
+}
