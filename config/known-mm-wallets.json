@@ -1,0 +1,42 @@
+{
+  "_note": "Lean Solana MM dests for V4 dest-watch. Reports stay off GitHub. G1.",
+  "_updated": "2026-08-26",
+  "wallets": [
+    {
+      "address": "MfDuWeqSHEqTFVYZ7LoexgAK9dxk7cy4DFJWjWMGVWa",
+      "chain": "solana",
+      "entity": "Wintermute",
+      "role": "OTC",
+      "confidence": "HIGH",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "attribution_source": "MeteoraAg/ops blacklist report (W45 Wintermute OTC) + secondary analytics list (agentmila/solana-market-makers) + Dune curated label Wintermute 4"
+    },
+    {
+      "address": "5sTQ5ih7xtctBhMXHr3f1aWdaXazWrWfoehqWdqWnTFP",
+      "chain": "solana",
+      "entity": "Wintermute",
+      "role": "market-making",
+      "confidence": "MEDIUM",
+      "source": "https://github.com/agentmila/solana-market-makers",
+      "attribution_source": "agentmila/solana-market-makers (Nansen cross-ref claim)"
+    },
+    {
+      "address": "BMnT51N4iSNhWU5PyFFgWwFvN1jgaiiDr9ZHgnkm3iLJ",
+      "chain": "solana",
+      "entity": "Wintermute",
+      "role": "OTC",
+      "confidence": "MEDIUM",
+      "source": "https://github.com/agentmila/solana-market-makers",
+      "attribution_source": "agentmila/solana-market-makers (Nansen cross-ref claim)"
+    },
+    {
+      "address": "HwDkuDCUipJHHKodBBCjffFvrjhmd4iVVh7fq25fShvt",
+      "chain": "solana",
+      "entity": "DWF Labs",
+      "role": "trading",
+      "confidence": "HIGH",
+      "source": "https://blockchainreporter.net/dwf-labs-unveils-official-wallets-used-for-buyouts-on-secondary-marketplaces/",
+      "attribution_source": "Official disclosure by DWF Labs partner Andrei Grachev (May 2025) via multiple news reprints of disclosed addresses"
+    }
+  ]
+}

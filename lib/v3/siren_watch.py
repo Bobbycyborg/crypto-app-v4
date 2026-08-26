@@ -83,7 +83,10 @@ TICKER_TO_KEY = {
 WINTERMUTE = "MfDuWeqSHEqTFVYZ7LoexgAK9dxk7cy4DFJWjWMGVWa"
 
 CEX_PATH = ROOT / "config" / "known-cex-wallets.json"
-MM_PATH = ROOT / "reports/shared-mm-registry/shared-entity-wallet-registry.json"
+MM_PATHS = [
+    ROOT / "config" / "known-mm-wallets.json",
+    ROOT / "reports/shared-mm-registry/shared-entity-wallet-registry.json",
+]
 
 
 def _cex_tag(meta: dict[str, Any]) -> str:
@@ -110,20 +113,29 @@ def _cex_tag(meta: dict[str, Any]) -> str:
 
 def _load_dest_tags() -> tuple[dict[str, str], dict[str, str]]:
     cex: dict[str, str] = {}
+    mm: dict[str, str] = {}
     raw = json.loads(CEX_PATH.read_text())
     for addr, meta in (raw.get("wallets") or {}).items():
-        if meta.get("type") == "cex":
+        kind = meta.get("type")
+        if kind == "cex":
             cex[addr] = _cex_tag(meta)
-    mm: dict[str, str] = {}
-    reg = json.loads(MM_PATH.read_text())
-    for w in reg.get("wallets") or []:
-        if w.get("chain") != "solana":
+        elif kind == "mm" and not str(addr).startswith("0x"):
+            mm[addr] = meta.get("entity") or _cex_tag(meta)
+    for path in MM_PATHS:
+        if not path.exists():
             continue
-        if w.get("confidence") not in ("HIGH", "MEDIUM"):
-            continue
-        addr = w.get("address")
-        if addr:
-            mm[addr] = w.get("entity") or "MM"
+        reg = json.loads(path.read_text())
+        rows = reg.get("wallets") or []
+        if isinstance(rows, dict):
+            rows = [{"address": a, **(m if isinstance(m, dict) else {})} for a, m in rows.items()]
+        for w in rows:
+            if w.get("chain") not in (None, "solana"):
+                continue
+            if w.get("confidence") not in (None, "HIGH", "MEDIUM"):
+                continue
+            addr = w.get("address")
+            if addr and not str(addr).startswith("0x"):
+                mm[addr] = w.get("entity") or "MM"
     return cex, mm
 
 

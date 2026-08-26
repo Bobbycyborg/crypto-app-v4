@@ -1,6 +1,6 @@
 {
   "_note": "Labelled Solana wallets for PUMP forensics. CEX deposit \u2260 sale. Custody/Squads \u2260 independent holder. Verify before production use.",
-  "_updated": "2026-08-22",
+  "_updated": "2026-08-26",
   "_changelog_2026-08-12": "Removed dead Wintermute label GJRs4FwHteRiZRbrawiUfucAayY3aBSfMETebeeHagZ (account does not exist on-chain). Canonical MM/OTC source: reports/shared-mm-registry/shared-entity-wallet-registry.json",
   "wallets": {
     "5tzFkiKscXHK5ZXCGbPz2TPLjSddKEQw6YQ6WpnFtP1P": {
@@ -2032,9 +2032,56 @@
       "chain": "ethereum",
       "source": "https://etherscan.io/address/0x87b49A99CbCe4A9030e67919B776AA97d538aDda",
       "confidence": "HIGH"
+    },
+    "5sTQ5ih7xtctBhMXHr3f1aWdaXazWrWfoehqWdqWnTFP": {
+      "label": "Wintermute (market-making)",
+      "entity": "Wintermute",
+      "type": "mm",
+      "chain": "solana",
+      "source": "https://github.com/agentmila/solana-market-makers",
+      "confidence": "MEDIUM",
+      "g1_seeded": "2026-08-26"
+    },
+    "BMnT51N4iSNhWU5PyFFgWwFvN1jgaiiDr9ZHgnkm3iLJ": {
+      "label": "Wintermute (OTC)",
+      "entity": "Wintermute",
+      "type": "mm",
+      "chain": "solana",
+      "source": "https://github.com/agentmila/solana-market-makers",
+      "confidence": "MEDIUM",
+      "g1_seeded": "2026-08-26"
+    },
+    "HwDkuDCUipJHHKodBBCjffFvrjhmd4iVVh7fq25fShvt": {
+      "label": "DWF Labs (trading)",
+      "entity": "DWF Labs",
+      "type": "mm",
+      "chain": "solana",
+      "source": "https://blockchainreporter.net/dwf-labs-unveils-official-wallets-used-for-buyouts-on-secondary-marketplaces/",
+      "confidence": "HIGH",
+      "g1_seeded": "2026-08-26"
     }
   },
   "_changelog_2026-08-21": "Added official OKX/Bybit/Bitfinex Solana PoR keys as type=cex dests. Transfer != sale.",
   "_changelog_2026-08-21b": "Added official Binance Solana PoR hot/cold keys as type=cex. 60k user deposits not added.",
-  "_changelog_2026-08-22": "Seeded 7 HIGH ETH MM dests (Wintermute 5, DWF EVM, Jump, Amber, GSR, Cumberland x2). Nametag or official disclosure. Transfer \u2260 sale. No new Solana MM dests."
+  "_changelog_2026-08-22": "Seeded 7 HIGH ETH MM dests (Wintermute 5, DWF EVM, Jump, Amber, GSR, Cumberland x2). Nametag or official disclosure. Transfer \u2260 sale. No new Solana MM dests.",
+  "_changelog_2026-08-26_g1": {
+    "added_mm_solana": [
+      {
+        "entity": "Wintermute",
+        "confidence": "MEDIUM",
+        "address": "5sTQ5ih7xtctBhMXHr3f1aWdaXazWrWfoehqWdqWnTFP"
+      },
+      {
+        "entity": "Wintermute",
+        "confidence": "MEDIUM",
+        "address": "BMnT51N4iSNhWU5PyFFgWwFvN1jgaiiDr9ZHgnkm3iLJ"
+      },
+      {
+        "entity": "DWF Labs",
+        "confidence": "HIGH",
+        "address": "HwDkuDCUipJHHKodBBCjffFvrjhmd4iVVh7fq25fShvt"
+      }
+    ],
+    "note": "G1: missing proved MM dests so V4 dest-watch can name desks. No 60k deposits. No invented Gate/Kraken/Coinbase."
+  }
 }
