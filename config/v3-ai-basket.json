@@ -1,0 +1,12 @@
+{
+  "name": "V3 AI / compute basket (Phase 1 fixed)",
+  "implementation_status": "NEEDS_ENGINEERING",
+  "note": "Fixed constituents for Phase 1. Constituent history and liquidity filters not validated. Do not retrospectively change.",
+  "constituents": [
+    { "coingecko_id": "render-token", "symbol": "RENDER" },
+    { "coingecko_id": "fetch-ai", "symbol": "FET" },
+    { "coingecko_id": "bittensor", "symbol": "TAO" },
+    { "coingecko_id": "akash-network", "symbol": "AKT" },
+    { "coingecko_id": "io-net", "symbol": "IO" }
+  ]
+}

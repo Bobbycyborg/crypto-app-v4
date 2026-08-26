@@ -1,0 +1,112 @@
+{
+  "fetched_at": "2026-08-16T08:00:00Z",
+  "ok": true,
+  "prices": {
+    "assets": {
+      "BTC": {"ok": true, "price_usd": 63000, "ath_usd": 120000, "freshness": "CURRENT", "change_30d_pct": -2.0, "circulating_supply": 19800000},
+      "SOL": {"ok": true, "price_usd": 75, "ath_usd": 260, "freshness": "CURRENT", "change_30d_pct": 5.0, "circulating_supply": 500000000},
+      "RENDER": {"ok": true, "price_usd": 1.26, "ath_usd": 13, "freshness": "CURRENT", "change_30d_pct": -8.0, "circulating_supply": 500000000},
+      "PUMP": {"ok": true, "price_usd": 0.0028, "ath_usd": 0.01, "freshness": "CURRENT", "change_30d_pct": 12.0, "circulating_supply": 690000000000},
+      "GRASS": {"ok": true, "price_usd": 0.33, "ath_usd": 3.5, "freshness": "CURRENT", "change_30d_pct": -6.0, "circulating_supply": 400000000},
+      "RAY": {"ok": true, "price_usd": 0.62, "ath_usd": 8, "freshness": "CURRENT", "change_30d_pct": -4.0, "circulating_supply": 300000000},
+      "IO": {"ok": true, "price_usd": 0.11, "ath_usd": 4, "freshness": "CURRENT", "change_30d_pct": -7.0, "circulating_supply": 200000000},
+      "NOS": {"ok": true, "price_usd": 0.26, "ath_usd": 3, "freshness": "CURRENT", "change_30d_pct": -5.0, "circulating_supply": 100000000},
+      "FARTCOIN": {"ok": true, "price_usd": 0.14, "ath_usd": 2.48, "freshness": "CURRENT", "change_30d_pct": -10.0, "circulating_supply": 999000000},
+      "SPX6900": {"ok": true, "price_usd": 0.32, "ath_usd": 2.27, "freshness": "CURRENT", "change_30d_pct": -9.0, "circulating_supply": 931000000},
+      "ZEC": {"ok": true, "price_usd": 489, "ath_usd": 800, "freshness": "CURRENT", "change_30d_pct": 80.0, "circulating_supply": 16000000},
+      "HYPE": {"ok": true, "price_usd": 57, "ath_usd": 90, "freshness": "CURRENT", "change_30d_pct": -3.0, "circulating_supply": 270000000}
+    }
+  },
+  "technicals": {
+    "assets": {
+      "btc": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "sol": {"ok": true, "summary": "Below 50d · above 200d", "above_50": false, "above_200": true},
+      "render": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "pump": {"ok": true, "summary": "Above 50d · below 200d", "above_50": true, "above_200": false},
+      "grass": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "ray": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "io": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "nos": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "fartcoin": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "spx6900": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false},
+      "zec": {"ok": true, "summary": "Above 50d + 200d", "above_50": true, "above_200": true},
+      "hype": {"ok": true, "summary": "Below 50d + 200d", "above_50": false, "above_200": false}
+    }
+  },
+  "assets": {
+    "render": {
+      "foundation": {"ok": true, "circulating": 500000000},
+      "bme": {"ok": true, "last4_burned": 1000},
+      "bme_emit": {"ok": true, "last4_emit": 60000},
+      "frames": {"ok": true, "cumulative": 78000000}
+    },
+    "hype": {
+      "hyperliquid": {
+        "ok": true,
+        "circulatingSupply": 270000000,
+        "maxSupply": 1000000000,
+        "future_emissions": 500000000
+      }
+    }
+  },
+  "feeds": {
+    "cg_by_id": {
+      "bitcoin": {"price": 63000, "ath": 120000, "chg_30d": -2.0, "circ": 19800000, "max": 21000000},
+      "solana": {"price": 75, "ath": 260, "chg_30d": 5.0, "circ": 500000000},
+      "render-token": {"price": 1.26, "ath": 13, "chg_30d": -8.0, "circ": 500000000, "max": 644000000},
+      "pump-fun": {"price": 0.0028, "ath": 0.01, "chg_30d": 12.0},
+      "grass": {"price": 0.33, "ath": 3.5, "chg_30d": -6.0, "circ": 400000000, "max": 1000000000},
+      "raydium": {"price": 0.62, "ath": 8, "chg_30d": -4.0, "circ": 300000000, "max": 555000000},
+      "io": {"price": 0.11, "ath": 4, "chg_30d": -7.0, "circ": 200000000, "max": 800000000},
+      "nosana": {"price": 0.26, "ath": 3, "chg_30d": -5.0, "circ": 100000000, "max": 100000000},
+      "fartcoin": {"price": 0.14, "ath": 2.48, "chg_30d": -10.0, "circ": 999000000, "max": 1000000000},
+      "spx6900": {"price": 0.32, "ath": 2.27, "chg_30d": -9.0, "circ": 931000000, "max": 1000000000},
+      "zcash": {"price": 489, "ath": 800, "chg_30d": 80.0, "circ": 16000000, "max": 21000000},
+      "hyperliquid": {"price": 57, "ath": 90, "chg_30d": -3.0, "circ": 270000000, "max": 1000000000}
+    },
+    "supply_static": {
+      "FARTCOIN": {
+        "ok": true,
+        "mint_authority_revoked": true,
+        "freeze_authority_revoked": true
+      },
+      "SPX6900": {
+        "ok": true,
+        "portal_architecture_known": true
+      }
+    },
+    "leverage": {
+      "BTC": {"ok": true, "spot_listed": true, "perp_spot": 1.2, "oi_usd": 5000000000, "funding": 0.0001},
+      "SOL": {"ok": true, "spot_listed": true, "perp_spot": 1.5, "oi_usd": 800000000, "funding": 0.00005},
+      "RENDER": {"ok": true, "spot_listed": true, "perp_spot": 1.1, "oi_usd": 5000000, "funding": 0.0001},
+      "PUMP": {"ok": true, "spot_listed": true, "perp_spot": 2.5, "oi_usd": 2000000, "funding": 0.0002},
+      "GRASS": {"ok": true, "spot_listed": true, "perp_spot": 1.8, "oi_usd": 1000000, "funding": 0.0001},
+      "RAY": {"ok": true, "spot_listed": true, "perp_spot": 0.9, "oi_usd": 3000000, "funding": 0.00005},
+      "IO": {"ok": true, "spot_listed": true, "perp_spot": 1.4, "oi_usd": 2000000, "funding": 0.0001},
+      "FARTCOIN": {"ok": true, "spot_listed": true, "perp_spot": 2.2, "oi_usd": 4000000, "funding": 0.00015},
+      "SPX6900": {"ok": true, "spot_listed": false, "perp_spot": 3.0, "oi_usd": 2950000, "funding": 0.00001},
+      "ZEC": {"ok": true, "spot_listed": true, "perp_spot": 1.3, "oi_usd": 50000000, "funding": 0.0001},
+      "HYPE": {"ok": true, "spot_listed": false, "perp_spot": 2.8, "oi_usd": 100000000, "funding": 0.0002}
+    },
+    "concentration": {
+      "FARTCOIN": {"ok": true, "top20_pct": 44.7},
+      "SPX6900": {"ok": true, "top20_pct": 38.0},
+      "RENDER": {"ok": true, "top20_pct": 35.0}
+    },
+    "labelled": {
+      "ok": true,
+      "fart_wm": 5000000,
+      "spx_wm": 379457,
+      "ray_buyback": 1000000,
+      "pump_squads": 50000000000,
+      "pump_squads_n": 12
+    },
+    "helius_sample": {
+      "RAY": {"ok": true, "net_tokens": 1000, "unique_buyers": 5},
+      "RENDER": {"ok": true, "net_tokens": -500, "unique_buyers": 3}
+    },
+    "coinbase_fart": {"ok": true, "quote_24h": 500000},
+    "zec": {"ok": true, "pct": 42.0},
+    "sol_rpc": {"ok": true, "inflation_pct": 5.0, "issuance_yr": 23000000}
+  }
+}

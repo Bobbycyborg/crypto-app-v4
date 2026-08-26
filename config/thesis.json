@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "thesis_start_date": "2026-07-26",
+  "thesis_deadline": "2026-12-23",
+  "thesis_window_days": 150,
+  "notes": "Set thesis_start_date to first production report date (YYYY-MM-DD). Never auto-change. thesis_deadline = start + 150 days."
+}

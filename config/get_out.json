@@ -1,0 +1,125 @@
+{
+  "dust_usd": 5,
+  "pin_first": ["SOL"],
+  "always_keep": ["BTC", "HYPE", "ZEC"],
+  "drop_if_zero": ["RAY"],
+  "never_rows": ["USDC"],
+  "article_slug": {
+    "BTC": "btc",
+    "HYPE": "hype",
+    "ZEC": "zec",
+    "SOL": "sol",
+    "PUMP": "pump",
+    "GRASS": "grass",
+    "RENDER": "render",
+    "NOS": "nos",
+    "FART": "fartcoin",
+    "SPX": "spx6900",
+    "IO": "io",
+    "ORCA": null,
+    "BONK": null,
+    "GIGA": null,
+    "LOCKIN": null,
+    "RETARDIO": null
+  },
+  "display": {
+    "FARTCOIN": "FART",
+    "SPX6900": "SPX"
+  },
+  "levels": {
+    "PUMP": {
+      "text": "daily close that holds under $0.00215",
+      "kind": "daily_close",
+      "level": 0.00215
+    },
+    "SOL": {
+      "text": "daily close under $70",
+      "kind": "daily_close",
+      "level": 70
+    },
+    "ORCA": {
+      "text": "daily close under $1.01",
+      "kind": "daily_close",
+      "level": 1.01
+    },
+    "RENDER": {
+      "text": "daily close under $1.10",
+      "kind": "daily_close",
+      "level": 1.10
+    },
+    "IO": {
+      "text": "daily close under $0.090",
+      "kind": "daily_close",
+      "level": 0.09
+    },
+    "NOS": {
+      "text": "daily close under $0.220",
+      "kind": "daily_close",
+      "level": 0.22
+    },
+    "SPX": {
+      "text": "daily close under $0.275",
+      "kind": "daily_close",
+      "level": 0.275
+    },
+    "FART": {
+      "text": "daily close under $0.115",
+      "kind": "daily_close",
+      "level": 0.115
+    },
+    "BONK": {
+      "text": "daily close under $0.00000222",
+      "kind": "daily_close",
+      "level": 0.00000222
+    },
+    "GRASS": {
+      "text": "1h close under $0.286 (next slice) · last = daily close that holds under $0.270",
+      "kind": "grass",
+      "level_1h": 0.286,
+      "level_daily": 0.27
+    },
+    "GIGA": { "text": "—", "kind": "none" },
+    "LOCKIN": { "text": "—", "kind": "none" },
+    "RETARDIO": { "text": "—", "kind": "none" },
+    "BTC": { "text": "—", "kind": "none" },
+    "HYPE": { "text": "—", "kind": "none" },
+    "ZEC": { "text": "—", "kind": "none" }
+  },
+  "venues": {
+    "BTC": ["spot", "BTCUSDT"],
+    "HYPE": ["perp", "HYPEUSDT"],
+    "ZEC": ["spot", "ZECUSDT"],
+    "SOL": ["spot", "SOLUSDT"],
+    "PUMP": ["spot", "PUMPUSDT"],
+    "RENDER": ["spot", "RENDERUSDT"],
+    "IO": ["spot", "IOUSDT"],
+    "ORCA": ["spot", "ORCAUSDT"],
+    "BONK": ["spot", "BONKUSDT"],
+    "GRASS": ["perp", "GRASSUSDT"],
+    "FART": ["perp", "FARTCOINUSDT"],
+    "SPX": ["perp", "SPXUSDT"],
+    "NOS": ["coingecko", "nosana"]
+  },
+  "sirens": {
+    "SOL": "",
+    "PUMP": "",
+    "GRASS": "",
+    "RENDER": "",
+    "NOS": "",
+    "FART": "",
+    "SPX": "",
+    "IO": "",
+    "ORCA": "",
+    "BONK": "",
+    "GIGA": "",
+    "LOCKIN": "",
+    "RETARDIO": ""
+  },
+  "extra_mints": {
+    "ORCA": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+    "BONK": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+    "GIGA": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+    "LOCKIN": "8Ki8DpuWNxu9VsS3kQbarsCWMcFGWkzzA8pUPto9zBd5",
+    "RETARDIO": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "V3 market breadth universe (Phase 1 fixed)",
+  "implementation_status": "PRODUCTION_READY",
+  "note": "Fixed liquidity-qualified panel — ex-BTC, ex-ETH, ex-stablecoins. Not portfolio holdings. Constituents locked at Phase 1; do not retrospectively swap winners.",
+  "liquidity_rule": "Major CEX-listed liquid majors at lock date. Automated liquidity filter not yet wired.",
+  "constituents": [
+    { "coingecko_id": "solana", "symbol": "SOL" },
+    { "coingecko_id": "ripple", "symbol": "XRP" },
+    { "coingecko_id": "binancecoin", "symbol": "BNB" },
+    { "coingecko_id": "dogecoin", "symbol": "DOGE" },
+    { "coingecko_id": "cardano", "symbol": "ADA" },
+    { "coingecko_id": "chainlink", "symbol": "LINK" },
+    { "coingecko_id": "avalanche-2", "symbol": "AVAX" },
+    { "coingecko_id": "polkadot", "symbol": "DOT" },
+    { "coingecko_id": "tron", "symbol": "TRX" },
+    { "coingecko_id": "sui", "symbol": "SUI" },
+    { "coingecko_id": "stellar", "symbol": "XLM" },
+    { "coingecko_id": "litecoin", "symbol": "LTC" },
+    { "coingecko_id": "aptos", "symbol": "APT" },
+    { "coingecko_id": "arbitrum", "symbol": "ARB" },
+    { "coingecko_id": "optimism", "symbol": "OP" },
+    { "coingecko_id": "near", "symbol": "NEAR" },
+    { "coingecko_id": "internet-computer", "symbol": "ICP" },
+    { "coingecko_id": "cosmos", "symbol": "ATOM" },
+    { "coingecko_id": "filecoin", "symbol": "FIL" },
+    { "coingecko_id": "algorand", "symbol": "ALGO" },
+    { "coingecko_id": "mantle", "symbol": "MNT" }
+  ]
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto Decision Report — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Jost:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../dashboard-v1.css">
+</head>
+<body>
+<div class="dash">
+
+  <header class="dash-head">
+    <h1>Crypto Decision Report</h1>
+    <select class="week-inline" aria-label="Report week">
+      <option selected>9th of August, 2026</option>
+    </select>
+  </header>
+
+  <section class="metric-block" aria-label="Portfolio summary">
+    <div class="metric-row metric-row-4">
+      <div class="metric-card">
+        <div class="metric-label">Portfolio value</div>
+        <div class="metric-value">$2,283</div>
+        <div class="metric-sub">£1,714 tracked · BTC incomplete</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Weekly call</div>
+        <div class="metric-value call-orange">WAIT</div>
+        <div class="metric-sub">Confidence LOW</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Deploy this week</div>
+        <div class="metric-value">$0</div>
+        <div class="metric-sub">£250/mo planned · not deployed</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Alts beating BTC (30d)</div>
+        <div class="metric-value call-red">0</div>
+        <div class="metric-sub">of 8 tracked</div>
+      </div>
+    </div>
+    <div class="metric-row metric-row-3">
+      <div class="metric-card">
+        <div class="metric-label">Crypto cycle</div>
+        <div class="metric-value metric-with-lamp"><span class="lamp lamp-orange" aria-hidden="true"></span> Orange</div>
+        <div class="metric-sub">BTC down-leg maturing · not confirmed</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Alt cycle</div>
+        <div class="metric-value metric-with-lamp"><span class="lamp lamp-red" aria-hidden="true"></span> Red</div>
+        <div class="metric-sub">Breadth weak · dominance rising</div>
+      </div>
+      <div class="metric-card metric-wide">
+        <div class="metric-label">Bottom line</div>
+        <div class="metric-bl">Hold all positions. Deploy $0 until BTC is connected and signals align.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="holdings-block" aria-label="Holdings">
+    <h2 class="section-label">Holdings · tap to open report</h2>
+    <div class="holdings-grid">
+      <button type="button" class="hold-btn" data-asset="btc">
+        <span class="hold-ticker">BTC</span>
+        <span class="hold-price">—</span>
+        <span class="hold-call call-muted">INCOMPLETE</span>
+      </button>
+      <button type="button" class="hold-btn" data-asset="sol" data-src="sol-v4.html">
+        <span class="hold-ticker">SOL</span>
+        <span class="hold-price">$74.65</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+      <button type="button" class="hold-btn active" data-asset="render" data-src="render-v4.html">
+        <span class="hold-ticker">RENDER</span>
+        <span class="hold-price">$1.32</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+      <button type="button" class="hold-btn" data-asset="io" data-src="io-v4.html">
+        <span class="hold-ticker">IO</span>
+        <span class="hold-price">$0.12</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+      <button type="button" class="hold-btn" data-asset="nos" data-src="nos-v4.html">
+        <span class="hold-ticker">NOS</span>
+        <span class="hold-price">$0.26</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+      <button type="button" class="hold-btn" data-asset="grass" data-src="grass-v4.html">
+        <span class="hold-ticker">GRASS</span>
+        <span class="hold-price">$0.30</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+      <button type="button" class="hold-btn" data-asset="fartcoin" data-src="fartcoin-v4.html">
+        <span class="hold-ticker">FARTCOIN</span>
+        <span class="hold-price">$0.13</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+      <button type="button" class="hold-btn" data-asset="spx6900" data-src="spx6900-v4.html">
+        <span class="hold-ticker">SPX6900</span>
+        <span class="hold-price">$0.33</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+      <button type="button" class="hold-btn" data-asset="2z" data-src="2z-v4.html">
+        <span class="hold-ticker">2Z</span>
+        <span class="hold-price">$0.055</span>
+        <span class="hold-call call-orange"><span class="lamp lamp-orange" aria-hidden="true"></span> HOLD</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="report-panel" aria-label="Asset report">
+    <div class="report-panel-head">
+      <h2 class="section-label" id="reportTitle">RENDER · Weekly Report</h2>
+    </div>
+    <div class="report-frame-wrap" id="reportFrameWrap">
+      <iframe class="report-frame" id="reportFrame" title="Asset weekly report" src="render-v4.html"></iframe>
+    </div>
+    <div class="report-placeholder hidden" id="reportPlaceholder">
+      <p><strong>Report not built yet.</strong></p>
+      <p>BTC needs Coinbase connected. Other coins use the V4 weekly report when built.</p>
+    </div>
+  </section>
+</div>
+<script type="application/json" id="dashboard-holdings-json">{"sol": {"asset": "SOL", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 74.65, "price_display": "~$74.65", "holding_balance": 0.935592, "asset_call": "HOLD", "confidence": "MEDIUM", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $74.65, 75% below ATH \u2014 mixed evidence; maintain position, no deployment.", "signals": [{"name": "Trend", "colour": "RED", "evidence": "$74.65 now \u00b7 75% below ATH ($293).", "type": "RULE"}, {"name": "Bottoming", "colour": "ORANGE", "evidence": "Trading $71.98\u2013$76.62 (6% range); no confirmed reversal.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Market liquidity", "colour": "RED", "evidence": "24h volume $1611M vs $43452M mcap (4% turnover).", "type": "RULE"}, {"name": "Development", "colour": "GREEN", "evidence": "solana.com active; core L1 maintained publicly.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "ORANGE", "evidence": "92% of supply circulating (582.1M / 631.8M); $43452M mcap \u00b7 $47162M FDV.", "type": "RULE"}], "sources": [{"name": "Price \u2014 coingecko", "url": "https://www.coingecko.com/en/coins/solana", "fetched_at": "2026-08-08T07:33:51Z"}, {"name": "solana.com", "url": "https://solana.com", "fetched_at": "2026-08-08T07:33:51Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:33:51Z"}], "what_changed": "Price moved $76.45 \u2192 $74.65.", "bull_case": "Green signals: Development. 75% below ATH leaves upside if cycle turns. Core L1 exposure if alt cycle returns.", "bear_case": "Red/orange signals dominate. L1 does not guarantee SOL outperforms in risk-off periods.", "thesis_fails_if": "Sustained new lows + SOL/BTC weakens + turnover collapses.", "thesis_strengthens_if": "Higher highs/lows + SOL outperforms BTC 7d+ + rising market turnover.", "_signal_colours": {"Trend": "RED", "Bottoming": "ORANGE", "vs BTC": "ORANGE", "Market liquidity": "RED", "Development": "GREEN", "Token economics": "ORANGE"}, "_raw": {"profile": "major", "dex_liquidity": null}}, "render": {"asset": "RENDER", "template": "v4", "report_date": "2026-08-09", "report_date_display": "9 August 2026", "price_usd": 1.32, "price_display": "~$1.32", "holding_balance": 296.401119, "asset_call": "HOLD", "confidence": "MEDIUM", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $1.32, 90% below ATH \u2014 network/fundamental signals green but price and relative strength remain weak; no case for new capital.", "signals": [{"name": "Trend", "colour": "RED", "evidence": "$1.32 now \u00b7 90% below ATH ($13.53).", "type": "RULE"}, {"name": "Bottoming", "colour": "RED", "evidence": "At/near 14d low $1.31; no base confirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Network usage", "colour": "GREEN", "evidence": "Foundation dashboard: 77,931,230 frames rendered, 5,600 nodes since inception.", "type": "RULE"}, {"name": "Development", "colour": "GREEN", "evidence": "Foundation dashboard active; Dispersed GPU roadmap (RNP-009) and BME burn programme documented publicly.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "ORANGE", "evidence": "Burn/mint stats not retrieved this run \u2014 token economics signal excluded.", "type": "RULE"}], "sources": [{"name": "Price \u2014 coingecko", "url": "https://www.coingecko.com/en/coins/render-token", "fetched_at": "2026-08-09T09:30:34Z"}, {"name": "Render Foundation dashboard", "url": "https://stats.renderfoundation.com/", "fetched_at": "2026-08-09T09:30:34Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-09T09:30:34Z"}], "what_changed": "Frames rendered: 77,893,156 \u2192 77,931,230.", "bull_case": "Green signals: Network usage, Development. Network at 77,931,230 frames. Price 90% below ATH leaves upside if cycle turns.", "bear_case": "Red/orange signals: Trend, Bottoming, vs BTC, Token economics. Network success does not guarantee token performance.", "thesis_fails_if": "Sustained new lows + RENDER/BTC continues weakening + network frames stall week-on-week.", "thesis_strengthens_if": "Higher highs/lows + RENDER outperforms BTC 7d+ + frames rendered accelerating vs prior week.", "_signal_colours": {"Trend": "RED", "Bottoming": "RED", "vs BTC": "ORANGE", "Network usage": "GREEN", "Development": "GREEN", "Token economics": "ORANGE"}, "_raw": {"frames_rendered": 77931230, "nodes": 5600, "cumulative_burned": null, "rs_pp_7d": null}}, "io": {"asset": "IO", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 0.1209, "price_display": "~$0.12", "holding_balance": 2899.441064, "asset_call": "HOLD", "confidence": "MEDIUM", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $0.121, 98% below ATH \u2014 mixed evidence; maintain position, no deployment.", "signals": [{"name": "Trend", "colour": "RED", "evidence": "$0.121 now \u00b7 98% below ATH ($6.43).", "type": "RULE"}, {"name": "Bottoming", "colour": "ORANGE", "evidence": "14d range $0.118\u2013$0.149; structure unconfirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Network usage", "colour": "ORANGE", "evidence": "Network utilisation data unavailable from free sources this run \u2014 excluded.", "type": "RULE"}, {"name": "Development", "colour": "GREEN", "evidence": "io.net active; IO Cloud and Explorer product surfaces maintained publicly.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "RED", "evidence": "47% of supply circulating (378.4M / 798.8M); $46M mcap \u00b7 $96M FDV.", "type": "RULE"}], "sources": [{"name": "Price \u2014 coingecko", "url": "https://www.coingecko.com/en/coins/io", "fetched_at": "2026-08-08T07:32:06Z"}, {"name": "io.net", "url": "https://io.net", "fetched_at": "2026-08-08T07:32:06Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:32:06Z"}], "what_changed": "Price moved $0.147 \u2192 $0.121.", "bull_case": "Green signals: Development. DePIN GPU narrative intact at 98% below ATH.", "bear_case": "Red/orange signals: Trend, Bottoming, vs BTC, Network usage, Token economics. Compute demand does not guarantee token performance.", "thesis_fails_if": "Sustained new lows + IO/BTC weakens + no verified network utilisation recovery.", "thesis_strengthens_if": "Higher highs/lows + IO outperforms BTC 7d+ + authenticated network metrics show rising GPU hire.", "_signal_colours": {"Trend": "RED", "Bottoming": "ORANGE", "vs BTC": "ORANGE", "Network usage": "ORANGE", "Development": "GREEN", "Token economics": "RED"}, "_raw": {"rs_pp_7d": null, "network_metrics": null}}, "nos": {"asset": "NOS", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 0.2594, "price_display": "~$0.26", "holding_balance": 1452.547126, "asset_call": "HOLD", "confidence": "LOW", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $0.259, 97% below ATH \u2014 mixed evidence; maintain position, no deployment.", "signals": [{"name": "Trend", "colour": "RED", "evidence": "$0.259 now \u00b7 97% below ATH ($7.83).", "type": "RULE"}, {"name": "Bottoming", "colour": "RED", "evidence": "At/near 14d low $0.259; no base confirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Network usage", "colour": "ORANGE", "evidence": "Nosana job/network stats API unreachable this run \u2014 excluded from decision.", "type": "RULE"}, {"name": "Development", "colour": "GREEN", "evidence": "nosana.com active; GPU marketplace and deployment manager maintained publicly.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "ORANGE", "evidence": "100% of supply circulating (100.0M / 100.0M); $26M mcap \u00b7 $26M FDV.", "type": "RULE"}], "sources": [{"name": "Price \u2014 coingecko", "url": "https://www.coingecko.com/en/coins/nosana", "fetched_at": "2026-08-08T07:32:16Z"}, {"name": "nosana.com", "url": "https://nosana.com", "fetched_at": "2026-08-08T07:32:16Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:32:16Z"}], "what_changed": "Price moved $0.269 \u2192 $0.259.", "bull_case": "Green signals: Development. GPU-compute exposure at 97% below ATH.", "bear_case": "Price weak vs BTC; network utilisation not verified this week. Job-market tokens can lag even when product ships.", "thesis_fails_if": "Sustained new lows + NOS/BTC weakens + job/compute activity stalls.", "thesis_strengthens_if": "Higher highs/lows + NOS outperforms BTC 7d+ + indexer shows rising completed jobs.", "_signal_colours": {"Trend": "RED", "Bottoming": "RED", "vs BTC": "ORANGE", "Network usage": "ORANGE", "Development": "GREEN", "Token economics": "ORANGE"}, "_raw": {"rs_pp_7d": null, "network_stats": null}}, "grass": {"asset": "GRASS", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 0.3049, "price_display": "~$0.30", "holding_balance": 1148.41334, "asset_call": "HOLD", "confidence": "LOW", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $0.305, ATH data unavailable \u2014 mixed evidence; maintain position, no deployment.", "signals": [{"name": "Trend", "colour": "ORANGE", "evidence": "Price $0.305; no clear uptrend on 14d window.", "type": "RULE"}, {"name": "Bottoming", "colour": "RED", "evidence": "At/near 14d low $0.305; no base confirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Network usage", "colour": "ORANGE", "evidence": "Network utilisation data unavailable from free sources this run \u2014 excluded.", "type": "RULE"}, {"name": "Development", "colour": "GREEN", "evidence": "getgrass.io active; bandwidth network product maintained publicly.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "ORANGE", "evidence": "Supply stats not retrieved this run \u2014 token economics excluded.", "type": "RULE"}], "sources": [{"name": "Price \u2014 dexscreener", "url": "https://dexscreener.com/solana/gtj2s27ul7yz3tdtwpkjfncxeezrkrphjpj5fubwb8mk", "fetched_at": "2026-08-08T07:32:57Z"}, {"name": "getgrass.io", "url": "https://www.getgrass.io", "fetched_at": "2026-08-08T07:32:57Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:32:57Z"}], "what_changed": "Price moved $0.348 \u2192 $0.305. Trend signal: RED \u2192 ORANGE.", "bull_case": "Green signals: Development. DePIN bandwidth narrative if usage scales.", "bear_case": "Red/orange signals dominate. Grass user growth does not guarantee token performance.", "thesis_fails_if": "Sustained new lows + GRASS/BTC weakens + no verified network growth.", "thesis_strengthens_if": "Higher highs/lows + GRASS outperforms BTC 7d+ + verified usage rising.", "_signal_colours": {"Trend": "ORANGE", "Bottoming": "RED", "vs BTC": "ORANGE", "Network usage": "ORANGE", "Development": "GREEN", "Token economics": "ORANGE"}, "_raw": {"profile": "depin", "dex_liquidity": {"source": "dexscreener", "url": "https://dexscreener.com/solana/gtj2s27ul7yz3tdtwpkjfncxeezrkrphjpj5fubwb8mk", "liquidity_usd": 238635.48, "volume_24h_usd": 8068.98, "dex_id": "raydium"}}}, "fartcoin": {"asset": "FARTCOIN", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 0.1292, "price_display": "~$0.13", "holding_balance": 2310.118689, "asset_call": "HOLD", "confidence": "LOW", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $0.129, ATH data unavailable \u2014 mixed evidence; maintain position, no deployment. Speculative \u2014 no adds.", "signals": [{"name": "Trend", "colour": "ORANGE", "evidence": "Price $0.129; no clear uptrend on 14d window.", "type": "RULE"}, {"name": "Bottoming", "colour": "RED", "evidence": "At/near 14d low $0.129; no base confirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Liquidity", "colour": "GREEN", "evidence": "Top Solana pair liquidity $5.8M \u00b7 24h vol $0.2M (DexScreener).", "type": "RULE"}, {"name": "Speculative risk", "colour": "ORANGE", "evidence": "FARTCOIN labelled speculative \u2014 ATH drawdown data unavailable.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "ORANGE", "evidence": "Supply stats not retrieved this run \u2014 token economics excluded.", "type": "RULE"}], "sources": [{"name": "Price \u2014 dexscreener", "url": "https://dexscreener.com/solana/bzc9nzfmqkxr6fz1dbph7bdf9broyef6pnzesp7v5iiw", "fetched_at": "2026-08-08T07:33:06Z"}, {"name": "DexScreener", "url": "https://dexscreener.com/solana/bzc9nzfmqkxr6fz1dbph7bdf9broyef6pnzesp7v5iiw", "fetched_at": "2026-08-08T07:33:06Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:33:06Z"}], "what_changed": "Price moved $0.132 \u2192 $0.129.", "bull_case": "Green signals: Liquidity. Meme liquidity can return quickly in risk-on phases \u2014 size for total loss.", "bear_case": "Red/orange signals dominate. No fundamental thesis; liquidity can vanish in drawdowns.", "thesis_fails_if": "Liquidity thins + new lows + underperforms BTC for multiple weeks.", "thesis_strengthens_if": "Outperforms BTC 7d+ with stable DEX liquidity and higher lows.", "_signal_colours": {"Trend": "ORANGE", "Bottoming": "RED", "vs BTC": "ORANGE", "Liquidity": "GREEN", "Speculative risk": "ORANGE", "Token economics": "ORANGE"}, "_raw": {"profile": "memecoin", "dex_liquidity": {"source": "dexscreener", "url": "https://dexscreener.com/solana/bzc9nzfmqkxr6fz1dbph7bdf9broyef6pnzesp7v5iiw", "liquidity_usd": 5835543.0, "volume_24h_usd": 228714.1, "dex_id": "raydium"}}}, "spx6900": {"asset": "SPX6900", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 0.3322, "price_display": "~$0.33", "holding_balance": 1034.750734, "asset_call": "HOLD", "confidence": "MEDIUM", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $0.332, 85% below ATH \u2014 majority of signals negative; hold only, no adds. Speculative \u2014 no adds.", "signals": [{"name": "Trend", "colour": "RED", "evidence": "$0.332 now \u00b7 85% below ATH ($2.27).", "type": "RULE"}, {"name": "Bottoming", "colour": "RED", "evidence": "At/near 14d low $0.332; no base confirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Liquidity", "colour": "ORANGE", "evidence": "Top Solana pair liquidity $1.6M \u00b7 24h vol $0.1M (DexScreener).", "type": "RULE"}, {"name": "Speculative risk", "colour": "RED", "evidence": "Speculative asset \u2014 85% below ATH; no revenue/fundamental thesis. Position size should reflect total-loss risk.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "ORANGE", "evidence": "100% of supply circulating (931.0M / 931.0M); $309M mcap \u00b7 $309M FDV.", "type": "RULE"}], "sources": [{"name": "Price \u2014 coingecko", "url": "https://www.coingecko.com/en/coins/spx6900", "fetched_at": "2026-08-08T07:33:15Z"}, {"name": "DexScreener", "url": "https://dexscreener.com/solana/9t1h1udj558impnkepsn1fqkpc4xspq6cqsf6uestftr", "fetched_at": "2026-08-08T07:33:15Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:33:15Z"}], "what_changed": "Price moved $0.344 \u2192 $0.332.", "bull_case": "Green signals: none. 85% below ATH leaves upside if cycle turns. Community/mindshare asset \u2014 only viable as small speculative sleeve.", "bear_case": "Red/orange signals dominate. Meme cycle may be over; no earnings or usage floor.", "thesis_fails_if": "Liquidity thins + new lows + underperforms BTC for multiple weeks.", "thesis_strengthens_if": "Outperforms BTC 7d+ with stable DEX liquidity and higher lows.", "_signal_colours": {"Trend": "RED", "Bottoming": "RED", "vs BTC": "ORANGE", "Liquidity": "ORANGE", "Speculative risk": "RED", "Token economics": "ORANGE"}, "_raw": {"profile": "memecoin", "dex_liquidity": {"source": "dexscreener", "url": "https://dexscreener.com/solana/9t1h1udj558impnkepsn1fqkpc4xspq6cqsf6uestftr", "liquidity_usd": 1615551.77, "volume_24h_usd": 91129.1, "dex_id": "raydium"}}}, "2z": {"asset": "2Z", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 0.055, "price_display": "~$0.055", "holding_balance": 0.0, "asset_call": "HOLD", "confidence": "MEDIUM", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $0.055, 94% below ATH \u2014 majority of signals negative; hold only, no adds.", "signals": [{"name": "Trend", "colour": "RED", "evidence": "$0.055 now \u00b7 94% below ATH ($0.894).", "type": "RULE"}, {"name": "Bottoming", "colour": "RED", "evidence": "At/near 14d low $0.055; no base confirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Network usage", "colour": "ORANGE", "evidence": "Network utilisation data unavailable from free sources this run \u2014 excluded.", "type": "RULE"}, {"name": "Development", "colour": "GREEN", "evidence": "doublezero.xyz active; validator connectivity protocol documented publicly.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "RED", "evidence": "35% of supply circulating (3469.6M / 9998.2M); $191M mcap \u00b7 $550M FDV.", "type": "RULE"}], "sources": [{"name": "Price \u2014 coingecko", "url": "https://www.coingecko.com/en/coins/doublezero", "fetched_at": "2026-08-08T07:33:23Z"}, {"name": "doublezero.xyz", "url": "https://doublezero.xyz", "fetched_at": "2026-08-08T07:33:23Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:33:23Z"}], "what_changed": "Price moved $0.061 \u2192 $0.055.", "bull_case": "Green signals: Development. 94% below ATH leaves upside if cycle turns. Infra utility token if network adoption scales.", "bear_case": "Red/orange signals dominate. Protocol usage does not guarantee 2Z price recovery.", "thesis_fails_if": "Sustained new lows + 2Z/BTC weakens + no network adoption signals.", "thesis_strengthens_if": "Higher highs/lows + 2Z outperforms BTC 7d+ + rising on-chain usage.", "_signal_colours": {"Trend": "RED", "Bottoming": "RED", "vs BTC": "ORANGE", "Network usage": "ORANGE", "Development": "GREEN", "Token economics": "RED"}, "_raw": {"profile": "infra", "dex_liquidity": {"source": "dexscreener", "url": "https://dexscreener.com/solana/5guq7oozftnju48kvnrzcvjme9erw4dpctqyrak3z4ue", "liquidity_usd": 587189.68, "volume_24h_usd": 56802.84, "dex_id": "raydium"}}}}</script>
+<script>
+(function () {
+  const buttons = document.querySelectorAll('.hold-btn');
+  const frame = document.getElementById('reportFrame');
+  const wrap = document.getElementById('reportFrameWrap');
+  const placeholder = document.getElementById('reportPlaceholder');
+  const title = document.getElementById('reportTitle');
+  const labels = { btc: 'BTC', sol: 'SOL', render: 'RENDER', io: 'IO', nos: 'NOS', grass: 'GRASS', fartcoin: 'FARTCOIN', spx6900: 'SPX6900', '2z': '2Z' };
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      buttons.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const id = btn.dataset.asset;
+      title.textContent = (labels[id] || id.toUpperCase()) + ' · Weekly Report';
+      const src = btn.dataset.src;
+      if (src) {
+        frame.src = src;
+        wrap.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      } else {
+        wrap.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+      }
+      document.querySelector('.report-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+</script>
+</body>
+</html>

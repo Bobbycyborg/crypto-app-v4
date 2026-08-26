@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2Z — Weekly Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Jost:wght@600;700;800&display=swap" rel="stylesheet">
+<style>/* Asset report V4 — Futura titles + DM Sans body */
+:root {
+  --bg: #f4f1ec;
+  --ink: #1a1a1a;
+  --muted: #6b6560;
+  --line: #d4cfc8;
+  --green: #2d6b4a;
+  --orange: #c45a00;
+  --red: #9b4040;
+  --display: Futura, "Futura PT", Jost, sans-serif;
+  --body: "DM Sans", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  font-size: 14px;
+}
+.asset-v4 {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+.verdict {
+  margin-bottom: 1.25rem;
+}
+.title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.35rem;
+}
+.title-main {
+  font-family: var(--display);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+.asset-name { color: var(--ink); }
+.price-inline { color: var(--ink); font-weight: 600; }
+.call {
+  font-family: var(--display);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+.call-light { font-size: 0.85em; }
+.call-green { color: var(--green); }
+.call-orange { color: var(--orange); }
+.call-red { color: var(--red); }
+.sub-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+}
+.sub-line {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+.week-inline {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  max-width: 100%;
+}
+.conf {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.thesis {
+  font-size: 0.88rem;
+  color: var(--ink);
+  margin-bottom: 0.65rem;
+}
+.bottom-line {
+  font-size: 0.95rem;
+  max-width: 40em;
+}
+@media (max-width: 520px) {
+  .title-main, .call { font-size: 2rem; }
+  .sub-bar { flex-direction: column; gap: 0.25rem; }
+}
+.signals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+.signal-pallet {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.7rem 0.6rem 0.65rem;
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+.signal-pallet.signal-green { border-color: rgba(45, 107, 74, 0.25); background: rgba(223, 243, 232, 0.45); }
+.signal-pallet.signal-orange { border-color: rgba(196, 90, 0, 0.2); background: rgba(255, 232, 214, 0.45); }
+.signal-pallet.signal-red { border-color: rgba(155, 64, 64, 0.22); background: rgba(252, 232, 232, 0.5); }
+.signal-pallet.signal-placeholder {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 0.55;
+}
+.signal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  height: 2.6rem;
+  margin-bottom: 0.55rem;
+  flex-shrink: 0;
+}
+.signal-name {
+  font-family: var(--display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 0;
+}
+.signal-green .signal-name { color: var(--green); }
+.signal-orange .signal-name { color: var(--orange); }
+.signal-red .signal-name { color: var(--red); }
+.signal-placeholder .signal-name { color: #9a9590; }
+.signal-lamp {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.lamp-green { background: linear-gradient(145deg, #d8f3e4, #8ecfaa); }
+.lamp-orange { background: linear-gradient(145deg, #ffe8cc, #f0b872); }
+.lamp-red { background: linear-gradient(145deg, #fad8d8, #e8a0a0); }
+.lamp-grey { background: linear-gradient(145deg, #e8e4df, #c8c4bf); }
+.signal-evidence {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ink);
+  flex: 1;
+}
+.signal-placeholder .signal-evidence { color: var(--muted); font-style: italic; }
+@media (max-width: 680px) {
+  .signals-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 400px) {
+  .signals-grid { grid-template-columns: 1fr; }
+}
+.sources {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+  line-height: 1.55;
+}
+.plain-section {
+  margin-bottom: 1.1rem;
+}
+.plain-section h2 {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.plain-section p { font-size: 0.88rem; max-width: none; }
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+.case-pallet {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.7rem 0.6rem 0.65rem;
+  min-height: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+.case-bull {
+  border-color: rgba(45, 107, 74, 0.25);
+  background: rgba(223, 243, 232, 0.45);
+}
+.case-bear {
+  border-color: rgba(155, 64, 64, 0.22);
+  background: rgba(252, 232, 232, 0.5);
+}
+.case-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  height: 2.6rem;
+  margin-bottom: 0.55rem;
+  flex-shrink: 0;
+}
+.case-name {
+  font-family: var(--display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.case-bull .case-name { color: var(--green); }
+.case-bear .case-name { color: var(--red); }
+.case-body {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  flex: 1;
+}
+@media (max-width: 680px) {
+  .cases-grid { grid-template-columns: 1fr; }
+}
+.falsifiers p + p { margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+<article class="asset-v4">
+  <header class="verdict">
+    <div class="title-bar">
+      <h1 class="title-main">
+        <span class="asset-name">2Z</span>
+        <span class="price-inline">~$0.055</span>
+      </h1>
+      <p class="call call-orange">
+        <span class="call-light" aria-hidden="true">🟠</span>
+        HOLD
+      </p>
+    </div>
+    <div class="sub-bar">
+      <p class="sub-line">
+        Weekly Report
+        <select class="week-inline" id="weekPick" aria-label="Report week" onchange="if(this.value)location.href=this.value"><option value="../../reports/2026-08-08/2z-v4.html" selected>8th of August, 2026</option><option value="../../reports/2026-07-27/2z-v4.html">27th of July, 2026</option></select>
+      </p>
+      <p class="conf">Confidence: Medium</p>
+    </div>
+    <p class="thesis">Thesis: ALIVE, UNCONFIRMED</p>
+    <p class="bottom-line"><strong>Bottom line:</strong> At $0.055, 94% below ATH — majority of signals negative; hold only, no adds.</p>
+  </header>
+
+  <div class="signals-grid"><div class="signal-pallet signal-red"><div class="signal-head"><span class="signal-name">Trend</span><span class="signal-lamp lamp-red" aria-label="RED"></span></div><p class="signal-evidence">$0.055 now · 94% below ATH ($0.894).</p></div>
+<div class="signal-pallet signal-red"><div class="signal-head"><span class="signal-name">Bottoming</span><span class="signal-lamp lamp-red" aria-label="RED"></span></div><p class="signal-evidence">At/near 14d low $0.055; no base confirmed.</p></div>
+<div class="signal-pallet signal-orange"><div class="signal-head"><span class="signal-name">vs BTC</span><span class="signal-lamp lamp-orange" aria-label="ORANGE"></span></div><p class="signal-evidence">7d relative performance vs BTC: data unavailable — excluded from decision.</p></div>
+<div class="signal-pallet signal-orange"><div class="signal-head"><span class="signal-name">Network usage</span><span class="signal-lamp lamp-orange" aria-label="ORANGE"></span></div><p class="signal-evidence">Network utilisation data unavailable from free sources this run — excluded.</p></div>
+<div class="signal-pallet signal-green"><div class="signal-head"><span class="signal-name">Development</span><span class="signal-lamp lamp-green" aria-label="GREEN"></span></div><p class="signal-evidence">doublezero.xyz active; validator connectivity protocol documented publicly.</p></div>
+<div class="signal-pallet signal-red"><div class="signal-head"><span class="signal-name">Token economics</span><span class="signal-lamp lamp-red" aria-label="RED"></span></div><p class="signal-evidence">35% of supply circulating (3469.6M / 9998.2M); $191M mcap · $550M FDV.</p></div>
+<div class="signal-pallet signal-placeholder"><div class="signal-head"><span class="signal-name">Signal</span><span class="signal-lamp lamp-grey" aria-hidden="true"></span></div><p class="signal-evidence">Evidence</p></div>
+<div class="signal-pallet signal-placeholder"><div class="signal-head"><span class="signal-name">Signal</span><span class="signal-lamp lamp-grey" aria-hidden="true"></span></div><p class="signal-evidence">Evidence</p></div>
+</div>
+
+  <p class="sources"><strong>Sources:</strong> Price — coingecko · doublezero.xyz · Solana wallet</p>
+
+  <section class="plain-section">
+    <h2>What changed?</h2>
+    <p>Price moved $0.061 → $0.055.</p>
+  </section>
+
+  <div class="cases-grid">
+    <div class="case-pallet case-bull">
+      <div class="case-head">
+        <span class="case-name">Bull case</span>
+        <span class="signal-lamp lamp-green" aria-hidden="true"></span>
+      </div>
+      <p class="case-body">Green signals: Development. 94% below ATH leaves upside if cycle turns. Infra utility token if network adoption scales.</p>
+    </div>
+    <div class="case-pallet case-bear">
+      <div class="case-head">
+        <span class="case-name">Bear case</span>
+        <span class="signal-lamp lamp-red" aria-hidden="true"></span>
+      </div>
+      <p class="case-body">Red/orange signals dominate. Protocol usage does not guarantee 2Z price recovery.</p>
+    </div>
+  </div>
+
+  <section class="plain-section falsifiers">
+    <h2>What proves us wrong?</h2>
+    <p><strong>Bull thesis fails:</strong> Sustained new lows + 2Z/BTC weakens + no network adoption signals.</p>
+    <p><strong>Bull thesis strengthens:</strong> Higher highs/lows + 2Z outperforms BTC 7d+ + rising on-chain usage.</p>
+  </section>
+</article>
+<script type="application/json" id="asset-report-json">{"asset": "2Z", "template": "v4", "report_date": "2026-08-08", "report_date_display": "8 August 2026", "price_usd": 0.055, "price_display": "~$0.055", "holding_balance": 0.0, "asset_call": "HOLD", "confidence": "MEDIUM", "thesis_status": "ALIVE, UNCONFIRMED", "bottom_line": "At $0.055, 94% below ATH \u2014 majority of signals negative; hold only, no adds.", "signals": [{"name": "Trend", "colour": "RED", "evidence": "$0.055 now \u00b7 94% below ATH ($0.894).", "type": "RULE"}, {"name": "Bottoming", "colour": "RED", "evidence": "At/near 14d low $0.055; no base confirmed.", "type": "JUDGEMENT"}, {"name": "vs BTC", "colour": "ORANGE", "evidence": "7d relative performance vs BTC: data unavailable \u2014 excluded from decision.", "type": "RULE"}, {"name": "Network usage", "colour": "ORANGE", "evidence": "Network utilisation data unavailable from free sources this run \u2014 excluded.", "type": "RULE"}, {"name": "Development", "colour": "GREEN", "evidence": "doublezero.xyz active; validator connectivity protocol documented publicly.", "type": "JUDGEMENT"}, {"name": "Token economics", "colour": "RED", "evidence": "35% of supply circulating (3469.6M / 9998.2M); $191M mcap \u00b7 $550M FDV.", "type": "RULE"}], "sources": [{"name": "Price \u2014 coingecko", "url": "https://www.coingecko.com/en/coins/doublezero", "fetched_at": "2026-08-08T07:33:23Z"}, {"name": "doublezero.xyz", "url": "https://doublezero.xyz", "fetched_at": "2026-08-08T07:33:23Z"}, {"name": "Solana wallet", "url": "https://api.mainnet-beta.solana.com", "fetched_at": "2026-08-08T07:33:23Z"}], "what_changed": "Price moved $0.061 \u2192 $0.055.", "bull_case": "Green signals: Development. 94% below ATH leaves upside if cycle turns. Infra utility token if network adoption scales.", "bear_case": "Red/orange signals dominate. Protocol usage does not guarantee 2Z price recovery.", "thesis_fails_if": "Sustained new lows + 2Z/BTC weakens + no network adoption signals.", "thesis_strengthens_if": "Higher highs/lows + 2Z outperforms BTC 7d+ + rising on-chain usage.", "_signal_colours": {"Trend": "RED", "Bottoming": "RED", "vs BTC": "ORANGE", "Network usage": "ORANGE", "Development": "GREEN", "Token economics": "RED"}, "_raw": {"profile": "infra", "dex_liquidity": {"source": "dexscreener", "url": "https://dexscreener.com/solana/5guq7oozftnju48kvnrzcvjme9erw4dpctqyrak3z4ue", "liquidity_usd": 587189.68, "volume_24h_usd": 56802.84, "dex_id": "raydium"}}}</script>
+</body>
+</html>

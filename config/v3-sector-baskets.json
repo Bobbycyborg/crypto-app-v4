@@ -1,0 +1,70 @@
+{
+  "name": "V3 sector destination baskets (Phase 1 fixed)",
+  "implementation_status": "PRODUCTION_READY",
+  "note": "Predefined sector baskets — not portfolio holdings. Do not retrospectively swap constituents to match winners.",
+  "liquidity_rule": "Major CEX-listed liquid names at Phase 1 lock. Automated liquidity filter not yet wired.",
+  "method": "Equal-weight mean of constituent 30d USD returns vs BTC and vs broad-alt equal-weight benchmark.",
+  "baskets": [
+    {
+      "sector_id": "ai",
+      "label": "AI",
+      "constituents": [
+        { "coingecko_id": "render-token", "symbol": "RENDER" },
+        { "coingecko_id": "fetch-ai", "symbol": "FET" },
+        { "coingecko_id": "bittensor", "symbol": "TAO" },
+        { "coingecko_id": "akash-network", "symbol": "AKT" },
+        { "coingecko_id": "io-net", "symbol": "IO" }
+      ]
+    },
+    {
+      "sector_id": "memes",
+      "label": "Memes",
+      "constituents": [
+        { "coingecko_id": "dogecoin", "symbol": "DOGE" },
+        { "coingecko_id": "shiba-inu", "symbol": "SHIB" },
+        { "coingecko_id": "pepe", "symbol": "PEPE" },
+        { "coingecko_id": "bonk", "symbol": "BONK" },
+        { "coingecko_id": "dogwifcoin", "symbol": "WIF" },
+        { "coingecko_id": "floki", "symbol": "FLOKI" }
+      ]
+    },
+    {
+      "sector_id": "depin",
+      "label": "DePIN",
+      "constituents": [
+        { "coingecko_id": "filecoin", "symbol": "FIL" },
+        { "coingecko_id": "helium", "symbol": "HNT" },
+        { "coingecko_id": "arweave", "symbol": "AR" },
+        { "coingecko_id": "theta-token", "symbol": "THETA" },
+        { "coingecko_id": "grass", "symbol": "GRASS" },
+        { "coingecko_id": "hivemapper", "symbol": "HONEY" }
+      ]
+    },
+    {
+      "sector_id": "l1",
+      "label": "L1",
+      "constituents": [
+        { "coingecko_id": "solana", "symbol": "SOL" },
+        { "coingecko_id": "cardano", "symbol": "ADA" },
+        { "coingecko_id": "avalanche-2", "symbol": "AVAX" },
+        { "coingecko_id": "polkadot", "symbol": "DOT" },
+        { "coingecko_id": "sui", "symbol": "SUI" },
+        { "coingecko_id": "aptos", "symbol": "APT" },
+        { "coingecko_id": "near", "symbol": "NEAR" },
+        { "coingecko_id": "cosmos", "symbol": "ATOM" }
+      ]
+    },
+    {
+      "sector_id": "defi",
+      "label": "DeFi",
+      "constituents": [
+        { "coingecko_id": "uniswap", "symbol": "UNI" },
+        { "coingecko_id": "aave", "symbol": "AAVE" },
+        { "coingecko_id": "maker", "symbol": "MKR" },
+        { "coingecko_id": "lido-dao", "symbol": "LDO" },
+        { "coingecko_id": "curve-dao-token", "symbol": "CRV" },
+        { "coingecko_id": "jupiter-exchange-solana", "symbol": "JUP" }
+      ]
+    }
+  ]
+}

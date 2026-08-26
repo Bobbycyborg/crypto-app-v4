@@ -1,0 +1,26 @@
+# local only — never GitHub
+reports/
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+data/
+scripts/
+input/
+docs/
+**/.DS_Store
+**/__pycache__/
+*.pyc
+*.pyo
+*.local.env
+!*.local.env.example
+*.bak
+*.bak-*
+*.plist
+*.plist.disabled
+
+# personal
+config/wallet.json
+config/capital.json
+config/helius.local.env

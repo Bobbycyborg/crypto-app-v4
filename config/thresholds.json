@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "description": "RULE signal thresholds. Change only with documented reason in CHANGELOG.",
+  "btc_cycle": {
+    "swing_leg_reversal_pct": 0.05,
+    "leg_fatigue_early": 0.6,
+    "leg_fatigue_maturing": 0.75,
+    "leg_fatigue_stretched": 1.1,
+    "drawdown_deep_pct": -25,
+    "drawdown_moderate_pct": -15,
+    "return_30d_bull_pct": 15,
+    "return_30d_bear_pct": -10,
+    "return_60d_fear_pct": -10,
+    "return_90d_fear_pct": -15,
+    "four_year_low_window_days": 1460,
+    "sixty_day_band_min": 45,
+    "sixty_day_band_max": 75
+  },
+  "alt_breadth": {
+    "outperform_7d_green_count": 5,
+    "outperform_7d_yellow_count": 3,
+    "outperform_30d_green_count": 4,
+    "outperform_30d_yellow_count": 2,
+    "portfolio_assets_counted": ["RENDER", "IO", "NOS", "GRASS", "FARTCOIN", "SPX6900", "PUMP", "SOL"]
+  },
+  "btc_dominance": {
+    "rising_7d_pct": 0.5,
+    "falling_7d_pct": -0.5
+  },
+  "portfolio": {
+    "track_assets_json_only": true,
+    "include_other_wallet_line": false,
+    "week_change_notable_pct": 5
+  },
+  "prices": {
+    "primary": "coingecko",
+    "secondary": "dexscreener",
+    "tertiary": "binance",
+    "quaternary": "geckoterminal",
+    "quinary": "coinbase",
+    "mode": "multi_compare",
+    "diverge_alert_pct": 2.0,
+    "diverge_threshold_status": "PROVISIONAL",
+    "diverge_threshold_note": "Unverified operator default — not a validated signal threshold.",
+    "cache_max_age_sec": 900
+  },
+  "data_gaps": {
+    "btc_coinbase": "INCOMPLETE",
+    "show_manual_btc_placeholder": false
+  }
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Font picker — Crypto V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@500;600;700;800&family=Archivo:wght@600;700;800&family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600&family=Figtree:wght@400;500;600&family=Inter:wght@400;500;600&family=Jost:wght@600;700;800&family=Lexend:wght@600;700;800&family=Manrope:wght@500;600;700;800&family=Montserrat:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Rubik:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Space+Grotesk:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: linear-gradient(160deg, #f4f0ff 0%, #edf7f2 50%, #fff5eb 100%);
+  --ink: #2a2830;
+  --muted: #7a7585;
+  --line: rgba(100, 90, 120, 0.12);
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  padding: 2rem 1rem 4rem;
+}
+.intro {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+.intro h1 { font-size: 1.35rem; font-weight: 700; }
+.intro p { margin-top: 0.5rem; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+.grid {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.card {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+  cursor: default;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.card:hover {
+  border-color: rgba(120, 100, 180, 0.35);
+  box-shadow: 0 6px 24px rgba(100, 90, 140, 0.08);
+}
+.card .tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6b5ea8;
+  background: rgba(107, 94, 168, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+.card .names {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+.card .names strong { color: var(--ink); font-weight: 600; }
+.wait {
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+.deploy {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+}
+.body {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 52ch;
+}
+.label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>Fonts only — pick one letter</h1>
+  <p>Same words on every card. Big word = headline font. Small text = body font.<br>Reply with a letter, e.g. <strong>G</strong> or <strong>M</strong>. Nothing else to decide yet.</p>
+</div>
+
+<div class="grid">
+
+  <div class="card" style="--d:'Jost',sans-serif;--b:'Inter',sans-serif">
+    <div class="tag">A</div>
+    <div class="names"><strong>Headline:</strong> Jost · <strong>Body:</strong> Inter · <em>Futura family, classic geometric</em></div>
+    <div class="wait" style="font-family:var(--d);font-weight:800">WAIT</div>
+    <div class="deploy" style="font-family:var(--b)">Deploy £0 this week</div>
+    <div class="label" style="font-family:var(--b)">Crypto cycle thesis</div>
+    <div class="body" style="font-family:var(--b)">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">B</div>
+    <div class="names"><strong>Headline:</strong> Outfit · <strong>Body:</strong> Plus Jakarta Sans · <em>Rounded modern</em></div>
+    <div class="wait" style="font-family:'Outfit',sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:'Plus Jakarta Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:'Plus Jakarta Sans',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">C</div>
+    <div class="names"><strong>Headline:</strong> Albert Sans · <strong>Body:</strong> DM Sans · <em>Clean geometric</em></div>
+    <div class="wait" style="font-family:'Albert Sans',sans-serif;font-weight:800">WAIT</div>
+    <div class="deploy" style="font-family:'DM Sans',sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:'DM Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:'DM Sans',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">D</div>
+    <div class="names"><strong>Headline:</strong> Archivo · <strong>Body:</strong> Figtree · <em>Strong editorial</em></div>
+    <div class="wait" style="font-family:'Archivo',sans-serif;font-weight:800">WAIT</div>
+    <div class="deploy" style="font-family:'Figtree',sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:'Figtree',sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:'Figtree',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">E</div>
+    <div class="names"><strong>Headline + body:</strong> Manrope · <em>One font, very balanced</em></div>
+    <div class="wait" style="font-family:'Manrope',sans-serif;font-weight:800">WAIT</div>
+    <div class="deploy" style="font-family:'Manrope',sans-serif;font-weight:700">Deploy £0 this week</div>
+    <div class="label" style="font-family:'Manrope',sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:'Manrope',sans-serif;font-weight:500">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">F</div>
+    <div class="names"><strong>Headline:</strong> Space Grotesk · <strong>Body:</strong> Inter · <em>Techy but friendly</em></div>
+    <div class="wait" style="font-family:'Space Grotesk',sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:Inter,sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:Inter,sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:Inter,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">G</div>
+    <div class="names"><strong>Headline:</strong> Sora · <strong>Body:</strong> Inter · <em>Soft futuristic</em></div>
+    <div class="wait" style="font-family:'Sora',sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:Inter,sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:Inter,sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:Inter,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">H</div>
+    <div class="names"><strong>Headline:</strong> Montserrat · <strong>Body:</strong> Inter · <em>Popular, safe, familiar</em></div>
+    <div class="wait" style="font-family:Montserrat,sans-serif;font-weight:800">WAIT</div>
+    <div class="deploy" style="font-family:Inter,sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:Inter,sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:Inter,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">I</div>
+    <div class="names"><strong>Headline + body:</strong> Rubik · <em>Rounded, approachable</em></div>
+    <div class="wait" style="font-family:Rubik,sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:Rubik,sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:Rubik,sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:Rubik,sans-serif;font-weight:400">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">J</div>
+    <div class="names"><strong>Headline:</strong> Lexend · <strong>Body:</strong> Inter · <em>Designed for readability</em></div>
+    <div class="wait" style="font-family:Lexend,sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:Inter,sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:Inter,sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:Inter,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">K</div>
+    <div class="names"><strong>Headline:</strong> Bricolage Grotesque · <strong>Body:</strong> DM Sans · <em>Current / quirky</em></div>
+    <div class="wait" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:'DM Sans',sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:'DM Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:'DM Sans',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">L</div>
+    <div class="names"><strong>Headline:</strong> Work Sans · <strong>Body:</strong> Work Sans · <em>Neutral workhorse</em></div>
+    <div class="wait" style="font-family:'Work Sans',sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:'Work Sans',sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:'Work Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:'Work Sans',sans-serif;font-weight:400">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">M</div>
+    <div class="names"><strong>Headline + body:</strong> System font (SF Pro on Mac) · <em>No download, native</em></div>
+    <div class="wait" style="font-family:system-ui,-apple-system,'SF Pro Display',sans-serif;font-weight:700">WAIT</div>
+    <div class="deploy" style="font-family:system-ui,-apple-system,'SF Pro Text',sans-serif;font-weight:600">Deploy £0 this week</div>
+    <div class="label" style="font-family:system-ui,-apple-system,sans-serif">Crypto cycle thesis</div>
+    <div class="body" style="font-family:system-ui,-apple-system,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

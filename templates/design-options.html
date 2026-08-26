@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V2 Design Options — Pick fonts + traffic lights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@500;600;700;800&family=Archivo:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=Figtree:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Jost:wght@600;700;800&family=Manrope:wght@500;600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #2a2830;
+  --muted: #7a7585;
+  --line: rgba(120, 110, 140, 0.14);
+  --grad-bg: linear-gradient(145deg, #f6f2ff 0%, #eef8f4 42%, #fff6ee 100%);
+  --pill-green-bg: #dff3e8; --pill-green-fg: #2d6b4a;
+  --pill-yellow-bg: #faf0d8; --pill-yellow-fg: #8a6a1a;
+  --pill-red-bg: #fce8e8; --pill-red-fg: #9b4040;
+  --pill-grey-bg: #eceaf0; --pill-grey-fg: #6a6570;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  background: var(--grad-bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  line-height: 1.45;
+  padding: 2rem 1rem 4rem;
+}
+.page-head {
+  max-width: 1000px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+.page-head h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.page-head p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.option {
+  max-width: 1000px;
+  margin: 0 auto 3rem;
+  border-radius: 18px;
+  border: 2px solid transparent;
+  background: rgba(255,255,255,0.55);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(100, 90, 130, 0.08);
+}
+.option:hover { border-color: rgba(139, 127, 212, 0.35); }
+.opt-label {
+  padding: 0.85rem 1.25rem;
+  background: rgba(255,255,255,0.7);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.opt-label strong { font-size: 1rem; }
+.opt-label span { font-size: 0.78rem; color: var(--muted); }
+.opt-body { padding: 1.25rem; }
+
+/* Traffic light bar — shared structure */
+.tl-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 800px) { .tl-bar { grid-template-columns: repeat(2, 1fr); } }
+.tl {
+  border-radius: 12px;
+  padding: 0.85rem 0.75rem;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.65);
+}
+.tl .title {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin-bottom: 0.55rem;
+  line-height: 1.25;
+}
+.tl .lamp {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  margin: 0 auto 0.45rem;
+  box-shadow: inset 0 -2px 6px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06);
+}
+.tl .lamp.green { background: linear-gradient(145deg, #8fd4a8, #5fa882); }
+.tl .lamp.yellow { background: linear-gradient(145deg, #f0d080, #d4a843); }
+.tl .lamp.red { background: linear-gradient(145deg, #e8a0a0, #c46868); }
+.tl .lamp.grey { background: linear-gradient(145deg, #c8c4d0, #9a95a0); }
+.tl .status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.tl .status.g { color: var(--pill-green-fg); }
+.tl .status.y { color: var(--pill-yellow-fg); }
+.tl .status.r { color: var(--pill-red-fg); }
+.tl .status.gr { color: var(--pill-grey-fg); }
+
+/* Variant B — pill row instead of circles */
+.tl-bar-pills .tl { padding: 0.75rem 0.5rem; }
+.tl-bar-pills .pill-big {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+.tl-bar-pills .pill-big.green { background: var(--pill-green-bg); color: var(--pill-green-fg); }
+.tl-bar-pills .pill-big.yellow { background: var(--pill-yellow-bg); color: var(--pill-yellow-fg); }
+.tl-bar-pills .pill-big.red { background: var(--pill-red-bg); color: var(--pill-red-fg); }
+.tl-bar-pills .pill-big.grey { background: var(--pill-grey-bg); color: var(--pill-grey-fg); }
+
+.hero-mini {
+  padding: 1rem 0 0.25rem;
+  border-top: 1px solid var(--line);
+  margin-top: 0.5rem;
+}
+.hero-mini .call { line-height: 1; letter-spacing: -0.02em; }
+.hero-mini .sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; }
+
+/* Per-option font scopes */
+.opt-a { --display: "Jost", sans-serif; --body: "Inter", sans-serif; }
+.opt-b { --display: "Outfit", sans-serif; --body: "Plus Jakarta Sans", sans-serif; }
+.opt-c { --display: "Albert Sans", sans-serif; --body: "DM Sans", sans-serif; }
+.opt-d { --display: "Archivo", sans-serif; --body: "Figtree", sans-serif; }
+.opt-e { --display: "Manrope", sans-serif; --body: "Manrope", sans-serif; }
+.opt-f { --display: system-ui, -apple-system, "SF Pro Display", sans-serif; --body: system-ui, -apple-system, "SF Pro Text", sans-serif; }
+
+.opt-a .hero-mini .call, .opt-a .tl .status { font-family: var(--display); }
+.opt-a .opt-body { font-family: var(--body); }
+.opt-b .hero-mini .call, .opt-b .tl .status { font-family: var(--display); }
+.opt-b .opt-body { font-family: var(--body); }
+.opt-c .hero-mini .call, .opt-c .tl .status { font-family: var(--display); }
+.opt-c .opt-body { font-family: var(--body); }
+.opt-d .hero-mini .call, .opt-d .tl .status { font-family: var(--display); }
+.opt-d .opt-body { font-family: var(--body); }
+.opt-e .hero-mini .call, .opt-e .tl .status { font-family: var(--display); }
+.opt-e .opt-body { font-family: var(--body); }
+.opt-f .hero-mini .call, .opt-f .tl .status { font-family: var(--display); }
+.opt-f .opt-body { font-family: var(--body); }
+
+.opt-a .hero-mini .call { font-size: 2.8rem; font-weight: 800; }
+.opt-b .hero-mini .call { font-size: 2.8rem; font-weight: 700; }
+.opt-c .hero-mini .call { font-size: 2.75rem; font-weight: 800; }
+.opt-d .hero-mini .call { font-size: 2.7rem; font-weight: 800; }
+.opt-e .hero-mini .call { font-size: 2.65rem; font-weight: 800; }
+.opt-f .hero-mini .call { font-size: 2.6rem; font-weight: 700; }
+
+.note-box {
+  max-width: 1000px;
+  margin: 0 auto 2rem;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: rgba(139, 127, 212, 0.1);
+  border: 1px solid rgba(139, 127, 212, 0.2);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.note-box strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>Pick your look</h1>
+  <p>Six font options + traffic-light bar at top. Tell me A–F (and circles vs pills). Syne removed — all options use normal proportions.</p>
+</div>
+
+<div class="note-box">
+  <strong>Traffic lights (same on each):</strong> Crypto Cycle · Alt Cycle · Weekly Call · BTC Momentum · Alt Breadth.
+  Below = sample WAIT hero. Reply e.g. <strong>"C + circles"</strong> or <strong>"F + pills"</strong>.
+</div>
+
+<!-- A: Jost + Inter — closest Futura feel -->
+<div class="option opt-a">
+  <div class="opt-label"><strong>Option A</strong><span>Display: Jost · Body: Inter · Futura-adjacent, not stretched</span></div>
+  <div class="opt-body">
+    <div class="tl-bar">
+      <div class="tl"><div class="title">Crypto Cycle</div><div class="lamp yellow"></div><div class="status y">Yellow</div></div>
+      <div class="tl"><div class="title">Alt Cycle</div><div class="lamp red"></div><div class="status r">Red</div></div>
+      <div class="tl"><div class="title">Weekly Call</div><div class="lamp grey"></div><div class="status gr">Wait</div></div>
+      <div class="tl"><div class="title">BTC Momentum</div><div class="lamp green"></div><div class="status g">Green</div></div>
+      <div class="tl"><div class="title">Alt Breadth</div><div class="lamp red"></div><div class="status r">Red</div></div>
+    </div>
+    <div class="hero-mini">
+      <div class="call">WAIT</div>
+      <div class="sub">Deploy £0 · Confidence medium · Portfolio £2,412</div>
+    </div>
+  </div>
+</div>
+
+<!-- B: Outfit + Jakarta -->
+<div class="option opt-b">
+  <div class="opt-label"><strong>Option B</strong><span>Display: Outfit · Body: Plus Jakarta Sans · Soft modern</span></div>
+  <div class="opt-body">
+    <div class="tl-bar">
+      <div class="tl"><div class="title">Crypto Cycle</div><div class="lamp yellow"></div><div class="status y">Yellow</div></div>
+      <div class="tl"><div class="title">Alt Cycle</div><div class="lamp red"></div><div class="status r">Red</div></div>
+      <div class="tl"><div class="title">Weekly Call</div><div class="lamp grey"></div><div class="status gr">Wait</div></div>
+      <div class="tl"><div class="title">BTC Momentum</div><div class="lamp green"></div><div class="status g">Green</div></div>
+      <div class="tl"><div class="title">Alt Breadth</div><div class="lamp red"></div><div class="status r">Red</div></div>
+    </div>
+    <div class="hero-mini">
+      <div class="call">WAIT</div>
+      <div class="sub">Deploy £0 · Confidence medium · Portfolio £2,412</div>
+    </div>
+  </div>
+</div>
+
+<!-- C: Albert Sans + DM Sans — geometric -->
+<div class="option opt-c">
+  <div class="opt-label"><strong>Option C</strong><span>Display: Albert Sans · Body: DM Sans · Clean geometric</span></div>
+  <div class="opt-body">
+    <div class="tl-bar">
+      <div class="tl"><div class="title">Crypto Cycle</div><div class="lamp yellow"></div><div class="status y">Yellow</div></div>
+      <div class="tl"><div class="title">Alt Cycle</div><div class="lamp red"></div><div class="status r">Red</div></div>
+      <div class="tl"><div class="title">Weekly Call</div><div class="lamp grey"></div><div class="status gr">Wait</div></div>
+      <div class="tl"><div class="title">BTC Momentum</div><div class="lamp green"></div><div class="status g">Green</div></div>
+      <div class="tl"><div class="title">Alt Breadth</div><div class="lamp red"></div><div class="status r">Red</div></div>
+    </div>
+    <div class="hero-mini">
+      <div class="call">WAIT</div>
+      <div class="sub">Deploy £0 · Confidence medium · Portfolio £2,412</div>
+    </div>
+  </div>
+</div>
+
+<!-- D: Archivo + Figtree -->
+<div class="option opt-d">
+  <div class="opt-label"><strong>Option D</strong><span>Display: Archivo · Body: Figtree · Bold editorial</span></div>
+  <div class="opt-body">
+    <div class="tl-bar">
+      <div class="tl"><div class="title">Crypto Cycle</div><div class="lamp yellow"></div><div class="status y">Yellow</div></div>
+      <div class="tl"><div class="title">Alt Cycle</div><div class="lamp red"></div><div class="status r">Red</div></div>
+      <div class="tl"><div class="title">Weekly Call</div><div class="lamp grey"></div><div class="status gr">Wait</div></div>
+      <div class="tl"><div class="title">BTC Momentum</div><div class="lamp green"></div><div class="status g">Green</div></div>
+      <div class="tl"><div class="title">Alt Breadth</div><div class="lamp red"></div><div class="status r">Red</div></div>
+    </div>
+    <div class="hero-mini">
+      <div class="call">WAIT</div>
+      <div class="sub">Deploy £0 · Confidence medium · Portfolio £2,412</div>
+    </div>
+  </div>
+</div>
+
+<!-- E: Manrope single family -->
+<div class="option opt-e">
+  <div class="opt-label"><strong>Option E</strong><span>Display + body: Manrope · One family, balanced</span></div>
+  <div class="opt-body">
+    <div class="tl-bar">
+      <div class="tl"><div class="title">Crypto Cycle</div><div class="lamp yellow"></div><div class="status y">Yellow</div></div>
+      <div class="tl"><div class="title">Alt Cycle</div><div class="lamp red"></div><div class="status r">Red</div></div>
+      <div class="tl"><div class="title">Weekly Call</div><div class="lamp grey"></div><div class="status gr">Wait</div></div>
+      <div class="tl"><div class="title">BTC Momentum</div><div class="lamp green"></div><div class="status g">Green</div></div>
+      <div class="tl"><div class="title">Alt Breadth</div><div class="lamp red"></div><div class="status r">Red</div></div>
+    </div>
+    <div class="hero-mini">
+      <div class="call">WAIT</div>
+      <div class="sub">Deploy £0 · Confidence medium · Portfolio £2,412</div>
+    </div>
+  </div>
+</div>
+
+<!-- F: System fonts -->
+<div class="option opt-f">
+  <div class="opt-label"><strong>Option F</strong><span>System fonts (SF Pro on Mac) · No web font · Native feel</span></div>
+  <div class="opt-body">
+    <div class="tl-bar">
+      <div class="tl"><div class="title">Crypto Cycle</div><div class="lamp yellow"></div><div class="status y">Yellow</div></div>
+      <div class="tl"><div class="title">Alt Cycle</div><div class="lamp red"></div><div class="status r">Red</div></div>
+      <div class="tl"><div class="title">Weekly Call</div><div class="lamp grey"></div><div class="status gr">Wait</div></div>
+      <div class="tl"><div class="title">BTC Momentum</div><div class="lamp green"></div><div class="status g">Green</div></div>
+      <div class="tl"><div class="title">Alt Breadth</div><div class="lamp red"></div><div class="status r">Red</div></div>
+    </div>
+    <div class="hero-mini">
+      <div class="call">WAIT</div>
+      <div class="sub">Deploy £0 · Confidence medium · Portfolio £2,412</div>
+    </div>
+  </div>
+</div>
+
+<h2 style="max-width:1000px;margin:2rem auto 1rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);text-align:center;">Pill style (alternative to circles)</h2>
+
+<div class="option opt-c">
+  <div class="opt-label"><strong>Pill variant</strong><span>Same as C but labelled pills instead of lamps — e.g. if you prefer this</span></div>
+  <div class="opt-body">
+    <div class="tl-bar tl-bar-pills">
+      <div class="tl"><div class="title">Crypto Cycle</div><div class="pill-big yellow">Yellow</div></div>
+      <div class="tl"><div class="title">Alt Cycle</div><div class="pill-big red">Red</div></div>
+      <div class="tl"><div class="title">Weekly Call</div><div class="pill-big grey">Wait</div></div>
+      <div class="tl"><div class="title">BTC Momentum</div><div class="pill-big green">Green</div></div>
+      <div class="tl"><div class="title">Alt Breadth</div><div class="pill-big red">Red</div></div>
+    </div>
+    <div class="hero-mini" style="font-family:'Albert Sans',sans-serif">
+      <div class="call" style="font-size:2.75rem;font-weight:800">WAIT</div>
+      <div class="sub">Deploy £0 · Confidence medium</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2040 @@
+{
+  "_note": "Labelled Solana wallets for PUMP forensics. CEX deposit \u2260 sale. Custody/Squads \u2260 independent holder. Verify before production use.",
+  "_updated": "2026-08-22",
+  "_changelog_2026-08-12": "Removed dead Wintermute label GJRs4FwHteRiZRbrawiUfucAayY3aBSfMETebeeHagZ (account does not exist on-chain). Canonical MM/OTC source: reports/shared-mm-registry/shared-entity-wallet-registry.json",
+  "wallets": {
+    "5tzFkiKscXHK5ZXCGbPz2TPLjSddKEQw6YQ6WpnFtP1P": {
+      "label": "Binance hot wallet (public attribution)",
+      "type": "cex",
+      "source": "https://solscan.io/account/5tzFkiKscXHK5ZXCGbPz2TPLjSddKEQw6YQ6WpnFtP1P",
+      "confidence": "MEDIUM"
+    },
+    "2AQdpHJ2Gz1Ejm6oz17gJdgnx6nCySJZjMVZgdAPAuwd": {
+      "label": "Coinbase hot wallet (public attribution)",
+      "type": "cex",
+      "source": "https://solscan.io/account/2AQdpHJ2Gz1Ejm6oz17gJdgnx6nCySJZjMVZgdAPAuwd",
+      "confidence": "MEDIUM"
+    },
+    "Cfq1ts1iFr1eUWWBm8eFxUzm5R3YA3UvMZznwiShbgZt": {
+      "label": "PUMP protocol / LP-scale treasury",
+      "type": "treasury",
+      "source": "on-chain largest holder mapping",
+      "confidence": "MEDIUM"
+    },
+    "GsM3emTijQshDHrWRRhSQhqG1zYC9BNnAuah7ZPEu6ya": {
+      "label": "PUMP vesting distributor cluster",
+      "type": "treasury",
+      "source": "helius july distribution trace",
+      "confidence": "HIGH"
+    },
+    "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH",
+      "entity": "Binance"
+    },
+    "4sYGAxDy11dCiS3cBdWBH7ztY8H7D951mVMV5poyZTMc": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "A98NXgzCzKXoLSps5ga2pgsPdEj7AtDQnmAQjVeE8WEm": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "BRpXhshfaHtESkmBuZmrFrkJuRRhgmgmY1qtGkPdhwcj": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "C6FVB6jCdkPEdWRyzsV7RuUCmMeGgH9KAwirkKkERm3M": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "8eucCT1KqGV6ucERAtsjKm4U4YLUwNHvEeWXJ8MydfSa": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "DVRKLJ1a1R8RXtvPajhHBvuZzWpdJJC4XSUzXqnfJT54": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "EY1cDXoKAwkJwPoyUCvdHxtLSnCMccFpzEXzdGpvvWvT": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "6wrL9xKGPJz1sKTNFZx4QLZRJHny3hgEQvstXpVjJ8m5": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "Hv3s9sBvXLih4tVqHC2dVoMkUCW92tZ6DPyumzCfbe4K": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "8UjiSXFU45bZtovQjw6NCiNPBYFFLwzKcPCesFae1zGz": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "4Votc2LuueerHo1mocqTxhnArYpAbMtBAHsRyS5NpZJT": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "3L23bbdCk5WknsahZKJZw7ngwYC2gLgDez9KeaihCU5q": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "GGDbtt9ArMC7R9kpmC7r1nQZbBy7Htumf1LSmchxs6zc": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "rCTo9VHWqH5LLWCPoqPRvnDy7JTwCiECrvpWhqS38V6": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "1TQV75DZyj19JAuUq9RjvF4ceDuHzN1McQcggQ8u1ev": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "DiAvwdBbGESA51bxH6UKv1c4AVrQNYkPuVaW46dy3LWg": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "GJZgb2tYbxkJ1q9u5Xr8nDZtBypvwXQpNstrQ2P6UKh9": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "2Lwgk5qsbTPVcza28cNFzRHZXAhYBFagvFQTi19W4Lju": {
+      "label": "Squads multisig custody",
+      "type": "custody",
+      "source": "helius SQUADS_V4 activity on terminal wallet",
+      "confidence": "MEDIUM"
+    },
+    "GgQX3bDNCaXu8pp4WYRamuKZzYezcVhf3PJh419Z4gSX": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "86zviZwMGfYHwFzgV3p8MREMnvKmb69ZkxDBxeXmXDHj": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "A6dzisAAZLYefzEJ1JKfTgtbopgd1JgC9KMp8q5s4Zu2": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "DphzLLtXz2B133xMZkAgVy42gTCxpztJzZtJ9Haq2eEv": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "DPg3vkLhVG4DStXizsZfiMPNEgSMHVPW48uBYyuBc6iy": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "2s5CfZ3adDd52K3CEDr8CbtiZE56nYcx4XiBNiqZNCBe": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "8UhkGHGLpc8QBdSFapt6pwGUD7msFGoo4Ef8xEH2pmn5": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "8ehAfyVHFNfrhWU53KUJSm5VLAfY4DMP2ij7UckoBEwa": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "bZt4BMafPUdqEDQTBwntKWxnm9i4jmGczgGoWEBhtBQ": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "ATfCpmes7oPGJpqe8Quv5TCHdiURTBWjg1tHvonbKxWD": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "31RVsZpcmXxxiqrC5CqhpUijkezAQET8hkR7TYpqzj7q": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "ALynvqVUy4s4iKCkFis53GVHs5e8mnchfUJaGK1pM5Ki": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "2ki6XPajtxRUJTEp2qLABWEJ6jqeVoo1QfYmtStwrAyx": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "6rHo8LUSzyd3fX84nshmtPeFYAmzkE87wKzx2rmPKHQ2": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "8ec1wGmd87WUVmrgiiCKDqmeU7o7JVg2FwQVZUjY3KP": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "HagFJ5t7W1kRnbqkJxgvtuw1779ReeJ3gxCGGiEosWz": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "3HKnsZtQXrT42W8PVSLs6cTUQBC2BmuSRekMY2zYY87V": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "491vnfwiqtrsTM5UAWnaduUxATQ8U3NojL75rUCSYFo8": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "8ziMP4Bc5HnPjvdAQRnCed52QpvALQ16XHZ2PTGRKFM3": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "AHzDwT6cLxQAi3f14JHPAQF2texExGgd9BT9Vj6Fes7o": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "BFW2cjXqhk91B8cj9kPZvEPc8KFKgkN1eYux7QC2jqZB": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "ZnCRSoMKXuTdrcVFbobUr6d9weCPegBtgdXPDzRRcjC": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "DXSUBCAqeggmfdUfwaDi6iL4sRpVgHFUsDV91ZYzuLve": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "B2t62E6EebmN9mH3dZ31x9SgnoTv1JwsBZdhcAKMsQgL": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "9vLTUDttJEGnP1d3qmMqDxiv7Z4X76EGfnQD2WuFRjCz": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "4o4gGeLZJQukQmrJ911wXqfwAsdoNf19t8D3VK6mivCA": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "EDGVXQPitgC7BcnD4zH4vKh1NttCfyC68T36Rw7Psw4N": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "2TwGxSEkH6piC52tHSV1QksyySeY9NyuxSJP9vnD4WwZ": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "7vxtQ7sDP28xiS2nUJbz8pRYMCWCUDtabeMEuBXSUZnr": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "8wLTN387C6P5rYqZH7L4fpU6NLHeVFYcxSykdAUWk8Wy": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "D2eLkR2GJNq3zXP8pv6Y38ZyqT4ATsALxSQTbWXFEpHi": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "7sjjY6mbTVp6aYFR8mEK1LdxWYSVktz3SJDHr7q3Eif": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "9ZhSVHh2EZqKA6gkALS94MmKtz2GjErhQ9hgMjWfNiaU": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "6bogVACEiFk9xbza5ZgNA1iM2ceKiJ8AVgGqAAhJB7Zx": {
+      "label": "Squads multisig custody",
+      "type": "custody",
+      "source": "helius SQUADS_V4 activity on terminal wallet",
+      "confidence": "MEDIUM"
+    },
+    "5PHYYLykv9kbpNgN6uLWb24nyrhW3g52GWSHvNCXU5Gk": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "3WGPzS4JfrSc1RL9oxQByTBq43yXoSCWeSgg5xtSzSLi": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "3XXwxrHywkjDs87vvtqeCcdnuAf7KMPYjE7M7obxhndD": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "kYow3mGDz29iMR7Ki8yRwr2YkJBVCDe7dM66ugQqMoX": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "4QLNVpcmhCjWx7f8ccp9TnoAUvtwob8juGL7zv3986Hx": {
+      "label": "Streamflow vesting destination",
+      "type": "custody",
+      "source": "helius STREAMFLOW_TIMELOCK withdraw into wallet",
+      "confidence": "MEDIUM"
+    },
+    "3diC66SEKJCn3BND6LPDxi1b9oyGRvUcfmC9sqtAtWbj": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "BvhphWRidm6gvr4SqqLcaxQEnYAq1qjmVfJ5b9mFeN9J": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "3JDAcodat9iNPxHaRSaWQrHLCbUNBKKqBQPhMj4rPS2R": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "AbVPC8iFQKF8cHhC7ouJaWgdQN5y5tfe9ogQ7Tzig9AL": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius SQUADS_V4 + STREAMFLOW_TIMELOCK on terminal wallet",
+      "confidence": "HIGH"
+    },
+    "4dmRUdSwsDuV94Yv4XkZxSYa6hBQ4gZP1juqyyPd9jCt": {
+      "label": "Binance deposit (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "BfMv5DuWcJ9mGysWQ6PR2fGZ95APpDnW7T9ig67JQ5mM": {
+      "label": "Binance deposit (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "Gq7cAmTGQ9vE6EMsvK5f7JHDYjCSanrnBbGB2fHcjpvy": {
+      "label": "Binance deposit (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "FRhZUAe7MP5xtfmAiiHA2kBBx7QMZS26JQmH1B59Ahj6": {
+      "label": "Bybit deposit (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "31vbsVHsm4Mpygje8fCwa5Dq9MXA6LGsZSyJURyPoXga": {
+      "label": "Bybit deposit (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "81YAsNxxbQ8hkzivGqEh9BMsUfcodqQD7iZWwkRvjAS2": {
+      "label": "Bybit deposit (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "Ab6zEXskFyx69kjquraEoB3SJUrgR7Kih6dFJCSNM8kq": {
+      "label": "Bybit (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "AC5RDfQFmDS1deWZos921JfqscXdByf8BKHs5ACWjtW2": {
+      "label": "Bybit hot wallet (Meteora ops report)",
+      "type": "cex",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "MfDuWeqSHEqTFVYZ7LoexgAK9dxk7cy4DFJWjWMGVWa": {
+      "label": "Wintermute OTC (Meteora ops report)",
+      "type": "mm",
+      "source": "https://github.com/MeteoraAg/ops/issues/9",
+      "confidence": "MEDIUM"
+    },
+    "2wKyvVH7NVXMqXNKsAJWa7JM1L7xSC6TsD99YFdL5BUW": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius deep probe SQUADS+STREAMFLOW",
+      "confidence": "HIGH"
+    },
+    "7XQzhwiuvCFyXrxus5dbJd5vp55i6hCZTTqY2Ndx2jZY": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius deep probe SQUADS+STREAMFLOW",
+      "confidence": "HIGH"
+    },
+    "E6A625kVBeQpmh2Vi6U69c7BDebFngHhBEKWtt6Y9xMt": {
+      "label": "Squads multisig custody (Streamflow vesting destination)",
+      "type": "custody",
+      "source": "helius deep probe SQUADS+STREAMFLOW",
+      "confidence": "HIGH"
+    },
+    "42brAgAVNzMBP7aaktPvAmBSPEkehnFQejiZc53EpJFd": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "Hvkm4H2Ta3L3ssWbB5jeC4kpEJDuZnZqapAXp1V7UHEw": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "FeNayVKekV9FJzhD7ycTd6sbKEyzt9CRCiqxw5nr41yR": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "CqQ6AX1fiFfHKKY3saGzT5pgbkLwfLVrrAKpFhUG38oe": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "32cT9eAwkEvAk631rUcUAbXVFPg21DaAXzGiz9AqHTVE": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "9Z7S8vCj6nDbK9t4m4AU3vZpKm4UufHAwpmRYyKgZf7r": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "BunaYnktTigcU1ovzVt9dG7NMv2gW5VX7MBfSS8J38s2": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "AaFm2LPX8NUKXe64JaxcRNUc8QPGYCxrPG1HjHcTTGAK": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "i9XvhQqBCTQapqaFKPDuCbtPYMCwELmX8VTCsDhRG7d": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "7ReR6syi6gr7qUrKCL1FB9VFzGhVgHwLJ8wtfNtH9Mv4": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "iGdFcQoyR2MwbXMHQskhmNsqddZ6rinsipHc4TNSdwu": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "9ZifroknFoYu4r6DUk6nYoJiUQnEyyoUyeAwjXbPoL2x": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "2qo8jvuc49pFmTjmUHLiARSV6ppPTaE7gw27ZJ6DnNZy": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "CK8i4zFXkDE2KWfyg7g9S748r6mwxajbcKcyGhQMR3qQ": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "Gem2VAypSg7Ai7vjDKPTtqFahpoQWkfgVkyzx3rPoTka": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "5LZkATrLwHYCQj2YuVbjjgsDZzBk6YfL4pFQRJmtboT2": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "7cAui6ADtxLnpRr2wYvwJWTkzwgmVF2LYKnjKTLx4xR8": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "4raqd4tCEnm2yGeUocVqPgN2MPB1W6A3EZfC8LoMChvf": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "F6iEboP31qwgewVfonux3bdgWonJQHLgsky5uztmHDng": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "4SQQkqaouajAj9HaALAE1GUYhrkis96AhGr4gfnSDiUA": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "giPVBame6yenRbuYdsjXwku6TS3FaEkw7Nwy2VHiq8X": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "AL63c8ZNNAHZbAub6v1EGqQLt1fwyGQbVnFudw8xTPa5": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "8vHZDc2VTtynUizstoJHtXaH5VNKzynySMLZRZ8rj8Vc": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "BEyAq6ZgDkBwms5tNnYEjjvxsT7RaL8HVjxZvdu7XnJJ": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "FCgSWpNqaTvYydABHVCBxs7MRpgPBemhVDEYUcudj3Zv": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "CSSJFgoeqidqVtHKSNP7i7s6WX8APHfH2kYGdLV195Jb": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "FQEmsV5A6jZdmb3KuP3YBLmHfFNoKuoWddBGMQuW1M9f": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "CMivUnnbDHxLq9ChV1bSuiQE5ycZf6JVvFFDePMHhHYK": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "6fJxHzqAvnmsfb61Hkh7dNtUqLCaZdBtCvYq5X8BqHYj": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "6coXmZ8FRDRcuGQnoa1wH9GTrzJ7d1cD7NhiVDdMKt7F": {
+      "label": "Bybit PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bybit"
+    },
+    "3WjxkXbu9JBosUWUnJpjzec7Wa4rSkWo9khUbbLDCssk": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CBEADkb8TZAXHjVE3zwad4L995GZE7rJcacJ7asebkVG": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "is6MTRHEgyFLNTfYcuV4QBWLjrZBfmhVNYR6ccgr8KV": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3LzmBquLMap6ak2ofyeDbH99VhJ84k336RJzkLBwq3b1": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3n7E2gZmCaDGpmvmHVHhHg13x7y1zG37tnEXvizxnKY1": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "C1Fr2dLHvNMWKFuiM5nK5StfgWjbM6QcZcC5nkcYghkJ": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3bwCjRXv4LASkv7DbLRJi7fDXgRRfEZhEstDVoZsjEHR": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "GD3tr9DR8ZnSy2pQ22RwzSR4vKY48SxHLdgCymXQ6W5i": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9aiqyEUmwb63yUjwPHwY4jR68Pj5QsCQBGhYWRJEwXZA": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8KBargHcP6pZFyWGXnn9YpL5mit4AgLkuXeMAYitjU9f": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8PFD2CYF275p8YdRmhk4C1wcNoKeRVrouYdMbZV6HwHH": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5njZuDSS2WTFkvWWsgv8Q4TfQBuCASKJAztc5yF2qLWZ": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3THksatJaE5zpRTr5UpwF4snHZizzw2C26MTWHVf75W9": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9cFGNecbnLNiyYNZYKjN8egmMVrvn7HBQUCN9y6uXeYk": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9bAV2yg9oTWMc3sTdXhSeyDhuxs3iYfqvBzq1boYTLJT": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "GFg1X8GhgS1cid3KDHwP13FWmjCGm8BUEeaXJXjkapM2": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "4HwEZ1aHjQbUKVcAfLgRP1zSh2PHuzRMuhdGZXNiwhai": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "B5kYHL7ZSDUXdNmJZdkZrcnuydDb9xxqztEon5HuqGgu": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3n8t1n1NF6rhDeAPqQJF7RDD6JLGJPQftF1gMEKd4Sfs": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8KDZpmRUxrYWqabrRSckbMaqsdEGgrxDgVKK9K6o5S2F": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2egbJxkMXZ3LQz457NysWNFB99VJFUt5CXf5niYk3y2C": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5BRa8p4u273Uabc6Mg3kYy6m8iyXqBCp27QgmdyGvPEq": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "JBNg2D6GG5gNmsxscXFxSwLHfV6nTECQCdCH5uYDvvNd": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "HFgDun1rVFR1DuAse2Ke5c3xSscES4bEvddTf6tLSjd1": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "AMf9N5B9Bt7tR4mjF3RrSsWBRaS1xbbR9cxNCdhjLpE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "E1vXYwt2HLaviNv4gzDBKf5YKZc7DPbGNzS9MVK29t97": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CWWGynqj1RoeagiXjg4pYJXL9enEsc8qnBpfUWg2mCkB": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "C68a6RCGLiPskbPYtAcsCjhG8tfTWYcoB4JjCrXFdqyo": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "BG2R2K7vvBo9i4xDdc7SpfXYjubJDDBN1CwC786ATQNQ": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "FmpbkPgxjoYBJ6ac6YMhZ1FycCwuG8Zs2epxgsGFYvf6": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CdC3zo5BTMf67uEXkrtKANBN748smTmATT9w5sP519AH": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "6vhTE8xQqcsJUKsY1g5hVxCcSE6tEPJ4astkeq3RnUtp": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "29xZKBPkjTX3xLuTduaeoTQ1gPZsUHn99sEbyzhKsqnY": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "6sd2FGJiwBJMeQcn31gGZ1kPmgXerUUdCvigiSwpQAS3": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "GpA13iPfuvub7fsycshuRHoTbWNTTgeR98UW9hPpR3yC": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2cLNW8JvHiTYZPHqBUqxb2mpJsycq8VeRKts52S6PrzB": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "HnLezgQkNVWMp2AV6mcHM1Ljst32kfsoVnYUkvXuQpjg": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9isrZBGb9CWU79466DCUxN25iH7krrLRei5niqvH5WxU": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "Ea76qb13XfCNPhkC6Kngn1xrxTaAqKie8e1xpyhZWE7Y": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8qSQrdbvzftZ29AD91JU7aAr4jz6ArB5mXgEGpmQonhg": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "6vTm8KfwHL4HvsnFKhgeSdhPXN2BbAw7P8uRTUMq4nUw": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "64CuV85HHCydAwxQMoXwZ9HXoyw5qE65NkiJxCtuFErF": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9kQAUxzgkxVHyoF7g626hMTGPdBywXuecVKqzv2asPqW": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EhDyxGpEz9hryw6MwiBB7898WEzcoGTCAjVQMHbo6Q1M": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "ETZHF3bdNueRjUzhkEWoNb3sxzQ2kdxmFjWkNAFzCY2D": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "BEn6kZCSDtK82MvJ3ExAGwTAZuK1YtHUVXjTBe3AkGex": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9X5nzjmUGtPsFuRMq4MwrqmefhxHbUtw2Zf6YNSNRNbV": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8kygp58pU1pUed9CAC1TSpJw5CuyMPudzLKT63vtoi3k": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2vYxpjKRD16eHBxUMSGmfmhSfFnxK3Z6fiwCFxFMYR9Y": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EEYsXUTSQSSQ5umXQsP873mKLoQUvcARZdTXg3rFg4NY": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EkeyuVghbRfGWPyEtm3vnjKZPbUXXrPqxdar8fsEMuXd": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "4hKtmx39yKFhPsmGFY4mYiWGFw5CUChLyNSQybFXLQWE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "BBrKFV63KqHnRFco6GtiwssgZkozQ6FSk4RCZvVqDeQu": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2iLqnTkjz8yeTe5VQj1HQVvvHBK4KNRgnsbLcgUsw1BD": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EREtxSdDhNeqaHXwBZXvdqQngkagkfpmKqrUUHTH426B": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5XUysrSwJQNvFSpDhXk9m7Uh5fhnBkjeL5zgCVRiifR3": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "7fGw3UURsxk1szQ4buxQyEkiF4P6z7vx7sN1MHEguTJg": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "ESSRjL7tAdAW8n6Jn2hLWJXy1AHTGfrEjv3QWF5X68Bg": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "WXaGZmd7Zxm5sNy3Z1BCSrypfjEAoj8RKsRn7XsUr1k": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "GCp95GZF6DLEPvBUb8WqhzM6GvXiMm44Fbwj5kwAgcmR": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3CLjU8R2RULAEGJxF4zE6NpScng1q36qYLeSM3vqhdu6": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "4UP7t9p3HEd9gfF9gFKkGa1ZvLXFS2naHgnxB4fwpLfS": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "FdhaftEvHvN2droWPrTvbLMm7gAJJn7an5fP9SbjhccU": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "7dTubGTCM4JqfpzuejvD147xixDVtrU81Vj8pFMYoWdE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "AEZoku1fLfUz5JYJ3kJ5YVdf3QT1T4RwdggGbuR8Eakd": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8TPx9UAeWxpm7vfemjQNhMv4o9guFGnCKN5F6v3vAaQf": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "DnX1jjqy8A1e6Cn14R2P2NrfXqTbxkFhJa9MxXuXmxEr": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2YxQCXt9spMwoQZiwFLwdjHtscVvXi4nmxCkQCD6Rvgg": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8wM44Ryv9DFCSfkgUnPEPgnsc53arT4cnmXL6LnnC4UW": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "Co5ULHuc7tj1VUbgeMJTMbeZiEftrr6sdwhXoZrqzW4i": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9ZDX1UvJZjEPuXRbn8BApBQVZWo3uqUURDcsALbSeKbk": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "8chYSNhJ3HkwG34kfytwoJMN3WDtaYpb4ni6wekhfwsz": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "E8Q78o9wEcA2iz3pedKFnU5q7QQ5bRsTcJ8mJX5dohqK": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2dm8jHXzrK8Gegs7Bat6XrtpSMahpKQr8y84FYz48QEn": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "A5EXeggwt4JnvUUcQQgNapggEqHowCU94umKWrFXpxiY": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "22Naagq7LteEfBp1UhobKZbVn9PN6PXRfYuqoxPfFxdQ": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "DG52JpnVg1qGP2QPVWfUqnVrHrNJfaYvM4Z8sxKQNjMu": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "WYML4pFA8Vjbf34dyfpCB22WJXDKEEpTuN4iExZWETj": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2hkCcczkANNHGxi3tMgtwsMHqQysEkBXmzpDXdqUBKWE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "E7Z5mbX91EwC4r6dUERrY12v8rxEaKgWnQBn5QRSGBJv": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CjoV5B96reuCfPh2rRK11G1QptG97jZdyZArTn3EN1Mj": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "DSXPbNfyU6NxZfq4ohYc7FeNk4onMuCwP65pwVTEiVD6": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "HN7fEKg2UJoX2d2RAVdkc3BuhCse9whEcaavKZhEyGTX": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "4TF3CUvxokpCXc5Vr8jfo7E8kfKUDjsDXE831MHLbaoS": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9un5wqE3q4oCjyrDkwsdD48KteCJitQX5978Vh7KKxHo": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CQ4kCD3xgJpR9jkuAuZjLCeee91cQcJzMPZfXH8SHtoE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2hLJDUuvyropu36qNfgj6YVaxZZQ4tR8pFT2GVZkiq9g": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "JCKwL9eeV4tTB2w5LxZsUhqpke9gbKpVDZmSpDLfu97T": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "C2ukVTEfbuyG7CGGVZqJMBPSyjVsiqeXFcdmixbKSKke": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "Ac2kXAuh8EDWsvU1MJLuCj6L7uRHzys7sBHMCoLVhrYE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "HCQuN3fB5GfkeTvsx2v84q4FfvjY778hRkJiPLxhCBZ7": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2m4F5xgMRPEaYnrbmrG5ooSgtvSDoN3WofyEEQJzwX2J": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "BN8rRoEifmfexngPpL4Rh8jpgi4VHizDXm15Qz81METK": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "67gLX2qjrWAedGGy9D8EwMKvTGZEeMrynJjeneQaDe3c": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "HY13M68pqtjTUYM4SQDEj71uJ5TcCKZz1LmnkgWjbeVz": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "HmL7m7zCGmKgJoZsNa5V9F1YevQy4r9kpou85e5x3RQM": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "7C4T9Nn5cy4nKaxJ1iQ6iS1HkmsVs7n3qmerB6pj22Aw": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "71Q99GtLPFKmmi2T2Gf5i7aY7h2Ar9JJ1erZCSo3DRbv": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "Da8RuzF4whvWoQP8DD1rZMTi2i1u2VHFcU8zFrwfdBzA": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EfUjzhZdgeNEzjLpzLp2ePNR7K1cxvREp1MHZvbTg1rT": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2psmnC2yespGEuHiLZrJKG5WUuJp7KbENuM1ByPwm9UE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "GDy8kWqByXuwVuSGVSXSNVp4ZdHneC9TVJHTuyT6zRcm": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "FuScFuP2UXWGXsamq3FaboxJETYbpZhCFLNMdSEJkVgh": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "B5wZxjXVmqBFBnJ7ctXfSkGR2rzKWtYLUjK9EktqfCgr": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "6ngL5tHyi4sLUYi7sPMu2nEe6bVE5S3G4Ekmz9ApP9H1": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CtFk9tjNfEzBtSAQ1rDqBkdDwG2MUCr5SkVsyiNh98DS": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "7JXbuU78YzQtXo2crALdHebuHKAebcAxydkG2FY5QX52": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3WLsxTSrVqAiiyMScnRFGQvLmbneM5jSXXvHLK8pvDo7": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "D6g89z1wzcmhthHBW5Cnh5d2dx7DqxjvASADq9fi2kLw": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "AHVdD6a4KyokTPSVPChgbacZm1BtQjrNXim3qZmV1kWS": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "7vBw734qyXbksaD7b3UQ8f4v4gAE8VkPZSSWxrJzhgt2": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3SoLDrrjRE3h3LwKVwtwHnC2WQYrbNLh77sboh9NShkV": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "Gk73RezntpEs1tjhL4hLzo7LpM7qo8oSxAhjxLVVcgyD": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "Agq5QWskaLFEX59Tz9KsXjKJ8nWkvcp93tehxv6PBbcw": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "6J9wXvkBnSwNYyo8sAV9yxYjMGNjHiS8ZL3hxqKcMjck": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CAhCUcEswiWMSnxFKUC14rDjgD9Km9QSJ5PWwx1UuyDX": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "83JzPZixFveX1ztSopMgm8pk1qgxDt6wrGhuUEEUYBPZ": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "6Csi3F6FEmB1BjRL383kQ1DHNSbz2C7RCTyxbCB9gs63": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "9EE6ssDEs8cMxafvzivMTs3SiB127KR3cJ6tHXYHhovE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "AeGJBVzZQ8M6gXE35kZHuqUeTZsAbvUZJCgdcQVF4g8P": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "BQM6iajqhTLtJKNRtNgCw9MkKehoP1nrftFmkv8Z58Mm": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "25wCAt3FQJPVfbWmphkmJMbjYsEf3C4dcPsqmeLiLaXB": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2YBnRim9BM1tT1hKLscYC5aFdLC2JxDqJJo4TS4TDR5A": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "82wM6LfV3m8K65qwLr9RGPJqnDnr7AKuwL1xay3G5fqC": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "A54kcWxocqiFgz7AXdxpLwyxJK3YJQ4Pq9JCthLxKYsA": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "DJyV4AZgCHCTWZyTW3jxQMUN8NMy3e3MVZkBtZ2B1J8H": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2m4eVxeRzWkfLS3qQoy1qwpVTTNN5K6dvCwJgZM641Sg": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "A1A5XdYkZtLtyWu36dvtKNbBbR7fM6iMBMSotvyS4iwa": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5EyMbFSsZi3X7W2Jesy9wYb6VUnxqfnsE7sS8cSqtDT": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "ETJcJM2hyBBMLfv2WGUKvyCUr7HnK37fRceF127vtGLW": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "Hp8EKAMQNKjFZRS7TgZJ2NedUkCutT8fYLKZ6KxPTWEe": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "48KyeCFAUk8dNwWxRDof6ytbGprYvRSk1t6PmaaLGvuG": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "HSFHZdb4jdp55rQDsg3MEnjPgrCC5UaMsm937ybAxe7d": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3fkDswy2gLUhcZHgpJxz2bAgmv1uN5U8dNCUaaZLUBN4": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "GN75THGperSwPU6mqX5suREfvJog3UedjPejVu1s4Gzv": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EZVk1McsXTaKriiXs3BE7c5LDkuw7xe3JFKicpPddvCX": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "C4Pd5Wnd411uvQ9qeUjHgUq253Nh4LyaKegDxnRJSt7i": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CdjU2pK77vpUAqA3RTCsQMkYu8n2bY5JyGqzA5DoYStJ": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "DG5VHEj3VJUX9BkEbeJvSa6DaRmDYiT7mz7r3EBHSNbn": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "98qzrVnLHcf3WhRM7pSWoBBHxUzohiKxhCG7PBfE7pWv": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "339wjiUHKZHSch8LEAX181E39WnqHYphcz4JoEUJi5K9": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5CZdHWyuLrPFwEdf3avH4J48CsvK1T2v8ZoSiEJ3MExp": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EEf1Vim2fbVnTkvSMhKBxgJ58JJmjK9bWGgR2agcahU2": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "C5giHDnsU2cEHKopQ1D3iR5cpcL9LvjVgmy7YLJjjDL6": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "BG68vSiSyjk9iEi1WZX3hHYNhrrM63Qtf8uSqgsRvhpH": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CQxgsEW64gkzeEJ9FYfsyfc46u7rueXus51R7DNLnp8R": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "CeGyfZdtbjzC5FeVXCBdYE1v397yxxqYgmMcUwtouJUu": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5VCwKtCXgCJ6kit5FybXjvriW3xELsFDhYrPSqtJNmcD": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "xwC2r4WgSv4NSXPVzqWkj7AKp4cVdT3VJKeEdEFoww4": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "95thx7sQgT4hBXMV7igqSMNxan3Km2pCSS7Q3ExqpYiR": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "26SZDYrGiwvLm17BzAkWpY4PBXfwRKJ5ud6aLtdNmv1o": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "4jAV8UknDF7P1auWpFu12Vv3icrqn1zY2UgYqdekiWhy": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "4faseE2xPpjr7qJFwBdBau2qnqAoevT9WfwnzhJhFj1K": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "DwUMRGqmdD14iL2AWNTnBA1cBMDLKSpCXxDd7AhqUanv": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "G1MR57GSUUkfgmN3zUUZcNvbonyBMvNru8Ra5HPCFvEZ": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "6VrXDz8MJ6gKJDLDZbgNoDfb6bxNHj4ABTvexwBxA4FF": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "2WRW6eykdWXih5neex2oTT3fEvbTT2kDwDYd4KuqGfTi": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "3fsEw3NcHfU1oDnZKnWcztMZWta3mnTkjZRGmHmxugQt": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "FqoA2U6mLq8mFs6uvtoUDa1KxbXjmGux4DDCK3eN9vwk": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "EnrsmQjVSrsVNwhpdQ7oHUmWTC2roq7b8JXKm3uLzTpE": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5d9VZiHxPhigkFJ8RrjrcsPf6DrSxHT4FfVUkU8LsKZM": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5JRnzQCaji34xdPzccCD8XVcXHic8ewHs9bPANbKVmZY": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "5CRCFL9hbUyAL33h1ZLe5Qb7uwSqfxVJ7sWAZxzqFa8c": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "qDPvBTqB5mruoL5eSbBTttPJVQ82saJ1BRRYwDm9RUB": {
+      "label": "OKX PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "OKX"
+    },
+    "FxteHmLwG9nk1eL4pjNve3Eub2goGkkz6g6TbvdmW46a": {
+      "label": "Bitfinex PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bitfinex"
+    },
+    "FyJBKcfcEBzGN74uNxZ95GxnCxeuJJujQCELpPv14ZfN": {
+      "label": "Bitfinex PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bitfinex"
+    },
+    "GnCRxKqUEPouYMvTb5nJMGrDB3VkTXZnDTaDuVZdnWA3": {
+      "label": "Bitfinex PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bitfinex"
+    },
+    "J4rzLDLhLWFpjSgCMCcxTU84bQ8AH5vhgjwq7SjYVk8Q": {
+      "label": "Bitfinex PoR / announced",
+      "type": "cex",
+      "source": "official PoR",
+      "confidence": "HIGH",
+      "entity": "Bitfinex"
+    },
+    "3gd3dqgtJ4jWfBfLYTX67DALFetjc5iS72sCgRhCkW2u": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "c5f9zfpkKMD9N8uLqJcFeJAAz7v12vDMnup9Y6EeQkk": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "38xCLm9kSExfGU1GdyVuX4vop7SZns9kU2mQyTmmMdUP": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "HXsKP7wrBWaQ8T2Vtjry3Nj3oUgwYcqq9vrHDM12G664": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "GBrURzmtWujJRTA3Bkvo7ZgWuZYLMMwPCwre7BejJXnK": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "6QJzieMYfp7yr3EdrePaQoG3Ghxs2wM98xSLRu8Xh56U": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "EtwjSV65xPjZxDmmoNTw78gdYxLa1ayqVo4kXGsjhMiA": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "GK35nWN6ZHSGZrRTf8kTQd8RkFCighChPEb41XwSFVAC": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "5SDrsMNTYdhmApjfqYHDvjoW92f2S42vcc7zNDVcQ9Ej": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "28nYGHJyUVcVdxZtzKByBXEj127XnrUkrE3VaGuWj1ZU": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "6oCa9Tz8VXVp63WiFyruE5PD6yXz3pCsv6oGzUGvg9TP": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "G9RCBaYb8aBRxoe8QBC2ucGrVqjuZFysRhY8d56cnNT1": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "2ojv9BAiHUrvsm9gxDe7fJSzbNZSJcxZvf8dqmWGHG8S": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "EPauhjQjjTBCpeBtszS3xGRASLpEJFM1cspSiFRXZa9Z": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "3yFwqXBfZY4jBVUafQ1YEXw189y2dN3V5KQq9uzBDy1E": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "BZ3kabSsMzbuJUguYxtmkRtzw7ACqw1DUMH8PcbvXiUr": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "H8BgJgae6qhMtf7BM2JtddywSQt11WdxHHxkGLNX5hss": {
+      "label": "Binance official PoR hot/cold",
+      "type": "cex",
+      "entity": "Binance",
+      "source": "https://public.bnbstatic.com/static/proof-of-reserve/wallet_address_20260801.zip",
+      "confidence": "HIGH"
+    },
+    "0xCe84449A8Ebec019AC110a4b6662E55d0fD9f228": {
+      "label": "Wintermute 5",
+      "type": "mm",
+      "chain": "ethereum",
+      "source": "https://etherscan.io/address/0xCe84449A8Ebec019AC110a4b6662E55d0fD9f228",
+      "confidence": "HIGH"
+    },
+    "0xF0984860f1F31a784c0FF0bb4d1322e377f97631": {
+      "label": "DWF Labs (official EVM buyout custody)",
+      "type": "mm",
+      "chain": "ethereum",
+      "source": "https://blockchainreporter.net/dwf-labs-unveils-official-wallets-used-for-buyouts-on-secondary-marketplaces/",
+      "confidence": "HIGH"
+    },
+    "0xf584F8728B874a6a5c7A8d4d387C9aae9172D621": {
+      "label": "Jump Trading",
+      "type": "mm",
+      "chain": "ethereum",
+      "source": "https://etherscan.io/address/0xf584F8728B874a6a5c7A8d4d387C9aae9172D621",
+      "confidence": "HIGH"
+    },
+    "0x5b990C664aE7E759763ACfEC76E11c289c53Be77": {
+      "label": "Amber Group",
+      "type": "mm",
+      "chain": "ethereum",
+      "source": "https://etherscan.io/address/0x5b990C664aE7E759763ACfEC76E11c289c53Be77",
+      "confidence": "HIGH"
+    },
+    "0xD8D6fFE342210057BF4DCc31DA28D006f253cEF0": {
+      "label": "GSR",
+      "type": "mm",
+      "chain": "ethereum",
+      "source": "https://etherscan.io/address/0xD8D6fFE342210057BF4DCc31DA28D006f253cEF0",
+      "confidence": "HIGH"
+    },
+    "0xad6eaa735D9dF3D7696fd03984379dAE02eD8862": {
+      "label": "Cumberland",
+      "type": "mm",
+      "chain": "ethereum",
+      "source": "https://etherscan.io/address/0xad6eaa735D9dF3D7696fd03984379dAE02eD8862",
+      "confidence": "HIGH"
+    },
+    "0x87b49A99CbCe4A9030e67919B776AA97d538aDda": {
+      "label": "Cumberland",
+      "type": "mm",
+      "chain": "ethereum",
+      "source": "https://etherscan.io/address/0x87b49A99CbCe4A9030e67919B776AA97d538aDda",
+      "confidence": "HIGH"
+    }
+  },
+  "_changelog_2026-08-21": "Added official OKX/Bybit/Bitfinex Solana PoR keys as type=cex dests. Transfer != sale.",
+  "_changelog_2026-08-21b": "Added official Binance Solana PoR hot/cold keys as type=cex. 60k user deposits not added.",
+  "_changelog_2026-08-22": "Seeded 7 HIGH ETH MM dests (Wintermute 5, DWF EVM, Jump, Amber, GSR, Cumberland x2). Nametag or official disclosure. Transfer \u2260 sale. No new Solana MM dests."
+}

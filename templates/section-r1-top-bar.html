@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>R1 — Top bar (§51) · sample</title>
+<style>
+:root {
+  --bg: #f4f1ec;
+  --ink: #1a1a1a;
+  --muted: #6b6560;
+  --line: #d4cfc8;
+  --accent: #c45c26;
+  --green: #2d6a4f;
+  --yellow: #b8860b;
+  --red: #9b2226;
+  --display: Georgia, "Times New Roman", serif;
+  --data: "SF Pro Text", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: var(--data);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.45;
+  font-size: 14px;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+.sample-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+/* §51 header — one line */
+.topline-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+.topline-header h1 {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.topline-header select {
+  font-family: var(--data);
+  font-size: 0.8rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 0.2rem 0.4rem;
+}
+/* §51 blocks */
+.r1 { display: flex; flex-direction: column; gap: 1.35rem; }
+.r1-block { border-bottom: 1px solid var(--line); padding-bottom: 1.35rem; }
+.r1-block:last-child { border-bottom: none; padding-bottom: 0; }
+.lbl {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+/* 1. Date */
+.meta-line { font-size: 0.8rem; color: var(--muted); }
+.meta-line strong { color: var(--ink); font-weight: 600; }
+/* 2. Portfolio */
+.portfolio-usd {
+  font-family: var(--display);
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.portfolio-gbp {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+/* 3. Weekly call — text only */
+.weekly-call {
+  font-family: var(--display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+/* 4. Deploy */
+.deploy-main {
+  font-family: var(--display);
+  font-size: 1.35rem;
+}
+.deploy-plan {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+/* 5–6. Cycle lights */
+.cycle-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.light {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.light.green { background: var(--green); }
+.light.yellow { background: var(--yellow); }
+.light.red { background: var(--red); }
+.cycle-name {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.conf {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-left: auto;
+}
+.cycle-why {
+  font-size: 0.9rem;
+  max-width: 32em;
+}
+/* 7–8 lists */
+.r1 ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.r1 li { margin-bottom: 0.35rem; }
+.r1 li:last-child { margin-bottom: 0; }
+/* 9 falsifier */
+.falsifier {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-style: italic;
+  max-width: 36em;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="sample-tag">R1 · §51 top bar only · static sample data · not wired to run_week.py</p>
+
+  <header class="topline-header">
+    <h1>Crypto Decision Report</h1>
+    <select aria-label="Report week">
+      <option selected>2026-07-26</option>
+      <option>2026-07-19</option>
+    </select>
+  </header>
+
+  <section class="r1" aria-label="Weekly summary">
+
+    <!-- 1. Date / report # -->
+    <div class="r1-block">
+      <div class="lbl">1 · Date / report</div>
+      <p class="meta-line"><strong>Week of 26 July 2026</strong> · Report #1 · Data as of 26 Jul 2026 12:00 UTC</p>
+    </div>
+
+    <!-- 2. Portfolio USD (GBP subtle) -->
+    <div class="r1-block">
+      <div class="lbl">2 · Portfolio value</div>
+      <p class="portfolio-usd">$2,283</p>
+      <p class="portfolio-gbp">£1,714 tracked · Sol wallet · BTC incomplete until Coinbase connected</p>
+    </div>
+
+    <!-- 3. Weekly call — text, NOT a traffic light -->
+    <div class="r1-block">
+      <div class="lbl">3 · Weekly call</div>
+      <p class="weekly-call">WAIT</p>
+    </div>
+
+    <!-- 4. Amount to deploy -->
+    <div class="r1-block">
+      <div class="lbl">4 · Amount to deploy this week</div>
+      <p class="deploy-main">$0 <span style="font-size:0.85em;color:var(--muted)">(£0)</span></p>
+      <p class="deploy-plan">Planned monthly allocation: $250 (£250) · not deployed this week</p>
+    </div>
+
+    <!-- 5. Crypto cycle -->
+    <div class="r1-block">
+      <div class="lbl">5 · Crypto cycle</div>
+      <div class="cycle-card">
+        <div class="cycle-head">
+          <span class="light yellow" aria-hidden="true"></span>
+          <span class="cycle-name">Thesis</span>
+          <span class="conf">Confidence MEDIUM · JUDGEMENT</span>
+        </div>
+        <p class="cycle-why">BTC down-leg is 47 days (82% of median length) — bottom may be forming but no confirmed reversal yet.</p>
+      </div>
+    </div>
+
+    <!-- 6. Alt cycle -->
+    <div class="r1-block">
+      <div class="lbl">6 · Alt cycle</div>
+      <div class="cycle-card">
+        <div class="cycle-head">
+          <span class="light red" aria-hidden="true"></span>
+          <span class="cycle-name">Thesis</span>
+          <span class="conf">Confidence HIGH · JUDGEMENT</span>
+        </div>
+        <p class="cycle-why">Only 2 of 8 portfolio alts beat BTC over 30d; dominance rising — little evidence of broad alt participation.</p>
+      </div>
+    </div>
+
+    <!-- 7. What changed -->
+    <div class="r1-block">
+      <div class="lbl">7 · What changed</div>
+      <ul>
+        <li>First V2 report — no prior week to compare.</li>
+        <li>Wallet mapped: 7 tokens + SOL on Solana (assets.json).</li>
+        <li>BTC leg still down; reversal watch active, not confirmed.</li>
+      </ul>
+    </div>
+
+    <!-- 8. This week -->
+    <div class="r1-block">
+      <div class="lbl">8 · This week</div>
+      <ul>
+        <li>Deploy $0. Hold all positions. No swaps.</li>
+        <li>Add Coinbase read-only API key when ready (BTC balance INCOMPLETE).</li>
+        <li>Profit ladder: NOT YET APPROVED.</li>
+      </ul>
+    </div>
+
+    <!-- 9. What could prove us wrong -->
+    <div class="r1-block">
+      <div class="lbl">9 · What could prove us wrong</div>
+      <p class="falsifier">BTC breaks prior swing lows on rising volume — would downgrade the crypto-cycle thesis and keep deployment at zero.</p>
+    </div>
+
+  </section>
+</div>
+</body>
+</html>

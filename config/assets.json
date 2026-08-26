@@ -1,0 +1,83 @@
+{
+  "wallet": "AyoTEz2X2hQMDTXbpD3W9QZThtwUJqui34uHSeUw2TzJ",
+  "assets": [
+    {
+      "id": "btc",
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "chain": "multi",
+      "notes": "May be on Coinbase — not in Sol wallet. Coinbase API deferred."
+    },
+    {
+      "id": "sol",
+      "symbol": "SOL",
+      "name": "Solana",
+      "chain": "solana",
+      "native": true
+    },
+    {
+      "id": "render",
+      "symbol": "RENDER",
+      "name": "Render",
+      "chain": "solana",
+      "mint": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof"
+    },
+    {
+      "id": "io",
+      "symbol": "IO",
+      "name": "io.net",
+      "chain": "solana",
+      "mint": "BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K"
+    },
+    {
+      "id": "nos",
+      "symbol": "NOS",
+      "name": "Nosana",
+      "chain": "solana",
+      "mint": "nosXBVoaCTtYdLvKY6Csb4AC8JCdQKKAaWYtx2ZMoo7"
+    },
+    {
+      "id": "grass",
+      "symbol": "GRASS",
+      "name": "Grass",
+      "chain": "solana",
+      "mint": "Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs"
+    },
+    {
+      "id": "fartcoin",
+      "symbol": "FARTCOIN",
+      "name": "Fartcoin",
+      "chain": "solana",
+      "mint": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump"
+    },
+    {
+      "id": "spx6900",
+      "symbol": "SPX6900",
+      "name": "SPX6900",
+      "chain": "solana",
+      "mint": "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr",
+      "notes": "Wormhole-bridged SPX on Solana"
+    },
+    {
+      "id": "pump",
+      "symbol": "PUMP",
+      "name": "Pump.fun",
+      "chain": "solana",
+      "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn"
+    },
+    {
+      "id": "ray",
+      "symbol": "RAY",
+      "name": "Raydium",
+      "chain": "solana",
+      "mint": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"
+    },
+    {
+      "id": "zec",
+      "symbol": "ZEC",
+      "name": "Zcash",
+      "chain": "zcash",
+      "notes": "Zcash L1 — not Solana. Stage-2 page uses Stage-1 packs."
+    }
+  ]
+}

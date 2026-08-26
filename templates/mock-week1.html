@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto Decision Report — Week of 26 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Jost:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #2a2830;
+  --muted: #7a7585;
+  --line: rgba(120, 110, 140, 0.14);
+  --display: Futura, "Futura PT", Jost, sans-serif;
+  --body: "DM Sans", system-ui, sans-serif;
+  --grad-bg: linear-gradient(145deg, #f6f2ff 0%, #eef8f4 42%, #fff6ee 100%);
+  --grad-hero: linear-gradient(120deg, #8b7fd4 0%, #6db89a 55%, #e8a07a 100%);
+  --grad-title: linear-gradient(90deg, #6b5ea8, #4d9a78);
+  --coral: #e8927c;
+  --sage: #5fa882;
+  --lavender: #8b7fd4;
+  --sky: #6aafd4;
+  --peach: #f0c4a8;
+  --pill-green-bg: #dff3e8;
+  --pill-green-fg: #2d6b4a;
+  --pill-amber-bg: #ffe8d6;
+  --pill-amber-fg: #c45a00;
+  --pill-red-bg: #fce8e8;
+  --pill-red-fg: #9b4040;
+  --lamp-green: linear-gradient(145deg, #d8f3e4, #8ecfaa);
+  --lamp-amber: linear-gradient(145deg, #ffe8cc, #f0b872);
+  --lamp-red: linear-gradient(145deg, #fad8d8, #e8a0a0);
+  --panel-bg: rgba(255, 255, 255, 0.62);
+  --panel-bg-strong: rgba(255, 255, 255, 0.78);
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: var(--body);
+  background: var(--grad-bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  line-height: 1.5;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.banner {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--lavender);
+  margin-bottom: 1.25rem;
+}
+.masthead {
+  padding-bottom: 1rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--line);
+}
+.masthead h1 {
+  font-family: var(--display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.meta {
+  margin-top: 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.meta span + span::before { content: " · "; }
+.hero {
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 1.75rem 1.5rem 2rem;
+  border-radius: 20px;
+  background: var(--panel-bg-strong);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(120, 100, 160, 0.06);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(139, 127, 212, 0.12), transparent 55%),
+              radial-gradient(ellipse 60% 50% at 0% 100%, rgba(109, 184, 154, 0.1), transparent 50%);
+  pointer-events: none;
+}
+.hero .watermark {
+  position: absolute;
+  right: -0.02em;
+  top: 0.05em;
+  font-family: var(--display);
+  font-size: clamp(5rem, 22vw, 10rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+}
+.hero .call {
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 14vw, 5.5rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  position: relative;
+  color: var(--ink);
+}
+.hero .deploy {
+  margin-top: 0.9rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  position: relative;
+  color: var(--ink);
+}
+.hero .deploy strong { font-weight: 700; color: var(--sage); }
+.hero .headline {
+  margin-top: 0.85rem;
+  font-size: 1rem;
+  max-width: 46ch;
+  position: relative;
+  color: var(--muted);
+}
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 700px) { .stat-strip { grid-template-columns: 1fr 1fr; } }
+.stat {
+  padding: 1.1rem 1.15rem;
+  border-radius: 14px;
+  background: var(--panel-bg);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+.stat .lbl {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.stat .num {
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.05;
+  margin-top: 0.3rem;
+  letter-spacing: -0.03em;
+}
+.stat:nth-child(1) .num { color: var(--lavender); }
+.stat:nth-child(2) .num { color: var(--sage); }
+.stat:nth-child(3) .num { color: var(--coral); }
+.stat:nth-child(4) .num { color: var(--sky); }
+.stat .sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.25rem; }
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+section h2 {
+  font-family: var(--display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+ul.plain { list-style: none; padding: 0; }
+ul.plain li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
+}
+ul.plain li strong { display: block; font-weight: 600; }
+ul.plain li span { color: var(--muted); font-size: 0.78rem; }
+.panel {
+  border-radius: 14px;
+  background: var(--panel-bg);
+  border: 1px solid var(--line);
+  padding: 1.15rem 1.2rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(8px);
+}
+.panel .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.panel h3 {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.panel p { margin-top: 0.55rem; font-size: 0.9rem; }
+.panel .foot { font-size: 0.72rem; color: var(--muted); margin-top: 0.45rem; }
+.panel .big {
+  font-family: var(--display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 0.35rem;
+  letter-spacing: -0.02em;
+}
+.clock {
+  margin-top: 0.75rem;
+  height: 6px;
+  background: rgba(120, 110, 140, 0.12);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.clock i {
+  display: block;
+  height: 100%;
+  width: 0.67%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--lavender), var(--sage));
+}
+.pill {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.22rem 0.55rem;
+  border-radius: 99px;
+}
+.pill.green { background: var(--pill-green-bg); color: var(--pill-green-fg); }
+.pill.amber { background: var(--pill-amber-bg); color: var(--pill-amber-fg); }
+.lamp-a {
+  display: inline-block;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.12);
+  vertical-align: -0.15em;
+}
+.lamp-a.green { background: var(--lamp-green); }
+.lamp-a.amber { background: var(--lamp-amber); }
+.lamp-a.red { background: var(--lamp-red); }
+.pill.red { background: var(--pill-red-bg); color: var(--pill-red-fg); }
+.signals {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.sig {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  padding: 0.75rem 0.8rem;
+  background: var(--panel-bg);
+}
+.sig .lbl { font-size: 0.58rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
+.sig .val { margin-top: 0.4rem; }
+.sig .type { font-size: 0.55rem; color: var(--muted); margin-top: 0.3rem; }
+details.sig-detail {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel-bg);
+  margin-bottom: 0.45rem;
+  overflow: hidden;
+}
+details.sig-detail summary {
+  cursor: pointer;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+details.sig-detail summary::-webkit-details-marker { display: none; }
+details.sig-detail .body {
+  padding: 0 0.9rem 0.8rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 0.65rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  background: var(--panel-bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); }
+th {
+  font-size: 0.58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.5);
+}
+tr:last-child td { border-bottom: none; }
+.bar-cell { width: 34%; }
+.bar { height: 5px; background: rgba(120, 110, 140, 0.12); border-radius: 99px; overflow: hidden; }
+.bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--lavender), var(--coral));
+}
+.num-r { text-align: right; font-variant-numeric: tabular-nums; }
+.incomplete { color: var(--pill-red-fg); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
+.actions {
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+  background: linear-gradient(135deg, rgba(139, 127, 212, 0.1), rgba(109, 184, 154, 0.08));
+  border: 1px solid rgba(139, 127, 212, 0.2);
+  margin: 2rem 0;
+}
+.actions h2 { margin-bottom: 0.65rem; }
+.actions ul { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+.actions li { margin-bottom: 0.35rem; }
+.capital-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 600px) { .capital-grid { grid-template-columns: 1fr; } }
+.capital-grid .panel { margin: 0; }
+.capital-grid .panel:nth-child(1) .big { color: var(--sage); }
+.capital-grid .panel:nth-child(2) .big { color: var(--lavender); }
+.btc-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+}
+.btc-mini div {
+  border-top: 1px solid var(--line);
+  padding-top: 0.55rem;
+}
+.btc-mini .n {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.btc-mini .l {
+  font-size: 0.58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+footer code { font-size: 0.68rem; background: rgba(255,255,255,0.5); padding: 0.1rem 0.35rem; border-radius: 4px; }
+.tl-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+@media (max-width: 800px) { .tl-bar { grid-template-columns: repeat(2, 1fr); } }
+.tl {
+  border-radius: 14px;
+  padding: 0.9rem 0.65rem;
+  text-align: center;
+  background: var(--panel-bg-strong);
+  border: 1px solid var(--line);
+}
+.tl .title {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.55rem;
+  line-height: 1.3;
+}
+.tl .lamp {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  margin: 0 auto 0.4rem;
+  box-shadow: inset 0 -2px 5px rgba(0,0,0,0.06);
+}
+.tl .lamp.green { background: var(--lamp-green); }
+.tl .lamp.amber { background: var(--lamp-amber); }
+.tl .lamp.red { background: var(--lamp-red); }
+.tl .status {
+  font-family: var(--display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.tl .status.g { color: var(--pill-green-fg); }
+.tl .status.am { color: var(--pill-amber-fg); }
+.tl .status.r { color: var(--pill-red-fg); }
+.tl-key {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 1.75rem;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="banner">Design mock — layout &amp; colours only · sample placeholder text</div>
+
+  <header class="masthead">
+    <h1>Crypto Decision Report</h1>
+    <div class="meta">
+      <span>Week of 26 Jul 2026</span>
+      <span>Data as of 26 Jul 2026 12:00 UTC</span>
+      <span>Report v0-mock</span>
+    </div>
+  </header>
+
+  <div class="tl-bar">
+    <div class="tl"><div class="title">Crypto Cycle</div><div class="lamp amber"></div><div class="status am">Amber</div></div>
+    <div class="tl"><div class="title">Alt Cycle</div><div class="lamp red"></div><div class="status r">Red</div></div>
+    <div class="tl"><div class="title">Weekly Call</div><div class="lamp amber"></div><div class="status am">Wait</div></div>
+    <div class="tl"><div class="title">BTC Momentum</div><div class="lamp green"></div><div class="status g">Green</div></div>
+    <div class="tl"><div class="title">Alt Breadth</div><div class="lamp red"></div><div class="status r">Red</div></div>
+  </div>
+  <p class="tl-key"><strong>Green</strong> supportive · <strong>Amber</strong> mixed · <strong>Red</strong> negative</p>
+
+  <div class="hero">
+    <div class="watermark" aria-hidden="true">WAIT</div>
+    <div class="call">WAIT</div>
+    <div class="deploy">Deploy <strong>£0</strong> this week · Confidence <strong>MEDIUM</strong></div>
+    <p class="headline">Cycle evidence mixed. Alt breadth weak. No capital deployment until signals align — or BTC holdings are connected.</p>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat">
+      <div class="lbl">Portfolio (tracked)</div>
+      <div class="num">£2,412</div>
+      <div class="sub">$3,214 USD · Sol wallet only</div>
+    </div>
+    <div class="stat">
+      <div class="lbl">Thesis clock</div>
+      <div class="num">1</div>
+      <div class="sub">of 150 days · deadline 23 Dec 2026</div>
+    </div>
+    <div class="stat">
+      <div class="lbl">BTC leg</div>
+      <div class="num">47d</div>
+      <div class="sub">down · 82% of median length</div>
+    </div>
+    <div class="stat">
+      <div class="lbl">Alts beating BTC (30d)</div>
+      <div class="num">2</div>
+      <div class="sub">of 8 tracked</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <section>
+      <h2>What changed</h2>
+      <ul class="plain">
+        <li><strong>First V2 report — baseline week</strong><span>No prior report to compare</span></li>
+        <li><strong>Wallet mapped: 7 tokens + SOL</strong><span>Matches assets.json</span></li>
+        <li><strong>BTC down-leg maturing</strong><span>Reversal watch active — not confirmed</span></li>
+      </ul>
+    </section>
+    <section>
+      <h2>What could prove us wrong</h2>
+      <ul class="plain">
+        <li><strong>BTC breaks prior lows on volume</strong><span>Would downgrade crypto cycle thesis</span></li>
+        <li><strong>5+ alts outperform BTC over 30d</strong><span>Would lift alt-cycle thesis</span></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="capital-grid">
+    <div class="panel">
+      <h3>Owned capital</h3>
+      <p class="big">~£2,146</p>
+      <p class="foot">Invested to date (approx) · wallet + Coinbase when connected</p>
+    </div>
+    <div class="panel">
+      <h3>Borrowed credit (separate)</h3>
+      <p class="big">£10,000</p>
+      <p class="foot">0% available · not deployed · never merged with owned total</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <div class="row">
+        <h3>Crypto cycle thesis</h3>
+        <span class="pill amber">AMBER</span>
+      </div>
+      <p>Major bottom may be forming within the 150-day window. Down-leg stretched vs history but no confirmed reversal yet.</p>
+      <div class="clock" title="Day 1 of 150"><i></i></div>
+      <p class="foot">Confidence MEDIUM · JUDGEMENT · Day 1 / 150</p>
+    </div>
+    <div class="panel">
+      <div class="row">
+        <h3>Alt-cycle thesis</h3>
+        <span class="pill red">RED</span>
+      </div>
+      <p>Little evidence of broad alt participation. BTC dominance rising. Portfolio alts mostly lagging BTC over 30 days.</p>
+      <p class="foot">Confidence HIGH · JUDGEMENT informed by RULE breadth</p>
+    </div>
+  </div>
+
+  <section style="margin-bottom:2rem">
+    <h2>BTC cycle evidence</h2>
+    <div class="panel">
+      <p>BTC $64,467 · from 365d high <strong>−12%</strong> · 60d return <strong>+4.2%</strong></p>
+      <div class="btc-mini">
+        <div><div class="l">Current leg</div><div class="n">47d down</div></div>
+        <div><div class="l">Avg down-leg</div><div class="n">57d</div></div>
+        <div><div class="l">4y since low</div><div class="n">1,420d</div></div>
+      </div>
+      <p class="foot">Historical base rate: 61% of comparable legs (n=23) reversed within 30d when past 75% median — not a forecast.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Signals</h2>
+    <div class="signals">
+      <div class="sig"><div class="lbl">Leg fatigue</div><div class="val"><span class="lamp-a amber"></span> Amber</div><div class="type">RULE</div></div>
+      <div class="sig"><div class="lbl">Drawdown 365d</div><div class="val"><span class="lamp-a amber"></span> Amber</div><div class="type">RULE</div></div>
+      <div class="sig"><div class="lbl">60d momentum</div><div class="val"><span class="lamp-a green"></span> Green</div><div class="type">RULE</div></div>
+      <div class="sig"><div class="lbl">4y position</div><div class="val"><span class="lamp-a amber"></span> Amber</div><div class="type">RULE</div></div>
+      <div class="sig"><div class="lbl">Alt breadth 7d</div><div class="val"><span class="lamp-a red"></span> Red</div><div class="type">RULE</div></div>
+      <div class="sig"><div class="lbl">Alt breadth 30d</div><div class="val"><span class="lamp-a red"></span> Red</div><div class="type">RULE</div></div>
+      <div class="sig"><div class="lbl">BTC dominance</div><div class="val"><span class="lamp-a red"></span> Red</div><div class="type">RULE</div></div>
+    </div>
+    <details class="sig-detail">
+      <summary>Leg fatigue <span class="lamp-a amber"></span> Amber · RULE</summary>
+      <div class="body">Current down-leg is 47 days vs median 57 days (82%). Threshold: AMBER at 60–110% of median. Source: btc-daily-close.json swing-leg detection.</div>
+    </details>
+    <details class="sig-detail">
+      <summary>Alt breadth 30d <span class="lamp-a red"></span> Red · RULE</summary>
+      <div class="body">2 of 8 portfolio assets outperformed BTC over 30d. Threshold: RED ≤1, AMBER 2–3, GREEN ≥4. Source: CoinGecko prices 26 Jul 2026.</div>
+    </details>
+  </section>
+
+  <div class="actions">
+    <h2>This week</h2>
+    <ul>
+      <li><strong>Deploy £0.</strong> Hold all positions. No swaps.</li>
+      <li>Add Coinbase read-only API key when ready (BTC currently INCOMPLETE).</li>
+      <li>Profit ladder: <strong>NOT YET APPROVED</strong></li>
+      <li>Watch: BTC leg length vs median; alt breadth count next Sunday.</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2>Holdings</h2>
+    <table>
+      <thead>
+        <tr><th>Asset</th><th class="num-r">Balance</th><th class="num-r">GBP</th><th class="num-r">USD</th><th class="bar-cell">Weight</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>IO</td><td class="num-r">2,485.48</td><td class="num-r">£370</td><td class="num-r">$493</td><td class="bar-cell"><div class="bar"><i style="width:15%"></i></div></td></tr>
+        <tr><td>NOS</td><td class="num-r">1,294.98</td><td class="num-r">£352</td><td class="num-r">$468</td><td class="bar-cell"><div class="bar"><i style="width:15%"></i></div></td></tr>
+        <tr><td>RENDER</td><td class="num-r">240.74</td><td class="num-r">£359</td><td class="num-r">$477</td><td class="bar-cell"><div class="bar"><i style="width:15%"></i></div></td></tr>
+        <tr><td>GRASS</td><td class="num-r">974.46</td><td class="num-r">£328</td><td class="num-r">$436</td><td class="bar-cell"><div class="bar"><i style="width:14%"></i></div></td></tr>
+        <tr><td>SPX6900</td><td class="num-r">851.19</td><td class="num-r">£286</td><td class="num-r">$380</td><td class="bar-cell"><div class="bar"><i style="width:12%"></i></div></td></tr>
+        <tr><td>2Z</td><td class="num-r">4,796.22</td><td class="num-r">£299</td><td class="num-r">$398</td><td class="bar-cell"><div class="bar"><i style="width:12%"></i></div></td></tr>
+        <tr><td>FARTCOIN</td><td class="num-r">1,903.90</td><td class="num-r">£244</td><td class="num-r">$325</td><td class="bar-cell"><div class="bar"><i style="width:10%"></i></div></td></tr>
+        <tr><td>SOL</td><td class="num-r">0.81</td><td class="num-r">£61</td><td class="num-r">$81</td><td class="bar-cell"><div class="bar"><i style="width:3%"></i></div></td></tr>
+        <tr><td>BTC</td><td class="num-r">—</td><td class="num-r incomplete" colspan="2">INCOMPLETE</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    Fonts: Futura (main) + DM Sans (body) · Pastel palette ·
+  Production: <code>python run_week.py</code> → report.json → HTML archive
+  </footer>
+</div>
+</body>
+</html>

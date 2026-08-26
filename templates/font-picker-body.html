@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Body font — pick one</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=DM+Sans:wght@400;500;600&family=Figtree:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=Lato:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Source+Sans+3:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: linear-gradient(160deg, #f4f0ff 0%, #edf7f2 50%, #fff5eb 100%);
+  --ink: #2a2830;
+  --muted: #7a7585;
+  --line: rgba(100, 90, 120, 0.12);
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  padding: 2rem 1rem 4rem;
+}
+.intro { max-width: 640px; margin: 0 auto 1.5rem; text-align: center; }
+.intro h1 { font-size: 1.25rem; font-weight: 700; }
+.intro p { margin-top: 0.45rem; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+.nav { text-align: center; margin-bottom: 1.5rem; font-size: 0.82rem; }
+.nav a { color: #6b5ea8; }
+.grid { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
+.card {
+  background: rgba(255,255,255,0.75);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+}
+.card:hover { border-color: rgba(120, 100, 180, 0.35); }
+.tag {
+  font-size: 0.7rem; font-weight: 700; color: #6b5ea8;
+  background: rgba(107, 94, 168, 0.1);
+  display: inline-block; padding: 0.12rem 0.45rem; border-radius: 6px; margin-bottom: 0.4rem;
+}
+.name { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.65rem; }
+.label {
+  font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.35rem;
+}
+.deploy { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.body { font-size: 0.9rem; line-height: 1.55; color: var(--muted); max-width: 50ch; }
+.small { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; }
+.head-fixed {
+  font-family: Jost, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: rgba(42, 40, 48, 0.2);
+  margin-bottom: 0.5rem;
+}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>Body / small text font</h1>
+  <p>Labels, paragraphs, tables. Pick a letter.<br>Headline font is a <a href="font-picker-main.html">separate page</a>.</p>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="tag">A</div>
+    <div class="name">Inter — most common UI body font</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:Inter,sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:Inter,sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:Inter,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:Inter,sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">B</div>
+    <div class="name">DM Sans — clean, slightly warmer</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:'DM Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:'DM Sans',sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:'DM Sans',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:'DM Sans',sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">C</div>
+    <div class="name">Plus Jakarta Sans — friendly modern</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:'Plus Jakarta Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:'Plus Jakarta Sans',sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:'Plus Jakarta Sans',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:'Plus Jakarta Sans',sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">D</div>
+    <div class="name">Figtree — contemporary, easy read</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:Figtree,sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:Figtree,sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:Figtree,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:Figtree,sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">E</div>
+    <div class="name">Source Sans 3 — Adobe classic</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:'Source Sans 3',sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:'Source Sans 3',sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:'Source Sans 3',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:'Source Sans 3',sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">F</div>
+    <div class="name">IBM Plex Sans — technical clarity</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:'IBM Plex Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:'IBM Plex Sans',sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:'IBM Plex Sans',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:'IBM Plex Sans',sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">G</div>
+    <div class="name">Work Sans — neutral workhorse</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:'Work Sans',sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:'Work Sans',sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:'Work Sans',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:'Work Sans',sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">H</div>
+    <div class="name">Lato — warm humanist</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:Lato,sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:Lato,sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:Lato,sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:Lato,sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">I</div>
+    <div class="name">Atkinson Hyperlegible — max readability</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:'Atkinson Hyperlegible',sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:'Atkinson Hyperlegible',sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:'Atkinson Hyperlegible',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:'Atkinson Hyperlegible',sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+  <div class="card">
+    <div class="tag">J</div>
+    <div class="name">System — SF Pro Text (Mac native)</div>
+    <div class="head-fixed">WAIT</div>
+    <div class="label" style="font-family:system-ui,-apple-system,sans-serif">Crypto cycle thesis</div>
+    <div class="deploy" style="font-family:system-ui,-apple-system,'SF Pro Text',sans-serif">Deploy £0 this week · Confidence medium</div>
+    <div class="body" style="font-family:system-ui,-apple-system,'SF Pro Text',sans-serif">Cycle evidence mixed. Alt breadth weak. No deployment until signals align or BTC data is connected.</div>
+    <div class="small" style="font-family:system-ui,-apple-system,sans-serif">Portfolio £2,412 · 7 tokens tracked · BTC incomplete</div>
+  </div>
+
+</div>
+
+</body>
+</html>

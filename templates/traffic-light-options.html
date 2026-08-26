@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Light shape — A selected · colours fixed</title>
+<style>
+body { margin: 0; font-family: system-ui, sans-serif; background: #f4f1ec; padding: 2rem 1rem; text-align: center; }
+h1 { font-size: 1rem; }
+p { font-size: 0.85rem; color: #777; }
+.lights { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+.l { width: 36px; height: 36px; border-radius: 50%; box-shadow: inset 0 -2px 4px rgba(0,0,0,0.12); }
+.g { background: linear-gradient(145deg,#9fd4b0,#43a047); }
+.am { background: linear-gradient(145deg,#ffcc80,#f57c00); }
+.r { background: linear-gradient(145deg,#ef9a9a,#e53935); }
+span { display: block; font-size: 0.7rem; color: #666; margin-top: 0.35rem; }
+</style>
+</head>
+<body>
+<h1>Locked: Option A</h1>
+<p>Green · Amber/Orange · Red</p>
+<div class="lights">
+  <div><div class="l g"></div><span>Green</span></div>
+  <div><div class="l am"></div><span>Amber</span></div>
+  <div><div class="l r"></div><span>Red</span></div>
+</div>
+</body>
+</html>
