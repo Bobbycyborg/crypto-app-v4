@@ -452,7 +452,8 @@
       "label": "Wintermute OTC (Meteora ops report)",
       "type": "mm",
       "source": "https://github.com/MeteoraAg/ops/issues/9",
-      "confidence": "MEDIUM"
+      "confidence": "HIGH",
+      "g1_confidence_note": "Aligned to shared-MM registry row wm-sol-mfdu confidence HIGH (Meteora ops + Dune + agentmila). known-cex had MEDIUM from the Meteora-only label. Not a new hunt. G1 review gap 3."
     },
     "2wKyvVH7NVXMqXNKsAJWa7JM1L7xSC6TsD99YFdL5BUW": {
       "label": "Squads multisig custody (Streamflow vesting destination)",
@@ -2083,5 +2084,12 @@
       }
     ],
     "note": "G1: missing proved MM dests so V4 dest-watch can name desks. No 60k deposits. No invented Gate/Kraken/Coinbase."
+  },
+  "_changelog_2026-08-26_g1b": {
+    "wintermute_mfdu_confidence": {
+      "from": "MEDIUM",
+      "to": "HIGH",
+      "why": "v3 shared-MM registry independently recorded HIGH for the same address. Brief said do not upgrade unless that registry already proved HIGH. It did."
+    }
   }
 }
