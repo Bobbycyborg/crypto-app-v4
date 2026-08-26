@@ -1,9 +1,9 @@
-# Job 1 tests (correction pass)
+# Job 1 tests (atomic completeness)
 
 ```text
 python3 tests/job1/job1_build.py
 python3 tests/job1/test_job1.py
 ```
 
-Semantic gates must be able to FAIL. No leftover `captured` / `usd_figure` IDs.
-Does not fetch live data. RAY and GRASS are dormant.
+Gates must be able to FAIL. RAY and GRASS are dormant. HTML is not modified.
+`dynamic_numeric_unmapped` must be 0 on active reports.

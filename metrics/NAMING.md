@@ -4,7 +4,7 @@ Pattern: `{asset}.{family}.{measure}[.{window}]`
 
 Banned production families: `captured`, `usd_figure`, `pct_figure`, `pp_figure`.
 
-Windows: `current`, `1d`, `7d`, `30d`, `90d`, `180d`, `ath`, `all_time`, `aug1`.
+Windows: `current`, `live`, `report`, `1d`, `7d`, `30d`, `90d`, `180d`, `ath`, `all_time`, `aug1`, `mean_30d`, `mean_7d`, named historical months (`july_2026`, `nov_2024`, …).
 
 Same meaning, many slots = one ID.
 Different window or definition = different ID.

@@ -1,43 +1,53 @@
 {
-  "canonical_metrics": 119,
-  "ui_occurrences": 2333,
-  "candidates": 2333,
+  "canonical_metrics": 482,
+  "ui_occurrences": 2495,
+  "candidates": 2495,
   "unclassified": 0,
   "classification": {
-    "MAPPED_CANONICAL": 153,
-    "STATIC_REFERENCE": 49,
-    "CONTEXT_ONLY": 542,
-    "QUALITATIVE_NON_METRIC": 1199,
-    "EVIDENCE_REFERENCE": 382,
-    "HISTORICAL": 6,
-    "WALLET_OWNED": 2
+    "MAPPED_CANONICAL": 652,
+    "STATIC_REFERENCE": 46,
+    "LEGACY_INACTIVE": 329,
+    "QUALITATIVE_NON_METRIC": 1000,
+    "CONTEXT_ONLY": 35,
+    "COMPOSITE_DISPLAY": 80,
+    "EVIDENCE_REFERENCE": 272,
+    "HISTORICAL": 48,
+    "WALLET_OWNED": 33
   },
   "metric_types": {
-    "CURRENT_DYNAMIC": 75,
-    "STATIC_DECISION_THRESHOLD": 36,
-    "HISTORICAL": 5,
-    "DERIVED_DYNAMIC": 2,
-    "WALLET_OWNED": 1
+    "CURRENT_DYNAMIC": 388,
+    "WALLET_OWNED": 32,
+    "STATIC_DECISION_THRESHOLD": 34,
+    "HISTORICAL": 26,
+    "DERIVED_DYNAMIC": 2
   },
   "ownership": {
-    "CGPT_CURSOR": 118,
-    "GROK": 1
+    "CGPT_CURSOR": 450,
+    "GROK": 32
   },
   "freshness": {
-    "UNKNOWN": 113,
-    "HISTORICAL": 5,
-    "STALE": 1
+    "UNKNOWN": 443,
+    "HISTORICAL": 26,
+    "STALE": 13
   },
   "status": {
-    "MISSING_PROVENANCE": 15,
-    "OK": 70,
-    "CONFLICT": 34
+    "MISSING_PROVENANCE": 67,
+    "OK": 349,
+    "CONFLICT": 66
   },
-  "conflicts": 34,
+  "conflicts": 66,
   "semantic_anomalies": 0,
-  "unknown_records": 119,
-  "sources_captured": 50,
-  "source_urls_captured": 34,
+  "dynamic_numeric_unmapped": 0,
+  "structured_numeric_context_only": 0,
+  "compound_unlinked": 0,
+  "wallet_siren_bad": 0,
+  "time_window_anomalies": 0,
+  "update_mode_anomalies": 0,
+  "wallet_metrics": 32,
+  "atomic_dynamic_facts": 773,
+  "unknown_records": 482,
+  "sources_captured": 312,
+  "source_urls_captured": 270,
   "active_report_assets": [
     "btc",
     "fartcoin",
@@ -65,102 +75,102 @@
   ],
   "asset_coverage": {
     "btc": {
-      "candidates": 172,
-      "mapped": 25,
+      "candidates": 190,
+      "mapped": 72,
       "unclassified": 0
     },
     "fartcoin": {
-      "candidates": 174,
-      "mapped": 11,
+      "candidates": 196,
+      "mapped": 50,
       "unclassified": 0
     },
     "hype": {
-      "candidates": 188,
-      "mapped": 5,
+      "candidates": 198,
+      "mapped": 72,
       "unclassified": 0
     },
     "io": {
-      "candidates": 174,
-      "mapped": 20,
+      "candidates": 182,
+      "mapped": 61,
       "unclassified": 0
     },
     "nos": {
-      "candidates": 192,
-      "mapped": 8,
+      "candidates": 198,
+      "mapped": 52,
       "unclassified": 0
     },
     "pump": {
-      "candidates": 320,
-      "mapped": 28,
+      "candidates": 360,
+      "mapped": 136,
       "unclassified": 0
     },
     "render": {
       "candidates": 155,
-      "mapped": 8,
+      "mapped": 62,
       "unclassified": 0
     },
     "sol": {
-      "candidates": 205,
-      "mapped": 23,
+      "candidates": 221,
+      "mapped": 112,
       "unclassified": 0
     },
     "spx6900": {
-      "candidates": 197,
-      "mapped": 13,
+      "candidates": 212,
+      "mapped": 61,
       "unclassified": 0
     },
     "zec": {
-      "candidates": 156,
-      "mapped": 6,
+      "candidates": 164,
+      "mapped": 44,
       "unclassified": 0
     }
   },
   "dormant_coverage": {
     "grass": {
-      "candidates": 144,
-      "mapped": 8,
+      "candidates": 152,
+      "mapped": 0,
       "unclassified": 0
     },
     "ray": {
-      "candidates": 166,
-      "mapped": 12,
+      "candidates": 177,
+      "mapped": 0,
       "unclassified": 0
     }
   },
   "hold_only_coverage": {
     "2z": {
       "candidates": 6,
-      "mapped": 3,
+      "mapped": 5,
       "unclassified": 0
     },
     "bonk": {
       "candidates": 8,
-      "mapped": 5,
+      "mapped": 7,
       "unclassified": 0
     },
     "drift": {
       "candidates": 5,
-      "mapped": 3,
+      "mapped": 4,
       "unclassified": 0
     },
     "giga": {
       "candidates": 8,
-      "mapped": 5,
+      "mapped": 7,
       "unclassified": 0
     },
     "lockin": {
       "candidates": 8,
-      "mapped": 5,
+      "mapped": 7,
       "unclassified": 0
     },
     "orca": {
       "candidates": 9,
-      "mapped": 5,
+      "mapped": 8,
       "unclassified": 0
     },
     "retardio": {
       "candidates": 8,
-      "mapped": 5,
+      "mapped": 7,
       "unclassified": 0
     }
   },
@@ -194,7 +204,14 @@
     "drawdown_not_ma_labels": "PASS",
     "type_safety_all_metrics": "PASS",
     "semantic_anomaly_zero": "PASS",
-    "conflict_detection": "PASS"
+    "conflict_detection": "PASS",
+    "active_reports_ten": "PASS",
+    "dynamic_numeric_unmapped_zero": "PASS",
+    "structured_numeric_context_only_zero": "PASS",
+    "compound_unlinked_zero": "PASS",
+    "wallet_siren_mapped": "PASS",
+    "time_window_anomalies_zero": "PASS",
+    "update_mode_anomalies_zero": "PASS"
   },
   "schema_errors_sample": [],
   "fail_hints": {
@@ -206,6 +223,10 @@
     "conflict_bad": [],
     "ray_active": 0,
     "grass_active": 0,
-    "anomalies": []
+    "anomalies": [],
+    "dyn_unmapped_sample": [],
+    "window_anoms": [],
+    "wallet_bad": 0,
+    "structured_ctx_sample": []
   }
 }

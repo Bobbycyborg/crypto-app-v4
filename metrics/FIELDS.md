@@ -52,3 +52,8 @@ As enums in the schema.
 ## value_kind / allowed_unit / allowed_literal_shape
 Declared on every canonical metric. The builder refuses to map a literal that fails the metric's type.
 USD metrics cannot absorb percents. Ratio metrics cannot absorb notionals. Index cannot absorb dates.
+Time basis is part of the id (`usd.30d` is not `usd.7d`; `usd_per_day.mean_30d` is not a 7d total).
+
+## update_mode
+LIVE (hold/desk ticker), REPORT_SNAPSHOT (frozen report figure), HISTORICAL, STATIC_THRESHOLD, WALLET_SNAPSHOT.
+A live ticker and a report hero price are different records. Conflict only if asset + definition + window + update_mode match and values disagree.

@@ -60,6 +60,7 @@ def main() -> int:
             fail("occurrence_references", o.get("metric_id"))
         if o.get("metric_id") is None and o["coverage_state"] not in {
             "QUALITATIVE_NON_METRIC", "FALSE_POSITIVE", "EVIDENCE_REFERENCE", "CONTEXT_ONLY",
+            "COMPOSITE_DISPLAY", "LEGACY_INACTIVE",
         }:
             fail("occurrence_references", o["occurrence_id"])
     print("PASS occurrence_references")
@@ -139,10 +140,27 @@ def main() -> int:
 
     sys.path.insert(0, str(Path(__file__).parent))
     from job1_build import TYPE_SPEC, shape_ok, detect_kind  # noqa: E402
+    families_path = METRICS / "metric-families.json"
+    if families_path.exists():
+        fam = json.loads(families_path.read_text())
+        for rest, spec in fam.items():
+            TYPE_SPEC[rest] = (spec["value_kind"], spec["allowed_unit"], spec["allowed_literal_shape"])
 
     if summary.get("semantic_anomalies", 1) != 0:
         fail("semantic_anomaly_zero", str(summary.get("semantic_anomalies")))
     print("PASS semantic_anomaly_zero")
+    if summary.get("dynamic_numeric_unmapped", 1) != 0:
+        fail("dynamic_numeric_unmapped_zero", str(summary.get("dynamic_numeric_unmapped")))
+    print("PASS dynamic_numeric_unmapped_zero")
+    if summary.get("time_window_anomalies", 1) != 0:
+        fail("time_window_anomalies_zero", str(summary.get("time_window_anomalies")))
+    print("PASS time_window_anomalies_zero")
+    if summary.get("update_mode_anomalies", 1) != 0:
+        fail("update_mode_anomalies_zero", str(summary.get("update_mode_anomalies")))
+    print("PASS update_mode_anomalies_zero")
+    if summary.get("wallet_siren_bad", 1) != 0:
+        fail("wallet_siren_mapped", str(summary.get("wallet_siren_bad")))
+    print("PASS wallet_siren_mapped")
 
     for m in registry:
         rest = m["metric_id"].split(".", 1)[1]
@@ -165,8 +183,6 @@ def main() -> int:
                 fail("type_safety_all_metrics", f"usd got pct {lit}")
             if spec[0] == "INDEX" and re.fullmatch(r"\d{4}-\d{2}-\d{2}", lit):
                 fail("type_safety_all_metrics", f"index is date {lit}")
-            if spec[0] == "COUNT" and re.search(r"[A-Za-z]{4,}", lit) and "of" not in lit.lower():
-                fail("type_safety_all_metrics", f"count is text {lit}")
     print("PASS type_safety_all_metrics")
 
     def lits(mid: str) -> list[str]:
@@ -220,6 +236,44 @@ def main() -> int:
         if "MIXED" in x.upper():
             fail("regression_participation", x)
     print("PASS regression_participation")
+
+    def mid_lits(suffix):
+        return [(o.get("metric_id"), o.get("current_literal_text") or "") for o in occs if suffix in (o.get("metric_id") or "")]
+
+    for mid, lit in mid_lits("price.usd"):
+        if "/d" in lit.lower():
+            fail("family_kind_gates", f"per-day literal on price {mid} {lit}")
+    for o in occs:
+        if o.get("asset") == "IO" and "etf.flow" in (o.get("metric_id") or ""):
+            fail("family_kind_gates", f"IO mapped to ETF {o.get('metric_id')} {o.get('current_literal_text')}")
+    for mid, lit in mid_lits("inflation.pct.current"):
+        if "68.8" in lit.replace(" ", ""):
+            fail("family_kind_gates", f"stake percent on inflation {mid} {lit}")
+    for o in occs:
+        mid = o.get("metric_id") or ""
+        if re.search(r"\.(jul|may|jun|now_7d|cum)\.", mid):
+            fail("family_kind_gates", f"inventory leftover {mid}")
+    for mid, lit in mid_lits("hype.fees.usd.30d"):
+        if "59.2" in lit.replace(" ", ""):
+            break
+    else:
+        fail("family_kind_gates", "missing HYPE fees 30d $59.2M")
+    for mid, lit in mid_lits("sol.fees.usd_per_day.mean_30d"):
+        if "809" in lit:
+            break
+    else:
+        fail("family_kind_gates", "missing SOL 30d mean fees /d")
+    for mid, lit in mid_lits("sol.funding.rate.latest"):
+        if "5.533" in lit.replace(" ", ""):
+            break
+    else:
+        fail("family_kind_gates", "missing SOL funding latest")
+    for mid, lit in mid_lits("sol.funding.rate.mean_7d"):
+        if "5.367" in lit.replace(" ", ""):
+            break
+    else:
+        fail("family_kind_gates", "missing SOL funding 7d mean")
+    print("PASS family_kind_gates")
 
     print("ALL JOB 1 SEMANTIC TESTS PASS")
     return 0

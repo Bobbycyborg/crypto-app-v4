@@ -28,7 +28,8 @@
     "evidence_variants",
     "value_kind",
     "allowed_unit",
-    "allowed_literal_shape"
+    "allowed_literal_shape",
+    "update_mode"
   ],
   "properties": {
     "metric_id": {
@@ -119,9 +120,28 @@
     "notes": { "type": "string" },
     "value_kind": {
       "type": "string",
-      "enum": ["USD_AMOUNT", "PERCENT", "RATIO_X", "TOKEN_AMOUNT", "COUNT", "INDEX", "PRICE_USD"]
+      "enum": [
+        "USD_AMOUNT",
+        "USD_PER_DAY",
+        "USD_7D_TOTAL",
+        "USD_30D_TOTAL",
+        "USD_PER_DAY_MEAN_30D",
+        "PERCENT",
+        "PERCENTAGE_POINTS",
+        "RATIO_X",
+        "TOKEN_AMOUNT",
+        "COUNT",
+        "INDEX",
+        "PRICE_USD",
+        "FUNDING_RATE",
+        "MA_LEVEL"
+      ]
     },
     "allowed_unit": { "type": "string" },
-    "allowed_literal_shape": { "type": "string" }
+    "allowed_literal_shape": { "type": "string" },
+    "update_mode": {
+      "type": "string",
+      "enum": ["LIVE", "REPORT_SNAPSHOT", "HISTORICAL", "STATIC_THRESHOLD", "WALLET_SNAPSHOT"]
+    }
   }
 }
