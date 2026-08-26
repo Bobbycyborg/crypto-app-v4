@@ -1,16 +1,17 @@
 # Crypto Decision Dashboard V4
 
-**ACTIVE DEVELOPMENT.** Forked from final frozen V3 / Review04.
+**GitHub is the bible.** This folder is the working copy until you commit and push.
+Read `AGENTS.md` first.
+
+Repo: https://github.com/Bobbycyborg/crypto-app-v4
+Live: https://bobbycyborg.github.io/crypto-app-v4/
 
 Open: `index-v4.html`
 
-V3 is frozen. Do not edit `../crypto-app-v3/index-v3.html`.
+V3 is frozen. Do not edit `../crypto-app-v3/`.
 
 See `V4-STATUS.md` and `V4-JOBS.md`.
 
-Wallet work: Grok-owned. Non-wallet: CGPT / Cursor.
+Wallet work: Grok. Non-wallet: CGPT / Cursor. Job 1 is theirs.
 
-ORCA, RAY, and House of Memes are deferred.
-
-
-Lean GitHub copy. Reports, zips, caches, scripts, and personal config stay local.
+Reports, zips, caches, scripts, and personal config stay local.
