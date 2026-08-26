@@ -13,6 +13,8 @@ Job 0 is not self-approved. Job 1 / C1–C6 not started.
 
 **Review ownership:** V4 report lane = Cursor executes → CGPT independently reviews → CGPT authorises next. Grok does not review Job 0–C6 unless Olly asks. Wallet lane = Grok owns data/research and PASS/FAIL; Cursor never marks wallet work complete. HOM remains outside this jobs file.
 
+Grok-only wallet jobs G1–G5: see \`GROK-JOBS.md\`. CGPT/Cursor do not open them.
+
 🟨 **0. Freeze V3 + fork V4**
 
 *⬜ Preserve existing `baselines/report-04.html` unchanged as the original Review04 snapshot; separately freeze the LIVE `crypto-app-v3/index-v3.html` after A–L + completed Grok wallet/siren/card stamps, and fork V4 from that live index only.
