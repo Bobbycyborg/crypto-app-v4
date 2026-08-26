@@ -1,42 +1,43 @@
 {
-  "canonical_metrics": 180,
+  "canonical_metrics": 119,
   "ui_occurrences": 2333,
   "candidates": 2333,
   "unclassified": 0,
   "classification": {
-    "MAPPED_CANONICAL": 242,
+    "MAPPED_CANONICAL": 153,
     "STATIC_REFERENCE": 49,
-    "CONTEXT_ONLY": 410,
-    "QUALITATIVE_NON_METRIC": 1196,
-    "EVIDENCE_REFERENCE": 380,
-    "HISTORICAL": 5,
-    "WALLET_OWNED": 51
+    "CONTEXT_ONLY": 542,
+    "QUALITATIVE_NON_METRIC": 1199,
+    "EVIDENCE_REFERENCE": 382,
+    "HISTORICAL": 6,
+    "WALLET_OWNED": 2
   },
   "metric_types": {
-    "CURRENT_DYNAMIC": 85,
-    "WALLET_OWNED": 50,
+    "CURRENT_DYNAMIC": 75,
     "STATIC_DECISION_THRESHOLD": 36,
-    "HISTORICAL": 4,
-    "DERIVED_DYNAMIC": 5
+    "HISTORICAL": 5,
+    "DERIVED_DYNAMIC": 2,
+    "WALLET_OWNED": 1
   },
   "ownership": {
-    "CGPT_CURSOR": 130,
-    "GROK": 50
+    "CGPT_CURSOR": 118,
+    "GROK": 1
   },
   "freshness": {
-    "UNKNOWN": 175,
-    "HISTORICAL": 4,
+    "UNKNOWN": 113,
+    "HISTORICAL": 5,
     "STALE": 1
   },
   "status": {
-    "MISSING_PROVENANCE": 16,
-    "OK": 106,
-    "CONFLICT": 58
+    "MISSING_PROVENANCE": 15,
+    "OK": 70,
+    "CONFLICT": 34
   },
-  "conflicts": 58,
-  "unknown_records": 180,
-  "sources_captured": 51,
-  "source_urls_captured": 48,
+  "conflicts": 34,
+  "semantic_anomalies": 0,
+  "unknown_records": 119,
+  "sources_captured": 50,
+  "source_urls_captured": 34,
   "active_report_assets": [
     "btc",
     "fartcoin",
@@ -65,107 +66,107 @@
   "asset_coverage": {
     "btc": {
       "candidates": 172,
-      "mapped": 34,
+      "mapped": 25,
       "unclassified": 0
     },
     "fartcoin": {
       "candidates": 174,
-      "mapped": 20,
+      "mapped": 11,
       "unclassified": 0
     },
     "hype": {
       "candidates": 188,
-      "mapped": 16,
+      "mapped": 5,
       "unclassified": 0
     },
     "io": {
       "candidates": 174,
-      "mapped": 21,
+      "mapped": 20,
       "unclassified": 0
     },
     "nos": {
       "candidates": 192,
-      "mapped": 15,
+      "mapped": 8,
       "unclassified": 0
     },
     "pump": {
       "candidates": 320,
-      "mapped": 39,
+      "mapped": 28,
       "unclassified": 0
     },
     "render": {
       "candidates": 155,
-      "mapped": 14,
+      "mapped": 8,
       "unclassified": 0
     },
     "sol": {
       "candidates": 205,
-      "mapped": 44,
+      "mapped": 23,
       "unclassified": 0
     },
     "spx6900": {
       "candidates": 197,
-      "mapped": 22,
+      "mapped": 13,
       "unclassified": 0
     },
     "zec": {
       "candidates": 156,
-      "mapped": 13,
+      "mapped": 6,
       "unclassified": 0
     }
   },
   "dormant_coverage": {
     "grass": {
       "candidates": 144,
-      "mapped": 17,
+      "mapped": 8,
       "unclassified": 0
     },
     "ray": {
       "candidates": 166,
-      "mapped": 24,
+      "mapped": 12,
       "unclassified": 0
     }
   },
   "hold_only_coverage": {
     "2z": {
       "candidates": 6,
-      "mapped": 6,
+      "mapped": 3,
       "unclassified": 0
     },
     "bonk": {
       "candidates": 8,
-      "mapped": 8,
+      "mapped": 5,
       "unclassified": 0
     },
     "drift": {
       "candidates": 5,
-      "mapped": 5,
+      "mapped": 3,
       "unclassified": 0
     },
     "giga": {
       "candidates": 8,
-      "mapped": 8,
+      "mapped": 5,
       "unclassified": 0
     },
     "lockin": {
       "candidates": 8,
-      "mapped": 8,
+      "mapped": 5,
       "unclassified": 0
     },
     "orca": {
       "candidates": 9,
-      "mapped": 9,
+      "mapped": 5,
       "unclassified": 0
     },
     "retardio": {
       "candidates": 8,
-      "mapped": 8,
+      "mapped": 5,
       "unclassified": 0
     }
   },
   "global_coverage": {
     "candidates": 32,
-    "mapped": 10,
+    "mapped": 6,
     "unclassified": 0
   },
   "tests": {
@@ -191,6 +192,8 @@
     "pump_buyback_7d_not_daily": "PASS",
     "etf_30d_not_ma_or_price": "PASS",
     "drawdown_not_ma_labels": "PASS",
+    "type_safety_all_metrics": "PASS",
+    "semantic_anomaly_zero": "PASS",
     "conflict_detection": "PASS"
   },
   "schema_errors_sample": [],
@@ -202,6 +205,7 @@
     "derived_bad": [],
     "conflict_bad": [],
     "ray_active": 0,
-    "grass_active": 0
+    "grass_active": 0,
+    "anomalies": []
   }
 }

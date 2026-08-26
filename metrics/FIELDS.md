@@ -49,6 +49,6 @@ Exactly one: CGPT_CURSOR or GROK.
 ## metric_type / status / historical_or_current / wallet_or_non_wallet
 As enums in the schema.
 
-## surface
-ACTIVE_REPORT | VISIBLE_HOLD_CARD_ONLY | LEGACY_INACTIVE | GLOBAL
-RAY article = LEGACY_INACTIVE. ORCA hold card = VISIBLE_HOLD_CARD_ONLY (not an onboarded report).
+## value_kind / allowed_unit / allowed_literal_shape
+Declared on every canonical metric. The builder refuses to map a literal that fails the metric's type.
+USD metrics cannot absorb percents. Ratio metrics cannot absorb notionals. Index cannot absorb dates.

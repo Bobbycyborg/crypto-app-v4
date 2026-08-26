@@ -137,6 +137,90 @@ def main() -> int:
             fail("drawdown_not_ma_labels", x)
     print("PASS drawdown_not_ma_labels")
 
+    sys.path.insert(0, str(Path(__file__).parent))
+    from job1_build import TYPE_SPEC, shape_ok, detect_kind  # noqa: E402
+
+    if summary.get("semantic_anomalies", 1) != 0:
+        fail("semantic_anomaly_zero", str(summary.get("semantic_anomalies")))
+    print("PASS semantic_anomaly_zero")
+
+    for m in registry:
+        rest = m["metric_id"].split(".", 1)[1]
+        spec = TYPE_SPEC.get(rest)
+        if not spec:
+            fail("type_safety_all_metrics", f"no spec {m['metric_id']}")
+        if m.get("value_kind") != spec[0]:
+            fail("type_safety_all_metrics", f"value_kind {m['metric_id']}")
+        for o in occs:
+            if o.get("metric_id") != m["metric_id"]:
+                continue
+            lit = o["current_literal_text"]
+            if not shape_ok(spec[2], lit):
+                fail("type_safety_all_metrics", f"{m['metric_id']} {lit!r} kind={detect_kind(lit)}")
+            if spec[0] == "RATIO_X" and ("$" in lit or "%" in lit):
+                fail("type_safety_all_metrics", f"ratio got money/pct {lit}")
+            if spec[0] == "PERCENT" and "$" in lit:
+                fail("type_safety_all_metrics", f"pct got usd {lit}")
+            if spec[0] in {"USD_AMOUNT", "PRICE_USD"} and "%" in lit:
+                fail("type_safety_all_metrics", f"usd got pct {lit}")
+            if spec[0] == "INDEX" and re.fullmatch(r"\d{4}-\d{2}-\d{2}", lit):
+                fail("type_safety_all_metrics", f"index is date {lit}")
+            if spec[0] == "COUNT" and re.search(r"[A-Za-z]{4,}", lit) and "of" not in lit.lower():
+                fail("type_safety_all_metrics", f"count is text {lit}")
+    print("PASS type_safety_all_metrics")
+
+    def lits(mid: str) -> list[str]:
+        return [o["current_literal_text"] for o in occs if o.get("metric_id") == mid]
+
+    lev = lits("btc.leverage.x.current")
+    if not lev:
+        fail("regression_btc_leverage", "missing btc.leverage.x.current")
+    for x in lev:
+        if "$" in x or "%" in x or re.search(r"\bBTC\b", x) or "funding" in x.lower():
+            fail("regression_btc_leverage", x)
+    print("PASS regression_btc_leverage")
+
+    for x in lits("btc.oi.usd.current"):
+        if "%" in x or re.search(r"\bBTC\b", x) or "×" in x:
+            fail("regression_btc_oi_usd", x)
+    print("PASS regression_btc_oi_usd")
+
+    dd = lits("btc.price.drawdown_from_ath.pct")
+    if not dd:
+        fail("regression_btc_drawdown", "missing")
+    for x in dd:
+        if "$" in x or re.search(r"50D|200D|\bRS\b", x, re.I) or "%" not in x:
+            fail("regression_btc_drawdown", x)
+    print("PASS regression_btc_drawdown")
+
+    for x in lits("io.funding.pct.current"):
+        if "$" in x:
+            fail("regression_io_funding", x)
+    if any(
+        "932" in o["current_literal_text"] and (o.get("metric_id") or "").endswith("funding.pct.current")
+        for o in occs
+    ):
+        fail("regression_io_funding", "$932k on funding")
+    print("PASS regression_io_funding")
+
+    for x in lits("fart.leverage.x.current"):
+        if "$" in x or "volume" in x.lower() or "last price" in x.lower():
+            fail("regression_fart_leverage", x)
+    print("PASS regression_fart_leverage")
+
+    fg = lits("global.fear_greed.index.current")
+    if not any(re.fullmatch(r"~?\d{1,3}", x.strip()) for x in fg):
+        fail("regression_fear_greed", f"no index level in {fg}")
+    for x in fg:
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", x.strip()) or x.strip() in {"+1", "−1", "-1"}:
+            fail("regression_fear_greed", x)
+    print("PASS regression_fear_greed")
+
+    for x in lits("global.participation.count.current"):
+        if "MIXED" in x.upper():
+            fail("regression_participation", x)
+    print("PASS regression_participation")
+
     print("ALL JOB 1 SEMANTIC TESTS PASS")
     return 0
 

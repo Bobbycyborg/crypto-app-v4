@@ -86,6 +86,50 @@ DEFS = {
     "siren.cover_fmt.current": "Siren-header coverage figure for {ASSET} from the watched-wallet JSON.",
     "siren.aug1_unknown_wallet_count.current": "Count of watched wallets for {ASSET} whose official 1 Aug 2026 00:00 UTC start value is UNKNOWN.",
     "tokens_bought.7d": "Estimated {ASSET} tokens purchased via buybacks over the trailing seven days.",
+    "participation.beat_btc.count": "Count of names in the Market Participation set that beat Bitcoin over the stated window.",
+    "participation.above_50dma.count": "Count of names in the Market Participation set above their 50-day average.",
+}
+
+# rest → (value_kind, allowed_unit, shape_name)
+TYPE_SPEC = {
+    "price.usd.current": ("PRICE_USD", "USD", "price_usd"),
+    "price.ath.usd": ("PRICE_USD", "USD", "price_usd"),
+    "price.drawdown_from_ath.pct": ("PERCENT", "%", "percent"),
+    "threshold.out.usd": ("PRICE_USD", "USD", "threshold"),
+    "threshold.this_move.usd": ("PRICE_USD", "USD", "threshold"),
+    "etf.flow.usd.1d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "etf.flow.usd.7d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "etf.flow.usd.30d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "etf.flow.usd.all_time": ("USD_AMOUNT", "USD", "usd_amount"),
+    "buyback.usd.7d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "buyback.usd.1d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "buyback.change.pct.7d": ("PERCENT", "%", "percent"),
+    "revenue.usd.7d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "revenue.usd.30d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "fees.usd.7d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "fees.usd.30d": ("USD_AMOUNT", "USD", "usd_amount"),
+    "supply.circulating.pct": ("PERCENT", "%", "percent"),
+    "holders.top20.pct": ("PERCENT", "%", "percent"),
+    "solana_supply_share.pct": ("PERCENT", "%", "percent"),
+    "leverage.perp_spot_notional.x": ("RATIO_X", "x", "ratio_x"),
+    "leverage.x.current": ("RATIO_X", "x", "ratio_x"),
+    "oi.usd.current": ("USD_AMOUNT", "USD", "usd_amount"),
+    "funding.pct.current": ("PERCENT", "%", "percent_or_rate"),
+    "return.pct.7d": ("PERCENT", "%", "percent"),
+    "return.pct.30d": ("PERCENT", "%", "percent"),
+    "return.pct.90d": ("PERCENT", "%", "percent"),
+    "return.pct.180d": ("PERCENT", "%", "percent"),
+    "fear_greed.index.current": ("INDEX", "index", "index_0_100"),
+    "participation.count.current": ("COUNT", "count", "count"),
+    "participation.beat_btc.count": ("COUNT", "count", "count"),
+    "participation.above_50dma.count": ("COUNT", "count", "count"),
+    "portfolio.value.usd.current": ("USD_AMOUNT", "USD", "usd_amount"),
+    "siren.watched_wallet_count.current": ("COUNT", "count", "count"),
+    "siren.tracked_fmt.current": ("TOKEN_AMOUNT", "tokens", "token_or_count"),
+    "siren.supply_fmt.current": ("TOKEN_AMOUNT", "tokens", "token_or_count"),
+    "siren.cover_fmt.current": ("PERCENT", "%", "percent_or_cover"),
+    "siren.aug1_unknown_wallet_count.current": ("COUNT", "count", "count"),
+    "tokens_bought.7d": ("TOKEN_AMOUNT", "tokens", "token_or_count"),
 }
 
 
@@ -239,6 +283,88 @@ def is_scalar(lit: str) -> bool:
     return bool(re.search(r"[\d$%×]", lit))
 
 
+PROSE_RE = re.compile(r"volume|estimate|formula|last price|× 24h|×24h|explanatory", re.I)
+
+
+def detect_kind(lit: str) -> str:
+    s = (lit or "").strip()
+    if not s:
+        return "EMPTY"
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}(?:T[\d:]+Z?)?", s):
+        return "DATE"
+    if PROSE_RE.search(s) and not re.search(r"[x×]", s):
+        return "PROSE"
+    if re.fullmatch(r"[A-Za-z][A-Za-z /·.+-]{1,24}", s) and not re.search(r"\d", s):
+        return "STATUS_TEXT"
+    if re.search(r"[x×]", s) and "$" not in s and not re.search(r"\d%\b", s):
+        return "RATIO_X"
+    if "$" in s:
+        raw = parse_raw(s)
+        if isinstance(raw, (int, float)) and raw >= 1e8:
+            return "USD_AMOUNT"
+        if re.search(r"[MBT]\b", s.replace(",", "")):
+            return "USD_AMOUNT"
+        return "PRICE_USD" if isinstance(raw, (int, float)) and raw < 1e8 else "USD_AMOUNT"
+    if "%" in s or re.search(r"/8h|e-0", s, re.I):
+        return "PERCENT"
+    if re.search(r"\d+\s*of\s*\d+", s, re.I):
+        return "COUNT"
+    if re.search(r"\b(BTC|SOL|ETH|PUMP|tokens?)\b", s, re.I) and "$" not in s:
+        return "TOKEN_AMOUNT"
+    if re.fullmatch(r"~?\+?-?\d+(?:\.\d+)?", s):
+        n = float(s.replace("~", "").replace("+", ""))
+        if 0 <= abs(n) <= 100 and not s.startswith("+"):
+            return "INDEX"
+        return "DELTA"
+    if re.fullmatch(r"\d+", s):
+        return "COUNT"
+    return "OTHER"
+
+
+def shape_ok(shape: str, lit: str) -> bool:
+    kind = detect_kind(lit)
+    if shape == "ratio_x":
+        return kind == "RATIO_X" and "$" not in lit and "%" not in lit and not PROSE_RE.search(lit)
+    if shape == "percent":
+        return kind == "PERCENT" and "$" not in lit and "×" not in lit and "x" not in lit.lower().replace("max", "")
+    if shape == "percent_or_rate":
+        return kind == "PERCENT" and "$" not in lit
+    if shape == "usd_amount":
+        return kind in {"USD_AMOUNT", "PRICE_USD"} and "$" in lit and "%" not in lit and "×" not in lit
+    if shape == "price_usd":
+        return kind == "PRICE_USD" and "$" in lit
+    if shape == "threshold":
+        if lit.strip() in {"—", "-", "–", ""}:
+            return True
+        if "close" in lit.lower() or "under" in lit.lower():
+            return True
+        return kind in {"PRICE_USD", "USD_AMOUNT"} and "$" in lit
+    if shape == "index_0_100":
+        if detect_kind(lit) in {"DATE", "DELTA", "STATUS_TEXT", "PERCENT"}:
+            return False
+        if lit.startswith("+") or lit.startswith("−") or lit.startswith("-") and not lit[1:2].isdigit():
+            return False
+        try:
+            n = float(re.sub(r"[^\d.]", "", lit))
+        except ValueError:
+            return False
+        return 0 <= n <= 100
+    if shape == "count":
+        return kind in {"COUNT"} and detect_kind(lit) != "STATUS_TEXT"
+    if shape == "token_or_count":
+        return kind in {"TOKEN_AMOUNT", "COUNT", "INDEX"} and "$" not in lit
+    if shape == "percent_or_cover":
+        return kind in {"PERCENT", "COUNT", "TOKEN_AMOUNT"}
+    return False
+
+
+def type_accepts(rest: str, lit: str) -> bool:
+    spec = TYPE_SPEC.get(rest)
+    if not spec:
+        return False
+    return shape_ok(spec[2], lit)
+
+
 def window_from_label(label: str) -> str | None:
     t = (label or "").lower().replace(" ", "")
     for w in ("all-time", "all_time", "180d", "90d", "30d", "7d", "1d", "24h"):
@@ -320,20 +446,24 @@ def map_to_metric(c: dict) -> dict:
     slug = c["asset_slug"]
     label = (c.get("label") or "").strip()
     tip = (c.get("tip_name") or "").strip()
-    low_lab = f"{label} {tip}".lower()
+    row = label.lower().strip()
+    tip_l = tip.lower().strip()
     cs = set((c.get("element_class") or "").split())
     kind = c.get("kind") or ""
 
     def ok(rest, rule, mtype="CURRENT_DYNAMIC", owner="CGPT_CURSOR", cov="MAPPED_CANONICAL"):
         if rest.split(".")[0] in BANNED_FAMILIES:
             return None
-        if rest not in DEFS:
+        if rest not in DEFS or rest not in TYPE_SPEC:
             return None
-        c["metric_id"] = slug_id(slug, rest)
+        if not type_accepts(rest, lit):
+            return None
+        c["metric_id"] = slug_id(c.get("asset_slug") or slug, rest)
         c["classification_rule"] = rule
         c["coverage_state"] = cov
         c["metric_type"] = mtype
         c["owner"] = owner
+        c["value_kind"] = TYPE_SPEC[rest][0]
         return c
 
     def non(state, rule, owner="CGPT_CURSOR"):
@@ -353,38 +483,43 @@ def map_to_metric(c: dict) -> dict:
             "aug1_unknown_wallet_count": "siren.aug1_unknown_wallet_count.current",
         }.get(lab)
         if rest:
-            return ok(rest, "siren_json_summary", "WALLET_OWNED", "GROK", "WALLET_OWNED") or non("CONTEXT_ONLY", "siren_unmapped")
+            return ok(rest, "siren_json_summary", "WALLET_OWNED", "GROK", "WALLET_OWNED") or non("CONTEXT_ONLY", "siren_type_or_unmapped")
         return non("WALLET_OWNED", "siren_json_other", "GROK")
 
     if kind == "econ_bar_title":
-        if "buyback" in low_lab and c.get("bar_last"):
-            return ok("buyback.usd.1d", "econ_bar_last_daily") or non("CONTEXT_ONLY", "econ_bar")
+        if "buyback" in row or "buyback" in tip_l:
+            if c.get("bar_last"):
+                return ok("buyback.usd.1d", "econ_bar_last_daily") or non("CONTEXT_ONLY", "econ_bar_last_not_usd")
         return non("CONTEXT_ONLY", "econ_bar_series_point")
 
     if "hold-px" in cs or kind == "attr:data-live-px":
-        return ok("price.usd.current", "hold_or_live_px")
+        return ok("price.usd.current", "hold_or_live_px") or non("CONTEXT_ONLY", "type_reject_price")
     if "alt-price" in cs:
-        return ok("price.usd.current", "hero_alt_price")
+        return ok("price.usd.current", "hero_alt_price") or non("CONTEXT_ONLY", "type_reject_price")
     if "desk-px" in cs:
-        return ok("price.usd.current", "desk_px")
+        return ok("price.usd.current", "desk_px") or non("CONTEXT_ONLY", "type_reject_price")
     if "hold-out" in cs:
-        return ok("threshold.out.usd", "hold_out", "STATIC_DECISION_THRESHOLD", cov="STATIC_REFERENCE")
+        return ok("threshold.out.usd", "hold_out", "STATIC_DECISION_THRESHOLD", cov="STATIC_REFERENCE") or non("STATIC_REFERENCE", "hold_out_untyped")
     if "desk-out" in cs:
-        if not is_scalar(lit) and "$" not in lit and lit.strip() in {"—", "-", "–"}:
-            return ok("threshold.out.usd", "desk_out_blank", "STATIC_DECISION_THRESHOLD", cov="STATIC_REFERENCE")
-        return ok("threshold.out.usd", "desk_out", "STATIC_DECISION_THRESHOLD", cov="STATIC_REFERENCE")
+        return ok("threshold.out.usd", "desk_out", "STATIC_DECISION_THRESHOLD", cov="STATIC_REFERENCE") or non("STATIC_REFERENCE", "desk_out_untyped")
     if "hold-shelf" in cs:
-        return ok("threshold.this_move.usd", "hold_shelf", "STATIC_DECISION_THRESHOLD", cov="STATIC_REFERENCE")
+        return ok("threshold.this_move.usd", "hold_shelf", "STATIC_DECISION_THRESHOLD", cov="STATIC_REFERENCE") or non("STATIC_REFERENCE", "hold_shelf_untyped")
 
-    if label.lower() in META_KEYS or (cs & {"ev-v", "fx-ev-v"} and label.lower() in META_KEYS):
-        return non("EVIDENCE_REFERENCE" if label.lower() == "evidence" else "QUALITATIVE_NON_METRIC", f"meta_key_{label.lower() or 'row'}")
+    if row in META_KEYS or (cs & {"ev-v", "fx-ev-v"} and row in META_KEYS):
+        return non("EVIDENCE_REFERENCE" if row == "evidence" else "QUALITATIVE_NON_METRIC", f"meta_key_{row or 'row'}")
+
+    if detect_kind(lit) == "DATE":
+        return non("CONTEXT_ONLY", "as_of_date_stamp")
+    if detect_kind(lit) == "PROSE":
+        return non("EVIDENCE_REFERENCE", "formula_or_prose")
+    if detect_kind(lit) == "STATUS_TEXT":
+        return non("QUALITATIVE_NON_METRIC", "status_label")
 
     if not is_scalar(lit) and kind in {"ev_v", "fx_ev_v", "ev_tip_read", "metric_val", "econ_dial"}:
         if re.search(r"[\d$%]", lit):
             return non("EVIDENCE_REFERENCE", "compound_or_prose_value")
         return non("QUALITATIVE_NON_METRIC", "non_numeric_read")
 
-    # ETF windows: label is 1D/7D/30D/ALL-TIME and tip ETF or kind etf
     win = window_from_label(label) or window_from_label(c.get("etf_window") or "")
     if kind.startswith("etf"):
         w = (c.get("etf_window") or win or "").lower().replace("-", "_")
@@ -392,60 +527,98 @@ def map_to_metric(c: dict) -> dict:
             rest = f"etf.flow.usd.{w}"
             mtype = "HISTORICAL" if w == "all_time" else "CURRENT_DYNAMIC"
             cov = "HISTORICAL" if w == "all_time" else "MAPPED_CANONICAL"
-            return ok(rest, "etf_window_slot", mtype, cov=cov) or non("CONTEXT_ONLY", "etf_unmapped")
+            return ok(rest, "etf_window_slot", mtype, cov=cov) or non("CONTEXT_ONLY", "etf_type_reject")
         return non("FALSE_POSITIVE", "etf_non_window")
 
-    if "buyback" in low_lab:
-        if re.search(r"[%+]", lit) and "$" not in lit:
-            return ok("buyback.change.pct.7d", "buyback_change_pct")
-        if "/d" in lit.lower() or (win == "1d"):
-            return ok("buyback.usd.1d", "buyback_daily")
-        return ok("buyback.usd.7d", "buyback_weekly")
-    if re.search(r"\brevenue\b|\brev\b", low_lab) and "$" in lit:
-        return ok("revenue.usd.7d" if (win or "7d") == "7d" else "revenue.usd.30d", "revenue_slot")
-    if "fee" in low_lab and "$" in lit:
-        return ok("fees.usd.7d", "fees_slot")
-    if "circulat" in low_lab and "%" in lit:
-        return ok("supply.circulating.pct", "circulating_pct")
-    if "top-20" in low_lab or "top 20" in low_lab or "top20" in low_lab:
-        return ok("holders.top20.pct", "top20_holders")
-    if re.search(r"8\.8\s*%", lit) and "solana" in low_lab:
-        c["asset_slug"] = "spx6900"
-        return ok("solana_supply_share.pct", "spx_solana_share")
-    if re.search(r"(?<![\d.])7\.0\s*[x×]", lit) and ("perp" in low_lab or "spot" in low_lab):
-        c["asset_slug"] = "fartcoin"
-        return ok("leverage.perp_spot_notional.x", "fart_perp_spot")
-    if "leverage" in low_lab or (re.search(r"[x×]", lit) and ("fut" in low_lab or "perp" in low_lab)):
-        return ok("leverage.x.current", "leverage_multiple")
-    if re.search(r"\boi\b|open interest", low_lab):
-        return ok("oi.usd.current", "open_interest")
-    if "fund" in low_lab:
-        return ok("funding.pct.current", "funding")
-    if label.lower() in {"7d", "30d", "90d", "180d"} and ("%" in lit or lit[:1] in "+-"):
-        w = label.lower()
-        if "ath" in low_lab or "retrac" in low_lab or "drawdown" in low_lab:
-            return ok("price.drawdown_from_ath.pct", "drawdown_window_row", "DERIVED_DYNAMIC")
-        return ok(f"return.pct.{w}", f"return_{w}")
-    if "retrac" in low_lab or "drawdown" in low_lab:
-        return ok("price.drawdown_from_ath.pct", "drawdown_slot", "DERIVED_DYNAMIC")
-    if re.search(r"\bath\b|all-time high", low_lab) and "$" in lit:
-        return ok("price.ath.usd", "ath_price", "HISTORICAL", cov="HISTORICAL")
-    if "price" in low_lab and "$" in lit:
-        raw = parse_raw(lit)
-        if isinstance(raw, (int, float)) and raw >= 1e8:
-            return non("CONTEXT_ONLY", "dollar_too_large_for_spot_price")
-        return ok("price.usd.current", "labelled_price")
-    if "fear" in low_lab or "greed" in low_lab:
-        c["asset_slug"] = "market"
-        return ok("fear_greed.index.current", "fear_greed")
-    if "participation" in low_lab:
-        c["asset_slug"] = "market"
-        return ok("participation.count.current", "market_participation")
-    if slug == "portfolio" or "portfolio" in low_lab:
+    if row in {"ath", "all-time high", "all time high"}:
+        return ok("price.ath.usd", "row_ath", "HISTORICAL", cov="HISTORICAL") or non("CONTEXT_ONLY", "ath_not_price")
+    if row in {"retracement", "drawdown", "from ath"}:
+        return ok("price.drawdown_from_ath.pct", "row_drawdown", "DERIVED_DYNAMIC") or non("CONTEXT_ONLY", "drawdown_not_pct")
+    if row in {"7d", "30d", "90d", "180d"} and detect_kind(lit) == "PERCENT":
+        return ok(f"return.pct.{row}", f"row_return_{row}") or non("CONTEXT_ONLY", "return_type_reject")
+    if row == "funding" or row.startswith("funding"):
+        return ok("funding.pct.current", "row_funding") or non("CONTEXT_ONLY", "funding_not_rate")
+    if row in {"ratio", "fut / spot", "fut/spot", "fut/spot now", "futures vs spot"}:
+        if "7.0" in lit:
+            hit = ok("leverage.perp_spot_notional.x", "row_fart_perp_spot")
+            if hit:
+                return hit
+        return ok("leverage.x.current", "row_ratio") or non("CONTEXT_ONLY", "ratio_not_x")
+    if row in {"oi", "open interest", "level"}:
+        return ok("oi.usd.current", "row_oi_usd") or non("CONTEXT_ONLY", "oi_not_usd")
+    if "oi" in row and detect_kind(lit) == "PERCENT":
+        return non("CONTEXT_ONLY", "oi_change_not_usd_oi")
+    if row in {"spot 24h", "perp 24h", "perp"}:
+        return non("CONTEXT_ONLY", "notional_or_volume_support")
+    if "earning" in row:
+        return ok("revenue.usd.30d", "row_earnings") or non("CONTEXT_ONLY", "earnings_not_usd")
+    if row == "index" and ("fear" in tip_l or "greed" in tip_l):
+        c["asset_slug"] = "global"
+        return ok("fear_greed.index.current", "row_fear_greed_index") or non("CONTEXT_ONLY", "fg_not_index")
+    if "prior" in row:
+        return non("CONTEXT_ONLY", "index_delta_not_level")
+    if row == "as of":
+        return non("CONTEXT_ONLY", "as_of_row")
+    if row == "beat bitcoin":
+        c["asset_slug"] = "global"
+        return ok("participation.beat_btc.count", "row_participation_beat_btc") or non("CONTEXT_ONLY", "part_not_count")
+    if "50-day" in row or "50 day" in row:
+        c["asset_slug"] = "global"
+        return ok("participation.above_50dma.count", "row_participation_50dma") or non("CONTEXT_ONLY", "part_not_count")
+    if "buyback" in row:
+        if detect_kind(lit) == "PERCENT":
+            return ok("buyback.change.pct.7d", "row_buyback_change") or non("CONTEXT_ONLY", "buyback_pct_reject")
+        if "/d" in lit.lower():
+            return ok("buyback.usd.1d", "row_buyback_daily") or non("CONTEXT_ONLY", "buyback_d_reject")
+        return ok("buyback.usd.7d", "row_buyback_weekly") or non("CONTEXT_ONLY", "buyback_type_reject")
+    if row == "weekly" and "buyback" in tip_l:
+        return ok("buyback.usd.7d", "row_weekly_buyback") or non("CONTEXT_ONLY", "buyback_type_reject")
+    if row in {"revenue", "rev"} or (row == "weekly" and "revenue" in tip_l):
+        return ok("revenue.usd.7d", "row_revenue") or non("CONTEXT_ONLY", "revenue_type_reject")
+    if "fee" in row:
+        return ok("fees.usd.7d", "row_fees") or non("CONTEXT_ONLY", "fees_type_reject")
+    if "circulat" in row and detect_kind(lit) == "PERCENT":
+        return ok("supply.circulating.pct", "row_circulating") or non("CONTEXT_ONLY", "circ_reject")
+    if "top-20" in row or "top 20" in row or "top20" in row:
+        return ok("holders.top20.pct", "row_top20") or non("CONTEXT_ONLY", "top20_reject")
+    if "price" in row and "$" in lit:
+        return ok("price.usd.current", "row_price") or non("CONTEXT_ONLY", "price_type_reject")
+
+    if kind in {"metric_val", "econ_dial", "econ_kpi", "ev_tip_read", "metric_card_value"}:
+        if "buyback" in tip_l or "buyback" in row:
+            if detect_kind(lit) == "PERCENT":
+                return ok("buyback.change.pct.7d", "head_buyback_change") or non("CONTEXT_ONLY", "head_bb_pct")
+            if "/d" in lit.lower():
+                return ok("buyback.usd.1d", "head_buyback_daily") or non("CONTEXT_ONLY", "head_bb_d")
+            return ok("buyback.usd.7d", "head_buyback_weekly") or non("CONTEXT_ONLY", "head_buyback_reject")
+        if row in {"retracement", "drawdown"} or "retrac" in row:
+            return ok("price.drawdown_from_ath.pct", "head_drawdown", "DERIVED_DYNAMIC") or non("CONTEXT_ONLY", "head_drawdown_reject")
+        if "fut" in row and "spot" in row:
+            return ok("leverage.x.current", "head_fut_spot") or non("CONTEXT_ONLY", "head_ratio_reject")
+        if row in {"oi trend"} or (row.startswith("oi") and detect_kind(lit) == "PERCENT"):
+            return non("CONTEXT_ONLY", "oi_trend_is_change")
+        if "fear" in tip_l or "greed" in tip_l:
+            c["asset_slug"] = "global"
+            return ok("fear_greed.index.current", "head_fear_greed") or non("QUALITATIVE_NON_METRIC", "fg_headline_not_index")
+        if "participation" in tip_l or "participation" in row:
+            c["asset_slug"] = "global"
+            return ok("participation.count.current", "head_participation") or non("QUALITATIVE_NON_METRIC", "participation_headline_not_count")
+        if "portfolio" in tip_l or slug == "portfolio":
+            c["asset_slug"] = "portfolio"
+            return ok("portfolio.value.usd.current", "head_portfolio", "WALLET_OWNED", "GROK", "WALLET_OWNED") or non("CONTEXT_ONLY", "portfolio_reject")
+        if row == "price" or tip_l == "price":
+            return ok("price.usd.current", "head_price") or non("CONTEXT_ONLY", "head_price_reject")
+        if "bought" in row:
+            return ok("tokens_bought.7d", "head_tokens_bought") or non("CONTEXT_ONLY", "tokens_bought_reject")
+        if "circulat" in row:
+            return ok("supply.circulating.pct", "head_circulating") or non("CONTEXT_ONLY", "head_circ")
+        if re.search(r"8\.8\s*%", lit) and "solana" in (row + " " + tip_l):
+            c["asset_slug"] = "spx6900"
+            return ok("solana_supply_share.pct", "head_spx_share") or non("CONTEXT_ONLY", "share_reject")
+
+    if slug == "portfolio":
         c["asset_slug"] = "portfolio"
-        return ok("portfolio.value.usd.current", "portfolio_value", "WALLET_OWNED", "GROK", "WALLET_OWNED")
-    if "bought" in low_lab and ("7d" in low_lab or "/ 7d" in low_lab):
-        return ok("tokens_bought.7d", "tokens_bought_7d")
+        return ok("portfolio.value.usd.current", "portfolio_value", "WALLET_OWNED", "GROK", "WALLET_OWNED") or non("CONTEXT_ONLY", "portfolio_reject")
 
     if kind in {"ev_v", "metric_val", "econ_dial", "econ_kpi", "ev_tip_read"} and is_scalar(lit):
         return non("CONTEXT_ONLY", "structured_slot_no_semantic_id")
@@ -717,12 +890,13 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
     if freshness == "STALE":
         notes.append("HTML stale stamp preserved; not refreshed in Job 1.")
 
+    vk, au, shape = TYPE_SPEC[rest]
     return {
         "metric_id": mid,
         "asset": label_of(slug if slug != "fartcoin" else "fartcoin") if slug != "fartcoin" else "FART",
         "value": value,
         "raw_value": raw if raw != "UNKNOWN" else "UNKNOWN",
-        "unit": unit_of(str(value), rest),
+        "unit": unit_of(str(value) if value not in (None, "UNKNOWN") else (lits[0] if lits else ""), rest) or au,
         "scope": rest.replace(".", " "),
         "definition": definition_for(mid),
         "source": source,
@@ -744,6 +918,9 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
         "raw_inputs": raw_inputs,
         "historical_or_current": hist,
         "wallet_or_non_wallet": "WALLET" if owner == "GROK" else "NON_WALLET",
+        "value_kind": vk,
+        "allowed_unit": au,
+        "allowed_literal_shape": shape,
         "evidence_reference": occs[0]["html_locator"],
         "evidence_variants": variants,
         "surface": first.get("surface") or "GLOBAL",
@@ -752,6 +929,10 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
 
 
 def main() -> int:
+    if set(DEFS) != set(TYPE_SPEC):
+        missing = set(DEFS) - set(TYPE_SPEC)
+        extra = set(TYPE_SPEC) - set(DEFS)
+        raise SystemExit(f"TYPE_SPEC mismatch missing={missing} extra={extra}")
     METRICS.mkdir(parents=True, exist_ok=True)
     root = lhtml.parse(str(HTML)).getroot()
     raw = extract(root)
@@ -847,6 +1028,47 @@ def main() -> int:
     dd_bad = [x for x in dd_lits if re.search(r"50D|200D|RS\b", x, re.I)]
     no_rule = [o["occurrence_id"] for o in occs_out if not o.get("classification_rule")]
 
+    anomalies = []
+    for m in registry:
+        rest = m["metric_id"].split(".", 1)[1]
+        spec = TYPE_SPEC.get(rest)
+        rows = [o for o in occs_out if o.get("metric_id") == m["metric_id"]]
+        if not spec:
+            anomalies.append({"metric_id": m["metric_id"], "reason": "missing_type_spec"})
+            continue
+        kinds = []
+        for o in rows:
+            lit = o["current_literal_text"]
+            if not shape_ok(spec[2], lit):
+                anomalies.append({
+                    "metric_id": m["metric_id"],
+                    "reason": "literal_fails_type",
+                    "literal": lit,
+                    "detected_kind": detect_kind(lit),
+                    "expected": spec[0],
+                })
+            kinds.append(detect_kind(lit))
+        compat = {spec[0]}
+        if spec[0] in {"USD_AMOUNT", "PRICE_USD"}:
+            compat |= {"USD_AMOUNT", "PRICE_USD"}
+        if spec[2] == "threshold":
+            compat |= {"PRICE_USD", "USD_AMOUNT", "OTHER", "STATUS_TEXT", "EMPTY"}
+        leftover = set(kinds) - compat
+        leftover -= {"EMPTY"}
+        if leftover and spec[2] != "threshold":
+            anomalies.append({
+                "metric_id": m["metric_id"],
+                "reason": "mixed_kinds",
+                "kinds": sorted(set(kinds)),
+            })
+
+    (METRICS / "JOB-V4-1-ANOMALIES.md").write_text(
+        "# JOB-V4-1-ANOMALIES\n\n"
+        f"unresolved: {len(anomalies)}\n"
+        + ("\n".join(f"- {a}" for a in anomalies) if anomalies else "none\n")
+        + "\n"
+    )
+
     tests = {
         "schema_validation": "PASS" if not schema_errors else "FAIL",
         "unique_metric_ids": "PASS" if len({m["metric_id"] for m in registry}) == len(registry) else "FAIL",
@@ -878,6 +1100,8 @@ def main() -> int:
         "pump_buyback_7d_not_daily": "PASS" if pump7 and not pump7_bad else "FAIL",
         "etf_30d_not_ma_or_price": "PASS" if etf30 is not None and not etf30_bad else "FAIL",
         "drawdown_not_ma_labels": "PASS" if not dd_bad else "FAIL",
+        "type_safety_all_metrics": "PASS" if not anomalies else "FAIL",
+        "semantic_anomaly_zero": "PASS" if len(anomalies) == 0 else "FAIL",
         "conflict_detection": "PASS" if all(
             m["status"] != "CONFLICT" or (m["value"] in (None, "UNKNOWN") and m.get("evidence_variants"))
             for m in registry
@@ -956,6 +1180,28 @@ def main() -> int:
 
     urls_n = sum(1 for m in registry if m.get("source_url_or_reference"))
     src_n = sum(1 for m in registry if m.get("source") not in (None, "UNKNOWN"))
+    REGRESSION_IDS = [
+        "btc.leverage.x.current",
+        "btc.oi.usd.current",
+        "btc.price.drawdown_from_ath.pct",
+        "io.funding.pct.current",
+        "fart.leverage.x.current",
+        "global.fear_greed.index.current",
+        "global.participation.count.current",
+        "global.participation.beat_btc.count",
+        "global.participation.above_50dma.count",
+        "fart.leverage.perp_spot_notional.x",
+    ]
+    reg_md = ["# JOB-V4-1-REGRESSION-LITERALS", ""]
+    for mid in REGRESSION_IDS:
+        lits = [o["current_literal_text"] for o in occs_out if o.get("metric_id") == mid]
+        reg_md.append(f"## {mid}")
+        if not lits:
+            reg_md.append("(none mapped)")
+        for x in lits:
+            reg_md.append(f"- `{x}`")
+        reg_md.append("")
+    (METRICS / "JOB-V4-1-REGRESSION-LITERALS.md").write_text("\n".join(reg_md) + "\n")
     summary = {
         "canonical_metrics": len(registry),
         "ui_occurrences": len(occs_out),
@@ -967,6 +1213,7 @@ def main() -> int:
         "freshness": dict(fresh),
         "status": dict(statuses),
         "conflicts": len(conflicts),
+        "semantic_anomalies": len(anomalies),
         "unknown_records": len(unknowns),
         "sources_captured": src_n,
         "source_urls_captured": urls_n,
@@ -988,6 +1235,7 @@ def main() -> int:
             "conflict_bad": conflict_bad,
             "ray_active": len(ray_active),
             "grass_active": len(grass_active),
+            "anomalies": anomalies[:12],
         },
     }
     (METRICS / "JOB-V4-1-SUMMARY.json").write_text(json.dumps(summary, indent=2) + "\n")

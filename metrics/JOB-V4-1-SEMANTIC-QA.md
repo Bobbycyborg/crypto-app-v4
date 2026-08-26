@@ -1,5 +1,8 @@
 # JOB V4-1 SEMANTIC QA (manual, deterministic)
 
+Type-safety pass: each canonical metric declares value_kind / allowed_unit / allowed_literal_shape.
+Unrelated descendant literals are CONTEXT_ONLY or a different metric. MIXED / dates / deltas are not counts or index levels.
+
 Dormant: RAY, GRASS = LEGACY_INACTIVE. Not active reports.
 ORCA = hold-card-only, not onboarded.
 

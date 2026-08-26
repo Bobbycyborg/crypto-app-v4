@@ -14,45 +14,6 @@
       "needs_job2": true
     },
     {
-      "metric_id": "2z.siren.cover_fmt.current",
-      "asset": "2Z",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "2z.siren.supply_fmt.current",
-      "asset": "2Z",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "2z.siren.tracked_fmt.current",
-      "asset": "2Z",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
       "metric_id": "2z.threshold.out.usd",
       "asset": "2Z",
       "missing": [
@@ -91,45 +52,6 @@
       "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
       "needs_job2": true
-    },
-    {
-      "metric_id": "bonk.siren.cover_fmt.current",
-      "asset": "BONK",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "bonk.siren.supply_fmt.current",
-      "asset": "BONK",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "bonk.siren.tracked_fmt.current",
-      "asset": "BONK",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
     },
     {
       "metric_id": "bonk.threshold.out.usd",
@@ -212,9 +134,7 @@
       "metric_id": "btc.funding.pct.current",
       "asset": "BTC",
       "missing": [
-        "source",
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -235,12 +155,10 @@
       "needs_job2": true
     },
     {
-      "metric_id": "btc.oi.usd.current",
+      "metric_id": "btc.price.ath.usd",
       "asset": "BTC",
       "missing": [
-        "source",
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -267,6 +185,39 @@
         "fetched_at",
         "raw_value",
         "as_of"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "CGPT_CURSOR",
+      "blocks_mapping": false,
+      "needs_job2": true
+    },
+    {
+      "metric_id": "btc.return.pct.30d",
+      "asset": "BTC",
+      "missing": [
+        "fetched_at"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "CGPT_CURSOR",
+      "blocks_mapping": false,
+      "needs_job2": true
+    },
+    {
+      "metric_id": "btc.return.pct.7d",
+      "asset": "BTC",
+      "missing": [
+        "fetched_at"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "CGPT_CURSOR",
+      "blocks_mapping": false,
+      "needs_job2": true
+    },
+    {
+      "metric_id": "btc.return.pct.90d",
+      "asset": "BTC",
+      "missing": [
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -325,32 +276,6 @@
       "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
       "needs_job2": true
-    },
-    {
-      "metric_id": "drift.siren.cover_fmt.current",
-      "asset": "DRIFT",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "drift.siren.tracked_fmt.current",
-      "asset": "DRIFT",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
     },
     {
       "metric_id": "drift.threshold.out.usd",
@@ -429,6 +354,18 @@
       "needs_job2": true
     },
     {
+      "metric_id": "fart.funding.pct.current",
+      "asset": "FART",
+      "missing": [
+        "fetched_at",
+        "as_of"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "CGPT_CURSOR",
+      "blocks_mapping": false,
+      "needs_job2": true
+    },
+    {
       "metric_id": "fart.leverage.perp_spot_notional.x",
       "asset": "FART",
       "missing": [
@@ -441,24 +378,11 @@
       "needs_job2": true
     },
     {
-      "metric_id": "fart.leverage.x.current",
+      "metric_id": "fart.oi.usd.current",
       "asset": "FART",
       "missing": [
         "fetched_at",
-        "raw_value",
         "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "fart.price.drawdown_from_ath.pct",
-      "asset": "FART",
-      "missing": [
-        "fetched_at",
-        "raw_value"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -478,32 +402,6 @@
       "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
       "needs_job2": true
-    },
-    {
-      "metric_id": "fart.siren.cover_fmt.current",
-      "asset": "FART",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "fart.siren.tracked_fmt.current",
-      "asset": "FART",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
     },
     {
       "metric_id": "fart.supply.circulating.pct",
@@ -559,45 +457,6 @@
       "needs_job2": true
     },
     {
-      "metric_id": "giga.siren.cover_fmt.current",
-      "asset": "GIGA",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "giga.siren.supply_fmt.current",
-      "asset": "GIGA",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "giga.siren.tracked_fmt.current",
-      "asset": "GIGA",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
       "metric_id": "giga.threshold.out.usd",
       "asset": "GIGA",
       "missing": [
@@ -626,10 +485,9 @@
     },
     {
       "metric_id": "global.fear_greed.index.current",
-      "asset": "MARKET",
+      "asset": "GLOBAL",
       "missing": [
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -640,9 +498,7 @@
       "metric_id": "global.leverage.x.current",
       "asset": "GLOBAL",
       "missing": [
-        "source",
         "fetched_at",
-        "raw_value",
         "as_of"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
@@ -651,12 +507,10 @@
       "needs_job2": true
     },
     {
-      "metric_id": "global.participation.count.current",
-      "asset": "MARKET",
+      "metric_id": "global.participation.above_50dma.count",
+      "asset": "GLOBAL",
       "missing": [
-        "source",
         "fetched_at",
-        "raw_value",
         "as_of"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
@@ -665,16 +519,16 @@
       "needs_job2": true
     },
     {
-      "metric_id": "global.portfolio.value.usd.current",
-      "asset": "PORTFOLIO",
+      "metric_id": "global.participation.beat_btc.count",
+      "asset": "GLOBAL",
       "missing": [
         "fetched_at",
         "as_of"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
+      "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
-      "needs_job2": false
+      "needs_job2": true
     },
     {
       "metric_id": "grass.price.usd.current",
@@ -691,102 +545,17 @@
       "needs_job2": true
     },
     {
-      "metric_id": "grass.return.pct.30d",
-      "asset": "GRASS",
-      "missing": [
-        "fetched_at"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "grass.return.pct.7d",
-      "asset": "GRASS",
-      "missing": [
-        "fetched_at"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
       "metric_id": "grass.revenue.usd.7d",
       "asset": "GRASS",
       "missing": [
-        "fetched_at"
+        "source",
+        "fetched_at",
+        "as_of"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
       "needs_job2": true
-    },
-    {
-      "metric_id": "grass.siren.aug1_unknown_wallet_count.current",
-      "asset": "GRASS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "grass.siren.cover_fmt.current",
-      "asset": "GRASS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "grass.siren.supply_fmt.current",
-      "asset": "GRASS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "grass.siren.tracked_fmt.current",
-      "asset": "GRASS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "grass.siren.watched_wallet_count.current",
-      "asset": "GRASS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
     },
     {
       "metric_id": "grass.supply.circulating.pct",
@@ -829,49 +598,12 @@
       "needs_job2": true
     },
     {
-      "metric_id": "hype.buyback.usd.7d",
-      "asset": "HYPE",
-      "missing": [
-        "source",
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
       "metric_id": "hype.fees.usd.7d",
       "asset": "HYPE",
       "missing": [
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "hype.leverage.x.current",
-      "asset": "HYPE",
-      "missing": [
         "source",
         "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "hype.oi.usd.current",
-      "asset": "HYPE",
-      "missing": [
-        "fetched_at",
-        "raw_value"
+        "as_of"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -886,18 +618,6 @@
         "fetched_at",
         "raw_value",
         "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "hype.supply.circulating.pct",
-      "asset": "HYPE",
-      "missing": [
-        "fetched_at",
-        "raw_value"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -932,23 +652,10 @@
       "needs_job2": true
     },
     {
-      "metric_id": "io.funding.pct.current",
-      "asset": "IO",
-      "missing": [
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
       "metric_id": "io.leverage.x.current",
       "asset": "IO",
       "missing": [
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -959,9 +666,8 @@
       "metric_id": "io.oi.usd.current",
       "asset": "IO",
       "missing": [
-        "source",
         "fetched_at",
-        "as_of"
+        "raw_value"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -1005,56 +711,16 @@
       "needs_job2": true
     },
     {
-      "metric_id": "io.siren.cover_fmt.current",
+      "metric_id": "io.revenue.usd.30d",
       "asset": "IO",
       "missing": [
-        "source",
         "fetched_at",
-        "as_of"
+        "raw_value"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
+      "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "io.siren.supply_fmt.current",
-      "asset": "IO",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "io.siren.tracked_fmt.current",
-      "asset": "IO",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "io.siren.watched_wallet_count.current",
-      "asset": "IO",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
+      "needs_job2": true
     },
     {
       "metric_id": "io.supply.circulating.pct",
@@ -1110,45 +776,6 @@
       "needs_job2": true
     },
     {
-      "metric_id": "lockin.siren.cover_fmt.current",
-      "asset": "LOCKIN",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "lockin.siren.supply_fmt.current",
-      "asset": "LOCKIN",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "lockin.siren.tracked_fmt.current",
-      "asset": "LOCKIN",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
       "metric_id": "lockin.threshold.out.usd",
       "asset": "LOCKIN",
       "missing": [
@@ -1176,18 +803,6 @@
       "needs_job2": true
     },
     {
-      "metric_id": "nos.price.drawdown_from_ath.pct",
-      "asset": "NOS",
-      "missing": [
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
       "metric_id": "nos.price.usd.current",
       "asset": "NOS",
       "missing": [
@@ -1202,69 +817,15 @@
       "needs_job2": true
     },
     {
-      "metric_id": "nos.siren.aug1_unknown_wallet_count.current",
+      "metric_id": "nos.return.pct.180d",
       "asset": "NOS",
       "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
+      "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "nos.siren.cover_fmt.current",
-      "asset": "NOS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "nos.siren.supply_fmt.current",
-      "asset": "NOS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "nos.siren.tracked_fmt.current",
-      "asset": "NOS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "nos.siren.watched_wallet_count.current",
-      "asset": "NOS",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
+      "needs_job2": true
     },
     {
       "metric_id": "nos.supply.circulating.pct",
@@ -1319,58 +880,6 @@
       "needs_job2": true
     },
     {
-      "metric_id": "orca.siren.cover_fmt.current",
-      "asset": "ORCA",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "orca.siren.supply_fmt.current",
-      "asset": "ORCA",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "orca.siren.tracked_fmt.current",
-      "asset": "ORCA",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "orca.siren.watched_wallet_count.current",
-      "asset": "ORCA",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
       "metric_id": "orca.threshold.out.usd",
       "asset": "ORCA",
       "missing": [
@@ -1397,6 +906,18 @@
       "needs_job2": true
     },
     {
+      "metric_id": "portfolio.portfolio.value.usd.current",
+      "asset": "PORTFOLIO",
+      "missing": [
+        "fetched_at",
+        "as_of"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "GROK",
+      "blocks_mapping": false,
+      "needs_job2": false
+    },
+    {
       "metric_id": "pump.buyback.usd.1d",
       "asset": "PUMP",
       "missing": [
@@ -1421,24 +942,10 @@
       "needs_job2": true
     },
     {
-      "metric_id": "pump.funding.pct.current",
+      "metric_id": "pump.oi.usd.current",
       "asset": "PUMP",
       "missing": [
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "pump.leverage.x.current",
-      "asset": "PUMP",
-      "missing": [
-        "source",
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -1507,58 +1014,6 @@
       "needs_job2": true
     },
     {
-      "metric_id": "pump.siren.cover_fmt.current",
-      "asset": "PUMP",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "pump.siren.supply_fmt.current",
-      "asset": "PUMP",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "pump.siren.tracked_fmt.current",
-      "asset": "PUMP",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "pump.siren.watched_wallet_count.current",
-      "asset": "PUMP",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
       "metric_id": "pump.supply.circulating.pct",
       "asset": "PUMP",
       "missing": [
@@ -1598,19 +1053,6 @@
       "needs_job2": true
     },
     {
-      "metric_id": "pump.tokens_bought.7d",
-      "asset": "PUMP",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
       "metric_id": "ray.buyback.change.pct.7d",
       "asset": "RAY",
       "missing": [
@@ -1623,58 +1065,10 @@
       "needs_job2": true
     },
     {
-      "metric_id": "ray.buyback.usd.7d",
-      "asset": "RAY",
-      "missing": [
-        "fetched_at"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
       "metric_id": "ray.fees.usd.7d",
       "asset": "RAY",
       "missing": [
         "source",
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "ray.funding.pct.current",
-      "asset": "RAY",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "ray.leverage.x.current",
-      "asset": "RAY",
-      "missing": [
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "ray.price.drawdown_from_ath.pct",
-      "asset": "RAY",
-      "missing": [
         "fetched_at",
         "raw_value"
       ],
@@ -1697,12 +1091,32 @@
       "needs_job2": true
     },
     {
-      "metric_id": "ray.revenue.usd.30d",
+      "metric_id": "ray.return.pct.30d",
       "asset": "RAY",
       "missing": [
-        "source",
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "CGPT_CURSOR",
+      "blocks_mapping": false,
+      "needs_job2": true
+    },
+    {
+      "metric_id": "ray.return.pct.7d",
+      "asset": "RAY",
+      "missing": [
+        "fetched_at"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "CGPT_CURSOR",
+      "blocks_mapping": false,
+      "needs_job2": true
+    },
+    {
+      "metric_id": "ray.return.pct.90d",
+      "asset": "RAY",
+      "missing": [
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -1713,8 +1127,7 @@
       "metric_id": "ray.revenue.usd.7d",
       "asset": "RAY",
       "missing": [
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -1738,8 +1151,7 @@
       "metric_id": "render.funding.pct.current",
       "asset": "RENDER",
       "missing": [
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -1759,58 +1171,6 @@
       "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
       "needs_job2": true
-    },
-    {
-      "metric_id": "render.siren.cover_fmt.current",
-      "asset": "RENDER",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "render.siren.supply_fmt.current",
-      "asset": "RENDER",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "render.siren.tracked_fmt.current",
-      "asset": "RENDER",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "render.siren.watched_wallet_count.current",
-      "asset": "RENDER",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
     },
     {
       "metric_id": "render.threshold.out.usd",
@@ -1851,45 +1211,6 @@
       "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
       "needs_job2": true
-    },
-    {
-      "metric_id": "retardio.siren.cover_fmt.current",
-      "asset": "RETARDIO",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "retardio.siren.supply_fmt.current",
-      "asset": "RETARDIO",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "retardio.siren.tracked_fmt.current",
-      "asset": "RETARDIO",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
     },
     {
       "metric_id": "retardio.threshold.out.usd",
@@ -1972,7 +1293,6 @@
       "metric_id": "sol.fees.usd.7d",
       "asset": "SOL",
       "missing": [
-        "source",
         "fetched_at",
         "raw_value"
       ],
@@ -1995,57 +1315,13 @@
       "needs_job2": true
     },
     {
-      "metric_id": "sol.leverage.x.current",
+      "metric_id": "sol.price.usd.current",
       "asset": "SOL",
       "missing": [
         "source",
         "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "sol.price.usd.current",
-      "asset": "SOL",
-      "missing": [
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "sol.return.pct.30d",
-      "asset": "SOL",
-      "missing": [
-        "fetched_at"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "sol.return.pct.7d",
-      "asset": "SOL",
-      "missing": [
-        "fetched_at"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "sol.return.pct.90d",
-      "asset": "SOL",
-      "missing": [
-        "fetched_at"
+        "raw_value",
+        "as_of"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -2092,6 +1368,17 @@
       "needs_job2": true
     },
     {
+      "metric_id": "spx.funding.pct.current",
+      "asset": "SPX",
+      "missing": [
+        "fetched_at"
+      ],
+      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
+      "owner": "CGPT_CURSOR",
+      "blocks_mapping": false,
+      "needs_job2": true
+    },
+    {
       "metric_id": "spx.holders.top20.pct",
       "asset": "SPX",
       "missing": [
@@ -2103,24 +1390,10 @@
       "needs_job2": true
     },
     {
-      "metric_id": "spx.leverage.x.current",
-      "asset": "SPX",
-      "missing": [
-        "fetched_at",
-        "raw_value"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
       "metric_id": "spx.oi.usd.current",
       "asset": "SPX",
       "missing": [
-        "source",
-        "fetched_at",
-        "raw_value"
+        "fetched_at"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
@@ -2140,58 +1413,6 @@
       "owner": "CGPT_CURSOR",
       "blocks_mapping": false,
       "needs_job2": true
-    },
-    {
-      "metric_id": "spx.siren.cover_fmt.current",
-      "asset": "SPX",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "spx.siren.supply_fmt.current",
-      "asset": "SPX",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "spx.siren.tracked_fmt.current",
-      "asset": "SPX",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
-    },
-    {
-      "metric_id": "spx.siren.watched_wallet_count.current",
-      "asset": "SPX",
-      "missing": [
-        "source",
-        "fetched_at",
-        "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "GROK",
-      "blocks_mapping": false,
-      "needs_job2": false
     },
     {
       "metric_id": "spx.supply.circulating.pct",
@@ -2225,29 +1446,6 @@
         "source",
         "fetched_at",
         "as_of"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "zec.funding.pct.current",
-      "asset": "ZEC",
-      "missing": [
-        "fetched_at"
-      ],
-      "why": "Not evidenced in the same HTML component. Job 1 does not research.",
-      "owner": "CGPT_CURSOR",
-      "blocks_mapping": false,
-      "needs_job2": true
-    },
-    {
-      "metric_id": "zec.leverage.x.current",
-      "asset": "ZEC",
-      "missing": [
-        "fetched_at",
-        "raw_value"
       ],
       "why": "Not evidenced in the same HTML component. Job 1 does not research.",
       "owner": "CGPT_CURSOR",
