@@ -18,6 +18,31 @@
     });
   }
 
+  var VIEW_START = "2023-10-16";
+
+  function viewSlice(d) {
+    var i0 = 0;
+    for (var i = 0; i < d.dates.length; i++) {
+      if (d.dates[i] >= VIEW_START) { i0 = i; break; }
+    }
+    if (i0 === 0) return d;
+    function cut(arr) { return arr.slice(i0); }
+    var coins = {};
+    Object.keys(d.coins).forEach(function (id) { coins[id] = cut(d.coins[id]); });
+    return {
+      title: d.title,
+      window: d.window,
+      dates: cut(d.dates),
+      colors: d.colors,
+      order: d.order,
+      grey: d.grey,
+      coins: coins,
+      shadeMin: cut(d.shadeMin),
+      shadeMax: cut(d.shadeMax),
+      strokes: d.strokes
+    };
+  }
+
   function shadeIds(d) {
     if (SHADE_IDS) return SHADE_IDS;
     var grey = {};
@@ -102,10 +127,10 @@
     var ctx = fitDpr(canvas, w, h);
     ctx.clearRect(0, 0, w, h);
 
-    var padL = thumb ? 2 : 44;
-    var padR = thumb ? 2 : 10;
-    var padT = thumb ? 2 : 4;
-    var padB = thumb ? 4 : 22;
+    var padL = thumb ? 0 : 44;
+    var padR = thumb ? 0 : 10;
+    var padT = thumb ? 0 : 4;
+    var padB = thumb ? 1 : 22;
     var n = d.dates.length;
     var yr = yRange(d, useOn);
     function X(i) { return padL + (i / (n - 1)) * (w - padL - padR); }
@@ -294,7 +319,7 @@
   }
 
   fetchJson().then(function (d) {
-    data = d;
+    data = viewSlice(d);
     (d.order || []).forEach(function (id) { on[id] = true; });
     bind();
     var key = document.getElementById("altMovesKey");
