@@ -73,9 +73,10 @@
         consider(d.shadeMax[j]);
       }
     }
-    var pad = (hi - lo) * 0.08;
-    if (pad < 20) pad = 20;
-    return { lo: lo - pad * 0.15, hi: hi + pad };
+    var bot = (hi - lo) * 0.04;
+    if (bot < 8) bot = 8;
+    if (lo > 0) lo = 0;
+    return { lo: lo - bot, hi: hi };
   }
 
   function dayShade(d, i, useOn) {
@@ -103,7 +104,7 @@
 
     var padL = thumb ? 2 : 44;
     var padR = thumb ? 2 : 10;
-    var padT = thumb ? 4 : 14;
+    var padT = thumb ? 2 : 4;
     var padB = thumb ? 4 : 22;
     var n = d.dates.length;
     var yr = yRange(d, useOn);
