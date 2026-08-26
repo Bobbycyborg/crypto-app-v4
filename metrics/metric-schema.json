@@ -29,7 +29,8 @@
     "value_kind",
     "allowed_unit",
     "allowed_literal_shape",
-    "update_mode"
+    "update_mode",
+    "scope_key"
   ],
   "properties": {
     "metric_id": {
@@ -142,6 +143,11 @@
     "update_mode": {
       "type": "string",
       "enum": ["LIVE", "REPORT_SNAPSHOT", "HISTORICAL", "STATIC_THRESHOLD", "WALLET_SNAPSHOT"]
+    },
+    "scope_key": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Measure subtype: SPOT vs PERP, PLATFORM vs TOKEN vs venue, PRICE vs OI_CHANGE vs RS, FEES vs REVENUE vs BUYBACK."
     }
   }
 }

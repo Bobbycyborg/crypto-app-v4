@@ -161,6 +161,12 @@ def main() -> int:
     if summary.get("wallet_siren_bad", 1) != 0:
         fail("wallet_siren_mapped", str(summary.get("wallet_siren_bad")))
     print("PASS wallet_siren_mapped")
+    if summary.get("semantic_scope_anomalies", 1) != 0:
+        fail("semantic_scope_anomalies_zero", str(summary.get("semantic_scope_anomalies")))
+    print("PASS semantic_scope_anomalies_zero")
+    if summary.get("prose_as_metric", 1) != 0:
+        fail("prose_as_metric_zero", str(summary.get("prose_as_metric")))
+    print("PASS prose_as_metric_zero")
 
     for m in registry:
         rest = m["metric_id"].split(".", 1)[1]
@@ -274,6 +280,52 @@ def main() -> int:
     else:
         fail("family_kind_gates", "missing SOL funding 7d mean")
     print("PASS family_kind_gates")
+
+    def labels(mid):
+        return " ".join((o.get("ui_location_identifier") or "") for o in occs if o.get("metric_id") == mid).lower()
+
+    for m in registry:
+        mid = m["metric_id"]
+        labs = labels(mid)
+        lits = [o["current_literal_text"] for o in occs if o.get("metric_id") == mid]
+        if "return.pct" in mid and ("open interest" in labs or re.search(r"\boi\b", labs)):
+            fail("scope_forbid_return_vs_oi", mid)
+        if mid.endswith("volume.usd.24h"):
+            fail("scope_forbid_spot_vs_perp", f"unscoped {mid}")
+        if "volume.spot." in mid and "perp" in labs:
+            fail("scope_forbid_spot_vs_perp", mid)
+        if "volume.perp." in mid and re.search(r"\bspot\b", labs):
+            fail("scope_forbid_spot_vs_perp", mid)
+        if "oi.platform." in mid and ("hype-token" in labs or "binance" in labs or "native" in labs):
+            fail("scope_forbid_oi_venues", mid)
+        if ".fees." in mid:
+            for o in occs:
+                if o.get("metric_id") != mid:
+                    continue
+                lab = (o.get("ui_location_identifier") or "").lower()
+                if "buyback" in lab or re.search(r"\brev\b", lab):
+                    fail("scope_forbid_fees_vs_rev_buyback", f"{mid} {lab}")
+        if "return.pct" in mid:
+            if "vs btc" in labs or "vs sol" in labs:
+                fail("scope_forbid_return_vs_rs", mid)
+        for lit in lits:
+            if re.search(r"\byears?\b", lit, re.I) and "emissions.tokens" in mid:
+                fail("scope_forbid_tokens_vs_duration", f"{mid} {lit}")
+            if re.search(r"[1-9A-HJ-NP-Za-km-z]{6,}(?:…|\.\.\.)", lit):
+                fail("scope_forbid_address_as_number", f"{mid} {lit}")
+            if re.search(r"\b(leads|lags|do not use)\b", lit, re.I) and "%" not in lit:
+                fail("scope_forbid_prose_as_metric", f"{mid} {lit}")
+        if (".mm." in mid or ".wallet." in mid) and m["owner"] != "GROK":
+            fail("scope_forbid_wallet_cursor_owned", mid)
+    print("PASS scope_forbid_return_vs_oi")
+    print("PASS scope_forbid_spot_vs_perp")
+    print("PASS scope_forbid_oi_venues")
+    print("PASS scope_forbid_fees_vs_rev_buyback")
+    print("PASS scope_forbid_return_vs_rs")
+    print("PASS scope_forbid_tokens_vs_duration")
+    print("PASS scope_forbid_address_as_number")
+    print("PASS scope_forbid_prose_as_metric")
+    print("PASS scope_forbid_wallet_cursor_owned")
 
     print("ALL JOB 1 SEMANTIC TESTS PASS")
     return 0

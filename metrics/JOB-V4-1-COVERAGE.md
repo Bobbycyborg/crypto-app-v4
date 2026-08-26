@@ -1,28 +1,28 @@
 # JOB V4-1 COVERAGE (correction)
 candidates: 2495
-canonical metrics: 482
+canonical metrics: 278
 unclassified: 0
-- QUALITATIVE_NON_METRIC: 1000
-- MAPPED_CANONICAL: 652
+- QUALITATIVE_NON_METRIC: 1022
+- MAPPED_CANONICAL: 409
 - LEGACY_INACTIVE: 329
-- EVIDENCE_REFERENCE: 272
+- CONTEXT_ONLY: 297
+- EVIDENCE_REFERENCE: 250
 - COMPOSITE_DISPLAY: 80
-- HISTORICAL: 48
 - STATIC_REFERENCE: 46
-- CONTEXT_ONLY: 35
-- WALLET_OWNED: 33
+- WALLET_OWNED: 40
+- HISTORICAL: 22
 
 ## Active reports
-- btc: candidates=190 mapped=72 unclassified=0
-- fartcoin: candidates=196 mapped=50 unclassified=0
-- hype: candidates=198 mapped=72 unclassified=0
-- io: candidates=182 mapped=61 unclassified=0
-- nos: candidates=198 mapped=52 unclassified=0
-- pump: candidates=360 mapped=136 unclassified=0
-- render: candidates=155 mapped=62 unclassified=0
-- sol: candidates=221 mapped=112 unclassified=0
-- spx6900: candidates=212 mapped=61 unclassified=0
-- zec: candidates=164 mapped=44 unclassified=0
+- btc: candidates=190 mapped=49 unclassified=0
+- fartcoin: candidates=196 mapped=41 unclassified=0
+- hype: candidates=198 mapped=47 unclassified=0
+- io: candidates=182 mapped=48 unclassified=0
+- nos: candidates=198 mapped=33 unclassified=0
+- pump: candidates=360 mapped=89 unclassified=0
+- render: candidates=155 mapped=35 unclassified=0
+- sol: candidates=221 mapped=64 unclassified=0
+- spx6900: candidates=212 mapped=34 unclassified=0
+- zec: candidates=164 mapped=20 unclassified=0
 
 ## Dormant / LEGACY_INACTIVE
 - grass: candidates=152 mapped=0 unclassified=0

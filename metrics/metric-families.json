@@ -222,10 +222,94 @@
     "allowed_literal_shape": "ratio_x"
   },
   "oi.usd.current": {
-    "definition": "Open interest in USD for {ASSET} as currently shown.",
+    "definition": "Open interest in USD for {ASSET} when the page does not name a venue or token/platform split.",
     "value_kind": "USD_AMOUNT",
     "allowed_unit": "USD",
     "allowed_literal_shape": "usd_amount"
+  },
+  "oi.platform.usd.current": {
+    "definition": "Platform-wide open interest in USD for {ASSET} as currently shown, not token-only or a single venue.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "oi.token.usd.current": {
+    "definition": "Token-named open interest in USD for {ASSET} as currently shown, not platform-wide OI.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "oi.binance.usd.current": {
+    "definition": "Binance venue open interest in USD for {ASSET} as currently shown.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "oi.native.usd.current": {
+    "definition": "Native-venue open interest in USD for {ASSET} as currently shown, not Binance.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "volume.spot.usd.24h": {
+    "definition": "USD spot traded volume for {ASSET} over 24 hours, not perpetual volume.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "volume.perp.usd.24h": {
+    "definition": "USD perpetual traded volume for {ASSET} over 24 hours, not spot volume.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "volume.l1_perp.usd.24h": {
+    "definition": "USD L1 perpetual day volume for {ASSET}, not the token-named 24h volume.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "volume.token.usd.24h": {
+    "definition": "USD 24h volume of the {ASSET} token itself, not L1 perp platform volume.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "fees.perps.usd.1d": {
+    "definition": "USD perpetual-market fees for {ASSET} over the latest 24h, not trailing 30d protocol fees.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "holders.unit_treasury.pct": {
+    "definition": "Share of {ASSET} supply in the Unit / protocol-custody treasury cohort.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "holders.lp.pct": {
+    "definition": "Share of {ASSET} supply in labelled LP / pool addresses.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "holders.unattributed.pct": {
+    "definition": "Share of {ASSET} top-holder set that is unattributed, not the Unit or LP slices.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "mm.wintermute.tokens": {
+    "definition": "Observed Wintermute inventory of {ASSET} from the wallet/MM lane (Grok-owned).",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "wallet.foundation.tokens.current": {
+    "definition": "Foundation or protocol wallet token inventory for {ASSET} (Grok-owned).",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
   },
   "oi.btc.current": {
     "definition": "Open interest in BTC for {ASSET} as currently shown.",
@@ -467,8 +551,8 @@
     "allowed_unit": "tokens",
     "allowed_literal_shape": "token_or_count"
   },
-  "volume.usd.24h": {
-    "definition": "USD traded volume for {ASSET} over 24 hours as currently shown.",
+  "volume.cg.usd.24h": {
+    "definition": "CoinGecko 24h USD volume for {ASSET} as currently shown, not the venue spot/perp pair.",
     "value_kind": "USD_AMOUNT",
     "allowed_unit": "USD",
     "allowed_literal_shape": "usd_amount"
@@ -551,299 +635,11 @@
     "allowed_unit": "x",
     "allowed_literal_shape": "ratio_x"
   },
-  "supply.hl_circulating.pct": {
-    "definition": "The supply hl_circulating pct quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "near_term_rs.pp.30d": {
-    "definition": "The near_term_rs pp 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "supply_market_confirmation.pp.30d": {
-    "definition": "The supply_market_confirmation pp 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "market_share.pct.share_history": {
-    "definition": "The market_share pct share_history quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "spot_vs_leverage.x.current": {
-    "definition": "The spot_vs_leverage x current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "RATIO_X",
-    "allowed_unit": "x",
-    "allowed_literal_shape": "ratio_x"
-  },
-  "sol_btc.pp.30d": {
-    "definition": "The sol_btc pp 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "circulating_20_1m.tokens.current": {
-    "definition": "The circulating_20_1m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "21m.tokens.current": {
-    "definition": "The 21m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "etfshare.pct.current": {
-    "definition": "The etfshare pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "circulating.value.current": {
-    "definition": "The circulating value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
   "af.inventory.share_hl_circ.pct": {
     "definition": "Assistance Fund inventory as a percent of Hyperliquid circulating supply.",
     "value_kind": "PERCENT",
     "allowed_unit": "%",
     "allowed_literal_shape": "percent"
-  },
-  "system.tokens.current": {
-    "definition": "The system tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "circulating_381m.tokens.current": {
-    "definition": "The circulating_381m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "800m.tokens.current": {
-    "definition": "The 800m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "circulating_100m.tokens.current": {
-    "definition": "The circulating_100m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "100m.tokens.current": {
-    "definition": "The 100m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "circulating_390b.tokens.current": {
-    "definition": "The circulating_390b tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "1t.tokens.current": {
-    "definition": "The 1t tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "supplypressure.pct.current": {
-    "definition": "The supplypressure pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "supplypressure_312b_scheduled.tokens.current": {
-    "definition": "The supplypressure_312b_scheduled tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "valuecapture.pct.current": {
-    "definition": "The valuecapture pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "valuecapture_locked_apr27.value.current": {
-    "definition": "The valuecapture_locked_apr27 value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "est_pumpbought.tokens.7d": {
-    "definition": "The est_pumpbought tokens 7d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "est_pumpbought_7d_est.value.7d": {
-    "definition": "The est_pumpbought_7d_est value 7d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "burn.tokens.current": {
-    "definition": "The burn tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "burn_last_4_wks.value.current": {
-    "definition": "The burn_last_4_wks value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "net.tokens.current": {
-    "definition": "The net tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "net_28_days.value.current": {
-    "definition": "The net_28_days value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "circulating_583m.tokens.current": {
-    "definition": "The circulating_583m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "633m.tokens.current": {
-    "definition": "The 633m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "net_growth.pct.current": {
-    "definition": "The net_growth pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "real_yield.pct.current": {
-    "definition": "The real_yield pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "circulating_931m.tokens.current": {
-    "definition": "The circulating_931m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "1b.tokens.current": {
-    "definition": "The 1b tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "dead.tokens.current": {
-    "definition": "The dead tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "unlockschedule.count.current": {
-    "definition": "The unlockschedule count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "unlockschedule_3_6_12m.tokens.current": {
-    "definition": "The unlockschedule_3_6_12m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "circulating_16_9m.tokens.current": {
-    "definition": "The circulating_16_9m tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "issuanceper_year_657k_zec.tokens.current": {
-    "definition": "The issuanceper_year_657k_zec tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "next_12missuance.tokens.current": {
-    "definition": "The next_12missuance tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "price.usd.july_2026_low": {
-    "definition": "The price usd july_2026_low quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "clear_lh.value.current": {
-    "definition": "The clear_lh value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "etf.flow.usd.2026_08_03_07": {
-    "definition": "The etf flow usd 2026_08_03_07 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "etf.flow.usd.2026_08_10": {
-    "definition": "The etf flow usd 2026_08_10 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "etf.flow.usd.2026_08_11": {
-    "definition": "The etf flow usd 2026_08_11 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "7d_mean.rate.mean_7d": {
-    "definition": "The 7d_mean rate mean_7d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "FUNDING_RATE",
-    "allowed_unit": "rate",
-    "allowed_literal_shape": "funding_rate"
-  },
-  "11.usd.current": {
-    "definition": "The 11 usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "perp.x.current": {
-    "definition": "The perp x current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "RATIO_X",
-    "allowed_unit": "x",
-    "allowed_literal_shape": "ratio_x"
-  },
-  "one_day_outflow.usd.current": {
-    "definition": "The one_day_outflow usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
   },
   "stablecoin.change.pct.30d": {
     "definition": "30-day percent change in stablecoin stock around {ASSET}.",
@@ -851,910 +647,16 @@
     "allowed_unit": "%",
     "allowed_literal_shape": "percent"
   },
-  "perp_vs_coinbase_spot.x.current": {
-    "definition": "The perp_vs_coinbase_spot x current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "RATIO_X",
-    "allowed_unit": "x",
-    "allowed_literal_shape": "ratio_x"
-  },
-  "circ.tokens.current": {
-    "definition": "The circ tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "mm.wintermute.tokens": {
-    "definition": "The mm wintermute tokens quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "above.usd.current": {
-    "definition": "The above usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "below.usd.current": {
-    "definition": "The below usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "perp_vs_coinbase_comparator.x.current": {
-    "definition": "The perp_vs_coinbase_comparator x current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "RATIO_X",
-    "allowed_unit": "x",
-    "allowed_literal_shape": "ratio_x"
-  },
-  "hyperliquid.pct.current": {
-    "definition": "The hyperliquid pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "ncu.hyperlabs.tokens": {
-    "definition": "The ncu hyperlabs tokens quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "foundation_named_vals.tokens.current": {
-    "definition": "The foundation_named_vals tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "of_that_hyperlabs.tokens.current": {
-    "definition": "The of_that_hyperlabs tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "of_that_foundation_wallet.tokens.current": {
-    "definition": "The of_that_foundation_wallet tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "other_delegators.tokens.current": {
-    "definition": "The other_delegators tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "perps_1m.pct.current": {
-    "definition": "The perps_1m pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "invented_monthly.tokens.current": {
-    "definition": "The invented_monthly tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "30d_avg_day.usd.mean_30d": {
-    "definition": "The 30d_avg_day usd mean_30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
   "clusters.running.count": {
     "definition": "Count of running compute clusters on the {ASSET} network.",
     "value_kind": "COUNT",
     "allowed_unit": "count",
     "allowed_literal_shape": "count"
   },
-  "30d_avg_d.usd.mean_30d": {
-    "definition": "The 30d_avg_d usd mean_30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "devices.inventory.count": {
-    "definition": "The devices inventory count quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "running.count.current": {
-    "definition": "The running count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "queued.count.current": {
-    "definition": "The queued count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "last_7d.value.7d": {
-    "definition": "The last_7d value 7d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "host_rewards.usd.cumulative": {
-    "definition": "The host_rewards usd cumulative quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "nos_sol_90d.pp.90d": {
-    "definition": "The nos_sol_90d pp 90d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
   "jobs.approx_30d.count": {
     "definition": "Jobs completed on {ASSET} over about 30 days.",
     "value_kind": "COUNT",
     "allowed_unit": "text",
     "allowed_literal_shape": "any_numeric"
-  },
-  "markets.count.current": {
-    "definition": "The markets count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "sample_n.count.current": {
-    "definition": "The sample_n count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "nos.usd.current": {
-    "definition": "The nos usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "render.usd.current": {
-    "definition": "The render usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "io.usd.current": {
-    "definition": "The io usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "live_spot.usd.current": {
-    "definition": "The live_spot usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "market_share.pct.ath_sep": {
-    "definition": "The market_share pct ath_sep quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "market_share.pct.jan_high": {
-    "definition": "The market_share pct jan_high quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "market_share.pct.june_atl": {
-    "definition": "The market_share pct june_atl quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "market_share.pct.aug_10": {
-    "definition": "The market_share pct aug_10 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "fees.usd_per_day.ath_sep": {
-    "definition": "The fees usd_per_day ath_sep quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "fees.usd_per_day.jan_high": {
-    "definition": "The fees usd_per_day jan_high quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "fees.usd_per_day.june_atl": {
-    "definition": "The fees usd_per_day june_atl quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "history.value.current": {
-    "definition": "The history value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "observed.value.current": {
-    "definition": "The observed value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "concentration.pct.current": {
-    "definition": "The concentration pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "30d.pct.30d": {
-    "definition": "The 30d pct 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "vs_sol_7d.pct.30d": {
-    "definition": "The vs_sol_7d pct 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "latest.rate.latest": {
-    "definition": "The latest rate latest quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "FUNDING_RATE",
-    "allowed_unit": "rate",
-    "allowed_literal_shape": "funding_rate"
-  },
-  "labelled_cex_deposit.pct.current": {
-    "definition": "The labelled_cex_deposit pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "observed_dex_swap.pct.current": {
-    "definition": "The observed_dex_swap pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "unattributed_held.pct.current": {
-    "definition": "The unattributed_held pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "observed_dex_swaps.pct.current": {
-    "definition": "The observed_dex_swaps pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "wallet.value.current": {
-    "definition": "The wallet value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "balance.tokens.current": {
-    "definition": "The balance tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "pump_btc.pct.30d": {
-    "definition": "The pump_btc pct 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "pump_sol.pct.30d": {
-    "definition": "The pump_sol pct 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "july.value.current": {
-    "definition": "The july value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "observed.tokens.current": {
-    "definition": "The observed tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "nodes.count.listed": {
-    "definition": "The nodes count listed quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "bme.burned.tokens.last4": {
-    "definition": "The bme burned tokens last4 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "structure.usd.current": {
-    "definition": "The structure usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "bme.burned.tokens.last8": {
-    "definition": "The bme burned tokens last8 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "bme.emissions.tokens.last8": {
-    "definition": "The bme emissions tokens last8 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "bme.node_due.tokens.per_epoch": {
-    "definition": "The bme node_due tokens per_epoch quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "net_accumulators.count.current": {
-    "definition": "The net_accumulators count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "sellers.count.current": {
-    "definition": "The sellers count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "gross_sell.tokens.current": {
-    "definition": "The gross_sell tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "top_5_sell.pct.current": {
-    "definition": "The top_5_sell pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "span.value.current": {
-    "definition": "The span value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "rank.value.current": {
-    "definition": "The rank value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "fees.usd_per_day.mean_7d": {
-    "definition": "The fees usd_per_day mean_7d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "jan_2025_ath_window.usd_per_day.jan_2025_ath": {
-    "definition": "The jan_2025_ath_window usd_per_day jan_2025_ath quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "latest_day.x.latest": {
-    "definition": "The latest_day x latest quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "RATIO_X",
-    "allowed_unit": "x",
-    "allowed_literal_shape": "ratio_x"
-  },
-  "validators.active.count": {
-    "definition": "The validators active count quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "issuance.tokens.per_year": {
-    "definition": "The issuance tokens per_year quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "burn.tokens.per_year": {
-    "definition": "The burn tokens per_year quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "7d.pp.7d": {
-    "definition": "The 7d pp 7d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "30d.pp.30d": {
-    "definition": "The 30d pp 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "90d.pp.90d": {
-    "definition": "The 90d pp 90d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "hist_table.value.current": {
-    "definition": "The hist_table value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "7d_rs.pp.7d": {
-    "definition": "The 7d_rs pp 7d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "90d_rs.pp.90d": {
-    "definition": "The 90d_rs pp 90d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "fut_spot_24h.x.1d": {
-    "definition": "The fut_spot_24h x 1d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "RATIO_X",
-    "allowed_unit": "x",
-    "allowed_literal_shape": "ratio_x"
-  },
-  "30d_sol_btc.pp.30d": {
-    "definition": "The 30d_sol_btc pp 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "jan_2025.usd_per_day.jan_2025_ath": {
-    "definition": "The jan_2025 usd_per_day jan_2025_ath quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "supply.net_change.tokens.per_year": {
-    "definition": "The supply net_change tokens per_year quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "365d_low.usd.current": {
-    "definition": "The 365d_low usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "bounce.pct.current": {
-    "definition": "The bounce pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "staking.apy.pct": {
-    "definition": "The staking apy pct quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "jan_2025_tvl.usd.jan_2025": {
-    "definition": "The jan_2025_tvl usd jan_2025 quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "june_2026_low.usd.current": {
-    "definition": "The june_2026_low usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "wormhole.pct.current": {
-    "definition": "The wormhole pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "burn.pct.current": {
-    "definition": "The burn pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "uniswap_lp.pct.current": {
-    "definition": "The uniswap_lp pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "top.value.current": {
-    "definition": "The top value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "solana_dex_sample_vol.usd.current": {
-    "definition": "The solana_dex_sample_vol usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "eth_totalsupply.tokens.current": {
-    "definition": "The eth_totalsupply tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "circ.pct.current": {
-    "definition": "The circ pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "local_180d.usd.180d": {
-    "definition": "The local_180d usd 180d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "eth_canonical.tokens.current": {
-    "definition": "The eth_canonical tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "burned_dead.tokens.current": {
-    "definition": "The burned_dead tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "unlock.count.current": {
-    "definition": "The unlock count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "next_12m_issuance.tokens.current": {
-    "definition": "The next_12m_issuance tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "shielded.share.pct": {
-    "definition": "The shielded share pct quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "tx.count.24h": {
-    "definition": "The tx count 24h quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "issuance.pct.current": {
-    "definition": "The issuance pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "max_supply_implied.usd.current": {
-    "definition": "The max_supply_implied usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "cg_fdv_field.usd.current": {
-    "definition": "The cg_fdv_field usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "ironwood.tokens.current": {
-    "definition": "The ironwood tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "orchard.tokens.current": {
-    "definition": "The orchard tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "next_12m_issuance_est.tokens.current": {
-    "definition": "The next_12m_issuance_est tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "price_trend.pct.current": {
-    "definition": "The price_trend pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "open_interest_p1.count.current": {
-    "definition": "The open_interest_p1 count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "open_interest_p2.pct.current": {
-    "definition": "The open_interest_p2 pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "open_interest_1d.pct.1d": {
-    "definition": "The open_interest_1d pct 1d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "btc.usd.current": {
-    "definition": "The btc usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "50_retraced_from_oct_2025_ath_p3.pct.current": {
-    "definition": "The 50_retraced_from_oct_2025_ath_p3 pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "vs_sol.tokens.30d": {
-    "definition": "The vs_sol tokens 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "vs_btc.tokens.30d": {
-    "definition": "The vs_btc tokens 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "vs_pump_context.tokens.90d": {
-    "definition": "The vs_pump_context tokens 90d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "unit.pct.current": {
-    "definition": "The unit pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "lp.pct.current": {
-    "definition": "The lp pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "raw_holder_concentration_p3.pct.current": {
-    "definition": "The raw_holder_concentration_p3 pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "contributor_labs_inventory.tokens.current": {
-    "definition": "The contributor_labs_inventory tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "hype.usd.current": {
-    "definition": "The hype usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "not_platform.usd.current": {
-    "definition": "The not_platform usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_AMOUNT",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "usd_amount"
-  },
-  "near_term_market_confirms_leadership_vs_.tokens.30d": {
-    "definition": "The near_term_market_confirms_leadership_vs_ tokens 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "burn_accounting.tokens.current": {
-    "definition": "The burn_accounting tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "48_circulating_of_800m_max_p2.tokens.current": {
-    "definition": "The 48_circulating_of_800m_max_p2 tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "price_ath.pct.current": {
-    "definition": "The price_ath pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "btc_rs.pp.30d": {
-    "definition": "The btc_rs pp 30d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENTAGE_POINTS",
-    "allowed_unit": "pp",
-    "allowed_literal_shape": "pp"
-  },
-  "net.value.current": {
-    "definition": "The net value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "cycle_range.value.180d": {
-    "definition": "The cycle_range value 180d quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "86_retraced_from_ath_deep_drawdown_from_.usd.current": {
-    "definition": "The 86_retraced_from_ath_deep_drawdown_from_ usd current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PRICE_USD",
-    "allowed_unit": "USD",
-    "allowed_literal_shape": "price_usd"
-  },
-  "86_retraced_from_ath_deep_drawdown_from_.pct.current": {
-    "definition": "The 86_retraced_from_ath_deep_drawdown_from_ pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "solana_1_owner_identity.value.current": {
-    "definition": "The solana_1_owner_identity value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "privacy_network.pct.current": {
-    "definition": "The privacy_network pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "issuance_not_unlock.pct.current": {
-    "definition": "The issuance_not_unlock pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "shielded.tokens.current": {
-    "definition": "The shielded tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "cohort.tokens.current": {
-    "definition": "The cohort tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "unattributed_still_held.pct.current": {
-    "definition": "The unattributed_still_held pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "known_entity.pct.current": {
-    "definition": "The known_entity pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "still_held.pct.current": {
-    "definition": "The still_held pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "dex_swap.pct.current": {
-    "definition": "The dex_swap pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "cex_deposit.pct.current": {
-    "definition": "The cex_deposit pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
-  },
-  "secondary_report.tokens.current": {
-    "definition": "The secondary_report tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "gap.tokens.current": {
-    "definition": "The gap tokens current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "TOKEN_AMOUNT",
-    "allowed_unit": "tokens",
-    "allowed_literal_shape": "token_or_count"
-  },
-  "traced_moved_recipients_first_hop.count.current": {
-    "definition": "The traced_moved_recipients_first_hop count current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "count",
-    "allowed_literal_shape": "count"
-  },
-  "event_window.value.current": {
-    "definition": "The event_window value current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "COUNT",
-    "allowed_unit": "text",
-    "allowed_literal_shape": "any_numeric"
-  },
-  "revenue.usd_per_day.ath_sep": {
-    "definition": "The revenue usd_per_day ath_sep quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "buyback.usd_per_day.ath_sep": {
-    "definition": "The buyback usd_per_day ath_sep quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "revenue.usd_per_day.jan_high": {
-    "definition": "The revenue usd_per_day jan_high quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "buyback.usd_per_day.jan_high": {
-    "definition": "The buyback usd_per_day jan_high quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "revenue.usd_per_day.june_atl": {
-    "definition": "The revenue usd_per_day june_atl quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "buyback.usd_per_day.june_atl": {
-    "definition": "The buyback usd_per_day june_atl quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "USD_PER_DAY",
-    "allowed_unit": "USD/day",
-    "allowed_literal_shape": "usd_per_day"
-  },
-  "selection.pct.current": {
-    "definition": "The selection pct current quantity for {ASSET} as shown on this dashboard; time basis and unit are encoded in the metric id.",
-    "value_kind": "PERCENT",
-    "allowed_unit": "%",
-    "allowed_literal_shape": "percent"
   }
 }

@@ -31,45 +31,10 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 - 0897b63f380b84f1: `~−37.1%` source=CoinGecko + Binance
 - ac4fa868419ba6fe: `~−49.6%` source=CoinGecko + Binance
 
-## btc.return.pct.30d
-- asset: BTC owner: CGPT_CURSOR value: UNKNOWN
-- b00bb9459a09a669: `~+1.3%` source=CoinGecko + Binance
-- ea4867285c3c27b9:openinterest30d063: `+0.6% 30d` source=Binance openInterest
-
-## btc.return.pct.7d
-- asset: BTC owner: CGPT_CURSOR value: UNKNOWN
-- fcb1016edc66d435: `~−1.1%` source=CoinGecko + Binance
-- ea4867285c3c27b9:openinterest7d167d: `+1.6% 7d` source=Binance openInterest
-
-## btc.volume.usd.24h
-- asset: BTC owner: CGPT_CURSOR value: UNKNOWN
-- 5c8d0872a909af7c: `~$1.92B` source=Binance
-- b39b2e61121477c0: `~$17.59B` source=Binance
-
-## fart.holders.top20.pct
-- asset: FART owner: CGPT_CURSOR value: UNKNOWN
-- ddb276c08d5d7063:rawtop20p1977: `9.77%` source=FARTCOIN Stage-1
-- ddb276c08d5d7063:rawtop20p2215: `2.15%` source=FARTCOIN Stage-1
-- ddb276c08d5d7063:rawtop20p33323: `33.23%` source=FARTCOIN Stage-1
-- f0b525c079c6f8f3:rawtop20p1977: `9.77%` source=FARTCOIN Stage 1
-- f0b525c079c6f8f3:rawtop20p2215: `2.15%` source=FARTCOIN Stage 1
-- f0b525c079c6f8f3:rawtop20p33323: `33.23%` source=FARTCOIN Stage 1
-- 320ffbe509342af0:rawtop20p1977: `9.77%` source=FARTCOIN Stage-1
-- 320ffbe509342af0:rawtop20p2215: `2.15%` source=FARTCOIN Stage-1
-- 320ffbe509342af0:rawtop20p33323: `33.23%` source=FARTCOIN Stage-1
-- e84341f646bcb0a8:rawtop20p1977: `9.77%` source=UNKNOWN
-- e84341f646bcb0a8:rawtop20p2215: `2.15%` source=UNKNOWN
-- e84341f646bcb0a8:rawtop20p33323: `33.23%` source=UNKNOWN
-
 ## fart.price.usd.live
 - asset: FART owner: CGPT_CURSOR value: UNKNOWN
 - 63ef23570133b680: `$0.15055` source=UNKNOWN
 - 527b99c36062be1b: `$0.180` source=UNKNOWN
-
-## fart.volume.usd.24h
-- asset: FART owner: CGPT_CURSOR value: UNKNOWN
-- 4994092b9d039bbe: `$12.9M` source=FARTCOIN Stage-1
-- 098817515427c5a2: `$52.9M` source=FARTCOIN Stage-1
 
 ## giga.price.usd.live
 - asset: GIGA owner: CGPT_CURSOR value: UNKNOWN
@@ -106,29 +71,10 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 ## hype.fees.usd.30d
 - asset: HYPE owner: CGPT_CURSOR value: UNKNOWN
 - 5671055251eb27b1: `$59.2M` source=UNKNOWN
-- 2e6f7832ec8ec37d:perps24h16m: `$1.6M` source=HYPE Stage-1 evidence
 - 2e6f7832ec8ec37d:30d448m: `$44.8M` source=HYPE Stage-1 evidence
 - 98c64419c5099855:fees30d448m: `$44.8M` source=HYPE Stage-1 evidence
 - 1c189ddf33d2e9cd:fees30d448m: `$44.8M` source=Hyperliquid + DefiLlama
 - 5dc5ae04fd3b4e43:fees30d592m: `$59.2M` source=HYPE Stage-1 evidence
-
-## hype.hyperliquid.pct.current
-- asset: HYPE owner: CGPT_CURSOR value: UNKNOWN
-- 0e3f72856ea27d16: `298.99M (29.9%)` source=HYPE Stage-1 evidence
-- 5c28b0a1723262b4:hyperliquid299: `29.9%` source=HYPE Stage-1 evidence
-
-## hype.ncu.hyperlabs.tokens
-- asset: HYPE owner: CGPT_CURSOR value: UNKNOWN
-- 9227e6b8a62d57d3: `241.24M` source=HYPE Stage-1 evidence
-- 2630634f3ec0d86b: `~241M` source=HYPE Stage-1 evidence
-- 25b28d979d9d69df: `~241M` source=UNKNOWN
-
-## hype.oi.usd.current
-- asset: HYPE owner: CGPT_CURSOR value: UNKNOWN
-- 89fa44e7a81e7493: `$7.29B` source=HYPE Stage-1 evidence
-- e372936b4631e386: `$1.24B` source=HYPE Stage-1 evidence
-- 7fe2da12b644bb73: `$277.7M` source=HYPE Stage-1 evidence
-- e780218144db1c9e: `$1.24B` source=HYPE Stage-1 evidence
 
 ## hype.supply.circulating.pct
 - asset: HYPE owner: CGPT_CURSOR value: UNKNOWN
@@ -138,16 +84,6 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 - 9190de8b5a2851a0:cg222: `22.2%` source=HL tokenDetails + CoinGecko
 - 5c28b0a1723262b4:cg222: `22.2%` source=HYPE Stage-1 evidence
 - cf8ae40fe3d96b46: `22.2%` source=UNKNOWN
-
-## hype.volume.usd.24h
-- asset: HYPE owner: CGPT_CURSOR value: UNKNOWN
-- 3969c2cac72c030f: `$3.16B` source=HYPE Stage-1 evidence
-- 3c1d7222727d0f39: `$190.2M` source=HYPE Stage-1 evidence
-
-## io.emissions.tokens.remaining
-- asset: IO owner: CGPT_CURSOR value: UNKNOWN
-- c52949798c650abd: `300M` source=UNKNOWN
-- ac38dd4a5e5ada99: `~20 YEARS` source=UNKNOWN
 
 ## io.leverage.x.current
 - asset: IO owner: CGPT_CURSOR value: UNKNOWN
@@ -195,36 +131,25 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 - d29ac7bd42e0e62f: `$0.28377` source=UNKNOWN
 - 13f0e3cdd09e3d1b: `$0.297` source=UNKNOWN
 
-## pump.30d.pct.30d
+## pump.buyback.usd.1d
 - asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
-- 29e4515d699560c9:30d1023: `+102.3%` source=binance-daily
-- e56246864f130a61:30d1047: `+104.7%` source=binance-daily
-
-## pump.fees.usd_per_day.ath_sep
-- asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
-- b20999b129b41042:fees19md: `$1.9M/d` source=defillama
-- b20999b129b41042:rev17md: `$1.7M/d` source=defillama
+- 5ae4bb4b00c56b01: `$1.0M` source=UNKNOWN
 - b20999b129b41042:buybackburn17md: `$1.7M/d` source=defillama
-- b62efd73779b1b92:fees19md: `$1.9M/d` source=UNKNOWN
+- d1831222201b7810:buybackburn11md: `$1.1M/d` source=defillama
+- 543a4e29faa9aad7:buybackburn442kd: `$442K/d` source=defillama
+- 55ea88d09c6072a9:buybackburn738kd: `$738K/d` source=defillama
+- b62efd73779b1b92:buybackburn17md: `$1.7M/d` source=UNKNOWN
+- 2adb10eaf30e5ad9:buybackburn11md: `$1.1M/d` source=UNKNOWN
+- 11fe6c383e4ceda5:buybackburn442kd: `$442K/d` source=UNKNOWN
 
 ## pump.fees.usd_per_day.current
 - asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
-- 55ea88d09c6072a9:fees13md: `$1.3M/d` source=defillama
-- 55ea88d09c6072a9:rev998kd: `$998K/d` source=defillama
-- 55ea88d09c6072a9:buybackburn738kd: `$738K/d` source=defillama
-
-## pump.fees.usd_per_day.jan_high
-- asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
+- b20999b129b41042:fees19md: `$1.9M/d` source=defillama
 - d1831222201b7810:fees15md: `$1.5M/d` source=defillama
-- d1831222201b7810:rev12md: `$1.2M/d` source=defillama
-- d1831222201b7810:buybackburn11md: `$1.1M/d` source=defillama
-- 2adb10eaf30e5ad9:fees15md: `$1.5M/d` source=UNKNOWN
-
-## pump.fees.usd_per_day.june_atl
-- asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
 - 543a4e29faa9aad7:fees806kd: `$806K/d` source=defillama
-- 543a4e29faa9aad7:rev618kd: `$618K/d` source=defillama
-- 543a4e29faa9aad7:buybackburn442kd: `$442K/d` source=defillama
+- 55ea88d09c6072a9:fees13md: `$1.3M/d` source=defillama
+- b62efd73779b1b92:fees19md: `$1.9M/d` source=UNKNOWN
+- 2adb10eaf30e5ad9:fees15md: `$1.5M/d` source=UNKNOWN
 - 11fe6c383e4ceda5:fees806kd: `$806K/d` source=UNKNOWN
 
 ## pump.funding.percentile.current
@@ -238,6 +163,12 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 - asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
 - 1935aee50ff5615e:funding8h: `8h` source=binance
 - 74fad96e1ff80b18: `-0.00005 / 8h` source=Binance
+
+## pump.mm.wintermute.tokens
+- asset: PUMP owner: GROK value: UNKNOWN
+- fee8fc0a7bca7fab: `~287M observed · OTC INTERACTION ≠ SALE` source=Solscan · Squads custody + OTC
+- ae3ce6aa8ce00731: `~4.43B PUMP` source=Solscan · Wintermute OTC flow
+- 03f69d44e2dbf12e: `~287M PUMP` source=Solscan · Wintermute OTC flow
 
 ## pump.oi.usd.current
 - asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
@@ -260,9 +191,6 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 - asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
 - daa70059b5e885ff: `+102.3%` source=binance-daily
 - 40a7f29844851b28: `+104.7%` source=binance-daily
-- ec2e70f25adbef90:30d1023: `+102.3%` source=binance-daily
-- c679e8c7e45a5dd4:vssol7d277: `+27.7%` source=binance-daily
-- c679e8c7e45a5dd4:30d1047: `+104.7%` source=binance-daily
 - 28771180a961620c: `7d +31.1% · 30d +102.3%` source=binance-daily
 - f924090bf62805ea: `7d +27.7% · 30d +104.7%` source=binance-daily
 
@@ -285,10 +213,15 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 - 639c8f7e247eac61: `$7.0M/wk` source=Pump.fun / DefiLlama
 - 4c32b498c173c158: `$7.0M/wk` source=defillama
 
-## pump.spot_vs_leverage.x.current
+## pump.revenue.usd_per_day.current
 - asset: PUMP owner: CGPT_CURSOR value: UNKNOWN
-- 7e6308527f564225: `6.5× VS SPOT` source=binance
-- 0b351a7d9daf488b: `8.4× VS SPOT` source=binance
+- b20999b129b41042:rev17md: `$1.7M/d` source=defillama
+- d1831222201b7810:rev12md: `$1.2M/d` source=defillama
+- 543a4e29faa9aad7:rev618kd: `$618K/d` source=defillama
+- 55ea88d09c6072a9:rev998kd: `$998K/d` source=defillama
+- b62efd73779b1b92:rev17md: `$1.7M/d` source=UNKNOWN
+- 2adb10eaf30e5ad9:rev12md: `$1.2M/d` source=UNKNOWN
+- 11fe6c383e4ceda5:rev618kd: `$618K/d` source=UNKNOWN
 
 ## render.emissions.tokens.remaining
 - asset: RENDER owner: CGPT_CURSOR value: UNKNOWN
@@ -351,11 +284,6 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 - e428e003691cb07f: `$85.81` source=UNKNOWN
 - 504e882d9585718a: `$90.18` source=UNKNOWN
 
-## sol.spot_vs_leverage.x.current
-- asset: SOL owner: CGPT_CURSOR value: UNKNOWN
-- 6ed0e79cf79ae851: `6.80× fut/spot` source=Binance
-- 1498166cfe2ce1bc: `11.87×` source=Binance
-
 ## sol.stablecoin.usd.current
 - asset: SOL owner: CGPT_CURSOR value: UNKNOWN
 - ff7927325a809681: `$15.91B` source=DefiLlama stablecoins
@@ -394,24 +322,11 @@ Action: RECORDED ONLY — canonical value = UNKNOWN
 ## spx.supply.circulating.pct
 - asset: SPX owner: CGPT_CURSOR value: UNKNOWN
 - 8f0da2ae8b552915: `93.1%` source=UNKNOWN
+- c1a8ce44429b76dc: `~93% · unlock 0` source=SPX Stage 1
 - 1fd1402959c2e3ed: `~93% OF MAX` source=CoinGecko
-
-## zec.shielded.share.pct
-- asset: ZEC owner: CGPT_CURSOR value: UNKNOWN
-- a9ecce7a69c00747: `4.37M (~25.9%)` source=ZEC Stage-1 evidence
-- 56e0e9e6e632ec4f: `~4.37M / ~25.9%` source=ZEC Stage-1 evidence
-- 773c711cd457300a: `~25.9%` source=ZEC Stage-1 evidence
-- 698158930aaf98aa: `4.37M (~25.9%)` source=ZEC Stage-1 evidence
-- fbfccb735db6f79c:shieldedstockmater: `~25.9%` source=ZEC Stage-1 evidence
-- bb1ed7e68c0a9e5d: `4.37M (~25.9%)` source=UNKNOWN
 
 ## zec.supply.circulating.pct
 - asset: ZEC owner: CGPT_CURSOR value: UNKNOWN
 - 66debcb9a4b92716: `80.5%` source=UNKNOWN
 - a93e53fe19e43dcb: `~80.4%` source=ZEC Stage-1 evidence
-
-## zec.volume.usd.24h
-- asset: ZEC owner: CGPT_CURSOR value: UNKNOWN
-- e9d22308aab60ad2: `$474.5M` source=ZEC Stage-1 evidence
-- f5a90a118ac36651: `$54.6M` source=ZEC Stage-1 evidence
 

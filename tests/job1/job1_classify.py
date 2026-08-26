@@ -64,7 +64,21 @@ def _seed() -> None:
     family("solana_supply_share.pct", "Share of {ASSET} circulating supply that exists as the Solana mint, versus the CoinGecko circulating total.", "PERCENT", "%", "percent")
     family("leverage.perp_spot_notional.x", "Ratio of Binance perpetual notional to Coinbase estimated spot notional for {ASSET}.", "RATIO_X", "x", "ratio_x")
     family("leverage.x.current", "Stated perpetual-to-spot or venue leverage multiple for {ASSET} as currently shown.", "RATIO_X", "x", "ratio_x")
-    family("oi.usd.current", "Open interest in USD for {ASSET} as currently shown.", "USD_AMOUNT", "USD", "usd_amount")
+    family("oi.usd.current", "Open interest in USD for {ASSET} when the page does not name a venue or token/platform split.", "USD_AMOUNT", "USD", "usd_amount")
+    family("oi.platform.usd.current", "Platform-wide open interest in USD for {ASSET} as currently shown, not token-only or a single venue.", "USD_AMOUNT", "USD", "usd_amount")
+    family("oi.token.usd.current", "Token-named open interest in USD for {ASSET} as currently shown, not platform-wide OI.", "USD_AMOUNT", "USD", "usd_amount")
+    family("oi.binance.usd.current", "Binance venue open interest in USD for {ASSET} as currently shown.", "USD_AMOUNT", "USD", "usd_amount")
+    family("oi.native.usd.current", "Native-venue open interest in USD for {ASSET} as currently shown, not Binance.", "USD_AMOUNT", "USD", "usd_amount")
+    family("volume.spot.usd.24h", "USD spot traded volume for {ASSET} over 24 hours, not perpetual volume.", "USD_AMOUNT", "USD", "usd_amount")
+    family("volume.perp.usd.24h", "USD perpetual traded volume for {ASSET} over 24 hours, not spot volume.", "USD_AMOUNT", "USD", "usd_amount")
+    family("volume.l1_perp.usd.24h", "USD L1 perpetual day volume for {ASSET}, not the token-named 24h volume.", "USD_AMOUNT", "USD", "usd_amount")
+    family("volume.token.usd.24h", "USD 24h volume of the {ASSET} token itself, not L1 perp platform volume.", "USD_AMOUNT", "USD", "usd_amount")
+    family("fees.perps.usd.1d", "USD perpetual-market fees for {ASSET} over the latest 24h, not trailing 30d protocol fees.", "USD_AMOUNT", "USD", "usd_amount")
+    family("holders.unit_treasury.pct", "Share of {ASSET} supply in the Unit / protocol-custody treasury cohort.", "PERCENT", "%", "percent")
+    family("holders.lp.pct", "Share of {ASSET} supply in labelled LP / pool addresses.", "PERCENT", "%", "percent")
+    family("holders.unattributed.pct", "Share of {ASSET} top-holder set that is unattributed, not the Unit or LP slices.", "PERCENT", "%", "percent")
+    family("mm.wintermute.tokens", "Observed Wintermute inventory of {ASSET} from the wallet/MM lane (Grok-owned).", "TOKEN_AMOUNT", "tokens", "token_or_count")
+    family("wallet.foundation.tokens.current", "Foundation or protocol wallet token inventory for {ASSET} (Grok-owned).", "TOKEN_AMOUNT", "tokens", "token_or_count")
     family("oi.btc.current", "Open interest in BTC for {ASSET} as currently shown.", "TOKEN_AMOUNT", "BTC", "token_or_count")
     family("oi.change.pct.1d", "Percent change in {ASSET} open interest over one day.", "PERCENT", "%", "percent")
     family("oi.change.pct.7d", "Percent change in {ASSET} open interest over seven days.", "PERCENT", "%", "percent")
@@ -105,7 +119,7 @@ def _seed() -> None:
     family("af.inventory.tokens.current", "Assistance Fund HYPE inventory currently shown.", "TOKEN_AMOUNT", "tokens", "token_or_count")
     family("af.buys.usd.30d", "Assistance Fund USD buys of HYPE over a trailing 30-day window.", "USD_30D_TOTAL", "USD", "usd_amount")
     family("emissions.tokens.remaining", "Remaining future token emissions for {ASSET} as currently shown.", "TOKEN_AMOUNT", "tokens", "token_or_count")
-    family("volume.usd.24h", "USD traded volume for {ASSET} over 24 hours as currently shown.", "USD_AMOUNT", "USD", "usd_amount")
+    family("volume.cg.usd.24h", "CoinGecko 24h USD volume for {ASSET} as currently shown, not the venue spot/perp pair.", "USD_AMOUNT", "USD", "usd_amount")
     family("rs.vs_btc.pct.7d", "Relative-strength percent of {ASSET} versus Bitcoin over seven days.", "PERCENT", "%", "percent")
     family("rs.vs_btc.pct.30d", "Relative-strength percent of {ASSET} versus Bitcoin over thirty days.", "PERCENT", "%", "percent")
     family("rs.vs_sol.pct.7d", "Relative-strength percent of {ASSET} versus Solana over seven days.", "PERCENT", "%", "percent")
@@ -127,7 +141,10 @@ TYPE_SPEC = {k: (v[1], v[2], v[3]) for k, v in CATALOG.items()}
 
 
 def parse_raw(literal: str):
-    s = (literal or "").strip().replace("~", "").replace(",", "").replace(" ", "")
+    s = (literal or "").strip()
+    if is_address_literal(s) or is_prose_status(s) or re.search(r"\byears?\b", s, re.I):
+        return "UNKNOWN"
+    s = s.replace("~", "").replace(",", "").replace(" ", "")
     m = re.search(r"(-?\d+(?:\.\d+)?)([KMBTkmbt%x×]?)", s.replace("$", "").replace("/wk", "").replace("/d", ""))
     if not m:
         return "UNKNOWN"
@@ -136,6 +153,26 @@ def parse_raw(literal: str):
     if suf in ("%", "X", "×"):
         return n
     return n * {"": 1, "K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}.get(suf, 1)
+
+
+def is_address_literal(lit: str) -> bool:
+    s = (lit or "").strip()
+    if re.search(r"[1-9A-HJ-NP-Za-km-z]{6,}(?:…|\.\.\.)", s):
+        return True
+    if re.fullmatch(r"[1-9A-HJ-NP-Za-km-z]{32,44}", s):
+        return True
+    return False
+
+
+def is_prose_status(lit: str) -> bool:
+    s = (lit or "").strip()
+    if re.search(r"do not use", s, re.I):
+        return True
+    if re.search(r"\b(leads|lags)\b", s, re.I) and re.search(r"\b(btc|sol)\b", s, re.I) and "%" not in s:
+        return True
+    if re.match(r"^(leads|lags|leading|lagging)\b", s, re.I) and "$" not in s and "%" not in s:
+        return True
+    return False
 
 
 def detect_kind(lit: str) -> str:
@@ -232,16 +269,15 @@ def shape_ok(shape: str, lit: str) -> bool:
 def ensure(rest: str, lit: str, definition: str | None = None) -> str:
     if rest.split(".")[0] in BANNED_FAMILIES:
         raise ValueError(rest)
-    if rest not in CATALOG:
-        kind = detect_kind(lit)
-        vk, unit, shape = spec_from_kind(kind, rest, lit)
-        defn = definition or (
-            f"The {rest.replace('.', ' ')} quantity for {{ASSET}} as shown on this dashboard; "
-            "time basis and unit are encoded in the metric id."
-        )
-        CATALOG[rest] = (defn, vk, unit, shape)
-        DEFS[rest] = defn
-        TYPE_SPEC[rest] = (vk, unit, shape)
+    if rest in CATALOG:
+        return rest
+    if not definition:
+        return rest
+    kind = detect_kind(lit)
+    vk, unit, shape = spec_from_kind(kind, rest, lit)
+    CATALOG[rest] = (definition, vk, unit, shape)
+    DEFS[rest] = definition
+    TYPE_SPEC[rest] = (vk, unit, shape)
     return rest
 
 
@@ -288,7 +324,14 @@ def slug_id(asset_slug: str, rest: str) -> str:
 
 
 def infer_window(row: str, tip: str, hint: str, lit: str, parent_label: str = "") -> str:
-    b = f"{row} {tip} {hint} {lit} {parent_label}".lower()
+    local = _window_from(f"{row} {hint} {lit}")
+    if local:
+        return local
+    return _window_from(f"{tip} {parent_label}") or "current"
+
+
+def _window_from(s: str) -> str | None:
+    b = (s or "").lower()
     if "nov 2024" in b:
         return "nov_2024"
     if "june 2026" in b and "fee" in b:
@@ -299,39 +342,92 @@ def infer_window(row: str, tip: str, hint: str, lit: str, parent_label: str = ""
         return "jan_high"
     if "june atl" in b or "jun atl" in b:
         return "june_atl"
-    if "jan 2025" in b and ("fee" in b or "ath" in b) and "tvl" not in row:
+    if "jan 2025" in b and ("fee" in b or "ath" in b) and "tvl" not in b:
         return "jan_2025_ath"
     if "jan 2025" in b and "tvl" in b:
         return "jan_2025"
-    if re.search(r"\bjuly\b", row) and "earn" in b:
+    if re.search(r"\bjuly\b", b) and "earn" in b:
         return "july_2026"
-    if re.search(r"\bmay\b", row) and "earn" in b:
+    if re.search(r"\bmay\b", b) and "earn" in b:
         return "may_2026"
-    if re.search(r"\bjune\b", row) and "earn" in b:
+    if re.search(r"\bjune\b", b) and "earn" in b:
         return "june_2026"
-    if "cumulative" in b or row == "cumulative":
+    if "cumulative" in b:
         return "cumulative"
-    if "/d" in lit.lower() or "/ day" in hint or "per day" in b or "avg /d" in b or "avg/day" in b:
-        if "30d" in b or "30d" in hint:
+    if "/d" in b or "/ day" in b or "/day" in b or "per day" in b or "avg /d" in b or "avg/day" in b:
+        if "30d" in b:
             return "mean_30d"
-        if "7d" in b or "±7d" in b or "+/-7d" in b:
+        if "7d" in b or "±7d" in b:
             return "mean_7d"
         return "per_day"
-    if "latest" in row or "latest print" in b or "latest 8h" in b:
-        return "latest"
-    if "7d mean" in b or row == "7d mean":
+    if "latest print" in b or "latest 8h" in b or re.search(r"\blatest\b", b):
+        if "7d mean" not in b:
+            return "latest"
+    if "7d mean" in b:
         return "mean_7d"
     compact = b.replace(" ", "").replace("-", "")
     for token, w in (
-        ("alltime", "all_time"), ("all-time", "all_time"),
+        ("alltime", "all_time"), ("24h", "1d"),
         ("180d", "180d"), ("90d", "90d"), ("30d", "30d"),
-        ("7d", "7d"), ("24h", "1d"), ("1d", "1d"),
+        ("7d", "7d"), ("1d", "1d"),
     ):
         if token.replace("-", "") in compact:
             return w
-    if hint.strip().lower() in {"30d", "7d", "1d"}:
-        return hint.strip().lower()
-    return "current"
+    if b.strip() in {"30d", "7d", "1d"}:
+        return b.strip()
+    return None
+
+
+def rest_scope(rest: str) -> str:
+    r = rest or ""
+    for key, scope in (
+        ("volume.spot.", "SPOT"), ("volume.perp.", "PERP"), ("volume.l1_perp.", "L1_PERP"),
+        ("volume.token.", "TOKEN"), ("volume.cg.", "CG"),
+        ("oi.platform.", "PLATFORM"), ("oi.token.", "TOKEN"), ("oi.binance.", "BINANCE"),
+        ("oi.native.", "NATIVE"), ("oi.change.", "OI_CHANGE"), ("oi.btc.", "BTC"),
+        ("fees.perps.", "PERPS"), ("return.pct.", "PRICE"),
+        ("rs.vs_btc.", "RS_BTC"), ("rs.vs_sol.", "RS_SOL"),
+        ("holders.unit_treasury.", "UNIT_TREASURY"), ("holders.lp.", "LP"),
+        ("holders.unattributed.", "UNATTRIBUTED"), ("holders.top20.", "TOP20"),
+        ("mm.wintermute.", "WALLET_MM"), ("wallet.", "WALLET"), ("siren.", "WALLET"),
+        ("buyback.", "BUYBACK"), ("revenue.", "REVENUE"), ("fees.", "FEES"),
+    ):
+        if r.startswith(key) or f".{key}" in f".{r}":
+            return scope
+    return "UNSPECIFIED"
+
+
+def infer_scope(row: str, tip: str, parent: str, lit: str) -> str:
+    r = (row or "").lower()
+    if "l1 perp" in r:
+        return "L1_PERP"
+    if "hype-token" in r and ("vol" in r or "day" in r) and "oi" not in r:
+        return "TOKEN"
+    if "hype-token oi" in r:
+        return "TOKEN"
+    if r in {"spot 24h"} or (r.startswith("spot") and "24h" in r):
+        return "SPOT"
+    if r in {"perp 24h", "perps 24h", "binance perp 24h"}:
+        return "PERP"
+    if "cg" in r and "vol" in r:
+        return "CG"
+    if "platform oi" in r or r == "platform oi":
+        return "PLATFORM"
+    if "native" in r and "oi" in r:
+        return "NATIVE"
+    if "binance" in r and "oi" in r:
+        return "BINANCE"
+    if r in {"unit"} or r.endswith(" unit"):
+        return "UNIT_TREASURY"
+    if r in {"lp"}:
+        return "LP"
+    if "unattributed" in r:
+        return "UNATTRIBUTED"
+    if "wintermute" in r or "wintermute" in (tip or "").lower():
+        return "WALLET_MM"
+    if "open interest" in r or r.endswith(" oi") or r in {"oi", "oi trend", "oi δ"}:
+        return "OI_CHANGE" if "%" in (lit or "") else "UNSPECIFIED"
+    return "UNSPECIFIED"
 
 
 def is_historical_window(win: str) -> bool:
@@ -343,7 +439,7 @@ def is_historical_window(win: str) -> bool:
 
 
 def update_mode_for(c: dict, rest: str, mtype: str) -> str:
-    if mtype == "WALLET_OWNED" or rest.startswith("siren.") or rest.startswith("portfolio."):
+    if mtype == "WALLET_OWNED" or rest.startswith("siren.") or rest.startswith("portfolio.") or rest.startswith("mm.") or rest.startswith("wallet."):
         return "WALLET_SNAPSHOT"
     if mtype == "STATIC_DECISION_THRESHOLD":
         return "STATIC_THRESHOLD"
@@ -446,6 +542,9 @@ def _children_from(c: dict) -> list[dict]:
         if all(num for _, num in extracted):
             for i, (val, num) in enumerate(extracted):
                 lab = re.split(r"\s*[$~+\-−\d]", val, maxsplit=1)[0].strip(" ·:-") or f"{row} p{i+1}"
+                trail = re.search(r"(?:%|[x×]|[KMBT]|/d)\s+([A-Za-z][A-Za-z0-9+\- ]{0,28})$", val)
+                if trail:
+                    lab = trail.group(1).strip()
                 kids.append(_child(c, num, lab))
             return kids
 
@@ -499,11 +598,15 @@ def classify(c: dict) -> dict:
         if rest.split(".")[0] in BANNED_FAMILIES:
             return None
         ensure(rest, lit)
-        if not type_accepts(rest, lit):
+        if rest not in TYPE_SPEC or not type_accepts(rest, lit):
             return None
         if is_historical_window(rest.split(".")[-1]) or mtype == "HISTORICAL":
             mtype = "HISTORICAL"
             cov = "HISTORICAL"
+        if rest.startswith("mm.") or rest.startswith("wallet.") or rest.startswith("siren.") or rest.startswith("portfolio."):
+            owner = "GROK"
+            mtype = "WALLET_OWNED"
+            cov = "WALLET_OWNED"
         c["metric_id"] = slug_id(c.get("asset_slug") or slug, rest)
         c["classification_rule"] = rule
         c["coverage_state"] = cov
@@ -512,6 +615,7 @@ def classify(c: dict) -> dict:
         c["value_kind"] = TYPE_SPEC[rest][0]
         c["time_window"] = rest.split(".")[-1]
         c["update_mode"] = update_mode_for(c, rest, mtype)
+        c["scope_key"] = rest_scope(rest) if rest_scope(rest) != "UNSPECIFIED" else infer_scope(row, tip_l, parent_lab, lit)
         return c
 
     if slug in DORMANT_SLUGS:
@@ -571,6 +675,18 @@ def classify(c: dict) -> dict:
         return non("QUALITATIVE_NON_METRIC", "formula_prose")
 
     dk = detect_kind(lit)
+    if is_address_literal(lit):
+        return non("CONTEXT_ONLY", "address_not_metric", "GROK")
+    if is_prose_status(lit):
+        return non("QUALITATIVE_NON_METRIC", "prose_status_not_metric")
+    if re.search(r"\byears?\b", lit, re.I) and "emission" in blob:
+        return non("QUALITATIVE_NON_METRIC", "duration_not_tokens")
+    if "wintermute" in row or "wintermute" in tip_l:
+        if dk in {"TOKEN_AMOUNT", "COUNT", "OTHER"} and "$" not in lit:
+            return ok("mm.wintermute.tokens", "mm_wintermute", "WALLET_OWNED", "GROK", "WALLET_OWNED") or non("CONTEXT_ONLY", "mm_type_reject", "GROK")
+        return non("QUALITATIVE_NON_METRIC", "mm_scan_note", "GROK")
+    if ("foundation wallet" in blob or ( "wallet" in row and "siren" not in row)) and dk in {"TOKEN_AMOUNT", "COUNT"} and not is_address_literal(lit):
+        return ok("wallet.foundation.tokens.current", "foundation_wallet", "WALLET_OWNED", "GROK", "WALLET_OWNED") or non("CONTEXT_ONLY", "wallet_type_reject", "GROK")
     if dk == "DATE":
         return non("CONTEXT_ONLY", "as_of_date_stamp")
     if dk == "STATUS_TEXT":
@@ -629,6 +745,12 @@ def classify(c: dict) -> dict:
     if row in {"retracement", "drawdown", "from ath"} and "%" in lit:
         return ok("price.drawdown_from_ath.pct", "row_drawdown", "DERIVED_DYNAMIC") or non("CONTEXT_ONLY", "drawdown_not_pct")
     if row in {"7d", "30d", "90d", "180d"} and dk == "PERCENT" and "rs" not in tip_l and "pp" not in lit.lower():
+        if "oi" in tip_l or "open interest" in tip_l or "oi" in parent_lab:
+            w = row if row in {"1d", "7d", "30d"} else "30d"
+            return ok(f"oi.change.pct.{w}", "window_row_oi_change") or non("CONTEXT_ONLY", "oi_change_reject")
+        if "vs btc" in blob or "vs sol" in blob or "rs" in tip_l:
+            rest = "rs.vs_btc.pct." + row if "btc" in blob else "rs.vs_sol.pct." + row
+            return ok(rest, "window_row_rs") or non("CONTEXT_ONLY", "rs")
         return ok(f"return.pct.{row}", f"row_return_{row}") or non("CONTEXT_ONLY", "return_type_reject")
 
     if "nu6" in row or "issuance / funding" in row or row.startswith("issuance /"):
@@ -661,7 +783,14 @@ def classify(c: dict) -> dict:
     if row in {"oi", "open interest", "level", "oi notional", "binance oi", "binance hype oi", "native hype oi", "hype-token oi", "platform oi"}:
         if "btc" in lit.lower():
             return ok("oi.btc.current", "row_oi_btc") or non("CONTEXT_ONLY", "oi_btc_reject")
-        return ok("oi.usd.current", "row_oi_usd") or non("CONTEXT_ONLY", "oi_not_usd")
+        sc = infer_scope(row, tip_l, parent_lab, lit)
+        rest = {
+            "PLATFORM": "oi.platform.usd.current",
+            "TOKEN": "oi.token.usd.current",
+            "BINANCE": "oi.binance.usd.current",
+            "NATIVE": "oi.native.usd.current",
+        }.get(sc, "oi.usd.current")
+        return ok(rest, "row_oi_usd") or non("CONTEXT_ONLY", "oi_not_usd")
     if "oi" in row and dk == "PERCENT":
         w = win if win in {"1d", "7d", "30d"} else "30d"
         return ok(f"oi.change.pct.{w}", "oi_change") or non("CONTEXT_ONLY", "oi_change_reject")
@@ -670,11 +799,24 @@ def classify(c: dict) -> dict:
             ok("oi.change.pct.30d", "oi_trend_30d") or non("CONTEXT_ONLY", "oi_trend")
         )
 
-    if row in {"spot 24h", "perp 24h", "cg 24h vol", "hype-token day vol", "binance perp 24h", "l1 perp day"}:
-        return ok("volume.usd.24h", "row_volume_24h") or non("CONTEXT_ONLY", "vol_reject")
+    if row in {"perps 24h", "perp 24h"} and "fee" in tip_l and "$" in lit:
+        return ok("fees.perps.usd.1d", "fees_perps_24h") or non("CONTEXT_ONLY", "fees_1d_reject")
 
-    # Fees — window required; section tip counts, parent prose tooltip does not
-    if "fee" in row or tip_l in {"fees", "fee"} or (tip_l.startswith("fee") and len(tip_l) < 24):
+    if row in {"spot 24h", "perp 24h", "perps 24h", "cg 24h vol", "hype-token day vol", "binance perp 24h", "l1 perp day"}:
+        sc = infer_scope(row, tip_l, parent_lab, lit)
+        rest = {
+            "SPOT": "volume.spot.usd.24h",
+            "PERP": "volume.perp.usd.24h",
+            "L1_PERP": "volume.l1_perp.usd.24h",
+            "TOKEN": "volume.token.usd.24h",
+            "CG": "volume.cg.usd.24h",
+        }.get(sc)
+        if rest:
+            return ok(rest, "row_volume_24h") or non("CONTEXT_ONLY", "vol_reject")
+        return non("CONTEXT_ONLY", "volume_scope_unknown")
+
+    # Fees — local row establishes the measure; parent/tip may only fill a missing window
+    if "fee" in row or (row in {"7d", "30d", "1d", "24h"} and "fee" in tip_l and "rev" not in row and "buyback" not in row):
         if dk == "PERCENT" or "δ" in row or "delta" in row:
             return ok("fees.change.pct.30d", "fees_delta") or non("CONTEXT_ONLY", "fees_delta_reject")
         if win == "nov_2024":
@@ -701,8 +843,10 @@ def classify(c: dict) -> dict:
             return ok("fees.usd.7d", "fees_7d") or non("CONTEXT_ONLY", "fees_7d_reject")
         if win == "1d" or "24h" in row:
             return ok("fees.usd.1d", "fees_1d") or non("CONTEXT_ONLY", "fees_1d_reject")
-        if "$" in lit and hint_l == "30d":
-            return ok("fees.usd.30d", "fees_hint_30d") or non("CONTEXT_ONLY", "fees_hint_reject")
+        if "$" in lit and ("30d" in hint_l or "30d" in tip_l or "mean" in hint_l or "mean" in tip_l):
+            if "/d" in lit.lower() or "mean" in hint_l or "mean" in tip_l:
+                return ok("fees.usd_per_day.mean_30d", "fees_mean_from_hint") or non("CONTEXT_ONLY", "fees_mean_reject")
+            return ok("fees.usd.30d", "fees_30d_from_hint") or non("CONTEXT_ONLY", "fees_hint_reject")
         return non("CONTEXT_ONLY", "fees_window_unknown")
 
     # Earnings / revenue — row label first; month cells; never inherit a long parent tooltip
@@ -809,12 +953,22 @@ def classify(c: dict) -> dict:
 
     if "circulat" in row and "%" in lit:
         return ok("supply.circulating.pct", "row_circ_pct") or non("CONTEXT_ONLY", "circ_pct")
+    if row in {"circ"}:
+        if "%" in lit:
+            return ok("supply.circulating.pct", "row_circ_pct") or non("CONTEXT_ONLY", "circ_pct")
+        return ok("supply.circulating.tokens", "row_circ_tokens") or non("CONTEXT_ONLY", "circ_tok")
     if "circ / max" in row or row.startswith("circulating ") and "/" in lit:
         return non("COMPOSITE_DISPLAY", "circ_max_pair")
     if row in {"cg circ", "solana circ"} or (row == "cg" and dk == "TOKEN_AMOUNT"):
         return ok("supply.circulating.tokens", "row_circ_tokens") or non("CONTEXT_ONLY", "circ_tok")
     if row in {"max", "max supply"} and "drawdown" not in lit.lower() and "$" not in lit:
         return ok("supply.max.tokens", "row_max_tokens") or non("CONTEXT_ONLY", "max_tok")
+    if row in {"unit"} and "%" in lit:
+        return ok("holders.unit_treasury.pct", "holders_unit") or non("CONTEXT_ONLY", "unit_pct")
+    if row in {"lp"} and "%" in lit:
+        return ok("holders.lp.pct", "holders_lp") or non("CONTEXT_ONLY", "lp_pct")
+    if "unattributed" in row and "%" in lit:
+        return ok("holders.unattributed.pct", "holders_unattributed") or non("CONTEXT_ONLY", "unattr_pct")
     if "top-20" in row or "top 20" in row or "top20" in row:
         return ok("holders.top20.pct", "row_top20") or non("CONTEXT_ONLY", "top20_reject")
 
@@ -827,7 +981,7 @@ def classify(c: dict) -> dict:
         ensure("compute.hours.cumulative", lit, "Cumulative compute hours on the {ASSET} network.")
         return ok("compute.hours.cumulative", "row_hours") or non("CONTEXT_ONLY", "hours")
     if row in {"l1 perp day"}:
-        return ok("volume.usd.24h", "row_l1_perp_day") or non("CONTEXT_ONLY", "vol_reject")
+        return ok("volume.l1_perp.usd.24h", "row_l1_perp_day") or non("CONTEXT_ONLY", "vol_reject")
     if "no material mm" in row or "wintermute/dwf" in lit.lower():
         return non("QUALITATIVE_NON_METRIC", "mm_scan_note")
     if "running" in row and "job" in blob:
@@ -861,6 +1015,12 @@ def classify(c: dict) -> dict:
         if "30d" in row:
             rest = rest.replace(".7d", ".30d")
         return ok(rest, "rs_pp") or non("CONTEXT_ONLY", "rs")
+    if "vs btc" in row and "%" in lit:
+        w = "30d" if "30d" in row or win == "30d" else "7d"
+        return ok(f"rs.vs_btc.pct.{w}", "rs_btc_row") or non("CONTEXT_ONLY", "rs")
+    if "vs sol" in row and "%" in lit:
+        w = "30d" if "30d" in row or win == "30d" else "7d"
+        return ok(f"rs.vs_sol.pct.{w}", "rs_sol_row") or non("CONTEXT_ONLY", "rs")
     if row in {"pump / btc", "pump / sol"} and "%" in lit:
         rest = "rs.vs_btc.pct.30d" if "btc" in row else "rs.vs_sol.pct.30d"
         return ok(rest, "pump_rs_head") or non("CONTEXT_ONLY", "rs")
@@ -901,34 +1061,19 @@ def classify(c: dict) -> dict:
     }:
         if dk == "STATUS_TEXT":
             return non("QUALITATIVE_NON_METRIC", "status_with_digits")
-        key = re.sub(r"[^a-z0-9]+", "_", (row or tip_l or "slot").lower()).strip("_")[:40] or "slot"
-        if key.split("_")[0] in BANNED_FAMILIES:
-            key = "named_" + key
         alias = {
             "jul": "revenue.usd.july_2026", "july": "revenue.usd.july_2026",
             "may": "revenue.usd.may_2026", "jun": "revenue.usd.june_2026", "june": "revenue.usd.june_2026",
             "cum": "revenue.usd.cumulative", "cumulative": "revenue.usd.cumulative",
-            "now": "fees.usd_per_day.mean_7d" if "/d" in lit.lower() else "price.usd.report",
-            "now_7d": "fees.usd_per_day.mean_7d", "now_7d_mean": "fees.usd_per_day.mean_7d",
+            "now": "fees.usd_per_day.mean_7d" if "/d" in lit.lower() else None,
             "last_4_ratio": "bme.ratio.last4", "recent_bme": "bme.ratio.last4",
-        }.get(key)
-        if alias:
+        }.get(re.sub(r"[^a-z0-9]+", "_", (row or "").lower()).strip("_")[:40])
+        if alias and alias in CATALOG:
             mtype = "HISTORICAL" if is_historical_window(alias.split(".")[-1]) else "CURRENT_DYNAMIC"
-            hit = ok(alias, "label_inventory_alias", mtype)
+            hit = ok(alias, "explicit_family_alias", mtype)
             if hit:
                 return hit
-        unit_part = {
-            "USD_AMOUNT": "usd", "USD_PER_DAY": "usd_per_day", "USD_7D_TOTAL": "usd",
-            "PRICE_USD": "usd", "PERCENT": "pct", "PERCENTAGE_POINTS": "pp",
-            "RATIO_X": "x", "TOKEN_AMOUNT": "tokens", "COUNT": "count",
-            "INDEX": "index", "FUNDING_RATE": "rate", "MA_LEVEL": "ma",
-        }.get(dk, "value")
-        rest = f"{key}.{unit_part}.{win}"
-        mtype = "HISTORICAL" if is_historical_window(win) else "CURRENT_DYNAMIC"
-        hit = ok(rest, "label_inventory", mtype)
-        if hit:
-            return hit
-        return non("UNCLASSIFIED", "dynamic_numeric_unmapped")
+        return non("CONTEXT_ONLY", "no_explicit_family")
 
     return non("CONTEXT_ONLY", "unstructured_or_non_metric")
 
@@ -978,9 +1123,9 @@ def _keyword_rest(row: str, tip: str, hint: str, lit: str, win: str, dk: str) ->
     if "host usdreward" in row:
         return "host_rewards.usd.cumulative"
     if row in {"l1 perp day"}:
-        return "volume.usd.24h"
+        return "volume.l1_perp.usd.24h"
     if row in {"platform oi"}:
-        return "oi.usd.current"
+        return "oi.platform.usd.current"
     if row in {"clusters", "running clusters"}:
         return "clusters.running.count"
     if row in {"hours"}:
@@ -1000,10 +1145,12 @@ def _keyword_rest(row: str, tip: str, hint: str, lit: str, win: str, dk: str) ->
     if "share history" in row or row in {"ath sep", "jan high", "june atl", "aug 10"} and "%" in lit:
         return f"market_share.pct.{re.sub(r'[^a-z0-9]+', '_', row)[:24]}"
     if "perps 24h" in row and "$" in lit:
-        return "volume.usd.24h"
+        return None
     if "perps 30d" in row and "$" in lit:
         return "fees.usd.30d"
-    if win in {"7d", "30d", "90d", "180d"} and dk == "PERCENT" and "rs" not in b:
+    if win in {"7d", "30d", "90d", "180d"} and dk == "PERCENT":
+        if "oi" in b or "open interest" in b or "vs btc" in b or "vs sol" in b or "rs" in b:
+            return None
         return f"return.pct.{win}"
     return None
 
@@ -1016,6 +1163,7 @@ def is_dynamic_numeric(c: dict) -> bool:
         "econ_bar_series_point", "formula_or_prose", "formula_prose",
         "definition_text", "relation_status", "index_delta_not_level",
         "long_prose_container", "status_sentence", "rev_7d_reject", "mm_scan_note", "nu6_split", "negation_status",
+        "prose_status_not_metric", "address_not_metric", "duration_not_tokens", "no_explicit_family",
     }:
         return False
     if len(c.get("literal") or "") > 70 and (c.get("kind") in {"ev_tip_read"} or (c.get("label") or "").lower() in META_KEYS):
@@ -1029,6 +1177,8 @@ def is_dynamic_numeric(c: dict) -> bool:
         return False
     row = (c.get("label") or "").lower().strip()
     if row in META_KEYS:
+        return False
+    if is_address_literal(lit) or is_prose_status(lit):
         return False
     dk = detect_kind(lit)
     if dk in {"DATE", "STATUS_TEXT", "PROSE", "EMPTY"}:

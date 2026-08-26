@@ -1,41 +1,41 @@
 {
-  "canonical_metrics": 482,
+  "canonical_metrics": 278,
   "ui_occurrences": 2495,
   "candidates": 2495,
   "unclassified": 0,
   "classification": {
-    "MAPPED_CANONICAL": 652,
+    "MAPPED_CANONICAL": 409,
     "STATIC_REFERENCE": 46,
     "LEGACY_INACTIVE": 329,
-    "QUALITATIVE_NON_METRIC": 1000,
-    "CONTEXT_ONLY": 35,
+    "QUALITATIVE_NON_METRIC": 1022,
+    "CONTEXT_ONLY": 297,
     "COMPOSITE_DISPLAY": 80,
-    "EVIDENCE_REFERENCE": 272,
-    "HISTORICAL": 48,
-    "WALLET_OWNED": 33
+    "EVIDENCE_REFERENCE": 250,
+    "HISTORICAL": 22,
+    "WALLET_OWNED": 40
   },
   "metric_types": {
-    "CURRENT_DYNAMIC": 388,
-    "WALLET_OWNED": 32,
+    "CURRENT_DYNAMIC": 195,
+    "WALLET_OWNED": 36,
     "STATIC_DECISION_THRESHOLD": 34,
-    "HISTORICAL": 26,
+    "HISTORICAL": 11,
     "DERIVED_DYNAMIC": 2
   },
   "ownership": {
-    "CGPT_CURSOR": 450,
-    "GROK": 32
+    "CGPT_CURSOR": 242,
+    "GROK": 36
   },
   "freshness": {
-    "UNKNOWN": 443,
-    "HISTORICAL": 26,
-    "STALE": 13
+    "UNKNOWN": 260,
+    "HISTORICAL": 11,
+    "STALE": 7
   },
   "status": {
-    "MISSING_PROVENANCE": 67,
-    "OK": 349,
-    "CONFLICT": 66
+    "MISSING_PROVENANCE": 23,
+    "OK": 204,
+    "CONFLICT": 51
   },
-  "conflicts": 66,
+  "conflicts": 51,
   "semantic_anomalies": 0,
   "dynamic_numeric_unmapped": 0,
   "structured_numeric_context_only": 0,
@@ -43,11 +43,13 @@
   "wallet_siren_bad": 0,
   "time_window_anomalies": 0,
   "update_mode_anomalies": 0,
-  "wallet_metrics": 32,
-  "atomic_dynamic_facts": 773,
-  "unknown_records": 482,
-  "sources_captured": 312,
-  "source_urls_captured": 270,
+  "semantic_scope_anomalies": 0,
+  "prose_as_metric": 0,
+  "wallet_metrics": 36,
+  "atomic_dynamic_facts": 511,
+  "unknown_records": 278,
+  "sources_captured": 160,
+  "source_urls_captured": 137,
   "active_report_assets": [
     "btc",
     "fartcoin",
@@ -76,52 +78,52 @@
   "asset_coverage": {
     "btc": {
       "candidates": 190,
-      "mapped": 72,
+      "mapped": 49,
       "unclassified": 0
     },
     "fartcoin": {
       "candidates": 196,
-      "mapped": 50,
+      "mapped": 41,
       "unclassified": 0
     },
     "hype": {
       "candidates": 198,
-      "mapped": 72,
+      "mapped": 47,
       "unclassified": 0
     },
     "io": {
       "candidates": 182,
-      "mapped": 61,
+      "mapped": 48,
       "unclassified": 0
     },
     "nos": {
       "candidates": 198,
-      "mapped": 52,
+      "mapped": 33,
       "unclassified": 0
     },
     "pump": {
       "candidates": 360,
-      "mapped": 136,
+      "mapped": 89,
       "unclassified": 0
     },
     "render": {
       "candidates": 155,
-      "mapped": 62,
+      "mapped": 35,
       "unclassified": 0
     },
     "sol": {
       "candidates": 221,
-      "mapped": 112,
+      "mapped": 64,
       "unclassified": 0
     },
     "spx6900": {
       "candidates": 212,
-      "mapped": 61,
+      "mapped": 34,
       "unclassified": 0
     },
     "zec": {
       "candidates": 164,
-      "mapped": 44,
+      "mapped": 20,
       "unclassified": 0
     }
   },
@@ -211,7 +213,10 @@
     "compound_unlinked_zero": "PASS",
     "wallet_siren_mapped": "PASS",
     "time_window_anomalies_zero": "PASS",
-    "update_mode_anomalies_zero": "PASS"
+    "update_mode_anomalies_zero": "PASS",
+    "semantic_scope_anomalies_zero": "PASS",
+    "prose_as_metric_zero": "PASS",
+    "wallet_mm_grok_owned": "PASS"
   },
   "schema_errors_sample": [],
   "fail_hints": {
@@ -227,6 +232,9 @@
     "dyn_unmapped_sample": [],
     "window_anoms": [],
     "wallet_bad": 0,
+    "scope_anoms": [],
+    "prose_as_metric": [],
+    "wallet_owner_bad": [],
     "structured_ctx_sample": []
   }
 }

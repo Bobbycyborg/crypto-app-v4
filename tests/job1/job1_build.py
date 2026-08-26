@@ -19,7 +19,10 @@ from job1_classify import (  # noqa: E402
     classify,
     detect_kind,
     explode_atomic,
+    is_address_literal,
     is_dynamic_numeric,
+    is_prose_status,
+    rest_scope,
     shape_ok,
     type_accepts,
 )
@@ -599,6 +602,7 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
         "evidence_variants": variants,
         "surface": first.get("surface") or "GLOBAL",
         "update_mode": update_mode,
+        "scope_key": first.get("scope_key") or rest_scope(rest),
         "notes": " ".join(notes) if notes else "Job 1 inventory. Provenance is component-local only.",
     }
 
@@ -637,6 +641,7 @@ def main() -> int:
             "metric_type": c.get("metric_type"),
             "update_mode": c.get("update_mode"),
             "time_window": c.get("time_window"),
+            "scope_key": c.get("scope_key"),
             "parent_occurrence_id": c.get("parent_occurrence_id"),
             "linked_metric_ids": c.get("linked_metric_ids") or [],
             "is_compound_parent": bool(c.get("is_compound_parent")),
@@ -798,6 +803,38 @@ def main() -> int:
         if len(modes) > 1:
             mode_anoms.append({"metric_id": mid, "modes": sorted(modes)})
 
+    scope_anoms = []
+    prose_as_metric = []
+    by_mid_scopes = defaultdict(set)
+    for c in classified:
+        mid = c.get("metric_id")
+        if not mid:
+            continue
+        if c.get("scope_key"):
+            by_mid_scopes[mid].add(c["scope_key"])
+        lit = c.get("literal") or ""
+        if is_prose_status(lit) or is_address_literal(lit) or re.search(r"\byears?\b", lit, re.I):
+            prose_as_metric.append({"metric_id": mid, "lit": lit})
+        labs = (c.get("label") or "").lower()
+        if "return.pct" in mid and ("oi" in labs or "open interest" in labs):
+            scope_anoms.append({"metric_id": mid, "why": "price_return_vs_oi_change", "lit": lit})
+        if "volume.spot." in mid and "perp" in labs:
+            scope_anoms.append({"metric_id": mid, "why": "spot_vs_perp", "lit": lit})
+        if "volume.perp." in mid and re.search(r"\bspot\b", labs):
+            scope_anoms.append({"metric_id": mid, "why": "spot_vs_perp", "lit": lit})
+        if mid.endswith("volume.usd.24h"):
+            scope_anoms.append({"metric_id": mid, "why": "unscoped_volume", "lit": lit})
+        if ".fees." in mid and any(x in labs for x in ("buyback",)) or (".fees." in mid and re.search(r"\brev\b", labs)):
+            scope_anoms.append({"metric_id": mid, "why": "fees_vs_revenue_buyback", "lit": lit})
+        if "return.pct" in mid and ("vs btc" in labs or "vs sol" in labs):
+            scope_anoms.append({"metric_id": mid, "why": "return_vs_rs", "lit": lit})
+        if "emissions.tokens" in mid and re.search(r"\byears?\b", lit, re.I):
+            scope_anoms.append({"metric_id": mid, "why": "tokens_vs_duration", "lit": lit})
+    for mid, scopes in by_mid_scopes.items():
+        if len(scopes) > 1:
+            scope_anoms.append({"metric_id": mid, "why": "mixed_scope_key", "scopes": sorted(scopes)})
+    wallet_owner_bad = [m["metric_id"] for m in registry if (".mm." in m["metric_id"] or ".wallet." in m["metric_id"]) and m["owner"] != "GROK"]
+
     tests = {
         "schema_validation": "PASS" if not schema_errors else "FAIL",
         "unique_metric_ids": "PASS" if len({m["metric_id"] for m in registry}) == len(registry) else "FAIL",
@@ -845,6 +882,9 @@ def main() -> int:
         "wallet_siren_mapped": "PASS" if not wallet_bad else "FAIL",
         "time_window_anomalies_zero": "PASS" if not window_anoms else "FAIL",
         "update_mode_anomalies_zero": "PASS" if not mode_anoms else "FAIL",
+        "semantic_scope_anomalies_zero": "PASS" if not scope_anoms else "FAIL",
+        "prose_as_metric_zero": "PASS" if not prose_as_metric else "FAIL",
+        "wallet_mm_grok_owned": "PASS" if not wallet_owner_bad else "FAIL",
     }
 
     (METRICS / "metric-registry.json").write_text(json.dumps({"metrics": registry}, indent=2) + "\n")
@@ -1014,6 +1054,8 @@ def main() -> int:
         "wallet_siren_bad": len(wallet_bad),
         "time_window_anomalies": len(window_anoms),
         "update_mode_anomalies": len(mode_anoms),
+        "semantic_scope_anomalies": len(scope_anoms),
+        "prose_as_metric": len(prose_as_metric),
         "wallet_metrics": owners.get("GROK", 0),
         "atomic_dynamic_facts": sum(1 for c in classified if is_dynamic_numeric(c) and c.get("metric_id")),
         "unknown_records": len(unknowns),
@@ -1044,6 +1086,9 @@ def main() -> int:
             ],
             "window_anoms": window_anoms[:12],
             "wallet_bad": len(wallet_bad),
+            "scope_anoms": scope_anoms[:12],
+            "prose_as_metric": prose_as_metric[:12],
+            "wallet_owner_bad": wallet_owner_bad[:12],
             "structured_ctx_sample": [
                 {"label": c.get("label"), "lit": (c.get("literal") or "")[:60], "asset": c.get("asset_slug")}
                 for c in structured_ctx[:12]

@@ -57,3 +57,6 @@ Time basis is part of the id (`usd.30d` is not `usd.7d`; `usd_per_day.mean_30d` 
 ## update_mode
 LIVE (hold/desk ticker), REPORT_SNAPSHOT (frozen report figure), HISTORICAL, STATIC_THRESHOLD, WALLET_SNAPSHOT.
 A live ticker and a report hero price are different records. Conflict only if asset + definition + window + update_mode match and values disagree.
+
+## scope_key
+Measure subtype. Spot volume is not perp volume. Platform OI is not token OI. Price return is not OI change. Fees are not revenue or buybacks. Same unit + same window is not enough to share a metric.

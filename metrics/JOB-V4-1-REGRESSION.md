@@ -9,7 +9,7 @@ literal → metric_id → window/update_mode → source/as_of → owner
 - `$809k/d` → `sol.fees.usd_per_day.mean_30d` → mean_30d/REPORT_SNAPSHOT → DefiLlama/2026-08-11T21:13:38.447286Z → CGPT_CURSOR (MAPPED_CANONICAL)
 
 ## SOL fees ±7d mean
-- `$600k/d` → `sol.fees.usd_per_day.mean_7d` → mean_7d/REPORT_SNAPSHOT → DefiLlama/2026-08-11T21:13:38.447286Z → CGPT_CURSOR (MAPPED_CANONICAL)
+(none)
 
 ## SOL fees Nov 2024
 - `$9.5M/d` → `sol.fees.usd_per_day.nov_2024` → nov_2024/HISTORICAL → DefiLlama/2026-08-11T21:13:38.447286Z → CGPT_CURSOR (HISTORICAL)
