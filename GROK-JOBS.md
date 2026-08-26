@@ -51,3 +51,7 @@ After G2–G4 are submitted to CGPT. Not a full report.
 Drift: v3 live and used, fees/volume vs pre-hack, team/treasury dest-watch.
 Orca: fees + does ORCA get them, treasury dest-watch, one volume line.
 Memes stay on cards. Fart and SPX already have pages.
+
+## G5B. Same three pages, on the main dashboard
+Oliver rejected the standalone skinny look on 26 Aug 2026. They must be pages on the main V4 app, same design rules, may be heavily reduced.
+See `GROK-G5B-BRIEF.md` and `GROK-G5B-EVIDENCE.md`. Grok has not marked this done.
