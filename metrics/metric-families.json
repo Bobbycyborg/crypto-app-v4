@@ -359,6 +359,12 @@
     "allowed_unit": "USD",
     "allowed_literal_shape": "usd_amount"
   },
+  "fees.perps.usd.30d": {
+    "definition": "USD perpetual-market fees for {ASSET} over the trailing thirty days, not protocol-wide 30d fees.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
   "holders.unit_treasury.pct": {
     "definition": "Share of {ASSET} supply in the Unit / protocol-custody treasury cohort.",
     "value_kind": "PERCENT",
@@ -900,15 +906,63 @@
     "allowed_literal_shape": "percent"
   },
   "shielded.share.pct": {
-    "definition": "The shielded share pct observation for {ASSET} at the stated window.",
+    "definition": "Percent of {ASSET} circulating supply that is shielded, not the shielded token quantity.",
     "value_kind": "PERCENT",
     "allowed_unit": "%",
     "allowed_literal_shape": "percent"
+  },
+  "shielded.tokens.current": {
+    "definition": "Shielded token quantity of {ASSET} as currently shown, not the shielded share percent.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
   },
   "tx.count.24h": {
     "definition": "The tx count 24h observation for {ASSET} at the stated window.",
     "value_kind": "COUNT",
     "allowed_unit": "count",
     "allowed_literal_shape": "count"
+  },
+  "nodes.with_running_jobs.count": {
+    "definition": "Count of {ASSET} compute nodes that currently have at least one running job, not the job count itself.",
+    "value_kind": "COUNT",
+    "allowed_unit": "count",
+    "allowed_literal_shape": "count"
+  },
+  "mm.wintermute.balance.tokens": {
+    "definition": "Observed Wintermute wallet inventory/balance of {ASSET} from the wallet/MM lane (Grok-owned).",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "mm.wintermute.transfer.tokens": {
+    "definition": "Observed Wintermute transfer or OTC-interaction token amount for {ASSET}, not wallet inventory (Grok-owned).",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "dex_eth_ratio.latest_day.x": {
+    "definition": "Solana DEX volume versus Ethereum L1 DEX volume for the latest day, as a multiple.",
+    "value_kind": "RATIO_X",
+    "allowed_unit": "x",
+    "allowed_literal_shape": "ratio_x"
+  },
+  "dex_eth_ratio.7d.x": {
+    "definition": "Solana DEX volume versus Ethereum L1 DEX volume over seven days, as a multiple.",
+    "value_kind": "RATIO_X",
+    "allowed_unit": "x",
+    "allowed_literal_shape": "ratio_x"
+  },
+  "oi.usd.stage1": {
+    "definition": "Open interest in USD for {ASSET} from the Stage-1 historical evidence snapshot, not the live Binance print.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "stablecoin.usd.stage1": {
+    "definition": "USD-pegged stablecoin stock on {ASSET} from the Stage-1 historical evidence snapshot, not the live current print.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
   }
 }

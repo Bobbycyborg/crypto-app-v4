@@ -1,41 +1,41 @@
 {
-  "canonical_metrics": 318,
-  "ui_occurrences": 2498,
-  "candidates": 2498,
+  "canonical_metrics": 320,
+  "ui_occurrences": 2525,
+  "candidates": 2525,
   "unclassified": 0,
   "classification": {
-    "MAPPED_CANONICAL": 427,
-    "STATIC_REFERENCE": 46,
-    "LEGACY_INACTIVE": 329,
-    "QUALITATIVE_NON_METRIC": 1022,
-    "CONTEXT_ONLY": 254,
-    "COMPOSITE_DISPLAY": 81,
-    "EVIDENCE_REFERENCE": 250,
-    "HISTORICAL": 49,
-    "WALLET_OWNED": 40
+    "MAPPED_CANONICAL": 431,
+    "STATIC_DECISION_THRESHOLD": 46,
+    "LEGACY_INACTIVE": 335,
+    "COMPOSITE_DISPLAY": 106,
+    "QUALITATIVE_NON_METRIC": 1004,
+    "CONTEXT_ONLY": 253,
+    "EVIDENCE_REFERENCE": 255,
+    "HISTORICAL": 57,
+    "WALLET_OWNED": 38
   },
   "metric_types": {
-    "CURRENT_DYNAMIC": 217,
-    "WALLET_OWNED": 36,
+    "CURRENT_DYNAMIC": 220,
+    "WALLET_OWNED": 35,
     "STATIC_DECISION_THRESHOLD": 34,
-    "HISTORICAL": 29,
-    "DERIVED_DYNAMIC": 2
+    "HISTORICAL": 31
   },
   "ownership": {
-    "CGPT_CURSOR": 282,
-    "GROK": 36
+    "CGPT_CURSOR": 285,
+    "GROK": 35
   },
   "freshness": {
-    "UNKNOWN": 282,
-    "HISTORICAL": 29,
-    "STALE": 7
+    "UNKNOWN": 284,
+    "HISTORICAL": 31,
+    "STALE": 5
   },
   "status": {
-    "MISSING_PROVENANCE": 25,
-    "OK": 263,
-    "CONFLICT": 30
+    "MISSING_PROVENANCE": 91,
+    "OK": 204,
+    "FORMAT_VARIANT": 15,
+    "CONFLICT": 10
   },
-  "conflicts": 30,
+  "conflicts": 10,
   "semantic_anomalies": 0,
   "dynamic_numeric_unmapped": 0,
   "structured_numeric_context_only": 0,
@@ -53,11 +53,11 @@
   "abbreviated_unknown_parsed_zero": 0,
   "metric_kind_capture_mismatch": 0,
   "observation_context_conflicts": 0,
-  "wallet_metrics": 36,
-  "atomic_dynamic_facts": 556,
-  "unknown_records": 318,
-  "sources_captured": 209,
-  "source_urls_captured": 158,
+  "wallet_metrics": 35,
+  "atomic_dynamic_facts": 565,
+  "unknown_records": 320,
+  "sources_captured": 134,
+  "source_urls_captured": 161,
   "active_report_assets": [
     "btc",
     "fartcoin",
@@ -86,17 +86,17 @@
   "asset_coverage": {
     "btc": {
       "candidates": 190,
-      "mapped": 56,
+      "mapped": 57,
       "unclassified": 0
     },
     "fartcoin": {
-      "candidates": 196,
-      "mapped": 41,
+      "candidates": 198,
+      "mapped": 39,
       "unclassified": 0
     },
     "hype": {
       "candidates": 198,
-      "mapped": 54,
+      "mapped": 53,
       "unclassified": 0
     },
     "io": {
@@ -105,13 +105,13 @@
       "unclassified": 0
     },
     "nos": {
-      "candidates": 200,
+      "candidates": 203,
       "mapped": 37,
       "unclassified": 0
     },
     "pump": {
-      "candidates": 360,
-      "mapped": 90,
+      "candidates": 368,
+      "mapped": 98,
       "unclassified": 0
     },
     "render": {
@@ -120,18 +120,18 @@
       "unclassified": 0
     },
     "sol": {
-      "candidates": 222,
-      "mapped": 75,
+      "candidates": 224,
+      "mapped": 82,
       "unclassified": 0
     },
     "spx6900": {
-      "candidates": 212,
-      "mapped": 34,
+      "candidates": 215,
+      "mapped": 33,
       "unclassified": 0
     },
     "zec": {
       "candidates": 164,
-      "mapped": 27,
+      "mapped": 25,
       "unclassified": 0
     }
   },
@@ -142,14 +142,14 @@
       "unclassified": 0
     },
     "ray": {
-      "candidates": 177,
+      "candidates": 183,
       "mapped": 0,
       "unclassified": 0
     }
   },
   "hold_only_coverage": {
     "2z": {
-      "candidates": 6,
+      "candidates": 7,
       "mapped": 5,
       "unclassified": 0
     },
@@ -159,7 +159,7 @@
       "unclassified": 0
     },
     "drift": {
-      "candidates": 5,
+      "candidates": 6,
       "mapped": 4,
       "unclassified": 0
     },
@@ -174,7 +174,7 @@
       "unclassified": 0
     },
     "orca": {
-      "candidates": 9,
+      "candidates": 10,
       "mapped": 8,
       "unclassified": 0
     },

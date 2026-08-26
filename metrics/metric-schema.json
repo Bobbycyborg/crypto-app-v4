@@ -77,8 +77,13 @@
     },
     "status": {
       "type": "string",
-      "enum": ["OK", "UNKNOWN", "CONFLICT", "MISSING_PROVENANCE", "DERIVATION_UNVERIFIED"]
+      "enum": ["OK", "UNKNOWN", "CONFLICT", "MISSING_PROVENANCE", "DERIVATION_UNVERIFIED", "FORMAT_VARIANT", "UNKNOWN_SCOPE"]
     },
+    "conflict_review": {
+      "type": ["string", "null"],
+      "enum": ["MANUALLY_CONFIRMED", null]
+    },
+    "observation_id": { "type": ["string", "null"] },
     "display_precision": { "type": ["string", "null"] },
     "currency": { "type": ["string", "null"] },
     "denominator": { "type": ["string", "null"] },
@@ -110,7 +115,9 @@
           "source_url": { "type": ["string", "null"] },
           "as_of": { "type": ["string", "null"] },
           "freshness": { "type": ["string", "null"] },
-          "kind": { "type": "string" }
+          "kind": { "type": "string" },
+          "observation_id": { "type": ["string", "null"] },
+          "extractor": { "type": ["string", "null"] }
         }
       }
     },

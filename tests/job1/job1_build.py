@@ -16,7 +16,6 @@ from job1_classify import (  # noqa: E402
     CATALOG,
     DEFS,
     TYPE_SPEC,
-    classify,
     detect_kind,
     explode_atomic,
     historical_container,
@@ -26,11 +25,12 @@ from job1_classify import (  # noqa: E402
     is_non_value_label,
     is_prose_status,
     looks_like_funding_rate,
-    parse_raw,
     rest_scope,
     shape_ok,
     type_accepts,
 )
+from job1_apply import apply_manifest, conflict_groups, group_status  # noqa: E402
+from job1_extractors import extract_value, numeric_token_count, rounding_equivalent  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 HTML = ROOT / "index-v4.html"
@@ -181,16 +181,20 @@ def location_type(el) -> str:
     return "other"
 
 
-def raw_of(literal: str, rest: str = ""):
-    spec = TYPE_SPEC.get(rest)
-    vk = spec[0] if spec else None
-    return parse_raw(literal, vk, rest)
+def raw_of(o_or_literal, rest: str = ""):
+    if isinstance(o_or_literal, dict):
+        if o_or_literal.get("raw_value") is not None:
+            return o_or_literal.get("raw_value")
+        ext = o_or_literal.get("extractor") or {"type": "explicit_unknown"}
+        return extract_value(ext, o_or_literal.get("literal") or "")
+    return "UNKNOWN"
 
 
 def observation_key(o: dict) -> tuple:
     return (
-        (o.get("observation_anchor") or o.get("time_window") or "").lower(),
-        o.get("as_of") or "UNKNOWN",
+        o.get("metric_id"),
+        o.get("observation_id") or o.get("observation_anchor") or "",
+        o.get("scope_key") or "",
         o.get("update_mode") or "",
     )
 
@@ -275,7 +279,9 @@ def make_cand(el, literal, kind, extra=None) -> dict:
         "literal": literal,
         "kind": kind,
         "asset_slug": slug,
-        "surface": surface_of(el, slug),
+        "surface": (
+            "VISIBLE_HOLD_CARD_ONLY" if slug in HOLD_ONLY_TICKERS.values() else surface_of(el, slug)
+        ),
         "ui_location_type": location_type(el),
         "html_locator": loc,
         "element_class": cls(el)[:120],
@@ -296,8 +302,11 @@ def make_cand(el, literal, kind, extra=None) -> dict:
     return rec
 
 
+MANIFEST_PATH = METRICS / "ui-mapping-manifest.json"
+
+
 def map_to_metric(c: dict) -> dict:
-    return classify(c)
+    raise RuntimeError("map_to_metric is disabled; apply_manifest owns identity")
 
 
 
@@ -469,31 +478,27 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
     for o in occs:
         if o["literal"] not in lits:
             lits.append(o["literal"])
-    raws = [(lit, raw_of(lit, rest)) for lit in lits]
+    raws = [(o.get("literal"), raw_of(o, rest)) for o in occs]
     by_obs = defaultdict(list)
     for o in occs:
         by_obs[observation_key(o)].append(o)
     genuine_conflict = False
+    rounding_only = False
     for group in by_obs.values():
-        nums = []
-        for o in group:
-            r = raw_of(o["literal"], rest)
-            if isinstance(r, (int, float)):
-                nums.append(r)
-            elif r != "UNKNOWN":
-                nums.append(r)
-        uniq = set(nums)
-        if len(uniq) > 1:
+        st = group_status(group)
+        if st == "CONFLICT":
             genuine_conflict = True
             break
+        if st == "FORMAT_VARIANT":
+            rounding_only = True
     numeric = [r for _, r in raws if isinstance(r, (int, float))]
-    format_only = len(set(numeric)) == 1 and len(numeric) == len(lits) and len(lits) > 1 and not genuine_conflict
-    # ETF compact vs tooltip: still format_only only if parse_raw equal. $1.96B vs $2.0B are NOT equal — record as FORMAT_VARIANT_UNPROVEN not conflict winner.
+    format_only = (rounding_only or (len(set(numeric)) == 1 and len(numeric) == len(lits) and len(lits) > 1)) and not genuine_conflict
     etf = rest.startswith("etf.flow")
     etf_compact = False
     if etf and len(lits) > 1:
         etf_compact = True
-        genuine_conflict = False  # two surfaces of same Farside window; compact card vs tooltip. Do not pick winner.
+        if not genuine_conflict:
+            genuine_conflict = False
     owner = first.get("owner") or "CGPT_CURSOR"
     mtype = first.get("metric_type") or "CURRENT_DYNAMIC"
     if any(o.get("metric_type") == "DERIVED_DYNAMIC" for o in occs):
@@ -520,29 +525,27 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
         as_of = as_of if as_of != "UNKNOWN" else "2026-08-12"
     if mtype == "HISTORICAL":
         freshness = "HISTORICAL"
-    if mid == "pump.buyback.usd.7d":
-        as_of = "2026-08-25" if as_of == "UNKNOWN" else as_of
-        if source == "UNKNOWN":
-            source = "DefiLlama holdersRevenue"
 
     status = "OK"
     if genuine_conflict:
         status = "CONFLICT"
         value, raw = "UNKNOWN", "UNKNOWN"
+    elif rounding_only:
+        status = "FORMAT_VARIANT"
+        value, raw = "UNKNOWN", "UNKNOWN"
     elif etf_compact:
-        status = "OK"
-        value, raw = "UNKNOWN", "UNKNOWN"  # do not choose compact vs tooltip
+        status = "FORMAT_VARIANT" if format_only else "OK"
+        value, raw = "UNKNOWN", "UNKNOWN"
     elif format_only:
-        # same underlying number, different text — still do not invent a winner; keep the shared raw, value UNKNOWN? Instruction: formatting difference is not automatically a conflict. Record variants. Using shared raw is OK; display value UNKNOWN avoids picking $6.8M vs $6.8M/wk as "the" one... actually those parse equal. Prefer the more explicit literal containing /wk if present.
-        value, raw = "UNKNOWN", numeric[0]
-        status = "OK"
-        # explicit weekly buyback: allow the /wk form as display because it is the same number plus unit, not a competing fact
+        value, raw = "UNKNOWN", numeric[0] if numeric else "UNKNOWN"
+        status = "FORMAT_VARIANT" if rounding_only else "OK"
         wk = [x for x in lits if "/wk" in x.lower()]
         if wk and len(set(numeric)) == 1:
             value = wk[0]
+            status = "OK"
     else:
         value = lits[0]
-        raw = raw_of(value, rest)
+        raw = raws[0][1] if raws else "UNKNOWN"
 
     if status == "OK" and source == "UNKNOWN" and mtype == "CURRENT_DYNAMIC":
         status = "MISSING_PROVENANCE"
@@ -565,12 +568,18 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
         variants.append({
             "occurrence_id": o["occurrence_id"],
             "literal": o["literal"],
-            "raw_value": raw_of(o["literal"], rest),
+            "raw_value": raw_of(o, rest),
             "source": o.get("source") or "UNKNOWN",
             "source_url": o.get("source_url"),
             "as_of": o.get("as_of") or "UNKNOWN",
             "freshness": o.get("freshness_hint") or freshness,
-            "kind": "format_variant" if etf_compact or format_only else ("conflict_alternative" if genuine_conflict else "occurrence"),
+            "observation_id": o.get("observation_id") or o.get("observation_anchor"),
+            "extractor": (
+                (o.get("extractor") or {}).get("type")
+                if isinstance(o.get("extractor"), dict)
+                else o.get("extractor")
+            ),
+            "kind": "format_variant" if status == "FORMAT_VARIANT" or etf_compact or format_only else ("conflict_alternative" if genuine_conflict else "occurrence"),
         })
 
     hist = "STATIC" if mtype in ("STATIC_DECISION_THRESHOLD", "STATIC_REFERENCE") else (
@@ -624,6 +633,12 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
         "surface": first.get("surface") or "GLOBAL",
         "update_mode": update_mode,
         "scope_key": first.get("scope_key") or rest_scope(rest),
+        "observation_id": (
+            first.get("observation_id") or first.get("observation_anchor")
+            if len({o.get("observation_id") or o.get("observation_anchor") for o in occs}) == 1
+            else None
+        ),
+        "conflict_review": "MANUALLY_CONFIRMED" if status == "CONFLICT" else None,
         "notes": " ".join(notes) if notes else "Job 1 inventory. Provenance is component-local only.",
     }
 
@@ -634,9 +649,12 @@ def main() -> int:
         extra = set(TYPE_SPEC) - set(DEFS)
         raise SystemExit(f"TYPE_SPEC mismatch missing={missing} extra={extra}")
     METRICS.mkdir(parents=True, exist_ok=True)
+    if not MANIFEST_PATH.exists():
+        raise SystemExit("metrics/ui-mapping-manifest.json missing")
+    manifest = json.loads(MANIFEST_PATH.read_text())
     root = lhtml.parse(str(HTML)).getroot()
     raw = explode_atomic(extract(root))
-    classified = [map_to_metric(dict(c)) for c in raw]
+    classified = apply_manifest(raw, manifest)
     for c in classified:
         if not c.get("classification_rule"):
             c["coverage_state"] = "UNCLASSIFIED"
@@ -667,18 +685,21 @@ def main() -> int:
             "linked_metric_ids": c.get("linked_metric_ids") or [],
             "is_compound_parent": bool(c.get("is_compound_parent")),
             "observation_anchor": c.get("observation_anchor"),
+            "observation_id": c.get("observation_id") or c.get("observation_anchor"),
             "parent_label": c.get("parent_label"),
+            "extractor": (c.get("extractor") or {}).get("type") if isinstance(c.get("extractor"), dict) else c.get("extractor"),
             "historical_or_current": (
                 "HISTORICAL" if c.get("metric_type") == "HISTORICAL" or is_historical_window((c.get("time_window") or ""))
                 else ("STATIC" if c.get("metric_type") in {"STATIC_DECISION_THRESHOLD", "STATIC_REFERENCE"} else "CURRENT")
             ),
-            "raw_value": raw_of(c["literal"], (c.get("metric_id") or ".").split(".", 1)[-1] if c.get("metric_id") else ""),
+            "raw_value": c.get("raw_value"),
         })
 
     by_id = defaultdict(list)
     for c in classified:
         if c.get("metric_id") and c["coverage_state"] in {
             "MAPPED_CANONICAL", "WALLET_OWNED", "HISTORICAL", "STATIC_REFERENCE",
+            "STATIC_DECISION_THRESHOLD",
         }:
             by_id[c["metric_id"]].append(c)
 
@@ -794,12 +815,14 @@ def main() -> int:
             continue
         if is_dynamic_numeric(c) and not c.get("metric_id") and c.get("coverage_state") not in {
             "COMPOSITE_DISPLAY", "HISTORICAL", "STATIC_REFERENCE", "WALLET_OWNED", "QUALITATIVE_NON_METRIC",
+            "CONTEXT_ONLY", "EVIDENCE_REFERENCE", "FALSE_POSITIVE", "LEGACY_INACTIVE", "STATIC_DECISION_THRESHOLD",
         }:
             dyn_unmapped.append(c)
         if (
             c.get("kind") in {"ev_v", "metric_val", "econ_dial", "econ_kpi", "atomic_span"}
             and is_dynamic_numeric(c)
             and c.get("coverage_state") == "CONTEXT_ONLY"
+            and (c.get("classification_rule") or "") in {"unmapped", ""}
         ):
             structured_ctx.append(c)
         if c.get("is_compound_parent"):
@@ -879,19 +902,23 @@ def main() -> int:
         lit = c.get("literal") or ""
         rest = mid.split(".", 1)[1]
         vk = (TYPE_SPEC.get(rest) or (None,))[0]
-        raw = raw_of(lit, rest)
+        raw = c.get("raw_value")
         parent = by_oid.get(c.get("parent_occurrence_id") or "")
         if parent:
             pev = historical_container(parent, parent.get("label") or "")
             child_win = c.get("time_window") or rest.split(".")[-1]
             if pev and is_historical_window(pev) and not re.search(r"\bnow\b", (parent.get("label") or ""), re.I):
-                if re.search(r"\s/\s", parent.get("label") or "") and len(re.findall(r"[A-Za-z]", parent.get("label") or "")) > 6:
+                parent_lab = (parent.get("label") or "").strip().lower()
+                if parent_lab in {"evidence", "read", "detail", ""} or "evidence" in parent_lab:
                     pass
-                elif child_win == "current" or str(mid).endswith(".current"):
-                    historical_child_marked_current.append({"metric_id": mid, "parent": parent.get("label"), "lit": lit})
-                if any(x in rest for x in ("fees.", "revenue.", "buyback.", "tvl.")) and pev not in mid and child_win != pev:
-                    if not is_historical_window(str(child_win)):
-                        parent_context_lost.append({"metric_id": mid, "parent": parent.get("label"), "expected": pev, "lit": lit})
+                elif re.search(r"\s/\s", parent.get("label") or "") and len(re.findall(r"[A-Za-z]", parent.get("label") or "")) > 6:
+                    pass
+                else:
+                    if child_win == "current" or str(mid).endswith(".current"):
+                        historical_child_marked_current.append({"metric_id": mid, "parent": parent.get("label"), "lit": lit})
+                    if any(x in rest for x in ("fees.", "revenue.", "buyback.", "tvl.")) and pev not in mid and child_win != pev:
+                        if not is_historical_window(str(child_win)):
+                            parent_context_lost.append({"metric_id": mid, "parent": parent.get("label"), "expected": pev, "lit": lit})
         if is_non_value_label(lit):
             non_value_as_metric.append({"metric_id": mid, "lit": lit})
         if "gpu_hours" in mid:
@@ -927,12 +954,13 @@ def main() -> int:
             continue
         rest = m["metric_id"].split(".", 1)[1]
         rows = [c for c in classified if c.get("metric_id") == m["metric_id"]]
-        byk = defaultdict(list)
-        for o in rows:
-            r = raw_of(o["literal"], rest)
-            if isinstance(r, (int, float)):
-                byk[observation_key(o)].append(r)
-        if not any(len(set(vs)) > 1 for vs in byk.values()):
+        byk = conflict_groups(rows)
+        true_disagreement = False
+        for group in byk.values():
+            if group_status(group) == "CONFLICT":
+                true_disagreement = True
+                break
+        if not true_disagreement:
             observation_context_conflicts.append(m["metric_id"])
 
     tests = {
@@ -943,7 +971,8 @@ def main() -> int:
         "occurrence_references": "PASS" if all(
             (o["metric_id"] in by_id) or o["coverage_state"] in {
                 "QUALITATIVE_NON_METRIC", "FALSE_POSITIVE", "EVIDENCE_REFERENCE", "CONTEXT_ONLY",
-                "COMPOSITE_DISPLAY", "LEGACY_INACTIVE",
+                "COMPOSITE_DISPLAY", "LEGACY_INACTIVE", "STATIC_DECISION_THRESHOLD", "HISTORICAL",
+                "WALLET_OWNED", "STATIC_REFERENCE",
             } for o in occs_out
         ) else "FAIL",
         "no_generic_fallback_ids": "PASS" if not banned_ids else "FAIL",
@@ -1067,10 +1096,6 @@ def main() -> int:
 
     urls_n = sum(1 for m in registry if m.get("source_url_or_reference"))
     src_n = sum(1 for m in registry if m.get("source") not in (None, "UNKNOWN"))
-    (METRICS / "metric-families.json").write_text(json.dumps({
-        rest: {"definition": d, "value_kind": vk, "allowed_unit": u, "allowed_literal_shape": s}
-        for rest, (d, vk, u, s) in CATALOG.items()
-    }, indent=2) + "\n")
 
     def _row(asset, needle, mid_suffix=None):
         hits = []
@@ -1191,7 +1216,7 @@ def main() -> int:
             rest = (c.get("metric_id") or ".").split(".", 1)[-1] if c.get("metric_id") else ""
             ctx_md.append(
                 f"- `{parent_lab}` / `{parent_lit[:80]}` → `{c.get('literal')}` → "
-                f"`{c.get('metric_id')}`/{c.get('classification_rule')} → `{raw_of(c.get('literal') or '', rest)}` → "
+                f"`{c.get('metric_id')}`/{c.get('classification_rule')} → `{c.get('raw_value')}` → "
                 f"{c.get('metric_type') or c.get('coverage_state')} → "
                 f"{c.get('observation_anchor') or c.get('time_window')} → "
                 f"{c.get('source')}/{c.get('as_of')}"

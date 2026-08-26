@@ -60,7 +60,7 @@ def main() -> int:
             fail("occurrence_references", o.get("metric_id"))
         if o.get("metric_id") is None and o["coverage_state"] not in {
             "QUALITATIVE_NON_METRIC", "FALSE_POSITIVE", "EVIDENCE_REFERENCE", "CONTEXT_ONLY",
-            "COMPOSITE_DISPLAY", "LEGACY_INACTIVE",
+            "COMPOSITE_DISPLAY", "LEGACY_INACTIVE", "STATIC_DECISION_THRESHOLD",
         }:
             fail("occurrence_references", o["occurrence_id"])
     print("PASS occurrence_references")

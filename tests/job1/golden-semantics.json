@@ -1,0 +1,299 @@
+{
+  "version": 1,
+  "notes": "Static golden truth. Builder must not generate or modify this file.",
+  "cases": [
+    {
+      "id": "pump_ath_sep_fees",
+      "asset": "PUMP",
+      "literal_contains": "1.9M/d",
+      "parent_contains": "ATH Sep",
+      "expect_metric_id": "pump.fees.usd_per_day.ath_sep",
+      "expect_raw": 1900000,
+      "expect_historical": true,
+      "expect_observation_id": "ath_sep"
+    },
+    {
+      "id": "pump_ath_sep_revenue",
+      "asset": "PUMP",
+      "literal_contains": "1.7M/d",
+      "label_contains": "rev",
+      "parent_contains": "ATH Sep",
+      "expect_metric_id": "pump.revenue.usd_per_day.ath_sep",
+      "expect_raw": 1700000,
+      "expect_historical": true,
+      "expect_observation_id": "ath_sep"
+    },
+    {
+      "id": "pump_ath_sep_buyback",
+      "asset": "PUMP",
+      "literal_contains": "1.7M/d",
+      "label_contains": "buyback",
+      "parent_contains": "ATH Sep",
+      "expect_metric_id": "pump.buyback.usd_per_day.ath_sep",
+      "expect_raw": 1700000,
+      "expect_historical": true,
+      "expect_observation_id": "ath_sep"
+    },
+    {
+      "id": "pump_jan_high_fees",
+      "asset": "PUMP",
+      "literal_contains": "1.5M/d",
+      "parent_contains": "Jan high",
+      "expect_metric_id": "pump.fees.usd_per_day.jan_high",
+      "expect_raw": 1500000,
+      "expect_historical": true,
+      "expect_observation_id": "jan_high"
+    },
+    {
+      "id": "pump_jan_high_revenue",
+      "asset": "PUMP",
+      "literal_contains": "1.2M/d",
+      "parent_contains": "Jan high",
+      "expect_metric_id": "pump.revenue.usd_per_day.jan_high",
+      "expect_raw": 1200000,
+      "expect_historical": true,
+      "expect_observation_id": "jan_high"
+    },
+    {
+      "id": "pump_jan_high_buyback",
+      "asset": "PUMP",
+      "literal_contains": "1.1M/d",
+      "parent_contains": "Jan high",
+      "expect_metric_id": "pump.buyback.usd_per_day.jan_high",
+      "expect_raw": 1100000,
+      "expect_historical": true,
+      "expect_observation_id": "jan_high"
+    },
+    {
+      "id": "pump_june_atl_fees",
+      "asset": "PUMP",
+      "literal_contains": "806K/d",
+      "parent_contains": "June ATL",
+      "expect_metric_id": "pump.fees.usd_per_day.june_atl",
+      "expect_raw": 806000,
+      "expect_historical": true,
+      "expect_observation_id": "june_atl"
+    },
+    {
+      "id": "pump_june_atl_revenue",
+      "asset": "PUMP",
+      "literal_contains": "618K/d",
+      "parent_contains": "June ATL",
+      "expect_metric_id": "pump.revenue.usd_per_day.june_atl",
+      "expect_raw": 618000,
+      "expect_historical": true,
+      "expect_observation_id": "june_atl"
+    },
+    {
+      "id": "pump_june_atl_buyback",
+      "asset": "PUMP",
+      "literal_contains": "442K/d",
+      "parent_contains": "June ATL",
+      "expect_metric_id": "pump.buyback.usd_per_day.june_atl",
+      "expect_raw": 442000,
+      "expect_historical": true,
+      "expect_observation_id": "june_atl"
+    },
+    {
+      "id": "pump_now_fees",
+      "asset": "PUMP",
+      "literal_contains": "1.3M/d",
+      "parent_contains": "Now",
+      "expect_metric_id": "pump.fees.usd_per_day.current",
+      "expect_raw": 1300000,
+      "expect_historical": false
+    },
+    {
+      "id": "pump_now_revenue",
+      "asset": "PUMP",
+      "literal_contains": "998K/d",
+      "parent_contains": "Now",
+      "expect_metric_id": "pump.revenue.usd_per_day.current",
+      "expect_raw": 998000,
+      "expect_historical": false
+    },
+    {
+      "id": "pump_now_buyback",
+      "asset": "PUMP",
+      "literal_contains": "738K/d",
+      "parent_contains": "Now",
+      "expect_metric_id": "pump.buyback.usd_per_day.current",
+      "expect_raw": 738000,
+      "expect_historical": false
+    },
+    {
+      "id": "render_last_4_wks",
+      "asset": "RENDER",
+      "literal_equals": "LAST 4 WKS",
+      "expect_nonmetric": true
+    },
+    {
+      "id": "sol_print_7d",
+      "asset": "SOL",
+      "literal_equals": "print − / 7d +",
+      "expect_nonmetric": true
+    },
+    {
+      "id": "sol_3d_means",
+      "asset": "SOL",
+      "literal_contains": "means at anchor",
+      "expect_nonmetric": true
+    },
+    {
+      "id": "sol_scientific_funding",
+      "asset": "SOL",
+      "literal_contains": "5.533e-05",
+      "expect_metric_id": "sol.funding.rate.latest",
+      "expect_raw": -0.00005533,
+      "raw_tolerance": 1e-12
+    },
+    {
+      "id": "pump_bare_8h",
+      "asset": "PUMP",
+      "literal_equals": "8h",
+      "expect_nonmetric": true
+    },
+    {
+      "id": "nos_jobs_running",
+      "asset": "NOS",
+      "literal_equals": "855",
+      "label_contains": "run",
+      "expect_metric_id": "nos.jobs.running.count",
+      "expect_raw": 855
+    },
+    {
+      "id": "nos_nodes_running",
+      "asset": "NOS",
+      "literal_equals": "35",
+      "label_contains": "Nodes with running jobs",
+      "expect_metric_id": "nos.nodes.with_running_jobs.count",
+      "expect_raw": 35
+    },
+    {
+      "id": "nos_gpu_hours",
+      "asset": "NOS",
+      "literal_equals": "119,219",
+      "expect_metric_id": "nos.gpu_hours.approx_31d",
+      "expect_raw": 119219
+    },
+    {
+      "id": "sol_30d_minus_1pp",
+      "asset": "SOL",
+      "literal_contains": "-1.00pp",
+      "expect_metric_id": "sol.rs.vs_btc.pp.30d",
+      "expect_raw": -1.0
+    },
+    {
+      "id": "compact_ellipsis_unknown",
+      "literal_contains": "$0.0...",
+      "expect_raw": "UNKNOWN",
+      "forbid_raw_zero": true
+    },
+    {
+      "id": "hype_circ_pct_222",
+      "asset": "HYPE",
+      "literal_contains": "222.45M (22.2%)",
+      "expect_metric_id": "hype.supply.circulating.pct",
+      "expect_raw": 22.2
+    },
+    {
+      "id": "sol_tvl_stage1",
+      "asset": "SOL",
+      "literal_contains": "$4.80B",
+      "expect_metric_id": "sol.tvl.usd.stage1",
+      "expect_historical": true
+    },
+    {
+      "id": "sol_tvl_current",
+      "asset": "SOL",
+      "literal_equals": "$5.65B",
+      "expect_metric_id": "sol.tvl.usd.current",
+      "expect_historical": false
+    },
+    {
+      "id": "pump_rs_btc_7d",
+      "asset": "PUMP",
+      "literal_contains": "31.1",
+      "parent_contains": "BTC",
+      "expect_metric_id": "pump.rs.vs_btc.pct.7d",
+      "expect_raw": 31.1
+    },
+    {
+      "id": "pump_rs_btc_30d",
+      "asset": "PUMP",
+      "literal_contains": "102.3",
+      "expect_metric_id": "pump.rs.vs_btc.pct.30d",
+      "expect_raw": 102.3
+    },
+    {
+      "id": "pump_rs_sol_7d",
+      "asset": "PUMP",
+      "literal_contains": "27.7",
+      "expect_metric_id": "pump.rs.vs_sol.pct.7d",
+      "expect_raw": 27.7
+    },
+    {
+      "id": "pump_rs_sol_30d",
+      "asset": "PUMP",
+      "literal_contains": "104.7",
+      "expect_metric_id": "pump.rs.vs_sol.pct.30d",
+      "expect_raw": 104.7
+    },
+    {
+      "id": "pump_report_price_rounding",
+      "expect_registry_status": { "metric_id": "pump.price.usd.report", "status": "FORMAT_VARIANT" }
+    },
+    {
+      "id": "hype_af_rounding",
+      "expect_registry_status": { "metric_id": "hype.af.inventory.tokens.current", "status": "FORMAT_VARIANT" }
+    },
+    {
+      "id": "hype_emissions_rounding",
+      "expect_registry_status": { "metric_id": "hype.emissions.tokens.remaining", "status": "FORMAT_VARIANT" }
+    },
+    {
+      "id": "hype_ncu_rounding",
+      "expect_registry_status": { "metric_id": "hype.ncu.hyperlabs.tokens", "status": "FORMAT_VARIANT" }
+    },
+    {
+      "id": "pump_wintermute_balance",
+      "asset": "PUMP",
+      "literal_contains": "4.43B",
+      "label_contains": "Balance",
+      "expect_metric_id": "pump.mm.wintermute.balance.tokens",
+      "expect_owner": "GROK"
+    },
+    {
+      "id": "pump_wintermute_transfer",
+      "asset": "PUMP",
+      "literal_contains": "287M",
+      "expect_metric_id": "pump.mm.wintermute.transfer.tokens",
+      "expect_owner": "GROK"
+    },
+    {
+      "id": "btc_ath_126_bare",
+      "asset": "BTC",
+      "literal_equals": "$126.1",
+      "expect_metric_id": "btc.price.ath.usd",
+      "expect_raw": "UNKNOWN"
+    },
+    {
+      "id": "spx_oi_stage1",
+      "asset": "SPX",
+      "literal_contains": "2.95M",
+      "expect_metric_id": "spx.oi.usd.stage1"
+    },
+    {
+      "id": "spx_oi_binance",
+      "asset": "SPX",
+      "literal_contains": "6.4M",
+      "expect_metric_id": "spx.oi.binance.usd.current"
+    },
+    {
+      "id": "sol_dex_latest_day",
+      "asset": "SOL",
+      "literal_contains": "1.786",
+      "expect_metric_id": "sol.dex_eth_ratio.latest_day.x"
+    }
+  ]
+}
