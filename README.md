@@ -4,7 +4,8 @@
 Read `AGENTS.md` first.
 
 Repo: https://github.com/Bobbycyborg/crypto-app-v4
-Live: https://bobbycyborg.github.io/crypto-app-v4/
+Live: https://bobby.olivergoodrum.com
+GitHub Pages: https://bobbycyborg.github.io/crypto-app-v4/
 
 Open: `index-v4.html`
 
