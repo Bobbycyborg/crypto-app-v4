@@ -258,20 +258,26 @@
       });
       el.appendChild(b);
     });
-    var other = document.createElement("button");
-    other.type = "button";
-    other.className = otherOn ? "" : "is-off";
-    var sw2 = document.createElement("span");
-    sw2.className = "alt-moves-swatch";
-    sw2.style.background = GREY_LINE;
-    other.appendChild(sw2);
-    other.appendChild(document.createTextNode("Other Coins"));
-    other.addEventListener("click", function () {
-      otherOn = !otherOn;
-      other.classList.toggle("is-off", !otherOn);
-      redrawFull();
-    });
-    el.appendChild(other);
+  }
+
+
+  function fillOther(d) {
+    var el = document.getElementById("altMovesOther");
+    if (!el) return;
+    var names = d.grey || [];
+    if (!names.length) { el.hidden = true; return; }
+    el.hidden = false;
+    el.textContent = "* Other Coins (" + names.join(", ") + ")";
+    el.classList.toggle("is-off", !otherOn);
+    if (!el.dataset.bound) {
+      el.dataset.bound = "1";
+      el.addEventListener("click", function () {
+        otherOn = !otherOn;
+        el.classList.toggle("is-off", !otherOn);
+        redrawFull();
+        redrawThumb();
+      });
+    }
   }
 
   function redrawThumb() {
@@ -324,6 +330,7 @@
     bind();
     var key = document.getElementById("altMovesKey");
     if (key) buildKey(key, d);
+    fillOther(d);
     redrawThumb();
   }).catch(function (err) {
     console.warn(err);
