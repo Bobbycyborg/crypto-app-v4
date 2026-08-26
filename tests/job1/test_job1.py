@@ -327,6 +327,31 @@ def main() -> int:
     print("PASS scope_forbid_prose_as_metric")
     print("PASS scope_forbid_wallet_cursor_owned")
 
+    if summary.get("parent_context_lost", 1) != 0:
+        fail("parent_context_lost_zero", str(summary.get("parent_context_lost")))
+    print("PASS parent_context_lost_zero")
+    if summary.get("historical_child_marked_current", 1) != 0:
+        fail("historical_child_marked_current_zero", str(summary.get("historical_child_marked_current")))
+    print("PASS historical_child_marked_current_zero")
+    if summary.get("non_value_label_as_metric", 1) != 0:
+        fail("non_value_label_as_metric_zero", str(summary.get("non_value_label_as_metric")))
+    print("PASS non_value_label_as_metric_zero")
+    if summary.get("wrong_numeric_token_selected", 1) != 0:
+        fail("wrong_numeric_token_selected_zero", str(summary.get("wrong_numeric_token_selected")))
+    print("PASS wrong_numeric_token_selected_zero")
+    if summary.get("scientific_notation_parse_errors", 1) != 0:
+        fail("scientific_notation_parse_errors_zero", str(summary.get("scientific_notation_parse_errors")))
+    print("PASS scientific_notation_parse_errors_zero")
+    if summary.get("abbreviated_unknown_parsed_zero", 1) != 0:
+        fail("abbreviated_unknown_parsed_zero", str(summary.get("abbreviated_unknown_parsed_zero")))
+    print("PASS abbreviated_unknown_parsed_zero")
+    if summary.get("metric_kind_capture_mismatch", 1) != 0:
+        fail("metric_kind_capture_mismatch_zero", str(summary.get("metric_kind_capture_mismatch")))
+    print("PASS metric_kind_capture_mismatch_zero")
+    if summary.get("observation_context_conflicts", 1) != 0:
+        fail("observation_context_conflicts_zero", str(summary.get("observation_context_conflicts")))
+    print("PASS observation_context_conflicts_zero")
+
     print("ALL JOB 1 SEMANTIC TESTS PASS")
     return 0
 

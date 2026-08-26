@@ -18,9 +18,7 @@ literal → metric_id → window/update_mode → source/as_of → owner
 - `$356k/d` → `sol.fees.usd_per_day.june_2026` → june_2026/HISTORICAL → DefiLlama/2026-08-11T21:13:38.447286Z → CGPT_CURSOR (HISTORICAL)
 
 ## SOL funding latest
-- `print − / 7d +` → `sol.funding.rate.latest` → latest/REPORT_SNAPSHOT → Binance SOLUSDT funding/2026-08-11T16:00:00+00:00 → CGPT_CURSOR (MAPPED_CANONICAL)
 - `-5.533e-05` → `sol.funding.rate.latest` → latest/REPORT_SNAPSHOT → Binance SOLUSDT funding/2026-08-11T16:00:00+00:00 → CGPT_CURSOR (MAPPED_CANONICAL)
-- `±3d means at anchors` → `sol.funding.rate.latest` → latest/REPORT_SNAPSHOT → Binance/2026-08-11T21:13:38.447286Z → CGPT_CURSOR (MAPPED_CANONICAL)
 
 ## SOL funding 7d mean
 - `5.367e-05` → `sol.funding.rate.mean_7d` → mean_7d/REPORT_SNAPSHOT → Binance SOLUSDT/2026-08-11T21:13:38.447286Z → CGPT_CURSOR (MAPPED_CANONICAL)

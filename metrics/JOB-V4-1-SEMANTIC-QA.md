@@ -22,7 +22,7 @@ Sample: `literal → asset → metric → source/as_of → class`
 |---|---|---|---|---|
 | $6.8M/wk | PUMP | pump.buyback.usd.7d | defillama / 2026-08-25 | weekly total |
 | $6.8M | PUMP | pump.buyback.usd.7d | same weekly fact | chart kpi |
-| $1.0M | PUMP | pump.buyback.usd.1d | chart last bar | daily, not 7d |
+| $1.0M/d | PUMP | pump.buyback.usd_per_day.current | chart last bar | daily /d, not 7d |
 
 ## HYPE
 | literal | asset | metric | source / as_of | class |

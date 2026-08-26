@@ -155,6 +155,12 @@
     "allowed_unit": "USD/day",
     "allowed_literal_shape": "usd_per_day"
   },
+  "buyback.usd_per_day.current": {
+    "definition": "USD per day {ASSET} buyback/burn as currently shown.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
   "fees.usd_per_day.nov_2024": {
     "definition": "USD per day {ASSET} fees at the November 2024 historical window.",
     "value_kind": "USD_PER_DAY",
@@ -169,6 +175,78 @@
   },
   "fees.usd_per_day.jan_2025_ath": {
     "definition": "USD per day {ASSET} fees at the January 2025 ATH window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "fees.usd_per_day.ath_sep": {
+    "definition": "USD per day {ASSET} fees at the ATH Sep historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "fees.usd_per_day.jan_high": {
+    "definition": "USD per day {ASSET} fees at the January high historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "fees.usd_per_day.june_atl": {
+    "definition": "USD per day {ASSET} fees at the June ATL historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "fees.usd_per_day.stage1": {
+    "definition": "USD per day {ASSET} fees in the Stage-1 historical evidence snapshot.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "revenue.usd_per_day.ath_sep": {
+    "definition": "USD per day {ASSET} revenue at the ATH Sep historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "revenue.usd_per_day.jan_high": {
+    "definition": "USD per day {ASSET} revenue at the January high historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "revenue.usd_per_day.june_atl": {
+    "definition": "USD per day {ASSET} revenue at the June ATL historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "revenue.usd_per_day.stage1": {
+    "definition": "USD per day {ASSET} revenue in the Stage-1 historical evidence snapshot.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "buyback.usd_per_day.ath_sep": {
+    "definition": "USD per day {ASSET} buyback/burn at the ATH Sep historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "buyback.usd_per_day.jan_high": {
+    "definition": "USD per day {ASSET} buyback/burn at the January high historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "buyback.usd_per_day.june_atl": {
+    "definition": "USD per day {ASSET} buyback/burn at the June ATL historical/event window.",
+    "value_kind": "USD_PER_DAY",
+    "allowed_unit": "USD/day",
+    "allowed_literal_shape": "usd_per_day"
+  },
+  "buyback.usd_per_day.stage1": {
+    "definition": "USD per day {ASSET} buyback/burn in the Stage-1 historical evidence snapshot.",
     "value_kind": "USD_PER_DAY",
     "allowed_unit": "USD/day",
     "allowed_literal_shape": "usd_per_day"
@@ -461,6 +539,12 @@
     "allowed_unit": "USD",
     "allowed_literal_shape": "usd_amount"
   },
+  "tvl.usd.stage1": {
+    "definition": "Total value locked in USD for {ASSET} in the Stage-1 historical evidence snapshot, not the live current TVL.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
   "stablecoin.usd.current": {
     "definition": "USD-pegged stablecoin stock on {ASSET} as currently shown.",
     "value_kind": "USD_AMOUNT",
@@ -635,11 +719,47 @@
     "allowed_unit": "x",
     "allowed_literal_shape": "ratio_x"
   },
+  "supply.hl_circulating.pct": {
+    "definition": "The supply hl_circulating pct observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "market_share.pct.share_history": {
+    "definition": "The market_share pct share_history observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
   "af.inventory.share_hl_circ.pct": {
     "definition": "Assistance Fund inventory as a percent of Hyperliquid circulating supply.",
     "value_kind": "PERCENT",
     "allowed_unit": "%",
     "allowed_literal_shape": "percent"
+  },
+  "price.usd.july_2026_low": {
+    "definition": "The price usd july_2026_low observation for {ASSET} at the stated window.",
+    "value_kind": "PRICE_USD",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "price_usd"
+  },
+  "etf.flow.usd.2026_08_03_07": {
+    "definition": "The etf flow usd 2026_08_03_07 observation for {ASSET} at the stated window.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "etf.flow.usd.2026_08_10": {
+    "definition": "The etf flow usd 2026_08_10 observation for {ASSET} at the stated window.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
+  "etf.flow.usd.2026_08_11": {
+    "definition": "The etf flow usd 2026_08_11 observation for {ASSET} at the stated window.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
   },
   "stablecoin.change.pct.30d": {
     "definition": "30-day percent change in stablecoin stock around {ASSET}.",
@@ -647,16 +767,148 @@
     "allowed_unit": "%",
     "allowed_literal_shape": "percent"
   },
+  "ncu.hyperlabs.tokens": {
+    "definition": "The ncu hyperlabs tokens observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "fees.usd.30d.stage1": {
+    "definition": "The fees usd 30d stage1 observation for {ASSET} at the stated window.",
+    "value_kind": "USD_30D_TOTAL",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
   "clusters.running.count": {
     "definition": "Count of running compute clusters on the {ASSET} network.",
     "value_kind": "COUNT",
     "allowed_unit": "count",
     "allowed_literal_shape": "count"
   },
+  "leverage.x.stage1": {
+    "definition": "The leverage x stage1 observation for {ASSET} at the stated window.",
+    "value_kind": "RATIO_X",
+    "allowed_unit": "x",
+    "allowed_literal_shape": "ratio_x"
+  },
+  "devices.inventory.count": {
+    "definition": "The devices inventory count observation for {ASSET} at the stated window.",
+    "value_kind": "COUNT",
+    "allowed_unit": "count",
+    "allowed_literal_shape": "count"
+  },
+  "host_rewards.usd.cumulative": {
+    "definition": "The host_rewards usd cumulative observation for {ASSET} at the stated window.",
+    "value_kind": "USD_AMOUNT",
+    "allowed_unit": "USD",
+    "allowed_literal_shape": "usd_amount"
+  },
   "jobs.approx_30d.count": {
     "definition": "Jobs completed on {ASSET} over about 30 days.",
     "value_kind": "COUNT",
     "allowed_unit": "text",
     "allowed_literal_shape": "any_numeric"
+  },
+  "market_share.pct.ath_sep": {
+    "definition": "The market_share pct ath_sep observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "market_share.pct.jan_high": {
+    "definition": "The market_share pct jan_high observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "market_share.pct.june_atl": {
+    "definition": "The market_share pct june_atl observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "market_share.pct.aug_10": {
+    "definition": "The market_share pct aug_10 observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "nodes.count.listed": {
+    "definition": "The nodes count listed observation for {ASSET} at the stated window.",
+    "value_kind": "COUNT",
+    "allowed_unit": "count",
+    "allowed_literal_shape": "count"
+  },
+  "bme.burned.tokens.last4": {
+    "definition": "The bme burned tokens last4 observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "bme.burned.tokens.last8": {
+    "definition": "The bme burned tokens last8 observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "bme.emissions.tokens.last8": {
+    "definition": "The bme emissions tokens last8 observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "bme.node_due.tokens.per_epoch": {
+    "definition": "The bme node_due tokens per_epoch observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "validators.active.count": {
+    "definition": "The validators active count observation for {ASSET} at the stated window.",
+    "value_kind": "COUNT",
+    "allowed_unit": "text",
+    "allowed_literal_shape": "any_numeric"
+  },
+  "issuance.tokens.per_year": {
+    "definition": "The issuance tokens per_year observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "burn.tokens.per_year": {
+    "definition": "The burn tokens per_year observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "inflation.pct.stage1": {
+    "definition": "The inflation pct stage1 observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "supply.net_change.tokens.per_year": {
+    "definition": "The supply net_change tokens per_year observation for {ASSET} at the stated window.",
+    "value_kind": "TOKEN_AMOUNT",
+    "allowed_unit": "tokens",
+    "allowed_literal_shape": "token_or_count"
+  },
+  "staking.apy.pct": {
+    "definition": "The staking apy pct observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "shielded.share.pct": {
+    "definition": "The shielded share pct observation for {ASSET} at the stated window.",
+    "value_kind": "PERCENT",
+    "allowed_unit": "%",
+    "allowed_literal_shape": "percent"
+  },
+  "tx.count.24h": {
+    "definition": "The tx count 24h observation for {ASSET} at the stated window.",
+    "value_kind": "COUNT",
+    "allowed_unit": "count",
+    "allowed_literal_shape": "count"
   }
 }

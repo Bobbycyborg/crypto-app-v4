@@ -53,9 +53,22 @@ def _seed() -> None:
     family("fees.usd_per_day.mean_30d", "USD per day {ASSET} fees as a 30-day mean.", "USD_PER_DAY_MEAN_30D", "USD/day", "usd_per_day")
     family("fees.usd_per_day.current", "USD per day {ASSET} fees as currently shown (not a 7d or 30d mean unless labelled).", "USD_PER_DAY", "USD/day", "usd_per_day")
     family("revenue.usd_per_day.current", "USD per day {ASSET} revenue as currently shown.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("buyback.usd_per_day.current", "USD per day {ASSET} buyback/burn as currently shown.", "USD_PER_DAY", "USD/day", "usd_per_day")
     family("fees.usd_per_day.nov_2024", "USD per day {ASSET} fees at the November 2024 historical window.", "USD_PER_DAY", "USD/day", "usd_per_day")
     family("fees.usd_per_day.june_2026", "USD per day {ASSET} fees at the June 2026 historical low window.", "USD_PER_DAY", "USD/day", "usd_per_day")
     family("fees.usd_per_day.jan_2025_ath", "USD per day {ASSET} fees at the January 2025 ATH window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("fees.usd_per_day.ath_sep", "USD per day {ASSET} fees at the ATH Sep historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("fees.usd_per_day.jan_high", "USD per day {ASSET} fees at the January high historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("fees.usd_per_day.june_atl", "USD per day {ASSET} fees at the June ATL historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("fees.usd_per_day.stage1", "USD per day {ASSET} fees in the Stage-1 historical evidence snapshot.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("revenue.usd_per_day.ath_sep", "USD per day {ASSET} revenue at the ATH Sep historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("revenue.usd_per_day.jan_high", "USD per day {ASSET} revenue at the January high historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("revenue.usd_per_day.june_atl", "USD per day {ASSET} revenue at the June ATL historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("revenue.usd_per_day.stage1", "USD per day {ASSET} revenue in the Stage-1 historical evidence snapshot.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("buyback.usd_per_day.ath_sep", "USD per day {ASSET} buyback/burn at the ATH Sep historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("buyback.usd_per_day.jan_high", "USD per day {ASSET} buyback/burn at the January high historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("buyback.usd_per_day.june_atl", "USD per day {ASSET} buyback/burn at the June ATL historical/event window.", "USD_PER_DAY", "USD/day", "usd_per_day")
+    family("buyback.usd_per_day.stage1", "USD per day {ASSET} buyback/burn in the Stage-1 historical evidence snapshot.", "USD_PER_DAY", "USD/day", "usd_per_day")
     family("fees.change.pct.30d", "Percent change in {ASSET} fees versus the prior 30-day period.", "PERCENT", "%", "percent")
     family("supply.circulating.pct", "Circulating supply of {ASSET} as a percent of the stated max or total supply.", "PERCENT", "%", "percent")
     family("supply.circulating.tokens", "Circulating token quantity of {ASSET} as currently shown.", "TOKEN_AMOUNT", "tokens", "token_or_count")
@@ -104,6 +117,7 @@ def _seed() -> None:
     family("ma.usd.200d", "200-day moving-average USD (or venue) level for {ASSET} as shown.", "MA_LEVEL", "USD", "ma_level")
     family("tvl.usd.current", "Total value locked in USD for {ASSET} as currently shown.", "USD_AMOUNT", "USD", "usd_amount")
     family("tvl.usd.jan_2025", "Total value locked in USD for {ASSET} at the January 2025 historical window.", "USD_AMOUNT", "USD", "usd_amount")
+    family("tvl.usd.stage1", "Total value locked in USD for {ASSET} in the Stage-1 historical evidence snapshot, not the live current TVL.", "USD_AMOUNT", "USD", "usd_amount")
     family("stablecoin.usd.current", "USD-pegged stablecoin stock on {ASSET} as currently shown.", "USD_AMOUNT", "USD", "usd_amount")
     family("stake.ratio.pct", "Share of {ASSET} supply that is staked, as currently shown.", "PERCENT", "%", "percent")
     family("stake.tokens.current", "Quantity of {ASSET} that is staked, as currently shown.", "TOKEN_AMOUNT", "tokens", "token_or_count")
@@ -140,19 +154,116 @@ DEFS = {k: v[0] for k, v in CATALOG.items()}
 TYPE_SPEC = {k: (v[1], v[2], v[3]) for k, v in CATALOG.items()}
 
 
-def parse_raw(literal: str):
-    s = (literal or "").strip()
-    if is_address_literal(s) or is_prose_status(s) or re.search(r"\byears?\b", s, re.I):
-        return "UNKNOWN"
-    s = s.replace("~", "").replace(",", "").replace(" ", "")
-    m = re.search(r"(-?\d+(?:\.\d+)?)([KMBTkmbt%x×]?)", s.replace("$", "").replace("/wk", "").replace("/d", ""))
-    if not m:
-        return "UNKNOWN"
-    n = float(m.group(1))
-    suf = m.group(2).upper()
-    if suf in ("%", "X", "×"):
+def is_non_value_label(lit: str) -> bool:
+    s = (lit or "").strip()
+    if not s:
+        return False
+    if re.fullmatch(r"(?:last\s+)?\d+\s*(?:wks?|weeks?|days?|d|hours?|h|epochs?)\.?", s, re.I):
+        return True
+    if re.fullmatch(r"/?\s*~?\d+\s*h", s, re.I):
+        return True
+    if re.search(r"means at anchor", s, re.I):
+        return True
+    if re.search(r"^print\s*[−\-+/]", s, re.I) and not looks_like_funding_rate(s):
+        return True
+    if re.fullmatch(r"[±+\-−]?\d+\s*d\s+means.*", s, re.I):
+        return True
+    return False
+
+
+def looks_like_funding_rate(lit: str) -> bool:
+    s = (lit or "").strip()
+    if not s or re.fullmatch(r"/?\s*~?\d+\s*h", s, re.I):
+        return False
+    if re.search(r"means at anchor", s, re.I):
+        return False
+    if re.search(r"^print\s*[−\-+/]", s, re.I) and not re.search(r"\d(?:\.\d+)?[eE][+\-]|\d%/8h|-0\.\d+", s):
+        return False
+    if re.search(r"\d(?:\.\d+)?[eE][+\-]?\d+", s):
+        return True
+    if re.search(r"[+\-−]?\d+(?:\.\d+)?%\s*/\s*8h", s, re.I):
+        return True
+    if re.search(r"[+\-−]?0\.0+\d+", s):
+        return True
+    if re.search(r"[+\-−]?\d+\.\d+%?\s*/\s*8h", s, re.I):
+        return True
+    return False
+
+
+def _to_float(num: str, suf: str = "") -> float:
+    n = float(num.replace("−", "-").replace(",", ""))
+    u = (suf or "").upper()
+    if u in ("%", "X", "×"):
         return n
-    return n * {"": 1, "K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}.get(suf, 1)
+    return n * {"": 1, "K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}.get(u, 1)
+
+
+def parse_raw(literal: str, value_kind: str | None = None, rest: str | None = None):
+    s = (literal or "").strip()
+    vk = (value_kind or "").upper()
+    rest = rest or ""
+    if not s or is_address_literal(s) or is_prose_status(s):
+        return "UNKNOWN"
+    if is_non_value_label(s):
+        return "UNKNOWN"
+    if re.search(r"\byears?\b", s, re.I) and vk in {"TOKEN_AMOUNT", ""}:
+        return "UNKNOWN"
+    if re.search(r"\.\.\.|…", s) and re.search(r"\$?0\.0", s):
+        return "UNKNOWN"
+
+    sci = re.search(r"([+\-−]?\d+(?:\.\d+)?)[eE]([+\-]?\d+)", s.replace("−", "-"))
+    if sci and (vk in {"", "FUNDING_RATE"} or "funding.rate" in rest):
+        return float(sci.group(1).replace("−", "-") + "e" + sci.group(2))
+
+    if vk == "PERCENTAGE_POINTS" or ".pp." in f".{rest}" or re.search(r"\d\s*pp\b", s, re.I):
+        m = re.search(r"([+\-−]?\d+(?:\.\d+)?)\s*pp\b", s, re.I)
+        if not m:
+            return "UNKNOWN"
+        return float(m.group(1).replace("−", "-"))
+
+    if vk == "PERCENT":
+        m = re.search(r"\((\d+(?:\.\d+)?)%\)", s)
+        if m:
+            return float(m.group(1))
+        m = re.search(r"([+\-−]?\d+(?:\.\d+)?)\s*%", s)
+        if m:
+            return float(m.group(1).replace("−", "-"))
+        return "UNKNOWN"
+
+    if vk == "FUNDING_RATE" or "funding.rate" in rest:
+        if not looks_like_funding_rate(s):
+            return "UNKNOWN"
+        if sci:
+            return float(sci.group(1).replace("−", "-") + "e" + sci.group(2))
+        m = re.search(r"([+\-−]?\d+(?:\.\d+)?)(%)?", s.replace("−", "-"))
+        if not m:
+            return "UNKNOWN"
+        return float(m.group(1).replace("−", "-"))
+
+    if "gpu_hours" in rest or (vk == "COUNT" and re.search(r"\d[\d,]*\s*h\b", s, re.I)):
+        m = re.search(r"([\d,]+(?:\.\d+)?)\s*h\b", s, re.I)
+        if m:
+            return float(m.group(1).replace(",", ""))
+
+    if "jobs.running" in rest:
+        m = re.search(r"([\d,]+)\s*run", s, re.I) or re.search(r"([\d,]+)", s)
+        if m:
+            return float(m.group(1).replace(",", ""))
+
+    compact = s.replace("~", "").replace(",", "")
+    for m in re.finditer(
+        r"([+\-−]?\d+(?:\.\d+)?)([KMBTkmbt%x×]?)",
+        compact.replace("$", "").replace("/wk", "").replace("/d", "").replace("−", "-"),
+    ):
+        after = compact[m.end():m.end() + 4]
+        if re.match(r"[dD]\b", after) and not m.group(2):
+            continue
+        if re.match(r"[hH]\b", after) and "gpu" not in rest and vk != "COUNT":
+            continue
+        if re.match(r"\s*(?:wks?|weeks?)\b", after, re.I):
+            continue
+        return _to_float(m.group(1), m.group(2))
+    return "UNKNOWN"
 
 
 def is_address_literal(lit: str) -> bool:
@@ -230,7 +341,7 @@ def shape_ok(shape: str, lit: str) -> bool:
     if shape == "percent_or_rate":
         return kind in {"PERCENT", "FUNDING_RATE"} and "$" not in lit
     if shape == "funding_rate":
-        return kind in {"FUNDING_RATE", "PERCENT", "INDEX", "OTHER", "DELTA"} and "$" not in lit
+        return looks_like_funding_rate(lit) and "$" not in lit
     if shape == "usd_amount":
         return kind in {"USD_AMOUNT", "PRICE_USD", "USD_7D_TOTAL", "USD_PER_DAY"} and "$" in lit and "×" not in lit
     if shape == "usd_per_day":
@@ -284,9 +395,9 @@ def ensure(rest: str, lit: str, definition: str | None = None) -> str:
 def spec_from_kind(kind: str, rest: str, lit: str) -> tuple[str, str, str]:
     if "usd_per_day" in rest or "/d" in lit.lower():
         return ("USD_PER_DAY_MEAN_30D" if "mean_30d" in rest else "USD_PER_DAY", "USD/day", "usd_per_day")
-    if rest.endswith(".30d") and "usd" in rest:
+    if (rest.endswith(".30d") or ".30d." in rest) and "usd" in rest:
         return ("USD_30D_TOTAL", "USD", "usd_amount")
-    if rest.endswith(".7d") and "usd" in rest:
+    if (rest.endswith(".7d") or ".7d." in rest) and "usd" in rest:
         return ("USD_7D_TOTAL", "USD", "usd_amount")
     if "funding" in rest:
         return ("FUNDING_RATE", "rate", "funding_rate")
@@ -323,48 +434,71 @@ def slug_id(asset_slug: str, rest: str) -> str:
     return f"{a}.{rest}"
 
 
-def infer_window(row: str, tip: str, hint: str, lit: str, parent_label: str = "") -> str:
-    local = _window_from(f"{row} {hint} {lit}")
-    if local:
-        return local
-    return _window_from(f"{tip} {parent_label}") or "current"
+def infer_window(row: str, tip: str, hint: str, lit: str, parent_label: str = "", source: str = "", inherited: str = "") -> str:
+    """Event/historical parent context beats unit tokens such as /d in the child literal."""
+    event = inherited or _event_from(f"{row} {parent_label}") or _event_from(tip)
+    if not event:
+        event = _event_from(lit) if not re.search(r"/d", (lit or "").lower()) else None
+    if event:
+        return event
+    obs = _observation_window(f"{row} {hint}")
+    if obs:
+        return obs
+    obs = _observation_window(f"{tip} {parent_label}")
+    if obs:
+        return obs
+    obs = _observation_window(lit)
+    if obs:
+        return obs
+    return "current"
 
 
-def _window_from(s: str) -> str | None:
+def _event_from(s: str) -> str | None:
     b = (s or "").lower()
-    if "nov 2024" in b:
-        return "nov_2024"
-    if "june 2026" in b and "fee" in b:
-        return "june_2026"
+    if not b.strip():
+        return None
+    if re.search(r"\bnow\b", b) and not re.search(r"ath sep|jan high|june atl|stage\s*1|jan 2025|nov 2024", b):
+        return None
     if "ath sep" in b or (re.search(r"\bath\b", b) and re.search(r"\bsep\b", b)):
         return "ath_sep"
     if "jan high" in b:
         return "jan_high"
     if "june atl" in b or "jun atl" in b:
         return "june_atl"
-    if "jan 2025" in b and ("fee" in b or "ath" in b) and "tvl" not in b:
-        return "jan_2025_ath"
-    if "jan 2025" in b and "tvl" in b:
+    if "nov 2024" in b:
+        return "nov_2024"
+    if "stage1" in b or "stage 1" in b:
+        return "stage1"
+    if "jan 2025" in b:
+        if "tvl" in b:
+            return "jan_2025"
+        if "fee" in b or "ath" in b:
+            return "jan_2025_ath"
         return "jan_2025"
+    if "june 2026" in b and "fee" in b:
+        return "june_2026"
+    if re.search(r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)", b) and len(re.findall(r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)", b)) >= 2:
+        return None
     if re.search(r"\bjuly\b", b) and "earn" in b:
         return "july_2026"
     if re.search(r"\bmay\b", b) and "earn" in b:
         return "may_2026"
     if re.search(r"\bjune\b", b) and "earn" in b:
         return "june_2026"
+    return None
+
+
+def _observation_window(s: str) -> str | None:
+    b = (s or "").lower()
     if "cumulative" in b:
         return "cumulative"
-    if "/d" in b or "/ day" in b or "/day" in b or "per day" in b or "avg /d" in b or "avg/day" in b:
-        if "30d" in b:
-            return "mean_30d"
-        if "7d" in b or "±7d" in b:
-            return "mean_7d"
-        return "per_day"
+    if "30d mean" in b or "30d avg" in b or "avg /d" in b or "avg/day" in b:
+        return "mean_30d"
+    if "7d mean" in b or "±7d" in b:
+        return "mean_7d"
     if "latest print" in b or "latest 8h" in b or re.search(r"\blatest\b", b):
         if "7d mean" not in b:
             return "latest"
-    if "7d mean" in b:
-        return "mean_7d"
     compact = b.replace(" ", "").replace("-", "")
     for token, w in (
         ("alltime", "all_time"), ("24h", "1d"),
@@ -375,6 +509,26 @@ def _window_from(s: str) -> str | None:
             return w
     if b.strip() in {"30d", "7d", "1d"}:
         return b.strip()
+    return None
+
+
+def historical_container(c: dict, extra: str = "") -> str | None:
+    blob = " ".join([
+        c.get("label") or "",
+        c.get("tip_name") or "",
+        c.get("parent_label") or "",
+        c.get("window_hint") or "",
+        extra,
+    ]).lower()
+    ev = _event_from(blob)
+    if ev:
+        return ev
+    src = (c.get("source") or "").lower()
+    row = (c.get("label") or "").lower().strip()
+    if "stage1" in blob or "stage 1" in blob or "stage-1" in blob:
+        return "stage1"
+    if ("stage1" in src or "stage 1" in src or "stage-1" in src) and row in {"evidence", ""}:
+        return "stage1"
     return None
 
 
@@ -434,7 +588,7 @@ def is_historical_window(win: str) -> bool:
     return win in {
         "nov_2024", "june_2026", "jan_2025", "jan_2025_ath",
         "july_2026", "may_2026", "all_time", "ath",
-        "ath_sep", "jan_high", "june_atl",
+        "ath_sep", "jan_high", "june_atl", "stage1",
     }
 
 
@@ -476,13 +630,24 @@ def explode_atomic(cands: list[dict]) -> list[dict]:
 def _child(parent: dict, literal: str, label: str, extra_rest: str | None = None) -> dict:
     ch = deepcopy(parent)
     ch["literal"] = re.sub(r"\s+", " ", literal).strip()
-    ch["parent_label"] = parent.get("label") or ""
+    ch["parent_label"] = parent.get("label") or parent.get("parent_label") or ""
     ch["label"] = label
     ch["parent_occurrence_id"] = parent["occurrence_id"]
     ch["kind"] = "atomic_span"
     ch["is_compound_parent"] = False
     ch["occurrence_id"] = parent["occurrence_id"] + ":" + re.sub(r"[^a-z0-9]+", "", (label + literal).lower())[:18]
+    ch["observation_anchor"] = (
+        historical_container(parent, f"{parent.get('label','')} {label}")
+        or _event_from(ch["parent_label"])
+        or ("now" if re.search(r"\bnow\b", (ch["parent_label"] + " " + label).lower()) else None)
+    )
     if extra_rest:
+        ev = historical_container(parent) or _event_from(ch["parent_label"])
+        if ev and is_historical_window(ev):
+            if extra_rest.endswith(".current"):
+                extra_rest = extra_rest[: -len("current")] + ev
+            elif extra_rest.endswith((".30d", ".7d", ".1d")):
+                extra_rest = extra_rest + "." + ev
         ch["forced_rest"] = extra_rest
     return ch
 
@@ -518,6 +683,10 @@ def _children_from(c: dict) -> list[dict]:
         return kids
     parts = [x.strip() for x in re.split(r"\s*[·•∙⋅]\s*", lit) if x.strip()]
     def _part_value(val: str) -> str | None:
+        if re.search(r"\b(run|jobs?|queued|h|hours?|gpu-?h)\b", val, re.I):
+            m = re.search(r"([\d,]+(?:\.\d+)?)", val)
+            if m:
+                return m.group(0)
         if re.search(r"\b\d+[dD]\b", val) and not re.search(r"\$|%|[x×]|e[+\-]|/d|/wk|/8h", val):
             return None
         if re.search(r"percentile|pctile|\d(?:st|nd|rd|th)\b", val, re.I):
@@ -545,18 +714,24 @@ def _children_from(c: dict) -> list[dict]:
                 trail = re.search(r"(?:%|[x×]|[KMBT]|/d)\s+([A-Za-z][A-Za-z0-9+\- ]{0,28})$", val)
                 if trail:
                     lab = trail.group(1).strip()
+                if re.search(r"\brun\b", val, re.I):
+                    lab = "run"
+                elif re.search(r"\bqueued\b", val, re.I):
+                    lab = "queued"
+                elif re.search(r"\bh\b|gpu", val, re.I):
+                    lab = "gpu hours"
                 kids.append(_child(c, num, lab))
             return kids
 
     # labeled evidence spans
     if row_l in {"evidence", ""} or c.get("kind") in {"fx_ev_v", "ev_tip_read"}:
+        hist = historical_container(c, lit)
         for rx, rest, lab in (
             (r"(?:^|[^A-Za-z0-9])50d\s*[~≈]?\s*(\$?\d[\d,.]*)", "ma.usd.50d", "50d"),
             (r"(?:^|[^A-Za-z0-9])200d\s*[~≈]?\s*(\$?\d[\d,.]*)", "ma.usd.200d", "200d"),
             (r"(?:^|[^A-Za-z0-9])20d\s*[~≈]?\s*(\$?\d[\d,.]*)", "ma.usd.20d", "20d"),
             (r"OI\s*[~≈]?\s*(~?\d[\d.]+k\s*BTC)", "oi.btc.current", "OI BTC"),
             (r"fut/spot\s*[~≈]?\s*(~?\d[\d.]+×)", "leverage.x.current", "fut/spot"),
-            (r"TVL\s*[~≈]?\s*(\$[\d.]+[MBT])", "tvl.usd.current", "TVL"),
             (r"stablecoins?\s*[~≈]?\s*(\$[\d.]+[MBT])", "stablecoin.usd.current", "Stablecoins"),
             (r"frames?\s*[~≈]?\s*(~?[\d.]+M)", "usage.frames.cumulative", "Frames"),
             (r"perps?\s*30d\s*(?:fees)?\s*[~≈]?\s*(\$[\d.]+[MB])", "fees.usd.30d", "Fees 30d"),
@@ -569,6 +744,25 @@ def _children_from(c: dict) -> list[dict]:
             m = re.search(rx, lit, re.I)
             if m:
                 kids.append(_child(c, m.group(1), lab, rest))
+        for m in re.finditer(
+            r"TVL\s*[~≈]?\s*(\$[\d.]+[MBT])(?:\s*vs\s*(~?\$[\d.]+[MBT]))?",
+            lit,
+            re.I,
+        ):
+            first = m.group(1)
+            vs = m.group(2)
+            after = lit[m.end(): m.end() + 28].lower()
+            src = (c.get("source") or "").lower()
+            rest_first = "tvl.usd.current"
+            if vs and "ath" in after:
+                rest_first = "tvl.usd.stage1"
+            elif "stage1" in src or hist == "stage1":
+                rest_first = "tvl.usd.stage1"
+            elif hist == "jan_2025":
+                rest_first = "tvl.usd.jan_2025"
+            kids.append(_child(c, first, "TVL", rest_first))
+            if vs:
+                kids.append(_child(c, vs.lstrip("~"), "TVL ATH", "tvl.usd.jan_2025"))
     return kids
 
 
@@ -585,7 +779,16 @@ def classify(c: dict) -> dict:
     cs = set((c.get("element_class") or "").split())
     kind = c.get("kind") or ""
     blob = f"{row} {tip_l} {hint_l} {parent_lab}"
-    win = infer_window(row, tip_l, hint_l, lit, parent_lab)
+    win = infer_window(
+        row, tip_l, hint_l, lit, parent_lab,
+        c.get("source") or "",
+        c.get("observation_anchor") or "",
+    )
+    c["observation_anchor"] = c.get("observation_anchor") or (
+        win if is_historical_window(win) else (
+            "now" if re.search(r"\bnow\b", f"{row} {parent_lab}") else win
+        )
+    )
 
     def non(state, rule, owner="CGPT_CURSOR"):
         c["coverage_state"] = state
@@ -598,6 +801,8 @@ def classify(c: dict) -> dict:
         if rest.split(".")[0] in BANNED_FAMILIES:
             return None
         ensure(rest, lit)
+        if rest not in CATALOG:
+            ensure(rest, lit, f"The {rest.replace('.', ' ')} observation for {{ASSET}} at the stated window.")
         if rest not in TYPE_SPEC or not type_accepts(rest, lit):
             return None
         if is_historical_window(rest.split(".")[-1]) or mtype == "HISTORICAL":
@@ -616,6 +821,7 @@ def classify(c: dict) -> dict:
         c["time_window"] = rest.split(".")[-1]
         c["update_mode"] = update_mode_for(c, rest, mtype)
         c["scope_key"] = rest_scope(rest) if rest_scope(rest) != "UNSPECIFIED" else infer_scope(row, tip_l, parent_lab, lit)
+        c["observation_anchor"] = c.get("observation_anchor") or rest.split(".")[-1]
         return c
 
     if slug in DORMANT_SLUGS:
@@ -624,6 +830,9 @@ def classify(c: dict) -> dict:
 
     if c.get("is_compound_parent"):
         return non("EVIDENCE_REFERENCE" if row in META_KEYS or row == "evidence" else "COMPOSITE_DISPLAY", "compound_parent")
+
+    if is_non_value_label(lit):
+        return non("CONTEXT_ONLY", "non_value_label")
 
     if c.get("forced_rest"):
         mtype = "HISTORICAL" if is_historical_window(c["forced_rest"].split(".")[-1]) else "CURRENT_DYNAMIC"
@@ -756,6 +965,8 @@ def classify(c: dict) -> dict:
     if "nu6" in row or "issuance / funding" in row or row.startswith("issuance /"):
         return non("QUALITATIVE_NON_METRIC", "nu6_split")
     if "funding" in row or (row in {"latest", "latest 8h print", "latest print"} and "fund" in tip_l):
+        if is_non_value_label(lit) or not looks_like_funding_rate(lit):
+            return non("CONTEXT_ONLY", "funding_not_rate")
         if "pctile" in row or "percentile" in row or re.search(r"\d+(st|nd|rd|th)\b", lit, re.I):
             return ok("funding.percentile.current", "funding_pctile") or non("CONTEXT_ONLY", "funding_pctile_reject")
         if "7d mean" in row or row == "7d mean" or win == "mean_7d":
@@ -825,13 +1036,16 @@ def classify(c: dict) -> dict:
             return ok("fees.usd_per_day.june_2026", "fees_june_2026", "HISTORICAL") or non("CONTEXT_ONLY", "fees_hist")
         if win == "jan_2025_ath" or ("jan 2025" in blob and "/d" in lit.lower()):
             return ok("fees.usd_per_day.jan_2025_ath", "fees_jan_2025", "HISTORICAL") or non("CONTEXT_ONLY", "fees_hist")
-        if win in {"ath_sep", "jan_high", "june_atl"}:
+        if win in {"ath_sep", "jan_high", "june_atl", "stage1"}:
             return ok(f"fees.usd_per_day.{win}", "fees_named_hist", "HISTORICAL") or non("CONTEXT_ONLY", "fees_hist")
-        if "/d" in lit.lower() or win in {"mean_30d", "mean_7d", "per_day"}:
-            if win in {"mean_30d", "per_day"} and ("30d" in blob or win == "mean_30d"):
+        per_day_unit = "/d" in lit.lower() or "/d" in hint_l or "/ day" in hint_l or "per day" in hint_l
+        if per_day_unit or win in {"mean_30d", "mean_7d", "per_day"}:
+            if win in {"mean_30d", "30d"} and ("30d" in blob or win == "mean_30d" or "mean" in hint_l or "mean" in tip_l):
                 return ok("fees.usd_per_day.mean_30d", "fees_mean_30d") or non("CONTEXT_ONLY", "fees_mean_reject")
             if win == "mean_7d" or "±7d" in blob:
                 return ok("fees.usd_per_day.mean_7d", "fees_mean_7d") or non("CONTEXT_ONLY", "fees_mean7_reject")
+            if win == "30d":
+                return ok("fees.usd_per_day.mean_30d", "fees_mean_30d") or non("CONTEXT_ONLY", "fees_mean_reject")
             return ok("fees.usd_per_day.current", "fees_per_day_now") or non("CONTEXT_ONLY", "fees_day_now")
         if win in {"mean_30d", "per_day"} and ("/d" in lit.lower() or "mean" in blob or "/ day" in hint_l):
             return ok("fees.usd_per_day.mean_30d", "fees_mean_30d") or non("CONTEXT_ONLY", "fees_mean_reject")
@@ -879,7 +1093,7 @@ def classify(c: dict) -> dict:
             return ok("revenue.usd.7d", "revenue_7d") or non("CONTEXT_ONLY", "rev_7d_reject")
         if win == "30d":
             return ok("revenue.usd.30d", "revenue_30d") or non("CONTEXT_ONLY", "rev_30d_reject")
-        if win in {"ath_sep", "jan_high", "june_atl"} and ("/d" in lit.lower() or "$" in lit):
+        if win in {"ath_sep", "jan_high", "june_atl", "stage1"} and ("/d" in lit.lower() or "$" in lit):
             return ok(f"revenue.usd_per_day.{win}", "rev_named_hist", "HISTORICAL") or non("CONTEXT_ONLY", "rev_hist")
         if "/d" in lit.lower():
             if "30d" in blob or win == "mean_30d":
@@ -893,14 +1107,16 @@ def classify(c: dict) -> dict:
         if dk == "PERCENT":
             return ok("buyback.change.pct.7d", "row_buyback_change") or non("CONTEXT_ONLY", "buyback_pct_reject")
         if "/d" in lit.lower():
-            if win in {"ath_sep", "jan_high", "june_atl"}:
+            if win in {"ath_sep", "jan_high", "june_atl", "stage1"}:
                 return ok(f"buyback.usd_per_day.{win}", "buyback_named_hist", "HISTORICAL") or non("CONTEXT_ONLY", "buyback_hist")
-            return ok("buyback.usd.1d", "row_buyback_daily") or non("CONTEXT_ONLY", "buyback_d_reject")
+            return ok("buyback.usd_per_day.current", "row_buyback_daily") or non("CONTEXT_ONLY", "buyback_d_reject")
         return ok("buyback.usd.7d", "row_buyback_weekly") or non("CONTEXT_ONLY", "buyback_type_reject")
 
     if row in {"tvl"} or row.startswith("tvl"):
-        if "jan 2025" in blob:
+        if win == "jan_2025" or "jan 2025" in blob:
             return ok("tvl.usd.jan_2025", "tvl_jan_2025", "HISTORICAL") or non("CONTEXT_ONLY", "tvl_hist")
+        if win == "stage1" or "stage1" in blob or "stage 1" in blob or "stage1" in (c.get("source") or "").lower() or "stage-1" in (c.get("source") or "").lower():
+            return ok("tvl.usd.stage1", "tvl_stage1", "HISTORICAL") or non("CONTEXT_ONLY", "tvl_hist")
         return ok("tvl.usd.current", "row_tvl") or non("CONTEXT_ONLY", "tvl_reject")
     if "stablecoin" in row or row == "stables 30d":
         if "%" in lit:
@@ -949,6 +1165,8 @@ def classify(c: dict) -> dict:
     if "af buys" in row:
         return ok("af.buys.usd.30d", "row_af_buys") or non("CONTEXT_ONLY", "af_buys")
     if "emission" in row or row == "futureemissions" or "emissionsleft" in row.replace(" ", ""):
+        if is_non_value_label(lit) or re.search(r"last\s+\d+\s+wks?", lit, re.I):
+            return non("CONTEXT_ONLY", "non_value_label")
         return ok("emissions.tokens.remaining", "row_emissions") or non("CONTEXT_ONLY", "emissions")
 
     if "circulat" in row and "%" in lit:
@@ -984,8 +1202,12 @@ def classify(c: dict) -> dict:
         return ok("volume.l1_perp.usd.24h", "row_l1_perp_day") or non("CONTEXT_ONLY", "vol_reject")
     if "no material mm" in row or "wintermute/dwf" in lit.lower():
         return non("QUALITATIVE_NON_METRIC", "mm_scan_note")
+    if row in {"run", "running"} or (re.fullmatch(r"run", row) and re.search(r"\d", lit)):
+        return ok("jobs.running.count", "row_jobs_running") or non("CONTEXT_ONLY", "jobs_run")
     if "running" in row and "job" in blob:
         return ok("jobs.running.count", "row_jobs_running") or non("CONTEXT_ONLY", "jobs_run")
+    if row in {"queued"}:
+        return ok("jobs.queued.count", "row_jobs_queued") or non("CONTEXT_ONLY", "jobs_q")
     if "completed" in row or "cumulative jobs" in row:
         return ok("jobs.completed.cumulative", "row_jobs_cum") or non("CONTEXT_ONLY", "jobs_cum")
     if "gpu" in row:
@@ -1164,6 +1386,7 @@ def is_dynamic_numeric(c: dict) -> bool:
         "definition_text", "relation_status", "index_delta_not_level",
         "long_prose_container", "status_sentence", "rev_7d_reject", "mm_scan_note", "nu6_split", "negation_status",
         "prose_status_not_metric", "address_not_metric", "duration_not_tokens", "no_explicit_family",
+        "non_value_label", "funding_not_rate", "window_label_not_value",
     }:
         return False
     if len(c.get("literal") or "") > 70 and (c.get("kind") in {"ev_tip_read"} or (c.get("label") or "").lower() in META_KEYS):

@@ -19,9 +19,14 @@ from job1_classify import (  # noqa: E402
     classify,
     detect_kind,
     explode_atomic,
+    historical_container,
     is_address_literal,
     is_dynamic_numeric,
+    is_historical_window,
+    is_non_value_label,
     is_prose_status,
+    looks_like_funding_rate,
+    parse_raw,
     rest_scope,
     shape_ok,
     type_accepts,
@@ -176,16 +181,18 @@ def location_type(el) -> str:
     return "other"
 
 
-def parse_raw(literal: str):
-    s = (literal or "").strip().replace("~", "").replace(",", "").replace(" ", "")
-    m = re.search(r"(-?\d+(?:\.\d+)?)([KMBTkmbt%x×]?)", s.replace("$", "").replace("/wk", "").replace("/d", ""))
-    if not m:
-        return "UNKNOWN"
-    n = float(m.group(1))
-    suf = m.group(2).upper()
-    if suf in ("%", "X", "×"):
-        return n
-    return n * {"": 1, "K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}.get(suf, 1)
+def raw_of(literal: str, rest: str = ""):
+    spec = TYPE_SPEC.get(rest)
+    vk = spec[0] if spec else None
+    return parse_raw(literal, vk, rest)
+
+
+def observation_key(o: dict) -> tuple:
+    return (
+        (o.get("observation_anchor") or o.get("time_window") or "").lower(),
+        o.get("as_of") or "UNKNOWN",
+        o.get("update_mode") or "",
+    )
 
 
 def unit_of(literal: str, rest: str) -> str:
@@ -462,11 +469,25 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
     for o in occs:
         if o["literal"] not in lits:
             lits.append(o["literal"])
-    # format variants: same parse_raw
-    raws = [(lit, parse_raw(lit)) for lit in lits]
+    raws = [(lit, raw_of(lit, rest)) for lit in lits]
+    by_obs = defaultdict(list)
+    for o in occs:
+        by_obs[observation_key(o)].append(o)
+    genuine_conflict = False
+    for group in by_obs.values():
+        nums = []
+        for o in group:
+            r = raw_of(o["literal"], rest)
+            if isinstance(r, (int, float)):
+                nums.append(r)
+            elif r != "UNKNOWN":
+                nums.append(r)
+        uniq = set(nums)
+        if len(uniq) > 1:
+            genuine_conflict = True
+            break
     numeric = [r for _, r in raws if isinstance(r, (int, float))]
-    format_only = len(set(numeric)) == 1 and len(numeric) == len(lits) and len(lits) > 1
-    genuine_conflict = len(lits) > 1 and not format_only
+    format_only = len(set(numeric)) == 1 and len(numeric) == len(lits) and len(lits) > 1 and not genuine_conflict
     # ETF compact vs tooltip: still format_only only if parse_raw equal. $1.96B vs $2.0B are NOT equal — record as FORMAT_VARIANT_UNPROVEN not conflict winner.
     etf = rest.startswith("etf.flow")
     etf_compact = False
@@ -521,7 +542,7 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
             value = wk[0]
     else:
         value = lits[0]
-        raw = parse_raw(value)
+        raw = raw_of(value, rest)
 
     if status == "OK" and source == "UNKNOWN" and mtype == "CURRENT_DYNAMIC":
         status = "MISSING_PROVENANCE"
@@ -544,7 +565,7 @@ def build_metric(mid: str, occs: list[dict]) -> dict:
         variants.append({
             "occurrence_id": o["occurrence_id"],
             "literal": o["literal"],
-            "raw_value": parse_raw(o["literal"]),
+            "raw_value": raw_of(o["literal"], rest),
             "source": o.get("source") or "UNKNOWN",
             "source_url": o.get("source_url"),
             "as_of": o.get("as_of") or "UNKNOWN",
@@ -645,6 +666,13 @@ def main() -> int:
             "parent_occurrence_id": c.get("parent_occurrence_id"),
             "linked_metric_ids": c.get("linked_metric_ids") or [],
             "is_compound_parent": bool(c.get("is_compound_parent")),
+            "observation_anchor": c.get("observation_anchor"),
+            "parent_label": c.get("parent_label"),
+            "historical_or_current": (
+                "HISTORICAL" if c.get("metric_type") == "HISTORICAL" or is_historical_window((c.get("time_window") or ""))
+                else ("STATIC" if c.get("metric_type") in {"STATIC_DECISION_THRESHOLD", "STATIC_REFERENCE"} else "CURRENT")
+            ),
+            "raw_value": raw_of(c["literal"], (c.get("metric_id") or ".").split(".", 1)[-1] if c.get("metric_id") else ""),
         })
 
     by_id = defaultdict(list)
@@ -835,6 +863,78 @@ def main() -> int:
             scope_anoms.append({"metric_id": mid, "why": "mixed_scope_key", "scopes": sorted(scopes)})
     wallet_owner_bad = [m["metric_id"] for m in registry if (".mm." in m["metric_id"] or ".wallet." in m["metric_id"]) and m["owner"] != "GROK"]
 
+    by_oid = {c["occurrence_id"]: c for c in classified}
+    parent_context_lost = []
+    historical_child_marked_current = []
+    non_value_as_metric = []
+    wrong_numeric_token = []
+    sci_parse_errors = []
+    abbrev_zero = []
+    kind_capture_mismatch = []
+    observation_context_conflicts = []
+    for c in classified:
+        mid = c.get("metric_id")
+        if not mid:
+            continue
+        lit = c.get("literal") or ""
+        rest = mid.split(".", 1)[1]
+        vk = (TYPE_SPEC.get(rest) or (None,))[0]
+        raw = raw_of(lit, rest)
+        parent = by_oid.get(c.get("parent_occurrence_id") or "")
+        if parent:
+            pev = historical_container(parent, parent.get("label") or "")
+            child_win = c.get("time_window") or rest.split(".")[-1]
+            if pev and is_historical_window(pev) and not re.search(r"\bnow\b", (parent.get("label") or ""), re.I):
+                if re.search(r"\s/\s", parent.get("label") or "") and len(re.findall(r"[A-Za-z]", parent.get("label") or "")) > 6:
+                    pass
+                elif child_win == "current" or str(mid).endswith(".current"):
+                    historical_child_marked_current.append({"metric_id": mid, "parent": parent.get("label"), "lit": lit})
+                if any(x in rest for x in ("fees.", "revenue.", "buyback.", "tvl.")) and pev not in mid and child_win != pev:
+                    if not is_historical_window(str(child_win)):
+                        parent_context_lost.append({"metric_id": mid, "parent": parent.get("label"), "expected": pev, "lit": lit})
+        if is_non_value_label(lit):
+            non_value_as_metric.append({"metric_id": mid, "lit": lit})
+        if "gpu_hours" in mid:
+            hm = re.search(r"([\d,]+)\s*h", lit, re.I)
+            rm = re.search(r"([\d,]+)\s*run", lit, re.I)
+            if hm and rm:
+                hours = float(hm.group(1).replace(",", ""))
+                if raw != hours:
+                    wrong_numeric_token.append({"metric_id": mid, "parent": None, "lit": lit, "raw": raw, "expected": hours})
+        if vk == "PERCENTAGE_POINTS":
+            mpp = re.search(r"([+\-−]?\d+(?:\.\d+)?)\s*pp", lit, re.I)
+            if mpp:
+                expected = float(mpp.group(1).replace("−", "-"))
+                if raw != expected:
+                    wrong_numeric_token.append({"metric_id": mid, "lit": lit, "raw": raw, "expected": expected})
+        if vk == "PERCENT":
+            mpct = re.search(r"\((\d+(?:\.\d+)?)%\)", lit)
+            if mpct and raw != float(mpct.group(1)):
+                kind_capture_mismatch.append({"metric_id": mid, "lit": lit, "raw": raw, "expected": float(mpct.group(1))})
+        sci = re.search(r"([+\-−]?\d+(?:\.\d+)?)[eE]([+\-]?\d+)", lit.replace("−", "-"))
+        if sci:
+            expected = float(sci.group(1).replace("−", "-") + "e" + sci.group(2))
+            if isinstance(raw, (int, float)) and abs(raw - expected) > max(abs(expected) * 1e-9, 1e-18):
+                sci_parse_errors.append({"metric_id": mid, "lit": lit, "raw": raw, "expected": expected})
+        if re.search(r"\.\.\.|…", lit) and re.search(r"\$?0\.0", lit) and raw == 0:
+            abbrev_zero.append({"metric_id": mid, "lit": lit, "raw": raw})
+        if vk == "FUNDING_RATE" and not looks_like_funding_rate(lit):
+            kind_capture_mismatch.append({"metric_id": mid, "lit": lit, "why": "funding_not_rate"})
+        if vk == "TOKEN_AMOUNT" and (is_non_value_label(lit) or re.search(r"last\s+\d+\s+wks?", lit, re.I)):
+            kind_capture_mismatch.append({"metric_id": mid, "lit": lit, "why": "duration_as_tokens"})
+    for m in registry:
+        if m["status"] != "CONFLICT":
+            continue
+        rest = m["metric_id"].split(".", 1)[1]
+        rows = [c for c in classified if c.get("metric_id") == m["metric_id"]]
+        byk = defaultdict(list)
+        for o in rows:
+            r = raw_of(o["literal"], rest)
+            if isinstance(r, (int, float)):
+                byk[observation_key(o)].append(r)
+        if not any(len(set(vs)) > 1 for vs in byk.values()):
+            observation_context_conflicts.append(m["metric_id"])
+
     tests = {
         "schema_validation": "PASS" if not schema_errors else "FAIL",
         "unique_metric_ids": "PASS" if len({m["metric_id"] for m in registry}) == len(registry) else "FAIL",
@@ -885,6 +985,14 @@ def main() -> int:
         "semantic_scope_anomalies_zero": "PASS" if not scope_anoms else "FAIL",
         "prose_as_metric_zero": "PASS" if not prose_as_metric else "FAIL",
         "wallet_mm_grok_owned": "PASS" if not wallet_owner_bad else "FAIL",
+        "parent_context_lost_zero": "PASS" if not parent_context_lost else "FAIL",
+        "historical_child_marked_current_zero": "PASS" if not historical_child_marked_current else "FAIL",
+        "non_value_label_as_metric_zero": "PASS" if not non_value_as_metric else "FAIL",
+        "wrong_numeric_token_selected_zero": "PASS" if not wrong_numeric_token else "FAIL",
+        "scientific_notation_parse_errors_zero": "PASS" if not sci_parse_errors else "FAIL",
+        "abbreviated_unknown_parsed_zero": "PASS" if not abbrev_zero else "FAIL",
+        "metric_kind_capture_mismatch_zero": "PASS" if not kind_capture_mismatch else "FAIL",
+        "observation_context_conflicts_zero": "PASS" if not observation_context_conflicts else "FAIL",
     }
 
     (METRICS / "metric-registry.json").write_text(json.dumps({"metrics": registry}, indent=2) + "\n")
@@ -1036,6 +1144,81 @@ def main() -> int:
         reg_md.append("")
     (METRICS / "JOB-V4-1-REGRESSION.md").write_text("\n".join(reg_md) + "\n")
     (METRICS / "JOB-V4-1-REGRESSION-LITERALS.md").write_text("\n".join(reg_md) + "\n")
+
+    ctx_md = [
+        "# JOB-V4-1-REGRESSION-CONTEXT",
+        "",
+        "original parent → child literal → metric_id/classification → raw_value → historical/current → observation anchor → source/as_of",
+        "",
+    ]
+    oid_map = {c["occurrence_id"]: c for c in classified}
+
+    def ctx_rows(asset, needles, parent_needles=None):
+        hits = []
+        for c in classified:
+            if label_of(c.get("asset_slug") or "") != asset and c.get("asset") != asset:
+                ast = ASSET_LABEL.get(c.get("asset_slug") or "", "")
+                if ast != asset:
+                    continue
+            lit = c.get("literal") or ""
+            lab = c.get("label") or ""
+            blob = f"{lab} {lit}"
+            if not any(n.lower() in blob.lower() or n.lower() in lit.lower() for n in needles):
+                continue
+            parent = oid_map.get(c.get("parent_occurrence_id") or "")
+            parent_lab = (parent.get("label") if parent else None) or c.get("parent_label") or ""
+            if parent_needles and not any(p.lower() in parent_lab.lower() for p in parent_needles):
+                if not any(p.lower() in blob.lower() for p in parent_needles):
+                    continue
+            hits.append(c)
+        return hits
+
+    def emit(title, rows):
+        ctx_md.append(f"## {title}")
+        if not rows:
+            ctx_md.append("(none)")
+            ctx_md.append("")
+            return
+        seen = set()
+        for c in rows:
+            parent = oid_map.get(c.get("parent_occurrence_id") or "")
+            parent_lab = (parent.get("label") if parent else None) or c.get("parent_label") or "(none)"
+            parent_lit = (parent.get("literal") if parent else "") or ""
+            key = (parent_lab, c.get("literal"), c.get("metric_id"), c.get("classification_rule"))
+            if key in seen:
+                continue
+            seen.add(key)
+            rest = (c.get("metric_id") or ".").split(".", 1)[-1] if c.get("metric_id") else ""
+            ctx_md.append(
+                f"- `{parent_lab}` / `{parent_lit[:80]}` → `{c.get('literal')}` → "
+                f"`{c.get('metric_id')}`/{c.get('classification_rule')} → `{raw_of(c.get('literal') or '', rest)}` → "
+                f"{c.get('metric_type') or c.get('coverage_state')} → "
+                f"{c.get('observation_anchor') or c.get('time_window')} → "
+                f"{c.get('source')}/{c.get('as_of')}"
+            )
+        ctx_md.append("")
+
+    emit("1. PUMP ATH Sep fees/revenue/buyback", ctx_rows("PUMP", ["1.9M/d", "1.7M/d"], ["ATH Sep", "ath sep"]))
+    emit("2. PUMP Jan high fees/revenue/buyback", ctx_rows("PUMP", ["1.5M/d", "1.2M/d", "1.1M/d"], ["Jan high", "jan high"]))
+    emit("3. PUMP June ATL fees/revenue/buyback", ctx_rows("PUMP", ["806K/d", "618K/d", "442K/d"], ["June ATL", "june atl"]))
+    emit("4. PUMP Now fees/revenue/buyback", ctx_rows("PUMP", ["1.3M/d", "998K/d", "738K/d"], ["Now", "now"]))
+    emit("5. RENDER LAST 4 WKS", [c for c in classified if c.get("asset_slug") == "render" and "LAST 4 WKS" in (c.get("literal") or "")])
+    emit("6. SOL print − / 7d +", [c for c in classified if c.get("asset_slug") == "sol" and "print" in (c.get("literal") or "") and "7d" in (c.get("literal") or "")])
+    emit("7. SOL ±3d means at anchors", [c for c in classified if c.get("asset_slug") == "sol" and "means at anchor" in (c.get("literal") or "").lower()])
+    emit("8. SOL -5.533e-05", [c for c in classified if c.get("asset_slug") == "sol" and "5.533e-05" in (c.get("literal") or "").replace(" ", "")])
+    emit("9. PUMP bare 8h", [c for c in classified if c.get("asset_slug") == "pump" and re.fullmatch(r"/?\s*~?8h", (c.get("literal") or "").strip(), re.I)])
+    emit("10. NOS 855 run · 119,219 h/~31d", [c for c in classified if c.get("asset_slug") == "nos" and ("119,219" in (c.get("literal") or "") or "855" in (c.get("literal") or "") and "run" in (c.get("label") or "").lower() + (c.get("literal") or "").lower())])
+    emit("11. SOL 30d -1.00pp", [c for c in classified if c.get("asset_slug") == "sol" and "-1.00pp" in (c.get("literal") or "").replace(" ", "")])
+    emit("12. $0.0... compact price/threshold", [c for c in classified if re.search(r"\$0\.0+\.\.\.|\$0\.0+…", c.get("literal") or "")])
+    emit("13. HYPE 222.45M (22.2%)", [c for c in classified if c.get("asset_slug") == "hype" and "22.2%" in (c.get("literal") or "")])
+    emit("14. SOL Stage1-historical TVL versus current TVL", [
+        c for c in classified
+        if c.get("asset_slug") == "sol" and (
+            "tvl" in (c.get("metric_id") or "") or "TVL" in (c.get("label") or "") or "4.8" in (c.get("literal") or "") or "5.65" in (c.get("literal") or "")
+        ) and ("4.8" in (c.get("literal") or "") or "5.65" in (c.get("literal") or "") or "11.3" in (c.get("literal") or "") or "tvl" in (c.get("metric_id") or ""))
+    ])
+    (METRICS / "JOB-V4-1-REGRESSION-CONTEXT.md").write_text("\n".join(ctx_md) + "\n")
+
     summary = {
         "canonical_metrics": len(registry),
         "ui_occurrences": len(occs_out),
@@ -1056,6 +1239,14 @@ def main() -> int:
         "update_mode_anomalies": len(mode_anoms),
         "semantic_scope_anomalies": len(scope_anoms),
         "prose_as_metric": len(prose_as_metric),
+        "parent_context_lost": len(parent_context_lost),
+        "historical_child_marked_current": len(historical_child_marked_current),
+        "non_value_label_as_metric": len(non_value_as_metric),
+        "wrong_numeric_token_selected": len(wrong_numeric_token),
+        "scientific_notation_parse_errors": len(sci_parse_errors),
+        "abbreviated_unknown_parsed_zero": len(abbrev_zero),
+        "metric_kind_capture_mismatch": len(kind_capture_mismatch),
+        "observation_context_conflicts": len(observation_context_conflicts),
         "wallet_metrics": owners.get("GROK", 0),
         "atomic_dynamic_facts": sum(1 for c in classified if is_dynamic_numeric(c) and c.get("metric_id")),
         "unknown_records": len(unknowns),
@@ -1093,6 +1284,14 @@ def main() -> int:
                 {"label": c.get("label"), "lit": (c.get("literal") or "")[:60], "asset": c.get("asset_slug")}
                 for c in structured_ctx[:12]
             ],
+            "parent_context_lost": parent_context_lost[:12],
+            "historical_child_marked_current": historical_child_marked_current[:12],
+            "non_value_as_metric": non_value_as_metric[:12],
+            "wrong_numeric_token": wrong_numeric_token[:12],
+            "sci_parse_errors": sci_parse_errors[:12],
+            "abbrev_zero": abbrev_zero[:12],
+            "kind_capture_mismatch": kind_capture_mismatch[:12],
+            "observation_context_conflicts": observation_context_conflicts[:12],
         },
     }
     (METRICS / "JOB-V4-1-SUMMARY.json").write_text(json.dumps(summary, indent=2) + "\n")

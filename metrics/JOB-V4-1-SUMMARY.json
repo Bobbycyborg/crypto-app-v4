@@ -1,41 +1,41 @@
 {
-  "canonical_metrics": 278,
-  "ui_occurrences": 2495,
-  "candidates": 2495,
+  "canonical_metrics": 318,
+  "ui_occurrences": 2498,
+  "candidates": 2498,
   "unclassified": 0,
   "classification": {
-    "MAPPED_CANONICAL": 409,
+    "MAPPED_CANONICAL": 427,
     "STATIC_REFERENCE": 46,
     "LEGACY_INACTIVE": 329,
     "QUALITATIVE_NON_METRIC": 1022,
-    "CONTEXT_ONLY": 297,
-    "COMPOSITE_DISPLAY": 80,
+    "CONTEXT_ONLY": 254,
+    "COMPOSITE_DISPLAY": 81,
     "EVIDENCE_REFERENCE": 250,
-    "HISTORICAL": 22,
+    "HISTORICAL": 49,
     "WALLET_OWNED": 40
   },
   "metric_types": {
-    "CURRENT_DYNAMIC": 195,
+    "CURRENT_DYNAMIC": 217,
     "WALLET_OWNED": 36,
     "STATIC_DECISION_THRESHOLD": 34,
-    "HISTORICAL": 11,
+    "HISTORICAL": 29,
     "DERIVED_DYNAMIC": 2
   },
   "ownership": {
-    "CGPT_CURSOR": 242,
+    "CGPT_CURSOR": 282,
     "GROK": 36
   },
   "freshness": {
-    "UNKNOWN": 260,
-    "HISTORICAL": 11,
+    "UNKNOWN": 282,
+    "HISTORICAL": 29,
     "STALE": 7
   },
   "status": {
-    "MISSING_PROVENANCE": 23,
-    "OK": 204,
-    "CONFLICT": 51
+    "MISSING_PROVENANCE": 25,
+    "OK": 263,
+    "CONFLICT": 30
   },
-  "conflicts": 51,
+  "conflicts": 30,
   "semantic_anomalies": 0,
   "dynamic_numeric_unmapped": 0,
   "structured_numeric_context_only": 0,
@@ -45,11 +45,19 @@
   "update_mode_anomalies": 0,
   "semantic_scope_anomalies": 0,
   "prose_as_metric": 0,
+  "parent_context_lost": 0,
+  "historical_child_marked_current": 0,
+  "non_value_label_as_metric": 0,
+  "wrong_numeric_token_selected": 0,
+  "scientific_notation_parse_errors": 0,
+  "abbreviated_unknown_parsed_zero": 0,
+  "metric_kind_capture_mismatch": 0,
+  "observation_context_conflicts": 0,
   "wallet_metrics": 36,
-  "atomic_dynamic_facts": 511,
-  "unknown_records": 278,
-  "sources_captured": 160,
-  "source_urls_captured": 137,
+  "atomic_dynamic_facts": 556,
+  "unknown_records": 318,
+  "sources_captured": 209,
+  "source_urls_captured": 158,
   "active_report_assets": [
     "btc",
     "fartcoin",
@@ -78,7 +86,7 @@
   "asset_coverage": {
     "btc": {
       "candidates": 190,
-      "mapped": 49,
+      "mapped": 56,
       "unclassified": 0
     },
     "fartcoin": {
@@ -88,32 +96,32 @@
     },
     "hype": {
       "candidates": 198,
-      "mapped": 47,
+      "mapped": 54,
       "unclassified": 0
     },
     "io": {
       "candidates": 182,
-      "mapped": 48,
+      "mapped": 50,
       "unclassified": 0
     },
     "nos": {
-      "candidates": 198,
-      "mapped": 33,
+      "candidates": 200,
+      "mapped": 37,
       "unclassified": 0
     },
     "pump": {
       "candidates": 360,
-      "mapped": 89,
+      "mapped": 90,
       "unclassified": 0
     },
     "render": {
       "candidates": 155,
-      "mapped": 35,
+      "mapped": 41,
       "unclassified": 0
     },
     "sol": {
-      "candidates": 221,
-      "mapped": 64,
+      "candidates": 222,
+      "mapped": 75,
       "unclassified": 0
     },
     "spx6900": {
@@ -123,7 +131,7 @@
     },
     "zec": {
       "candidates": 164,
-      "mapped": 20,
+      "mapped": 27,
       "unclassified": 0
     }
   },
@@ -216,7 +224,15 @@
     "update_mode_anomalies_zero": "PASS",
     "semantic_scope_anomalies_zero": "PASS",
     "prose_as_metric_zero": "PASS",
-    "wallet_mm_grok_owned": "PASS"
+    "wallet_mm_grok_owned": "PASS",
+    "parent_context_lost_zero": "PASS",
+    "historical_child_marked_current_zero": "PASS",
+    "non_value_label_as_metric_zero": "PASS",
+    "wrong_numeric_token_selected_zero": "PASS",
+    "scientific_notation_parse_errors_zero": "PASS",
+    "abbreviated_unknown_parsed_zero": "PASS",
+    "metric_kind_capture_mismatch_zero": "PASS",
+    "observation_context_conflicts_zero": "PASS"
   },
   "schema_errors_sample": [],
   "fail_hints": {
@@ -235,6 +251,14 @@
     "scope_anoms": [],
     "prose_as_metric": [],
     "wallet_owner_bad": [],
-    "structured_ctx_sample": []
+    "structured_ctx_sample": [],
+    "parent_context_lost": [],
+    "historical_child_marked_current": [],
+    "non_value_as_metric": [],
+    "wrong_numeric_token": [],
+    "sci_parse_errors": [],
+    "abbrev_zero": [],
+    "kind_capture_mismatch": [],
+    "observation_context_conflicts": []
   }
 }
