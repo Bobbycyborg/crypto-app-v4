@@ -1,0 +1,178 @@
+# JOB-V4-1-UNKNOWNS
+
+fetched_at is UNKNOWN for every record (not inferred).
+
+- fetched_at: 180
+- as_of: 131
+- source: 129
+- raw_value: 67
+
+## Non-fetched_at gaps
+- `2z.price.usd.current` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `2z.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `2z.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `2z.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `2z.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `2z.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `bonk.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `bonk.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `bonk.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `bonk.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `bonk.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `bonk.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `btc.etf.flow.usd.1d` missing=['as_of'] owner=CGPT_CURSOR
+- `btc.etf.flow.usd.30d` missing=['raw_value', 'as_of'] owner=CGPT_CURSOR
+- `btc.etf.flow.usd.7d` missing=['raw_value', 'as_of'] owner=CGPT_CURSOR
+- `btc.etf.flow.usd.all_time` missing=['as_of'] owner=CGPT_CURSOR
+- `btc.funding.pct.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `btc.leverage.x.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `btc.oi.usd.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `btc.price.drawdown_from_ath.pct` missing=['raw_value'] owner=CGPT_CURSOR
+- `btc.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `btc.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `btc.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `btc.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `drift.price.usd.current` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `drift.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `drift.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `drift.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `drift.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `eth.etf.flow.usd.1d` missing=['as_of'] owner=CGPT_CURSOR
+- `eth.etf.flow.usd.30d` missing=['raw_value', 'as_of'] owner=CGPT_CURSOR
+- `eth.etf.flow.usd.7d` missing=['raw_value', 'as_of'] owner=CGPT_CURSOR
+- `eth.etf.flow.usd.all_time` missing=['as_of'] owner=CGPT_CURSOR
+- `fart.leverage.perp_spot_notional.x` missing=['as_of'] owner=CGPT_CURSOR
+- `fart.leverage.x.current` missing=['raw_value', 'as_of'] owner=CGPT_CURSOR
+- `fart.price.drawdown_from_ath.pct` missing=['raw_value'] owner=CGPT_CURSOR
+- `fart.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `fart.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `fart.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `fart.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `fart.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `fart.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `giga.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `giga.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `giga.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `giga.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `giga.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `giga.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `global.fear_greed.index.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `global.leverage.x.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `global.participation.count.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `global.portfolio.value.usd.current` missing=['as_of'] owner=GROK
+- `grass.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `grass.siren.aug1_unknown_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `grass.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `grass.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `grass.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `grass.siren.watched_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `grass.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `grass.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `grass.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `hype.buyback.usd.7d` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `hype.fees.usd.7d` missing=['raw_value'] owner=CGPT_CURSOR
+- `hype.leverage.x.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `hype.oi.usd.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `hype.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `hype.supply.circulating.pct` missing=['raw_value'] owner=CGPT_CURSOR
+- `hype.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `hype.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `io.funding.pct.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `io.leverage.x.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `io.oi.usd.current` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `io.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `io.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `io.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `io.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `io.siren.watched_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `io.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `io.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `io.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `lockin.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `lockin.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `lockin.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `lockin.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `lockin.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `lockin.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `nos.price.drawdown_from_ath.pct` missing=['raw_value'] owner=CGPT_CURSOR
+- `nos.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `nos.siren.aug1_unknown_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `nos.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `nos.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `nos.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `nos.siren.watched_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `nos.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `nos.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `nos.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `orca.price.usd.current` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `orca.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `orca.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `orca.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `orca.siren.watched_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `orca.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `orca.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `pump.buyback.usd.1d` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `pump.funding.pct.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `pump.leverage.x.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `pump.price.usd.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `pump.return.pct.30d` missing=['raw_value'] owner=CGPT_CURSOR
+- `pump.return.pct.7d` missing=['raw_value'] owner=CGPT_CURSOR
+- `pump.return.pct.90d` missing=['raw_value'] owner=CGPT_CURSOR
+- `pump.revenue.usd.7d` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `pump.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `pump.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `pump.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `pump.siren.watched_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `pump.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `pump.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `pump.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `pump.tokens_bought.7d` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `ray.buyback.change.pct.7d` missing=['raw_value'] owner=CGPT_CURSOR
+- `ray.fees.usd.7d` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `ray.funding.pct.current` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `ray.leverage.x.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `ray.price.drawdown_from_ath.pct` missing=['raw_value'] owner=CGPT_CURSOR
+- `ray.price.usd.current` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `ray.revenue.usd.30d` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `ray.revenue.usd.7d` missing=['raw_value'] owner=CGPT_CURSOR
+- `ray.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `render.funding.pct.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `render.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `render.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `render.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `render.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `render.siren.watched_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `render.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `render.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `retardio.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `retardio.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `retardio.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `retardio.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `retardio.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `retardio.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `sol.etf.flow.usd.1d` missing=['as_of'] owner=CGPT_CURSOR
+- `sol.etf.flow.usd.30d` missing=['raw_value', 'as_of'] owner=CGPT_CURSOR
+- `sol.etf.flow.usd.7d` missing=['raw_value', 'as_of'] owner=CGPT_CURSOR
+- `sol.etf.flow.usd.all_time` missing=['as_of'] owner=CGPT_CURSOR
+- `sol.fees.usd.7d` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `sol.funding.pct.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `sol.leverage.x.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `sol.price.usd.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `sol.supply.circulating.pct` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `sol.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `sol.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `spx.leverage.x.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `spx.oi.usd.current` missing=['source', 'raw_value'] owner=CGPT_CURSOR
+- `spx.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `spx.siren.cover_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `spx.siren.supply_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `spx.siren.tracked_fmt.current` missing=['source', 'as_of'] owner=GROK
+- `spx.siren.watched_wallet_count.current` missing=['source', 'as_of'] owner=GROK
+- `spx.supply.circulating.pct` missing=['raw_value'] owner=CGPT_CURSOR
+- `spx.threshold.out.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `spx.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR
+- `zec.leverage.x.current` missing=['raw_value'] owner=CGPT_CURSOR
+- `zec.price.usd.current` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `zec.supply.circulating.pct` missing=['raw_value'] owner=CGPT_CURSOR
+- `zec.threshold.out.usd` missing=['source', 'raw_value', 'as_of'] owner=CGPT_CURSOR
+- `zec.threshold.this_move.usd` missing=['source', 'as_of'] owner=CGPT_CURSOR

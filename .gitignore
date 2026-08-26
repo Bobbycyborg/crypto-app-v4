@@ -1,5 +1,9 @@
-# local only — never GitHub
+# local only — NEVER GitHub
+reports
 reports/
+reports-NOT-FOR-GH/
+**/NOT-FOR-GITHUB.txt
+**/NOT-FOR-GITHUB.md
 *.zip
 *.7z
 *.tar

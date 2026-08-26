@@ -1,0 +1,207 @@
+{
+  "canonical_metrics": 180,
+  "ui_occurrences": 2333,
+  "candidates": 2333,
+  "unclassified": 0,
+  "classification": {
+    "MAPPED_CANONICAL": 242,
+    "STATIC_REFERENCE": 49,
+    "CONTEXT_ONLY": 410,
+    "QUALITATIVE_NON_METRIC": 1196,
+    "EVIDENCE_REFERENCE": 380,
+    "HISTORICAL": 5,
+    "WALLET_OWNED": 51
+  },
+  "metric_types": {
+    "CURRENT_DYNAMIC": 85,
+    "WALLET_OWNED": 50,
+    "STATIC_DECISION_THRESHOLD": 36,
+    "HISTORICAL": 4,
+    "DERIVED_DYNAMIC": 5
+  },
+  "ownership": {
+    "CGPT_CURSOR": 130,
+    "GROK": 50
+  },
+  "freshness": {
+    "UNKNOWN": 175,
+    "HISTORICAL": 4,
+    "STALE": 1
+  },
+  "status": {
+    "MISSING_PROVENANCE": 16,
+    "OK": 106,
+    "CONFLICT": 58
+  },
+  "conflicts": 58,
+  "unknown_records": 180,
+  "sources_captured": 51,
+  "source_urls_captured": 48,
+  "active_report_assets": [
+    "btc",
+    "fartcoin",
+    "hype",
+    "io",
+    "nos",
+    "pump",
+    "render",
+    "sol",
+    "spx6900",
+    "zec"
+  ],
+  "dormant_assets": [
+    "grass",
+    "ray"
+  ],
+  "hold_card_only_assets": [
+    "2z",
+    "bonk",
+    "drift",
+    "giga",
+    "lockin",
+    "orca",
+    "retardio"
+  ],
+  "asset_coverage": {
+    "btc": {
+      "candidates": 172,
+      "mapped": 34,
+      "unclassified": 0
+    },
+    "fartcoin": {
+      "candidates": 174,
+      "mapped": 20,
+      "unclassified": 0
+    },
+    "hype": {
+      "candidates": 188,
+      "mapped": 16,
+      "unclassified": 0
+    },
+    "io": {
+      "candidates": 174,
+      "mapped": 21,
+      "unclassified": 0
+    },
+    "nos": {
+      "candidates": 192,
+      "mapped": 15,
+      "unclassified": 0
+    },
+    "pump": {
+      "candidates": 320,
+      "mapped": 39,
+      "unclassified": 0
+    },
+    "render": {
+      "candidates": 155,
+      "mapped": 14,
+      "unclassified": 0
+    },
+    "sol": {
+      "candidates": 205,
+      "mapped": 44,
+      "unclassified": 0
+    },
+    "spx6900": {
+      "candidates": 197,
+      "mapped": 22,
+      "unclassified": 0
+    },
+    "zec": {
+      "candidates": 156,
+      "mapped": 13,
+      "unclassified": 0
+    }
+  },
+  "dormant_coverage": {
+    "grass": {
+      "candidates": 144,
+      "mapped": 17,
+      "unclassified": 0
+    },
+    "ray": {
+      "candidates": 166,
+      "mapped": 24,
+      "unclassified": 0
+    }
+  },
+  "hold_only_coverage": {
+    "2z": {
+      "candidates": 6,
+      "mapped": 6,
+      "unclassified": 0
+    },
+    "bonk": {
+      "candidates": 8,
+      "mapped": 8,
+      "unclassified": 0
+    },
+    "drift": {
+      "candidates": 5,
+      "mapped": 5,
+      "unclassified": 0
+    },
+    "giga": {
+      "candidates": 8,
+      "mapped": 8,
+      "unclassified": 0
+    },
+    "lockin": {
+      "candidates": 8,
+      "mapped": 8,
+      "unclassified": 0
+    },
+    "orca": {
+      "candidates": 9,
+      "mapped": 9,
+      "unclassified": 0
+    },
+    "retardio": {
+      "candidates": 8,
+      "mapped": 8,
+      "unclassified": 0
+    }
+  },
+  "global_coverage": {
+    "candidates": 32,
+    "mapped": 10,
+    "unclassified": 0
+  },
+  "tests": {
+    "schema_validation": "PASS",
+    "unique_metric_ids": "PASS",
+    "required_fields": "PASS",
+    "owner_coverage": "PASS",
+    "occurrence_references": "PASS",
+    "no_generic_fallback_ids": "PASS",
+    "no_boilerplate_definitions": "PASS",
+    "unclassified_zero": "PASS",
+    "every_occurrence_has_rule": "PASS",
+    "active_asset_coverage": "PASS",
+    "global_coverage": "PASS",
+    "ray_not_active_report": "PASS",
+    "grass_not_active_report": "PASS",
+    "orca_not_onboarded_report": "PASS",
+    "no_market_hold_when_ticker": "PASS",
+    "wallet_ownership_separation": "PASS",
+    "historical_static_separation": "PASS",
+    "conflict_value_unknown": "PASS",
+    "derived_has_method_inputs": "PASS",
+    "pump_buyback_7d_not_daily": "PASS",
+    "etf_30d_not_ma_or_price": "PASS",
+    "drawdown_not_ma_labels": "PASS",
+    "conflict_detection": "PASS"
+  },
+  "schema_errors_sample": [],
+  "fail_hints": {
+    "banned_ids": [],
+    "pump7_bad": [],
+    "etf30_bad": [],
+    "market_hold": 0,
+    "derived_bad": [],
+    "conflict_bad": [],
+    "ray_active": 0,
+    "grass_active": 0
+  }
+}

@@ -14,4 +14,5 @@ See `V4-STATUS.md` and `V4-JOBS.md`.
 
 Wallet work: Grok. Non-wallet: CGPT / Cursor. Job 1 is theirs.
 
-Reports, zips, caches, scripts, and personal config stay local.
+`reports-NOT-FOR-GH/` is local evidence only. Never GitHub.
+Zips, caches, scripts, and personal config stay local.

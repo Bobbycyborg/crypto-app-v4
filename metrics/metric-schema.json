@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycyborg.github.io/crypto-app-v4/metrics/metric-schema.json",
+  "title": "V4 canonical metric record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "metric_id",
+    "asset",
+    "value",
+    "raw_value",
+    "unit",
+    "scope",
+    "definition",
+    "source",
+    "as_of",
+    "fetched_at",
+    "freshness",
+    "calculation_version",
+    "owner",
+    "metric_type",
+    "status",
+    "historical_or_current",
+    "wallet_or_non_wallet",
+    "time_window",
+    "source_type",
+    "notes",
+    "evidence_variants"
+  ],
+  "properties": {
+    "metric_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9_]+)+$",
+      "description": "Stable machine id. Not UI-location-specific. No generic leftover families."
+    },
+    "asset": { "type": "string", "minLength": 1 },
+    "value": {
+      "description": "Agreed display value, or UNKNOWN/null when status is CONFLICT.",
+      "type": ["string", "number", "null"]
+    },
+    "raw_value": {
+      "description": "Unformatted numeric raw value, or UNKNOWN/null.",
+      "type": ["string", "number", "null"]
+    },
+    "unit": { "type": "string" },
+    "scope": { "type": "string" },
+    "definition": {
+      "type": "string",
+      "minLength": 20,
+      "description": "Exact plain-English definition. Not a boilerplate wrapper around metric_id."
+    },
+    "source": { "type": "string" },
+    "as_of": { "type": ["string", "null"] },
+    "fetched_at": { "type": ["string", "null"] },
+    "freshness": {
+      "type": "string",
+      "enum": ["FRESH", "STALE", "UNKNOWN", "HISTORICAL"]
+    },
+    "freshness_rule": { "type": "string" },
+    "calculation_version": { "type": "string" },
+    "owner": { "type": "string", "enum": ["CGPT_CURSOR", "GROK"] },
+    "metric_type": {
+      "type": "string",
+      "enum": [
+        "CURRENT_DYNAMIC",
+        "DERIVED_DYNAMIC",
+        "HISTORICAL",
+        "STATIC_REFERENCE",
+        "STATIC_DECISION_THRESHOLD",
+        "WALLET_OWNED"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["OK", "UNKNOWN", "CONFLICT", "MISSING_PROVENANCE", "DERIVATION_UNVERIFIED"]
+    },
+    "display_precision": { "type": ["string", "null"] },
+    "currency": { "type": ["string", "null"] },
+    "denominator": { "type": ["string", "null"] },
+    "time_window": { "type": ["string", "null"] },
+    "source_type": { "type": "string" },
+    "source_url_or_reference": { "type": ["string", "null"] },
+    "calculation_method": { "type": ["string", "null"] },
+    "raw_inputs": { "type": "array", "items": { "type": "string" } },
+    "historical_or_current": {
+      "type": "string",
+      "enum": ["CURRENT", "HISTORICAL", "STATIC"]
+    },
+    "wallet_or_non_wallet": {
+      "type": "string",
+      "enum": ["WALLET", "NON_WALLET"]
+    },
+    "evidence_reference": { "type": ["string", "null"] },
+    "evidence_variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["occurrence_id", "literal"],
+        "properties": {
+          "occurrence_id": { "type": "string" },
+          "literal": { "type": "string" },
+          "raw_value": { "type": ["string", "number", "null"] },
+          "source": { "type": ["string", "null"] },
+          "source_url": { "type": ["string", "null"] },
+          "as_of": { "type": ["string", "null"] },
+          "freshness": { "type": ["string", "null"] },
+          "kind": { "type": "string" }
+        }
+      }
+    },
+    "surface": {
+      "type": "string",
+      "enum": ["ACTIVE_REPORT", "VISIBLE_HOLD_CARD_ONLY", "LEGACY_INACTIVE", "GLOBAL"]
+    },
+    "notes": { "type": "string" }
+  }
+}
