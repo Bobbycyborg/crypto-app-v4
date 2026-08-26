@@ -32,8 +32,10 @@ Only proved addresses. No invented wallets.
 Tags in the UI, not raw addresses. CEX/MM stay dest-watch, not 1 Aug walks.
 
 ## G2. Leftover 1 Aug 2026 00:00 UTC walks
-Finish the leftover hot unlabeled wallets. No UNKNOWN. No guessed zeros. No 10 Aug fallback.
-Skip thick CEX/MM books. GRASS stays dormant unless Olly says otherwise.
+The 16 leftover boxes (>300 txs since 1 Aug) stay skipped / DEFER.
+Oliver approved that skip on 26 Aug 2026. Same pile parked on 25 Aug next to CEX/MM books.
+No guessed zeros. No 10 Aug fallback. No UNKNOWN written. GRASS stays dormant.
+Do not walk them unless Oliver reopens them.
 
 ## G3. Last-cycle pack stays Grok
 Four-turn hunts, March 2024 compare, dest registry, 20-name price map stay Grok research.
@@ -43,6 +45,9 @@ Do not hand to Cursor. Only put a piece in the app if Olly asks (ALT Moves alrea
 Prove on-chain. Tag. Keep unnamed whales on the list if they are large.
 No invented wallets.
 
-## G5. Keep the live dest hops on the watch
-PUMP 150 and other bag dest hops. Size into MM/CEX is the siren.
-Not a Cursor job.
+## G5. Skinny pages: Orca / Drift / 2Z
+After G2–G4 are submitted to CGPT. Not a full report.
+2Z: unlock (when, size, who, dest-watch).
+Drift: v3 live and used, fees/volume vs pre-hack, team/treasury dest-watch.
+Orca: fees + does ORCA get them, treasury dest-watch, one volume line.
+Memes stay on cards. Fart and SPX already have pages.
