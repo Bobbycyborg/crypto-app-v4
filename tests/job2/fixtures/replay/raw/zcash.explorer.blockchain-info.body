@@ -1,0 +1,1 @@
+{"valuePools": [{"id": "transparent", "chainValue": 10}, {"id": "sprout", "chainValue": 1}, {"id": "sapling", "chainValue": 2}, {"id": "orchard", "chainValue": 3}, {"id": "ironwood", "chainValue": 4}], "chainSupply": {"chainValue": 20}, "transactions24h": 12345}

@@ -1,0 +1,12 @@
+{
+  "source_key": "solana_rpc",
+  "request_key": "solana.rpc.getInflationRate",
+  "url": "https://api.mainnet-beta.solana.com",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "ad149c4b26ea903101a657964fbb790544992ee8cebf2c953fdf49bad7c074d1",
+  "raw_body_path": "solana.rpc.getInflationRate.body",
+  "attempts": 1
+}

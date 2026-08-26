@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.summary.fees.solana.dailyFees",
+  "url": "https://api.llama.fi/summary/fees/solana",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "43e077e21e0c7ad6382453de81717cc9306a95e55f6dfb28e96539d6cb15379d",
+  "raw_body_path": "defillama.summary.fees.solana.dailyFees.body",
+  "attempts": 1
+}

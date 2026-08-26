@@ -1,0 +1,12 @@
+{
+  "source_key": "render_foundation",
+  "request_key": "render.epochBurnStats",
+  "url": "https://infra.shikumi.cc/api/v1/epochBurnStats",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "a45e07abef749e744a0b39ac8c8eba75cb039b6389c7fd383d937c29ae841992",
+  "raw_body_path": "render.epochBurnStats.body",
+  "attempts": 1
+}

@@ -1,0 +1,12 @@
+{
+  "source_key": "dexscreener",
+  "request_key": "dexscreener.token.pump",
+  "url": "https://api.dexscreener.com/latest/dex/tokens/pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "d6a079d3809bb8e7324808c3642d2f6f3f44a94469fdaac4d2fd3374e42a0acd",
+  "raw_body_path": "dexscreener.token.pump.body",
+  "attempts": 1
+}

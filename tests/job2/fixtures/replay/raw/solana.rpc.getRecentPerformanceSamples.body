@@ -1,0 +1,1 @@
+{"jsonrpc": "2.0", "result": [{"numNonVoteTransactions": 6000, "numTransactions": 8000, "samplePeriodSecs": 60}], "id": 1}

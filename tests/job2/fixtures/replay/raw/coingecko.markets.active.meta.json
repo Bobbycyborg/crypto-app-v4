@@ -1,0 +1,12 @@
+{
+  "source_key": "coingecko",
+  "request_key": "coingecko.markets.active",
+  "url": "https://api.coingecko.com/api/v3/coins/markets",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "345042374655a34629f90f1b84b2ab5dfd6fa5342cf36c860c7a95f0cafa64f2",
+  "raw_body_path": "coingecko.markets.active.body",
+  "attempts": 1
+}

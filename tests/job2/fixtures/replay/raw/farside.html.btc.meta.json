@@ -1,0 +1,12 @@
+{
+  "source_key": "farside",
+  "request_key": "farside.html.btc",
+  "url": "https://farside.co.uk/btc/",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "text/html",
+  "body_sha256": "44161662ac5e0b562305c750b1729524402c52b5afac5b28cf1fdda068ccd64a",
+  "raw_body_path": "farside.html.btc.body",
+  "attempts": 1
+}

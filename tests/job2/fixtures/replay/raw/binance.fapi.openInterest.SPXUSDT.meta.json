@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.openInterest.SPXUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/openInterest",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "1f520df1447f30a7727b15010748dbe0095dbf2b9c959ef500bf36221a84b089",
+  "raw_body_path": "binance.fapi.openInterest.SPXUSDT.body",
+  "attempts": 1
+}

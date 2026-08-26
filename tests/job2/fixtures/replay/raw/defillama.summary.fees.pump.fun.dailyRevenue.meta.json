@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.summary.fees.pump.fun.dailyRevenue",
+  "url": "https://api.llama.fi/summary/fees/pump.fun",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "0ed9a93b6da9a9d71ca0b38b3c2e782bcbf3d53ba6aa2a25374edecbfd635fee",
+  "raw_body_path": "defillama.summary.fees.pump.fun.dailyRevenue.body",
+  "attempts": 1
+}

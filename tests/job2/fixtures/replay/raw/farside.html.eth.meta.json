@@ -1,0 +1,12 @@
+{
+  "source_key": "farside",
+  "request_key": "farside.html.eth",
+  "url": "https://farside.co.uk/eth/",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "text/html",
+  "body_sha256": "f4ec163d84b66483401b183405e74fe78f1c3d9231f6d2d60b30d2b7f3b65e97",
+  "raw_body_path": "farside.html.eth.body",
+  "attempts": 1
+}

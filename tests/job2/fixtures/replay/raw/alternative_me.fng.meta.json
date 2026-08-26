@@ -1,0 +1,12 @@
+{
+  "source_key": "alternative_me",
+  "request_key": "alternative_me.fng",
+  "url": "https://api.alternative.me/fng/?limit=1",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "7466aba2d93027069c033ad6a860054dcb914dcf0e1509f7f62741db24cd5ab8",
+  "raw_body_path": "alternative_me.fng.body",
+  "attempts": 1
+}

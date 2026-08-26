@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.premiumIndex.ZECUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/premiumIndex",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "f103f0723681b2e966c924179daa91af570b9a07dc4d47c337495e29f389889b",
+  "raw_body_path": "binance.fapi.premiumIndex.ZECUSDT.body",
+  "attempts": 1
+}

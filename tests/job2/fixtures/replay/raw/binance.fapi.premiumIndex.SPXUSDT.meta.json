@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.premiumIndex.SPXUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/premiumIndex",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "109c2692a92aea33d6cfc87d888b0b2495a3c33097da5f26ca3f1768414135f4",
+  "raw_body_path": "binance.fapi.premiumIndex.SPXUSDT.body",
+  "attempts": 1
+}

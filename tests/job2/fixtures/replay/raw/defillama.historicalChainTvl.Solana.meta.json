@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.historicalChainTvl.Solana",
+  "url": "https://api.llama.fi/v2/historicalChainTvl/Solana",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "12c70b767798e9d40e09ea68a57c2ea68ffc93afcdf39fa23975f9845f711054",
+  "raw_body_path": "defillama.historicalChainTvl.Solana.body",
+  "attempts": 1
+}

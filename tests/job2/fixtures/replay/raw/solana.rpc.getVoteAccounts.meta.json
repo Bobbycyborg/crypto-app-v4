@@ -1,0 +1,12 @@
+{
+  "source_key": "solana_rpc",
+  "request_key": "solana.rpc.getVoteAccounts",
+  "url": "https://api.mainnet-beta.solana.com",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "739be21a61489578300e444982f5a76cad370e7d5af1ecc7f4efd2637064f1ff",
+  "raw_body_path": "solana.rpc.getVoteAccounts.body",
+  "attempts": 1
+}

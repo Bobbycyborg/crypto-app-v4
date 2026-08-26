@@ -1,0 +1,12 @@
+{
+  "source_key": "render_foundation",
+  "request_key": "render.nodes_and_frames",
+  "url": "https://stats.renderfoundation.com/api/nodes_and_frames",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "7e31259818341e820b92d50204b56c1db2aa4f4629de2c91ee20cfe8f59a4b56",
+  "raw_body_path": "render.nodes_and_frames.body",
+  "attempts": 1
+}

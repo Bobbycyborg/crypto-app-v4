@@ -1,0 +1,12 @@
+{
+  "source_key": "solana_rpc",
+  "request_key": "solana.rpc.getRecentPerformanceSamples",
+  "url": "https://api.mainnet-beta.solana.com",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "1614ba1b8d6bc1140994bc88210a8d953a575b8cbe4555c9a0d309779acecdbc",
+  "raw_body_path": "solana.rpc.getRecentPerformanceSamples.body",
+  "attempts": 1
+}

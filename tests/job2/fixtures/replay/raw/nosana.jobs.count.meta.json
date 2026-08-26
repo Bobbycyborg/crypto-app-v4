@@ -1,0 +1,12 @@
+{
+  "source_key": "nosana",
+  "request_key": "nosana.jobs.count",
+  "url": "https://blockchain-indexer.k8s.prd.nos.ci/jobs/count",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "39b0c19a9b7902fd5622583e60ec290792ea0065709c597788c06fef45ba163f",
+  "raw_body_path": "nosana.jobs.count.body",
+  "attempts": 1
+}

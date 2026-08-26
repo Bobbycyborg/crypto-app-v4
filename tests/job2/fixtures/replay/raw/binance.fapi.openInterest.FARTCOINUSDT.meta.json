@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.openInterest.FARTCOINUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/openInterest",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "ee70cf587f739831c7af972a235e77351739f0c038c9bb865aa1342beb06a158",
+  "raw_body_path": "binance.fapi.openInterest.FARTCOINUSDT.body",
+  "attempts": 1
+}

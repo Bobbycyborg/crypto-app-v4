@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.stablecoinchains",
+  "url": "https://stablecoins.llama.fi/stablecoinchains",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "501eb20d508f4fcc513174cf3a37774d179f9c467e25d68695f73f8a3440e167",
+  "raw_body_path": "defillama.stablecoinchains.body",
+  "attempts": 1
+}

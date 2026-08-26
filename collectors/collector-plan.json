@@ -1,0 +1,5279 @@
+{
+  "job": "V4-JOB-2",
+  "job1_commit": "0084838bf3587be0116653ac1c0f68ff0edddcc6",
+  "job1_registry_sha256": "19061e193b5946477592ce01d670ec2f4d8bf67a4bf811cf1a5f61df70f381b1",
+  "entries": [
+    {
+      "metric_id": "2z.price.usd.live",
+      "asset": "2Z",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "2z.siren.supply.tokens.current",
+      "asset": "2Z",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "2z.siren.tracked.tokens.current",
+      "asset": "2Z",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "2z.threshold.out.usd",
+      "asset": "2Z",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "2z.threshold.this_move.usd",
+      "asset": "2Z",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "bonk.price.usd.live",
+      "asset": "BONK",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "bonk.siren.supply.tokens.current",
+      "asset": "BONK",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "bonk.siren.tracked.tokens.current",
+      "asset": "BONK",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "bonk.threshold.out.usd",
+      "asset": "BONK",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "bonk.threshold.this_move.usd",
+      "asset": "BONK",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.1d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Bitcoin ETF",
+        "tickers_must": [
+          "IBIT",
+          "FBTC",
+          "GBTC"
+        ],
+        "forbidden_tickers": [
+          "ETHA",
+          "BSOL",
+          "ETHE"
+        ],
+        "window": "latest",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.2026_08_03_07",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.2026_08_10",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.2026_08_11",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.30d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Bitcoin ETF",
+        "tickers_must": [
+          "IBIT",
+          "FBTC",
+          "GBTC"
+        ],
+        "forbidden_tickers": [
+          "ETHA",
+          "BSOL",
+          "ETHE"
+        ],
+        "window": "30d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.7d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Bitcoin ETF",
+        "tickers_must": [
+          "IBIT",
+          "FBTC",
+          "GBTC"
+        ],
+        "forbidden_tickers": [
+          "ETHA",
+          "BSOL",
+          "ETHE"
+        ],
+        "window": "7d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.all_time",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.funding.rate.latest",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "rate",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.premiumIndex.BTCUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/lastFundingRate"
+      },
+      "normalizer": {
+        "type": "decimal_as_percent"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.inflation.pct.current",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.leverage.x.current",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "DERIVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": {
+        "op": "RATIO",
+        "inputs": [
+          "btc.volume.perp.usd.24h",
+          "btc.volume.spot.usd.24h"
+        ],
+        "calculation_version": "v1"
+      },
+      "notes": "V3 AUTOJOB01 BTCUSDT perp quoteVolume / spot quoteVolume.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.ma.usd.200d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.ma.usd.50d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.oi.btc.current",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "BTC",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterest.BTCUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/openInterest"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.oi.change.pct.1d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.binance.com/en/futures/BTCUSDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.oi.change.pct.30d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Binance openInterest' url='https://fapi.binance.com/fapi/v1/openInterest?symbol=BTCUSDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.oi.change.pct.7d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.binance.com/en/futures/BTCUSDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.price.ath.usd",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.price.drawdown_from_ath.pct",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "bitcoin"
+        },
+        "field": "ath_change_percentage"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.price.usd.july_2026_low",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.BTCUSDT.1d",
+      "selector": {
+        "type": "named_record_field",
+        "name": "klines_july_min_close",
+        "year": 2026,
+        "month": 7
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 Binance daily; V3 re-reads July 2026 BTCUSDT daily lows.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.price.usd.live",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "bitcoin"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.price.usd.report",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "bitcoin"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.return.pct.30d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "bitcoin"
+        },
+        "field": "price_change_percentage_30d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.return.pct.7d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "bitcoin"
+        },
+        "field": "price_change_percentage_7d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.return.pct.90d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "bitcoin"
+        },
+        "field": "price_change_percentage_90d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.stablecoin.change.pct.30d",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Approved Market evidence' url='https://www.chicagofed.org/research/data/nfci/current-data'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.supply.circulating.pct",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.threshold.out.usd",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.threshold.this_move.usd",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "btc.volume.perp.usd.24h",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.ticker24h.BTCUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/quoteVolume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "btc.volume.spot.usd.24h",
+      "asset": "BTC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.ticker24h.BTCUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/quoteVolume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "drift.price.usd.live",
+      "asset": "DRIFT",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "drift.siren.tracked.tokens.current",
+      "asset": "DRIFT",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "drift.threshold.out.usd",
+      "asset": "DRIFT",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "drift.threshold.this_move.usd",
+      "asset": "DRIFT",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.1d",
+      "asset": "ETH",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Ethereum ETF",
+        "tickers_must": [
+          "ETHA",
+          "ETHE"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "BSOL",
+          "GBTC"
+        ],
+        "window": "latest",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.30d",
+      "asset": "ETH",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Ethereum ETF",
+        "tickers_must": [
+          "ETHA",
+          "ETHE"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "BSOL",
+          "GBTC"
+        ],
+        "window": "30d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.7d",
+      "asset": "ETH",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Ethereum ETF",
+        "tickers_must": [
+          "ETHA",
+          "ETHE"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "BSOL",
+          "GBTC"
+        ],
+        "window": "7d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.all_time",
+      "asset": "ETH",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "fart.funding.rate.latest",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "rate",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.premiumIndex.FARTCOINUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/lastFundingRate"
+      },
+      "normalizer": {
+        "type": "decimal_as_percent"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.holders.lp.pct",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.coingecko.com/en/coins/fartcoin'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.holders.unattributed.pct",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.coingecko.com/en/coins/fartcoin'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.holders.unit_treasury.pct",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.coingecko.com/en/coins/fartcoin'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.leverage.perp_spot_notional.x",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='FARTCOIN Stage-1' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.liquidity.dex.usd.current",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='FARTCOIN Stage-1' url='https://www.coingecko.com/en/coins/fartcoin'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.ma.usd.200d",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.ma.usd.50d",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.market_cap.usd.current",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "market_cap"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.oi.usd.current",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterest.FARTCOINUSDT",
+      "selector": {
+        "type": "named_record_field",
+        "name": "open_interest_usd",
+        "oi_pointer": "/openInterest",
+        "mark_request_key": "binance.fapi.ticker24h.FARTCOINUSDT",
+        "mark_pointer": "/lastPrice"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 is USD OI; Binance openInterest is contracts. See selector identity; normalized via mark from same-run ticker capture.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.price.usd.live",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.price.usd.report",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.return.pct.30d",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "price_change_percentage_30d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.return.pct.7d",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "price_change_percentage_7d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.return.pct.90d",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "price_change_percentage_90d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.rs.vs_sol.pp.7d",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "pp",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='FARTCOIN Stage-1' url='https://www.coingecko.com/en/coins/fartcoin'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.siren.tracked.tokens.current",
+      "asset": "FART",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "fart.supply.circulating.pct",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.supply.circulating.tokens",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "circulating_supply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.supply.max.tokens",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "max_supply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.threshold.out.usd",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "fart.threshold.this_move.usd",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "fart.volume.cg.usd.24h",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "total_volume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "fart.volume.perp.usd.24h",
+      "asset": "FART",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.ticker24h.FARTCOINUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/quoteVolume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "giga.price.usd.live",
+      "asset": "GIGA",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "giga.siren.supply.tokens.current",
+      "asset": "GIGA",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "giga.siren.tracked.tokens.current",
+      "asset": "GIGA",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "giga.threshold.out.usd",
+      "asset": "GIGA",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "giga.threshold.this_move.usd",
+      "asset": "GIGA",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "global.fear_greed.index.current",
+      "asset": "GLOBAL",
+      "owner": "CGPT_CURSOR",
+      "unit": "index",
+      "disposition": "COLLECT",
+      "source_key": "alternative_me",
+      "request_key": "alternative_me.fng",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/data/0/value"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 source alternative.me; official JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "global.leverage.x.current",
+      "asset": "GLOBAL",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "DERIVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": {
+        "op": "RATIO",
+        "inputs": [
+          "btc.volume.perp.usd.24h",
+          "btc.volume.spot.usd.24h"
+        ],
+        "calculation_version": "v1"
+      },
+      "notes": "V3 market leverage uses BTCUSDT perp and spot 24h quote.",
+      "required": true
+    },
+    {
+      "metric_id": "global.participation.above_50dma.count",
+      "asset": "GLOBAL",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='CoinGecko markets' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "global.participation.beat_btc.count",
+      "asset": "GLOBAL",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='CoinGecko markets' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.af.buys.usd.30d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.af.inventory.share_hl_circ.pct",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.af.inventory.tokens.current",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.emissions.tokens.remaining",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.tokenDetails",
+      "selector": {
+        "type": "json_key",
+        "key": "futureEmissions"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL api.hyperliquid.xyz/info; V3 tokenDetails futureEmissions. Identity name=HYPE.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.fees.change.pct.30d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_pct_change_last_n",
+        "pointer": "/totalDataChart",
+        "n": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "30d percent change of daily fees series.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.fees.perps.usd.30d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_sum_last_n",
+        "pointer": "/totalDataChart",
+        "n": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Same DefiLlama hyperliquid-perp 30d fees payload as hype.fees.usd.30d; Job 1 URL identical.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.fees.usd.30d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_sum_last_n",
+        "pointer": "/totalDataChart",
+        "n": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL api.llama.fi/summary/fees/hyperliquid-perp.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.ma.usd.200d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://www.coingecko.com/en/coins/hyperliquid'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.ma.usd.50d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://www.coingecko.com/en/coins/hyperliquid'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.ncu.hyperlabs.tokens",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.tokenDetails",
+      "selector": {
+        "type": "named_record_field",
+        "name": "ncu_balance",
+        "address": "0x43e9abea1910387c4292bca4b94de81462f8a251"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "V3 HyperLabs NCU address on tokenDetails.nonCirculatingUserBalances.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.oi.binance.usd.current",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://www.coingecko.com/en/coins/hyperliquid'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.oi.native.usd.current",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://www.coingecko.com/en/coins/hyperliquid'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.oi.platform.usd.current",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://api.hyperliquid.xyz/info'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.oi.token.usd.current",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://api.hyperliquid.xyz/info'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.price.usd.live",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "hyperliquid"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.price.usd.report",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.return.pct.30d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "hyperliquid"
+        },
+        "field": "price_change_percentage_30d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.return.pct.7d",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "hyperliquid"
+        },
+        "field": "price_change_percentage_7d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.stake.tokens.current",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://api.hyperliquid.xyz/info'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.supply.circulating.pct",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://api.hyperliquid.xyz/info'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.supply.hl_circulating.pct",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.tokenDetails",
+      "selector": {
+        "type": "named_record_field",
+        "name": "ratio_pct",
+        "num_key": "circulatingSupply",
+        "den_key": "maxSupply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "circulatingSupply/maxSupply*100 from tokenDetails.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.supply.max.tokens",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.threshold.out.usd",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "hype.threshold.this_move.usd",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "hype.volume.l1_perp.usd.24h",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://api.hyperliquid.xyz/info'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.volume.token.usd.24h",
+      "asset": "HYPE",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='HYPE Stage-1 evidence' url='https://api.hyperliquid.xyz/info'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "hype.wallet.foundation.tokens.current",
+      "asset": "HYPE",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "io.clusters.running.count",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "io_explorer",
+      "request_key": "io.clusters",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/data/running_clusters"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Job 1 io.net Explorer clusters URL.",
+      "required": true
+    },
+    {
+      "metric_id": "io.devices.inventory.count",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='io.net Explorer API' url='https://api.io.solutions/v1/io-explorer/network/info/clusters'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.emissions.tokens.remaining",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.leverage.x.current",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.binance.com/en/futures/IOUSDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.leverage.x.stage1",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "io.ma.usd.200d",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.ma.usd.50d",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.oi.usd.current",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.oi.usd.stage1",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "io.price.ath.usd",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "io.price.drawdown_from_ath.pct",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage-1 price' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.price.usd.live",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "io"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "io.price.usd.report",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage-1 price' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.revenue.usd.cumulative",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "io_explorer",
+      "request_key": "io.clusters",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/data/total_earnings"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 clusters URL; V3 total_earnings on clusters payload.",
+      "required": true
+    },
+    {
+      "metric_id": "io.revenue.usd.july_2026",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "io.revenue.usd.june_2026",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "io.revenue.usd.may_2026",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "io.revenue.usd_per_day.mean_30d",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://api.io.solutions/v1/io-explorer/network/info/clusters'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.rs.vs_sol.pp.30d",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "pp",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Binance' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.rs.vs_sol.pp.7d",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "pp",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Binance' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.siren.supply.tokens.current",
+      "asset": "IO",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "io.siren.tracked.tokens.current",
+      "asset": "IO",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "io.siren.watched_wallet_count.current",
+      "asset": "IO",
+      "owner": "GROK",
+      "unit": "count",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "io.supply.circulating.pct",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.supply.circulating.tokens",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage-1 supply' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.supply.max.tokens",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage-1 supply' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "io.threshold.out.usd",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "io.threshold.this_move.usd",
+      "asset": "IO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "lockin.price.usd.live",
+      "asset": "LOCKIN",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "lockin.siren.supply.tokens.current",
+      "asset": "LOCKIN",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "lockin.siren.tracked.tokens.current",
+      "asset": "LOCKIN",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "lockin.threshold.out.usd",
+      "asset": "LOCKIN",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "lockin.threshold.this_move.usd",
+      "asset": "LOCKIN",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "nos.gpu_hours.approx_31d",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://blockchain-indexer.k8s.prd.nos.ci/jobs/count'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.host_rewards.usd.cumulative",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage 1' url='https://learn.nosana.com/api/first-job.html'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.jobs.approx_30d.count",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "text",
+      "disposition": "COLLECT",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "selector": {
+        "type": "json_key",
+        "key": "last30Days"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Requires last30Days on jobs/count; else SOURCE_SCHEMA_MISMATCH.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.jobs.completed.cumulative",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "selector": {
+        "type": "named_record_field",
+        "name": "by_state_count",
+        "state": "COMPLETED"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Job 1 Nosana blockchain-indexer jobs/count.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.jobs.queued.count",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "selector": {
+        "type": "named_record_field",
+        "name": "by_state_count",
+        "state": "QUEUED"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL jobs/count.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.jobs.running.count",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "selector": {
+        "type": "named_record_field",
+        "name": "by_state_count",
+        "state": "RUNNING"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL jobs/count.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.ma.usd.200d",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.ma.usd.50d",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.market_cap.usd.current",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "nosana"
+        },
+        "field": "market_cap"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.nodes.with_running_jobs.count",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "selector": {
+        "type": "json_key",
+        "key": "distinctNodesWithRunningJobs"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Field name must exist on jobs/count. Fail closed if renamed.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.price.usd.live",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "nosana"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.price.usd.report",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.return.pct.180d",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='CoinGecko + GT OHLCV' url='https://www.coingecko.com/en/coins/nosana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.rs.vs_sol.pp.30d",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "pp",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage 1' url='https://www.coingecko.com/en/coins/nosana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.rs.vs_sol.pp.7d",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "pp",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage 1' url='https://www.coingecko.com/en/coins/nosana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.siren.aug1_unknown_wallet_count.current",
+      "asset": "NOS",
+      "owner": "GROK",
+      "unit": "count",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "nos.siren.supply.tokens.current",
+      "asset": "NOS",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "nos.siren.tracked.tokens.current",
+      "asset": "NOS",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "nos.siren.watched_wallet_count.current",
+      "asset": "NOS",
+      "owner": "GROK",
+      "unit": "count",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "nos.stake.ratio.pct",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.stake.tokens.current",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Stage 1' url='https://www.coingecko.com/en/coins/nosana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.supply.circulating.pct",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.supply.circulating.tokens",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "nosana"
+        },
+        "field": "circulating_supply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.supply.max.tokens",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "nosana"
+        },
+        "field": "max_supply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "nos.threshold.out.usd",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "nos.threshold.this_move.usd",
+      "asset": "NOS",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "orca.price.usd.live",
+      "asset": "ORCA",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "orca.siren.supply.tokens.current",
+      "asset": "ORCA",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "orca.siren.tracked.tokens.current",
+      "asset": "ORCA",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "orca.siren.watched_wallet_count.current",
+      "asset": "ORCA",
+      "owner": "GROK",
+      "unit": "count",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "orca.threshold.out.usd",
+      "asset": "ORCA",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "orca.threshold.this_move.usd",
+      "asset": "ORCA",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "portfolio.portfolio.value.usd.current",
+      "asset": "GLOBAL",
+      "owner": "GROK",
+      "unit": "USD",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "pump.buyback.usd.1d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.buyback.usd.7d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.pump.fun.dailyHoldersRevenue",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_sum_last_n",
+        "pointer": "/totalDataChart",
+        "n": 7
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "V3 holdersRevenue 7d chart sum for pump.fun.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.buyback.usd_per_day.ath_sep",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.buyback.usd_per_day.current",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.buyback.usd_per_day.jan_high",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.buyback.usd_per_day.june_atl",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.fees.usd_per_day.ath_sep",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.fees.usd_per_day.current",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.fees.usd_per_day.jan_high",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.fees.usd_per_day.june_atl",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.funding.rate.latest",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "rate",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.premiumIndex.PUMPUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/lastFundingRate"
+      },
+      "normalizer": {
+        "type": "decimal_as_percent"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.holders.unattributed.pct",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Solscan \u00b7 Squads custody + OTC' url='https://solscan.io/account/5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.leverage.x.current",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.ticker24h.PUMPUSDT",
+      "selector": {
+        "type": "named_record_field",
+        "name": "perp_spot_ratio",
+        "perp_pointer": "/quoteVolume",
+        "spot_request_key": "binance.spot.ticker24h.PUMPUSDT",
+        "spot_pointer": "/quoteVolume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 binance futures PUMPUSDT; V3 perp/spot 24h quote ratio.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.liquidity.dex.usd.current",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.pump",
+      "selector": {
+        "type": "named_record_field",
+        "name": "dex_pair_liquidity_usd",
+        "chain_id": "solana",
+        "base_token_address": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 source dexscreener; V3 DexScreener pair for PUMP mint. First-pair is forbidden \u2014 use identity pairAddress if present.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.ma.usd.200d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.ma.usd.50d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.market_share.pct.ath_sep",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.market_share.pct.aug_10",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.market_share.pct.current",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.overview.fees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "launchpad_share_pct",
+        "slug": "pump.fun"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "V3 Launchpad category 24h fee share.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.market_share.pct.jan_high",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.market_share.pct.june_atl",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.market_share.pct.share_history",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.mm.wintermute.balance.tokens",
+      "asset": "PUMP",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "pump.mm.wintermute.transfer.tokens",
+      "asset": "PUMP",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "pump.oi.usd.current",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterest.PUMPUSDT",
+      "selector": {
+        "type": "named_record_field",
+        "name": "open_interest_usd",
+        "oi_pointer": "/openInterest",
+        "mark_request_key": "binance.fapi.ticker24h.PUMPUSDT",
+        "mark_pointer": "/lastPrice"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Binance USDT-M openInterest \u00d7 mark; Job 1 names Binance futures PUMPUSDT.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.price.usd.live",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "pump-fun"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.price.usd.report",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='coingecko/dex' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.revenue.usd.7d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.pump.fun.dailyRevenue",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_sum_last_n",
+        "pointer": "/totalDataChart",
+        "n": 7
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL DefiLlama pump.fun fees page; V3 uses dataType=dailyRevenue 7d chart sum. Does not prefer $9M or $7M.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.revenue.usd_per_day.ath_sep",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.revenue.usd_per_day.current",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.revenue.usd_per_day.jan_high",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.revenue.usd_per_day.june_atl",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.rs.vs_btc.pct.30d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "selector": {
+        "type": "named_record_field",
+        "name": "klines_rs_pct",
+        "window_days": 30,
+        "bench_request_key": "binance.spot.klines.BTCUSDT.1d"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 binance-daily klines; RS = PUMP window return minus bench window return.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "selector": {
+        "type": "named_record_field",
+        "name": "klines_rs_pct",
+        "window_days": 7,
+        "bench_request_key": "binance.spot.klines.BTCUSDT.1d"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 binance-daily klines; RS = PUMP window return minus bench window return.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.rs.vs_sol.pct.30d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "selector": {
+        "type": "named_record_field",
+        "name": "klines_rs_pct",
+        "window_days": 30,
+        "bench_request_key": "binance.spot.klines.SOLUSDT.1d"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 binance-daily klines; RS = PUMP window return minus bench window return.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "selector": {
+        "type": "named_record_field",
+        "name": "klines_rs_pct",
+        "window_days": 7,
+        "bench_request_key": "binance.spot.klines.SOLUSDT.1d"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 binance-daily klines; RS = PUMP window return minus bench window return.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.siren.supply.tokens.current",
+      "asset": "PUMP",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "pump.siren.tracked.tokens.current",
+      "asset": "PUMP",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "pump.siren.watched_wallet_count.current",
+      "asset": "PUMP",
+      "owner": "GROK",
+      "unit": "count",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "pump.supply.circulating.pct",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "pump.threshold.out.usd",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "pump.threshold.this_move.usd",
+      "asset": "PUMP",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "render.bme.burned.tokens.last4",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "render_foundation",
+      "request_key": "render.epochBurnStats",
+      "selector": {
+        "type": "named_record_field",
+        "name": "epoch_burn_last_n",
+        "n": 4,
+        "field": "burnedRender"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 epochBurnStats.",
+      "required": true
+    },
+    {
+      "metric_id": "render.bme.burned.tokens.last8",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "render_foundation",
+      "request_key": "render.epochBurnStats",
+      "selector": {
+        "type": "named_record_field",
+        "name": "epoch_burn_last_n",
+        "n": 8,
+        "field": "burnedRender"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 epochBurnStats.",
+      "required": true
+    },
+    {
+      "metric_id": "render.bme.emissions.tokens.last8",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Foundation first-party API' url='https://infra.shikumi.cc/api/v1/epochBurnStats'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.bme.node_due.tokens.per_epoch",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Foundation first-party API' url='https://infra.shikumi.cc/api/v1/epochBurnStats'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.bme.ratio.last4",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Foundation API' url='https://infra.shikumi.cc/api/v1/epochBurnStats'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.bme.ratio.last8",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Foundation first-party API' url='https://infra.shikumi.cc/api/v1/epochBurnStats'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.emissions.tokens.remaining",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Foundation API' url='https://infra.shikumi.cc/api/v1/epochBurnStats'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.funding.rate.latest",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "rate",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.premiumIndex.RENDERUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/lastFundingRate"
+      },
+      "normalizer": {
+        "type": "decimal_as_percent"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "render.leverage.x.current",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.binance.com/en/futures/RENDERUSDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.ma.usd.200d",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.ma.usd.50d",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.nodes.count.listed",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "render_foundation",
+      "request_key": "render.nodes_and_frames",
+      "selector": {
+        "type": "json_key",
+        "key": "nodes"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Same Foundation stats payload as frames.",
+      "required": true
+    },
+    {
+      "metric_id": "render.price.usd.live",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "render-token"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "render.price.usd.report",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "render.siren.supply.tokens.current",
+      "asset": "RENDER",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "render.siren.tracked.tokens.current",
+      "asset": "RENDER",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "render.siren.watched_wallet_count.current",
+      "asset": "RENDER",
+      "owner": "GROK",
+      "unit": "count",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "render.supply.circulating.tokens",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "render_foundation",
+      "request_key": "render.supplyInfo",
+      "selector": {
+        "type": "json_key",
+        "key": "circulatingSupply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 Foundation supplyInfo.",
+      "required": true
+    },
+    {
+      "metric_id": "render.supply.max.tokens",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "render_foundation",
+      "request_key": "render.supplyInfo",
+      "selector": {
+        "type": "json_key",
+        "key": "maxSupply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 Foundation supplyInfo.",
+      "required": true
+    },
+    {
+      "metric_id": "render.threshold.out.usd",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "render.threshold.this_move.usd",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "render.usage.frames.cumulative",
+      "asset": "RENDER",
+      "owner": "CGPT_CURSOR",
+      "unit": "frames",
+      "disposition": "COLLECT",
+      "source_key": "render_foundation",
+      "request_key": "render.nodes_and_frames",
+      "selector": {
+        "type": "json_key",
+        "key": "frames"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "V3 stats.renderfoundation.com/api/nodes_and_frames; Job 1 URL is the stats site.",
+      "required": true
+    },
+    {
+      "metric_id": "retardio.price.usd.live",
+      "asset": "RETARDIO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "retardio.siren.supply.tokens.current",
+      "asset": "RETARDIO",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "retardio.siren.tracked.tokens.current",
+      "asset": "RETARDIO",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "retardio.threshold.out.usd",
+      "asset": "RETARDIO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "retardio.threshold.this_move.usd",
+      "asset": "RETARDIO",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.burn.tokens.per_year",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Solana RPC + DefiLlama burn' url='https://api.mainnet-beta.solana.com'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.7d.x",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://defillama.com/dexs/chains/solana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.latest_day.x",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://defillama.com/dexs/chains/solana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.x.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://defillama.com/dexs/chains/solana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.1d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Solana ETF",
+        "tickers_must": [
+          "BSOL",
+          "VSOL"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "ETHA",
+          "GBTC"
+        ],
+        "window": "latest",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.30d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Solana ETF",
+        "tickers_must": [
+          "BSOL",
+          "VSOL"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "ETHA",
+          "GBTC"
+        ],
+        "window": "30d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.7d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Solana ETF",
+        "tickers_must": [
+          "BSOL",
+          "VSOL"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "ETHA",
+          "GBTC"
+        ],
+        "window": "7d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "notes": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.all_time",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.fees.usd_per_day.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.fees.usd_per_day.june_2026",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.fees.usd_per_day.mean_30d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.solana.dailyFees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_mean_last_n",
+        "pointer": "/totalDataChart",
+        "n": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL DefiLlama Solana fees.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.fees.usd_per_day.nov_2024",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD/day",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.funding.rate.latest",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "rate",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.premiumIndex.SOLUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/lastFundingRate"
+      },
+      "normalizer": {
+        "type": "decimal_as_percent"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL is fundingRate; V3 live feed uses premiumIndex lastFundingRate on the same Binance USDT-M product.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.funding.rate.mean_7d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "rate",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Binance SOLUSDT' url='https://www.binance.com/en/trade/SOL_USDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.inflation.pct.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "COLLECT",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getInflationRate",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/result/total"
+      },
+      "normalizer": {
+        "type": "decimal_as_percent"
+      },
+      "derivation": null,
+      "notes": "Job 1 Solana RPC; getInflationRate.total is a fraction.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.inflation.pct.stage1",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.issuance.tokens.per_year",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Solana RPC + DefiLlama burn' url='https://api.mainnet-beta.solana.com'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.leverage.x.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://fapi.binance.com/fapi/v1/fundingRate?symbol=SOLUSDT&limit=1'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.leverage.x.stage1",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.ma.usd.200d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.ma.usd.50d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.price.usd.live",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "solana"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.price.usd.report",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Binance' url='https://fapi.binance.com/fapi/v1/fundingRate?symbol=SOLUSDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "pp",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.SOLUSDT.1d",
+      "selector": {
+        "type": "named_record_field",
+        "name": "klines_rs_pct",
+        "window_days": 30,
+        "bench_request_key": "binance.spot.klines.BTCUSDT.1d"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL is SOLUSDT daily klines.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.rs.vs_btc.pp.7d",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "pp",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.SOLUSDT.1d",
+      "selector": {
+        "type": "named_record_field",
+        "name": "klines_rs_pct",
+        "window_days": 7,
+        "bench_request_key": "binance.spot.klines.BTCUSDT.1d"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL is SOLUSDT daily klines.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.stablecoin.usd.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.stablecoinchains",
+      "selector": {
+        "type": "named_record_field",
+        "name": "stablecoin_chain_usd",
+        "chain_name": "Solana"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL DefiLlama stablecoins/chains; V3 stablecoinchains peggedUSD.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.stablecoin.usd.stage1",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.stake.ratio.pct",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Solana RPC getVoteAccounts' url='https://api.mainnet-beta.solana.com'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.stake.tokens.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getVoteAccounts",
+      "selector": {
+        "type": "named_record_field",
+        "name": "vote_accounts_activated_stake"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Sum activatedStake lamports / 1e9.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.staking.apy.pct",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Solana RPC + DefiLlama burn' url='https://api.mainnet-beta.solana.com'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.supply.circulating.pct",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.supply.net_change.tokens.per_year",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Solana RPC + DefiLlama burn' url='https://api.mainnet-beta.solana.com'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.threshold.out.usd",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.threshold.this_move.usd",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.tps.all.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://defillama.com/chain/Solana'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.tps.nonvote.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getRecentPerformanceSamples",
+      "selector": {
+        "type": "named_record_field",
+        "name": "perf_tps_nonvote"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 getRecentPerformanceSamples.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.tvl.usd.current",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "defillama",
+      "request_key": "defillama.historicalChainTvl.Solana",
+      "selector": {
+        "type": "named_record_field",
+        "name": "latest_list_field",
+        "field": "tvl"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL DefiLlama Solana chain; V3 historicalChainTvl last tvl.",
+      "required": true
+    },
+    {
+      "metric_id": "sol.tvl.usd.jan_2025",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.tvl.usd.stage1",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "sol.validators.active.count",
+      "asset": "SOL",
+      "owner": "CGPT_CURSOR",
+      "unit": "text",
+      "disposition": "COLLECT",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getVoteAccounts",
+      "selector": {
+        "type": "named_record_field",
+        "name": "vote_accounts_active_count"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Job 1 getVoteAccounts.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.funding.rate.latest",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "rate",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.premiumIndex.SPXUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/lastFundingRate"
+      },
+      "normalizer": {
+        "type": "decimal_as_percent"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.holders.top20.pct",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='Solana RPC getTokenLargestAccounts \u00b7 SPX Stage-1' url='https://www.coingecko.com/en/coins/spx6900'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.ma.usd.200d",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.ma.usd.50d",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.oi.binance.usd.current",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterest.SPXUSDT",
+      "selector": {
+        "type": "named_record_field",
+        "name": "open_interest_usd",
+        "oi_pointer": "/openInterest",
+        "mark_request_key": "binance.fapi.ticker24h.SPXUSDT",
+        "mark_pointer": "/lastPrice"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 URL is Binance futures SPXUSDT.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.oi.change.pct.30d",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='SPX Stage-1' url='https://www.binance.com/en/futures/SPXUSDT'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.oi.usd.stage1",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "spx.price.ath.usd",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "spx.price.usd.live",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "spx6900"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.price.usd.report",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.return.pct.30d",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.siren.supply.tokens.current",
+      "asset": "SPX",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "spx.siren.tracked.tokens.current",
+      "asset": "SPX",
+      "owner": "GROK",
+      "unit": "tokens",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "spx.siren.watched_wallet_count.current",
+      "asset": "SPX",
+      "owner": "GROK",
+      "unit": "count",
+      "disposition": "GROK_WALLET",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Job 1 owner=GROK. Cursor does not collect."
+    },
+    {
+      "metric_id": "spx.supply.circulating.pct",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='SPX Stage 1' url='https://www.coingecko.com/en/coins/spx6900'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.supply.circulating.tokens",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "spx6900"
+        },
+        "field": "circulating_supply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.supply.max.tokens",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "spx6900"
+        },
+        "field": "max_supply"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship.",
+      "required": true
+    },
+    {
+      "metric_id": "spx.threshold.out.usd",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "spx.threshold.this_move.usd",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "spx.volume.perp.usd.24h",
+      "asset": "SPX",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='SPX Stage-1' url='https://www.coingecko.com/en/coins/spx6900'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.inflation.pct.current",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='ZEC Stage-1 evidence' url='https://electriccoin.co/blog/zcash-halvening-nu6-embracing-the-new-dev-fund/'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.leverage.x.current",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "x",
+      "disposition": "DERIVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": {
+        "op": "RATIO",
+        "inputs": [
+          "zec.volume.perp.usd.24h",
+          "zec.volume.spot.usd.24h"
+        ],
+        "calculation_version": "v1"
+      },
+      "notes": "Same V3 perp/spot definition; Job 1 names Binance futures ZECUSDT.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.ma.usd.200d",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.coingecko.com/en/coins/zcash'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.ma.usd.50d",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://www.coingecko.com/en/coins/zcash'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.oi.binance.usd.current",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterest.ZECUSDT",
+      "selector": {
+        "type": "named_record_field",
+        "name": "open_interest_usd",
+        "oi_pointer": "/openInterest",
+        "mark_request_key": "binance.fapi.ticker24h.ZECUSDT",
+        "mark_pointer": "/lastPrice"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 ZEC Stage-1 / Binance futures ZECUSDT.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.price.usd.live",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "zcash"
+        },
+        "field": "current_price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 live-price source is UNKNOWN. Bound to V3 AUTOJOB01 CoinGecko markets, not HTML data-feed.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.price.usd.report",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url=''). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.shielded.share.pct",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://mainnet.zcashexplorer.app/api/v1/blockchain-info'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.shielded.tokens.current",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "COLLECT",
+      "source_key": "zcash_explorer",
+      "request_key": "zcash.explorer.blockchain-info",
+      "selector": {
+        "type": "named_record_field",
+        "name": "pool_sum",
+        "pointer": "/valuePools",
+        "ids": [
+          "sprout",
+          "sapling",
+          "orchard",
+          "ironwood"
+        ]
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 zcashexplorer blockchain-info.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.supply.circulating.pct",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "%",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://electriccoin.co/blog/zcash-halvening-nu6-embracing-the-new-dev-fund/'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.supply.circulating.tokens",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://electriccoin.co/blog/zcash-halvening-nu6-embracing-the-new-dev-fund/'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.supply.max.tokens",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "tokens",
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "notes": "Job 1 provenance is insufficient for a reliable collector (source='UNKNOWN' url='https://electriccoin.co/blog/zcash-halvening-nu6-embracing-the-new-dev-fund/'). No provider substitution.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.threshold.out.usd",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "zec.threshold.this_move.usd",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "PRESERVE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "required": false,
+      "notes": "Historical, static, threshold, or dated event. No live collector."
+    },
+    {
+      "metric_id": "zec.tx.count.24h",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "count",
+      "disposition": "COLLECT",
+      "source_key": "zcash_explorer",
+      "request_key": "zcash.explorer.blockchain-info",
+      "selector": {
+        "type": "json_key",
+        "key": "transactions24h"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "notes": "Fail closed if explorer uses a different 24h tx field name.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.volume.perp.usd.24h",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.fapi.ticker24h.ZECUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/quoteVolume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    },
+    {
+      "metric_id": "zec.volume.spot.usd.24h",
+      "asset": "ZEC",
+      "owner": "CGPT_CURSOR",
+      "unit": "USD",
+      "disposition": "COLLECT",
+      "source_key": "binance",
+      "request_key": "binance.spot.ticker24h.ZECUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/quoteVolume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "notes": "Job 1 names Binance; official futures/spot JSON API.",
+      "required": true
+    }
+  ]
+}

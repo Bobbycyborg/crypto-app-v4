@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.premiumIndex.SOLUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/premiumIndex",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "2384cab35878a9697af2aff5683ae7b02897000fff06aa80ab047f6a564d45d1",
+  "raw_body_path": "binance.fapi.premiumIndex.SOLUSDT.body",
+  "attempts": 1
+}

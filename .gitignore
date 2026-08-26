@@ -28,3 +28,6 @@ docs/
 config/wallet.json
 config/capital.json
 config/helius.local.env
+
+# Job 2 live collector runtime (raw captures / run JSON)
+runtime-NOT-FOR-GH/

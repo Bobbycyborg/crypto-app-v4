@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.overview.fees",
+  "url": "https://api.llama.fi/overview/fees",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "6c4d1d624074cb8b3289ec4bf805f3e6ff168bd48c1f9d5b468acc07b2ce6ba2",
+  "raw_body_path": "defillama.overview.fees.body",
+  "attempts": 1
+}

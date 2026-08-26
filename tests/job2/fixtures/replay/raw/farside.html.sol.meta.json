@@ -1,0 +1,12 @@
+{
+  "source_key": "farside",
+  "request_key": "farside.html.sol",
+  "url": "https://farside.co.uk/sol/",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "text/html",
+  "body_sha256": "7b0cf9c76dca0dc662eb259a3f5fde8fdf65ab331c5ef2b4758c3da210428bae",
+  "raw_body_path": "farside.html.sol.body",
+  "attempts": 1
+}

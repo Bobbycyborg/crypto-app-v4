@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.spot.ticker24h.ZECUSDT",
+  "url": "https://api.binance.com/api/v3/ticker/24hr",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "cbc6e8a675ccfc4c53423137f1dcd0cd569daffa967cc14092d3117201c0d611",
+  "raw_body_path": "binance.spot.ticker24h.ZECUSDT.body",
+  "attempts": 1
+}

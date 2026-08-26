@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.openInterest.ZECUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/openInterest",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "9c462005063d1aa2c6eb8aab2a6654e00b467bdc6322f0af207fc89ce7961abe",
+  "raw_body_path": "binance.fapi.openInterest.ZECUSDT.body",
+  "attempts": 1
+}

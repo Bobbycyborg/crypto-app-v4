@@ -1,0 +1,12 @@
+{
+  "source_key": "zcash_explorer",
+  "request_key": "zcash.explorer.blockchain-info",
+  "url": "https://mainnet.zcashexplorer.app/api/v1/blockchain-info",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-26T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "28af70fa00f86262fd3ee9b921b493fcbbc0d0a44354c18be863af470b936986",
+  "raw_body_path": "zcash.explorer.blockchain-info.body",
+  "attempts": 1
+}
