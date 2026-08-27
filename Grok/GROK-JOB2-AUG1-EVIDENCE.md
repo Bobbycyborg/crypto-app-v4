@@ -11,10 +11,10 @@ Oliver 27 Aug:
 - 1 Aug stays 1 Aug (start of this move). Do not rename the row 27 Aug.
 - Last sell stays. now / last_out / left_24h kept.
 - % gone since 1 Aug only when both 1 Aug and now are real.
-- GRASS is DEAD (same as DRIFT) — do not walk GRASS, do not splice GRASS, skip all GRASS queue items. DRIFT stays out.
-- Skip PUMP / ORCA (no fake27 / dead). HOM not present.
+- GRASS is DEAD (same as DRIFT) — do not walk / splice GRASS. DRIFT stays out.
+- Skip PUMP / ORCA. HOM not present.
 
-Helius maxed; public-RPC ATA path (`getSignaturesForAddress` + `getTransaction` mint delta). Persist each proof before splice. Sleep/backoff on 429.
+Helius maxed; public-RPC ATA path. Persist each proof before splice. Sleep/backoff on 429.
 
 ## The lie
 
@@ -22,64 +22,48 @@ Helius maxed; public-RPC ATA path (`getSignaturesForAddress` + `getTransaction` 
 
 ## Per coin (this pack)
 
-| Coin | fake27 | proved 1 Aug (this job, on page) | DEFER whale (left as_of_now) | DEFER dest-watch (CEX/MM) | still as_of_now | notes |
+| Coin | fake27 | proved 1 Aug (this job, on page) | DEFER whale (left as_of_now) | DEFER dest-watch | still as_of_now | notes |
 |---|---:|---:|---:|---:|---:|---|
 | FART | 31 | 27 | 3 | 1 | 3 | batch 1. FART real 1 Aug not overwritten. |
-| LOCKIN | 31 | 30 | 1 (Raydium) | 0 | 1 | batch 2 |
-| RETARDIO | 37 | 36 | 1 (Raydium) | 0 | 1 | batch 3 |
-| SPX | 40 | 38 | 2 (Orca Whirlpool, Raydium) | 0 | 2 | batch 4 |
-| 2Z | 46 | 39 | 2 (TwoZ56, Raydium CLMM) | 5 | 2 | batch 5 |
-| IO | 57 | 55 | 0 | 1 | 1 (Jupiter, not yet walked) | parallel + this resume. Jupiter leftover. |
-| NOS | 75 | 70 | 3 (2x Raydium CLMM, Nos67) | 2 | 3 | walked/spliced. Honest DEFER. |
-| RENDER | 62 | 21 | 0 | 5 | 35 | this batch spliced proved Render24–38 + dest-watch. Rest still walking. |
-| BONK | 73 | 18 | 0 | 0 | 52 | Bonk34 spliced this batch; rest still walking. |
-| GIGA | 77 | 43 | 0 | 0 | 34 | Giga34–63 spliced this batch; rest still walking. |
-| GRASS | 57 | 0 | 0 | 0 | 57 | SKIP — Oliver: GRASS dead. |
-| **total** | **586** | **377 on page** | **12** | **14** | **191 on page** | GRASS 57 of leftover are skip |
+| LOCKIN | 31 | 30 | 1 | 0 | 1 | batch 2 |
+| RETARDIO | 37 | 36 | 1 | 0 | 1 | batch 3 |
+| SPX | 40 | 38 | 2 | 0 | 2 | batch 4 |
+| 2Z | 46 | 39 | 2 | 5 | 2 | batch 5 |
+| IO | 57 | 55 | 0 | 1 | 1 (Jupiter) | Jupiter not walked |
+| NOS | 75 | 70 | 3 | 2 | 3 | walked / honest DEFER |
+| RENDER | 62 | 49 | 0 | 8 | 5 (Jupiter, Render49, Render50, OKX, Binance) | nearly done |
+| BONK | 73 | 25 | 0 | 1 | 44 | still walking |
+| GIGA | 77 | 46 | 0 | 0 | 31 | still walking |
+| GRASS | 57 | 0 | 0 | 0 | 57 | SKIP |
+| **total** | **586** | **415 on page** | **12** | **18** | **150 on page** | GRASS 57 of leftover are skip |
 
 PUMP / ORCA / DRIFT no fake27. HOM not present. G2 leftover 16 not walked.
 
 ## What this resume did / did not
 
-Did:
-- Pulled origin/main. No rebase. Did not start over.
-- Spliced already-proved LOCKIN first, then walked RETARDIO / SPX / 2Z / IO.
-- Parallel commits also landed batches 2–7 (same job, same persist). This resume did not overwrite those splices.
-- This batch: spliced unspliced proved RENDER / GIGA / BONK from persist onto current HEAD.
-- Skipped GRASS / DRIFT / PUMP / ORCA.
-- Reconstructed 0s only when walk-proved.
-- Persist each proof. Backoff on 429.
+Did: resume persist (no start-over); splice LOCKIN first; walk RETARDIO/SPX/2Z/IO; splice proved RENDER/GIGA/BONK as proofs landed; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff 429; reconstructed 0s only when walk-proved.
 
-Did not:
-- Invent numbers or guess zeros.
-- Add wallets / change config address lists.
-- Touch HOM or hold-card look.
-- Start Job 3.
-- FAIL Job 1.
-- Walk or splice GRASS.
+Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card look; start Job 3; FAIL Job 1; walk or splice GRASS.
 
 ## Files touched
 
-- `index-v4.html` — siren-watch-data only (RENDER / GIGA / BONK this commit). JS `since 1 Aug` row from batch 1. Label still `1 Aug`.
+- `index-v4.html` — siren-watch-data only. JS `since 1 Aug` from batch 1. Label still `1 Aug`.
 - `Grok/GROK-JOB2-AUG1-EVIDENCE.md` — this pack
 
 ## Files left alone
 
-- config address lists
-- HOM / DRIFT / GRASS / PUMP / ORCA
-- FART real 1 Aug
-- `data/cache/job2-aug1-proofs.json` local persist (gitignored)
+- config address lists; HOM; DRIFT; GRASS; PUMP; ORCA; FART real 1 Aug; `data/cache` persist (gitignored)
 
-## Commits
+## Commits (this resume)
 
-- Batch 1: `eb21ce2` FART 27 + JS row
-- Batch 2: `332acd8` LOCKIN 30; `e657cb5` partial RETARDIO (superseded)
-- Batch 3: `2b0c655` RETARDIO 36
-- Batch 4: `84f7e2c` / `1a66bce` SPX 38
-- Batch 5: `baf3ee7` / `a625a6a` / `bcc4953` 2Z
-- Batch 6–7: `d63223d` / `8b207fc` (parallel: IO / NOS / partial others)
-- This commit: RENDER + GIGA + BONK splice from persist. Hash: read `git log -1`.
+- `332acd8` batch 2 LOCKIN 30
+- `2b0c655` batch 3 RETARDIO 36
+- `1a66bce` batch 4 SPX 38 (parallel `84f7e2c`)
+- `a625a6a` batch 5 pack (2Z HTML in parallel `baf3ee7`/`bcc4953`)
+- `6496feb` batch 8 RENDER/GIGA/BONK splice
+- This commit: further RENDER/GIGA/BONK splice. Hash: read `git log -1`.
+- Parallel also landed `e657cb5`, `d63223d`, `8b207fc`, `e7dd955`.
 
 ## Status
 
-**NOT DONE.** Live leftover still `as_of_now` and not yet walked or still walking: RENDER 35, BONK 52, GIGA 34, IO Jupiter 1. Honest DEFERs left as_of_now on FART/LOCKIN/RETARDIO/SPX/2Z/NOS. GRASS skipped. Grok has not marked this complete.
+**NOT DONE.** Live leftover still as_of_now / still walking: RENDER 5, BONK 44, GIGA 31, IO Jupiter 1. GRASS skipped. Honest DEFERs left as_of_now on completed coins. Grok has not marked this complete.
