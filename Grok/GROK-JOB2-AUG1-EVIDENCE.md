@@ -18,8 +18,8 @@ Oliver: 1 Aug label stays. Last sell stays. GRASS dead — not walked, not splic
 | LOCKIN | 31 | 30 | 1 (Raydium AMM) | 0 | 1 |
 | RETARDIO | 37 | 36 | 1 (Raydium AMM) | 0 | 1 |
 | SPX | 40 | 38 | 2 (Raydium AMM, Orca Whirlpool) | 0 | 2 |
-| 2Z | 46 | 36 | 2 (Raydium CLMM, TwoZ56) | 7 CEX → CEX book | 2 |
-| IO | 57 | 49 | 0 so far | 0 | 8 (Jupiter, Io66–70, KuCoin, Coinbase) |
+| 2Z | 46 | 36 | 2 (Raydium CLMM, TwoZ56) + 1 other gt300 | 7 CEX → CEX book | 2 |
+| IO | 57 | 55 | 0 | 1 (KuCoin → CEX book) | 1 (Jupiter, walk unfinished) |
 | RENDER | 62 | ~5 | — | some desk | 56 (walk in flight) |
 | BONK | 73 | ~17 | — | some desk | 53 (walk in flight) |
 | NOS | 75 | ~39 | — | some desk | 35 (walk in flight) |
