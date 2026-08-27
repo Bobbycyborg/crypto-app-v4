@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.openInterestHist.SPXUSDT.1d",
+  "url": "https://fapi.binance.com/futures/data/openInterestHist",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "5c4124802bdd5bb4bc53a9bac260c69c8b04124b519c4303f44eb6a9f5770118",
+  "raw_body_path": "binance.fapi.openInterestHist.SPXUSDT.1d.body",
+  "attempts": 1
+}

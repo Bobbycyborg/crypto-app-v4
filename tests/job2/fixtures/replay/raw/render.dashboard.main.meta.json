@@ -1,0 +1,12 @@
+{
+  "source_key": "render_foundation",
+  "request_key": "render.dashboard.main",
+  "url": "https://stats.renderfoundation.com/",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "text/html",
+  "body_sha256": "d7e03b1408a06fddfb09ff248043f911eeb17b62abe61261bdc4ddefc27ac785",
+  "raw_body_path": "render.dashboard.main.body",
+  "attempts": 1
+}

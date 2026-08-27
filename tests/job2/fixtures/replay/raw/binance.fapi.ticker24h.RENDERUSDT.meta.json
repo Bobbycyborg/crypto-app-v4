@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.ticker24h.RENDERUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/ticker/24hr",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "c7292a68e4f7a4506532e0159d88f2e83682df079ec2102586a99d15f1641104",
+  "raw_body_path": "binance.fapi.ticker24h.RENDERUSDT.body",
+  "attempts": 1
+}

@@ -1,0 +1,12 @@
+{
+  "source_key": "solana_rpc",
+  "request_key": "solana.rpc.getTokenSupply.spx",
+  "url": "https://api.mainnet-beta.solana.com",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "05b2651df1dde432e0d48c3478fc1b17223437b4efdd85387c2c848ddec4ecbc",
+  "raw_body_path": "solana.rpc.getTokenSupply.spx.body",
+  "attempts": 1
+}

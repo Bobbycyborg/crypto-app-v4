@@ -1,0 +1,12 @@
+{
+  "source_key": "nosana",
+  "request_key": "nosana.stats",
+  "url": "https://blockchain-indexer.k8s.prd.nos.ci/stats",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "0369d59ccd63d6b775e6d8f8d84e3102807c85cdeced468eda3d6d3f6ab5c055",
+  "raw_body_path": "nosana.stats.body",
+  "attempts": 1
+}

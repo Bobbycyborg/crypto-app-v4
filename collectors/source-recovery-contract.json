@@ -1,0 +1,5059 @@
+{
+  "job": "V4-JOB-2B",
+  "generated_at": "2026-08-27T09:37:59Z",
+  "start_head": "087066fcbb4a497d5bfaffbb17843ef76ae39a8a",
+  "entries": [
+    {
+      "metric_id": "2z.price.usd.live",
+      "asset": "2Z",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V4_HTML",
+      "recovery_tier": 1,
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.2z",
+      "provider": "dexscreener",
+      "endpoint_or_method": "dex:J6pQQ3FAcJQeWPPGppWRb4nM8jU3wLyYbRrLh7feMfvd \u2192 /latest/dex/tokens/{mint}, highest liquidity.usd pair priceUsd",
+      "selector": {
+        "type": "named_record_field",
+        "name": "dex_live_price_highest_liquidity"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V4_HTML",
+          "path": "index-v4.html",
+          "commit_or_ref": "087066fc",
+          "locator": "data-feed dex:J6p\u2026 + tick() L2745-2756",
+          "evidence_summary": "Hold card 2Z uses dex feed; tick sorts pairs by liquidity.usd desc, takes priceUsd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "bonk.price.usd.live",
+      "asset": "BONK",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V4_HTML",
+      "recovery_tier": 1,
+      "source_key": "binance",
+      "request_key": "binance.spot.tickerPrice.BONKUSDT",
+      "provider": "binance",
+      "endpoint_or_method": "spot:BONKUSDT \u2192 api/v3/ticker/price",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V4_HTML",
+          "path": "index-v4.html",
+          "commit_or_ref": "087066fc",
+          "locator": "data-feed spot:BONKUSDT + tick() spot batch",
+          "evidence_summary": "Binance spot ticker price"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "btc.inflation.pct.current",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "derived",
+      "endpoint_or_method": "3.125*144*365/circulating*100 from CG circ",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/apply_dynamic.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/apply_dynamic.py:btc_body dial Issuance",
+          "evidence_summary": "lib/v3/autojob01/apply_dynamic.py:btc_body dial Issuance"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "btc.ma.usd.200d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "btc.ma.usd.50d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "btc.oi.change.pct.1d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "fapi/futures/data/openInterestHist sumOpenInterestValue \u03941d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/btc_intel.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map",
+          "evidence_summary": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source proven in V3 research layer; AUTOJOB01 lacks live change-pct extractor for BTCUSDT"
+    },
+    {
+      "metric_id": "btc.oi.change.pct.30d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "fapi/futures/data/openInterestHist sumOpenInterestValue \u039430d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/btc_intel.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map",
+          "evidence_summary": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source proven in V3 research layer; AUTOJOB01 lacks live change-pct extractor for BTCUSDT"
+    },
+    {
+      "metric_id": "btc.oi.change.pct.7d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "fapi/futures/data/openInterestHist sumOpenInterestValue \u03947d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/btc_intel.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map",
+          "evidence_summary": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source proven in V3 research layer; AUTOJOB01 lacks live change-pct extractor for BTCUSDT"
+    },
+    {
+      "metric_id": "btc.stablecoin.change.pct.30d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "stablecoincharts/all change_30d_pct",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/stablecoin_supply.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/stablecoin_supply.py:fetch_stablecoin_supply + lib/v3/autojob01/collect.py:collect_market",
+          "evidence_summary": "lib/stablecoin_supply.py:fetch_stablecoin_supply + lib/v3/autojob01/collect.py:collect_market"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "btc.supply.circulating.pct",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply/21_000_000*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/apply_dynamic.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/apply_dynamic.py:btc_body + collect_prices",
+          "evidence_summary": "lib/v3/autojob01/apply_dynamic.py:btc_body + collect_prices"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "drift.price.usd.live",
+      "asset": "DRIFT",
+      "required": false,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "INACTIVE",
+      "recovery_tier": "N/A",
+      "source_key": null,
+      "request_key": null,
+      "provider": null,
+      "endpoint_or_method": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "PRODUCT_STATE",
+          "path": "collectors/asset-state-overrides.json",
+          "commit_or_ref": "3ab20af",
+          "locator": "DRIFT=LEGACY_INACTIVE",
+          "evidence_summary": "DRIFT disconnected from holdings board; no collector work"
+        }
+      ],
+      "semantic_match": {
+        "asset": "N/A",
+        "measure": "N/A",
+        "scope": "N/A",
+        "window": "N/A",
+        "unit": "N/A",
+        "update_mode": "N/A"
+      },
+      "notes": "DRIFT LEGACY_INACTIVE per Job 2B brief \u00a75/\u00a721."
+    },
+    {
+      "metric_id": "fart.holders.lp.pct",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "stage2_overlay",
+      "endpoint_or_method": "Raydium LP 2.15%",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/apply_stage2_meme_overlay.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/apply_stage2_meme_overlay.py:FART_HOLDER_READ",
+          "evidence_summary": "lib/v3/autojob01/apply_stage2_meme_overlay.py:FART_HOLDER_READ"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.holders.unattributed.pct",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "stage2_overlay",
+      "endpoint_or_method": "33.23% unattributed top-20",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/apply_stage2_meme_overlay.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/apply_stage2_meme_overlay.py",
+          "evidence_summary": "lib/v3/autojob01/apply_stage2_meme_overlay.py"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.holders.unit_treasury.pct",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "stage2_overlay",
+      "endpoint_or_method": "Unit/Hyperunit treasury 9.77%",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/apply_stage2_meme_overlay.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/apply_stage2_meme_overlay.py",
+          "evidence_summary": "lib/v3/autojob01/apply_stage2_meme_overlay.py"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.leverage.perp_spot_notional.x",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance+coinbase",
+      "endpoint_or_method": "perp_vs_coinbase_spot_ratio",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/fartcoin_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/fartcoin_stage1_loader.py:leverage.perp_vs_coinbase_spot_ratio",
+          "evidence_summary": "lib/v3/fartcoin_stage1_loader.py:leverage.perp_vs_coinbase_spot_ratio"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.liquidity.dex.usd.current",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "dexscreener",
+      "endpoint_or_method": "top Raydium pool liquidity.usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/fartcoin_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/fartcoin_stage1_loader.py:spot_liquidity.top_pool_liq_usd + collectors/_author_plan.py dex_pair_liquidity_usd pattern",
+          "evidence_summary": "lib/v3/fartcoin_stage1_loader.py:spot_liquidity.top_pool_liq_usd + collectors/_author_plan.py dex_pair_liquidity_usd pattern"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.ma.usd.200d",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.ma.usd.50d",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.price.usd.report",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.rs.vs_sol.pp.7d",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "spot klines RS window",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/rs.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/rs.py:ratio_change_pct + _author_plan.py klines_rs_pct",
+          "evidence_summary": "lib/v3/rs.py:ratio_change_pct + _author_plan.py klines_rs_pct"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "fart.supply.circulating.pct",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply/max_supply*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "commit_or_ref": "087066fc",
+          "locator": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "evidence_summary": "*_stage1_loader.py supply.circulating_pct_of_max"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "giga.price.usd.live",
+      "asset": "GIGA",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V4_HTML",
+      "recovery_tier": 1,
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.giga",
+      "provider": "dexscreener",
+      "endpoint_or_method": "dex:63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+      "selector": {
+        "type": "named_record_field",
+        "name": "dex_live_price_highest_liquidity"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V4_HTML",
+          "path": "index-v4.html",
+          "commit_or_ref": "087066fc",
+          "locator": "data-feed dex:63Lf\u2026",
+          "evidence_summary": "Dex highest-liquidity live price"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "global.participation.above_50dma.count",
+      "asset": "GLOBAL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "collect_participation \u2192 above_50d_n",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_participation + lib/v3/breadth_universe.py",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_participation + lib/v3/breadth_universe.py"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "global.participation.beat_btc.count",
+      "asset": "GLOBAL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "collect_participation \u2192 beat_btc_n",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_participation + lib/v3/breadth_universe.py",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_participation + lib/v3/breadth_universe.py"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.af.buys.usd.30d",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "CGPT_DECISION_COLLECT",
+      "recovery_tier": "CGPT_DECISION",
+      "source_key": "defillama",
+      "request_key": "defillama.overview.fees.dailyHoldersRevenue",
+      "provider": "DefiLlama",
+      "endpoint_or_method": "/overview/fees?dataType=dailyHoldersRevenue",
+      "selector": {
+        "type": "named_record_field",
+        "name": "defillama_hyperliquid_holders_revenue_30d",
+        "identity": {
+          "name": "Hyperliquid"
+        },
+        "field": "total30d"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "daily_af_buys: UNKNOWN",
+          "evidence_summary": "Stage-1 loader explicitly marks AF 30d buys unknown"
+        },
+        {
+          "type": "JOB1",
+          "path": "metrics/metric-registry.json",
+          "commit_or_ref": "0084838b",
+          "locator": "value $43.9M from HYPE Stage-1 evidence",
+          "evidence_summary": "Displayed value exists but no executable fetch/calc contract"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "CGPT resolved blocker after historical recovery: DefiLlama methodology defines Hyperliquid Holders Revenue as fees directed to the Assistance Fund for buying HYPE.",
+      "decision_reason": "DefiLlama methodology defines Hyperliquid Holders Revenue as fees directed to the Assistance Fund for buying HYPE.",
+      "decision_authority": "CGPT",
+      "decision_date": "2026-08-27"
+    },
+    {
+      "metric_id": "hype.af.inventory.share_hl_circ.pct",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "af_inventory/circulatingSupply*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py supply.af_inventory + hl_circulating",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py supply.af_inventory + hl_circulating",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py supply.af_inventory + hl_circulating"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.af.inventory.tokens.current",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "tokenDetails nonCirculatingUserBalances 0xfefe",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/asset_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/asset_live.py:collect_hype_live + hype_stage1_loader.py",
+          "evidence_summary": "lib/v3/autojob01/asset_live.py:collect_hype_live + hype_stage1_loader.py"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.ma.usd.200d",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.ma.usd.50d",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.oi.binance.usd.current",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterest.HYPEUSDT",
+      "provider": "binance",
+      "endpoint_or_method": "fapi/v1/openInterest HYPEUSDT \u00d7 mark from ticker",
+      "selector": {
+        "type": "named_record_field",
+        "name": "open_interest_usd",
+        "oi_pointer": "/openInterest",
+        "mark_request_key": "binance.fapi.ticker24h.HYPEUSDT",
+        "mark_pointer": "/lastPrice"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "BINANCE_PERP HYPEUSDT + _binance_lev openInterest",
+          "evidence_summary": "V3 Binance USDT-M OI for HYPE"
+        },
+        {
+          "type": "JOB1",
+          "path": "metrics/metric-registry.json",
+          "commit_or_ref": "0084838b",
+          "locator": "metric_id hype.oi.binance.usd.current",
+          "evidence_summary": "Canonical metric name specifies Binance OI USD"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Job 1 source_url pointed at CoinGecko page; metric_id + V3 BN_PERP resolve to Binance futures OI."
+    },
+    {
+      "metric_id": "hype.oi.native.usd.current",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "metaAndAssetCtxs HYPE row oi_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py:leverage.hype_token_oi_usd",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py:leverage.hype_token_oi_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.oi.platform.usd.current",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "platform open_interest_mark_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py:leverage.platform_oi_usd",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py:leverage.platform_oi_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.oi.token.usd.current",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "native HYPE perp OI (same as native)",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py:leverage.hype_token_oi_usd",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py:leverage.hype_token_oi_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.price.usd.report",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.stake.tokens.current",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "hl_stake_extract total_stake_hype",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py:staking.total_stake_hype",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py:staking.total_stake_hype"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.supply.circulating.pct",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid+coingecko",
+      "endpoint_or_method": "hl_circulating_pct OR cg_circulating_pct (conflict preserved)",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py:supply + collectors/_author_plan.py tokenDetails ratio_pct",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py:supply + collectors/_author_plan.py tokenDetails ratio_pct"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.supply.max.tokens",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "tokenDetails maxSupply",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/asset_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/asset_live.py:collect_hype_live",
+          "evidence_summary": "lib/v3/autojob01/asset_live.py:collect_hype_live"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.volume.l1_perp.usd.24h",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "platform day_notional_volume_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py:hl_perp_market_snapshot day_notional_volume_usd",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py:hl_perp_market_snapshot day_notional_volume_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "hype.volume.token.usd.24h",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "hyperliquid",
+      "endpoint_or_method": "HYPE row dayNtlVlm",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/hype_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/hype_stage1_loader.py:leverage.hype_token_day_notional_usd",
+          "evidence_summary": "lib/v3/hype_stage1_loader.py:leverage.hype_token_day_notional_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.devices.inventory.count",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": "io_explorer",
+      "request_key": "io.inventory",
+      "provider": "io_explorer",
+      "endpoint_or_method": "GET /v1/io-explorer/network/inventory-aggregated \u2192 data.total",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/data/total"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "inventory_total from inv_data.get(\"total\")",
+          "evidence_summary": "Stage-1 loads network_inventory-aggregated.json; inventory_total field"
+        },
+        {
+          "type": "JOB1",
+          "path": "metrics/metric-registry.json",
+          "commit_or_ref": "0084838b",
+          "locator": "io.devices.inventory.count source=io.net Explorer API",
+          "evidence_summary": "Job 1 names io.net Explorer inventory endpoint"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.emissions.tokens.remaining",
+      "asset": "IO",
+      "required": false,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "CGPT_DECISION_PRESERVE",
+      "recovery_tier": "CGPT_DECISION",
+      "source_key": null,
+      "request_key": null,
+      "provider": null,
+      "endpoint_or_method": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "emissions_design: 500M genesis + 300M over ~20y",
+          "evidence_summary": "Tokenomics narrative only; no live remaining-emissions API field"
+        }
+      ],
+      "semantic_match": {
+        "asset": "N/A",
+        "measure": "N/A",
+        "scope": "N/A",
+        "window": "N/A",
+        "unit": "N/A",
+        "update_mode": "N/A"
+      },
+      "notes": "Legacy pre-IDE fixed-emission tokenomics. io.net's Incentive Dynamic Engine went live 11 Jun 2026 and replaced inflation-based tokenomics with a demand-driven issuance/burn system. The historical 300M-over-20y statement must not be collected or represented as a current remaining-emissions figure.",
+      "decision_reason": "io.net IDE (Jun 2026) retired fixed 300M-over-20y emissions; no defensible current remaining-emissions collector.",
+      "decision_authority": "CGPT",
+      "decision_date": "2026-08-27"
+    },
+    {
+      "metric_id": "io.leverage.x.current",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "IOUSDT perp quoteVolume/spot quoteVolume",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/feeds_live.py:_binance_lev + _author_plan zec/io leverage pattern",
+          "evidence_summary": "lib/v3/autojob01/feeds_live.py:_binance_lev + _author_plan zec/io leverage pattern"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.ma.usd.200d",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.ma.usd.50d",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.oi.usd.current",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "fapi openInterest IOUSDT \u00d7 mark",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py derivatives + feeds_live _binance_lev",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/io_stage1_loader.py derivatives + feeds_live _binance_lev",
+          "evidence_summary": "lib/v3/io_stage1_loader.py derivatives + feeds_live _binance_lev"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.price.drawdown_from_ath.pct",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "ath_change_percentage",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py price_structure.drawdown_pct",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/io_stage1_loader.py price_structure.drawdown_pct",
+          "evidence_summary": "lib/v3/io_stage1_loader.py price_structure.drawdown_pct"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.price.usd.report",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.revenue.usd_per_day.mean_30d",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "io_explorer+defillama",
+      "endpoint_or_method": "total-earnings-summary avg_30d OR defillama io fees mean30",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/feeds_live.py:_io_earnings avg_30d",
+          "evidence_summary": "lib/v3/autojob01/feeds_live.py:_io_earnings avg_30d"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.rs.vs_sol.pp.30d",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "IO vs SOL klines 30d RS",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py rs_vs_sol_pp",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/io_stage1_loader.py rs_vs_sol_pp",
+          "evidence_summary": "lib/v3/io_stage1_loader.py rs_vs_sol_pp"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.rs.vs_sol.pp.7d",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "IO vs SOL klines 7d RS",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py rs_vs_sol_pp",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/io_stage1_loader.py rs_vs_sol_pp",
+          "evidence_summary": "lib/v3/io_stage1_loader.py rs_vs_sol_pp"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.supply.circulating.pct",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply/max_supply*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "commit_or_ref": "087066fc",
+          "locator": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "evidence_summary": "*_stage1_loader.py supply.circulating_pct_of_max"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.supply.circulating.tokens",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py supply.circulating_cg",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/io_stage1_loader.py supply.circulating_cg",
+          "evidence_summary": "lib/v3/io_stage1_loader.py supply.circulating_cg"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "io.supply.max.tokens",
+      "asset": "IO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "max_supply 800M design",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/io_stage1_loader.py supply.max_supply",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/io_stage1_loader.py supply.max_supply",
+          "evidence_summary": "lib/v3/io_stage1_loader.py supply.max_supply"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "lockin.price.usd.live",
+      "asset": "LOCKIN",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V4_HTML",
+      "recovery_tier": 1,
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.lockin",
+      "provider": "dexscreener",
+      "endpoint_or_method": "dex:8Ki8DpuWNxu9VsS3kQbarsCWMcFGWkzzA8pUPto9zBd5",
+      "selector": {
+        "type": "named_record_field",
+        "name": "dex_live_price_highest_liquidity"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V4_HTML",
+          "path": "index-v4.html",
+          "commit_or_ref": "087066fc",
+          "locator": "hold LOCKIN data-feed dex:8Ki8\u2026",
+          "evidence_summary": "Executable dex live-price rule in tick()"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.gpu_hours.approx_31d",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "nosana",
+      "endpoint_or_method": "stats gpu hours window total_field",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/nos_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/nos_stage1_loader.py:network.gpu_hours_window_total",
+          "evidence_summary": "lib/v3/nos_stage1_loader.py:network.gpu_hours_window_total"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.host_rewards.usd.cumulative",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "nosana",
+      "endpoint_or_method": "jobs/stats usdReward cumulative",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/nos_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/nos_stage1_loader.py:network.jobs_stats_usd_reward_cum",
+          "evidence_summary": "lib/v3/nos_stage1_loader.py:network.jobs_stats_usd_reward_cum"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.ma.usd.200d",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "CoinGecko daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.ma.usd.50d",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "CoinGecko daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.price.usd.report",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.return.pct.180d",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "geckoterminal/coingecko",
+      "endpoint_or_method": "returns_pct.180",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/nos_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/nos_stage1_loader.py:price_structure.returns_pct",
+          "evidence_summary": "lib/v3/nos_stage1_loader.py:price_structure.returns_pct"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.rs.vs_sol.pp.30d",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance/gecko",
+      "endpoint_or_method": "RS vs SOL 30d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/nos_stage1_loader.py rs packs",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/nos_stage1_loader.py rs packs",
+          "evidence_summary": "lib/v3/nos_stage1_loader.py rs packs"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.rs.vs_sol.pp.7d",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance/gecko",
+      "endpoint_or_method": "RS vs SOL 7d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/nos_stage1_loader.py rs packs",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/nos_stage1_loader.py rs packs",
+          "evidence_summary": "lib/v3/nos_stage1_loader.py rs packs"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.stake.ratio.pct",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "nosana",
+      "endpoint_or_method": "nosStaked/100M*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/feeds_live.py:_nos_indexer staked_pct + nos_stage1_loader",
+          "evidence_summary": "lib/v3/autojob01/feeds_live.py:_nos_indexer staked_pct + nos_stage1_loader"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.stake.tokens.current",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "nosana",
+      "endpoint_or_method": "stats nosStaked",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/nos_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/nos_stage1_loader.py:supply.nos_staked",
+          "evidence_summary": "lib/v3/nos_stage1_loader.py:supply.nos_staked"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "nos.supply.circulating.pct",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply/max_supply*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "commit_or_ref": "087066fc",
+          "locator": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "evidence_summary": "*_stage1_loader.py supply.circulating_pct_of_max"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "orca.price.usd.live",
+      "asset": "ORCA",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V4_HTML",
+      "recovery_tier": 1,
+      "source_key": "binance",
+      "request_key": "binance.spot.tickerPrice.ORCAUSDT",
+      "provider": "binance",
+      "endpoint_or_method": "spot:ORCAUSDT",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/price"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V4_HTML",
+          "path": "index-v4.html",
+          "commit_or_ref": "087066fc",
+          "locator": "data-feed spot:ORCAUSDT",
+          "evidence_summary": "Binance spot ticker price"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.buyback.usd.1d",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "pump.fun dailyHoldersRevenue total24h",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/pump_platform_health.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/pump_platform_health.py:buyback_burn.total_24h_usd",
+          "evidence_summary": "lib/v3/pump_platform_health.py:buyback_burn.total_24h_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.buyback.usd_per_day.current",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "dailyHoldersRevenue total24h",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/pump_platform_health.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/pump_platform_health.py",
+          "evidence_summary": "lib/v3/pump_platform_health.py"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.fees.usd_per_day.current",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "dailyFees total24h",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/pump_platform_health.py via _llama_fees fees_1d",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/pump_platform_health.py via _llama_fees fees_1d",
+          "evidence_summary": "lib/v3/pump_platform_health.py via _llama_fees fees_1d"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.holders.unattributed.pct",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "forensics",
+      "endpoint_or_method": "unattributed_still_held_top pct",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/pump_forensics_loader.py ownership unattributed",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/pump_forensics_loader.py ownership unattributed",
+          "evidence_summary": "lib/v3/pump_forensics_loader.py ownership unattributed"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.ma.usd.200d",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.ma.usd.50d",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.price.usd.report",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.revenue.usd_per_day.current",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "dailyRevenue total24h",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/pump_platform_health.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/pump_platform_health.py:revenue.total_24h_usd",
+          "evidence_summary": "lib/v3/pump_platform_health.py:revenue.total_24h_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "pump.supply.circulating.pct",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko+solana_rpc",
+      "endpoint_or_method": "circulating_pct_of_max",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/pump_stage1_evidence.py + pump_minidash",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/pump_stage1_evidence.py + pump_minidash",
+          "evidence_summary": "lib/v3/pump_stage1_evidence.py + pump_minidash"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.bme.emissions.tokens.last8",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "render_foundation",
+      "endpoint_or_method": "burn_vs_emissions_joined last8 node_emissions",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/render_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/render_stage1_loader.py:bme.last8.node_emissions",
+          "evidence_summary": "lib/v3/render_stage1_loader.py:bme.last8.node_emissions"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.bme.node_due.tokens.per_epoch",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "render_foundation",
+      "endpoint_or_method": "epochBurnStats latest_node_operator_due",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/render_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/render_stage1_loader.py:bme.node_operator_due_per_epoch",
+          "evidence_summary": "lib/v3/render_stage1_loader.py:bme.node_operator_due_per_epoch"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.bme.ratio.last4",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "render_foundation",
+      "endpoint_or_method": "last4 burn_emit_ratio",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/render_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/render_stage1_loader.py:bme.last4.ratio",
+          "evidence_summary": "lib/v3/render_stage1_loader.py:bme.last4.ratio"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.bme.ratio.last8",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "render_foundation",
+      "endpoint_or_method": "last8 burn_emit_ratio",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/render_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/render_stage1_loader.py:bme.last8.ratio",
+          "evidence_summary": "lib/v3/render_stage1_loader.py:bme.last8.ratio"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.emissions.tokens.remaining",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "CGPT_DECISION_COLLECT",
+      "recovery_tier": "CGPT_DECISION",
+      "source_key": "render_foundation",
+      "request_key": "render.dashboard.main",
+      "provider": "Render Network Foundation",
+      "endpoint_or_method": "official dashboard / Leftover Emissions",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "render_leftover_emissions",
+        "label": "Leftover Emissions"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB1",
+          "path": "metrics/metric-registry.json",
+          "commit_or_ref": "0084838b",
+          "locator": "source Foundation API epochBurnStats",
+          "evidence_summary": "Job 1 cites epochBurnStats URL"
+        },
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/render_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "BME burn/emit windows only",
+          "evidence_summary": "No remaining-emissions counter in Foundation loaders"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "CGPT Job 2B: collect Leftover Emissions from stats.renderfoundation.com; epochBurnStats is not the semantic source for remaining emissions.",
+      "decision_reason": "Official Render Foundation dashboard publishes explicit Leftover Emissions field.",
+      "decision_authority": "CGPT",
+      "decision_date": "2026-08-27"
+    },
+    {
+      "metric_id": "render.leverage.x.current",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "RENDERUSDT perp/spot 24h quote ratio",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/render_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/render_stage1_loader.py:derivatives.fut_spot + feeds_live _binance_lev",
+          "evidence_summary": "lib/v3/render_stage1_loader.py:derivatives.fut_spot + feeds_live _binance_lev"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.ma.usd.200d",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.ma.usd.50d",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "render.price.usd.report",
+      "asset": "RENDER",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "retardio.price.usd.live",
+      "asset": "RETARDIO",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V4_HTML",
+      "recovery_tier": 1,
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.retardio",
+      "provider": "dexscreener",
+      "endpoint_or_method": "dex:6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx",
+      "selector": {
+        "type": "named_record_field",
+        "name": "dex_live_price_highest_liquidity"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V4_HTML",
+          "path": "index-v4.html",
+          "commit_or_ref": "087066fc",
+          "locator": "hold RETARDIO data-feed dex:6ogz\u2026",
+          "evidence_summary": "Executable dex live-price rule in tick()"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.burn.tokens.per_year",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "solana_rpc",
+      "endpoint_or_method": "estimated burn from staking_inflation_burn",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sol_intel.py + sol stage1 staking_inflation_burn",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sol_intel.py + sol stage1 staking_inflation_burn",
+          "evidence_summary": "lib/v3/sol_intel.py + sol stage1 staking_inflation_burn"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.7d.x",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "overview/dexs solana.total7d / ethereum.total7d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio ratio_7d",
+          "evidence_summary": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio ratio_7d"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.latest_day.x",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "ratio_24h",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio",
+          "evidence_summary": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.x.current",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "ratio_24h alias current",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio",
+          "evidence_summary": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.fees.usd_per_day.current",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "defillama",
+      "endpoint_or_method": "summary/fees/solana total24h",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/feeds_live.py:_llama_fees + collect sol.fees",
+          "evidence_summary": "lib/v3/autojob01/feeds_live.py:_llama_fees + collect sol.fees"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.funding.rate.mean_7d",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "fundingRate history mean 7d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sol_intel.py funding 7d mean evidence",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sol_intel.py funding 7d mean evidence",
+          "evidence_summary": "lib/v3/sol_intel.py funding 7d mean evidence"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.issuance.tokens.per_year",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "solana_rpc",
+      "endpoint_or_method": "getInflationRate.total * total_sol",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/supporting_feeds.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/supporting_feeds.py:fetch_solana_network issuance_yr",
+          "evidence_summary": "lib/supporting_feeds.py:fetch_solana_network issuance_yr"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.leverage.x.current",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "SOLUSDT perp/spot quote ratio",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sol_intel.py fut_spot + feeds_live _binance_lev",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sol_intel.py fut_spot + feeds_live _binance_lev",
+          "evidence_summary": "lib/v3/sol_intel.py fut_spot + feeds_live _binance_lev"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.ma.usd.200d",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.ma.usd.50d",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.price.usd.report",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.stake.ratio.pct",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "solana_rpc",
+      "endpoint_or_method": "activatedStake/total*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/supporting_feeds.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/supporting_feeds.py:fetch_solana_network stake_pct",
+          "evidence_summary": "lib/supporting_feeds.py:fetch_solana_network stake_pct"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.staking.apy.pct",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "external_sample",
+      "endpoint_or_method": "liquid-staking APY sample 4.65\u20135.80 headline only",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sol_product.py APY sample \u2014 not live collector",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sol_product.py APY sample \u2014 not live collector",
+          "evidence_summary": "lib/v3/sol_product.py APY sample \u2014 not live collector"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "V3 cites sample APY band only \u2014 no pinned live APY endpoint"
+    },
+    {
+      "metric_id": "sol.supply.circulating.pct",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "solana_rpc+coingecko",
+      "endpoint_or_method": "circulating/total*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/supporting_feeds.py getSupply circ/total",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/supporting_feeds.py getSupply circ/total",
+          "evidence_summary": "lib/supporting_feeds.py getSupply circ/total"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.supply.net_change.tokens.per_year",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "derived",
+      "endpoint_or_method": "issuance - burn net SOL/yr",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sol_intel.py net ~+X SOL/yr",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sol_intel.py net ~+X SOL/yr",
+          "evidence_summary": "lib/v3/sol_intel.py net ~+X SOL/yr"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "sol.tps.all.current",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "solana_rpc",
+      "endpoint_or_method": "getRecentPerformanceSamples mean tps all",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sol_intel.py activity.tps_all_mean_20samples",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sol_intel.py activity.tps_all_mean_20samples",
+          "evidence_summary": "lib/v3/sol_intel.py activity.tps_all_mean_20samples"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "spx.holders.top20.pct",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "solana_rpc",
+      "endpoint_or_method": "solana_top20_pct_of_sol_mint",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/spx_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/spx_stage1_loader.py:holders.solana_top20_pct_of_sol_mint",
+          "evidence_summary": "lib/v3/spx_stage1_loader.py:holders.solana_top20_pct_of_sol_mint"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "spx.ma.usd.200d",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "spx.ma.usd.50d",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "spx.oi.change.pct.30d",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "CGPT_DECISION_COLLECT",
+      "recovery_tier": "CGPT_DECISION",
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterestHist.SPXUSDT.1d",
+      "provider": "Binance USD\u24c8-M Futures",
+      "endpoint_or_method": "openInterestHist SPXUSDT 1d sumOpenInterestValue",
+      "selector": {
+        "type": "named_record_field",
+        "name": "open_interest_change_pct",
+        "window": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB1",
+          "path": "metrics/metric-registry.json",
+          "commit_or_ref": "0084838b",
+          "locator": "definition: percent change in OI over 30d",
+          "evidence_summary": "Canonical definition is trailing OI % change"
+        },
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/spx_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "oi_vs_30d_max_pct from oi_pct_30d_max",
+          "evidence_summary": "V3 displays current OI as % of 30d max (~87%), not % change"
+        },
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "_oi_vs_30d openInterestHist",
+          "evidence_summary": "openInterestHist used for % of max, not period change"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "CGPT resolved conflict in favour of the approved Job-1 semantic definition. V3 oi_vs_30d_max_pct remains historical evidence for a different measure and is forbidden as an input to this metric.",
+      "decision_reason": "CGPT resolved conflict in favour of Job 1 trailing 30d OI % change; V3 oi_vs_30d_max_pct is a different measure.",
+      "decision_authority": "CGPT",
+      "decision_date": "2026-08-27"
+    },
+    {
+      "metric_id": "spx.price.usd.report",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "spx.return.pct.30d",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko/binance",
+      "endpoint_or_method": "returns 30d",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/spx_stage1_loader.py price_structure returns",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/spx_stage1_loader.py price_structure returns",
+          "evidence_summary": "lib/v3/spx_stage1_loader.py price_structure returns"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "spx.supply.circulating.pct",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply/max_supply*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "commit_or_ref": "087066fc",
+          "locator": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "evidence_summary": "*_stage1_loader.py supply.circulating_pct_of_max"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "spx.volume.perp.usd.24h",
+      "asset": "SPX",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": "binance",
+      "request_key": "binance.fapi.ticker24h.SPXUSDT",
+      "provider": "binance",
+      "endpoint_or_method": "fapi/v1/ticker/24hr SPXUSDT quoteVolume",
+      "selector": {
+        "type": "json_pointer",
+        "pointer": "/quoteVolume"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/spx_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "derivatives fut_quote_vol_24h from Binance futures",
+          "evidence_summary": "SPX perp 24h quote volume from Binance SPXUSDT"
+        },
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/feeds_live.py",
+          "commit_or_ref": "087066fc",
+          "locator": "BINANCE_PERP SPX6900\u2192SPXUSDT",
+          "evidence_summary": "AUTOJOB01 perp ticker feed"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.inflation.pct.current",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "zcash_explorer+stage1",
+      "endpoint_or_method": "estimated_annual_inflation_pct",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/zec_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/zec_stage1_loader.py:supply.estimated_annual_inflation_pct",
+          "evidence_summary": "lib/v3/zec_stage1_loader.py:supply.estimated_annual_inflation_pct"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.ma.usd.200d",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.ma.usd.50d",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "binance",
+      "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/sma_trend.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+          "evidence_summary": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.price.usd.report",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/autojob01/collect.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+          "evidence_summary": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.shielded.share.pct",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "zcash_explorer",
+      "endpoint_or_method": "shielded_pct_of_chain from valuePools",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/zec_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/zec_stage1_loader.py:monetary.shielded_pct_of_chain + collectors/_author_plan zec.shielded.tokens",
+          "evidence_summary": "lib/v3/zec_stage1_loader.py:monetary.shielded_pct_of_chain + collectors/_author_plan zec.shielded.tokens"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.supply.circulating.pct",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply/max_supply*100",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "commit_or_ref": "087066fc",
+          "locator": "*_stage1_loader.py supply.circulating_pct_of_max",
+          "evidence_summary": "*_stage1_loader.py supply.circulating_pct_of_max"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.supply.circulating.tokens",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "circulating_supply",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/zec_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/zec_stage1_loader.py:supply.circulating",
+          "evidence_summary": "lib/v3/zec_stage1_loader.py:supply.circulating"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "zec.supply.max.tokens",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "BLOCKED_SOURCE",
+      "previous_live_status": "BLOCKED_SOURCE",
+      "resolution": "RECOVERED_V3_CODE",
+      "recovery_tier": 2,
+      "source_key": null,
+      "request_key": null,
+      "provider": "coingecko",
+      "endpoint_or_method": "max_supply 21M",
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "V3_CODE",
+          "path": "lib/v3/zec_stage1_loader.py",
+          "commit_or_ref": "087066fc",
+          "locator": "lib/v3/zec_stage1_loader.py:supply.max_supply",
+          "evidence_summary": "lib/v3/zec_stage1_loader.py:supply.max_supply"
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": ""
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.1d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.btc",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Bitcoin ETF",
+        "tickers_must": [
+          "IBIT",
+          "FBTC",
+          "GBTC"
+        ],
+        "forbidden_tickers": [
+          "ETHA",
+          "BSOL",
+          "ETHE"
+        ],
+        "window": "latest",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "btc.etf.flow.usd.1d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.30d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.btc",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Bitcoin ETF",
+        "tickers_must": [
+          "IBIT",
+          "FBTC",
+          "GBTC"
+        ],
+        "forbidden_tickers": [
+          "ETHA",
+          "BSOL",
+          "ETHE"
+        ],
+        "window": "30d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "btc.etf.flow.usd.30d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.7d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.btc",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Bitcoin ETF",
+        "tickers_must": [
+          "IBIT",
+          "FBTC",
+          "GBTC"
+        ],
+        "forbidden_tickers": [
+          "ETHA",
+          "BSOL",
+          "ETHE"
+        ],
+        "window": "7d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "btc.etf.flow.usd.7d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "btc.return.pct.90d",
+      "asset": "BTC",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "bitcoin"
+        },
+        "field": "price_change_percentage_90d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "btc.return.pct.90d",
+          "evidence_summary": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.1d",
+      "asset": "ETH",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.eth",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Ethereum ETF",
+        "tickers_must": [
+          "ETHA",
+          "ETHE"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "BSOL",
+          "GBTC"
+        ],
+        "window": "latest",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "eth.etf.flow.usd.1d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.30d",
+      "asset": "ETH",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.eth",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Ethereum ETF",
+        "tickers_must": [
+          "ETHA",
+          "ETHE"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "BSOL",
+          "GBTC"
+        ],
+        "window": "30d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "eth.etf.flow.usd.30d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.7d",
+      "asset": "ETH",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.eth",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Ethereum ETF",
+        "tickers_must": [
+          "ETHA",
+          "ETHE"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "BSOL",
+          "GBTC"
+        ],
+        "window": "7d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "eth.etf.flow.usd.7d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "fart.return.pct.90d",
+      "asset": "FART",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "provider": "coingecko",
+      "endpoint_or_method": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {
+          "id": "fartcoin"
+        },
+        "field": "price_change_percentage_90d_in_currency"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "fart.return.pct.90d",
+          "evidence_summary": "Job 1 CoinGecko provenance and/or V3 CG_MARKETS relationship."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "hype.fees.change.pct.30d",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "provider": "defillama",
+      "endpoint_or_method": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_pct_change_last_n",
+        "pointer": "/totalDataChart",
+        "n": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "hype.fees.change.pct.30d",
+          "evidence_summary": "30d percent change of daily fees series."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "hype.fees.perps.usd.30d",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "provider": "defillama",
+      "endpoint_or_method": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_sum_last_n",
+        "pointer": "/totalDataChart",
+        "n": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "hype.fees.perps.usd.30d",
+          "evidence_summary": "Same DefiLlama hyperliquid-perp 30d fees payload as hype.fees.usd.30d; Job 1 URL identical."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "hype.fees.usd.30d",
+      "asset": "HYPE",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "provider": "defillama",
+      "endpoint_or_method": "defillama.summary.fees.hyperliquid-perp.dailyFees",
+      "selector": {
+        "type": "named_record_field",
+        "name": "chart_sum_last_n",
+        "pointer": "/totalDataChart",
+        "n": 30
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "hype.fees.usd.30d",
+          "evidence_summary": "Job 1 URL api.llama.fi/summary/fees/hyperliquid-perp."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "nos.jobs.approx_30d.count",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "provider": "nosana",
+      "endpoint_or_method": "nosana.jobs.count",
+      "selector": {
+        "type": "json_key",
+        "key": "last30Days"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "nos.jobs.approx_30d.count",
+          "evidence_summary": "Requires last30Days on jobs/count; else SOURCE_SCHEMA_MISMATCH."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "nos.nodes.with_running_jobs.count",
+      "asset": "NOS",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "provider": "nosana",
+      "endpoint_or_method": "nosana.jobs.count",
+      "selector": {
+        "type": "json_key",
+        "key": "distinctNodesWithRunningJobs"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "nos.nodes.with_running_jobs.count",
+          "evidence_summary": "Field name must exist on jobs/count. Fail closed if renamed."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "pump.liquidity.dex.usd.current",
+      "asset": "PUMP",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.pump",
+      "provider": "dexscreener",
+      "endpoint_or_method": "dexscreener.token.pump",
+      "selector": {
+        "type": "named_record_field",
+        "name": "dex_pair_liquidity_usd",
+        "chain_id": "solana",
+        "base_token_address": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn"
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "pump.liquidity.dex.usd.current",
+          "evidence_summary": "Job 1 source dexscreener; V3 DexScreener pair for PUMP mint. First-pair is forbidden \u2014 use identity pairAddress if present."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.1d",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.sol",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Solana ETF",
+        "tickers_must": [
+          "BSOL",
+          "VSOL"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "ETHA",
+          "GBTC"
+        ],
+        "window": "latest",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "sol.etf.flow.usd.1d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.30d",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.sol",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Solana ETF",
+        "tickers_must": [
+          "BSOL",
+          "VSOL"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "ETHA",
+          "GBTC"
+        ],
+        "window": "30d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "sol.etf.flow.usd.30d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.7d",
+      "asset": "SOL",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "provider": "farside",
+      "endpoint_or_method": "farside.html.sol",
+      "selector": {
+        "type": "explicit_html_selector",
+        "name": "farside_etf_flow",
+        "title_must": "Solana ETF",
+        "tickers_must": [
+          "BSOL",
+          "VSOL"
+        ],
+        "forbidden_tickers": [
+          "IBIT",
+          "ETHA",
+          "GBTC"
+        ],
+        "window": "7d",
+        "order": "newest_first"
+      },
+      "normalizer": {
+        "type": "millions_to_usd"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "sol.etf.flow.usd.7d",
+          "evidence_summary": "Job 1 Farside Investors; official HTML tables. Values stored as USD not millions."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "zec.shielded.tokens.current",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "zcash_explorer",
+      "request_key": "zcash.explorer.blockchain-info",
+      "provider": "zcash_explorer",
+      "endpoint_or_method": "zcash.explorer.blockchain-info",
+      "selector": {
+        "type": "named_record_field",
+        "name": "pool_sum",
+        "pointer": "/valuePools",
+        "ids": [
+          "sprout",
+          "sapling",
+          "orchard",
+          "ironwood"
+        ]
+      },
+      "normalizer": {
+        "type": "identity"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "zec.shielded.tokens.current",
+          "evidence_summary": "Job 1 zcashexplorer blockchain-info."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "zec.tx.count.24h",
+      "asset": "ZEC",
+      "required": true,
+      "previous_disposition": "COLLECT",
+      "previous_live_status": "LIVE_FAIL",
+      "resolution": "ALREADY_VALID",
+      "recovery_tier": 0,
+      "source_key": "zcash_explorer",
+      "request_key": "zcash.explorer.blockchain-info",
+      "provider": "zcash_explorer",
+      "endpoint_or_method": "zcash.explorer.blockchain-info",
+      "selector": {
+        "type": "json_key",
+        "key": "transactions24h"
+      },
+      "normalizer": {
+        "type": "integer"
+      },
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "JOB2_PLAN",
+          "path": "collectors/collector-plan.json",
+          "commit_or_ref": "e34452a",
+          "locator": "zec.tx.count.24h",
+          "evidence_summary": "Fail closed if explorer uses a different 24h tx field name."
+        }
+      ],
+      "semantic_match": {
+        "asset": true,
+        "measure": true,
+        "scope": true,
+        "window": true,
+        "unit": true,
+        "update_mode": true
+      },
+      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+    },
+    {
+      "metric_id": "drift.threshold.out.usd",
+      "asset": "DRIFT",
+      "required": false,
+      "previous_disposition": "PRESERVE",
+      "previous_live_status": "N/A",
+      "resolution": "INACTIVE",
+      "recovery_tier": "N/A",
+      "source_key": null,
+      "request_key": null,
+      "provider": null,
+      "endpoint_or_method": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "PRODUCT_STATE",
+          "path": "collectors/asset-state-overrides.json",
+          "commit_or_ref": "3ab20af",
+          "locator": "DRIFT=LEGACY_INACTIVE",
+          "evidence_summary": "No DRIFT collector work"
+        }
+      ],
+      "semantic_match": {
+        "asset": "N/A",
+        "measure": "N/A",
+        "scope": "N/A",
+        "window": "N/A",
+        "unit": "N/A",
+        "update_mode": "N/A"
+      },
+      "notes": "DRIFT LEGACY_INACTIVE"
+    },
+    {
+      "metric_id": "drift.threshold.this_move.usd",
+      "asset": "DRIFT",
+      "required": false,
+      "previous_disposition": "PRESERVE",
+      "previous_live_status": "N/A",
+      "resolution": "INACTIVE",
+      "recovery_tier": "N/A",
+      "source_key": null,
+      "request_key": null,
+      "provider": null,
+      "endpoint_or_method": null,
+      "selector": null,
+      "normalizer": null,
+      "derivation": null,
+      "evidence_refs": [
+        {
+          "type": "PRODUCT_STATE",
+          "path": "collectors/asset-state-overrides.json",
+          "commit_or_ref": "3ab20af",
+          "locator": "DRIFT=LEGACY_INACTIVE",
+          "evidence_summary": "No DRIFT collector work"
+        }
+      ],
+      "semantic_match": {
+        "asset": "N/A",
+        "measure": "N/A",
+        "scope": "N/A",
+        "window": "N/A",
+        "unit": "N/A",
+        "update_mode": "N/A"
+      },
+      "notes": "DRIFT LEGACY_INACTIVE"
+    }
+  ],
+  "cgpt_blocker_decisions_applied_at": "2026-08-27T12:00:00Z"
+}

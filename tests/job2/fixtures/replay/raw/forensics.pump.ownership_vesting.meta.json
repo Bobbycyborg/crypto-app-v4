@@ -1,0 +1,12 @@
+{
+  "source_key": "forensics",
+  "request_key": "forensics.pump.ownership_vesting",
+  "url": "file://local",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "bad1b14f46b810b5da24b0aeac422938420c46e40fa195f8c2f96e7c96af4dd2",
+  "raw_body_path": "forensics.pump.ownership_vesting.body",
+  "attempts": 1
+}

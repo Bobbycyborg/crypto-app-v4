@@ -6,7 +6,7 @@
   "http_status": 200,
   "fetched_at": "2026-08-26T12:00:00Z",
   "content_type": "application/json",
-  "body_sha256": "43e077e21e0c7ad6382453de81717cc9306a95e55f6dfb28e96539d6cb15379d",
+  "body_sha256": "80df3c6c3acbcef7f65a02d289d165309b932653579e7e2d8d291ff96de77b1b",
   "raw_body_path": "defillama.summary.fees.solana.dailyFees.body",
   "attempts": 1
 }

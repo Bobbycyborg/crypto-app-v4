@@ -1,0 +1,949 @@
+[
+  {
+    "metric_id": "bonk.price.usd.live",
+    "resolution": "RECOVERED_V4_HTML",
+    "provider": "binance",
+    "endpoint_or_method": "spot:BONKUSDT \u2192 api/v3/ticker/price",
+    "evidence": "index-v4.html:2728-2777 holdLivePx.tick spot batch",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "giga.price.usd.live",
+    "resolution": "RECOVERED_V4_HTML",
+    "provider": "dexscreener",
+    "endpoint_or_method": "dex:63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9 \u2192 /latest/dex/tokens/{mint}",
+    "evidence": "index-v4.html:2745-2756",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "orca.price.usd.live",
+    "resolution": "RECOVERED_V4_HTML",
+    "provider": "binance",
+    "endpoint_or_method": "spot:ORCAUSDT \u2192 api/v3/ticker/price",
+    "evidence": "index-v4.html:2728-2777",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "drift.price.usd.live",
+    "resolution": "INACTIVE",
+    "provider": null,
+    "endpoint_or_method": null,
+    "evidence": "metrics/JOB-V4-1-SUMMARY.json: drift non-wallet siren asset; no portfolio collector",
+    "semantic_match": "N/A",
+    "note": "DRIFT non-wallet \u2014 mark inactive not blocked"
+  },
+  {
+    "metric_id": "btc.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "btc.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "CoinGecko daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "CoinGecko daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "spx.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "spx.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "zec.ma.usd.50d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "zec.ma.usd.200d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "Binance daily closes \u2192 SMAcompute_sma_trend",
+    "evidence": "lib/v3/sma_trend.py:compute_sma_trend + VENUES map",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "btc.inflation.pct.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "derived",
+    "endpoint_or_method": "3.125*144*365/circulating*100 from CG circ",
+    "evidence": "lib/v3/autojob01/apply_dynamic.py:btc_body dial Issuance",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "btc.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply/21_000_000*100",
+    "evidence": "lib/v3/autojob01/apply_dynamic.py:btc_body + collect_prices",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "btc.stablecoin.change.pct.30d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "stablecoincharts/all change_30d_pct",
+    "evidence": "lib/stablecoin_supply.py:fetch_stablecoin_supply + lib/v3/autojob01/collect.py:collect_market",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "btc.oi.change.pct.1d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "fapi/futures/data/openInterestHist sumOpenInterestValue \u03941d",
+    "evidence": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map",
+    "semantic_match": "partial",
+    "note": "Source proven in V3 research layer; AUTOJOB01 lacks live change-pct extractor for BTCUSDT"
+  },
+  {
+    "metric_id": "btc.oi.change.pct.7d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "fapi/futures/data/openInterestHist sumOpenInterestValue \u03947d",
+    "evidence": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map",
+    "semantic_match": "partial",
+    "note": "Source proven in V3 research layer; AUTOJOB01 lacks live change-pct extractor for BTCUSDT"
+  },
+  {
+    "metric_id": "btc.oi.change.pct.30d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "fapi/futures/data/openInterestHist sumOpenInterestValue \u039430d",
+    "evidence": "lib/v3/btc_intel.py:openInterestHist evidence + lib/v3/btc_product.py OI \u0394 display; live BTC hist not wired in feeds_live oi_30d map",
+    "semantic_match": "partial",
+    "note": "Source proven in V3 research layer; AUTOJOB01 lacks live change-pct extractor for BTCUSDT"
+  },
+  {
+    "metric_id": "global.participation.above_50dma.count",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "collect_participation \u2192 above_50d_n",
+    "evidence": "lib/v3/autojob01/collect.py:collect_participation + lib/v3/breadth_universe.py",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "global.participation.beat_btc.count",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "collect_participation \u2192 beat_btc_n",
+    "evidence": "lib/v3/autojob01/collect.py:collect_participation + lib/v3/breadth_universe.py",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.holders.lp.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "stage2_overlay",
+    "endpoint_or_method": "Raydium LP 2.15%",
+    "evidence": "lib/v3/autojob01/apply_stage2_meme_overlay.py:FART_HOLDER_READ",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.holders.unattributed.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "stage2_overlay",
+    "endpoint_or_method": "33.23% unattributed top-20",
+    "evidence": "lib/v3/autojob01/apply_stage2_meme_overlay.py",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.holders.unit_treasury.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "stage2_overlay",
+    "endpoint_or_method": "Unit/Hyperunit treasury 9.77%",
+    "evidence": "lib/v3/autojob01/apply_stage2_meme_overlay.py",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.leverage.perp_spot_notional.x",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance+coinbase",
+    "endpoint_or_method": "perp_vs_coinbase_spot_ratio",
+    "evidence": "lib/v3/fartcoin_stage1_loader.py:leverage.perp_vs_coinbase_spot_ratio",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.liquidity.dex.usd.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "dexscreener",
+    "endpoint_or_method": "top Raydium pool liquidity.usd",
+    "evidence": "lib/v3/fartcoin_stage1_loader.py:spot_liquidity.top_pool_liq_usd + collectors/_author_plan.py dex_pair_liquidity_usd pattern",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.rs.vs_sol.pp.7d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "spot klines RS window",
+    "evidence": "lib/v3/rs.py:ratio_change_pct + _author_plan.py klines_rs_pct",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "fart.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply/max_supply*100",
+    "evidence": "*_stage1_loader.py supply.circulating_pct_of_max",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.af.buys.usd.30d",
+    "resolution": "SOURCE_DECISION_CONFLICT",
+    "provider": "defillama",
+    "endpoint_or_method": "hyperliquid-perp dailyHoldersRevenue 30d sum",
+    "evidence": "lib/v3/autojob01/apply_dynamic.py:llama_h hold_30d",
+    "semantic_match": "partial"
+  },
+  {
+    "metric_id": "hype.af.inventory.share_hl_circ.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "af_inventory/circulatingSupply*100",
+    "evidence": "lib/v3/hype_stage1_loader.py supply.af_inventory + hl_circulating",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.af.inventory.tokens.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "tokenDetails nonCirculatingUserBalances 0xfefe",
+    "evidence": "lib/v3/autojob01/asset_live.py:collect_hype_live + hype_stage1_loader.py",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.oi.binance.usd.current",
+    "resolution": "SOURCE_DECISION_CONFLICT",
+    "provider": "binance",
+    "endpoint_or_method": "fapi/v1/openInterest HYPEUSDT \u00d7 mark",
+    "evidence": "lib/v3/hype_stage1_loader.py:leverage.binance_oi_usd",
+    "semantic_match": "partial"
+  },
+  {
+    "metric_id": "hype.oi.native.usd.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "metaAndAssetCtxs HYPE row oi_usd",
+    "evidence": "lib/v3/hype_stage1_loader.py:leverage.hype_token_oi_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.oi.platform.usd.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "platform open_interest_mark_usd",
+    "evidence": "lib/v3/hype_stage1_loader.py:leverage.platform_oi_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.oi.token.usd.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "native HYPE perp OI (same as native)",
+    "evidence": "lib/v3/hype_stage1_loader.py:leverage.hype_token_oi_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.stake.tokens.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "hl_stake_extract total_stake_hype",
+    "evidence": "lib/v3/hype_stage1_loader.py:staking.total_stake_hype",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid+coingecko",
+    "endpoint_or_method": "hl_circulating_pct OR cg_circulating_pct (conflict preserved)",
+    "evidence": "lib/v3/hype_stage1_loader.py:supply + collectors/_author_plan.py tokenDetails ratio_pct",
+    "semantic_match": false
+  },
+  {
+    "metric_id": "hype.supply.max.tokens",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "tokenDetails maxSupply",
+    "evidence": "lib/v3/autojob01/asset_live.py:collect_hype_live",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.volume.l1_perp.usd.24h",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "platform day_notional_volume_usd",
+    "evidence": "lib/v3/hype_stage1_loader.py:hl_perp_market_snapshot day_notional_volume_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "hype.volume.token.usd.24h",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "hyperliquid",
+    "endpoint_or_method": "HYPE row dayNtlVlm",
+    "evidence": "lib/v3/hype_stage1_loader.py:leverage.hype_token_day_notional_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.leverage.x.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "IOUSDT perp quoteVolume/spot quoteVolume",
+    "evidence": "lib/v3/autojob01/feeds_live.py:_binance_lev + _author_plan zec/io leverage pattern",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.oi.usd.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "fapi openInterest IOUSDT \u00d7 mark",
+    "evidence": "lib/v3/io_stage1_loader.py derivatives + feeds_live _binance_lev",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.price.drawdown_from_ath.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "ath_change_percentage",
+    "evidence": "lib/v3/io_stage1_loader.py price_structure.drawdown_pct",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.revenue.usd_per_day.mean_30d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "io_explorer+defillama",
+    "endpoint_or_method": "total-earnings-summary avg_30d OR defillama io fees mean30",
+    "evidence": "lib/v3/autojob01/feeds_live.py:_io_earnings avg_30d",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.rs.vs_sol.pp.30d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "IO vs SOL klines 30d RS",
+    "evidence": "lib/v3/io_stage1_loader.py rs_vs_sol_pp",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.rs.vs_sol.pp.7d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "IO vs SOL klines 7d RS",
+    "evidence": "lib/v3/io_stage1_loader.py rs_vs_sol_pp",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply/max_supply*100",
+    "evidence": "*_stage1_loader.py supply.circulating_pct_of_max",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.supply.circulating.tokens",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply",
+    "evidence": "lib/v3/io_stage1_loader.py supply.circulating_cg",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "io.supply.max.tokens",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "max_supply 800M design",
+    "evidence": "lib/v3/io_stage1_loader.py supply.max_supply",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.gpu_hours.approx_31d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "nosana",
+    "endpoint_or_method": "stats gpu hours window total_field",
+    "evidence": "lib/v3/nos_stage1_loader.py:network.gpu_hours_window_total",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.host_rewards.usd.cumulative",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "nosana",
+    "endpoint_or_method": "jobs/stats usdReward cumulative",
+    "evidence": "lib/v3/nos_stage1_loader.py:network.jobs_stats_usd_reward_cum",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.return.pct.180d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "geckoterminal/coingecko",
+    "endpoint_or_method": "returns_pct.180",
+    "evidence": "lib/v3/nos_stage1_loader.py:price_structure.returns_pct",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.rs.vs_sol.pp.30d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance/gecko",
+    "endpoint_or_method": "RS vs SOL 30d",
+    "evidence": "lib/v3/nos_stage1_loader.py rs packs",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.rs.vs_sol.pp.7d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance/gecko",
+    "endpoint_or_method": "RS vs SOL 7d",
+    "evidence": "lib/v3/nos_stage1_loader.py rs packs",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.stake.ratio.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "nosana",
+    "endpoint_or_method": "nosStaked/100M*100",
+    "evidence": "lib/v3/autojob01/feeds_live.py:_nos_indexer staked_pct + nos_stage1_loader",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.stake.tokens.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "nosana",
+    "endpoint_or_method": "stats nosStaked",
+    "evidence": "lib/v3/nos_stage1_loader.py:supply.nos_staked",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "nos.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply/max_supply*100",
+    "evidence": "*_stage1_loader.py supply.circulating_pct_of_max",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.buyback.usd.1d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "pump.fun dailyHoldersRevenue total24h",
+    "evidence": "lib/v3/pump_platform_health.py:buyback_burn.total_24h_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.buyback.usd_per_day.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "dailyHoldersRevenue total24h",
+    "evidence": "lib/v3/pump_platform_health.py",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.fees.usd_per_day.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "dailyFees total24h",
+    "evidence": "lib/v3/pump_platform_health.py via _llama_fees fees_1d",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.holders.unattributed.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "forensics",
+    "endpoint_or_method": "unattributed_still_held_top pct",
+    "evidence": "lib/v3/pump_forensics_loader.py ownership unattributed",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.revenue.usd_per_day.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "dailyRevenue total24h",
+    "evidence": "lib/v3/pump_platform_health.py:revenue.total_24h_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "pump.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko+solana_rpc",
+    "endpoint_or_method": "circulating_pct_of_max",
+    "evidence": "lib/v3/pump_stage1_evidence.py + pump_minidash",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.bme.emissions.tokens.last8",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "render_foundation",
+    "endpoint_or_method": "burn_vs_emissions_joined last8 node_emissions",
+    "evidence": "lib/v3/render_stage1_loader.py:bme.last8.node_emissions",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.bme.node_due.tokens.per_epoch",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "render_foundation",
+    "endpoint_or_method": "epochBurnStats latest_node_operator_due",
+    "evidence": "lib/v3/render_stage1_loader.py:bme.node_operator_due_per_epoch",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.bme.ratio.last4",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "render_foundation",
+    "endpoint_or_method": "last4 burn_emit_ratio",
+    "evidence": "lib/v3/render_stage1_loader.py:bme.last4.ratio",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.bme.ratio.last8",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "render_foundation",
+    "endpoint_or_method": "last8 burn_emit_ratio",
+    "evidence": "lib/v3/render_stage1_loader.py:bme.last8.ratio",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.leverage.x.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "RENDERUSDT perp/spot 24h quote ratio",
+    "evidence": "lib/v3/render_stage1_loader.py:derivatives.fut_spot + feeds_live _binance_lev",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "render.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.burn.tokens.per_year",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "solana_rpc",
+    "endpoint_or_method": "estimated burn from staking_inflation_burn",
+    "evidence": "lib/v3/sol_intel.py + sol stage1 staking_inflation_burn",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.dex_eth_ratio.7d.x",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "overview/dexs solana.total7d / ethereum.total7d",
+    "evidence": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio ratio_7d",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.dex_eth_ratio.latest_day.x",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "ratio_24h",
+    "evidence": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.dex_eth_ratio.x.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "ratio_24h alias current",
+    "evidence": "lib/v3/autojob01/feeds_live.py:_llama_dex_ratio",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.fees.usd_per_day.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "defillama",
+    "endpoint_or_method": "summary/fees/solana total24h",
+    "evidence": "lib/v3/autojob01/feeds_live.py:_llama_fees + collect sol.fees",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.funding.rate.mean_7d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "fundingRate history mean 7d",
+    "evidence": "lib/v3/sol_intel.py funding 7d mean evidence",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.issuance.tokens.per_year",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "solana_rpc",
+    "endpoint_or_method": "getInflationRate.total * total_sol",
+    "evidence": "lib/supporting_feeds.py:fetch_solana_network issuance_yr",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.leverage.x.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "binance",
+    "endpoint_or_method": "SOLUSDT perp/spot quote ratio",
+    "evidence": "lib/v3/sol_intel.py fut_spot + feeds_live _binance_lev",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.stake.ratio.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "solana_rpc",
+    "endpoint_or_method": "activatedStake/total*100",
+    "evidence": "lib/supporting_feeds.py:fetch_solana_network stake_pct",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.staking.apy.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "external_sample",
+    "endpoint_or_method": "liquid-staking APY sample 4.65\u20135.80 headline only",
+    "evidence": "lib/v3/sol_product.py APY sample \u2014 not live collector",
+    "semantic_match": false,
+    "note": "V3 cites sample APY band only \u2014 no pinned live APY endpoint"
+  },
+  {
+    "metric_id": "sol.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "solana_rpc+coingecko",
+    "endpoint_or_method": "circulating/total*100",
+    "evidence": "lib/supporting_feeds.py getSupply circ/total",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.supply.net_change.tokens.per_year",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "derived",
+    "endpoint_or_method": "issuance - burn net SOL/yr",
+    "evidence": "lib/v3/sol_intel.py net ~+X SOL/yr",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "sol.tps.all.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "solana_rpc",
+    "endpoint_or_method": "getRecentPerformanceSamples mean tps all",
+    "evidence": "lib/v3/sol_intel.py activity.tps_all_mean_20samples",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "spx.holders.top20.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "solana_rpc",
+    "endpoint_or_method": "solana_top20_pct_of_sol_mint",
+    "evidence": "lib/v3/spx_stage1_loader.py:holders.solana_top20_pct_of_sol_mint",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "spx.oi.change.pct.30d",
+    "resolution": "SOURCE_DECISION_CONFLICT",
+    "provider": "binance",
+    "endpoint_or_method": "openInterestHist 30d \u0394 (not wired live; stage1 oi_vs_30d_max is different metric)",
+    "evidence": "lib/v3/spx_stage1_loader.py derivatives oi hist packs + feeds_live _oi_vs_30d pattern",
+    "semantic_match": "partial"
+  },
+  {
+    "metric_id": "spx.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "spx.return.pct.30d",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko/binance",
+    "endpoint_or_method": "returns 30d",
+    "evidence": "lib/v3/spx_stage1_loader.py price_structure returns",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "spx.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply/max_supply*100",
+    "evidence": "*_stage1_loader.py supply.circulating_pct_of_max",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "spx.volume.perp.usd.24h",
+    "resolution": "SOURCE_DECISION_CONFLICT",
+    "provider": "binance",
+    "endpoint_or_method": "fapi ticker24h SPXUSDT quoteVolume",
+    "evidence": "collectors/_author_plan.py spx.volume.perp (deleted) + binance pattern",
+    "semantic_match": "partial"
+  },
+  {
+    "metric_id": "zec.inflation.pct.current",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "zcash_explorer+stage1",
+    "endpoint_or_method": "estimated_annual_inflation_pct",
+    "evidence": "lib/v3/zec_stage1_loader.py:supply.estimated_annual_inflation_pct",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "zec.price.usd.report",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "coingecko.markets.current_price / stage1 price_structure.now_usd",
+    "evidence": "lib/v3/autojob01/collect.py:collect_prices + *_stage1_loader.py price_structure.now_usd",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "zec.shielded.share.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "zcash_explorer",
+    "endpoint_or_method": "shielded_pct_of_chain from valuePools",
+    "evidence": "lib/v3/zec_stage1_loader.py:monetary.shielded_pct_of_chain + collectors/_author_plan zec.shielded.tokens",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "zec.supply.circulating.pct",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply/max_supply*100",
+    "evidence": "*_stage1_loader.py supply.circulating_pct_of_max",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "zec.supply.circulating.tokens",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "circulating_supply",
+    "evidence": "lib/v3/zec_stage1_loader.py:supply.circulating",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "zec.supply.max.tokens",
+    "resolution": "RECOVERED_V3_CODE",
+    "provider": "coingecko",
+    "endpoint_or_method": "max_supply 21M",
+    "evidence": "lib/v3/zec_stage1_loader.py:supply.max_supply",
+    "semantic_match": true
+  },
+  {
+    "metric_id": "2z.price.usd.live",
+    "resolution": "TRUE_BLOCKER",
+    "provider": null,
+    "endpoint_or_method": null,
+    "evidence": "Desk-row static px only; no data-feed/tick contract in index-v4.html and no V3 live collector.",
+    "semantic_match": false,
+    "note": "Desk-row static px only; no data-feed/tick contract in index-v4.html and no V3 live collector."
+  },
+  {
+    "metric_id": "lockin.price.usd.live",
+    "resolution": "TRUE_BLOCKER",
+    "provider": null,
+    "endpoint_or_method": null,
+    "evidence": "Desk-row static px only; no data-feed/tick contract in index-v4.html and no V3 live collector.",
+    "semantic_match": false,
+    "note": "Desk-row static px only; no data-feed/tick contract in index-v4.html and no V3 live collector."
+  },
+  {
+    "metric_id": "retardio.price.usd.live",
+    "resolution": "TRUE_BLOCKER",
+    "provider": null,
+    "endpoint_or_method": null,
+    "evidence": "Desk-row static px only; no data-feed/tick contract in index-v4.html and no V3 live collector.",
+    "semantic_match": false,
+    "note": "Desk-row static px only; no data-feed/tick contract in index-v4.html and no V3 live collector."
+  },
+  {
+    "metric_id": "io.devices.inventory.count",
+    "resolution": "TRUE_BLOCKER",
+    "provider": null,
+    "endpoint_or_method": null,
+    "evidence": "V3 has running_clusters/total_compute_hours only \u2014 no devices.inventory field in io_stage1_loader or feeds_live",
+    "semantic_match": false,
+    "note": "V3 has running_clusters/total_compute_hours only \u2014 no devices.inventory field in io_stage1_loader or feeds_live"
+  },
+  {
+    "metric_id": "io.emissions.tokens.remaining",
+    "resolution": "TRUE_BLOCKER",
+    "provider": null,
+    "endpoint_or_method": null,
+    "evidence": "Only emissions_design narrative (~300M/20y); no first-party remaining-emissions API field in io_stage1_loader",
+    "semantic_match": false,
+    "note": "Only emissions_design narrative (~300M/20y); no first-party remaining-emissions API field in io_stage1_loader"
+  },
+  {
+    "metric_id": "render.emissions.tokens.remaining",
+    "resolution": "TRUE_BLOCKER",
+    "provider": null,
+    "endpoint_or_method": null,
+    "evidence": "BME tracks epoch emissions/burn windows; no remaining-emissions token counter in render_stage1_loader or asset_live",
+    "semantic_match": false,
+    "note": "BME tracks epoch emissions/burn windows; no remaining-emissions token counter in render_stage1_loader or asset_live"
+  }
+]

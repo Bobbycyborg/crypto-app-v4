@@ -4,9 +4,9 @@
   "url": "https://api.io.solutions/v1/io-explorer/network/info/clusters",
   "params": null,
   "http_status": 200,
-  "fetched_at": "2026-08-26T12:00:00Z",
+  "fetched_at": "2026-08-27T12:00:00Z",
   "content_type": "application/json",
-  "body_sha256": "0c9a60f10aa53eb29e70479d96b6ca4617c465e6976e70ca82288488764559fa",
+  "body_sha256": "30b5d93e1cad71862f67a60db0d785b1919814aa183e7b24bd7f47dcaa23013e",
   "raw_body_path": "io.clusters.body",
   "attempts": 1
 }

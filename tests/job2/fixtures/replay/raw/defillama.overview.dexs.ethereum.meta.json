@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.overview.dexs.ethereum",
+  "url": "https://api.llama.fi/overview/dexs/ethereum",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "db8e2a3e90c25918d1d2329ae87ffc4a89d2f526b07610e6718829061a100f08",
+  "raw_body_path": "defillama.overview.dexs.ethereum.body",
+  "attempts": 1
+}

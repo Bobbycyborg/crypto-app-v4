@@ -1,0 +1,12 @@
+{
+  "source_key": "coingecko",
+  "request_key": "coingecko.market_chart.nosana",
+  "url": "https://api.coingecko.com/api/v3/coins/nosana/market_chart",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "07f9e1907e7dcf43cb8a38010b81253df973a2f0ef8bde1905b2002dafa1a306",
+  "raw_body_path": "coingecko.market_chart.nosana.body",
+  "attempts": 1
+}

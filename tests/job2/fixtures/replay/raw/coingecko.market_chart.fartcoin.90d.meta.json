@@ -1,0 +1,12 @@
+{
+  "source_key": "coingecko",
+  "request_key": "coingecko.market_chart.fartcoin.90d",
+  "url": "https://api.coingecko.com/api/v3/coins/fartcoin/market_chart",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "e788a57bf6418fb3138d743349481f2c91fd84876a9caf83670cb5ec6a774951",
+  "raw_body_path": "coingecko.market_chart.fartcoin.90d.body",
+  "attempts": 1
+}

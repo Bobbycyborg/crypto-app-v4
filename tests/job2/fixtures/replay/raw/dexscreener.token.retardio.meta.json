@@ -1,0 +1,12 @@
+{
+  "source_key": "dexscreener",
+  "request_key": "dexscreener.token.retardio",
+  "url": "https://api.dexscreener.com/latest/dex/tokens/retardio",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "5aea1d4f1624db3311daf8971364daa3357af90bba0e52e449e1115fe359356f",
+  "raw_body_path": "dexscreener.token.retardio.body",
+  "attempts": 1
+}

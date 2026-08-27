@@ -6,7 +6,7 @@
   "http_status": 200,
   "fetched_at": "2026-08-26T12:00:00Z",
   "content_type": "application/json",
-  "body_sha256": "401eadb497c228f95b42568c238a7f89876998bbe26665f5e051b46949ed46f7",
+  "body_sha256": "5d47cdd5476fdf01ac0ddfa5f4f439fcca85559fe50f5ddd08cc5c3fddf6a25f",
   "raw_body_path": "binance.spot.klines.SOLUSDT.1d.body",
   "attempts": 1
 }

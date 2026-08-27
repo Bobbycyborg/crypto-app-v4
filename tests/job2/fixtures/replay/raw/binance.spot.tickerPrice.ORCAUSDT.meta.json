@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.spot.tickerPrice.ORCAUSDT",
+  "url": "https://api.binance.com/api/v3/ticker/price",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "b7d60a2300b166c5ad13fe8911fb304b975e949e06e9c9b4912788a6939dbbb2",
+  "raw_body_path": "binance.spot.tickerPrice.ORCAUSDT.body",
+  "attempts": 1
+}

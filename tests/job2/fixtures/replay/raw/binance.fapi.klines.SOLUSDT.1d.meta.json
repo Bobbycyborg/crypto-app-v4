@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.klines.SOLUSDT.1d",
+  "url": "https://fapi.binance.com/fapi/v1/klines",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "7ef776c54a7848a499ecb755b2a0520b4c3475293d8c934947f055fd1d8d2d3f",
+  "raw_body_path": "binance.fapi.klines.SOLUSDT.1d.body",
+  "attempts": 1
+}

@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.openInterest.SOLUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/openInterest",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "140b2046abb2928ee202c04565f8bde7961ccda57cc27f368c635139e21c35e4",
+  "raw_body_path": "binance.fapi.openInterest.SOLUSDT.body",
+  "attempts": 1
+}

@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.overview.dexs.solana",
+  "url": "https://api.llama.fi/overview/dexs/solana",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "1ff75b55b53c6735308593fe0783ee71cca89fb31f2d478aef15689319cd01a0",
+  "raw_body_path": "defillama.overview.dexs.solana.body",
+  "attempts": 1
+}

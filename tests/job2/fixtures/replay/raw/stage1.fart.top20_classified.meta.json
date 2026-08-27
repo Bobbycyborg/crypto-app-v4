@@ -1,0 +1,12 @@
+{
+  "source_key": "stage1_evidence",
+  "request_key": "stage1.fart.top20_classified",
+  "url": "file://local",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "77a0d0202e1b3e8935dccf7a56dfff359d0d44dfadd22c03d7990e434c8968d8",
+  "raw_body_path": "stage1.fart.top20_classified.body",
+  "attempts": 1
+}

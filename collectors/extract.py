@@ -96,6 +96,10 @@ def explicit_html_selector(html: str, selector: dict[str, Any]) -> Any:
     from html.parser import HTMLParser
 
     name = selector.get("name")
+    if name == "render_leftover_emissions":
+        from collectors.phase_b_selectors import render_leftover_emissions_html
+
+        return render_leftover_emissions_html(html, selector)
     if name != "farside_etf_flow":
         raise ExtractError("SOURCE_SCHEMA_MISMATCH", f"unknown html selector {name}")
 
@@ -260,12 +264,30 @@ def extract(doc: Any, selector: dict[str, Any], *, html: str | None = None) -> A
             return epoch_burn_last_n(doc, selector)
         if name == "by_state_count":
             return by_state_count(doc, selector)
+        if name == "ratio_pct" and selector.get("num_key") == "af_inventory":
+            from collectors.phase_b_selectors_extra import hype_af_share_hl_circ
+
+            return hype_af_share_hl_circ(doc, selector)
         if name == "ratio_pct":
+            if any(selector.get(k) for k in ("num_field", "den_field", "den_const")) or selector.get("identity"):
+                from collectors.phase_b_selectors_extra import ratio_pct_extended
+
+                return ratio_pct_extended(doc, selector)
             return ratio_pct(doc, selector)
         if name == "latest_list_field":
             return latest_list_field(doc, selector)
         if name == "dex_pair_liquidity_usd":
             return dex_pair_liquidity_usd(doc, selector)
+        if name:
+            from collectors.phase_b_selectors import dispatch_phase_b
+            from collectors.phase_b_selectors_extra import dispatch_phase_b_extra
+
+            out = dispatch_phase_b(name, doc, selector, html=html)
+            if out is not None:
+                return out
+            out = dispatch_phase_b_extra(name, doc, selector, html=html)
+            if out is not None:
+                return out
         return named_record_field(doc, selector)
     if stype == "csv_column":
         return csv_column(doc, selector)

@@ -1,0 +1,12 @@
+{
+  "source_key": "dexscreener",
+  "request_key": "dexscreener.token.fartcoin",
+  "url": "https://api.dexscreener.com/latest/dex/tokens/9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "e515912283feec2029542a08e890549f26789d722e6e33cef208a43c79fb873a",
+  "raw_body_path": "dexscreener.token.fartcoin.body",
+  "attempts": 1
+}

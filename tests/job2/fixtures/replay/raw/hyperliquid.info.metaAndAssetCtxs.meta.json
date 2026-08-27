@@ -1,0 +1,12 @@
+{
+  "source_key": "hyperliquid",
+  "request_key": "hyperliquid.info.metaAndAssetCtxs",
+  "url": "https://api.hyperliquid.xyz/info",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "a4efd290661583733a9bb95940553b3466708d36539defcf73fe01a273c83812",
+  "raw_body_path": "hyperliquid.info.metaAndAssetCtxs.body",
+  "attempts": 1
+}

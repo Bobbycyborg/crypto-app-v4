@@ -1,0 +1,12 @@
+{
+  "source_key": "io_explorer",
+  "request_key": "io.total_earnings_summary",
+  "url": "https://api.io.solutions/v1/io-explorer/network/info/cluster/total-earnings-summary",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "06288c86380c8ad024ad99fdb62debf46d827e050563b7f28bbbdc8e397b7964",
+  "raw_body_path": "io.total_earnings_summary.body",
+  "attempts": 1
+}

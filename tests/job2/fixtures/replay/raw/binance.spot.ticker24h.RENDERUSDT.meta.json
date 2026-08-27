@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.spot.ticker24h.RENDERUSDT",
+  "url": "https://api.binance.com/api/v3/ticker/24hr",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "ff1c582fec1a67be2a06e36c68d09c97f2be94a9ca47438370778a0f5efca0a5",
+  "raw_body_path": "binance.spot.ticker24h.RENDERUSDT.body",
+  "attempts": 1
+}

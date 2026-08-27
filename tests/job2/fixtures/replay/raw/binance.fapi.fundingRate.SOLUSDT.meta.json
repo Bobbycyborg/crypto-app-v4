@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.fapi.fundingRate.SOLUSDT",
+  "url": "https://fapi.binance.com/fapi/v1/fundingRate",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "ab2c6dd0a6d98817721f7bb1629d9622ca35c66814e5328c4dc1d4905d44a360",
+  "raw_body_path": "binance.fapi.fundingRate.SOLUSDT.body",
+  "attempts": 1
+}

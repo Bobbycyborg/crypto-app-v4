@@ -1,0 +1,12 @@
+{
+  "source_key": "defillama",
+  "request_key": "defillama.summary.fees.hyperliquid.dailyFees",
+  "url": "https://api.llama.fi/summary/fees/hyperliquid",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "2850f6581a13df2e86b3a7c613ff8de882dec33fdf14af7a1829f3fed21ef47d",
+  "raw_body_path": "defillama.summary.fees.hyperliquid.dailyFees.body",
+  "attempts": 1
+}

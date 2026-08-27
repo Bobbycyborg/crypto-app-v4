@@ -1,0 +1,12 @@
+{
+  "source_key": "solana_rpc",
+  "request_key": "solana.rpc.getTokenLargestAccounts.spx",
+  "url": "https://api.mainnet-beta.solana.com",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "e7b46814a3fed3e0137e1bddbacbfe0a8f4e7aed743e32654b070c44359e0b27",
+  "raw_body_path": "solana.rpc.getTokenLargestAccounts.spx.body",
+  "attempts": 1
+}

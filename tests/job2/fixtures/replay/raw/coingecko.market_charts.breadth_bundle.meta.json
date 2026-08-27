@@ -1,0 +1,12 @@
+{
+  "source_key": "coingecko",
+  "request_key": "coingecko.market_charts.breadth_bundle",
+  "url": "file://local",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "d9b84779b2752962ed9e99c4b80a09bad77e9188c969d4aa18d4adce61d3d397",
+  "raw_body_path": "coingecko.market_charts.breadth_bundle.body",
+  "attempts": 1
+}

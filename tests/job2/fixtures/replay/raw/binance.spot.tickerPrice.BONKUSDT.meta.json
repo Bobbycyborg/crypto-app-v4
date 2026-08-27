@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.spot.tickerPrice.BONKUSDT",
+  "url": "https://api.binance.com/api/v3/ticker/price",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "cc723de83667b99ff03cd895171d1ea2ea349021a50fe3d283bbf56e77f62341",
+  "raw_body_path": "binance.spot.tickerPrice.BONKUSDT.body",
+  "attempts": 1
+}

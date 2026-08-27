@@ -1,0 +1,12 @@
+{
+  "source_key": "dexscreener",
+  "request_key": "dexscreener.token.2z",
+  "url": "https://api.dexscreener.com/latest/dex/tokens/2z",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "6b78ed68835e70968affb3c226e4efeb6bed98913e42c5ae70426e6e1b204694",
+  "raw_body_path": "dexscreener.token.2z.body",
+  "attempts": 1
+}

@@ -69,15 +69,18 @@ def gates() -> dict[str, int]:
         "solana_rpc": "solana.rpc.",
         "zcash_explorer": "zcash.",
         "dexscreener": "dexscreener.",
+        "stage1_evidence": "stage1.",
+        "forensics": "forensics.",
+        "coinbase": "coinbase.",
     }
     for e in PLAN["entries"]:
         m = by[e["metric_id"]]
         if e["disposition"] == "COLLECT" and (m["owner"] == "GROK" or m["wallet_or_non_wallet"] == "WALLET"):
             g["wallet_collector"] += 1
-        if e["disposition"] in {"COLLECT", "DERIVE"} and m["asset"] in {"RAY", "GRASS"}:
+        if e["disposition"] in {"COLLECT", "DERIVE"} and m["asset"] in {"RAY", "GRASS", "DRIFT"}:
             g["dormant_asset_collector"] += 1
         if m["metric_type"] == "CURRENT_DYNAMIC" and m["wallet_or_non_wallet"] == "NON_WALLET":
-            if e["disposition"] not in {"COLLECT", "DERIVE", "PRESERVE", "BLOCKED_SOURCE", "COMPOSITE_ONLY"}:
+            if e["disposition"] not in {"COLLECT", "DERIVE", "PRESERVE", "BLOCKED_SOURCE", "COMPOSITE_ONLY", "LEGACY_INACTIVE"}:
                 g["required_dynamic_unaccounted"] += 1
         if e["disposition"] == "COLLECT":
             if not e.get("source_key"):

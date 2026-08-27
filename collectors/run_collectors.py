@@ -113,8 +113,10 @@ def validate_contract(plan: dict[str, Any], registry: dict[str, Any]) -> None:
             raise RuntimeError(f"wallet_collector mis-tagged {mid}")
         if disp == "COLLECT" and m["owner"] == "GROK":
             raise RuntimeError(f"wallet_collector {mid}")
-        if disp == "COLLECT" and m["asset"] in {"RAY", "GRASS"}:
+        if disp == "COLLECT" and m["asset"] in {"RAY", "GRASS", "DRIFT"}:
             raise RuntimeError(f"dormant_asset_collector {mid}")
+        if disp == "BLOCKED_SOURCE" and e.get("required"):
+            raise RuntimeError(f"required_blocked_source {mid}")
         if "helius" in json.dumps(e).lower():
             raise RuntimeError("helius mentioned in plan")
 
@@ -232,6 +234,13 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
         if bench_key not in captures:
             raise ExtractError("SOURCE_UNAVAILABLE", f"missing bench capture {bench_key}")
         return klines_rs_pct(cap.parsed, captures[bench_key].parsed, int(selector["window_days"])), None
+    if name == "market_chart_rs_pct":
+        bench_key = selector["bench_request_key"]
+        if bench_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing bench capture {bench_key}")
+        from collectors.phase_b_selectors_extra import market_chart_rs_pct
+
+        return market_chart_rs_pct(cap.parsed, captures[bench_key].parsed, int(selector["window_days"])), None
     if name == "open_interest_usd":
         mark_key = selector["mark_request_key"]
         if mark_key not in captures:
@@ -242,6 +251,41 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
         if spot_key not in captures:
             raise ExtractError("SOURCE_UNAVAILABLE", f"missing spot capture {spot_key}")
         return perp_spot_ratio(cap.parsed, captures[spot_key].parsed, selector), None
+    if name == "perp_vs_coinbase_spot_ratio":
+        spot_key = selector["spot_request_key"]
+        if spot_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing spot capture {spot_key}")
+        from collectors.phase_b_selectors_extra import perp_vs_coinbase_spot_ratio
+
+        return perp_vs_coinbase_spot_ratio(cap.parsed, captures[spot_key].parsed, selector), None
+    if name == "dex_chain_ratio":
+        den_key = selector["den_request_key"]
+        if den_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing den capture {den_key}")
+        from collectors.phase_b_selectors_extra import dex_chain_ratio
+
+        return dex_chain_ratio(cap.parsed, captures[den_key].parsed, selector), None
+    if name == "pump_circulating_pct_of_max":
+        sup_key = selector["solana_supply_request_key"]
+        if sup_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing supply capture {sup_key}")
+        from collectors.phase_b_selectors_extra import pump_circulating_pct_of_max
+
+        return pump_circulating_pct_of_max(cap.parsed, captures[sup_key].parsed, selector), None
+    if name == "solana_top20_pct_of_mint":
+        sup_key = selector["solana_supply_request_key"]
+        if sup_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing supply capture {sup_key}")
+        from collectors.phase_b_selectors_extra import solana_top20_pct_of_mint
+
+        return solana_top20_pct_of_mint(cap.parsed, captures[sup_key].parsed, selector), None
+    if name == "participation_above_50d_n":
+        charts_key = selector.get("charts_request_key", "coingecko.market_charts.breadth_bundle")
+        if charts_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing charts capture {charts_key}")
+        from collectors.phase_b_selectors_extra import participation_above_50d_n
+
+        return participation_above_50d_n(cap.parsed, selector, captures[charts_key].parsed), None
     raw = extract(cap.parsed, selector, html=cap.html)
     return raw, cap.meta.get("fetched_at")
 
@@ -249,7 +293,7 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
 def extra_request_keys(entry: dict[str, Any]) -> list[str]:
     sel = entry.get("selector") or {}
     extra = []
-    for k in ("bench_request_key", "mark_request_key", "spot_request_key"):
+    for k in ("bench_request_key", "mark_request_key", "spot_request_key", "den_request_key", "solana_supply_request_key", "charts_request_key"):
         if sel.get(k):
             extra.append(sel[k])
     return extra
@@ -435,13 +479,22 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
         facts.append(row)
         by_id[mid] = row
 
-    required = [e for e in entries if e.get("required") and e["disposition"] in {"COLLECT", "DERIVE"}]
-    req_ok = sum(1 for e in required if by_id.get(e["metric_id"], {}).get("status") == "OK")
-    req_fail = [e["metric_id"] for e in required if by_id.get(e["metric_id"], {}).get("status") != "OK"]
+    required_all = [e for e in entries if e.get("required")]
+    required_dynamic = [e for e in required_all if e["disposition"] in {"COLLECT", "DERIVE"}]
+    required_blocked = [e for e in required_all if e["disposition"] == "BLOCKED_SOURCE"]
+    req_ok = sum(1 for e in required_dynamic if by_id.get(e["metric_id"], {}).get("status") == "OK")
+    req_fail = [e["metric_id"] for e in required_dynamic if by_id.get(e["metric_id"], {}).get("status") != "OK"]
+    required_unaccounted = [
+        e["metric_id"]
+        for e in required_all
+        if e["disposition"] not in {"COLLECT", "DERIVE", "BLOCKED_SOURCE"}
+    ]
 
     if mode == "replay":
         overall = "REPLAY"
-    elif not required:
+    elif required_blocked or required_unaccounted:
+        overall = "FAIL"
+    elif not required_dynamic:
         overall = "SUCCESS"
     elif req_fail and req_ok:
         overall = "PARTIAL_FAIL"
@@ -460,9 +513,13 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
         "overall_status": overall,
         "mode": mode,
         "source_requests": len(needed_unique),
+        "required_total": len(required_all),
+        "required_dynamic": len(required_dynamic),
         "required_ok": req_ok,
         "required_failed": len(req_fail),
         "required_failed_ids": req_fail,
+        "required_blocked_source": [e["metric_id"] for e in required_blocked],
+        "required_dynamic_unaccounted": required_unaccounted,
         "facts": facts,
     }
     out_path = run_dir / "collector-run.json"

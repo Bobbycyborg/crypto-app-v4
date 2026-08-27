@@ -4,7 +4,7 @@
   "url": "https://fapi.binance.com/fapi/v1/ticker/24hr",
   "params": null,
   "http_status": 200,
-  "fetched_at": "2026-08-26T12:00:00Z",
+  "fetched_at": "2026-08-27T12:00:00Z",
   "content_type": "application/json",
   "body_sha256": "b0e029663e26788f10eda82ebbf0cdaeb754f35f8b721c9c7b7be56d41aa1812",
   "raw_body_path": "binance.fapi.ticker24h.SPXUSDT.body",

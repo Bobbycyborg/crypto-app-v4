@@ -1,0 +1,12 @@
+{
+  "source_key": "dexscreener",
+  "request_key": "dexscreener.token.lockin",
+  "url": "https://api.dexscreener.com/latest/dex/tokens/lockin",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "6b87b44a7b7f3f5edd9c1fab0b9503f5e0a2da580d4dd40997a51f4bfe52f0bf",
+  "raw_body_path": "dexscreener.token.lockin.body",
+  "attempts": 1
+}

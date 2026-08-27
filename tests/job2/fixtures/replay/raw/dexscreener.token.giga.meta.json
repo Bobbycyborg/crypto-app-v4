@@ -1,0 +1,12 @@
+{
+  "source_key": "dexscreener",
+  "request_key": "dexscreener.token.giga",
+  "url": "https://api.dexscreener.com/latest/dex/tokens/giga",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "2bf33051c7f29b4ee37c2df0eb1a33b82a7dec76079550d931a238e3bb9f72c4",
+  "raw_body_path": "dexscreener.token.giga.body",
+  "attempts": 1
+}

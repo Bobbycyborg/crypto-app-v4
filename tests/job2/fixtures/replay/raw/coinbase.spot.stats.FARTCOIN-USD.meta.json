@@ -1,0 +1,12 @@
+{
+  "source_key": "coinbase",
+  "request_key": "coinbase.spot.stats.FARTCOIN-USD",
+  "url": "https://api.exchange.coinbase.com/products/FARTCOIN-USD/stats",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "1c00de77c57074a54513b9a9f83d0e88e653847d98730134f5c0129fd78c778a",
+  "raw_body_path": "coinbase.spot.stats.FARTCOIN-USD.body",
+  "attempts": 1
+}

@@ -1,0 +1,12 @@
+{
+  "source_key": "io_explorer",
+  "request_key": "io.inventory",
+  "url": "https://api.io.solutions/v1/io-explorer/network/inventory-aggregated",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "5d8075dcb66124c301375534900752d2fd5cb89e880051ca89aeae7731de2316",
+  "raw_body_path": "io.inventory.body",
+  "attempts": 1
+}

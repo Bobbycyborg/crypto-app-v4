@@ -1,0 +1,12 @@
+{
+  "source_key": "binance",
+  "request_key": "binance.spot.klines.ZECUSDT.1d",
+  "url": "https://api.binance.com/api/v3/klines",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "b57916b640ccb1d5730a8d6b7c39ff554c907962db6da0aae67590953c43e773",
+  "raw_body_path": "binance.spot.klines.ZECUSDT.1d.body",
+  "attempts": 1
+}

@@ -1,0 +1,12 @@
+{
+  "source_key": "coingecko",
+  "request_key": "coingecko.market_chart.bitcoin.90d",
+  "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "d253f0ef850c94321419e435a49dbf646779ea6bd95c192131047088eb8c483e",
+  "raw_body_path": "coingecko.market_chart.bitcoin.90d.body",
+  "attempts": 1
+}

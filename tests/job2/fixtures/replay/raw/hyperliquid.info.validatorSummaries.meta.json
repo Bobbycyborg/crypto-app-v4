@@ -1,0 +1,12 @@
+{
+  "source_key": "hyperliquid",
+  "request_key": "hyperliquid.info.validatorSummaries",
+  "url": "https://api.hyperliquid.xyz/info",
+  "params": null,
+  "http_status": 200,
+  "fetched_at": "2026-08-27T12:00:00Z",
+  "content_type": "application/json",
+  "body_sha256": "65c4b0d397966401233a82d4011c9cfd34f28fe9593d636fcc1c8e28f96f6913",
+  "raw_body_path": "hyperliquid.info.validatorSummaries.body",
+  "attempts": 1
+}

@@ -85,7 +85,7 @@ def test_required_dynamic_accounted() -> None:
         if m["wallet_or_non_wallet"] != "NON_WALLET":
             continue
         e = next(x for x in PLAN["entries"] if x["metric_id"] == m["metric_id"])
-        assert e["disposition"] in {"COLLECT", "DERIVE", "PRESERVE", "BLOCKED_SOURCE", "COMPOSITE_ONLY"}
+        assert e["disposition"] in {"COLLECT", "DERIVE", "PRESERVE", "BLOCKED_SOURCE", "COMPOSITE_ONLY", "LEGACY_INACTIVE"}
 
 
 if __name__ == "__main__":

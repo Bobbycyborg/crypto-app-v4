@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Any
 
 from collectors.http_client import HttpError, HttpResponse, request as http_request
 from collectors.source_requests import REQUESTS
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _coingecko_headers() -> dict[str, str]:
@@ -23,6 +26,22 @@ def fetch(request_key: str) -> HttpResponse:
     if request_key not in REQUESTS:
         raise HttpError("SOURCE_UNAVAILABLE", f"unknown request_key {request_key}")
     spec = REQUESTS[request_key]
+    url = spec["url"]
+    if url.startswith("file://"):
+        from collectors.http_client import HttpResponse, body_sha256, utc_now
+
+        rel = url[len("file://") :]
+        path = (ROOT / rel) if not rel.startswith("/") else Path(rel)
+        body = path.read_bytes()
+        return HttpResponse(
+            url=url,
+            method=spec.get("method", "GET"),
+            status_code=200,
+            headers={"Content-Type": "application/json"},
+            body=body,
+            fetched_at=utc_now(),
+            attempts=1,
+        )
     extra = dict(spec.get("headers") or {})
     if spec.get("auth") == "coingecko_optional":
         extra.update(_coingecko_headers())
