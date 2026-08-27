@@ -1,0 +1,17 @@
+{
+  "alternative_me": "Alternative.me",
+  "binance": "Binance",
+  "coingecko": "CoinGecko",
+  "coinbase": "Coinbase",
+  "defillama": "DefiLlama",
+  "dexscreener": "DexScreener",
+  "farside": "Farside Investors",
+  "hyperliquid": "Hyperliquid",
+  "io_explorer": "io.net Explorer",
+  "nosana": "Nosana",
+  "render_foundation": "Render Network Foundation",
+  "solana_rpc": "Solana RPC",
+  "zcash_explorer": "Zcash Explorer",
+  "forensics": "Local forensic evidence",
+  "stage1_evidence": "Local forensic evidence"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "job3.writer_quarantine.v1",
+  "writers": [
+    {
+      "writer_id": "hold_card_live_price_tick",
+      "source_fragment": "    tick();\n    setInterval(tick, 45000);",
+      "replacement_fragment": "    /* JOB3_SHADOW_QUARANTINE: canonical snapshot owns CGPT hold-card prices */\n    void 0;",
+      "affected_metric_ids": [
+        "btc.price.usd.live",
+        "sol.price.usd.live",
+        "pump.price.usd.live",
+        "spx.price.usd.live",
+        "hype.price.usd.live",
+        "zec.price.usd.live",
+        "render.price.usd.live",
+        "nos.price.usd.live",
+        "io.price.usd.live",
+        "fart.price.usd.live",
+        "orca.price.usd.live"
+      ],
+      "expected_match_count": 1,
+      "reason": "Client-side Binance/DexScreener/CoinGecko fetches overwrite canonical hold-card and hero prices."
+    }
+  ]
+}

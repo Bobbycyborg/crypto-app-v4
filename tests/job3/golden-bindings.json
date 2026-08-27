@@ -1,0 +1,100 @@
+{
+  "cases": [
+    {
+      "binding_id": "spx.price.usd.live::025e0ac993bbe3d3",
+      "metric_id": "spx.price.usd.live",
+      "job1_occurrence_id": "025e0ac993bbe3d3",
+      "source_literal": "$0.373899"
+    },
+    {
+      "binding_id": "pump.buyback.usd.7d::0daaf51009abb31a",
+      "metric_id": "pump.buyback.usd.7d",
+      "job1_occurrence_id": "0daaf51009abb31a",
+      "source_literal": "$6.8<span class='econ-u'>M</span>"
+    },
+    {
+      "binding_id": "io.revenue.usd_per_day.mean_30d::16413e2a60b6440f:cumulativerecentea",
+      "metric_id": "io.revenue.usd_per_day.mean_30d",
+      "job1_occurrence_id": "16413e2a60b6440f:cumulativerecentea",
+      "source_literal": "$26,768/d"
+    },
+    {
+      "binding_id": "pump.rs.vs_sol.pct.7d::1794795161a85982",
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "job1_occurrence_id": "1794795161a85982",
+      "source_literal": "+27.7%"
+    },
+    {
+      "binding_id": "pump.rs.vs_btc.pct.7d::28771180a961620c:7d7d311",
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "job1_occurrence_id": "28771180a961620c:7d7d311",
+      "source_literal": "7d +31.1%"
+    },
+    {
+      "binding_id": "btc.price.usd.live::30f665b010005234",
+      "metric_id": "btc.price.usd.live",
+      "job1_occurrence_id": "30f665b010005234",
+      "source_literal": "$76,746"
+    },
+    {
+      "binding_id": "pump.revenue.usd.7d::393acc45f1ccb980",
+      "metric_id": "pump.revenue.usd.7d",
+      "job1_occurrence_id": "393acc45f1ccb980",
+      "source_literal": "$7.0M/wk"
+    },
+    {
+      "binding_id": "render.emissions.tokens.remaining::39a40b6c433056f2",
+      "metric_id": "render.emissions.tokens.remaining",
+      "job1_occurrence_id": "39a40b6c433056f2",
+      "source_literal": "60.0k"
+    },
+    {
+      "binding_id": "pump.price.usd.live::453887e2e9e73499",
+      "metric_id": "pump.price.usd.live",
+      "job1_occurrence_id": "453887e2e9e73499",
+      "source_literal": "$0.00409"
+    },
+    {
+      "binding_id": "hype.af.buys.usd.30d::4fb9087d25d45f86",
+      "metric_id": "hype.af.buys.usd.30d",
+      "job1_occurrence_id": "4fb9087d25d45f86",
+      "source_literal": "Llama ~$31M (Stage 1)</span>"
+    },
+    {
+      "binding_id": "sol.price.usd.live::504e882d9585718a",
+      "metric_id": "sol.price.usd.live",
+      "job1_occurrence_id": "504e882d9585718a",
+      "source_literal": "$90.18"
+    },
+    {
+      "binding_id": "fart.price.usd.live::527b99c36062be1b",
+      "metric_id": "fart.price.usd.live",
+      "job1_occurrence_id": "527b99c36062be1b",
+      "source_literal": "$0.180"
+    },
+    {
+      "binding_id": "btc.ma.usd.50d::642689b28dd7386d:50d63564",
+      "metric_id": "btc.ma.usd.50d",
+      "job1_occurrence_id": "642689b28dd7386d:50d63564",
+      "source_literal": "63564"
+    },
+    {
+      "binding_id": "nos.nodes.with_running_jobs.count::877eb59133d455c8",
+      "metric_id": "nos.nodes.with_running_jobs.count",
+      "job1_occurrence_id": "877eb59133d455c8",
+      "source_literal": "~35 WITH RUNNING JOBS"
+    },
+    {
+      "binding_id": "zec.tx.count.24h::c93bbc14605168f8",
+      "metric_id": "zec.tx.count.24h",
+      "job1_occurrence_id": "c93bbc14605168f8",
+      "source_literal": "5023</span>"
+    },
+    {
+      "binding_id": "nos.jobs.approx_30d.count::ec7564b9f608879c",
+      "metric_id": "nos.jobs.approx_30d.count",
+      "job1_occurrence_id": "ec7564b9f608879c",
+      "source_literal": "112,550</span>"
+    }
+  ]
+}
