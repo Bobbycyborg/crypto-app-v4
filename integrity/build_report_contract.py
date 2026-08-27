@@ -11,6 +11,10 @@ import sys
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from integrity.extract import classify_surface, extract_articles, extract_stance_headline
 from integrity.model import (
     ACTIVE_REPORT_ASSETS,
@@ -19,8 +23,6 @@ from integrity.model import (
     EXCLUDED_ASSETS,
     REQUIRED_CATEGORIES,
 )
-
-ROOT = Path(__file__).resolve().parents[1]
 
 DUPLICATE_FOCUS_SUFFIXES = (
     ".price.usd.live",
