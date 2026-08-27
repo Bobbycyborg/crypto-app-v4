@@ -31,13 +31,15 @@ Helius maxed; public-RPC ATA path. Persist each proof before splice. Sleep/backo
 | 2Z | 46 | 39 | 2 | 5 | 2 | batch 5 |
 | IO | 57 | 55 | 0 | 1 | 1 (Jupiter) | Jupiter not walked |
 | NOS | 75 | 70 | 3 | 2 | 3 | walked / honest DEFER |
-| RENDER | 62 | 49 | 0 | 8 | 5 (Jupiter, Render49, Render50, OKX, Binance) | nearly done |
-| BONK | 73 | 25 | 0 | 1 | 44 | still walking |
-| GIGA | 77 | 46 | 0 | 0 | 31 | still walking |
+| RENDER | 62 | 49 | 0 | 8 | 5 (Jupiter, Render49, Render50, OKX, Binance) | still walking leftovers |
+| BONK | 73 | 38 | 3 | 1 | 31 | batch 10 spliced +13; Bonk37/44/49 gt300 left as_of_now |
+| GIGA | 77 | 60 | 1 | 0 | 17 | batch 10 spliced +14; Giga65 gt300 left as_of_now |
 | GRASS | 57 | 0 | 0 | 0 | 57 | SKIP |
-| **total** | **586** | **415 on page** | **12** | **18** | **150 on page** | GRASS 57 of leftover are skip |
+| **total** | **586** | **442 on page** | **16** | **18** | **123 on page** | GRASS 57 of leftover are skip |
 
 PUMP / ORCA / DRIFT no fake27. HOM not present. G2 leftover 16 not walked.
+
+Live page after batch 10: RENDER 83 real / 5 fake27 / 14 dest. BONK 55 real / 31 fake27 / 9 dest. GIGA 77 real / 17 fake27 / 2 dest. IO 71 real / 1 fake27 / 4 dest.
 
 ## What this resume did / did not
 
@@ -61,9 +63,10 @@ Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card
 - `1a66bce` batch 4 SPX 38 (parallel `84f7e2c`)
 - `a625a6a` batch 5 pack (2Z HTML in parallel `baf3ee7`/`bcc4953`)
 - `6496feb` batch 8 RENDER/GIGA/BONK splice
-- This commit: further RENDER/GIGA/BONK splice. Hash: read `git log -1`.
+- `a45a9d5` batch 9
+- This commit: batch 10 GIGA +14 / BONK +13. Hash: read `git log -1`.
 - Parallel also landed `e657cb5`, `d63223d`, `8b207fc`, `e7dd955`.
 
 ## Status
 
-**NOT DONE.** Live leftover still as_of_now / still walking: RENDER 5, BONK 44, GIGA 31, IO Jupiter 1. GRASS skipped. Honest DEFERs left as_of_now on completed coins. Grok has not marked this complete.
+**NOT DONE.** Live leftover still as_of_now / still walking: RENDER 5, BONK 31, GIGA 17, IO Jupiter 1. Honest DEFER whale gt300 left as_of_now (BONK 3, GIGA 1). GRASS skipped. Grok has not marked this complete.
