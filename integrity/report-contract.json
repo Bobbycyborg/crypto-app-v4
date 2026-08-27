@@ -1,0 +1,1648 @@
+{
+  "active_report_assets": [
+    "btc",
+    "sol",
+    "render",
+    "pump",
+    "io",
+    "nos",
+    "fartcoin",
+    "spx6900",
+    "zec",
+    "hype"
+  ],
+  "ath_drawdown_rules": [
+    {
+      "asset": "btc",
+      "ath_metric_id": "btc.price.ath.usd",
+      "drawdown_metric_id": "btc.price.drawdown_from_ath.pct",
+      "price_metric_id": "btc.price.usd.live",
+      "rule_id": "btc::ath_drawdown"
+    },
+    {
+      "asset": "io",
+      "ath_metric_id": "io.price.ath.usd",
+      "drawdown_metric_id": "io.price.drawdown_from_ath.pct",
+      "price_metric_id": "io.price.usd.live",
+      "rule_id": "io::ath_drawdown"
+    }
+  ],
+  "binding_count": 418,
+  "binding_manifest_sha256": "d3c1d5b9878d032132592d5092c373e4ec6ae9088a9f0507f7768cf805a93ceb",
+  "bound_metric_ids": [
+    "2z.price.usd.live",
+    "bonk.price.usd.live",
+    "btc.etf.flow.usd.1d",
+    "btc.etf.flow.usd.30d",
+    "btc.etf.flow.usd.7d",
+    "btc.funding.rate.latest",
+    "btc.inflation.pct.current",
+    "btc.leverage.x.current",
+    "btc.ma.usd.200d",
+    "btc.ma.usd.50d",
+    "btc.oi.btc.current",
+    "btc.oi.change.pct.1d",
+    "btc.oi.change.pct.30d",
+    "btc.oi.change.pct.7d",
+    "btc.price.drawdown_from_ath.pct",
+    "btc.price.usd.july_2026_low",
+    "btc.price.usd.live",
+    "btc.price.usd.report",
+    "btc.return.pct.30d",
+    "btc.return.pct.7d",
+    "btc.return.pct.90d",
+    "btc.stablecoin.change.pct.30d",
+    "btc.supply.circulating.pct",
+    "btc.volume.perp.usd.24h",
+    "btc.volume.spot.usd.24h",
+    "eth.etf.flow.usd.1d",
+    "eth.etf.flow.usd.30d",
+    "eth.etf.flow.usd.7d",
+    "fart.funding.rate.latest",
+    "fart.holders.lp.pct",
+    "fart.holders.unattributed.pct",
+    "fart.holders.unit_treasury.pct",
+    "fart.leverage.perp_spot_notional.x",
+    "fart.liquidity.dex.usd.current",
+    "fart.ma.usd.200d",
+    "fart.ma.usd.50d",
+    "fart.market_cap.usd.current",
+    "fart.oi.usd.current",
+    "fart.price.usd.live",
+    "fart.price.usd.report",
+    "fart.return.pct.30d",
+    "fart.return.pct.7d",
+    "fart.return.pct.90d",
+    "fart.rs.vs_sol.pp.7d",
+    "fart.supply.circulating.pct",
+    "fart.supply.circulating.tokens",
+    "fart.supply.max.tokens",
+    "fart.volume.cg.usd.24h",
+    "fart.volume.perp.usd.24h",
+    "giga.price.usd.live",
+    "global.fear_greed.index.current",
+    "global.leverage.x.current",
+    "global.participation.above_50dma.count",
+    "global.participation.beat_btc.count",
+    "hype.af.buys.usd.30d",
+    "hype.af.inventory.share_hl_circ.pct",
+    "hype.af.inventory.tokens.current",
+    "hype.emissions.tokens.remaining",
+    "hype.fees.change.pct.30d",
+    "hype.fees.perps.usd.30d",
+    "hype.fees.usd.30d",
+    "hype.ma.usd.200d",
+    "hype.ma.usd.50d",
+    "hype.ncu.hyperlabs.tokens",
+    "hype.oi.binance.usd.current",
+    "hype.oi.native.usd.current",
+    "hype.oi.platform.usd.current",
+    "hype.oi.token.usd.current",
+    "hype.price.usd.live",
+    "hype.price.usd.report",
+    "hype.return.pct.30d",
+    "hype.return.pct.7d",
+    "hype.stake.tokens.current",
+    "hype.supply.circulating.pct",
+    "hype.supply.hl_circulating.pct",
+    "hype.supply.max.tokens",
+    "hype.volume.l1_perp.usd.24h",
+    "hype.volume.token.usd.24h",
+    "io.clusters.running.count",
+    "io.devices.inventory.count",
+    "io.leverage.x.current",
+    "io.ma.usd.200d",
+    "io.ma.usd.50d",
+    "io.oi.usd.current",
+    "io.price.drawdown_from_ath.pct",
+    "io.price.usd.live",
+    "io.price.usd.report",
+    "io.revenue.usd.cumulative",
+    "io.revenue.usd_per_day.mean_30d",
+    "io.rs.vs_sol.pp.30d",
+    "io.rs.vs_sol.pp.7d",
+    "io.supply.circulating.pct",
+    "io.supply.circulating.tokens",
+    "io.supply.max.tokens",
+    "lockin.price.usd.live",
+    "nos.gpu_hours.approx_31d",
+    "nos.host_rewards.usd.cumulative",
+    "nos.jobs.approx_30d.count",
+    "nos.jobs.completed.cumulative",
+    "nos.jobs.queued.count",
+    "nos.jobs.running.count",
+    "nos.ma.usd.200d",
+    "nos.ma.usd.50d",
+    "nos.market_cap.usd.current",
+    "nos.nodes.with_running_jobs.count",
+    "nos.price.usd.live",
+    "nos.price.usd.report",
+    "nos.return.pct.180d",
+    "nos.rs.vs_sol.pp.30d",
+    "nos.rs.vs_sol.pp.7d",
+    "nos.stake.ratio.pct",
+    "nos.stake.tokens.current",
+    "nos.supply.circulating.pct",
+    "nos.supply.circulating.tokens",
+    "nos.supply.max.tokens",
+    "orca.price.usd.live",
+    "pump.buyback.usd.1d",
+    "pump.buyback.usd.7d",
+    "pump.buyback.usd_per_day.current",
+    "pump.fees.usd_per_day.current",
+    "pump.funding.rate.latest",
+    "pump.holders.unattributed.pct",
+    "pump.leverage.x.current",
+    "pump.liquidity.dex.usd.current",
+    "pump.ma.usd.200d",
+    "pump.ma.usd.50d",
+    "pump.market_share.pct.current",
+    "pump.oi.usd.current",
+    "pump.price.usd.live",
+    "pump.price.usd.report",
+    "pump.revenue.usd.7d",
+    "pump.revenue.usd_per_day.current",
+    "pump.rs.vs_btc.pct.30d",
+    "pump.rs.vs_btc.pct.7d",
+    "pump.rs.vs_sol.pct.30d",
+    "pump.rs.vs_sol.pct.7d",
+    "pump.supply.circulating.pct",
+    "render.bme.burned.tokens.last4",
+    "render.bme.burned.tokens.last8",
+    "render.bme.emissions.tokens.last8",
+    "render.bme.node_due.tokens.per_epoch",
+    "render.bme.ratio.last4",
+    "render.bme.ratio.last8",
+    "render.emissions.tokens.remaining",
+    "render.funding.rate.latest",
+    "render.leverage.x.current",
+    "render.ma.usd.200d",
+    "render.ma.usd.50d",
+    "render.nodes.count.listed",
+    "render.price.usd.live",
+    "render.price.usd.report",
+    "render.supply.circulating.tokens",
+    "render.supply.max.tokens",
+    "render.usage.frames.cumulative",
+    "retardio.price.usd.live",
+    "sol.burn.tokens.per_year",
+    "sol.dex_eth_ratio.7d.x",
+    "sol.dex_eth_ratio.latest_day.x",
+    "sol.dex_eth_ratio.x.current",
+    "sol.etf.flow.usd.1d",
+    "sol.etf.flow.usd.30d",
+    "sol.etf.flow.usd.7d",
+    "sol.fees.usd_per_day.current",
+    "sol.fees.usd_per_day.mean_30d",
+    "sol.funding.rate.latest",
+    "sol.funding.rate.mean_7d",
+    "sol.inflation.pct.current",
+    "sol.issuance.tokens.per_year",
+    "sol.leverage.x.current",
+    "sol.ma.usd.200d",
+    "sol.ma.usd.50d",
+    "sol.price.usd.live",
+    "sol.price.usd.report",
+    "sol.rs.vs_btc.pp.30d",
+    "sol.rs.vs_btc.pp.7d",
+    "sol.stablecoin.usd.current",
+    "sol.stake.ratio.pct",
+    "sol.stake.tokens.current",
+    "sol.supply.circulating.pct",
+    "sol.supply.net_change.tokens.per_year",
+    "sol.tps.all.current",
+    "sol.tps.nonvote.current",
+    "sol.tvl.usd.current",
+    "sol.validators.active.count",
+    "spx.funding.rate.latest",
+    "spx.holders.top20.pct",
+    "spx.ma.usd.200d",
+    "spx.ma.usd.50d",
+    "spx.oi.binance.usd.current",
+    "spx.oi.change.pct.30d",
+    "spx.price.usd.live",
+    "spx.price.usd.report",
+    "spx.return.pct.30d",
+    "spx.supply.circulating.pct",
+    "spx.supply.circulating.tokens",
+    "spx.supply.max.tokens",
+    "spx.volume.perp.usd.24h",
+    "zec.inflation.pct.current",
+    "zec.leverage.x.current",
+    "zec.ma.usd.200d",
+    "zec.ma.usd.50d",
+    "zec.oi.binance.usd.current",
+    "zec.price.usd.live",
+    "zec.price.usd.report",
+    "zec.shielded.share.pct",
+    "zec.shielded.tokens.current",
+    "zec.supply.circulating.pct",
+    "zec.supply.circulating.tokens",
+    "zec.supply.max.tokens",
+    "zec.tx.count.24h",
+    "zec.volume.perp.usd.24h",
+    "zec.volume.spot.usd.24h"
+  ],
+  "cgpt_binding_count": 418,
+  "collector_plan_sha256": "24e6163a72480aea5db3d8ff39cc6d5846d83a75fc46f947ec7534d90c7ae7aa",
+  "derive_plan_count": 4,
+  "derive_rules": [
+    {
+      "calculation_version": "v1",
+      "inputs": [
+        "btc.volume.perp.usd.24h",
+        "btc.volume.spot.usd.24h"
+      ],
+      "metric_id": "btc.leverage.x.current",
+      "op": "RATIO"
+    },
+    {
+      "calculation_version": "v1",
+      "inputs": [
+        "btc.volume.perp.usd.24h",
+        "btc.volume.spot.usd.24h"
+      ],
+      "metric_id": "global.leverage.x.current",
+      "op": "RATIO"
+    },
+    {
+      "calculation_version": "v1",
+      "inputs": [
+        "sol.issuance.tokens.per_year",
+        "sol.burn.tokens.per_year"
+      ],
+      "metric_id": "sol.supply.net_change.tokens.per_year",
+      "op": "SUBTRACT"
+    },
+    {
+      "calculation_version": "v1",
+      "inputs": [
+        "zec.volume.perp.usd.24h",
+        "zec.volume.spot.usd.24h"
+      ],
+      "metric_id": "zec.leverage.x.current",
+      "op": "RATIO"
+    }
+  ],
+  "duplicate_focus_metrics": [
+    "bonk.price.usd.live",
+    "btc.price.usd.report",
+    "btc.return.pct.90d",
+    "fart.price.usd.live",
+    "giga.price.usd.live",
+    "hype.fees.perps.usd.30d",
+    "hype.fees.usd.30d",
+    "io.price.usd.live",
+    "io.price.usd.report",
+    "io.revenue.usd.cumulative",
+    "lockin.price.usd.live",
+    "nos.price.usd.live",
+    "orca.price.usd.live",
+    "pump.buyback.usd.7d",
+    "pump.liquidity.dex.usd.current",
+    "pump.price.usd.live",
+    "pump.price.usd.report",
+    "pump.revenue.usd.7d",
+    "render.price.usd.live",
+    "retardio.price.usd.live",
+    "sol.fees.usd_per_day.mean_30d",
+    "sol.price.usd.live",
+    "sol.price.usd.report",
+    "spx.price.usd.live"
+  ],
+  "duplicate_metric_groups": {
+    "bonk.price.usd.live": [
+      "bonk.price.usd.live::73f03441b6c01eac",
+      "bonk.price.usd.live::b5b7b250c5a338ce"
+    ],
+    "btc.etf.flow.usd.30d": [
+      "btc.etf.flow.usd.30d::2ca05ff63314ee52",
+      "btc.etf.flow.usd.30d::d433123463093159"
+    ],
+    "btc.etf.flow.usd.7d": [
+      "btc.etf.flow.usd.7d::4e665aa491e3ccf9",
+      "btc.etf.flow.usd.7d::a32aae108297e221"
+    ],
+    "btc.funding.rate.latest": [
+      "btc.funding.rate.latest::3d28b945387864b6",
+      "btc.funding.rate.latest::7a94480752764e78",
+      "btc.funding.rate.latest::f305f2b7fc15edc9",
+      "btc.funding.rate.latest::f4bcb3ebd02a2235"
+    ],
+    "btc.leverage.x.current": [
+      "btc.leverage.x.current::21b7837240ffeb26",
+      "btc.leverage.x.current::4e29f14202089731:futspot92",
+      "btc.leverage.x.current::59d0690ad45994a0",
+      "btc.leverage.x.current::5e94fd5eec55ccf5",
+      "btc.leverage.x.current::83e79a3d6f5e4ea9:futspot92",
+      "btc.leverage.x.current::b1f50b89bc241699:futspot92"
+    ],
+    "btc.oi.btc.current": [
+      "btc.oi.btc.current::686192d68b5a88c5",
+      "btc.oi.btc.current::6c1c38935408f171:oibtc1081kbtc",
+      "btc.oi.btc.current::7ba2b6b1fb29ad0a",
+      "btc.oi.btc.current::83e79a3d6f5e4ea9:oibtc1081kbtc",
+      "btc.oi.btc.current::d903f55218a2b840"
+    ],
+    "btc.oi.change.pct.30d": [
+      "btc.oi.change.pct.30d::a2274614121d519d",
+      "btc.oi.change.pct.30d::e8ccf1b726f518e0:oi30d0630d"
+    ],
+    "btc.price.drawdown_from_ath.pct": [
+      "btc.price.drawdown_from_ath.pct::0897b63f380b84f1",
+      "btc.price.drawdown_from_ath.pct::42d54decbba930f0:50retracedfromoct2",
+      "btc.price.drawdown_from_ath.pct::ac4fa868419ba6fe"
+    ],
+    "btc.price.usd.july_2026_low": [
+      "btc.price.usd.july_2026_low::8ce3f1ada0980dc5",
+      "btc.price.usd.july_2026_low::8e211dc83ffa5276"
+    ],
+    "btc.price.usd.report": [
+      "btc.price.usd.report::24c837b712b58400",
+      "btc.price.usd.report::ba1ef26f7d76c556"
+    ],
+    "btc.return.pct.90d": [
+      "btc.return.pct.90d::41853ba2672d0f84",
+      "btc.return.pct.90d::b87e9c35bd0167f2"
+    ],
+    "btc.stablecoin.change.pct.30d": [
+      "btc.stablecoin.change.pct.30d::25f46221e3451a9f",
+      "btc.stablecoin.change.pct.30d::7ee483ab6cff0974"
+    ],
+    "eth.etf.flow.usd.30d": [
+      "eth.etf.flow.usd.30d::50b5d3b0940183f2",
+      "eth.etf.flow.usd.30d::8ba3f2526ae91edf"
+    ],
+    "eth.etf.flow.usd.7d": [
+      "eth.etf.flow.usd.7d::3cd3a486a27b1969",
+      "eth.etf.flow.usd.7d::c72511a0c7139bdb"
+    ],
+    "fart.holders.lp.pct": [
+      "fart.holders.lp.pct::320ffbe509342af0:lp215",
+      "fart.holders.lp.pct::a3d9b29267fdd2ed:lp215",
+      "fart.holders.lp.pct::ddb276c08d5d7063:lp215",
+      "fart.holders.lp.pct::e84341f646bcb0a8:lp215",
+      "fart.holders.lp.pct::f0b525c079c6f8f3:lp215"
+    ],
+    "fart.holders.unattributed.pct": [
+      "fart.holders.unattributed.pct::320ffbe509342af0:unattributed3323",
+      "fart.holders.unattributed.pct::a3d9b29267fdd2ed:unattributed3323",
+      "fart.holders.unattributed.pct::ddb276c08d5d7063:unattributed3323",
+      "fart.holders.unattributed.pct::e84341f646bcb0a8:unattributed3323",
+      "fart.holders.unattributed.pct::f0b525c079c6f8f3:unattributed3323"
+    ],
+    "fart.holders.unit_treasury.pct": [
+      "fart.holders.unit_treasury.pct::320ffbe509342af0:unit977",
+      "fart.holders.unit_treasury.pct::a3d9b29267fdd2ed:unit977",
+      "fart.holders.unit_treasury.pct::ddb276c08d5d7063:unit977",
+      "fart.holders.unit_treasury.pct::e84341f646bcb0a8:unit977",
+      "fart.holders.unit_treasury.pct::f0b525c079c6f8f3:unit977"
+    ],
+    "fart.leverage.perp_spot_notional.x": [
+      "fart.leverage.perp_spot_notional.x::208f55354ce7acee",
+      "fart.leverage.perp_spot_notional.x::b30ad0df00843f02"
+    ],
+    "fart.price.usd.live": [
+      "fart.price.usd.live::527b99c36062be1b",
+      "fart.price.usd.live::63ef23570133b680"
+    ],
+    "giga.price.usd.live": [
+      "giga.price.usd.live::18b120ce5c37820f",
+      "giga.price.usd.live::64d09ef0404301de"
+    ],
+    "hype.af.buys.usd.30d": [
+      "hype.af.buys.usd.30d::4fb9087d25d45f86",
+      "hype.af.buys.usd.30d::6e76f75749f04a82"
+    ],
+    "hype.af.inventory.tokens.current": [
+      "hype.af.inventory.tokens.current::5b8bee4b7950805f",
+      "hype.af.inventory.tokens.current::8d23e70b11cfd9aa",
+      "hype.af.inventory.tokens.current::9ac30afdf3ead167",
+      "hype.af.inventory.tokens.current::a04faa11acc7f55b",
+      "hype.af.inventory.tokens.current::a2683f1c73f5a835",
+      "hype.af.inventory.tokens.current::d64ddb15b8868ae9",
+      "hype.af.inventory.tokens.current::e827ccf80fb90642"
+    ],
+    "hype.emissions.tokens.remaining": [
+      "hype.emissions.tokens.remaining::13b43a25b12316d7",
+      "hype.emissions.tokens.remaining::7f82c3d8eb5d4bbc",
+      "hype.emissions.tokens.remaining::87e62f589c2255b7",
+      "hype.emissions.tokens.remaining::ee87a61b01678f80"
+    ],
+    "hype.fees.perps.usd.30d": [
+      "hype.fees.perps.usd.30d::1c189ddf33d2e9cd:fees30d448m",
+      "hype.fees.perps.usd.30d::2e6f7832ec8ec37d:30d448m",
+      "hype.fees.perps.usd.30d::98c64419c5099855:fees30d448m"
+    ],
+    "hype.fees.usd.30d": [
+      "hype.fees.usd.30d::5671055251eb27b1",
+      "hype.fees.usd.30d::5dc5ae04fd3b4e43:fees30d592m"
+    ],
+    "hype.ma.usd.200d": [
+      "hype.ma.usd.200d::af4e74cd0dc0cb3c",
+      "hype.ma.usd.200d::b30dcf05d042f130:200d479"
+    ],
+    "hype.ma.usd.50d": [
+      "hype.ma.usd.50d::b30dcf05d042f130:50d605",
+      "hype.ma.usd.50d::cffa7cfc1a16ef25"
+    ],
+    "hype.ncu.hyperlabs.tokens": [
+      "hype.ncu.hyperlabs.tokens::25b28d979d9d69df",
+      "hype.ncu.hyperlabs.tokens::2630634f3ec0d86b",
+      "hype.ncu.hyperlabs.tokens::9227e6b8a62d57d3"
+    ],
+    "hype.supply.circulating.pct": [
+      "hype.supply.circulating.pct::36a29921e78b751e",
+      "hype.supply.circulating.pct::5c28b0a1723262b4:cg222",
+      "hype.supply.circulating.pct::67cbe4dae3a4824a:cg222",
+      "hype.supply.circulating.pct::9190de8b5a2851a0:cg222",
+      "hype.supply.circulating.pct::a9f447d56301e1e8",
+      "hype.supply.circulating.pct::cf8ae40fe3d96b46"
+    ],
+    "hype.supply.hl_circulating.pct": [
+      "hype.supply.hl_circulating.pct::07d506b08c3e769d",
+      "hype.supply.hl_circulating.pct::67cbe4dae3a4824a:hl299",
+      "hype.supply.hl_circulating.pct::9190de8b5a2851a0:hl299",
+      "hype.supply.hl_circulating.pct::eea7beba279a0669"
+    ],
+    "hype.supply.max.tokens": [
+      "hype.supply.max.tokens::882fb6d7d01cadca",
+      "hype.supply.max.tokens::e2dad50d6635ef02"
+    ],
+    "io.clusters.running.count": [
+      "io.clusters.running.count::0a1a37f1eab05b33",
+      "io.clusters.running.count::1dc836b7c48f0541",
+      "io.clusters.running.count::834a7aadcaad8a2d"
+    ],
+    "io.devices.inventory.count": [
+      "io.devices.inventory.count::0c34a5c5100d3441",
+      "io.devices.inventory.count::5de12316ce0bf4c9"
+    ],
+    "io.leverage.x.current": [
+      "io.leverage.x.current::3e290849fe7796b7:futspot25",
+      "io.leverage.x.current::9e1aaecfccbf4d64:futspot25"
+    ],
+    "io.price.drawdown_from_ath.pct": [
+      "io.price.drawdown_from_ath.pct::21dc61c12e638001",
+      "io.price.drawdown_from_ath.pct::ea9d44fbfd2175d8"
+    ],
+    "io.price.usd.live": [
+      "io.price.usd.live::58c7b916dbe131ff",
+      "io.price.usd.live::c482e55850cf0dec"
+    ],
+    "io.price.usd.report": [
+      "io.price.usd.report::9e69194b7d9aa7c7",
+      "io.price.usd.report::a4dd9235dfaa20e3",
+      "io.price.usd.report::ea2b02196eabd46c"
+    ],
+    "io.revenue.usd.cumulative": [
+      "io.revenue.usd.cumulative::0838de4cdf309fcc",
+      "io.revenue.usd.cumulative::16413e2a60b6440f:cumulativerecentea",
+      "io.revenue.usd.cumulative::320417c333ae71cd",
+      "io.revenue.usd.cumulative::8c51171f444341cb",
+      "io.revenue.usd.cumulative::c6fa4b446b7ccaaa"
+    ],
+    "io.supply.circulating.tokens": [
+      "io.supply.circulating.tokens::07eba86eb93f67ce:circ3815m",
+      "io.supply.circulating.tokens::4c89892ae0b04360",
+      "io.supply.circulating.tokens::dfb9b67f12a9da8b"
+    ],
+    "io.supply.max.tokens": [
+      "io.supply.max.tokens::65fbbf6e3343eaed",
+      "io.supply.max.tokens::e460a727efcc3f75"
+    ],
+    "lockin.price.usd.live": [
+      "lockin.price.usd.live::25343c98ae3accac",
+      "lockin.price.usd.live::36f96b755b9b2dc5"
+    ],
+    "nos.gpu_hours.approx_31d": [
+      "nos.gpu_hours.approx_31d::77f5e0c5f5c97383",
+      "nos.gpu_hours.approx_31d::edcbee5edc844ffc",
+      "nos.gpu_hours.approx_31d::f5e7c0d619aab1c5:gpuhours119219"
+    ],
+    "nos.jobs.completed.cumulative": [
+      "nos.jobs.completed.cumulative::1d70a41f9cd855bf",
+      "nos.jobs.completed.cumulative::8a7acfe56c2b879d",
+      "nos.jobs.completed.cumulative::90b401930a563bb4",
+      "nos.jobs.completed.cumulative::df45ff651c167316"
+    ],
+    "nos.jobs.running.count": [
+      "nos.jobs.running.count::79a3a1858e972d92:running855",
+      "nos.jobs.running.count::f5e7c0d619aab1c5:run855"
+    ],
+    "nos.nodes.with_running_jobs.count": [
+      "nos.nodes.with_running_jobs.count::877eb59133d455c8",
+      "nos.nodes.with_running_jobs.count::baa55547a5695da9"
+    ],
+    "nos.price.usd.live": [
+      "nos.price.usd.live::13f0e3cdd09e3d1b",
+      "nos.price.usd.live::d29ac7bd42e0e62f"
+    ],
+    "nos.rs.vs_sol.pp.30d": [
+      "nos.rs.vs_sol.pp.30d::9d0645ac4922908a",
+      "nos.rs.vs_sol.pp.30d::b34efe8a5e4c05de"
+    ],
+    "nos.stake.tokens.current": [
+      "nos.stake.tokens.current::69aa8295b5417079",
+      "nos.stake.tokens.current::fce31b59911d5951"
+    ],
+    "orca.price.usd.live": [
+      "orca.price.usd.live::5f9063265687a410",
+      "orca.price.usd.live::bae7ded108edf8ee"
+    ],
+    "pump.buyback.usd.7d": [
+      "pump.buyback.usd.7d::0daaf51009abb31a",
+      "pump.buyback.usd.7d::3b8d75372c0e8124",
+      "pump.buyback.usd.7d::7ce8fc75d909ed4e",
+      "pump.buyback.usd.7d::bd56dd7ac70f9c09",
+      "pump.buyback.usd.7d::c905dff4eb51a867",
+      "pump.buyback.usd.7d::de7215bafc54955d"
+    ],
+    "pump.holders.unattributed.pct": [
+      "pump.holders.unattributed.pct::14145797567ef9dd",
+      "pump.holders.unattributed.pct::4ab9170002071863",
+      "pump.holders.unattributed.pct::90480fddfa1b1a79"
+    ],
+    "pump.leverage.x.current": [
+      "pump.leverage.x.current::34f4602ccc14f63a",
+      "pump.leverage.x.current::d127babf5a502dee",
+      "pump.leverage.x.current::dd4c516723857ac9"
+    ],
+    "pump.liquidity.dex.usd.current": [
+      "pump.liquidity.dex.usd.current::4db159f646a85749",
+      "pump.liquidity.dex.usd.current::cef4feb8394452a1",
+      "pump.liquidity.dex.usd.current::fd5a3ec303dd37f3"
+    ],
+    "pump.market_share.pct.current": [
+      "pump.market_share.pct.current::1304cbc04609379d",
+      "pump.market_share.pct.current::40e937507738d996",
+      "pump.market_share.pct.current::48257c83c3d176f7",
+      "pump.market_share.pct.current::74727f9d91e39e21",
+      "pump.market_share.pct.current::908383b64970a293",
+      "pump.market_share.pct.current::a176f9079783d76f"
+    ],
+    "pump.oi.usd.current": [
+      "pump.oi.usd.current::1935aee50ff5615e:oioi664mfunding000",
+      "pump.oi.usd.current::2aaabf77e9f551b3",
+      "pump.oi.usd.current::a97185155f2f6692"
+    ],
+    "pump.price.usd.live": [
+      "pump.price.usd.live::453887e2e9e73499",
+      "pump.price.usd.live::e8bcdc38f4342977"
+    ],
+    "pump.price.usd.report": [
+      "pump.price.usd.report::1151f0a84ffbeb7b",
+      "pump.price.usd.report::2f70b0154443b456",
+      "pump.price.usd.report::3ace104cbd8b9f5b"
+    ],
+    "pump.revenue.usd.7d": [
+      "pump.revenue.usd.7d::393acc45f1ccb980",
+      "pump.revenue.usd.7d::3b90a09cddde9afd",
+      "pump.revenue.usd.7d::4c32b498c173c158",
+      "pump.revenue.usd.7d::4d93ac88ae67a391",
+      "pump.revenue.usd.7d::639c8f7e247eac61",
+      "pump.revenue.usd.7d::6a7aa7864f2cbea7"
+    ],
+    "pump.rs.vs_btc.pct.30d": [
+      "pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+      "pump.rs.vs_btc.pct.30d::29e4515d699560c9:30d1023",
+      "pump.rs.vs_btc.pct.30d::daa70059b5e885ff",
+      "pump.rs.vs_btc.pct.30d::ec2e70f25adbef90:30d1023",
+      "pump.rs.vs_btc.pct.30d::edb61ec7c6813110:30d30d1023"
+    ],
+    "pump.rs.vs_btc.pct.7d": [
+      "pump.rs.vs_btc.pct.7d::28771180a961620c:7d7d311",
+      "pump.rs.vs_btc.pct.7d::29e4515d699560c9:vsbtc7d311",
+      "pump.rs.vs_btc.pct.7d::39fa98691ae42f72",
+      "pump.rs.vs_btc.pct.7d::3e0f65037949a884",
+      "pump.rs.vs_btc.pct.7d::ec2e70f25adbef90:vsbtc7d311",
+      "pump.rs.vs_btc.pct.7d::edb61ec7c6813110:7d7d311"
+    ],
+    "pump.rs.vs_sol.pct.30d": [
+      "pump.rs.vs_sol.pct.30d::40a7f29844851b28",
+      "pump.rs.vs_sol.pct.30d::4ffac745424686bc:30d30d1047",
+      "pump.rs.vs_sol.pct.30d::c679e8c7e45a5dd4:30d1047",
+      "pump.rs.vs_sol.pct.30d::e56246864f130a61:30d1047",
+      "pump.rs.vs_sol.pct.30d::f924090bf62805ea:30d30d1047"
+    ],
+    "pump.rs.vs_sol.pct.7d": [
+      "pump.rs.vs_sol.pct.7d::1794795161a85982",
+      "pump.rs.vs_sol.pct.7d::4ffac745424686bc:7d7d277",
+      "pump.rs.vs_sol.pct.7d::c679e8c7e45a5dd4:vssol7d277",
+      "pump.rs.vs_sol.pct.7d::e56246864f130a61:vssol7d277",
+      "pump.rs.vs_sol.pct.7d::f924090bf62805ea:7d7d277"
+    ],
+    "render.bme.burned.tokens.last4": [
+      "render.bme.burned.tokens.last4::7744a22079c62bfe",
+      "render.bme.burned.tokens.last4::77ce965848ab7bf9"
+    ],
+    "render.bme.burned.tokens.last8": [
+      "render.bme.burned.tokens.last8::8b17ff4740c93804",
+      "render.bme.burned.tokens.last8::ebb977f363566cb8"
+    ],
+    "render.bme.emissions.tokens.last8": [
+      "render.bme.emissions.tokens.last8::44896e514a87eed6",
+      "render.bme.emissions.tokens.last8::8febf468794c098d"
+    ],
+    "render.bme.node_due.tokens.per_epoch": [
+      "render.bme.node_due.tokens.per_epoch::d5ae6376f9c32b14",
+      "render.bme.node_due.tokens.per_epoch::de84325d07b839f7"
+    ],
+    "render.bme.ratio.last4": [
+      "render.bme.ratio.last4::00a581be80d3bc08",
+      "render.bme.ratio.last4::ade009462532f2d3",
+      "render.bme.ratio.last4::b7bd7028b2909464",
+      "render.bme.ratio.last4::bfa9b81a99db1d51"
+    ],
+    "render.bme.ratio.last8": [
+      "render.bme.ratio.last8::6ab520f912c0df64",
+      "render.bme.ratio.last8::a3bea5ef565305ea"
+    ],
+    "render.emissions.tokens.remaining": [
+      "render.emissions.tokens.remaining::39a40b6c433056f2",
+      "render.emissions.tokens.remaining::784e21fa74c23e7d",
+      "render.emissions.tokens.remaining::86deed25d23c0cac"
+    ],
+    "render.funding.rate.latest": [
+      "render.funding.rate.latest::08e06bd2aeaf412d",
+      "render.funding.rate.latest::827a6f887bb75b5b"
+    ],
+    "render.price.usd.live": [
+      "render.price.usd.live::0afa1f001784f9f5",
+      "render.price.usd.live::31eab5e121ed0dde"
+    ],
+    "render.supply.circulating.tokens": [
+      "render.supply.circulating.tokens::50634f135a6232f1",
+      "render.supply.circulating.tokens::9717a7f84574330a"
+    ],
+    "render.supply.max.tokens": [
+      "render.supply.max.tokens::99e6b4f0a62f2764",
+      "render.supply.max.tokens::c8a310e202fe2057"
+    ],
+    "render.usage.frames.cumulative": [
+      "render.usage.frames.cumulative::5f39d4c24bda6df0",
+      "render.usage.frames.cumulative::844d003377b11509",
+      "render.usage.frames.cumulative::8b769c37d45dc9f8:frames7890m",
+      "render.usage.frames.cumulative::e756c124dde6205e",
+      "render.usage.frames.cumulative::fbf24d3324f76c36:frames7890m"
+    ],
+    "retardio.price.usd.live": [
+      "retardio.price.usd.live::959a0e63f9259547",
+      "retardio.price.usd.live::e85debc81c74f915"
+    ],
+    "sol.burn.tokens.per_year": [
+      "sol.burn.tokens.per_year::729b49b4a535ce25",
+      "sol.burn.tokens.per_year::8c74ba2aa2578b26",
+      "sol.burn.tokens.per_year::b6d6e3c08dea74a6"
+    ],
+    "sol.dex_eth_ratio.latest_day.x": [
+      "sol.dex_eth_ratio.latest_day.x::422ec6a9d1c5609b",
+      "sol.dex_eth_ratio.latest_day.x::5a761661b54f6628"
+    ],
+    "sol.etf.flow.usd.30d": [
+      "sol.etf.flow.usd.30d::4a82934001dad2d4",
+      "sol.etf.flow.usd.30d::c8ce1e4d1266f232"
+    ],
+    "sol.etf.flow.usd.7d": [
+      "sol.etf.flow.usd.7d::66e6e4a9ada600b2",
+      "sol.etf.flow.usd.7d::a10ecc41e501f2d2"
+    ],
+    "sol.fees.usd_per_day.mean_30d": [
+      "sol.fees.usd_per_day.mean_30d::099c4211328a6a27",
+      "sol.fees.usd_per_day.mean_30d::1196c5420fa50b60"
+    ],
+    "sol.funding.rate.latest": [
+      "sol.funding.rate.latest::40ab2843baace389",
+      "sol.funding.rate.latest::b3ecaabebbfe46b9",
+      "sol.funding.rate.latest::c640b89ba50299cf"
+    ],
+    "sol.inflation.pct.current": [
+      "sol.inflation.pct.current::14cc83ca51a1aa6e",
+      "sol.inflation.pct.current::1c5e1062715287f7",
+      "sol.inflation.pct.current::8a09d0546a26b07b:inflation37",
+      "sol.inflation.pct.current::e21df30ddd5c626d:inflation370",
+      "sol.inflation.pct.current::e90f8ef7ab2b3229:inflation370"
+    ],
+    "sol.issuance.tokens.per_year": [
+      "sol.issuance.tokens.per_year::81a11b141a64738c",
+      "sol.issuance.tokens.per_year::adab2b6c69ba2689",
+      "sol.issuance.tokens.per_year::c2e192da52bcb360"
+    ],
+    "sol.price.usd.live": [
+      "sol.price.usd.live::504e882d9585718a",
+      "sol.price.usd.live::e428e003691cb07f"
+    ],
+    "sol.price.usd.report": [
+      "sol.price.usd.report::431f9b3ab4827c65",
+      "sol.price.usd.report::dbece22f177afc77",
+      "sol.price.usd.report::e2f289b53a0c3a75"
+    ],
+    "sol.rs.vs_btc.pp.30d": [
+      "sol.rs.vs_btc.pp.30d::3e74cf9c769a721d:30d30d100pp",
+      "sol.rs.vs_btc.pp.30d::61f6aa26c9076185:btcrs30d100pp",
+      "sol.rs.vs_btc.pp.30d::912faf0f88c7deba",
+      "sol.rs.vs_btc.pp.30d::cec5bcdd093d162d",
+      "sol.rs.vs_btc.pp.30d::d4423e5dd1711238",
+      "sol.rs.vs_btc.pp.30d::d8be8c7c40201c87"
+    ],
+    "sol.rs.vs_btc.pp.7d": [
+      "sol.rs.vs_btc.pp.7d::128b8d765ef15fa0",
+      "sol.rs.vs_btc.pp.7d::3e74cf9c769a721d:7d7d376pp",
+      "sol.rs.vs_btc.pp.7d::d99a2c1abe8fe381"
+    ],
+    "sol.stake.ratio.pct": [
+      "sol.stake.ratio.pct::4c5372a92f7a8532",
+      "sol.stake.ratio.pct::672ff7dc9a746891",
+      "sol.stake.ratio.pct::84190ecd328ff3a7",
+      "sol.stake.ratio.pct::8a09d0546a26b07b:staked688",
+      "sol.stake.ratio.pct::92030a926d506419",
+      "sol.stake.ratio.pct::e21df30ddd5c626d:staked688"
+    ],
+    "sol.supply.net_change.tokens.per_year": [
+      "sol.supply.net_change.tokens.per_year::145cf94432895488",
+      "sol.supply.net_change.tokens.per_year::a0e659cf88a543ff",
+      "sol.supply.net_change.tokens.per_year::b037b7f8f31c5378"
+    ],
+    "sol.tps.nonvote.current": [
+      "sol.tps.nonvote.current::1e95ad74fcaca8c0:tpsnv25780",
+      "sol.tps.nonvote.current::3511bc92f09e06e8",
+      "sol.tps.nonvote.current::c815b93cb6b03db4:tpsnv25780"
+    ],
+    "sol.tvl.usd.current": [
+      "sol.tvl.usd.current::4e42bfcfa549694e",
+      "sol.tvl.usd.current::c815b93cb6b03db4:tvl565b"
+    ],
+    "spx.holders.top20.pct": [
+      "spx.holders.top20.pct::34b38885c567d588",
+      "spx.holders.top20.pct::bc22daf9756d4a89",
+      "spx.holders.top20.pct::f12ea2782ca69bd3"
+    ],
+    "spx.price.usd.live": [
+      "spx.price.usd.live::025e0ac993bbe3d3",
+      "spx.price.usd.live::1283d241fe92dc31"
+    ],
+    "spx.supply.circulating.pct": [
+      "spx.supply.circulating.pct::1fd1402959c2e3ed",
+      "spx.supply.circulating.pct::8f0da2ae8b552915",
+      "spx.supply.circulating.pct::c1a8ce44429b76dc"
+    ],
+    "spx.supply.circulating.tokens": [
+      "spx.supply.circulating.tokens::2334471431faffe8:cg9310m",
+      "spx.supply.circulating.tokens::67bed9e4c36984ef:circ9310m",
+      "spx.supply.circulating.tokens::87d89122dc6c28f1:circ9310m",
+      "spx.supply.circulating.tokens::f5a8b06def5acb31:circ9310m"
+    ],
+    "spx.supply.max.tokens": [
+      "spx.supply.max.tokens::67bed9e4c36984ef:max100b",
+      "spx.supply.max.tokens::87d89122dc6c28f1:max100b",
+      "spx.supply.max.tokens::f5a8b06def5acb31:max100b"
+    ],
+    "zec.inflation.pct.current": [
+      "zec.inflation.pct.current::5369a7974d0494af",
+      "zec.inflation.pct.current::61de56da6f92404a"
+    ],
+    "zec.leverage.x.current": [
+      "zec.leverage.x.current::9363209189a72968",
+      "zec.leverage.x.current::c9079e884e163237",
+      "zec.leverage.x.current::ce16cf4c59e2f354"
+    ],
+    "zec.ma.usd.200d": [
+      "zec.ma.usd.200d::16f665d285ab12ab:200d393",
+      "zec.ma.usd.200d::7774b679d4db02a5:200d393spotzecusdt"
+    ],
+    "zec.ma.usd.50d": [
+      "zec.ma.usd.50d::16f665d285ab12ab:50d488",
+      "zec.ma.usd.50d::7774b679d4db02a5:50dabove488"
+    ],
+    "zec.shielded.share.pct": [
+      "zec.shielded.share.pct::0bcbf079cf3f5a66",
+      "zec.shielded.share.pct::773c711cd457300a",
+      "zec.shielded.share.pct::fbfccb735db6f79c:shieldedstockmater"
+    ],
+    "zec.supply.circulating.pct": [
+      "zec.supply.circulating.pct::66debcb9a4b92716",
+      "zec.supply.circulating.pct::a93e53fe19e43dcb"
+    ]
+  },
+  "excluded_assets": [
+    "ray",
+    "grass",
+    "drift"
+  ],
+  "expected_checks": {
+    "active_assets": 10,
+    "ath_rules": 2,
+    "binding_consistency": 418,
+    "derive_rules": 4,
+    "input_lineage": 7,
+    "ma_claims": 7,
+    "rs_claims": 30
+  },
+  "freshness_metric_ids": [
+    "2z.price.usd.live",
+    "bonk.price.usd.live",
+    "btc.price.usd.live"
+  ],
+  "job1_registry_sha256": "19061e193b5946477592ce01d670ec2f4d8bf67a4bf811cf1a5f61df70f381b1",
+  "ma_language_claims": [
+    {
+      "asset": "btc",
+      "claim_id": "btc::ma_language::stance_headline",
+      "location": "alt-stance-headline",
+      "ma200_language": "ABOVE",
+      "ma200_metric_id": "btc.ma.usd.200d",
+      "ma50_language": "ABOVE",
+      "ma50_metric_id": "btc.ma.usd.50d",
+      "price_metric_id": "btc.price.usd.live"
+    },
+    {
+      "asset": "sol",
+      "claim_id": "sol::ma_language::stance_headline",
+      "location": "alt-stance-headline",
+      "ma200_language": "ABOVE",
+      "ma200_metric_id": "sol.ma.usd.200d",
+      "ma50_language": "ABOVE",
+      "ma50_metric_id": "sol.ma.usd.50d",
+      "price_metric_id": "sol.price.usd.live"
+    },
+    {
+      "asset": "render",
+      "claim_id": "render::ma_language::stance_headline",
+      "location": "alt-stance-headline",
+      "ma200_language": "BELOW",
+      "ma200_metric_id": "render.ma.usd.200d",
+      "ma50_language": "ABOVE",
+      "ma50_metric_id": "render.ma.usd.50d",
+      "price_metric_id": "render.price.usd.live"
+    },
+    {
+      "asset": "io",
+      "claim_id": "io::ma_language::stance_headline",
+      "location": "alt-stance-headline",
+      "ma200_language": "ABOVE",
+      "ma200_metric_id": "io.ma.usd.200d",
+      "ma50_language": "ABOVE",
+      "ma50_metric_id": "io.ma.usd.50d",
+      "price_metric_id": "io.price.usd.live"
+    },
+    {
+      "asset": "nos",
+      "claim_id": "nos::ma_language::stance_headline",
+      "location": "alt-stance-headline",
+      "ma200_language": "ABOVE",
+      "ma200_metric_id": "nos.ma.usd.200d",
+      "ma50_language": "ABOVE",
+      "ma50_metric_id": "nos.ma.usd.50d",
+      "price_metric_id": "nos.price.usd.live"
+    },
+    {
+      "asset": "fartcoin",
+      "claim_id": "fartcoin::ma_language::stance_headline",
+      "location": "alt-stance-headline",
+      "ma200_language": "ABOVE",
+      "ma200_metric_id": "fart.ma.usd.200d",
+      "ma50_language": "ABOVE",
+      "ma50_metric_id": "fart.ma.usd.50d",
+      "price_metric_id": "fart.price.usd.live"
+    },
+    {
+      "asset": "spx6900",
+      "claim_id": "spx6900::ma_language::stance_headline",
+      "location": "alt-stance-headline",
+      "ma200_language": "ABOVE",
+      "ma200_metric_id": "spx.ma.usd.200d",
+      "ma50_language": "ABOVE",
+      "ma50_metric_id": "spx.ma.usd.50d",
+      "price_metric_id": "spx.price.usd.live"
+    }
+  ],
+  "permanent_regressions": {
+    "pump_buyback_duplicate": {
+      "binding_ids": [
+        "pump.buyback.usd.7d::0daaf51009abb31a",
+        "pump.buyback.usd.7d::3b8d75372c0e8124",
+        "pump.buyback.usd.7d::7ce8fc75d909ed4e",
+        "pump.buyback.usd.7d::bd56dd7ac70f9c09",
+        "pump.buyback.usd.7d::c905dff4eb51a867",
+        "pump.buyback.usd.7d::de7215bafc54955d"
+      ],
+      "metric_id": "pump.buyback.usd.7d",
+      "wallet_lane_exclusion": "GROK-owned wallet values are not this metric"
+    },
+    "spx_price_duplicate": {
+      "binding_ids": [
+        "spx.price.usd.live::025e0ac993bbe3d3",
+        "spx.price.usd.live::1283d241fe92dc31"
+      ],
+      "metric_id": "spx.price.usd.live"
+    }
+  },
+  "required_categories": [
+    "01_input_lineage",
+    "02_active_asset_coverage",
+    "03_canonical_metric_coverage",
+    "04_rendered_binding_consistency",
+    "05_duplicate_consistency",
+    "06_ath_drawdown_arithmetic",
+    "07_moving_average_language",
+    "08_relative_strength_language",
+    "09_freshness_asof_consistency",
+    "10_tooltip_visible_visual_agreement",
+    "11_derived_metric_arithmetic",
+    "12_permanent_regressions"
+  ],
+  "rs_language_claims": [
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.7d::128b8d765ef15fa0",
+      "claim_id": "sol.rs.vs_btc.pp.7d::128b8d765ef15fa0::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.7d::1794795161a85982",
+      "claim_id": "pump.rs.vs_sol.pct.7d::1794795161a85982::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+      "claim_id": "pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.7d::28771180a961620c:7d7d311",
+      "claim_id": "pump.rs.vs_btc.pct.7d::28771180a961620c:7d7d311::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.30d::29e4515d699560c9:30d1023",
+      "claim_id": "pump.rs.vs_btc.pct.30d::29e4515d699560c9:30d1023::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.7d::29e4515d699560c9:vsbtc7d311",
+      "claim_id": "pump.rs.vs_btc.pct.7d::29e4515d699560c9:vsbtc7d311::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.7d::39fa98691ae42f72",
+      "claim_id": "pump.rs.vs_btc.pct.7d::39fa98691ae42f72::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.7d::3e0f65037949a884",
+      "claim_id": "pump.rs.vs_btc.pct.7d::3e0f65037949a884::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.30d::3e74cf9c769a721d:30d30d100pp",
+      "claim_id": "sol.rs.vs_btc.pp.30d::3e74cf9c769a721d:30d30d100pp::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.7d::3e74cf9c769a721d:7d7d376pp",
+      "claim_id": "sol.rs.vs_btc.pp.7d::3e74cf9c769a721d:7d7d376pp::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.30d::40a7f29844851b28",
+      "claim_id": "pump.rs.vs_sol.pct.30d::40a7f29844851b28::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.30d::4ffac745424686bc:30d30d1047",
+      "claim_id": "pump.rs.vs_sol.pct.30d::4ffac745424686bc:30d30d1047::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.7d::4ffac745424686bc:7d7d277",
+      "claim_id": "pump.rs.vs_sol.pct.7d::4ffac745424686bc:7d7d277::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.30d::61f6aa26c9076185:btcrs30d100pp",
+      "claim_id": "sol.rs.vs_btc.pp.30d::61f6aa26c9076185:btcrs30d100pp::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.30d::912faf0f88c7deba",
+      "claim_id": "sol.rs.vs_btc.pp.30d::912faf0f88c7deba::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.30d::c679e8c7e45a5dd4:30d1047",
+      "claim_id": "pump.rs.vs_sol.pct.30d::c679e8c7e45a5dd4:30d1047::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.7d::c679e8c7e45a5dd4:vssol7d277",
+      "claim_id": "pump.rs.vs_sol.pct.7d::c679e8c7e45a5dd4:vssol7d277::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.30d::cec5bcdd093d162d",
+      "claim_id": "sol.rs.vs_btc.pp.30d::cec5bcdd093d162d::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.30d::d4423e5dd1711238",
+      "claim_id": "sol.rs.vs_btc.pp.30d::d4423e5dd1711238::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.30d::d8be8c7c40201c87",
+      "claim_id": "sol.rs.vs_btc.pp.30d::d8be8c7c40201c87::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "sol",
+      "binding_id": "sol.rs.vs_btc.pp.7d::d99a2c1abe8fe381",
+      "claim_id": "sol.rs.vs_btc.pp.7d::d99a2c1abe8fe381::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "sol.rs.vs_btc.pp.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.30d::daa70059b5e885ff",
+      "claim_id": "pump.rs.vs_btc.pct.30d::daa70059b5e885ff::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.30d::e56246864f130a61:30d1047",
+      "claim_id": "pump.rs.vs_sol.pct.30d::e56246864f130a61:30d1047::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.7d::e56246864f130a61:vssol7d277",
+      "claim_id": "pump.rs.vs_sol.pct.7d::e56246864f130a61:vssol7d277::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.30d::ec2e70f25adbef90:30d1023",
+      "claim_id": "pump.rs.vs_btc.pct.30d::ec2e70f25adbef90:30d1023::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.7d::ec2e70f25adbef90:vsbtc7d311",
+      "claim_id": "pump.rs.vs_btc.pct.7d::ec2e70f25adbef90:vsbtc7d311::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.30d::edb61ec7c6813110:30d30d1023",
+      "claim_id": "pump.rs.vs_btc.pct.30d::edb61ec7c6813110:30d30d1023::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_btc.pct.7d::edb61ec7c6813110:7d7d311",
+      "claim_id": "pump.rs.vs_btc.pct.7d::edb61ec7c6813110:7d7d311::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "window": "7d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.30d::f924090bf62805ea:30d30d1047",
+      "claim_id": "pump.rs.vs_sol.pct.30d::f924090bf62805ea:30d30d1047::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.30d",
+      "window": "30d"
+    },
+    {
+      "asset": "pump",
+      "binding_id": "pump.rs.vs_sol.pct.7d::f924090bf62805ea:7d7d277",
+      "claim_id": "pump.rs.vs_sol.pct.7d::f924090bf62805ea:7d7d277::rs_language",
+      "language": "LEADS",
+      "location": "stance_or_binding_context",
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "window": "7d"
+    }
+  ],
+  "schema_version": "job4.contract.v1",
+  "source_html_sha256": "ae1d57e0601b5bd1bc78e4af053738e58f307eaccb67fd024f3c72f4f705ecf7",
+  "surface_by_binding": {
+    "2z.price.usd.live::704c9bdc24512a7f": "hold_card",
+    "bonk.price.usd.live::73f03441b6c01eac": "hold_card",
+    "bonk.price.usd.live::b5b7b250c5a338ce": "hero",
+    "btc.etf.flow.usd.1d::deffa019b9a6eb0a": "tooltip",
+    "btc.etf.flow.usd.30d::2ca05ff63314ee52": "tooltip",
+    "btc.etf.flow.usd.30d::d433123463093159": "body",
+    "btc.etf.flow.usd.7d::4e665aa491e3ccf9": "tooltip",
+    "btc.etf.flow.usd.7d::a32aae108297e221": "body",
+    "btc.funding.rate.latest::3d28b945387864b6": "tooltip",
+    "btc.funding.rate.latest::7a94480752764e78": "tooltip",
+    "btc.funding.rate.latest::f305f2b7fc15edc9": "tooltip",
+    "btc.funding.rate.latest::f4bcb3ebd02a2235": "tooltip",
+    "btc.inflation.pct.current::01660e6a6d540fca": "body",
+    "btc.leverage.x.current::21b7837240ffeb26": "tooltip",
+    "btc.leverage.x.current::4e29f14202089731:futspot92": "body",
+    "btc.leverage.x.current::59d0690ad45994a0": "tooltip",
+    "btc.leverage.x.current::5e94fd5eec55ccf5": "tooltip",
+    "btc.leverage.x.current::83e79a3d6f5e4ea9:futspot92": "tooltip",
+    "btc.leverage.x.current::b1f50b89bc241699:futspot92": "tooltip",
+    "btc.ma.usd.200d::642689b28dd7386d:200d69412": "body",
+    "btc.ma.usd.50d::642689b28dd7386d:50d63564": "body",
+    "btc.oi.btc.current::686192d68b5a88c5": "tooltip",
+    "btc.oi.btc.current::6c1c38935408f171:oibtc1081kbtc": "tooltip",
+    "btc.oi.btc.current::7ba2b6b1fb29ad0a": "tooltip",
+    "btc.oi.btc.current::83e79a3d6f5e4ea9:oibtc1081kbtc": "tooltip",
+    "btc.oi.btc.current::d903f55218a2b840": "tooltip",
+    "btc.oi.change.pct.1d::e8ccf1b726f518e0:oi1d251d": "tooltip",
+    "btc.oi.change.pct.30d::a2274614121d519d": "tooltip",
+    "btc.oi.change.pct.30d::e8ccf1b726f518e0:oi30d0630d": "tooltip",
+    "btc.oi.change.pct.7d::e8ccf1b726f518e0:oi7d167d": "tooltip",
+    "btc.price.drawdown_from_ath.pct::0897b63f380b84f1": "tooltip",
+    "btc.price.drawdown_from_ath.pct::42d54decbba930f0:50retracedfromoct2": "tooltip",
+    "btc.price.drawdown_from_ath.pct::ac4fa868419ba6fe": "tooltip",
+    "btc.price.usd.july_2026_low::8ce3f1ada0980dc5": "tooltip",
+    "btc.price.usd.july_2026_low::8e211dc83ffa5276": "tooltip",
+    "btc.price.usd.live::30f665b010005234": "hold_card",
+    "btc.price.usd.report::24c837b712b58400": "tooltip",
+    "btc.price.usd.report::ba1ef26f7d76c556": "hero",
+    "btc.return.pct.30d::b00bb9459a09a669": "tooltip",
+    "btc.return.pct.7d::fcb1016edc66d435": "tooltip",
+    "btc.return.pct.90d::41853ba2672d0f84": "tooltip",
+    "btc.return.pct.90d::b87e9c35bd0167f2": "tooltip",
+    "btc.stablecoin.change.pct.30d::25f46221e3451a9f": "tooltip",
+    "btc.stablecoin.change.pct.30d::7ee483ab6cff0974": "body",
+    "btc.supply.circulating.pct::32a1a542b11cd72b": "body",
+    "btc.volume.perp.usd.24h::b39b2e61121477c0": "tooltip",
+    "btc.volume.spot.usd.24h::5c8d0872a909af7c": "tooltip",
+    "eth.etf.flow.usd.1d::70269286ef8ca500": "tooltip",
+    "eth.etf.flow.usd.30d::50b5d3b0940183f2": "body",
+    "eth.etf.flow.usd.30d::8ba3f2526ae91edf": "tooltip",
+    "eth.etf.flow.usd.7d::3cd3a486a27b1969": "tooltip",
+    "eth.etf.flow.usd.7d::c72511a0c7139bdb": "body",
+    "fart.funding.rate.latest::19a9b12453b55994": "tooltip",
+    "fart.holders.lp.pct::320ffbe509342af0:lp215": "tooltip",
+    "fart.holders.lp.pct::a3d9b29267fdd2ed:lp215": "tooltip",
+    "fart.holders.lp.pct::ddb276c08d5d7063:lp215": "tooltip",
+    "fart.holders.lp.pct::e84341f646bcb0a8:lp215": "body",
+    "fart.holders.lp.pct::f0b525c079c6f8f3:lp215": "tooltip",
+    "fart.holders.unattributed.pct::320ffbe509342af0:unattributed3323": "tooltip",
+    "fart.holders.unattributed.pct::a3d9b29267fdd2ed:unattributed3323": "tooltip",
+    "fart.holders.unattributed.pct::ddb276c08d5d7063:unattributed3323": "tooltip",
+    "fart.holders.unattributed.pct::e84341f646bcb0a8:unattributed3323": "body",
+    "fart.holders.unattributed.pct::f0b525c079c6f8f3:unattributed3323": "tooltip",
+    "fart.holders.unit_treasury.pct::320ffbe509342af0:unit977": "tooltip",
+    "fart.holders.unit_treasury.pct::a3d9b29267fdd2ed:unit977": "tooltip",
+    "fart.holders.unit_treasury.pct::ddb276c08d5d7063:unit977": "tooltip",
+    "fart.holders.unit_treasury.pct::e84341f646bcb0a8:unit977": "body",
+    "fart.holders.unit_treasury.pct::f0b525c079c6f8f3:unit977": "tooltip",
+    "fart.leverage.perp_spot_notional.x::208f55354ce7acee": "tooltip",
+    "fart.leverage.perp_spot_notional.x::b30ad0df00843f02": "body",
+    "fart.liquidity.dex.usd.current::d8625a7d234349f9": "tooltip",
+    "fart.ma.usd.200d::6abb75bfb915ca8d:200d0169": "body",
+    "fart.ma.usd.50d::6abb75bfb915ca8d:50d0138": "body",
+    "fart.market_cap.usd.current::205067419005ddb8": "tooltip",
+    "fart.oi.usd.current::4c58c2423fe2ca88": "tooltip",
+    "fart.price.usd.live::527b99c36062be1b": "hold_card",
+    "fart.price.usd.live::63ef23570133b680": "hero",
+    "fart.price.usd.report::0aae9bf80ff7a05f": "hero",
+    "fart.return.pct.30d::d829868b59b829e2:30d44": "tooltip",
+    "fart.return.pct.7d::d829868b59b829e2:7d11": "tooltip",
+    "fart.return.pct.90d::d829868b59b829e2:90d394": "tooltip",
+    "fart.rs.vs_sol.pp.7d::91eac45ff0bdc323": "tooltip",
+    "fart.supply.circulating.pct::1bb124d160a83903": "tooltip",
+    "fart.supply.circulating.tokens::ae712c21f54f268d:circ99997m": "tooltip",
+    "fart.supply.max.tokens::ae712c21f54f268d:max100000m": "tooltip",
+    "fart.volume.cg.usd.24h::4994092b9d039bbe": "tooltip",
+    "fart.volume.perp.usd.24h::098817515427c5a2": "tooltip",
+    "giga.price.usd.live::18b120ce5c37820f": "hero",
+    "giga.price.usd.live::64d09ef0404301de": "hold_card",
+    "global.fear_greed.index.current::8c6525e881c1275b": "tooltip",
+    "global.leverage.x.current::5badbd17431d506a": "tooltip",
+    "global.participation.above_50dma.count::ad4e880e078153cb": "tooltip",
+    "global.participation.beat_btc.count::3e7315de21cb58b1": "tooltip",
+    "hype.af.buys.usd.30d::4fb9087d25d45f86": "tooltip",
+    "hype.af.buys.usd.30d::6e76f75749f04a82": "body",
+    "hype.af.inventory.share_hl_circ.pct::ac2698875bd6f2b1": "tooltip",
+    "hype.af.inventory.tokens.current::5b8bee4b7950805f": "body",
+    "hype.af.inventory.tokens.current::8d23e70b11cfd9aa": "tooltip",
+    "hype.af.inventory.tokens.current::9ac30afdf3ead167": "tooltip",
+    "hype.af.inventory.tokens.current::a04faa11acc7f55b": "tooltip",
+    "hype.af.inventory.tokens.current::a2683f1c73f5a835": "tooltip",
+    "hype.af.inventory.tokens.current::d64ddb15b8868ae9": "tooltip",
+    "hype.af.inventory.tokens.current::e827ccf80fb90642": "tooltip",
+    "hype.emissions.tokens.remaining::13b43a25b12316d7": "tooltip",
+    "hype.emissions.tokens.remaining::7f82c3d8eb5d4bbc": "tooltip",
+    "hype.emissions.tokens.remaining::87e62f589c2255b7": "tooltip",
+    "hype.emissions.tokens.remaining::ee87a61b01678f80": "tooltip",
+    "hype.fees.change.pct.30d::daeea25d018a7dc6": "tooltip",
+    "hype.fees.perps.usd.30d::1c189ddf33d2e9cd:fees30d448m": "tooltip",
+    "hype.fees.perps.usd.30d::2e6f7832ec8ec37d:30d448m": "tooltip",
+    "hype.fees.perps.usd.30d::98c64419c5099855:fees30d448m": "tooltip",
+    "hype.fees.usd.30d::5671055251eb27b1": "body",
+    "hype.fees.usd.30d::5dc5ae04fd3b4e43:fees30d592m": "tooltip",
+    "hype.ma.usd.200d::af4e74cd0dc0cb3c": "tooltip",
+    "hype.ma.usd.200d::b30dcf05d042f130:200d479": "body",
+    "hype.ma.usd.50d::b30dcf05d042f130:50d605": "body",
+    "hype.ma.usd.50d::cffa7cfc1a16ef25": "tooltip",
+    "hype.ncu.hyperlabs.tokens::25b28d979d9d69df": "body",
+    "hype.ncu.hyperlabs.tokens::2630634f3ec0d86b": "tooltip",
+    "hype.ncu.hyperlabs.tokens::9227e6b8a62d57d3": "tooltip",
+    "hype.oi.binance.usd.current::7fe2da12b644bb73": "tooltip",
+    "hype.oi.native.usd.current::e780218144db1c9e": "tooltip",
+    "hype.oi.platform.usd.current::89fa44e7a81e7493": "tooltip",
+    "hype.oi.token.usd.current::e372936b4631e386": "tooltip",
+    "hype.price.usd.live::9a0398ec9ade7913": "hold_card",
+    "hype.price.usd.report::e42a6930af042dfe": "hero",
+    "hype.return.pct.30d::147e78ce73789aca:pricetrend30d3630d": "tooltip",
+    "hype.return.pct.7d::147e78ce73789aca:pricetrend7d347d": "tooltip",
+    "hype.stake.tokens.current::fb649a99590b0a07": "tooltip",
+    "hype.supply.circulating.pct::36a29921e78b751e": "tooltip",
+    "hype.supply.circulating.pct::5c28b0a1723262b4:cg222": "tooltip",
+    "hype.supply.circulating.pct::67cbe4dae3a4824a:cg222": "tooltip",
+    "hype.supply.circulating.pct::9190de8b5a2851a0:cg222": "tooltip",
+    "hype.supply.circulating.pct::a9f447d56301e1e8": "tooltip",
+    "hype.supply.circulating.pct::cf8ae40fe3d96b46": "body",
+    "hype.supply.hl_circulating.pct::07d506b08c3e769d": "body",
+    "hype.supply.hl_circulating.pct::67cbe4dae3a4824a:hl299": "tooltip",
+    "hype.supply.hl_circulating.pct::9190de8b5a2851a0:hl299": "tooltip",
+    "hype.supply.hl_circulating.pct::eea7beba279a0669": "tooltip",
+    "hype.supply.max.tokens::882fb6d7d01cadca": "tooltip",
+    "hype.supply.max.tokens::e2dad50d6635ef02": "body",
+    "hype.volume.l1_perp.usd.24h::3969c2cac72c030f": "tooltip",
+    "hype.volume.token.usd.24h::3c1d7222727d0f39": "tooltip",
+    "io.clusters.running.count::0a1a37f1eab05b33": "body",
+    "io.clusters.running.count::1dc836b7c48f0541": "tooltip",
+    "io.clusters.running.count::834a7aadcaad8a2d": "tooltip",
+    "io.devices.inventory.count::0c34a5c5100d3441": "body",
+    "io.devices.inventory.count::5de12316ce0bf4c9": "tooltip",
+    "io.leverage.x.current::3e290849fe7796b7:futspot25": "body",
+    "io.leverage.x.current::9e1aaecfccbf4d64:futspot25": "body",
+    "io.ma.usd.200d::97febe1c95d9ed69:200d0134": "body",
+    "io.ma.usd.50d::97febe1c95d9ed69:50d0147": "body",
+    "io.oi.usd.current::111a8806df3897f9": "body",
+    "io.price.drawdown_from_ath.pct::21dc61c12e638001": "tooltip",
+    "io.price.drawdown_from_ath.pct::ea9d44fbfd2175d8": "body",
+    "io.price.usd.live::58c7b916dbe131ff": "hold_card",
+    "io.price.usd.live::c482e55850cf0dec": "hero",
+    "io.price.usd.report::9e69194b7d9aa7c7": "tooltip",
+    "io.price.usd.report::a4dd9235dfaa20e3": "body",
+    "io.price.usd.report::ea2b02196eabd46c": "hero",
+    "io.revenue.usd.cumulative::0838de4cdf309fcc": "body",
+    "io.revenue.usd.cumulative::16413e2a60b6440f:cumulativerecentea": "tooltip",
+    "io.revenue.usd.cumulative::320417c333ae71cd": "tooltip",
+    "io.revenue.usd.cumulative::8c51171f444341cb": "body",
+    "io.revenue.usd.cumulative::c6fa4b446b7ccaaa": "tooltip",
+    "io.revenue.usd_per_day.mean_30d::16413e2a60b6440f:cumulativerecentea": "tooltip",
+    "io.rs.vs_sol.pp.30d::1d2934be16765f29": "tooltip",
+    "io.rs.vs_sol.pp.7d::91a2cfcb667f895e": "tooltip",
+    "io.supply.circulating.pct::73c24c15ca3b1a6d": "body",
+    "io.supply.circulating.tokens::07eba86eb93f67ce:circ3815m": "tooltip",
+    "io.supply.circulating.tokens::4c89892ae0b04360": "body",
+    "io.supply.circulating.tokens::dfb9b67f12a9da8b": "tooltip",
+    "io.supply.max.tokens::65fbbf6e3343eaed": "tooltip",
+    "io.supply.max.tokens::e460a727efcc3f75": "body",
+    "lockin.price.usd.live::25343c98ae3accac": "hero",
+    "lockin.price.usd.live::36f96b755b9b2dc5": "hold_card",
+    "nos.gpu_hours.approx_31d::77f5e0c5f5c97383": "tooltip",
+    "nos.gpu_hours.approx_31d::edcbee5edc844ffc": "tooltip",
+    "nos.gpu_hours.approx_31d::f5e7c0d619aab1c5:gpuhours119219": "tooltip",
+    "nos.host_rewards.usd.cumulative::e13377c4db8c365a": "tooltip",
+    "nos.jobs.approx_30d.count::ec7564b9f608879c": "tooltip",
+    "nos.jobs.completed.cumulative::1d70a41f9cd855bf": "tooltip",
+    "nos.jobs.completed.cumulative::8a7acfe56c2b879d": "tooltip",
+    "nos.jobs.completed.cumulative::90b401930a563bb4": "body",
+    "nos.jobs.completed.cumulative::df45ff651c167316": "tooltip",
+    "nos.jobs.queued.count::79a3a1858e972d92:queued40": "tooltip",
+    "nos.jobs.running.count::79a3a1858e972d92:running855": "tooltip",
+    "nos.jobs.running.count::f5e7c0d619aab1c5:run855": "tooltip",
+    "nos.ma.usd.200d::b049856614cdcd6c:200d0273": "body",
+    "nos.ma.usd.50d::b049856614cdcd6c:50d0266": "body",
+    "nos.market_cap.usd.current::d500c474fb6866cc": "tooltip",
+    "nos.nodes.with_running_jobs.count::877eb59133d455c8": "tooltip",
+    "nos.nodes.with_running_jobs.count::baa55547a5695da9": "tooltip",
+    "nos.price.usd.live::13f0e3cdd09e3d1b": "hold_card",
+    "nos.price.usd.live::d29ac7bd42e0e62f": "hero",
+    "nos.price.usd.report::9ed5dcdab1de893a": "hero",
+    "nos.return.pct.180d::e33b14eff5c20fbb": "tooltip",
+    "nos.rs.vs_sol.pp.30d::9d0645ac4922908a": "tooltip",
+    "nos.rs.vs_sol.pp.30d::b34efe8a5e4c05de": "tooltip",
+    "nos.rs.vs_sol.pp.7d::838f6053bde06bf6": "tooltip",
+    "nos.stake.ratio.pct::5a5772760bd5d0c8": "tooltip",
+    "nos.stake.tokens.current::69aa8295b5417079": "tooltip",
+    "nos.stake.tokens.current::fce31b59911d5951": "tooltip",
+    "nos.supply.circulating.pct::5589696265b70dcc": "body",
+    "nos.supply.circulating.tokens::4283311be1a59aec:circ100m": "tooltip",
+    "nos.supply.max.tokens::4283311be1a59aec:max100m": "tooltip",
+    "orca.price.usd.live::5f9063265687a410": "hero",
+    "orca.price.usd.live::bae7ded108edf8ee": "hold_card",
+    "pump.buyback.usd.1d::5ae4bb4b00c56b01": "tooltip",
+    "pump.buyback.usd.7d::0daaf51009abb31a": "body",
+    "pump.buyback.usd.7d::3b8d75372c0e8124": "tooltip",
+    "pump.buyback.usd.7d::7ce8fc75d909ed4e": "tooltip",
+    "pump.buyback.usd.7d::bd56dd7ac70f9c09": "tooltip",
+    "pump.buyback.usd.7d::c905dff4eb51a867": "tooltip",
+    "pump.buyback.usd.7d::de7215bafc54955d": "tooltip",
+    "pump.buyback.usd_per_day.current::55ea88d09c6072a9:buybackburn738kd": "tooltip",
+    "pump.fees.usd_per_day.current::55ea88d09c6072a9:fees13md": "tooltip",
+    "pump.funding.rate.latest::74fad96e1ff80b18": "tooltip",
+    "pump.holders.unattributed.pct::14145797567ef9dd": "tooltip",
+    "pump.holders.unattributed.pct::4ab9170002071863": "tooltip",
+    "pump.holders.unattributed.pct::90480fddfa1b1a79": "body",
+    "pump.leverage.x.current::34f4602ccc14f63a": "tooltip",
+    "pump.leverage.x.current::d127babf5a502dee": "tooltip",
+    "pump.leverage.x.current::dd4c516723857ac9": "tooltip",
+    "pump.liquidity.dex.usd.current::4db159f646a85749": "tooltip",
+    "pump.liquidity.dex.usd.current::cef4feb8394452a1": "tooltip",
+    "pump.liquidity.dex.usd.current::fd5a3ec303dd37f3": "tooltip",
+    "pump.ma.usd.200d::127758e4af6d211d:200d0002": "body",
+    "pump.ma.usd.50d::127758e4af6d211d:50d0002": "body",
+    "pump.market_share.pct.current::1304cbc04609379d": "tooltip",
+    "pump.market_share.pct.current::40e937507738d996": "tooltip",
+    "pump.market_share.pct.current::48257c83c3d176f7": "tooltip",
+    "pump.market_share.pct.current::74727f9d91e39e21": "tooltip",
+    "pump.market_share.pct.current::908383b64970a293": "tooltip",
+    "pump.market_share.pct.current::a176f9079783d76f": "tooltip",
+    "pump.oi.usd.current::1935aee50ff5615e:oioi664mfunding000": "tooltip",
+    "pump.oi.usd.current::2aaabf77e9f551b3": "tooltip",
+    "pump.oi.usd.current::a97185155f2f6692": "tooltip",
+    "pump.price.usd.live::453887e2e9e73499": "hold_card",
+    "pump.price.usd.live::e8bcdc38f4342977": "hero",
+    "pump.price.usd.report::1151f0a84ffbeb7b": "tooltip",
+    "pump.price.usd.report::2f70b0154443b456": "tooltip",
+    "pump.price.usd.report::3ace104cbd8b9f5b": "hero",
+    "pump.revenue.usd.7d::393acc45f1ccb980": "tooltip",
+    "pump.revenue.usd.7d::3b90a09cddde9afd": "body",
+    "pump.revenue.usd.7d::4c32b498c173c158": "tooltip",
+    "pump.revenue.usd.7d::4d93ac88ae67a391": "tooltip",
+    "pump.revenue.usd.7d::639c8f7e247eac61": "tooltip",
+    "pump.revenue.usd.7d::6a7aa7864f2cbea7": "tooltip",
+    "pump.revenue.usd_per_day.current::55ea88d09c6072a9:rev998kd": "tooltip",
+    "pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023": "tooltip",
+    "pump.rs.vs_btc.pct.30d::29e4515d699560c9:30d1023": "tooltip",
+    "pump.rs.vs_btc.pct.30d::daa70059b5e885ff": "tooltip",
+    "pump.rs.vs_btc.pct.30d::ec2e70f25adbef90:30d1023": "tooltip",
+    "pump.rs.vs_btc.pct.30d::edb61ec7c6813110:30d30d1023": "tooltip",
+    "pump.rs.vs_btc.pct.7d::28771180a961620c:7d7d311": "tooltip",
+    "pump.rs.vs_btc.pct.7d::29e4515d699560c9:vsbtc7d311": "tooltip",
+    "pump.rs.vs_btc.pct.7d::39fa98691ae42f72": "tooltip",
+    "pump.rs.vs_btc.pct.7d::3e0f65037949a884": "tooltip",
+    "pump.rs.vs_btc.pct.7d::ec2e70f25adbef90:vsbtc7d311": "tooltip",
+    "pump.rs.vs_btc.pct.7d::edb61ec7c6813110:7d7d311": "tooltip",
+    "pump.rs.vs_sol.pct.30d::40a7f29844851b28": "tooltip",
+    "pump.rs.vs_sol.pct.30d::4ffac745424686bc:30d30d1047": "tooltip",
+    "pump.rs.vs_sol.pct.30d::c679e8c7e45a5dd4:30d1047": "tooltip",
+    "pump.rs.vs_sol.pct.30d::e56246864f130a61:30d1047": "tooltip",
+    "pump.rs.vs_sol.pct.30d::f924090bf62805ea:30d30d1047": "tooltip",
+    "pump.rs.vs_sol.pct.7d::1794795161a85982": "tooltip",
+    "pump.rs.vs_sol.pct.7d::4ffac745424686bc:7d7d277": "tooltip",
+    "pump.rs.vs_sol.pct.7d::c679e8c7e45a5dd4:vssol7d277": "tooltip",
+    "pump.rs.vs_sol.pct.7d::e56246864f130a61:vssol7d277": "tooltip",
+    "pump.rs.vs_sol.pct.7d::f924090bf62805ea:7d7d277": "tooltip",
+    "pump.supply.circulating.pct::911dc92e0b62f1bd": "body",
+    "render.bme.burned.tokens.last4::7744a22079c62bfe": "tooltip",
+    "render.bme.burned.tokens.last4::77ce965848ab7bf9": "tooltip",
+    "render.bme.burned.tokens.last8::8b17ff4740c93804": "tooltip",
+    "render.bme.burned.tokens.last8::ebb977f363566cb8": "body",
+    "render.bme.emissions.tokens.last8::44896e514a87eed6": "body",
+    "render.bme.emissions.tokens.last8::8febf468794c098d": "tooltip",
+    "render.bme.node_due.tokens.per_epoch::d5ae6376f9c32b14": "tooltip",
+    "render.bme.node_due.tokens.per_epoch::de84325d07b839f7": "body",
+    "render.bme.ratio.last4::00a581be80d3bc08": "tooltip",
+    "render.bme.ratio.last4::ade009462532f2d3": "tooltip",
+    "render.bme.ratio.last4::b7bd7028b2909464": "tooltip",
+    "render.bme.ratio.last4::bfa9b81a99db1d51": "tooltip",
+    "render.bme.ratio.last8::6ab520f912c0df64": "body",
+    "render.bme.ratio.last8::a3bea5ef565305ea": "tooltip",
+    "render.emissions.tokens.remaining::39a40b6c433056f2": "body",
+    "render.emissions.tokens.remaining::784e21fa74c23e7d": "tooltip",
+    "render.emissions.tokens.remaining::86deed25d23c0cac": "tooltip",
+    "render.funding.rate.latest::08e06bd2aeaf412d": "body",
+    "render.funding.rate.latest::827a6f887bb75b5b": "tooltip",
+    "render.leverage.x.current::2500247905633f51:futspot27": "tooltip",
+    "render.ma.usd.200d::de401e7cbfe1515d:200d165": "body",
+    "render.ma.usd.50d::de401e7cbfe1515d:50d145": "body",
+    "render.nodes.count.listed::e4bf791531fd85ef": "tooltip",
+    "render.price.usd.live::0afa1f001784f9f5": "hold_card",
+    "render.price.usd.live::31eab5e121ed0dde": "hero",
+    "render.price.usd.report::93bcbc30853cc05a": "hero",
+    "render.supply.circulating.tokens::50634f135a6232f1": "tooltip",
+    "render.supply.circulating.tokens::9717a7f84574330a": "body",
+    "render.supply.max.tokens::99e6b4f0a62f2764": "tooltip",
+    "render.supply.max.tokens::c8a310e202fe2057": "body",
+    "render.usage.frames.cumulative::5f39d4c24bda6df0": "tooltip",
+    "render.usage.frames.cumulative::844d003377b11509": "tooltip",
+    "render.usage.frames.cumulative::8b769c37d45dc9f8:frames7890m": "tooltip",
+    "render.usage.frames.cumulative::e756c124dde6205e": "tooltip",
+    "render.usage.frames.cumulative::fbf24d3324f76c36:frames7890m": "body",
+    "retardio.price.usd.live::959a0e63f9259547": "hold_card",
+    "retardio.price.usd.live::e85debc81c74f915": "hero",
+    "sol.burn.tokens.per_year::729b49b4a535ce25": "tooltip",
+    "sol.burn.tokens.per_year::8c74ba2aa2578b26": "tooltip",
+    "sol.burn.tokens.per_year::b6d6e3c08dea74a6": "tooltip",
+    "sol.dex_eth_ratio.7d.x::c4ee7e4ddc0798c7": "tooltip",
+    "sol.dex_eth_ratio.latest_day.x::422ec6a9d1c5609b": "tooltip",
+    "sol.dex_eth_ratio.latest_day.x::5a761661b54f6628": "tooltip",
+    "sol.dex_eth_ratio.x.current::f5008b58aaf73a10": "tooltip",
+    "sol.etf.flow.usd.1d::52f63db09516059b": "tooltip",
+    "sol.etf.flow.usd.30d::4a82934001dad2d4": "tooltip",
+    "sol.etf.flow.usd.30d::c8ce1e4d1266f232": "body",
+    "sol.etf.flow.usd.7d::66e6e4a9ada600b2": "body",
+    "sol.etf.flow.usd.7d::a10ecc41e501f2d2": "tooltip",
+    "sol.fees.usd_per_day.current::2c260486204fff28": "body",
+    "sol.fees.usd_per_day.mean_30d::099c4211328a6a27": "tooltip",
+    "sol.fees.usd_per_day.mean_30d::1196c5420fa50b60": "tooltip",
+    "sol.funding.rate.latest::40ab2843baace389": "tooltip",
+    "sol.funding.rate.latest::b3ecaabebbfe46b9": "tooltip",
+    "sol.funding.rate.latest::c640b89ba50299cf": "tooltip",
+    "sol.funding.rate.mean_7d::55ae6c1182925938": "tooltip",
+    "sol.inflation.pct.current::14cc83ca51a1aa6e": "tooltip",
+    "sol.inflation.pct.current::1c5e1062715287f7": "body",
+    "sol.inflation.pct.current::8a09d0546a26b07b:inflation37": "body",
+    "sol.inflation.pct.current::e21df30ddd5c626d:inflation370": "tooltip",
+    "sol.inflation.pct.current::e90f8ef7ab2b3229:inflation370": "tooltip",
+    "sol.issuance.tokens.per_year::81a11b141a64738c": "tooltip",
+    "sol.issuance.tokens.per_year::adab2b6c69ba2689": "tooltip",
+    "sol.issuance.tokens.per_year::c2e192da52bcb360": "tooltip",
+    "sol.leverage.x.current::2b5f20393eb93f2c:futspot68": "tooltip",
+    "sol.ma.usd.200d::c36dc88aaaea116b:200d821": "body",
+    "sol.ma.usd.50d::c36dc88aaaea116b:50d760": "body",
+    "sol.price.usd.live::504e882d9585718a": "hold_card",
+    "sol.price.usd.live::e428e003691cb07f": "hero",
+    "sol.price.usd.report::431f9b3ab4827c65": "hero",
+    "sol.price.usd.report::dbece22f177afc77": "tooltip",
+    "sol.price.usd.report::e2f289b53a0c3a75": "body",
+    "sol.rs.vs_btc.pp.30d::3e74cf9c769a721d:30d30d100pp": "tooltip",
+    "sol.rs.vs_btc.pp.30d::61f6aa26c9076185:btcrs30d100pp": "tooltip",
+    "sol.rs.vs_btc.pp.30d::912faf0f88c7deba": "tooltip",
+    "sol.rs.vs_btc.pp.30d::cec5bcdd093d162d": "tooltip",
+    "sol.rs.vs_btc.pp.30d::d4423e5dd1711238": "tooltip",
+    "sol.rs.vs_btc.pp.30d::d8be8c7c40201c87": "tooltip",
+    "sol.rs.vs_btc.pp.7d::128b8d765ef15fa0": "tooltip",
+    "sol.rs.vs_btc.pp.7d::3e74cf9c769a721d:7d7d376pp": "tooltip",
+    "sol.rs.vs_btc.pp.7d::d99a2c1abe8fe381": "tooltip",
+    "sol.stablecoin.usd.current::ff7927325a809681": "tooltip",
+    "sol.stake.ratio.pct::4c5372a92f7a8532": "tooltip",
+    "sol.stake.ratio.pct::672ff7dc9a746891": "body",
+    "sol.stake.ratio.pct::84190ecd328ff3a7": "tooltip",
+    "sol.stake.ratio.pct::8a09d0546a26b07b:staked688": "tooltip",
+    "sol.stake.ratio.pct::92030a926d506419": "tooltip",
+    "sol.stake.ratio.pct::e21df30ddd5c626d:staked688": "tooltip",
+    "sol.stake.tokens.current::3f4a4f60549c71ce": "tooltip",
+    "sol.supply.circulating.pct::8fc514cc0fb2c0af": "body",
+    "sol.supply.net_change.tokens.per_year::145cf94432895488": "tooltip",
+    "sol.supply.net_change.tokens.per_year::a0e659cf88a543ff": "tooltip",
+    "sol.supply.net_change.tokens.per_year::b037b7f8f31c5378": "body",
+    "sol.tps.all.current::c815b93cb6b03db4:tpsall41980": "tooltip",
+    "sol.tps.nonvote.current::1e95ad74fcaca8c0:tpsnv25780": "tooltip",
+    "sol.tps.nonvote.current::3511bc92f09e06e8": "tooltip",
+    "sol.tps.nonvote.current::c815b93cb6b03db4:tpsnv25780": "tooltip",
+    "sol.tvl.usd.current::4e42bfcfa549694e": "tooltip",
+    "sol.tvl.usd.current::c815b93cb6b03db4:tvl565b": "tooltip",
+    "sol.validators.active.count::8b78f3ddc0ac327d": "tooltip",
+    "spx.funding.rate.latest::ac560446513fc5e6": "tooltip",
+    "spx.holders.top20.pct::34b38885c567d588": "tooltip",
+    "spx.holders.top20.pct::bc22daf9756d4a89": "tooltip",
+    "spx.holders.top20.pct::f12ea2782ca69bd3": "body",
+    "spx.ma.usd.200d::894d27dd8f8e7ef7:200d0337": "body",
+    "spx.ma.usd.50d::894d27dd8f8e7ef7:50d0347": "body",
+    "spx.oi.binance.usd.current::ef67931bd7be9afb": "tooltip",
+    "spx.oi.change.pct.30d::ff76a244e8710096": "tooltip",
+    "spx.price.usd.live::025e0ac993bbe3d3": "hero",
+    "spx.price.usd.live::1283d241fe92dc31": "hold_card",
+    "spx.price.usd.report::59e6aa2ef146fa32": "hero",
+    "spx.return.pct.30d::61637a22f46dde30": "body",
+    "spx.supply.circulating.pct::1fd1402959c2e3ed": "tooltip",
+    "spx.supply.circulating.pct::8f0da2ae8b552915": "body",
+    "spx.supply.circulating.pct::c1a8ce44429b76dc": "tooltip",
+    "spx.supply.circulating.tokens::2334471431faffe8:cg9310m": "tooltip",
+    "spx.supply.circulating.tokens::67bed9e4c36984ef:circ9310m": "body",
+    "spx.supply.circulating.tokens::87d89122dc6c28f1:circ9310m": "tooltip",
+    "spx.supply.circulating.tokens::f5a8b06def5acb31:circ9310m": "tooltip",
+    "spx.supply.max.tokens::67bed9e4c36984ef:max100b": "body",
+    "spx.supply.max.tokens::87d89122dc6c28f1:max100b": "tooltip",
+    "spx.supply.max.tokens::f5a8b06def5acb31:max100b": "tooltip",
+    "spx.volume.perp.usd.24h::6f1a434e63bb424d": "tooltip",
+    "zec.inflation.pct.current::5369a7974d0494af": "body",
+    "zec.inflation.pct.current::61de56da6f92404a": "tooltip",
+    "zec.leverage.x.current::9363209189a72968": "tooltip",
+    "zec.leverage.x.current::c9079e884e163237": "tooltip",
+    "zec.leverage.x.current::ce16cf4c59e2f354": "tooltip",
+    "zec.ma.usd.200d::16f665d285ab12ab:200d393": "body",
+    "zec.ma.usd.200d::7774b679d4db02a5:200d393spotzecusdt": "tooltip",
+    "zec.ma.usd.50d::16f665d285ab12ab:50d488": "body",
+    "zec.ma.usd.50d::7774b679d4db02a5:50dabove488": "tooltip",
+    "zec.oi.binance.usd.current::7be85787ab49ec7a": "tooltip",
+    "zec.price.usd.live::d4745656fca18cf9": "hold_card",
+    "zec.price.usd.report::f30dff44c006ada6": "hero",
+    "zec.shielded.share.pct::0bcbf079cf3f5a66": "tooltip",
+    "zec.shielded.share.pct::773c711cd457300a": "tooltip",
+    "zec.shielded.share.pct::fbfccb735db6f79c:shieldedstockmater": "tooltip",
+    "zec.shielded.tokens.current::fbfccb735db6f79c:zec437m": "tooltip",
+    "zec.supply.circulating.pct::66debcb9a4b92716": "body",
+    "zec.supply.circulating.pct::a93e53fe19e43dcb": "tooltip",
+    "zec.supply.circulating.tokens::109ac734f06a8cd9:circ1687m": "tooltip",
+    "zec.supply.max.tokens::109ac734f06a8cd9:max2100m": "tooltip",
+    "zec.tx.count.24h::c93bbc14605168f8": "tooltip",
+    "zec.volume.perp.usd.24h::e9d22308aab60ad2": "tooltip",
+    "zec.volume.spot.usd.24h::f5a90a118ac36651": "tooltip"
+  }
+}
