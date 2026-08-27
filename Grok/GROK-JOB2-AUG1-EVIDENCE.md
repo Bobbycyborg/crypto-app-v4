@@ -29,23 +29,23 @@ Helius maxed; public-RPC ATA path. Persist each proof before splice. Sleep/backo
 | RETARDIO | 37 | 36 | 1 | 0 | 1 | batch 3 |
 | SPX | 40 | 38 | 2 | 0 | 2 | batch 4 |
 | 2Z | 46 | 39 | 2 | 5 | 2 | batch 5 |
-| IO | 57 | 55 | 0 | 4 | 1 (Jupiter) | Jupiter leftover still walking |
+| IO | 57 | 55 | 0 | 1 | 1 (Jupiter) | Jupiter not walked |
 | NOS | 75 | 70 | 3 | 2 | 3 | walked / honest DEFER |
-| RENDER | 62 | 51 | 0 | 10 | 1 (Jupiter) | batch 11: Render49 + Render50 proved; OKX + Binance → CEX book. No recon 0s. Jupiter left as_of_now. |
-| BONK | 73 | 38 | 4 | 4 | 31 | still walking; Bonk37/44/49/61 gt300 left as_of_now |
-| GIGA | 77 | 60 | 1 | 0 | 17 | still walking; Giga65 gt300 left as_of_now |
+| RENDER | 62 | 51 | 0 | 10 | 1 (Jupiter) | batch 11 Render49/50 proved; leftover OKX/Binance dest-watch |
+| BONK | 73 | 45 | 4 | 1 | 24 | batch 11 +7; Bonk37/44/49/61 gt300 left as_of_now |
+| GIGA | 77 | 60 | 1 | 0 | 17 | batch 10 +14; Giga65 gt300; walk still on Giga82 |
 | GRASS | 57 | 0 | 0 | 0 | 57 | SKIP |
-| **total** | **586** | **444 on page** | **17** | **26** | **119 on page** | GRASS 57 of leftover are skip |
+| **total** | **586** | **451 on page** | **17** | **20** | **112 on page** | GRASS 57 of leftover are skip |
 
 PUMP / ORCA / DRIFT no fake27. HOM not present. G2 leftover 16 not walked.
 
-Live page after batch 11: RENDER 85 real / 1 fake27 (Jupiter) / 11 dest. BONK 55 real / 31 fake27 / 7 dest. GIGA 77 real / 17 fake27 / 1 dest. IO 71 real / 1 fake27 / 4 dest.
+Live page after batch 11: RENDER 85 real / 1 fake27 / 16 dest. BONK 62 real / 24 fake27 / 9 dest. GIGA 77 real / 17 fake27 / 2 dest. IO 71 real / 1 fake27 / 4 dest.
 
 ## What this resume did / did not
 
-Did: resume persist (no start-over); did not start duplicate RENDER/BONK/GIGA/IO walks; spliced RENDER leftover when 4 of last 5 had proofs; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff 429; reconstructed 0s only when walk-proved; no UNKNOWN whale stamps.
+Did: resume persist (no start-over); splice LOCKIN first; walk RETARDIO/SPX/2Z/IO; splice proved RENDER/GIGA/BONK as proofs landed; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff 429; reconstructed 0s only when walk-proved.
 
-Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card look; start Job 3; FAIL Job 1; walk or splice GRASS; stamp UNKNOWN on thick whales.
+Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card look; start Job 3; FAIL Job 1; walk or splice GRASS.
 
 ## Files touched
 
@@ -54,7 +54,7 @@ Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card
 
 ## Files left alone
 
-- config address lists; HOM; DRIFT; GRASS; PUMP; ORCA; FART / LOCKIN / RETARDIO / SPX / 2Z / NOS real 1 Aug; `data/cache` persist (gitignored)
+- config address lists; HOM; DRIFT; GRASS; PUMP; ORCA; FART real 1 Aug; `data/cache` persist (gitignored)
 
 ## Commits (this resume)
 
@@ -62,13 +62,12 @@ Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card
 - `2b0c655` batch 3 RETARDIO 36
 - `1a66bce` batch 4 SPX 38 (parallel `84f7e2c`)
 - `a625a6a` batch 5 pack (2Z HTML in parallel `baf3ee7`/`bcc4953`)
-- `8b207fc` batch 7 NOS 70
 - `6496feb` batch 8 RENDER/GIGA/BONK splice
 - `a45a9d5` batch 9
 - `107083e` batch 10 GIGA +14 / BONK +13
-- This commit: batch 11 RENDER Render49+Render50 proved, OKX+Binance CEX book. Hash: read `git log -1`.
-- Parallel also landed `e657cb5`, `d63223d`, `e7dd955`.
+- This commit: batch 11 RENDER leftover + BONK +7. Hash: read `git log -1`.
+- Parallel also landed `e657cb5`, `d63223d`, `8b207fc`, `e7dd955`.
 
 ## Status
 
-**NOT DONE.** Live leftover still as_of_now / still walking: RENDER Jupiter 1, BONK 31, GIGA 17, IO Jupiter 1. Honest DEFER whale gt300 left as_of_now (FART 3, LOCKIN/RETARDIO Raydium, SPX Orca+Raydium, 2Z TwoZ56+Raydium CLMM, NOS Nos67+2×Raydium CLMM, BONK 4, GIGA Giga65). GRASS skipped. Grok has not marked this complete.
+**NOT DONE.** Live leftover still as_of_now / still walking: RENDER Jupiter 1, BONK 24 (4 honest gt300), GIGA 17, IO Jupiter 1. GRASS skipped. Grok has not marked this complete.
