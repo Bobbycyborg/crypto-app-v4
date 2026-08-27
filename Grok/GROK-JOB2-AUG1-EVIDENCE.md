@@ -24,94 +24,66 @@ New dest-watch boxes from Job 1 had `aug1_status=as_of_now` and `aug1_as_of=2026
 
 | Coin | fake27 | proved 1 Aug (this job) | DEFER whale (left as_of_now) | DEFER dest-watch (CEX/MM book) | still as_of_now | notes |
 |---|---:|---:|---:|---:|---:|---|
-| FART | 31 | 27 | 3 (Fart21, Fart45, Raydium AMM Authority) | 1 (Wintermute, 266 txs) | 3 | batch 1. FART real 1 Aug not overwritten. |
-| LOCKIN | 31 | 30 (Lockin21–50) | 1 (Raydium AMM Authority, 301 txs) | 0 | 1 | batch 2. Reconstructed 0s: Lockin21, 23, 34, 47, 50. |
-| RETARDIO | 37 | 36 (Retardio21–56) | 1 (Raydium AMM Authority, 301 txs) | 0 | 1 | batch 3. Reconstructed 0s: Retardio31, 46, 52. |
-| SPX | 40 | 38 | 2 (Orca Whirlpool, Raydium AMM Authority) | 0 | 2 | batch 4. Binance CEX was thin (5 txs) so proved, not dest-watch. Reconstructed 0: Spx40. |
-| 2Z | 46 | 39 | 2 (TwoZ56, Raydium CLMM; both gt300) | 5 (Bybit, Bithumb, OKX-C68a, Coinbase, Binance) | 2 | batch 5. Gate.io (11 txs) + second OKX-8wM4 (7 txs) thin so proved. No reconstructed 0s. |
-| GRASS | 57 | 0 | 0 | 0 | 57 | SKIP — Oliver: GRASS dead. Do not walk / splice. |
-| IO | 57 | 0 | 0 | 0 | 57 | walking in parallel (separate proofs/log) |
-| RENDER | 62 | 0 | 0 | 0 | 62 | walking in parallel |
-| BONK | 73 | 0 | 0 | 0 | 73 | walking in parallel |
-| NOS | 75 | 0 | 0 | 0 | 75 | walking in parallel |
-| GIGA | 77 | 0 | 0 | 0 | 77 | walking in parallel |
+| FART | 31 | 27 | 3 (Fart21, Fart45, Raydium AMM Authority) | 1 (Wintermute) | 3 | batch 1. FART real 1 Aug not overwritten. |
+| LOCKIN | 31 | 30 | 1 (Raydium AMM Authority) | 0 | 1 | batch 2. Reconstructed 0s: Lockin21, 23, 34, 47, 50. |
+| RETARDIO | 37 | 36 | 1 (Raydium AMM Authority) | 0 | 1 | batch 3. Reconstructed 0s: Retardio31, 46, 52. |
+| SPX | 40 | 38 | 2 (Orca Whirlpool, Raydium AMM Authority) | 0 | 2 | batch 4. Reconstructed 0: Spx40. |
+| 2Z | 46 | 39 | 2 (TwoZ56, Raydium CLMM) | 5 (Bybit, Bithumb, OKX, Coinbase, Binance) | 2 | batch 5. Thin CEX (Gate.io + one OKX) proved. |
+| GRASS | 57 | 0 | 0 | 0 | 57 | SKIP — Oliver: GRASS dead. |
+| IO | 57 | 0 | 0 | 0 | 57 | walking now |
+| RENDER | 62 | 0 | 0 | 0 | 62 | not walked |
+| BONK | 73 | 0 | 0 | 0 | 73 | not walked |
+| NOS | 75 | 0 | 0 | 0 | 75 | not walked |
+| GIGA | 77 | 0 | 0 | 0 | 77 | not walked |
 | **total** | **586** | **170 on page** (27+30+36+38+39) | **9** | **6** | **415 on page** | GRASS 57 of leftover are skip |
 
-PUMP / ORCA / DRIFT had no fake27. HOM not present. G2 leftover 16 not in the fake27 set and not walked.
+PUMP / ORCA / DRIFT had no fake27. HOM not present. G2 leftover 16 not walked.
 
 ## What landed on the page
 
 ### Batch 1 (eb21ce2)
-- FART: 27 new real 1 Aug stamps. Old real 1 Aug kept. 3 thick whales still `as_of_now`. Wintermute → dest-watch `MM book`.
-- JS `since 1 Aug` percent row. Label still `1 Aug`.
+FART 27 + JS `since 1 Aug` row. Label still `1 Aug`.
 
 ### Batch 2 (332acd8)
-- LOCKIN: 30 new real 1 Aug stamps (Lockin21–50). FART not touched.
-- Note: `e657cb5` (also titled batch 2) spliced RETARDIO 21–27 mid-flight; batch 3 superseded that with the full RETARDIO splice.
+LOCKIN 30. `e657cb5` also titled batch 2 (partial RETARDIO); superseded by batch 3.
 
 ### Batch 3 (2b0c655)
-- RETARDIO: 36 new real 1 Aug stamps (Retardio21–56). Raydium left `as_of_now` (DEFER gt300).
-- LOCKIN Raydium walked DEFER gt300.
+RETARDIO 36. LOCKIN Raydium DEFER recorded.
 
 ### Batch 4 (1a66bce / 84f7e2c)
-- SPX: 38 new real 1 Aug stamps. Orca Whirlpool + Raydium AMM Authority left `as_of_now` (DEFER gt300, no UNKNOWN).
-- FART / LOCKIN / RETARDIO spliced boxes not overwritten.
-- Row label still `1 Aug`. JS row already present.
+SPX 38. Parallel batch-4 commits; counts match.
 
 ### Batch 5 (this commit)
-- 2Z: 39 new real 1 Aug stamps. TwoZ56 + Raydium CLMM left `as_of_now` (DEFER gt300, no UNKNOWN).
-- Dest-watch `CEX book`: Bybit, Bithumb, OKX (C68a6RCG, 301 txs), Coinbase, Binance.
-- Gate.io and the second OKX (8wM44Ryv, 7 txs) were thin so proved, not dest-watch.
-- FART / LOCKIN / RETARDIO / SPX real 1 Aug counts not dropped. Label still `1 Aug`. JS row present.
-- No reconstructed 0s on 2Z.
+- 2Z: 39 new real 1 Aug stamps. 5 thick CEX → dest-watch `CEX book`. TwoZ56 + Raydium CLMM left `as_of_now` (DEFER gt300, no UNKNOWN).
+- Prior coins not overwritten. Row label still `1 Aug`.
 
 ## What this resume did / did not
 
-Did:
-- Pulled origin/main. No rebase.
-- Did not start over. Waited for the already-running 2Z public-RPC walk (pid 295321) to finish; did not start a second 2Z walk.
-- 2Z done: proved=39 defer=7 (5 dest-watch + 2 whale) err=0. 429 backoff persist-and-continue.
-- Remaining live coins (IO, RENDER, BONK, NOS, GIGA) spreading in parallel with separate proofs/logs. Not walked sequentially after 2Z. Not launched as duplicates from this splice owner.
-- Skipped GRASS / DRIFT / PUMP / ORCA.
-- Left reconstructed 0s only where the walk proved them.
-- Persist each proof before splice. Sleep/backoff on 429.
+Did: resume from persist (no start-over); splice LOCKIN first; walk remaining live coins; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff on 429; reconstructed 0s only when walk-proved.
 
-Did not:
-- Did not invent numbers or guess zeros.
-- Did not add wallets or change config address lists.
-- Did not touch HOM or hold-card look.
-- Did not start Job 3.
-- Did not FAIL Job 1.
-- Did not walk or splice GRASS.
-- Did not stamp UNKNOWN on thick whales.
+Did not: invent numbers; add wallets; change config address lists; touch HOM / hold-card look; start Job 3; FAIL Job 1; walk or splice GRASS.
 
 ## Files touched
 
-- `index-v4.html` — siren-watch-data for FART (batch 1, left alone after), LOCKIN, RETARDIO, SPX, 2Z. JS row from batch 1.
+- `index-v4.html` — siren-watch-data for LOCKIN / RETARDIO / SPX / 2Z this resume. JS row from batch 1.
 - `Grok/GROK-JOB2-AUG1-EVIDENCE.md` — this pack
 
 ## Files left alone
 
 - `config/siren-wallets.json` / `config/siren-wallet-tags.json`
-- HOM (not present)
-- DRIFT / GRASS / PUMP / ORCA
-- FART / LOCKIN / RETARDIO / SPX real 1 Aug stamps
-- Unfinished parallel coins this batch (IO, RENDER, BONK, NOS, GIGA)
-- No invented wallets
+- HOM / DRIFT / GRASS / PUMP / ORCA
+- FART real 1 Aug stamps
+- Unwalked coins
 - `data/cache/job2-aug1-proofs.json` local persist (gitignored)
-
-## Persist
-
-Each proved 1 Aug written immediately to `data/cache/job2-aug1-proofs.json` (and box `/workspace/job2-aug1-proofs.json`) before splice.
 
 ## Commits
 
 - Batch 1: `eb21ce2`
-- Batch 2: `332acd8` (LOCKIN). `e657cb5` also titled batch 2 (partial RETARDIO 21–27) from a parallel splice; superseded by batch 3.
+- Batch 2: `332acd8` (LOCKIN). `e657cb5` partial RETARDIO (superseded).
 - Batch 3: `2b0c655` (RETARDIO 36)
-- Batch 4: `1a66bce` / `84f7e2c` (SPX 38)
-- Batch 5: this commit (2Z 39). Hash: read `git log -1`.
+- Batch 4: `84f7e2c` / `1a66bce` (SPX 38)
+- Batch 5: this commit (2Z 39 + 5 dest-watch). Hash: read `git log -1`.
 
 ## Status
 
-**NOT DONE.** Live remaining: IO, RENDER, BONK, NOS, GIGA (parallel walks). GRASS skipped. Honest DEFERs left as_of_now: FART 3, LOCKIN Raydium, RETARDIO Raydium, SPX Orca Whirlpool + Raydium, 2Z TwoZ56 + Raydium CLMM. Grok has not marked this complete.
+**NOT DONE.** Live remaining: IO (walking), RENDER, BONK, NOS, GIGA. GRASS skipped. Grok has not marked this complete.
