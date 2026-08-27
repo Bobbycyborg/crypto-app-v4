@@ -22,6 +22,7 @@ from renderer.anchors import (
     find_markup_literal,
     locate_literal,
     locate_literal_in_region,
+    plain_text_binding_literal,
     parse_xpath_segments,
     resolve_region,
     _article_index_score,
@@ -32,7 +33,7 @@ from renderer.anchors import (
     _xpath_score,
 )
 from renderer.eligibility import eligible_mappings, load_job1_job2
-from renderer.formatters import infer_formatter
+from renderer.formatters import adjust_formatter_for_binding, infer_formatter
 
 MANIFEST_PATH = Path(__file__).resolve().parent / "binding-manifest.json"
 HTML_PATH = ROOT / "index-v4.html"
@@ -51,16 +52,11 @@ def _effective_literal(
     *,
     longer_literals: list[str] | None = None,
 ) -> str | None:
-    if xpath:
-        region = resolve_region(index, xpath, html=html, location_hint=location_hint, literal=manifest_lit)
-        if region and manifest_lit:
-            located = locate_literal_in_region(html, region, manifest_lit)
-            if located:
-                return located[0]
-    if manifest_lit:
-        found = find_markup_literal(html, index, manifest_lit, xpath=xpath, location_hint=location_hint)
-        if found:
-            return found[0]
+    region = resolve_region(index, xpath, html=html, location_hint=location_hint, literal=manifest_lit) if xpath else None
+    if region and manifest_lit:
+        plain = plain_text_binding_literal(html, region, manifest_lit)
+        if plain:
+            return plain[0]
     if manifest_lit and manifest_lit in html:
         start = 0
         while True:
@@ -71,11 +67,16 @@ def _effective_literal(
                 if any(html.startswith(longer, i) for longer in longer_literals if len(longer) > len(manifest_lit)):
                     start = i + 1
                     continue
-            return manifest_lit
-    if xpath:
-        extracted = extract_region_literal(html, index, xpath, location_hint=location_hint)
-        if extracted and extracted in html:
-            return extracted
+            eff = manifest_lit
+            if "<" not in eff and ">" not in eff:
+                return eff
+            start = i + 1
+    if manifest_lit:
+        found = find_markup_literal(html, index, manifest_lit, xpath=xpath, location_hint=location_hint)
+        if found:
+            eff = found[0].split("<", 1)[0]
+            if eff:
+                return eff
     return None
 
 
@@ -197,10 +198,16 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
 
         if not cands:
             raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER no anchor {mid} {oid}")
+        if "<" in effective or ">" in effective:
+            raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER markup literal {mid} {oid}")
         cands.sort(key=lambda x: (-x[0], x[1]))
         score, pos, end = cands[0]
         used.append((pos, end))
         anchor = build_anchor(html, pos, effective)
+        target_kind = classify_target_kind(html, pos, effective)
+        if target_kind == "HTML_TEXT" and ("<" in effective or ">" in effective):
+            raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER tag crossing {mid} {oid}")
+        fmt = adjust_formatter_for_binding(infer_formatter(manifest_lit or effective), manifest_lit, effective, anchor["anchor_after"])
         entry = {
             "binding_id": _binding_id(mid, oid),
             "metric_id": mid,
@@ -210,14 +217,14 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
             "job1_mapping_id": mapping.get("mapping_id"),
             "occurrence_classification": mapping.get("classification"),
             "update_mode": mapping.get("update_mode") or occ.get(oid, {}).get("update_mode"),
-            "target_kind": classify_target_kind(html, pos, effective),
+            "target_kind": target_kind,
             "field": "value",
             "source_literal": effective,
             "anchor_before": anchor["anchor_before"],
             "anchor_after": anchor["anchor_after"],
             "anchor_sha256": anchor["anchor_sha256"],
             "component_id": occ.get(oid, {}).get("ui_location_identifier"),
-            "formatter": infer_formatter(manifest_lit or effective),
+            "formatter": fmt,
             "status_behavior": "UNKNOWN_ON_NON_OK",
             "notes": None,
         }

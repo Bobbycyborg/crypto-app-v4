@@ -9,6 +9,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from renderer.render_report import render_report
+sys.path.insert(0, str(ROOT / "tests/job3"))
+from _binding_span import rendered_span
 
 FIX = ROOT / "tests/job3/fixtures"
 
@@ -27,11 +29,9 @@ def main() -> int:
     )
     assert manifest["publishable"] is False
     assert code == 2
-    zec = [b for b in bindings if b["metric_id"] == "zec.tx.count.24h"]
-    for b in zec:
-        combo = b["anchor_before"] + b["source_literal"] + b["anchor_after"]
-        assert combo not in out
-        assert "UNKNOWN" in out
+    for b in bindings:
+        if snapshot["metrics"][b["metric_id"]]["status"] != "OK":
+            assert rendered_span(out, b, source=source) == "UNKNOWN", b["binding_id"]
     print("test_renderer_fail_closed OK")
     return 0
 

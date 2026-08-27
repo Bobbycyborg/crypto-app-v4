@@ -1,10 +1,10 @@
 {
   "schema_version": "job3.v1",
   "source_run_id": "SYNTHETIC_FAILCLOSED_JOB3",
-  "source_collector_run_sha256": "f25b8601d6cd8b5f82c388a28ac2bd012ae02ba3aa3a368bf6c997acae8a1b79",
+  "source_collector_run_sha256": "4c9c939155f438f57b3fcf72a4287ecca0e0b24a09dd37af19dee395ba8f7932",
   "job1_registry_sha256": "19061e193b5946477592ce01d670ec2f4d8bf67a4bf811cf1a5f61df70f381b1",
   "collector_plan_sha256": "24e6163a72480aea5db3d8ff39cc6d5846d83a75fc46f947ec7534d90c7ae7aa",
-  "generated_at": "2026-08-27T19:16:15Z",
+  "generated_at": "2026-08-27T19:35:15Z",
   "metrics": {
     "2z.price.usd.live": {
       "metric_id": "2z.price.usd.live",
@@ -109,13 +109,16 @@
       "status": "OK",
       "normalized_value": 1007,
       "unit": "x",
-      "source_key": "binance",
-      "source_label": "Binance",
+      "source_key": null,
+      "source_label": "Derived from canonical inputs",
       "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "fetched_at": "UNKNOWN",
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY",
-      "derivation_inputs": null,
+      "calculation_version": "v1",
+      "derivation_inputs": [
+        "btc.volume.perp.usd.24h",
+        "btc.volume.spot.usd.24h"
+      ],
       "error": null
     },
     "btc.ma.usd.200d": {
@@ -725,13 +728,16 @@
       "status": "OK",
       "normalized_value": 1051,
       "unit": "x",
-      "source_key": "binance",
-      "source_label": "Binance",
+      "source_key": null,
+      "source_label": "Derived from canonical inputs",
       "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "fetched_at": "UNKNOWN",
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY",
-      "derivation_inputs": null,
+      "calculation_version": "v1",
+      "derivation_inputs": [
+        "btc.volume.perp.usd.24h",
+        "btc.volume.spot.usd.24h"
+      ],
       "error": null
     },
     "global.participation.above_50dma.count": {
@@ -2517,13 +2523,16 @@
       "status": "OK",
       "normalized_value": 1179,
       "unit": "tokens",
-      "source_key": "binance",
-      "source_label": "Binance",
+      "source_key": null,
+      "source_label": "Derived from canonical inputs",
       "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "fetched_at": "UNKNOWN",
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY",
-      "derivation_inputs": null,
+      "calculation_version": "v1",
+      "derivation_inputs": [
+        "sol.issuance.tokens.per_year",
+        "sol.burn.tokens.per_year"
+      ],
       "error": null
     },
     "sol.tps.all.current": {
@@ -2783,13 +2792,16 @@
       "status": "OK",
       "normalized_value": 1198,
       "unit": "x",
-      "source_key": "binance",
-      "source_label": "Binance",
+      "source_key": null,
+      "source_label": "Derived from canonical inputs",
       "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "fetched_at": "UNKNOWN",
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY",
-      "derivation_inputs": null,
+      "calculation_version": "v1",
+      "derivation_inputs": [
+        "zec.volume.perp.usd.24h",
+        "zec.volume.spot.usd.24h"
+      ],
       "error": null
     },
     "zec.ma.usd.200d": {

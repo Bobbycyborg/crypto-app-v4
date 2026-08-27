@@ -86,11 +86,19 @@
       "status": "OK",
       "normalized_value": 1007,
       "unit": "x",
-      "source_key": "binance",
-      "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "source_key": null,
+      "source_as_of": "UNKNOWN",
+      "fetched_at": null,
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY"
+      "calculation_version": "v1",
+      "request_key": null,
+      "source_field": "RATIO",
+      "raw_capture_sha256": null,
+      "derivation_inputs": [
+        "btc.volume.perp.usd.24h",
+        "btc.volume.spot.usd.24h"
+      ],
+      "error": null
     },
     {
       "metric_id": "btc.ma.usd.200d",
@@ -570,11 +578,19 @@
       "status": "OK",
       "normalized_value": 1051,
       "unit": "x",
-      "source_key": "binance",
-      "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "source_key": null,
+      "source_as_of": "UNKNOWN",
+      "fetched_at": null,
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY"
+      "calculation_version": "v1",
+      "request_key": null,
+      "source_field": "RATIO",
+      "raw_capture_sha256": null,
+      "derivation_inputs": [
+        "btc.volume.perp.usd.24h",
+        "btc.volume.spot.usd.24h"
+      ],
+      "error": null
     },
     {
       "metric_id": "global.participation.above_50dma.count",
@@ -1978,11 +1994,19 @@
       "status": "OK",
       "normalized_value": 1179,
       "unit": "tokens",
-      "source_key": "binance",
-      "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "source_key": null,
+      "source_as_of": "UNKNOWN",
+      "fetched_at": null,
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY"
+      "calculation_version": "v1",
+      "request_key": null,
+      "source_field": "SUBTRACT",
+      "raw_capture_sha256": null,
+      "derivation_inputs": [
+        "sol.issuance.tokens.per_year",
+        "sol.burn.tokens.per_year"
+      ],
+      "error": null
     },
     {
       "metric_id": "sol.tps.all.current",
@@ -2187,11 +2211,19 @@
       "status": "OK",
       "normalized_value": 1198,
       "unit": "x",
-      "source_key": "binance",
-      "source_as_of": "2026-08-01T00:00:00Z",
-      "fetched_at": "2026-08-01T00:00:00Z",
+      "source_key": null,
+      "source_as_of": "UNKNOWN",
+      "fetched_at": null,
       "freshness": "UNKNOWN",
-      "calculation_version": "SYNTHETIC_TEST_ONLY"
+      "calculation_version": "v1",
+      "request_key": null,
+      "source_field": "RATIO",
+      "raw_capture_sha256": null,
+      "derivation_inputs": [
+        "zec.volume.perp.usd.24h",
+        "zec.volume.spot.usd.24h"
+      ],
+      "error": null
     },
     {
       "metric_id": "zec.ma.usd.200d",

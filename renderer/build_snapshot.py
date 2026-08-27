@@ -39,8 +39,23 @@ def _source_label(source_key: str | None, labels: dict[str, str]) -> str:
     return labels[source_key]
 
 
-def _derived_as_of(inputs: list[dict[str, Any]]) -> str:
-    as_ofs = {i.get("source_as_of") for i in inputs if i.get("source_as_of") and i.get("source_as_of") != "UNKNOWN"}
+def _derived_as_of(inputs: list[Any], facts_by_id: dict[str, dict[str, Any]]) -> str:
+    if not inputs:
+        return "UNKNOWN"
+    as_ofs: set[str] = set()
+    for inp in inputs:
+        if isinstance(inp, str):
+            fact = facts_by_id.get(inp)
+            if not fact:
+                return "UNKNOWN"
+            as_of = fact.get("source_as_of")
+        elif isinstance(inp, dict):
+            as_of = inp.get("source_as_of")
+        else:
+            return "UNKNOWN"
+        if not as_of or as_of == "UNKNOWN":
+            return "UNKNOWN"
+        as_ofs.add(as_of)
     if len(as_ofs) == 1:
         return next(iter(as_ofs))
     return "UNKNOWN"
@@ -79,7 +94,7 @@ def build_snapshot(collector_run: dict[str, Any], labels: dict[str, str]) -> dic
         derivation_inputs = fact.get("derivation_inputs")
         if entry.get("disposition") == "DERIVE" and not source_key:
             source_label = "Derived from canonical inputs"
-            source_as_of = _derived_as_of(derivation_inputs or [])
+            source_as_of = _derived_as_of(derivation_inputs or [], facts_by_id)
         else:
             source_label = _source_label(source_key, labels) if status == "OK" else "UNKNOWN"
             source_as_of = fact.get("source_as_of") or "UNKNOWN"

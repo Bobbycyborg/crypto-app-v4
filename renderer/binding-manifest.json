@@ -40,16 +40,16 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "0.82<span class='econ-u'>%</span>",
+      "source_literal": "0.82",
       "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Issuance<br>per year</span></div><div",
-      "anchor_sha256": "d1371ae6df7e0d4ab800b9cdb8f9077fe6d0583bf3efaecb0aa9ad16f6127d92",
+      "anchor_after": "<span class='econ-u'>%</span></span></div><span class=\"econ-dial-label\">Issuance",
+      "anchor_sha256": "2a420ddd128bb19d7f9f2c76e22a1e32b8dacbf4ddcddc4d087c023be394f79e",
       "component_id": "Issuanceper year",
       "formatter": {
         "type": "numeric",
         "scale": 1,
-        "percent": true,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -141,17 +141,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$27<span class='econ-u'>M</span>",
+      "source_literal": "$27",
       "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Earnings</span><span class=\"econ-sub\"",
-      "anchor_sha256": "ccb7d5d4b67843341360abf934ea9969bbd756e728411a56e03c9653c15548de",
+      "anchor_after": "<span class='econ-u'>M</span></span></div><span class=\"econ-dial-label\">Earnings",
+      "anchor_sha256": "52b366dec0303a856c97f811e089987ce7f4fff25ca2e0f10d0f65d6ab64f612",
       "component_id": "Earnings",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -174,6 +174,8 @@
       "component_id": "Retracement",
       "formatter": {
         "type": "numeric",
+        "unicode_minus": true,
+        "approx_prefix": "~",
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -190,13 +192,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-2.796e-05</span>",
-      "anchor_before": "ws\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding pctile</span><span clas",
-      "anchor_sha256": "e671c2440b091b3ce3cb58923009940bef1aa510e2de79dc183c35885a0f6a92",
+      "source_literal": "-2.796e-05",
+      "anchor_before": "\"><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Funding</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Funding pctile</div><div",
+      "anchor_sha256": "92ffdaeb8151ba8111b800cbadb964bb5644b85dc14daabb1c7b4671d45807dd",
       "component_id": "Funding",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scientific": true,
+        "decimal_places": 3
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -212,10 +216,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$52.9M</span>",
+      "source_literal": "$52.9M",
       "anchor_before": "iv><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp 24h</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v",
-      "anchor_sha256": "3267c8de134751bbd6ee2d5137b1335dd2915a66a3dabfb35c31ef7bd9a328d1",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span clas",
+      "anchor_sha256": "e13f7eb3deac606309a4678cfdd9a7538a888b7ac36b3863ecea405b974cc07a",
       "component_id": "Perp 24h",
       "formatter": {
         "type": "numeric",
@@ -246,10 +250,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "k",
         "scale": 1000,
         "suffix": "/d",
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "k"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -346,7 +350,8 @@
       "component_id": "Privacy / Network",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "approx_prefix": "~",
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -362,10 +367,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "2223</span>",
-      "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Inventory total</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Inventory/device count \u2260 utilized compute.</p",
-      "anchor_sha256": "ec87b9e2627231f984583d966056612e858c6a822efe84704ccae515965b47b7",
+      "source_literal": "2223",
+      "anchor_before": "lass=\"fx-ev-row\"><div class=\"fx-ev-k\">Inventory total</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-note\">Inventory/device count \u2260 utilized compute.</",
+      "anchor_sha256": "9d399161be5ee4036ecce2c6710f140727a7588bdf6150079a1d29d767aaa619",
       "component_id": "Inventory total",
       "formatter": {
         "type": "numeric",
@@ -386,10 +391,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$6.8<span class='econ-u'>M</span>",
-      "anchor_before": "ast\" style=\"height:94%\" title=\"$1.0M\"></span></div><span class=\"econ-chart-kpi\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Buybacks</span><span class=\"econ-sub\"",
-      "anchor_sha256": "05e8184f98d77ca86756579a4e51dc1ff43cc273a33223959f9fd8e6f12f4e56",
+      "source_literal": "$6.8M",
+      "anchor_before": "atform value capture is still the strong leg: ~$7.8M protocol revenue / 7d and ~",
+      "anchor_after": " buybacks / 7d. That path is ~50% of parent net revenue, locked ~through Apr 202",
+      "anchor_sha256": "1314077769918c76eea9e4a1ad908912eb480a340b9b10687a565c13a66d77a0",
       "component_id": "Buybacks",
       "formatter": {
         "type": "numeric",
@@ -437,10 +442,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "21.00M</span>",
+      "source_literal": "21.00M",
       "anchor_before": "ss=\"ev-tip-row\"><span class=\"ev-k\">Circ / max</span><span class=\"ev-v\">16.87M / ",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Circulating %</span><span class",
-      "anchor_sha256": "6284b172746e85d42fd17055a08b670f0ecee91967476e49a5c6a6cc52e2c7d7",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Circulating %</span><spa",
+      "anchor_sha256": "c6f4a4223fc998064ab7f188ab7764576e18183b033aed982820034e99525191",
       "component_id": "max",
       "formatter": {
         "type": "numeric",
@@ -462,10 +467,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$2.8M</div>",
+      "source_literal": "$2.8M",
       "anchor_before": "></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">OI</div><div class=\"fx-ev-v\">",
-      "anchor_after": "</div><div class=\"fx-ev-note\">Leverage present \u2260 bearish by itself.</div></div><",
-      "anchor_sha256": "0a4153ec3c181bf7a114f74ea4f5180a6ed87ad208377b8dd3078b0ab669eb06",
+      "anchor_after": "</div></div><div class=\"fx-ev-note\">Leverage present \u2260 bearish by itself.</div><",
+      "anchor_sha256": "67a22d7871eb6f6b57f2545b2a6800941c0aec6b585e3d4649303cf94ae81bc5",
       "component_id": "OI",
       "formatter": {
         "type": "numeric",
@@ -521,10 +526,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "k",
         "scale": 1000,
         "suffix": "/d",
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "k"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -633,10 +638,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "47%</span>",
+      "source_literal": "47%",
       "anchor_before": "s\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Live 24h</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Scope</span><span class=\"ev-v\">",
-      "anchor_sha256": "4c70087fbc3d078efc7df45bae50206fdf39b5ccf7fb0bd57cb534812efe4761",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Scope</span><span class=",
+      "anchor_sha256": "70c427b145f6a7e34b7ed83738fa8d6c946d5ee0bd62ad0b517e9d810da1b656",
       "component_id": "Live 24h",
       "formatter": {
         "type": "numeric",
@@ -658,13 +663,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~412M remaining</span>",
+      "source_literal": "~412M remaining",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">futureEmissions</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Would weaken the buyback bid just as float ex",
-      "anchor_sha256": "bbc784ba8ad9d00a42a69dc9a36650efb34193949276275ebc71daa184484634",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Would weaken the buyback bid just as f",
+      "anchor_sha256": "3766428f4d162d641262dc59eb7e67914531e1ee65580b1a7ad0755abe0242ea",
       "component_id": "futureEmissions",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -705,10 +711,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "7.61%</span>",
+      "source_literal": "7.61%",
       "anchor_before": "lass=\"ev-tip-row\"><span class=\"ev-k\">Unattributed held</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">The risk is available supply controlled throu",
-      "anchor_sha256": "8433cbf9ebaabee2152e3f8ae67bcad182fbba078a70db5e22362c0083c0879a",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">The risk is available supply controlle",
+      "anchor_sha256": "f75175f550ba67041b8b206dc6986f744b89e2f1b94514787b9fd41cc274249c",
       "component_id": "Unattributed held",
       "formatter": {
         "type": "numeric",
@@ -736,7 +742,8 @@
       "anchor_sha256": "6aa6c57e6fed5e90462ccb46c04bce0bb2b6ffbf84af5db07d3fb3392fd58b18",
       "component_id": "Net supply change",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -759,7 +766,7 @@
       "component_id": "Price Trend 30d",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -782,7 +789,7 @@
       "component_id": "Price Trend 7d",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -805,7 +812,7 @@
       "component_id": "Inflation / burn",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -993,13 +1000,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "5e-05</span>",
+      "source_literal": "5e-05",
       "anchor_before": "div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp vs Coinbase spot</span><sp",
-      "anchor_sha256": "d29c47dff3311d761840ceeff6ac65e24433a9aae8dc930fe80ee0718a8504a1",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp vs Coinbase spot</s",
+      "anchor_sha256": "b1e2a32522dc25a909cb53658920c934a403527dcd579a484be97ff75ab527e2",
       "component_id": "Funding",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scientific": true,
+        "decimal_places": 0
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1015,10 +1024,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~100<span class='econ-u'>%</span>",
-      "anchor_before": "roke=\"var(--green)\" stroke-dasharray=\"113.097 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-sub\">1B \u00b7 MINT OFF</span></div><div class",
-      "anchor_sha256": "ff1e70d0ce4bac89e5e45cec431670e8ecdcff638871d675ca8af0402e7831ba",
+      "source_literal": "~100%",
+      "anchor_before": "5\"/></svg></span></strong></div><span class=\"flag-detail\">Mint/freeze revoked \u00b7 ",
+      "anchor_after": " circ</span></div><div class=\"flag has-tip\"><div class=\"metric-tip-template\" hid",
+      "anchor_sha256": "4d0179ddaace08f5896567c5cfc96dc04984e9369a4bb7379718f5dfd59d03dc",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
@@ -1067,10 +1076,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "3.68<span class='econ-u'>%</span>",
-      "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Issuance<br>per year</span><span clas",
-      "anchor_sha256": "6fdb1dd1e3355e40ea9dee594b419069fbc6917c0d7cc4afaea6103f3c854e09",
+      "source_literal": "3.68%",
+      "anchor_before": "c-tag high\">High</span></div><div class=\"rc-item-line\">Staked 68.8% \u00b7 inflation ",
+      "anchor_after": " \u00b7 net ~+20,281,672 SOL/yr</div></div><div class=\"rc-item has-tip\"><div class=\"m",
+      "anchor_sha256": "8398bba4a47a6128bf2f1a11e42e5e6f6b57817452c177ace3f0787f7b737463",
       "component_id": "Issuanceper year",
       "formatter": {
         "type": "numeric",
@@ -1092,10 +1101,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-25.43pp</span>",
+      "source_literal": "-25.43pp",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">IO/SOL 30d</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Right side of the split.</p><div class=\"ev-ti",
-      "anchor_sha256": "1bcf5d78b67e588ba21517a63f0c0328540f92e9162fb48cf3843cc10ba905da",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Right side of the split.</p><div class",
+      "anchor_sha256": "680c1d21bc6174e13998d1651d5ec7724e706b4111457a73e96ac65703a70aa4",
       "component_id": "IO/SOL 30d",
       "formatter": {
         "type": "string_exact"
@@ -1114,10 +1123,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "4.09M</span>",
+      "source_literal": "4.09M",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Completed (cum)</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Cumulative completed \u2260 growth. ~35 = utilized",
-      "anchor_sha256": "ee5829ed4d6dfb8a3cb94e5e7dc52f8d6598efa3e794b5beda734e6af9c99e78",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Cumulative completed \u2260 growth. ~35 = u",
+      "anchor_sha256": "851a4675e750e92c99e0ad5988f50212db98595e7a2cdd85cdd83546970b647a",
       "component_id": "Completed (cum)",
       "formatter": {
         "type": "numeric",
@@ -1194,7 +1203,8 @@
       "component_id": "Circulating Supply",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "approx_prefix": "~",
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1210,10 +1220,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$132.0M</span>",
+      "source_literal": "$132.0M",
       "anchor_before": "></div><div class=\"ev-tip-row\"><span class=\"ev-k\">MCAP</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part of a b",
-      "anchor_sha256": "b48aa130ac34bf3e198ab4c96160978de1129a39748ce8f5e047a6428107f339",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part",
+      "anchor_sha256": "76e1ac2869d2051730b97fef190e19d1e809e56e219308faf0db678edfac020f",
       "component_id": "MCAP",
       "formatter": {
         "type": "numeric",
@@ -1236,13 +1246,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~7.0\u00d7</span>",
+      "source_literal": "~7.0\u00d7",
       "anchor_before": "rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Ratio</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Definition</span><span class=\"e",
-      "anchor_sha256": "9a08a4016fefb61006f42d0fadb2ea04774dd401dde06252a2c97398d095043f",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Definition</span><span c",
+      "anchor_sha256": "58e3d54c4a1a12229f026379cb2cd39e03210a7b52383553daaad95070dad27f",
       "component_id": "Ratio",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1264,7 +1275,8 @@
       "anchor_sha256": "04ea017ca17864beefa270da2cf50e37edc2841f9c29d33fcc8194a2d640c096",
       "component_id": "Fut / spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1329,10 +1341,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~$79,337.00</span>",
+      "source_literal": "~$79,337.00",
       "anchor_before": "p-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Now</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">ATH</span><span class=\"ev-v\">~$",
-      "anchor_sha256": "be9a534ce643aa2bdabd88d58f5736cd41d9ee8678456128e34593867c92f04d",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">ATH</span><span class=\"e",
+      "anchor_sha256": "829eff3d361042521bebb6c11a036fea5cca60cda0fc0f390dbde71daf818ad2",
       "component_id": "Now",
       "formatter": {
         "type": "numeric",
@@ -1429,13 +1441,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~-1.0%</span>",
+      "source_literal": "~-1.0%",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Stables 30d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">DXY</span><span class=\"ev-v\">UN",
-      "anchor_sha256": "87719949881783ea92facd4b1d6dce843cb5e86846ff11e3d4c5dd78d5a54745",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">DXY</span><span class=\"e",
+      "anchor_sha256": "a1946e8bf86bdabdfb63a08e0619603fbc76e0b118b8516b31e162e5f402c3f7",
       "component_id": "Stables 30d",
       "formatter": {
         "type": "numeric",
+        "approx_prefix": "~",
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -1576,10 +1589,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$102.8M</span>",
+      "source_literal": "$102.8M",
       "anchor_before": "emand</div><div class=\"ev-tip-read\">Current read: WATCH</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Futures / spot</span><span class=\"ev-v\">8.4\u00d7 (observed \u2014 no cutoff)</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.88th percentile vs own history (n=2382) \u00b7 latest -0.00005/8h</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding pctile</span><span class=\"ev-v\">5.9th vs own history</s",
-      "anchor_sha256": "04c52b2489e5b75ae2d042cc2ee47b824f8c9a45ece88465adc4fee0a313b3fb",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.88th percentile vs own history (n=2382) \u00b7 latest -0.00005/8h</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding pctile</span><span class=\"ev-v\">5.9th vs own his",
+      "anchor_sha256": "f08eaa669f27cd7305b45ce9c84e64e99c7faf7bf694888255850bc7c3650a99",
       "component_id": "OI",
       "formatter": {
         "type": "numeric",
@@ -1624,17 +1637,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$809<span class='econ-u'>k</span>",
+      "source_literal": "$809",
       "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Fees</span><span class=\"econ-sub\">/ D",
-      "anchor_sha256": "88b5be5380a859c52aeba182a7fed33b75a4818c9e04b97c5a6cfcba19215c4b",
+      "anchor_after": "<span class='econ-u'>k</span></span></div><span class=\"econ-dial-label\">Fees</sp",
+      "anchor_sha256": "896a08a253d80e1284ae68a73fbee2a466c1f00fa7fdcc5a998768537fcc63bc",
       "component_id": "Fees",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "k",
         "scale": 1000,
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "k"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1650,17 +1663,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$2.67<span class=\"u-unit\">B</span>",
+      "source_literal": "$2.67",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">30D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">ALL-TIME</span><span cla",
-      "anchor_sha256": "e7d6aff6bc5ce9d3c7cf347349da3b60e5f8584b1d0f3b051c787b983906a521",
+      "anchor_after": "<span class=\"u-unit\">B</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "66056de0e5b7a6e18761cd831a9da770003bbd8ee0b6655952f8a03d1fc4b3ba",
       "component_id": "30D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "B",
         "scale": 1000000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "external_scale_suffix": "B"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1879,16 +1892,16 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "95.6<span class='econ-u'>%</span>",
+      "source_literal": "95.6",
       "anchor_before": "8.121 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-s",
-      "anchor_sha256": "d3a503259b234c15085882e748168097af662b1956804e082bf589aa529b1d2f",
+      "anchor_after": "<span class='econ-u'>%</span></span></div><span class=\"econ-dial-label\">Circulat",
+      "anchor_sha256": "07589dba0dfcd6026eea0998c6ddcc0a11955e4724a726897cd1776d8357f007",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
         "scale": 1,
-        "percent": true,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1904,10 +1917,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~25.9%</span>",
+      "source_literal": "~25.9%",
       "anchor_before": "ip-row\"><span class=\"ev-k\">Solana top-20 (of Sol mint)</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Market-wide owners</span><span ",
-      "anchor_sha256": "2503486d23f68acac9bcd0223cfd72ec84d577f97717d88a3c324f9dc0f9c506",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Market-wide owners</span",
+      "anchor_sha256": "56fda73d3551413b06aab8d056392ca612f81a961887552bbdd62213a2254c08",
       "component_id": "Solana top-20 (of Sol mint)",
       "formatter": {
         "type": "numeric",
@@ -1930,10 +1943,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "8.4\u00d7 (observed \u2014 no cutoff)</span>",
+      "source_literal": "8.4\u00d7 (observed \u2014 no cutoff)",
       "anchor_before": ">More spot, less leverage dependence</div><div class=\"ev-tip-read\">Current read: WATCH</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Futures / spot</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">$102.8M</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.88th per",
-      "anchor_sha256": "654fd6b9b2c35c4719ff306fb46b68128c8490e807bb57d2dae5e15683723ae2",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">$102.8M</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.8",
+      "anchor_sha256": "837a6b236a11a609d1c0901c22c843412c6b9a1d4c6eb82e1f5ad3292dce1742",
       "component_id": "Futures / spot",
       "formatter": {
         "type": "string_exact"
@@ -1958,7 +1971,8 @@
       "anchor_sha256": "53698f864aba4a9bc0ccd5104a788cefd558831c76b8c6c276dd0dfecbed37d4",
       "component_id": "TPS snapshot",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2032,10 +2046,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
         "suffix": "/wk",
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2051,10 +2065,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$3.16B</span>",
+      "source_literal": "$3.16B",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">L1 perp day</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Platform OI</span><span class=\"",
-      "anchor_sha256": "9b40f04b4582ce0565260bdd9e51b8b4b41dd0af88da02e2de1bbbbc103e0f7b",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Platform OI</span><span ",
+      "anchor_sha256": "ff5a1c2f4c3da108ffa4aa3030ce53e54b92cae0e69eea317647b5254877e770",
       "component_id": "L1 perp day",
       "formatter": {
         "type": "numeric",
@@ -2161,10 +2175,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
         "suffix": "/wk",
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2180,10 +2194,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$9.0<span class='econ-u'>M</span>",
-      "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Revenue</span><span class=\"econ-sub\">",
-      "anchor_sha256": "0fb63b0c4183e4c05fe9dbf20c55f0709e4fb0f9bf4dcaeaa5e477c42d2ba96b",
+      "source_literal": "$9.0M",
+      "anchor_before": "\"7.25\" x2=\"8\" y2=\"11.25\"/></svg></span></strong></div><span class=\"flag-detail\">",
+      "anchor_after": " rev \u00b7 $6.8M buyback</span></div><div class=\"flag has-tip\"><div class=\"metric-ti",
+      "anchor_sha256": "3d2385fc33ba13f7ddb6752e82ce413c62ab047cba340b17b411ab310b6d89f0",
       "component_id": "Revenue",
       "formatter": {
         "type": "numeric",
@@ -2206,10 +2220,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$190.2M</span>",
+      "source_literal": "$190.2M",
       "anchor_before": "ass=\"ev-tip-row\"><span class=\"ev-k\">HYPE-token day vol</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Do not use ~$7.3B platform OI as HYPE-token O",
-      "anchor_sha256": "a678eeb9a2f5a9ff2120fc9b5cbaa7acf710940857dff58181f0759284be2f92",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Do not use ~$7.3B platform OI as HYPE-",
+      "anchor_sha256": "3fcb9599ccec9f20fec6041162255b69efb95c499f456a2ca847e88cc14c58e5",
       "component_id": "HYPE-token day vol",
       "formatter": {
         "type": "numeric",
@@ -2232,17 +2246,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$777.3<span class=\"u-unit\">M</span>",
+      "source_literal": "$777.3",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">7D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">30D</span><span class=\"e",
-      "anchor_sha256": "f7b472cc58fdf92299d1c869b49ec6b644eb334f1e8758af5d95ee5c798df738",
+      "anchor_after": "<span class=\"u-unit\">M</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "c1b67fb9198d64124e6ceed54b281d8c5da45dd719db56264e0349b518206ab2",
       "component_id": "7D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2258,14 +2272,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~+0.0100%/8h</span>",
+      "source_literal": "~+0.0100%/8h",
       "anchor_before": "div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Elevated leverage, not blow-off from this evi",
-      "anchor_sha256": "57b0b389d6ad2c3a109b03e2da01d4076546d729a851f88a8e40cd42c926e9a1",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Elevated leverage, not blow-off from t",
+      "anchor_sha256": "b1893f1ab1b29709043a92234f5a50d7f04eda7e64a6de2242159ec79708399f",
       "component_id": "Funding",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "approx_prefix": "~",
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2281,14 +2296,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "PUMP/BTC 7d +31.1% \u00b7 30d +102.3%; PUMP/SOL 7d +27.7% \u00b7 30d +104.7%.</span>",
+      "source_literal": "PUMP/BTC 7d +31.1% \u00b7 30d +102.3%; PUMP/SOL 7d +27.7% \u00b7 30d +104.7%.",
       "anchor_before": "s\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Evidence</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Confidence</span><span class=\"e",
-      "anchor_sha256": "ce5a1fd9011381c447f8cd8b639bd7a3c4cbe9cbd3b2828a52bbac96321a52f0",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Confidence</span><span c",
+      "anchor_sha256": "288d71b5c53895d5f879a75a1457ec115b3dbd04cbf5db85aad2c0cba330a180",
       "component_id": "Evidence",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2326,10 +2341,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "9 of 21.</span>",
+      "source_literal": "9 of 21.",
       "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">Beat Bitcoin</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">50-day average</span><span clas",
-      "anchor_sha256": "f3f475f696540d3a9fd0ce9aaef89dea2b6ed48e58653df9798be94177809755",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">50-day average</span><sp",
+      "anchor_sha256": "5c3043cea3bda2e91f63b92471d082290a327c764793ec19fb0b77dc128793e9",
       "component_id": "Beat Bitcoin",
       "formatter": {
         "type": "string_exact"
@@ -2392,10 +2407,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "434,931,021 SOL</span>",
+      "source_literal": "434,931,021 SOL",
       "anchor_before": "ows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Staked</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Validators</span><span class=\"e",
-      "anchor_sha256": "7a6ec1e7e6de51df75acd081ec3d4dfed4f202666d7fbd37367c4f3674cd0dfe",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Validators</span><span c",
+      "anchor_sha256": "3e3f4db9345fb7c3bc84c1e6c1e901489048ea4d658359b6dda69e0039e558ba",
       "component_id": "Staked",
       "formatter": {
         "type": "string_exact"
@@ -2446,7 +2461,9 @@
       "anchor_sha256": "c52ee1022715e9e8e5f4f95d0110c041efb569ec051e3e2a0218ee3f773fefe0",
       "component_id": "Funding latest print",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scientific": true,
+        "decimal_places": 3
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2462,14 +2479,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "47% (row above)</span>",
+      "source_literal": "47% (row above)",
       "anchor_before": "iv><div class=\"ev-tip-row\"><span class=\"ev-k\">Live 24h</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Coverage</span><span class=\"ev-",
-      "anchor_sha256": "268208522f1e6f2abf328921353a6594a25a3f98d89d54ebe36b4249a8fb9394",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Coverage</span><span cla",
+      "anchor_sha256": "0317092a7841d06648aec90df8275ab1ddfea6a3f9813cd9493cdc9db6e6468b",
       "component_id": "Live 24h",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2485,13 +2502,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~\u221221.5%</span>",
+      "source_literal": "~\u221221.5%",
       "anchor_before": "H</span><span class=\"ev-v\">~$126.1k</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">90d</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part of a bull \u2014 not bad on its own. The question i",
-      "anchor_sha256": "24848c80aee3b66ec831da4829b75466cb4055602ba2e67429cc6639287bc15d",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part of a bull \u2014 not bad on its own. The que",
+      "anchor_sha256": "f141866d56b14561eb45d5b6cd4063581541ba9200b17f6c0c34552954566ede",
       "component_id": "90d",
       "formatter": {
         "type": "numeric",
+        "unicode_minus": true,
+        "approx_prefix": "~",
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -2588,6 +2607,7 @@
       "component_id": "~50% retraced from Oct 2025 ATH p3",
       "formatter": {
         "type": "numeric",
+        "unicode_minus": true,
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -2629,10 +2649,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "120.0k</span>",
-      "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 emit</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 ratio</span><span class=",
-      "anchor_sha256": "0b25906794bce445766c62c67efde59f871dd4f2edaf82388ef2091d2182f740",
+      "source_literal": "120.0k",
+      "anchor_before": "iv class=\"fx-ev-row\"><div class=\"fx-ev-k\">Last-8 emit</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Last-8 ratio</div><div c",
+      "anchor_sha256": "ca04c1b9703ba8eeec5d7357ebac67856256d84edffd8ed35fe3adcdbdc155bc",
       "component_id": "Last-8 emit",
       "formatter": {
         "type": "numeric",
@@ -2679,10 +2699,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "47%</span>",
-      "anchor_before": "ss=\"ev-v\">Revenue $7.0M/wk \u00b7 Buyback/burn $6.8M/wk burned \u00b7 Launchpad 24h share ",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Confidence</span><span class=\"e",
-      "anchor_sha256": "e3aa69ed25ee993d72323ecbf135d28baef8a5fd12b3dab6f95c5d8d6757c286",
+      "source_literal": "47%",
+      "anchor_before": "/span></strong><small>Launchpad 24h (live)</small></div><div class=\"metric-val\">",
+      "anchor_after": "</div><div class=\"metric-tip-template\" hidden><div class=\"ev-tip\"><div class=\"ev",
+      "anchor_sha256": "5805641c289d82d04e468810e75f7beb32bdb9f2984218330145baac9d117199",
       "component_id": "Market share",
       "formatter": {
         "type": "numeric",
@@ -2704,10 +2724,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$12.9M</span>",
+      "source_literal": "$12.9M",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">CG 24h vol</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Top Raydium liq</span><span cla",
-      "anchor_sha256": "a954fc55b1b0bc0044b5e1f595d2b3fa0fa21e066a8761686eb8c4262b8380ae",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Top Raydium liq</span><s",
+      "anchor_sha256": "76ff7c0af99150458bc20c098508dc57bad683fed09a9a9f18f1958da73c5d39",
       "component_id": "CG 24h vol",
       "formatter": {
         "type": "numeric",
@@ -2730,17 +2750,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$0.07<span class=\"u-unit\">B</span>",
+      "source_literal": "$0.07",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">30D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">ALL-TIME</span><span cla",
-      "anchor_sha256": "97f89332fdd785e3c7cfe1795e5e482b7b90b6f5945a8047bb817ed0f6819e2c",
+      "anchor_after": "<span class=\"u-unit\">B</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "714399be8e607425a94fec89b97d6f9aa7c7bb117409b350f89d0b7554aa3fbd",
       "component_id": "30D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "B",
         "scale": 1000000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "external_scale_suffix": "B"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2756,10 +2776,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "7.61%</span>",
+      "source_literal": "7.61%",
       "anchor_before": "lass=\"ev-tip-row\"><span class=\"ev-k\">Unattributed held</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">July: ~52.04B already-unlocked Squads custody",
-      "anchor_sha256": "7a17a8ba9c65aa423dc78f535ff3da3003e870d36dc12c0e8a076bc336933473",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">July: ~52.04B already-unlocked Squads ",
+      "anchor_sha256": "04340767a9b62e097e4551473b128756ab27da629fbabf6f634e0bc2d935b0f2",
       "component_id": "Unattributed held",
       "formatter": {
         "type": "numeric",
@@ -2789,10 +2809,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
         "suffix": "/wk",
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2833,10 +2853,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$16.1M</span>",
+      "source_literal": "$16.1M",
       "anchor_before": "ip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp 24h</span><span class=\"ev-",
-      "anchor_sha256": "68fa7cc7a8567eb770cd385cd41cfb5106a36e9f365a5d7660be73425f86f758",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp 24h</span><span cla",
+      "anchor_sha256": "c41eb4b87d82074769a19fc11ba125871560681dafc6e1c7e2ac831c739cea25",
       "component_id": "OI",
       "formatter": {
         "type": "numeric",
@@ -2884,10 +2904,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$7.0M/wk \u00b7 up</span>",
+      "source_literal": "$7.0M/wk \u00b7 up",
       "anchor_before": "ws\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Revenue</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Buyback / burn</span><span clas",
-      "anchor_sha256": "45608f3524797a1ac7c003d2013080e6d859efb400ba67410c5809416ac5f7cb",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Buyback / burn</span><sp",
+      "anchor_sha256": "eb58bf576699eeac9ce1bbbbe7bbe69fff9acb087bc5e02a31c7394b90a467c2",
       "component_id": "Revenue",
       "formatter": {
         "type": "string_exact"
@@ -2980,17 +3000,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$1.96<span class=\"u-unit\">B</span>",
+      "source_literal": "$1.96",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">7D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">30D</span><span class=\"e",
-      "anchor_sha256": "908df9059b11c98b15bc75e46007d5fabbcd60b85d17f8f08e0885f4aa6783b6",
+      "anchor_after": "<span class=\"u-unit\">B</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "6cb7126fc088e822883693b841a73ee8de706502f157152f16b83d5f3a043cc5",
       "component_id": "7D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "B",
         "scale": 1000000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "external_scale_suffix": "B"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3006,10 +3026,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "Llama ~$31M (Stage 1)</span>",
+      "source_literal": "Llama ~$31M (Stage 1)",
       "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">AF buys ~30d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">AF inventory</span><span class=",
-      "anchor_sha256": "2004b07cc9df1c02a9ec438e15ca1d195fd21b567ecff2db61b185245f6f1e55",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">AF inventory</span><span",
+      "anchor_sha256": "74330f5a90fcd71231d2dddefebf1bfa3edeeec576718f6cf44b69e203901e0b",
       "component_id": "AF buys ~30d",
       "formatter": {
         "type": "string_exact"
@@ -3099,10 +3119,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "471.82M</span>",
+      "source_literal": "471.82M",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Solana circ</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Max supply</span><span class=\"e",
-      "anchor_sha256": "e996e9befe9ffb2796a2e53ea5e9f08efa636a1d4c1d27b4ce09827bbfcbe8de",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Max supply</span><span c",
+      "anchor_sha256": "7b3e50e300c40c9bcdc2402a343c83b55c9642af7bb77fb052a80c8000eb4d11",
       "component_id": "Solana circ",
       "formatter": {
         "type": "numeric",
@@ -3124,17 +3144,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$1.1<span class=\"u-unit\">B</span>",
+      "source_literal": "$1.1",
       "anchor_before": "n class=\"u\">7D</span></span><span class=\"sep\">/</span><span class=\"amt c-green\">",
-      "anchor_after": " <span class=\"u\">30D</span></span></span></div><div class=\"etf-row\"><a href=\"htt",
-      "anchor_sha256": "50ba585cb70a6c239eef8ccc03db9b7e4eaba1a3aa6fc46542b6f4754faca232",
+      "anchor_after": "<span class=\"u-unit\">B</span> <span class=\"u\">30D</span></span></span></div><div",
+      "anchor_sha256": "0cf67c4f267a17a648b9dffcc02b14444da054a82ef11a032f39b981a58e8e7a",
       "component_id": "30D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "B",
         "scale": 1000000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "B"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3175,17 +3195,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$33.5<span class=\"u-unit\">M</span>",
+      "source_literal": "$33.5",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">1D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">7D</span><span class=\"ev",
-      "anchor_sha256": "3bdfddf3110441f10d603c337df8efd4e76e8620cb872ee4eafd1e3470296dc6",
+      "anchor_after": "<span class=\"u-unit\">M</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "8fdae7918f20019ab7460bfe9543551a22db3aa4455eb6cce525b06e81c4066e",
       "component_id": "1D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3201,10 +3221,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "3.9<span class='econ-u'>%</span>",
-      "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Issuance<br>per year</span><span clas",
-      "anchor_sha256": "414dc3cbca512bacf02af4aba1477442cd7027cffc70ec07fca375af32c2d29d",
+      "source_literal": "3.9%",
+      "anchor_before": "7.25\" x2=\"8\" y2=\"11.25\"/></svg></span></strong></div><span class=\"flag-detail\">~",
+      "anchor_after": "/yr \u00b7 next 12m ~657k ZEC</span></div><div class=\"flag has-tip\"><div class=\"metri",
+      "anchor_sha256": "45c4fa74d552ca48c64d659cd9198677ef406913998bff3eef4671235e2774b8",
       "component_id": "Issuanceper year",
       "formatter": {
         "type": "numeric",
@@ -3226,10 +3246,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~100<span class='econ-u'>%</span>",
-      "anchor_before": "roke=\"var(--green)\" stroke-dasharray=\"113.097 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-sub\">100M / 100M</span></div><div class=\"",
-      "anchor_sha256": "64b5a88567b302ee0c29b45d3e4f1a346b44599958e253c65b99ffbded156c7b",
+      "source_literal": "~100%",
+      "anchor_before": "lass=\"ev-v\">Spot 24h ~$619,877 \u00b7 perp 24h ~$2.3M \u00b7 fut/spot ~2.5\u00d7 \u00b7 OI ~$3.2M \u00b7 ",
+      "anchor_after": " of 30d max \u00b7 funding 5e-05. OI rising \u2260 bearish. Funding quiet \u2014 not an extreme",
+      "anchor_sha256": "b2505dbb7f1a39a24fefc531433d2c0b7767e67004bfd988d292b87d13580bc0",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
@@ -3258,7 +3278,9 @@
       "anchor_sha256": "bf981f3c78dd59c7834a00a46707d75b6be332f5c7a20bca3eced27eeb320a9f",
       "component_id": "Funding 7d mean",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scientific": true,
+        "decimal_places": 3
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3274,18 +3296,18 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$738K/d</span>",
+      "source_literal": "$738K/d",
       "anchor_before": "s=\"ev-k\">Now</span><span class=\"ev-v\">fees $1.3M/d \u00b7 rev $998K/d \u00b7 buyback/burn ",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Fees / revenue / buyback windows from Stage-1",
-      "anchor_sha256": "dc6d8da046b94fa0dde58a3620eeecf5ff9ef6cffab110a95dd8c1ec3fb7e19f",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Fees / revenue / buyback windows from ",
+      "anchor_sha256": "6df770d4e4c960b9f49fc400d9dc9978037dba283c982bc0267232a7c133fa84",
       "component_id": "buyback/burn",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "K",
         "scale": 1000,
         "suffix": "/d",
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "K"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3355,10 +3377,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$59.2<span class='econ-u'>M</span>",
-      "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Fees</span><span class=\"econ-sub\">30D",
-      "anchor_sha256": "aeb6338dfd1def931ce82ed40947c0bd1dfa020b3275f5992aab7739b751fd82",
+      "source_literal": "$59.2M",
+      "anchor_before": "7.25\" x2=\"8\" y2=\"11.25\"/></svg></span></strong></div><span class=\"flag-detail\">~",
+      "anchor_after": "/30d \u00b7 soft vs own prior month</span></div><div class=\"flag has-tip\"><div class=",
+      "anchor_sha256": "1ab619bf7c9d24bef1fdbb600a244547d9fa0f26062ca550be4f4333c2a5e177",
       "component_id": "Fees",
       "formatter": {
         "type": "numeric",
@@ -3412,7 +3434,8 @@
       "anchor_sha256": "59c0774492037805636e4c039b37985dbc31137fd888dffd5682e842533f34b1",
       "component_id": "Futures vs Spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3453,10 +3476,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "12<span class='econ-u'>%</span>",
-      "anchor_before": "3.572 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Staked</span></div><div class=\"econ-d",
-      "anchor_sha256": "4d8128272355614d957080d8436a7640c00ee5ffbc1ef95f3c41653561fa0193",
+      "source_literal": "12%",
+      "anchor_before": "=\"metric-tip-template\" hidden><p class=\"metric-tip-source\">Swap split 87% LPs / ",
+      "anchor_after": " protocol / 1% Climate. Token gets a slice, not 100%.</p></div><div class=\"econ-",
+      "anchor_sha256": "2da49ad7beec7a86e5305357352a420161298073da576b929b245f013c22ff35",
       "component_id": "Staked",
       "formatter": {
         "type": "numeric",
@@ -3526,10 +3549,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "46.37M</span>",
-      "anchor_before": " UNRESOLVED</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Inventory</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Circ exclusion</span><span class=\"ev-v\">KNOWN</span></div><div class=\"e",
-      "anchor_sha256": "5a03ad27f16548c167a3714e538a0c0431f4ce0008dd8cf3963f6092088a6166",
+      "source_literal": "46.37M",
+      "anchor_before": "<div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Inventory</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Circ exclusion</div><div",
+      "anchor_sha256": "d2757e6de0b8e02073c7e6d80ec4ddcd3e455fa03c6ae2137b62030dbab1fe26",
       "component_id": "Inventory",
       "formatter": {
         "type": "numeric",
@@ -3551,10 +3574,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "9.160\u00d7</span>",
+      "source_literal": "9.160\u00d7",
       "anchor_before": "rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Ratio</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Scope</span><span class=\"ev-v\">",
-      "anchor_sha256": "9881568eb1260e47cfc74ccda79f8ff851e8dff40d2b7eb4ef1a47d5646483da",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Scope</span><span class=",
+      "anchor_sha256": "31bf9bb6fbf63edfaf476b728fdf73aa65a5a0de8fa0d8f55c88e907f08ad43f",
       "component_id": "Ratio",
       "formatter": {
         "type": "string_exact"
@@ -3652,9 +3675,9 @@
       "target_kind": "HTML_TEXT",
       "field": "value",
       "source_literal": "2223",
-      "anchor_before": "class=\"ev-v\">Running clusters ~16 \u00b7 compute hours cum ~32.5M \u00b7 inventory total ~",
-      "anchor_after": ". API active/passive labels are inventory labels \u2014 not proven hired/idle. Do not",
-      "anchor_sha256": "2fc8e63fd9ee24abea9657a209bf1fc48235202b5a41f9baffe2ab54b746abb1",
+      "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Inventory total</span><span class=\"ev-v\">",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Inventory/device count \u2260 utilized comp",
+      "anchor_sha256": "006e43497cf9126ad7826e62f0f911f56c7f44b18f7ffaeeddf9ab7151eb40e4",
       "component_id": "Inventory total",
       "formatter": {
         "type": "numeric",
@@ -3675,13 +3698,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~8.0\u00d7</span>",
+      "source_literal": "~8.0\u00d7",
       "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">Fut/spot now</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">~10",
-      "anchor_sha256": "27feeb308f773c08f2e8d2ae0b7331a46ddec9edc79113f8de975f34f1c9d5c1",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev",
+      "anchor_sha256": "6131b83036d101abd69d5b10ed7b31dcb86100f905c789aa32cdde7956d797f7",
       "component_id": "Fut/spot now",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3747,10 +3771,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~87%</span>",
-      "anchor_before": "iv class=\"ev-tip-row\"><span class=\"ev-k\">OI vs 30d max</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding state</span><span class",
-      "anchor_sha256": "29fadf56d261cc4611be436c37ffa2a3cd81414373cfa9f4635e123250d1eed8",
+      "source_literal": "~87%",
+      "anchor_before": "div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Vs 30d max</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-note\">OI rising \u2260 bearish.</div></div></details></",
+      "anchor_sha256": "0f9f6f966adb10286e44148561f836a39eee21e0f4d6e0603ad439bada380f12",
       "component_id": "Vs 30d max",
       "formatter": {
         "type": "numeric",
@@ -3829,10 +3853,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
         "suffix": "/wk",
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3969,10 +3993,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "80.5<span class='econ-u'>%</span>",
-      "anchor_before": "0.930 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-s",
-      "anchor_sha256": "1a0488fa02a4badd637055f141593fde877951a7863be7f3e7d541d7de338d55",
+      "source_literal": "80.5%",
+      "anchor_before": "ting</div><span class=\"rc-tag high\">High</span></div><div class=\"rc-item-line\">~",
+      "anchor_after": " circulating \u00b7 est. inflation ~3.9% \u00b7 issuance \u2260 unlock.</div></div><div class=\"",
+      "anchor_sha256": "ac5c97de116726dd2f3056a051987e1163dd2afc95f9ac0e50b46fbda916c057",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
@@ -3994,17 +4018,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$62<span class=\"u-unit\">M</span>",
+      "source_literal": "$62",
       "anchor_before": "get=\"_blank\" rel=\"noopener\">SOL</a><span class=\"amts\"><span class=\"amt c-green\">",
-      "anchor_after": " <span class=\"u\">7D</span></span><span class=\"sep\">/</span><span class=\"amt c-gr",
-      "anchor_sha256": "6e7277fe3cb674a63e7a3706d614c1234b3d99bdc5a5885344186e33d62d4bcf",
+      "anchor_after": "<span class=\"u-unit\">M</span> <span class=\"u\">7D</span></span><span class=\"sep\">",
+      "anchor_sha256": "4a65793f40e6a88830c85c77fd43b5ddf0323aecf970dc70265d81bd0106b494",
       "component_id": "7D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4020,10 +4044,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "69<span class='econ-u'>%</span>",
-      "anchor_before": "8.037 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Staked</span></div><div class=\"econ-d",
-      "anchor_sha256": "e96b1e1da77b71d37d277ace52dbfa2f70e0fe81cf8a830e7d644a037f997ce2",
+      "source_literal": "69%",
+      "anchor_before": ">Evidence</span><span class=\"ev-v\">Circ ~999.97M / max 1000.00M (~99.99748632984",
+      "anchor_after": "). Mint authority REVOKED \u00b7 freeze REVOKED. FLOAT CLEAN = almost all max supply ",
+      "anchor_sha256": "1cd6aa68569cf51887bc582323a4d8d25587b83028b246083bf8c577f8f3e95c",
       "component_id": "Staked",
       "formatter": {
         "type": "numeric",
@@ -4151,7 +4175,8 @@
       "anchor_sha256": "58d47174c1b1aa4e6f9081e565af62db4859bbeb5e3f5e64d6228aac9b842f13",
       "component_id": "Level",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4167,10 +4192,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "11.90M</span>",
+      "source_literal": "11.90M",
       "anchor_before": "/div><div class=\"ev-tip-row\"><span class=\"ev-k\">Staked</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Do not use MATERIAL supply pressure. Priority",
-      "anchor_sha256": "9948ef397d882f65a8021fbb65864dc3bcdf880a758a015477947dde73cc7499",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Do not use MATERIAL supply pressure. P",
+      "anchor_sha256": "711212c73e336a95b4210c119efb2911ce4aae9a948fd627b54b079ab4e183fd",
       "component_id": "Staked",
       "formatter": {
         "type": "numeric",
@@ -4200,10 +4225,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
         "suffix": "/wk",
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4219,10 +4244,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "0.98</span>",
-      "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 ratio</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Spike note</span><span class=\"e",
-      "anchor_sha256": "a8f3cdba7ae9e61401e20baa1bf16695d85e44a4831056b59996099ca7f55598",
+      "source_literal": "0.98",
+      "anchor_before": "v class=\"fx-ev-row\"><div class=\"fx-ev-k\">Last-8 ratio</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Spike note</div><div cla",
+      "anchor_sha256": "aba1f5ca9c6982b6b989c6db36af862f94987ac3db3e6e81f433d942ef2f4372",
       "component_id": "Last-8 ratio",
       "formatter": {
         "type": "numeric",
@@ -4311,17 +4336,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$43.9<span class='econ-u'>M</span>",
+      "source_literal": "$43.9",
       "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">AF buys</span><span class=\"econ-sub\">",
-      "anchor_sha256": "8cd043b0be34985ccd7b27015d40abac3d23e2871f2d9d94a9b29df933d22a90",
+      "anchor_after": "<span class='econ-u'>M</span></span></div><span class=\"econ-dial-label\">AF buys<",
+      "anchor_sha256": "e0b218a84709b3fa8a3a8548a950691ac536ce4e363bb3b839e57d2e2f2378f5",
       "component_id": "AF buys",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4363,17 +4388,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$115.6<span class=\"u-unit\">M</span>",
+      "source_literal": "$115.6",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">1D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">7D</span><span class=\"ev",
-      "anchor_sha256": "853edf5f3e478d656fd033ebefb9ac100bfd0b7e1d290503f5169df83ab5928a",
+      "anchor_after": "<span class=\"u-unit\">M</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "a24c500d45a293162e2db182410ad12f89eb46baef6078136bf5e6f963cd914b",
       "component_id": "1D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4414,13 +4439,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~255,690 SOL/yr</span>",
+      "source_literal": "~255,690 SOL/yr",
       "anchor_before": "v><div class=\"ev-tip-row\"><span class=\"ev-k\">Est. burn</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">APY split</span><span class=\"ev",
-      "anchor_sha256": "8fa6eb6f4c0f32883b80bb086b06c7b593e364d999a348f0f06a4f9a126bfd25",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">APY split</span><span cl",
+      "anchor_sha256": "a427bb9c5dac378727a3ae70126e1b455b89dc25862bd6fcc28a21a1e07acd98",
       "component_id": "Est. burn",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4436,16 +4462,16 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "47.7<span class='econ-u'>%</span>",
+      "source_literal": "47.7",
       "anchor_before": "3.947 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-s",
-      "anchor_sha256": "122c4b2c8e7f8e2e6409cd5b0df3769251dddb9ba24cc237ed5c92034faa52b3",
+      "anchor_after": "<span class='econ-u'>%</span></span></div><span class=\"econ-dial-label\">Circulat",
+      "anchor_sha256": "c58c7f23b618adb6e636c73bec427d24fd04619a3389abd11799089b76074d92",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
         "scale": 1,
-        "percent": true,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4483,14 +4509,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "47% \u00b7 down</span>",
+      "source_literal": "47% \u00b7 down",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Launchpad share</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Revenue, buyback/burn and available activity ",
-      "anchor_sha256": "d38d493226edc71b283657f4031a9582526634119e07703db1a9780daa81f86f",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Revenue, buyback/burn and available ac",
+      "anchor_sha256": "26bfffdb5546f025ccdf9992f7eaf51741c9676a27f62d777cc77ed51e46d3d1",
       "component_id": "Launchpad share",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4506,10 +4532,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-0.00005 / 8h</span>",
+      "source_literal": "-0.00005 / 8h",
       "anchor_before": "ows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Latest</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">History</span><span class=\"ev-v",
-      "anchor_sha256": "68863b15a6ea43aa20f8444a0ab5fcad47fa167aaaad0fa856cb797c24717144",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">History</span><span clas",
+      "anchor_sha256": "49db2d34141fab0c625f9413078bfd4b21f42e38ef5cf4f73eec126e2e348f7f",
       "component_id": "Latest",
       "formatter": {
         "type": "string_exact"
@@ -4579,13 +4605,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~$393 (spot ZECUSDT)</span>",
+      "source_literal": "~$393 (spot ZECUSDT)",
       "anchor_before": "v-tip-row\"><span class=\"ev-k\">50d / 200d</span><span class=\"ev-v\">Above ~$488 / ",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Binance perp/spot</span><span c",
-      "anchor_sha256": "c35602cb6c1c2ff05976759d6d0ca3e8b32b319886278b31a63e09fd787a1b19",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Binance perp/spot</span>",
+      "anchor_sha256": "b7997d1ae407ea6299b71b2a58c329c068d67c1298d4382fa3a710811ef56692",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4698,10 +4725,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "40</span>",
+      "source_literal": "40",
       "anchor_before": "\"ev-tip-row\"><span class=\"ev-k\">Running / queued</span><span class=\"ev-v\">855 / ",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">GPU-h ~31d</span><span class=\"e",
-      "anchor_sha256": "eadf4852adb9c435c7a1ae124150e4cc4fe2ff251223391b28e7cf92ad97939a",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">GPU-h ~31d</span><span c",
+      "anchor_sha256": "e37eb802af69fdca3154bcc4cc929eebf33bc257cfdc0d2c83839e2cfb277991",
       "component_id": "queued",
       "formatter": {
         "type": "numeric",
@@ -4746,14 +4773,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~+0.0100%/8h (mild)</span>",
+      "source_literal": "~+0.0100%/8h (mild)",
       "anchor_before": "div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Would clean the leverage-heavy structure with",
-      "anchor_sha256": "81df3aa7a61d977168a99f44271bda1210764e4fe4236ebf12c71c0db7b846ac",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Would clean the leverage-heavy structu",
+      "anchor_sha256": "4c36294382d3ed9620193339d84d5b6a4d49b3d82d304ca91754e9800c270f8e",
       "component_id": "Funding",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "approx_prefix": "~",
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4775,7 +4803,8 @@
       "anchor_sha256": "cf498b71fd3b6e9938614543adc09e3cb626f071f1d0ef63a0f365e571f1a842",
       "component_id": "OI",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4791,10 +4820,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$239.1M</span>",
+      "source_literal": "$239.1M",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">Binance OI</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp 24h</span><span class=\"ev-",
-      "anchor_sha256": "521df7af994df65f8c59de83b2c383103beae485e38c3c2c1b5e1b134cfd8840",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp 24h</span><span cla",
+      "anchor_sha256": "8f96637ab5fd56d5dae76f20fbb595286d7b644bc8d54204afa95ad4fd977b7d",
       "component_id": "Binance OI",
       "formatter": {
         "type": "numeric",
@@ -4825,10 +4854,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
         "suffix": "/wk",
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4851,6 +4880,7 @@
       "component_id": "Stables 30d",
       "formatter": {
         "type": "numeric",
+        "approx_prefix": "~",
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -4867,10 +4897,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "412.44M</span>",
+      "source_literal": "412.44M",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">futureEmissions</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">HyperLabs NCU</span><span class",
-      "anchor_sha256": "4ca49f8020e3aaa090c98102464fb80567a04526bad7c5ce6a19f53242e06966",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">HyperLabs NCU</span><spa",
+      "anchor_sha256": "3421c513812d42cce0423c702fad862102018142fae29212d47bca7ca25b6867",
       "component_id": "futureEmissions",
       "formatter": {
         "type": "numeric",
@@ -4892,10 +4922,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$277.7M</span>",
+      "source_literal": "$277.7M",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Binance HYPE OI</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Native HYPE OI</span><span clas",
-      "anchor_sha256": "69827edf1c505644ef4e0d238c094153d85777da6f0eb95ebb9f2d4137779b39",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Native HYPE OI</span><sp",
+      "anchor_sha256": "de93eb439a962520096118e9086355c84db9c79f9451ed9302a5519f85fb8738",
       "component_id": "Binance HYPE OI",
       "formatter": {
         "type": "numeric",
@@ -4918,13 +4948,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~23,394,503 SOL/yr</span>",
+      "source_literal": "~23,394,503 SOL/yr",
       "anchor_before": "iv class=\"ev-tip-row\"><span class=\"ev-k\">Est. issuance</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Est. burn</span><span class=\"ev",
-      "anchor_sha256": "ec8fac8d8fff146d10181dfb632f40668b0bc9d9482bbe0fbdc4582d4f0beff7",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Est. burn</span><span cl",
+      "anchor_sha256": "27b0f3f908ba695bc46de7e9776c38759cc26e766b2f9bb183a54623e3cf5d57",
       "component_id": "Est. issuance",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4941,12 +4972,14 @@
       "target_kind": "HTML_TEXT",
       "field": "value",
       "source_literal": "-2.796e-05",
-      "anchor_before": "\"><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Funding</div><div class=\"fx-ev-v\">",
-      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Funding pctile</div><div",
-      "anchor_sha256": "92ffdaeb8151ba8111b800cbadb964bb5644b85dc14daabb1c7b4671d45807dd",
+      "anchor_before": "ws\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding pctile</span><sp",
+      "anchor_sha256": "5c086245ad21ab8e9423c70c510b5ffe4112d7ba4cc1346d8cf07919e46a4457",
       "component_id": "Funding",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scientific": true,
+        "decimal_places": 3
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4986,10 +5019,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-5.90pp</span>",
+      "source_literal": "-5.90pp",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 7d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 30d</span><span class=\"",
-      "anchor_sha256": "e4eab0bbba5a24d2bb57743d6b81a2f3b4faf419ea80051175364bf26703c7db",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 30d</span><span ",
+      "anchor_sha256": "c57e43c6daf2c080fa9a41256e9ce598d544be2f224568bdcfb09fcd5b232260",
       "component_id": "NOS/SOL 7d",
       "formatter": {
         "type": "string_exact"
@@ -5133,7 +5166,8 @@
       "anchor_sha256": "eaed9af58b80fad7fe89796c66e6555d86232cd6ab0bd4f66d0c243109478a14",
       "component_id": "Nodes Running Jobs",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5199,10 +5233,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "412<span class='econ-u'>M</span>",
-      "anchor_before": "ay=\"0 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Emissions<br>left</span></div><div cl",
-      "anchor_sha256": "cab837a7f1d1fc19ea7a88c782e6c9fcbbc24a187a7ba4153c0d2dfc32bd445d",
+      "source_literal": "412M",
+      "anchor_before": "></svg></span></strong></div><span class=\"flag-detail\">Circ CONFLICT 22%/30% \u00b7 ~",
+      "anchor_after": " future emissions</span></div><div class=\"flag has-tip\"><div class=\"metric-tip-t",
+      "anchor_sha256": "4b3350f61591493fd31eb5b31ef28b055114d11566402e363bb890fa9ec447df",
       "component_id": "Emissionsleft",
       "formatter": {
         "type": "numeric",
@@ -5296,10 +5330,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$7.29B</span>",
+      "source_literal": "$7.29B",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Platform OI</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">HYPE-token OI</span><span class",
-      "anchor_sha256": "9bc3902d42f9b03d3c0faccc37a11180c6f2d5aa4bce34083ab463c52f3090d7",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">HYPE-token OI</span><spa",
+      "anchor_sha256": "c56b744ed10f5a8deb064f663a06dca3bc7340d147fa6336a162cf4fe8401772",
       "component_id": "Platform OI",
       "formatter": {
         "type": "numeric",
@@ -5322,10 +5356,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "3.7%</span>",
-      "anchor_before": "class=\"ev-tip-row\"><span class=\"ev-k\">Top5 buy conc.</span><span class=\"ev-v\">~9",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">WM bal</span><span class=\"ev-v\"",
-      "anchor_sha256": "c650ac17f8fabfb16c3da34d5559d6f92a3432ca19ef67e1025fb737ef70e438",
+      "source_literal": "3.7%",
+      "anchor_before": "\"><span class=\"ev-k\">Evidence</span><span class=\"ev-v\">Staked 68.8% \u00b7 inflation ",
+      "anchor_after": " \u00b7 est. issuance ~23,394,503 SOL/yr vs burn ~255,690 SOL/yr \u00b7 net ~+23,138,813 S",
+      "anchor_sha256": "ae43bee67520f39d4aa4b5f0a2ce3b8b273de9877664b803ea908c7a0431489d",
       "component_id": "inflation",
       "formatter": {
         "type": "numeric",
@@ -5372,10 +5406,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "4.09M</span>",
+      "source_literal": "4.09M",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Cumulative jobs</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Not a growth proof.</p><div class=\"ev-tip-foo",
-      "anchor_sha256": "308f6cd66fc6fea3ade3145fb2c83dd96ed6619eede34db8a90fa39492a58952",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Not a growth proof.</p><div class=\"ev-",
+      "anchor_sha256": "87e9ef956cf4693031296d6c9e8823c3b6df21c768146dfb62a4f93099b7e120",
       "component_id": "Cumulative jobs",
       "formatter": {
         "type": "numeric",
@@ -5397,10 +5431,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "117.9k</span>",
+      "source_literal": "117.9k",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 burn</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 emit</span><span class=\"",
-      "anchor_sha256": "7eb4e0079c9ec436f45d4214222c43d2f6fdc9bac6d406ef932e23ff65a5d69b",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 emit</span><span ",
+      "anchor_sha256": "e26e32a05b9eedde82776544d1e832b934d891edf32a195c53128743ed4f051b",
       "component_id": "Last-8 burn",
       "formatter": {
         "type": "numeric",
@@ -5447,10 +5481,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "690 active</span>",
+      "source_literal": "690 active",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">Validators</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">High stake share \u2014 not proof of healthy token",
-      "anchor_sha256": "dfdce43f5f17665a265633555dd7b7821b32a273a7535c6e3d8d603b45898ad0",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">High stake share \u2014 not proof of health",
+      "anchor_sha256": "dbd315b96af2c982fe538059ffae82f83f4f25616d23ab17f04bb6d5a22d4f83",
       "component_id": "Validators",
       "formatter": {
         "type": "string_exact"
@@ -5469,17 +5503,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$1.06<span class=\"u-unit\">B</span>",
+      "source_literal": "$1.06",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">30D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">ALL-TIME</span><span cla",
-      "anchor_sha256": "d7c48fdeb4df3df3b5bc08d60c4ca29953eb237e86d2cd52c4307cfa0d5807da",
+      "anchor_after": "<span class=\"u-unit\">B</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "c96e678c0844dddb1913b31e170a0b845886d6e2f2f6f7ef08c4317210bf6fa9",
       "component_id": "30D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "B",
         "scale": 1000000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "external_scale_suffix": "B"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5545,13 +5579,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~255,690 SOL/yr</span>",
+      "source_literal": "~255,690 SOL/yr",
       "anchor_before": "></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Burn</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">APY split</span><span class=\"ev",
-      "anchor_sha256": "73209e5810a5221b55e6b4bdb6e376a8a3f278efa310a141132397d87c03a664",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">APY split</span><span cl",
+      "anchor_sha256": "1dbc13b25c76163c4a577744953d0a8d99566fa62d29fbbe4ba55d55930e3aa7",
       "component_id": "Burn",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5567,10 +5602,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~$57.8k</span>",
+      "source_literal": "~$57.8k",
       "anchor_before": "s\"><div class=\"ev-tip-row\"><span class=\"ev-k\">July low</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Now</span><span class=\"ev-v\">Ra",
-      "anchor_sha256": "1570ef845f3317457e4a9f75d634e53270e4684e6c5e6788da08a44919634957",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Now</span><span class=\"e",
+      "anchor_sha256": "bb2ec2a9e2eaf81c437894a1aa73de9d8e08f59123f4f36a2511b93fc6c89c02",
       "component_id": "July low",
       "formatter": {
         "type": "numeric",
@@ -5594,10 +5629,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "46.37M</span>",
+      "source_literal": "46.37M",
       "anchor_before": "ANIC DEMAND</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Inventory</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Circ exclusion</span><span class=\"ev-v\">KNOWN</span></div><div class=\"e",
-      "anchor_sha256": "9d20707ad26ea6237198c243a54ca8fec0c8e8258cc7c0446e45f19c641c1a43",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Circ exclusion</span><span class=\"ev-v\">KNOWN</span></div><div c",
+      "anchor_sha256": "ca2c2ed24a2e677971d52cfc10ba728b4417695ae7815899b26b7f9e599fa85c",
       "component_id": "Inventory",
       "formatter": {
         "type": "numeric",
@@ -5619,10 +5654,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~$57.8k</span>",
+      "source_literal": "~$57.8k",
       "anchor_before": "s\"><div class=\"ev-tip-row\"><span class=\"ev-k\">July low</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Question</span><span class=\"ev-",
-      "anchor_sha256": "df53a9bbffe2fc4893a3ad22f6e079752b11c92c82dc3a2dc482cd2f7d1f1c57",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Question</span><span cla",
+      "anchor_sha256": "e051166994aacce4ad51743d096db4654efb03f7cc6ebf92007b30913588296b",
       "component_id": "July low",
       "formatter": {
         "type": "numeric",
@@ -5646,10 +5681,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "93.1<span class='econ-u'>%</span>",
-      "anchor_before": "5.294 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-s",
-      "anchor_sha256": "8e1e450f9c0eee3c54816210fa95a71eee11ad9e158468c9716abd8b289a7e85",
+      "source_literal": "93.1%",
+      "anchor_before": "an class=\"ev-k\">Evidence</span><span class=\"ev-v\">CG circ ~931.0M / max 1.00B (~",
+      "anchor_after": "). Most of SPX\u2019s maximum supply is already circulating. Mostly circulating \u2260 dec",
+      "anchor_sha256": "695c863c013a256adf227d0633ff96a24f4d7eb545195ddb222d266a0520a8c0",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
@@ -5671,16 +5706,16 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "92.2<span class='econ-u'>%</span>",
+      "source_literal": "92.2",
       "anchor_before": "4.276 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-s",
-      "anchor_sha256": "01c8e536267f9effc56a03b5261fcedd93438faec60ef34898039aca0ba2e476",
+      "anchor_after": "<span class='econ-u'>%</span></span></div><span class=\"econ-dial-label\">Circulat",
+      "anchor_sha256": "068024fdb34c0aacfd3444fe9293dfbc5ad97e79c98d72f27ce54e00ce833a94",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
         "scale": 1,
-        "percent": true,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5697,9 +5732,9 @@
       "target_kind": "HTML_TEXT",
       "field": "value",
       "source_literal": "120.0k",
-      "anchor_before": "iv class=\"fx-ev-row\"><div class=\"fx-ev-k\">Last-8 emit</div><div class=\"fx-ev-v\">",
-      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Last-8 ratio</div><div c",
-      "anchor_sha256": "ca04c1b9703ba8eeec5d7357ebac67856256d84edffd8ed35fe3adcdbdc155bc",
+      "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 emit</span><span class=\"ev-v\">",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 ratio</span><span",
+      "anchor_sha256": "6456c3e8ca086885b0e5ae3f098ef640e9a7d4c0406f77affafe970044d301f4",
       "component_id": "Last-8 emit",
       "formatter": {
         "type": "numeric",
@@ -5721,14 +5756,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "7.61% of cohort</div>",
+      "source_literal": "7.61% of cohort",
       "anchor_before": "-ev-row\"><div class=\"fx-ev-k\">Unattributed still held</div><div class=\"fx-ev-v\">",
-      "anchor_after": "</div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Classifications</div><div clas",
-      "anchor_sha256": "67be8e8878293bca72a585a4db7a61f6d58e422318ceeaceb61bcb2fe2489806",
+      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Classifications</div><di",
+      "anchor_sha256": "6c14baa19d9b2c496c7a9f0165f4f7da17d61e5b09301c3d818fd12170f57498",
       "component_id": "Unattributed still held",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5744,10 +5779,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "47%</span>",
+      "source_literal": "47%",
       "anchor_before": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Share</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">These prove the platform is economically acti",
-      "anchor_sha256": "73d6f37abb82542fce9aec115fe4afed4d5e28f9bdedcf2546f32bb0bd20e11c",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">These prove the platform is economical",
+      "anchor_sha256": "ab4f01083fee5eaf92e36d558293ac97dd9cffd3b169a11eee39b8ee359bfc51",
       "component_id": "Share",
       "formatter": {
         "type": "numeric",
@@ -5769,10 +5804,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "4.09M</span>",
-      "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Completed (cum)</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">~30d jobs</span><span class=\"ev",
-      "anchor_sha256": "23d8cf72f7ddbc5700c34071b88d706ee3fc3e2ceb006e5d7bc64bd948c1301b",
+      "source_literal": "4.09M",
+      "anchor_before": "lass=\"fx-ev-row\"><div class=\"fx-ev-k\">Cumulative jobs</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-note\">Not a growth proof.</div></div></details></s",
+      "anchor_sha256": "1f0ee2fd00912a394ba37625f5795c509c01107b237beeb31d0f7cdfcbef9cfa",
       "component_id": "Cumulative jobs",
       "formatter": {
         "type": "numeric",
@@ -5794,16 +5829,16 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "39.0<span class='econ-u'>%</span>",
+      "source_literal": "39.0",
       "anchor_before": "4.066 113.097\" transform=\"rotate(-90 22 22)\"/></svg><span class=\"econ-dial-num\">",
-      "anchor_after": "</span></div><span class=\"econ-dial-label\">Circulating</span><span class=\"econ-s",
-      "anchor_sha256": "2180121f71bd74fe820b7522438e5a3ec19fe263625b32053c17ca29f51c3f34",
+      "anchor_after": "<span class='econ-u'>%</span></span></div><span class=\"econ-dial-label\">Circulat",
+      "anchor_sha256": "c1d081c38ff0f7eeece24692c0acd76022574db401231b2f00e616fea6b92a80",
       "component_id": "Circulating",
       "formatter": {
         "type": "numeric",
         "scale": 1,
-        "percent": true,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5891,10 +5926,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-8.70pp</span>",
+      "source_literal": "-8.70pp",
       "anchor_before": "\"><div class=\"ev-tip-row\"><span class=\"ev-k\">IO/SOL 7d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">IO/SOL 30d</span><span class=\"e",
-      "anchor_sha256": "d50c350ef9cea2be94662eb01460ad56600e9701a712949f924e210d066039ca",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">IO/SOL 30d</span><span c",
+      "anchor_sha256": "5ea957ab7a5c98f96da60aba0ac455ee61abc3d268091359043b456e243ec0a0",
       "component_id": "IO/SOL 7d",
       "formatter": {
         "type": "string_exact"
@@ -5913,10 +5948,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-3.34pp</span>",
+      "source_literal": "-3.34pp",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">7d FART/SOL</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Not a clean leadership print.</p><div class=\"",
-      "anchor_sha256": "262bc53c68aede6e4808dde654a947daf6f7e81e1998518ee09d493500802130",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Not a clean leadership print.</p><div ",
+      "anchor_sha256": "d15def70c54f1992a4d93ef32c536921c578b3b4f863238e769bdff675b433f2",
       "component_id": "7d FART/SOL",
       "formatter": {
         "type": "string_exact"
@@ -5985,13 +6020,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~8.7\u00d7</span>",
+      "source_literal": "~8.7\u00d7",
       "anchor_before": "s=\"ev-tip-row\"><span class=\"ev-k\">Perp vs Binance spot</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Label</span><span class=\"ev-v\">",
-      "anchor_sha256": "95aa4d707ac95358f9eae333e974a2cd1404b5b72f89a02fb3a9d23058ac8ffd",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Label</span><span class=",
+      "anchor_sha256": "b59fb3ff0c028eaab6d3ed6c915df0b6fe12f54c92564b64e853ceafc54aae72",
       "component_id": "Perp vs Binance spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6104,10 +6140,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "0.147</span>",
-      "anchor_before": "pan></span><span><span class=\"hold-k\">This move</span><span class=\"hold-shelf\">$",
-      "anchor_after": "</span></span></button>\n<button class=\"hold\" type=\"button\" data-asset-slug=\"spx6",
-      "anchor_sha256": "ff473894a91988494f579e5129c917579aca7ddd89bf66457d62a7fe6be208d4",
+      "source_literal": "0.147",
+      "anchor_before": "=\"ev-k\">Evidence</span><span class=\"ev-v\">Binance spot IOUSDT. px ~0.117 \u00b7 50d ~",
+      "anchor_after": " \u00b7 200d ~0.134. 50 still &gt; 200 but price is below both \u2014 not a bullish golden",
+      "anchor_sha256": "698a5ce9771789569fd2cd2b45f1b5fe03ffcee7ad3fb00d81a05cfbcb0aafe8",
       "component_id": "50d",
       "formatter": {
         "type": "numeric",
@@ -6229,10 +6265,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-3.88pp</span>",
+      "source_literal": "-3.88pp",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 30d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">180d</span><span class=\"ev-v\">+",
-      "anchor_sha256": "c0cf8fd172472a1cda114a17e3c678c50a142f08ec4c7a4ac5ecc54083f9be74",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">180d</span><span class=\"",
+      "anchor_sha256": "b3fcae28170cafae5c559797924a381b278ccc33e357c32566e96a808c3b7995",
       "component_id": "NOS/SOL 30d",
       "formatter": {
         "type": "string_exact"
@@ -6324,13 +6360,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~46.4M, accumulating in Stage 1</span>",
+      "source_literal": "~46.4M, accumulating in Stage 1",
       "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">AF inventory</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">AF \u2260 organic demand</span><span",
-      "anchor_sha256": "617622f7275c7382dc0692aaba9289ae2db315375328bbcde22a7e2144b5c8d3",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">AF \u2260 organic demand</spa",
+      "anchor_sha256": "47fbcbf8a71688c037f240ffa574d167e95e49cb91b4d9df9f51309148aebbf7",
       "component_id": "AF inventory",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6352,7 +6389,8 @@
       "anchor_sha256": "a01fc6701208e231ba9b2dd6c851f475b0b8cab6c4b9f5715e45abc004168ad9",
       "component_id": "Net change",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6368,17 +6406,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$62.2<span class=\"u-unit\">M</span>",
+      "source_literal": "$62.2",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">7D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">30D</span><span class=\"e",
-      "anchor_sha256": "741da2e5f5fa6a8d7773ec84978157c68006340c4ba0ebb0b8ccd11388d4ff1c",
+      "anchor_after": "<span class=\"u-unit\">M</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "d7b331f22ec40d120757ad94e4525201335512b1970cf4834b4e66ef731c48b4",
       "component_id": "7D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6394,10 +6432,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "47%</span>",
-      "anchor_before": "ding</span><span class=\"ev-v\">15 of top 20 net accumulators checked still hold PUMP</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Concentration</span><span class=\"ev-v\">Top-5 gross buy share ",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Unknown</span><span class=\"ev-v\">Repeat / attributable buyer identity</span></div></div><p class=\"ev-tip-note\">Real DEX buying is present, but buyer qu",
-      "anchor_sha256": "88d91378ecfdd87b429db52647051a5d2760c9523d05747ff30f14bc2a845dfc",
+      "source_literal": "47%",
+      "anchor_before": "ss=\"ev-tip\"><div class=\"ev-tip-name\">MARKET SHARE</div><div class=\"ev-tip-read\">",
+      "anchor_after": "</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Live 2",
+      "anchor_sha256": "ed27e397ceb46ce2e530729452f9a1494ef1ec7914e2899f5181998b681071cb",
       "component_id": "MARKET SHARE",
       "formatter": {
         "type": "numeric",
@@ -6426,7 +6464,7 @@
       "component_id": "OI trend",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6443,9 +6481,9 @@
       "target_kind": "HTML_TEXT",
       "field": "value",
       "source_literal": "46.37M",
-      "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Evidence</span><span class=\"ev-v\">AF ",
-      "anchor_after": " \u00b7 HyperLabs 241.24M \u00b7 Foundation wallet 60.39M \u00b7 Grants 2.96M. PROTOCOL/SYSTEM ",
-      "anchor_sha256": "b7eab049063de735f867034470d13aacb7ee7d851d12145e975d894db1437038",
+      "anchor_before": " UNRESOLVED</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Inventory</span><span class=\"ev-v\">",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Circ exclusion</span><span class=\"ev-v\">KNOWN</span></div><div c",
+      "anchor_sha256": "1197cce35704456b24ba5243984387fc8b7688e6f50562d8f61809b949443b59",
       "component_id": "Inventory",
       "formatter": {
         "type": "numeric",
@@ -6467,17 +6505,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$2.0<span class=\"u-unit\">B</span>",
+      "source_literal": "$2.0",
       "anchor_before": "get=\"_blank\" rel=\"noopener\">BTC</a><span class=\"amts\"><span class=\"amt c-green\">",
-      "anchor_after": " <span class=\"u\">7D</span></span><span class=\"sep\">/</span><span class=\"amt c-gr",
-      "anchor_sha256": "d38b51fa23b85a707f87824ab51049e733dcbaeb7ab3276c9251b6e73e0f63eb",
+      "anchor_after": "<span class=\"u-unit\">B</span> <span class=\"u\">7D</span></span><span class=\"sep\">",
+      "anchor_sha256": "4c5aa3b31b753f1cd9cf54387ece9f1f3cbaa4103b6dd20c5bb36e43dbc2d4db",
       "component_id": "7D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "B",
         "scale": 1000000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "B"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6494,9 +6532,9 @@
       "target_kind": "HTML_TEXT",
       "field": "value",
       "source_literal": "0.98",
-      "anchor_before": "hs: burned ~54.1k vs node emissions ~60.0k (ratio ~0.21). Last 8 near-balance (~",
-      "anchor_after": ") distorted by one ~62k burn spike. Cumulative burned ~1.53M. Node-operator due ",
-      "anchor_sha256": "09fc1b4f0aa66b278e78023841220d62d76917366be0c5df3da60769bc5ab33e",
+      "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">Last-8 ratio</span><span class=\"ev-v\">",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Spike note</span><span c",
+      "anchor_sha256": "092845cbe14e0abc75bb2fc347821868b58f8b6eec1a282906870e1b2c272200",
       "component_id": "Last-8 ratio",
       "formatter": {
         "type": "numeric",
@@ -6618,10 +6656,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~80.4%</span>",
+      "source_literal": "~80.4%",
       "anchor_before": "iv class=\"ev-tip-row\"><span class=\"ev-k\">Circulating %</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Est. inflation</span><span clas",
-      "anchor_sha256": "1f9c96d8b4288fc0481f55a3665346ddb7b26acd46ac66d1e9164dbf14abf0d6",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Est. inflation</span><sp",
+      "anchor_sha256": "f2ff200c60e55503e61305888843a857dfa51bc400bdfa3d8f5a8a3a8e28e157",
       "component_id": "Circulating %",
       "formatter": {
         "type": "numeric",
@@ -6644,10 +6682,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$102.8M</span>",
+      "source_literal": "$102.8M",
       "anchor_before": "dence</div><div class=\"ev-tip-read\">Current read: WATCH</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Futures / spot</span><span class=\"ev-v\">8.4\u00d7 (observed \u2014 no cutoff)</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.88th percentile vs own history (n=2382) \u00b7 latest -0.00005/8h</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding pctile</span><span class=\"ev-v\">5.9th vs own history</s",
-      "anchor_sha256": "facd47bb1c79fda8224ac6a09676b3ea0c24c8b3524c2923b1fbfbb3355755ab",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.88th percentile vs own history (n=2382) \u00b7 latest -0.00005/8h</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding pctile</span><span class=\"ev-v\">5.9th vs own his",
+      "anchor_sha256": "3e9cc6f28bb08aa047074b0a86ab61a02cb9a93129519812b7e2d15dd840570d",
       "component_id": "OI",
       "formatter": {
         "type": "numeric",
@@ -6670,14 +6708,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "222.45M (22.2%)</span>",
+      "source_literal": "222.45M (22.2%)",
       "anchor_before": "ip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">CG</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Hyperliquid</span><span class=\"",
-      "anchor_sha256": "e5698a8c86ce0e1e78e5a21dfd857f1283f9c140f10c24abcb939acd713b3b3e",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Hyperliquid</span><span ",
+      "anchor_sha256": "a79cfc4ffdde9bfbcc6914d153c78ecd7460041365bbce2dbf6ac88d6bb592b1",
       "component_id": "CG",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6700,7 +6738,7 @@
       "component_id": "AF stock 15.5% HL CIRC",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6723,6 +6761,8 @@
       "component_id": "RETRACEMENT",
       "formatter": {
         "type": "numeric",
+        "unicode_minus": true,
+        "approx_prefix": "~",
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -6746,7 +6786,7 @@
       "component_id": "Funding",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6762,10 +6802,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "7 of 21.</span>",
+      "source_literal": "7 of 21.",
       "anchor_before": "v class=\"ev-tip-row\"><span class=\"ev-k\">50-day average</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Same calculation as before. Holdings counts s",
-      "anchor_sha256": "f33c321092fe32bc26f5053ae2290cb4eaccfbcd7ff14e55564bcf88cde966ab",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Same calculation as before. Holdings c",
+      "anchor_sha256": "d4c91f0a1a0a0f7e7d71024155872abb1ab66e4195f3c37c3162de170062a20a",
       "component_id": "50-day average",
       "formatter": {
         "type": "string_exact"
@@ -6784,13 +6824,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~23,394,503 SOL/yr</span>",
+      "source_literal": "~23,394,503 SOL/yr",
       "anchor_before": "lation 3.70%</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Issuance</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Burn</span><span class=\"ev-v\">~255,690 SOL/yr</span></div><div class=\"e",
-      "anchor_sha256": "99ea16847d654af18cf049599439b3258b91ebb72df2732e358d6c257a24d258",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Burn</span><span class=\"ev-v\">~255,690 SOL/yr</span></div><div c",
+      "anchor_sha256": "4c63bd157cad7840365a43bf5541534faf809352065abb6b66fb560bea276e65",
       "component_id": "Issuance",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6880,10 +6921,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "Above ~$47.9</span>",
+      "source_literal": "Above ~$47.9",
       "anchor_before": "></div><div class=\"ev-tip-row\"><span class=\"ev-k\">200d</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Longer uptrend intact above 200d; 50d already",
-      "anchor_sha256": "44bae5115955d9f2930fe665693c93dd6c47561c36b05a83e07f964310470a67",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Longer uptrend intact above 200d; 50d ",
+      "anchor_sha256": "c55dd63b258167b94f29da09d3862fe630803fe8ac36e9faeb4327b29bb0b88f",
       "component_id": "200d",
       "formatter": {
         "type": "string_exact"
@@ -6902,10 +6943,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~+1.3%</span>",
+      "source_literal": "~+1.3%",
       "anchor_before": "n></div><div class=\"ev-tip-row\"><span class=\"ev-k\">30d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">90d</span><span class=\"ev-v\">~\u2212",
-      "anchor_sha256": "cc3ffb21ee4915222592b52b7e34fcb523e9184c3600edbb33a8a18f7b87bb70",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">90d</span><span class=\"e",
+      "anchor_sha256": "047236758384d23b033f4e53897c20c66101313f4e8d1d4cf10db7b502927d17",
       "component_id": "30d",
       "formatter": {
         "type": "numeric",
@@ -6935,7 +6976,8 @@
       "anchor_sha256": "a597728bcbc4426db78671a5d91a804e8a5999fe5cafd9d18e9f427aefa231d0",
       "component_id": "Net change",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7019,13 +7061,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~7.0\u00d7</span>",
-      "anchor_before": "=\"ev-tip-row\"><span class=\"ev-k\">Perp vs Coinbase spot</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Comparator label</span><span cl",
-      "anchor_sha256": "4f5d2e2a7c46d2730d94fb3f8318c336cc90c994ddd7c87e01932b4c14c44f31",
+      "source_literal": "~7.0\u00d7",
+      "anchor_before": "ev\"><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Ratio</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-row\"><div class=\"fx-ev-k\">Scope</div><div class=\"f",
+      "anchor_sha256": "304ebc462e128f6451a97b1bb44265e1c63aed9aa6a5830d9daa277c64687833",
       "component_id": "Ratio",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7087,10 +7130,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-3.88pp</span>",
+      "source_literal": "-3.88pp",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 30d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 90d</span><span class=\"",
-      "anchor_sha256": "680820469d9c203ff050653c709aa865465434a1e83ecc94c3f3a0788054d9c5",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 90d</span><span ",
+      "anchor_sha256": "1cc51716bc829df0e3f7da45bf444e1045c58000539754abe686b818cc346329",
       "component_id": "NOS/SOL 30d",
       "formatter": {
         "type": "string_exact"
@@ -7142,7 +7185,9 @@
       "anchor_sha256": "2087082b5a169e2a8ef764386ae1fbc73dcfcf8eb1d10e85a306ed39ff9510c5",
       "component_id": "FUNDING",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scientific": true,
+        "decimal_places": 3
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7183,13 +7228,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~255,690 SOL/yr</span>",
+      "source_literal": "~255,690 SOL/yr",
       "anchor_before": "></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Burn</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">APY sample</span><span class=\"e",
-      "anchor_sha256": "39a1a22ae8229059c3c9ce30072d1129d17e5511cb31aff2f5f96afac0f18a00",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">APY sample</span><span c",
+      "anchor_sha256": "a50055633d6991709b8cd254bc86fe1a3ffbbe1e69add86372c574ef34ff43bf",
       "component_id": "Burn",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7229,13 +7275,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~\u221221.5%</span>",
+      "source_literal": "~\u221221.5%",
       "anchor_before": "30d</span><span class=\"ev-v\">~+1.3%</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">90d</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part of a bull \u2014 not bad on its own. The question i",
-      "anchor_sha256": "1a3bbfc8c3e1a6eab76fdc748c983096387420dda3ad8ee40f74212b2660f999",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part of a bull \u2014 not bad on its own. The que",
+      "anchor_sha256": "c4fab7904e31d42f17bee73812861804e89e41547e686d1926fbc8f519da375f",
       "component_id": "90d",
       "formatter": {
         "type": "numeric",
+        "unicode_minus": true,
+        "approx_prefix": "~",
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -7327,10 +7375,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~25.9%</span>",
+      "source_literal": "~25.9%",
       "anchor_before": "ip-row\"><span class=\"ev-k\">Solana top-20 (of Sol mint)</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Sol mint share is not market-wide ownership.<",
-      "anchor_sha256": "19d6ba6040db06d8a22e97589d52ea3277c8aa42e059375176fe2de4dc3c89d7",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Sol mint share is not market-wide owne",
+      "anchor_sha256": "c89d4e79560115c97043a31d71af993d17d25770e1f6d95a4d709a4c7a704b1a",
       "component_id": "Solana top-20 (of Sol mint)",
       "formatter": {
         "type": "numeric",
@@ -7397,14 +7445,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~93% \u00b7 unlock 0</span>",
+      "source_literal": "~93% \u00b7 unlock 0",
       "anchor_before": "></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Circ</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Market-wide owners UNKNOWN. Solana slice cann",
-      "anchor_sha256": "fab9059848e0b1b91b17ffd6afacaa3176b476d4911c4ea5094e66fbee2a0d9f",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Market-wide owners UNKNOWN. Solana sli",
+      "anchor_sha256": "c5e8f995e4e9e9c1460af37cee29ad4545b8a423c84205118639feea31805051",
       "component_id": "Circ",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "approx_prefix": "~",
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7420,13 +7469,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~23,394,503 SOL/yr</span>",
+      "source_literal": "~23,394,503 SOL/yr",
       "anchor_before": "8,813 SOL/yr</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Issuance</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Burn</span><span class=\"ev-v\">~255,690 SOL/yr</span></div><div class=\"e",
-      "anchor_sha256": "33781e9247e479fbcced91ac44af4f9439ca51b1308f00f1ff1ab77d594ec05a",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Burn</span><span class=\"ev-v\">~255,690 SOL/yr</span></div><div c",
+      "anchor_sha256": "c304017c735016ed01e997da3d1d8078ea8dd86f6f156d21a67ba44d64e01fdf",
       "component_id": "Issuance",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7541,7 +7591,9 @@
       "anchor_sha256": "b7c23af87463d2fde535342ece6dd81d680fc69446aee0c744231e23f01e7ad1",
       "component_id": "Latest 8h print",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scientific": true,
+        "decimal_places": 3
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7635,17 +7687,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$777<span class=\"u-unit\">M</span>",
+      "source_literal": "$777",
       "anchor_before": "get=\"_blank\" rel=\"noopener\">ETH</a><span class=\"amts\"><span class=\"amt c-green\">",
-      "anchor_after": " <span class=\"u\">7D</span></span><span class=\"sep\">/</span><span class=\"amt c-gr",
-      "anchor_sha256": "b98ea171384bb21ad0f2b663466f25a0323e892e9e989264a93b58884ccc31ae",
+      "anchor_after": "<span class=\"u-unit\">M</span> <span class=\"u\">7D</span></span><span class=\"sep\">",
+      "anchor_sha256": "b2249478f3450ca72130f31c8d7cbcbb2916498c67decc5960262df628e1dd53",
       "component_id": "7D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7760,17 +7812,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$70<span class=\"u-unit\">M</span>",
+      "source_literal": "$70",
       "anchor_before": "n class=\"u\">7D</span></span><span class=\"sep\">/</span><span class=\"amt c-green\">",
-      "anchor_after": " <span class=\"u\">30D</span></span></span></div></div></div><div class=\"card-src\"",
-      "anchor_sha256": "b7b2e27ae1e38140bc3549ac9998ba1468db4e1cf676041eec5297769fea909e",
+      "anchor_after": "<span class=\"u-unit\">M</span> <span class=\"u\">30D</span></span></span></div></di",
+      "anchor_sha256": "1912a251a9d93c377ebef99bcd8e0327e065f5289d87ed62c183144ff11707f8",
       "component_id": "30D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 0
+        "decimal_places": 0,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7786,10 +7838,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$6.8M/wk burned \u00b7 up</span>",
+      "source_literal": "$6.8M/wk burned \u00b7 up",
       "anchor_before": "v class=\"ev-tip-row\"><span class=\"ev-k\">Buyback / burn</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Launchpad share</span><span cla",
-      "anchor_sha256": "f5ed63e825c43fc64ca06fc4f22a85514ce0d9a2cf4fae04a9448bac6216fda7",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Launchpad share</span><s",
+      "anchor_sha256": "962d77948ffb5681dc8abbe02bc5418876bcf83e2f5c60d0a1450febe92ad542",
       "component_id": "Buyback / burn",
       "formatter": {
         "type": "string_exact"
@@ -7808,13 +7860,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~8.7\u00d7</span>",
+      "source_literal": "~8.7\u00d7",
       "anchor_before": "lass=\"ev-tip-row\"><span class=\"ev-k\">Binance perp/spot</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Global OI</span><span class=\"ev",
-      "anchor_sha256": "cc865704e9430b9ed4ebc871440541fb47e985c45b350156c5c0cbbfaae61c86",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Global OI</span><span cl",
+      "anchor_sha256": "1e363a9347254349a42c359160bc046e1cb3bcc21e3eac66c0877759c752d2df",
       "component_id": "Binance perp/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7830,10 +7883,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "5023</span>",
+      "source_literal": "5023",
       "anchor_before": "/div><div class=\"ev-tip-row\"><span class=\"ev-k\">Tx/24h</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Usage-rate trend</span><span cl",
-      "anchor_sha256": "64ea2aed4233cfe81320697d677c37a2ec46462166b183b612a339048e220089",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Usage-rate trend</span><",
+      "anchor_sha256": "d8afa6f4fa97ecacec81d16d1f1d11778f2675219860ad0578714655d357b740",
       "component_id": "Tx/24h",
       "formatter": {
         "type": "numeric",
@@ -7854,13 +7907,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~8.7\u00d7</span>",
+      "source_literal": "~8.7\u00d7",
       "anchor_before": "v><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp/spot</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Global OI</span><span class=\"ev",
-      "anchor_sha256": "55599fe70ade9e73bb41daafe8fb5e0466ed7ab906e47de0d26e6e2e44d40776",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Global OI</span><span cl",
+      "anchor_sha256": "9e3159b5fcaf5e7513e1112c88bedf70fc1b00d472ebafed2bd5f1a866950dfc",
       "component_id": "Perp/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7949,10 +8003,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "Below ~$60.5 (perp HYPEUSDT)</span>",
+      "source_literal": "Below ~$60.5 (perp HYPEUSDT)",
       "anchor_before": "p-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">50d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">200d</span><span class=\"ev-v\">A",
-      "anchor_sha256": "15dd121aac13eb157b80ee20372cbb1f5f95c569b8f1ebd5050f6ab3c4ca62f4",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">200d</span><span class=\"",
+      "anchor_sha256": "b67dd98e61c6370250614521ad00231ddaff3c4c9f6665e256d4d7d0eff0033d",
       "component_id": "50d",
       "formatter": {
         "type": "string_exact"
@@ -7971,10 +8025,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "8.4\u00d7 futures/spot</span>",
+      "source_literal": "8.4\u00d7 futures/spot",
       "anchor_before": "v class=\"ev-tip-row\"><span class=\"ev-k\">Futures / spot</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI / funding</span><span class=",
-      "anchor_sha256": "cb57b2c8f91820029fe1712d953503fba0d03e75b37374c89495ea4cd5b44af0",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI / funding</span><span",
+      "anchor_sha256": "c3146e4ff4af485ef4495cfb1805cfb402720854a6ebebd322a60e95b3d39f68",
       "component_id": "Futures / spot",
       "formatter": {
         "type": "string_exact"
@@ -8018,17 +8072,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$2.7<span class=\"u-unit\">B</span>",
+      "source_literal": "$2.7",
       "anchor_before": "n class=\"u\">7D</span></span><span class=\"sep\">/</span><span class=\"amt c-green\">",
-      "anchor_after": " <span class=\"u\">30D</span></span></span></div><div class=\"etf-row\"><a href=\"htt",
-      "anchor_sha256": "5756c609bf5b07b7ed12687c239494a0b248e57b207f51fad0e4bd9d15db376e",
+      "anchor_after": "<span class=\"u-unit\">B</span> <span class=\"u\">30D</span></span></span></div><div",
+      "anchor_sha256": "9dcf11e6a3df79cfe7f4644e883de454220d985eed33b7f8b7cc5f5fa0261546",
       "component_id": "30D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "B",
         "scale": 1000000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "B"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8091,10 +8145,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$25.3M</span>",
+      "source_literal": "$25.3M",
       "anchor_before": "-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">MCAP</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 30d</span><span class=\"",
-      "anchor_sha256": "482126143e94c6ba974fb862c6482bf12cc6c8e53d111bbc2b7e09c165bb2110",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">NOS/SOL 30d</span><span ",
+      "anchor_sha256": "280d9c26398fbd14c6addf326b5833c6c1f53212784b60daa98f1a128f05cfd2",
       "component_id": "MCAP",
       "formatter": {
         "type": "numeric",
@@ -8117,10 +8171,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "15.0k</span>",
+      "source_literal": "15.0k",
       "anchor_before": "class=\"ev-tip-row\"><span class=\"ev-k\">Node due / epoch</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Measured recent window \u2014 not a permanent infl",
-      "anchor_sha256": "dd93221a153a68461e533f09b40c78b5386622b9717bfbb628445aa293e3ddf9",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Measured recent window \u2014 not a permane",
+      "anchor_sha256": "273446b62174fe74632d2dadca7ea101691fda434489a9d5837a1166a329b095",
       "component_id": "Node due / epoch",
       "formatter": {
         "type": "numeric",
@@ -8210,10 +8264,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-39.4%</span>",
+      "source_literal": "-39.4%",
       "anchor_before": "row\"><span class=\"ev-k\">7d / 30d / 90d</span><span class=\"ev-v\">-1.1% / -4.4% / ",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">MCAP</span><span class=\"ev-v\">$",
-      "anchor_sha256": "e6d2a05ffb87266a30de225ca62a00705c7be7712043952e40c1aad5a23317fe",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">MCAP</span><span class=\"",
+      "anchor_sha256": "26d755f8cc5510459af1a490c1d96c66b8e387cac20eb37445e9b125ea4c4020",
       "component_id": "90d",
       "formatter": {
         "type": "numeric",
@@ -8233,10 +8287,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$5.9M</span>",
+      "source_literal": "$5.9M",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Top Raydium liq</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Not perp-only. Binance primary FARTCOIN marke",
-      "anchor_sha256": "d62e77ea82f15dcb3573a30ab6a37ae076499bb5705eebb9fc98334cfde1267b",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Not perp-only. Binance primary FARTCOI",
+      "anchor_sha256": "5b8319bdb8ee72414cfe1ef45484d713a7e59da88ae5421f1e23a81f00b35569",
       "component_id": "Top Raydium liq",
       "formatter": {
         "type": "numeric",
@@ -8281,13 +8335,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~108.1k BTC \u00b7 mild up</span>",
+      "source_literal": "~108.1k BTC \u00b7 mild up",
       "anchor_before": "an></div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v",
-      "anchor_sha256": "0239f0055a303668cb5ef39fc96f057d08c201032deda9befa6c1f1a01ba8c50",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span clas",
+      "anchor_sha256": "fc439b9ec3a65e172491eb66c626e76d821c688eb6d5d1d3fa12a16a2f8a595d",
       "component_id": "OI",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8351,10 +8406,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "-32.3%</span>",
+      "source_literal": "-32.3%",
       "anchor_before": "s\"><div class=\"ev-tip-row\"><span class=\"ev-k\">1m fee \u0394</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Read</span><span class=\"ev-v\">U",
-      "anchor_sha256": "f15ffc57d650df83d53e8879e657f0580c93dd8d66a03abd51bc3fe01d53313e",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Read</span><span class=\"",
+      "anchor_sha256": "283736590a73169098f8f96f89d66e36641be3533f982ae171141f9378eaf8cf",
       "component_id": "1m fee \u0394",
       "formatter": {
         "type": "numeric",
@@ -8399,10 +8454,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "8.4\u00d7 (observed \u2014 no cutoff)</span>",
+      "source_literal": "8.4\u00d7 (observed \u2014 no cutoff)",
       "anchor_before": "p-name\">Leverage outruns spot demand</div><div class=\"ev-tip-read\">Current read: WATCH</div><div class=\"ev-tip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">Futures / spot</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">$102.8M</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.88th per",
-      "anchor_sha256": "df371e2d9ec74d1c8713b89842e7f4e61f002b7ad7f1773bdcf9c243ed655a85",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">OI</span><span class=\"ev-v\">$102.8M</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding</span><span class=\"ev-v\">Binance funding ~5.8",
+      "anchor_sha256": "22a0dd1c44c09022ad21b31b4cda251c2e4235cbcb962df624f63ec3cfbc3acc",
       "component_id": "Futures / spot",
       "formatter": {
         "type": "string_exact"
@@ -8550,10 +8605,10 @@
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
         "suffix": "/wk",
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8594,17 +8649,17 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$337.6<span class=\"u-unit\">M</span>",
+      "source_literal": "$337.6",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">1D</span><span class=\"ev-v c-green\">",
-      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">7D</span><span class=\"ev",
-      "anchor_sha256": "7202b22989a112138e34a66de70b942580cb019d7e305c4edb0c70108814d4df",
+      "anchor_after": "<span class=\"u-unit\">M</span></span></div><div class=\"ev-tip-row\"><span class=\"e",
+      "anchor_sha256": "88268771ccfdcd323c6cd413d5e9eff169a5d6b5e0c9a813623fb331d83369ff",
       "component_id": "1D",
       "formatter": {
         "type": "numeric",
         "currency_prefix": "$",
-        "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 1
+        "decimal_places": 1,
+        "external_scale_suffix": "M"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8621,9 +8676,9 @@
       "target_kind": "HTML_TEXT",
       "field": "value",
       "source_literal": "4.09M",
-      "anchor_before": "lass=\"fx-ev-row\"><div class=\"fx-ev-k\">Cumulative jobs</div><div class=\"fx-ev-v\">",
-      "anchor_after": "</div></div><div class=\"fx-ev-note\">Not a growth proof.</div></div></details></s",
-      "anchor_sha256": "1f0ee2fd00912a394ba37625f5795c509c01107b237beeb31d0f7cdfcbef9cfa",
+      "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">Completed (cum)</span><span class=\"ev-v\">",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">~30d jobs</span><span cl",
+      "anchor_sha256": "3d7e52da225f04083d782b02363b8e84ec1a50ba213c03420cb836268c847e6a",
       "component_id": "Completed (cum)",
       "formatter": {
         "type": "numeric",
@@ -8670,10 +8725,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$2.4M</span>",
+      "source_literal": "$2.4M",
       "anchor_before": "ass=\"ev-tip-row\"><span class=\"ev-k\">Host usdReward cum</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Host usdReward \u2260 audited Nosana revenue. Thro",
-      "anchor_sha256": "439224f2a4e709b1bf95bfe6132701a7933147a3466d2f57b3461d0d34983445",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Host usdReward \u2260 audited Nosana revenu",
+      "anchor_sha256": "52e6fc4ba49169cdac0ddc4ed0bf1e5b2351d6fb3d97e3c24d016b3ae600a526",
       "component_id": "Host usdReward cum",
       "formatter": {
         "type": "numeric",
@@ -8797,10 +8852,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "+38.9%</span>",
+      "source_literal": "+38.9%",
       "anchor_before": "></div><div class=\"ev-tip-row\"><span class=\"ev-k\">180d</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part of a b",
-      "anchor_sha256": "75a537a1a1cb39efba00a3b1737fcc0d13d77d65277483398b7ae058f11ab226",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Retracement from ATH is a natural part",
+      "anchor_sha256": "5699e87e81bd9b7a5f56a63c2b3da64677975041e1950144cd22b8ef1b836e98",
       "component_id": "180d",
       "formatter": {
         "type": "numeric",
@@ -9051,13 +9106,14 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~46.4M accumulating</span>",
+      "source_literal": "~46.4M accumulating",
       "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">AF inventory</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">Would mean venue success is still converting ",
-      "anchor_sha256": "409bb7414d37d46c3550be90c1ca2ea6f5b1f2eb6d02cf92750013bdaee341a9",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">Would mean venue success is still conv",
+      "anchor_sha256": "ede9c71a64d6c1b01262e917abac62c8abcfdad0c0d66b1c85c29c6085c08c88",
       "component_id": "AF inventory",
       "formatter": {
-        "type": "string_exact"
+        "type": "string_exact",
+        "approx_prefix": "~"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9205,7 +9261,7 @@
       "component_id": "OI \u0394 1d",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9228,7 +9284,7 @@
       "component_id": "OI \u0394 30d",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9251,7 +9307,7 @@
       "component_id": "OI \u0394 7d",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9292,10 +9348,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$474.5M</span>",
+      "source_literal": "$474.5M",
       "anchor_before": "iv><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp 24h</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Spot 24h</span><span class=\"ev-",
-      "anchor_sha256": "0628982dd8fcabd74d26bf70b727f2d3c87712977acd11f9154430c98e14ceec",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Spot 24h</span><span cla",
+      "anchor_sha256": "52545f4fec86907e1684231c78dafc09e5f0508df0ec86e542c67b1c42a19b5a",
       "component_id": "Perp 24h",
       "formatter": {
         "type": "numeric",
@@ -9443,10 +9499,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "112,550</span>",
+      "source_literal": "112,550",
       "anchor_before": "v><div class=\"ev-tip-row\"><span class=\"ev-k\">~30d jobs</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Markets</span><span class=\"ev-v",
-      "anchor_sha256": "71228a1dfb4cb27245c70e08c8e6e3c8a494aef03c78bbb588c454ec21507309",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Markets</span><span clas",
+      "anchor_sha256": "81a15720c665b66f89f369f2e3b707efd062790f89d84ba605f977cfda175e2a",
       "component_id": "~30d jobs",
       "formatter": {
         "type": "numeric",
@@ -9514,10 +9570,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~119k</span>",
+      "source_literal": "~119k",
       "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">GPU-h ~31d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Organic share</span><span class",
-      "anchor_sha256": "50ae5f9441f02ab5d0c48fff034b11a7dbfe9bce51d80d957c7cd64c811ffe6e",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Organic share</span><spa",
+      "anchor_sha256": "65e19892373c0dfbc76a96880185c3a2cdbc28d02bc20c7a7bf452f36ab5d4c4",
       "component_id": "GPU-h ~31d",
       "formatter": {
         "type": "numeric",
@@ -9540,10 +9596,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "412.44M</span>",
+      "source_literal": "412.44M",
       "anchor_before": " class=\"ev-tip-row\"><span class=\"ev-k\">futureEmissions</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">CONFLICT LOCKED. Display both.</p><div class=",
-      "anchor_sha256": "2f1dfa2db21c0e5c78d289cbff6723f6a6ac181ed2091a86e59f84dba0abf070",
+      "anchor_after": "</span></div></div><p class=\"ev-tip-note\">CONFLICT LOCKED. Display both.</p><div",
+      "anchor_sha256": "b7bc4631e9f244d87877dd5163114f7fac8aea10470f7fe4873afca5a737611a",
       "component_id": "futureEmissions",
       "formatter": {
         "type": "numeric",
@@ -9687,10 +9743,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~25.9%</span>",
-      "anchor_before": "ev-tip-row\"><span class=\"ev-k\">Shielded stock</span><span class=\"ev-v\">~4.37M / ",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Issuance</span><span class=\"ev-",
-      "anchor_sha256": "de1be31ab6c48c17946e08058c61b0efaef16a8ad3fbde3c530cb9e0d2223632",
+      "source_literal": "~25.9%",
+      "anchor_before": "row\"><div class=\"fx-ev-k\">Solana top-20 (of Sol mint)</div><div class=\"fx-ev-v\">",
+      "anchor_after": "</div></div><div class=\"fx-ev-note\">Sol mint share is not market-wide ownership.",
+      "anchor_sha256": "dd3c923fae8742243b932b9fd3e54937799a934ff9eb29920c209f7138afcc88",
       "component_id": "Solana top-20 (of Sol mint)",
       "formatter": {
         "type": "numeric",
@@ -9720,7 +9776,8 @@
       "component_id": "Funding",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "approx_prefix": "~",
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9768,7 +9825,8 @@
       "component_id": "FUNDING",
       "formatter": {
         "type": "numeric",
-        "percent": true
+        "approx_prefix": "~",
+        "external_percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9856,10 +9914,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "$54.6M</span>",
+      "source_literal": "$54.6M",
       "anchor_before": "iv><div class=\"ev-tip-row\"><span class=\"ev-k\">Spot 24h</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp vs Binance spot</span><spa",
-      "anchor_sha256": "5aac4ea815797c131821c3f33ff9bf7873f70be44ec06218165c3dacd16905d0",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Perp vs Binance spot</sp",
+      "anchor_sha256": "f1e7f19d5dad496a5f04346cf24d8157a8cb655ba09bd6b815d12fa2829d44bd",
       "component_id": "Spot 24h",
       "formatter": {
         "type": "numeric",
@@ -9977,10 +10035,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "437.43M</span>",
+      "source_literal": "437.43M",
       "anchor_before": "<div class=\"ev-tip-row\"><span class=\"ev-k\">Total stake</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Foundation-named vals</span><sp",
-      "anchor_sha256": "bd002fde678283b65a2b11e274ffdc48df39d372a10f43b561908bbc8958f534",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Foundation-named vals</s",
+      "anchor_sha256": "69973475ca127cff902ca94188f808b0d0112f35ee431165a097dc3edcb7bea5",
       "component_id": "Total stake",
       "formatter": {
         "type": "numeric",
@@ -10079,13 +10137,15 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~\u22121.1%</span>",
+      "source_literal": "~\u22121.1%",
       "anchor_before": "ip-rows\"><div class=\"ev-tip-row\"><span class=\"ev-k\">7d</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">30d</span><span class=\"ev-v\">~+",
-      "anchor_sha256": "a18e44b1c8285537b4f7930cd15b0f57629a4ab1d79cc228b2d33397396e2028",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">30d</span><span class=\"e",
+      "anchor_sha256": "6b97e3041ea46b7a3b1a5da9f04e1f2519a405c526bd991328475c3ff9aecb6a",
       "component_id": "7d",
       "formatter": {
         "type": "numeric",
+        "unicode_minus": true,
+        "approx_prefix": "~",
         "percent": true
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
@@ -10102,10 +10162,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~11.9M</span>",
+      "source_literal": "~11.9M",
       "anchor_before": "/div><div class=\"ev-tip-row\"><span class=\"ev-k\">Staked</span><span class=\"ev-v\">",
-      "anchor_after": "</div><div class=\"ev-tip-row\"><span class=\"ev-k\">Live emissions</span><span clas",
-      "anchor_sha256": "3820f05036bf427a416d7bc31e54a2992028b297d5595d8b8e4e74bcc8e4f6af",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Live emissions</span><sp",
+      "anchor_sha256": "80e7b7ba8a2382e1ec0f870973a8af22009e539c9eee3e28384d57813539df57",
       "component_id": "Staked",
       "formatter": {
         "type": "numeric",
@@ -10154,10 +10214,10 @@
       "update_mode": "REPORT_SNAPSHOT",
       "target_kind": "HTML_TEXT",
       "field": "value",
-      "source_literal": "~87%</span>",
-      "anchor_before": "><div class=\"ev-tip-row\"><span class=\"ev-k\">Vs 30d max</span><span class=\"ev-v\">",
-      "anchor_after": "</div></div><p class=\"ev-tip-note\">OI rising \u2260 bearish.</p><div class=\"ev-tip-fo",
-      "anchor_sha256": "42312dbe362a93f0b8df28899d04ec10287942b242be2a20b5fe1025a3643e71",
+      "source_literal": "~87%",
+      "anchor_before": "iv class=\"ev-tip-row\"><span class=\"ev-k\">OI vs 30d max</span><span class=\"ev-v\">",
+      "anchor_after": "</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Funding state</span><spa",
+      "anchor_sha256": "4d69b67502e141841f2f8f562f7615cae6e75810fc1d246e6a3a7ca11dbdcc29",
       "component_id": "OI vs 30d max",
       "formatter": {
         "type": "numeric",

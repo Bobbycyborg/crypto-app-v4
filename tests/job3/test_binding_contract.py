@@ -16,6 +16,7 @@ MANIFEST = json.loads((ROOT / "renderer/binding-manifest.json").read_text())
 BINDINGS = MANIFEST["bindings"]
 REG, PLAN, _, MAPS = load_job1_job2()
 ELIG = eligible_mappings(MAPS, REG, PLAN)
+HTML = (ROOT / "index-v4.html").read_text()
 
 
 def gates() -> dict[str, int]:
@@ -24,6 +25,7 @@ def gates() -> dict[str, int]:
         "duplicate_binding_ids", "duplicate_job1_occurrences", "unknown_metric_ids", "owner_grok_bound",
         "dormant_asset_bound", "preserve_metric_bound", "static_threshold_bound", "historical_bound",
         "ambiguous_anchor", "missing_anchor", "overlapping_binding", "missing_formatter", "unknown_target_kind",
+        "markup_inside_HTML_TEXT_binding", "binding_crosses_tag_boundary",
     ]}
     g["eligible_job1_occurrences"] = len(ELIG)
     g["binding_entries"] = len(BINDINGS)
@@ -41,20 +43,28 @@ def gates() -> dict[str, int]:
             g["owner_grok_bound"] += 1
         if (b.get("asset") or "").upper() in {"RAY", "GRASS", "DRIFT"}:
             g["dormant_asset_bound"] += 1
+        cls = b.get("occurrence_classification")
+        if cls == "PRESERVE":
+            g["preserve_metric_bound"] += 1
+        if cls == "STATIC_DECISION_THRESHOLD":
+            g["static_threshold_bound"] += 1
+        if cls == "HISTORICAL":
+            g["historical_bound"] += 1
         if not b.get("formatter"):
             g["missing_formatter"] += 1
+        if b["target_kind"] == "HTML_TEXT" and ("<" in b["source_literal"] or ">" in b["source_literal"]):
+            g["markup_inside_HTML_TEXT_binding"] += 1
+            g["binding_crosses_tag_boundary"] += 1
         combo = b["anchor_before"] + b["source_literal"] + b["anchor_after"]
-        html = (ROOT / "index-v4.html").read_text()
-        c = html.count(combo)
+        c = HTML.count(combo)
         if c == 0:
             g["missing_anchor"] += 1
         elif c > 1:
             g["ambiguous_anchor"] += 1
     spans = []
     for b in BINDINGS:
-        html = (ROOT / "index-v4.html").read_text()
         combo = b["anchor_before"] + b["source_literal"] + b["anchor_after"]
-        i = html.index(combo) + len(b["anchor_before"])
+        i = HTML.index(combo) + len(b["anchor_before"])
         spans.append((i, i + len(b["source_literal"]), b["binding_id"]))
     spans.sort()
     for (a0, a1, _), (b0, b1, _) in zip(spans, spans[1:]):

@@ -282,6 +282,50 @@ def _plain_text(fragment: str) -> str:
     return re.sub(r"<[^>]+>", "", fragment)
 
 
+def plain_text_binding_literal(
+    html: str,
+    region: tuple[int, int],
+    manifest_lit: str,
+) -> tuple[str, int] | None:
+    """Map manifest literal to a tag-free source span; stop before inline markup splits."""
+    start, end = region
+    fragment = html[start:end]
+    plain = _plain_text(fragment)
+    rel = plain.find(manifest_lit)
+    if rel < 0:
+        located = locate_literal_in_region(html, region, manifest_lit)
+        if located:
+            eff, pos = located
+            if "<" not in eff and ">" not in eff:
+                return eff, pos
+        return None
+    plain_i = 0
+    html_i = 0
+    match_start: int | None = None
+    collected: list[str] = []
+    target_end = rel + len(manifest_lit)
+    while html_i < len(fragment) and plain_i < target_end:
+        if fragment[html_i] == "<":
+            if collected:
+                break
+            close = fragment.find(">", html_i)
+            html_i = close + 1 if close >= 0 else len(fragment)
+            continue
+        ch = fragment[html_i]
+        if plain_i == rel and match_start is None:
+            match_start = html_i
+        if plain_i >= rel:
+            collected.append(ch)
+        plain_i += 1
+        html_i += 1
+    if match_start is None or not collected:
+        return None
+    eff = "".join(collected)
+    if "<" in eff or ">" in eff:
+        return None
+    return eff, start + match_start
+
+
 def locate_literal_in_region(html: str, region: tuple[int, int], literal: str) -> tuple[str, int] | None:
     start, end = region
     fragment = html[start:end]
@@ -317,6 +361,10 @@ def locate_literal_in_region(html: str, region: tuple[int, int], literal: str) -
     if match_end is None:
         match_end = html_i
     eff = fragment[match_start:match_end]
+    if "<" in eff or ">" in eff:
+        eff = eff.split("<", 1)[0]
+    if not eff:
+        return None
     return eff, start + match_start
 
 

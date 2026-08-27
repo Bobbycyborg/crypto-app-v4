@@ -21,6 +21,19 @@ def infer_formatter(literal: str) -> dict[str, Any]:
     if raw.upper() == "UNKNOWN":
         fmt["type"] = "string_exact"
         return fmt
+    if "−" in raw:
+        fmt["unicode_minus"] = True
+        raw = raw.replace("−", "-")
+    if raw.startswith("~"):
+        fmt["approx_prefix"] = "~"
+    sci = re.match(r"^([+-])?(\d+(?:\.\d+)?)[eE]([+-]?\d+)$", raw.lstrip("~"))
+    if sci:
+        sign, mantissa, _exp = sci.groups()
+        fmt["scientific"] = True
+        fmt["decimal_places"] = len(mantissa.split(".", 1)[1]) if "." in mantissa else 0
+        if sign == "+":
+            fmt["explicit_plus_positive"] = True
+        return fmt
     m = re.match(r"^(~)?(\+)?(\$)?([0-9,]+(?:\.[0-9]+)?)([kKmMbBtT])?(%?)(/wk|/day|/d)?$", raw)
     if m:
         approx, plus, cur, num, scale_sfx, pct, suffix = m.groups()
@@ -59,6 +72,23 @@ def infer_formatter(literal: str) -> dict[str, Any]:
     return fmt
 
 
+def adjust_formatter_for_binding(
+    formatter: dict[str, Any],
+    manifest_lit: str,
+    effective: str,
+    anchor_after: str,
+) -> dict[str, Any]:
+    fmt = dict(formatter)
+    sfx = fmt.get("scale_suffix")
+    if sfx and not effective.endswith(str(sfx)) and anchor_after.lstrip().startswith("<"):
+        fmt.pop("scale_suffix", None)
+        fmt["external_scale_suffix"] = sfx
+    if fmt.get("percent") and not effective.endswith("%") and ("%" in anchor_after or anchor_after.lstrip().startswith("<")):
+        fmt.pop("percent", None)
+        fmt["external_percent"] = True
+    return fmt
+
+
 def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -> str:
     if status != "OK":
         return "UNKNOWN"
@@ -70,6 +100,15 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
     scale = Decimal(str(formatter.get("scale", 1)))
     shown = d / scale if scale != 1 else d
     places = int(formatter.get("decimal_places", 2))
+    if formatter.get("scientific"):
+        s = format(shown, f".{places}e")
+        if formatter.get("explicit_plus_positive") and d > 0 and not s.startswith("+"):
+            s = "+" + s
+        if formatter.get("unicode_minus") and s.startswith("-"):
+            s = "−" + s[1:]
+        if formatter.get("approx_prefix") and not s.startswith("~"):
+            s = formatter["approx_prefix"] + s
+        return s
     q = Decimal("1").scaleb(-places)
     shown = shown.quantize(q, rounding=ROUND_HALF_UP)
     if shown == shown.to_integral_value():
@@ -93,4 +132,6 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
         out += "x"
     if formatter.get("suffix"):
         out += formatter["suffix"]
+    if formatter.get("unicode_minus") and out.startswith("-"):
+        out = "−" + out[1:]
     return out
