@@ -29,21 +29,21 @@ Helius maxed; public-RPC ATA path. Persist each proof before splice. Sleep/backo
 | RETARDIO | 37 | 36 | 1 | 0 | 1 | batch 3 |
 | SPX | 40 | 38 | 2 | 0 | 2 | batch 4 |
 | 2Z | 46 | 39 | 2 | 5 | 2 | batch 5 |
-| IO | 57 | 55 | 0 | 1 | 1 (Jupiter) | Jupiter not walked |
+| IO | 57 | 55 | 0 | 1 | 1 (Jupiter) | walk still on Io57; Jupiter not yet |
 | NOS | 75 | 70 | 3 | 2 | 3 | walked / honest DEFER |
-| RENDER | 62 | 51 | 0 | 10 | 1 (Jupiter) | batch 11 Render49/50 proved; leftover OKX/Binance dest-watch |
-| BONK | 73 | 45 | 4 | 1 | 24 | batch 11 +7; Bonk37/44/49/61 gt300 left as_of_now |
-| GIGA | 77 | 60 | 1 | 0 | 17 | batch 10 +14; Giga65 gt300; walk still on Giga82 |
+| RENDER | 62 | 51 | 1 | 10 | 1 (Jupiter) | Jupiter honest gt300 DEFER; left as_of_now |
+| BONK | 73 | 46 | 4 | 1 | 23 | batch 12 +1 Bonk64; Bonk37/44/49/61 gt300; walk on Bonk65 |
+| GIGA | 77 | 64 | 1 | 0 | 13 | batch 12 +4 Giga82-85; Giga65 gt300; walk on Giga86 |
 | GRASS | 57 | 0 | 0 | 0 | 57 | SKIP |
-| **total** | **586** | **451 on page** | **17** | **20** | **112 on page** | GRASS 57 of leftover are skip |
+| **total** | **586** | **456 on page** | **18** | **20** | **107 on page** | GRASS 57 of leftover are skip |
 
 PUMP / ORCA / DRIFT no fake27. HOM not present. G2 leftover 16 not walked.
 
-Live page after batch 11: RENDER 85 real / 1 fake27 / 16 dest. BONK 62 real / 24 fake27 / 9 dest. GIGA 77 real / 17 fake27 / 2 dest. IO 71 real / 1 fake27 / 4 dest.
+Live page after batch 12: RENDER 85 real / 1 fake27 / 11 dest. BONK 63 real / 23 fake27 / 7 dest. GIGA 81 real / 13 fake27 / 1 dest. IO 71 real / 1 fake27 / 4 dest.
 
 ## What this resume did / did not
 
-Did: resume persist (no start-over); splice LOCKIN first; walk RETARDIO/SPX/2Z/IO; splice proved RENDER/GIGA/BONK as proofs landed; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff 429; reconstructed 0s only when walk-proved.
+Did: resume persist (no start-over); splice LOCKIN first; walk RETARDIO/SPX/2Z/IO; splice proved RENDER/GIGA/BONK as proofs landed; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff 429; reconstructed 0s only when walk-proved. This pack: splice GIGA Giga82-85 + BONK Bonk64. RENDER Jupiter honestly DEFERred gt300 (left as_of_now, no UNKNOWN).
 
 Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card look; start Job 3; FAIL Job 1; walk or splice GRASS.
 
@@ -65,9 +65,10 @@ Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card
 - `6496feb` batch 8 RENDER/GIGA/BONK splice
 - `a45a9d5` batch 9
 - `107083e` batch 10 GIGA +14 / BONK +13
-- This commit: batch 11 RENDER leftover + BONK +7. Hash: read `git log -1`.
+- `ce6e432` / `2795250` batch 11
+- This commit: batch 12 GIGA +4 / BONK +1. Hash: read `git log -1`.
 - Parallel also landed `e657cb5`, `d63223d`, `8b207fc`, `e7dd955`.
 
 ## Status
 
-**NOT DONE.** Live leftover still as_of_now / still walking: RENDER Jupiter 1, BONK 24 (4 honest gt300), GIGA 17, IO Jupiter 1. GRASS skipped. Grok has not marked this complete.
+**NOT DONE.** Live leftover still as_of_now / still walking: RENDER Jupiter 1 (honest gt300 DEFER), BONK 23 (4 honest gt300), GIGA 13 (1 honest gt300), IO Jupiter 1. GRASS skipped. Grok has not marked this complete.
