@@ -34,7 +34,7 @@ from renderer.anchors import (
     _xpath_score,
 )
 from renderer.eligibility import eligible_mappings, load_job1_job2
-from renderer.formatters import adjust_formatter_for_binding, infer_formatter, lock_formatter
+from renderer.formatter_recovery import FormatterRecoveryError, recover_formatter, select_binding_raw
 
 MANIFEST_PATH = Path(__file__).resolve().parent / "binding-manifest.json"
 HTML_PATH = ROOT / "index-v4.html"
@@ -87,17 +87,6 @@ def _infer_literal(manifest_lit: str, effective: str) -> str:
         if plain and "<" not in plain and ">" not in plain:
             return plain
     return effective
-
-
-def _raw_for_binding(reg: dict[str, Any], metric_id: str, occurrence_id: str) -> Any:
-    row = reg.get(metric_id)
-    if not row:
-        return None
-    raw = row.get("raw_value")
-    for ev in row.get("evidence_variants", []):
-        if ev.get("occurrence_id") == occurrence_id:
-            return ev.get("raw_value", raw)
-    return raw
 
 
 def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, Any], reg: dict[str, Any]) -> list[dict[str, Any]]:
@@ -227,16 +216,20 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
         target_kind = classify_target_kind(html, pos, effective)
         if target_kind == "HTML_TEXT" and ("<" in effective or ">" in effective):
             raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER tag crossing {mid} {oid}")
-        fmt = lock_formatter(
-            adjust_formatter_for_binding(
-                infer_formatter(_infer_literal(manifest_lit, effective)),
-                manifest_lit,
-                effective,
-                anchor["anchor_after"],
-            ),
-            effective,
-            _raw_for_binding(reg, mid, oid),
-        )
+        raw_value, raw_source = select_binding_raw(reg, mid, oid)
+        if raw_value is None:
+            fmt: dict[str, Any] = {"type": "string_exact"}
+        else:
+            try:
+                fmt = recover_formatter(
+                    source_literal=effective,
+                    raw_value=raw_value,
+                    manifest_lit=manifest_lit,
+                    anchor_after=anchor["anchor_after"],
+                )
+            except FormatterRecoveryError as exc:
+                raise SystemExit(f"JOB 3 FORMATTER BLOCKER {mid} {oid}: {exc}") from exc
+            fmt["formatter_raw_source"] = raw_source
         entry = {
             "binding_id": _binding_id(mid, oid),
             "metric_id": mid,

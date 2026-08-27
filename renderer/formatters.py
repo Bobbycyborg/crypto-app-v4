@@ -33,15 +33,39 @@ def infer_formatter(literal: str) -> dict[str, Any]:
         fmt["type"] = "string_exact"
         return fmt
 
-    if "−" in raw:
+    unicode_minus = "−" in raw
+    if unicode_minus:
         fmt["unicode_minus"] = True
         raw = raw.replace("−", "-")
 
-    if raw.startswith("~"):
+    if raw.startswith("~+"):
+        fmt["approx_prefix"] = "~"
+        fmt["explicit_plus_positive"] = True
+        raw = raw[2:]
+    elif raw.startswith("~"):
         fmt["approx_prefix"] = "~"
         raw = raw[1:]
 
-    sci = re.match(r"^([+-])?(\d+(?:\.\d+)?)[eE]([+-])(\d+)$", raw)
+    unicode_x = False
+    if raw.endswith("×"):
+        unicode_x = True
+        raw = raw[:-1]
+    ratio_x = raw.endswith("x") or unicode_x
+    if ratio_x and raw.endswith("x"):
+        raw = raw[:-1]
+
+    pp = raw.endswith("pp")
+    if pp:
+        raw = raw[:-2]
+
+    time_suffix = None
+    for sfx in ("/wk", "/day", "/d", "/yr"):
+        if raw.endswith(sfx):
+            time_suffix = sfx
+            raw = raw[: -len(sfx)]
+            break
+
+    sci = re.match(r"^([+-])?(\d+(?:\.\d+)?)[eE]([+\-−])(\d+)$", raw)
     if sci:
         sign, mantissa, _exp_sign, exp_digits = sci.groups()
         fmt["scientific"] = True
@@ -54,11 +78,11 @@ def infer_formatter(literal: str) -> dict[str, Any]:
         return fmt
 
     m = re.match(
-        r"^([+-])?(\$)?([0-9,]+(?:\.[0-9]+)?)([kKmMbBtT])?(%?)(/wk|/day|/d)?$",
+        r"^([+-])?(\$)?([0-9,]+(?:\.[0-9]+)?)([kKmMbBtT])?(%?)$",
         raw,
     )
     if m:
-        sign, cur, num, scale_sfx, pct, suffix = m.groups()
+        sign, cur, num, scale_sfx, pct = m.groups()
         if sign == "+":
             fmt["explicit_plus_positive"] = True
         elif sign == "-":
@@ -74,20 +98,28 @@ def infer_formatter(literal: str) -> dict[str, Any]:
             fmt["scale"] = 1
         if pct:
             fmt["percent"] = True
-        if suffix:
-            fmt["suffix"] = suffix
+        if pp:
+            fmt["percentage_points"] = True
+        if time_suffix:
+            fmt["suffix"] = time_suffix
         fmt["decimal_places"] = len(num.split(".", 1)[1]) if "." in num else 0
+        if ratio_x:
+            fmt["ratio_x"] = True
+            if unicode_x:
+                fmt["unicode_x"] = True
         return fmt
 
-    if raw.endswith("x") and re.match(r"^\+?[0-9]+(?:\.[0-9]+)?x$", raw):
+    if ratio_x and re.match(r"^\+?[0-9]+(?:\.[0-9]+)?$", raw):
         fmt["ratio_x"] = True
         fmt["scale"] = 1
-        fmt["decimal_places"] = len(raw.split(".")[1][:-1]) if "." in raw else 0
+        fmt["decimal_places"] = len(raw.split(".")[1]) if "." in raw else 0
         if raw.startswith("+"):
             fmt["explicit_plus_positive"] = True
+        if unicode_x:
+            fmt["unicode_x"] = True
         return fmt
 
-    if "%" in literal:
+    if "%" in literal and not pp:
         fmt["percent"] = True
         return fmt
 
@@ -151,7 +183,8 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
         d = Decimal("0")
 
     scale = Decimal(str(formatter.get("scale", 1)))
-    shown = d / scale if scale != 1 else d
+    coeff = Decimal(str(formatter.get("coefficient_override", "1")))
+    shown = (d * coeff) / scale if scale != 1 else d * coeff
     places = int(formatter.get("decimal_places", 2))
 
     if formatter.get("scientific"):
@@ -169,6 +202,7 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
         s = f"{shown:,}" if formatter.get("grouping") else str(shown)
     else:
         s = f"{shown:,}" if formatter.get("grouping") else str(shown)
+
     out = ""
     if formatter.get("literal_prefix"):
         out += formatter["literal_prefix"]
@@ -185,46 +219,12 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
         out += str(formatter["scale_suffix"])
     if formatter.get("percent"):
         out += "%"
+    if formatter.get("percentage_points"):
+        out += "pp"
     if formatter.get("ratio_x"):
-        out += "x"
+        out += "×" if formatter.get("unicode_x") else "x"
     if formatter.get("suffix"):
         out += formatter["suffix"]
     if formatter.get("literal_suffix"):
         out += formatter["literal_suffix"]
     return _apply_unicode_minus(out, formatter)
-
-
-def lock_formatter(formatter: dict[str, Any], effective: str, raw_value: Any) -> dict[str, Any]:
-    """Lock formatter fields so format_value(raw_value, fmt) == effective."""
-    if formatter.get("type") == "string_exact" or raw_value is None or raw_value == "UNKNOWN":
-        return formatter
-    if isinstance(raw_value, str):
-        try:
-            float(raw_value)
-        except ValueError:
-            return formatter
-
-    direct = format_value(raw_value, formatter)
-    if direct == effective:
-        locked = dict(formatter)
-        locked["roundtrip_verified"] = True
-        return locked
-
-    n = len(effective)
-    for pre in range(n + 1):
-        for suf in range(n - pre + 1):
-            core = effective[pre : n - suf] if suf else effective[pre:]
-            if not core:
-                continue
-            inner = infer_formatter(core)
-            if inner.get("type") == "string_exact":
-                continue
-            merged = dict(formatter)
-            merged.update(inner)
-            merged["literal_prefix"] = effective[:pre]
-            merged["literal_suffix"] = effective[n - suf :] if suf else ""
-            if format_value(raw_value, merged) == effective:
-                merged["roundtrip_verified"] = True
-                return merged
-
-    return formatter

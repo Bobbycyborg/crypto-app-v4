@@ -22,9 +22,7 @@
       "anchor_sha256": "844e60575ce6319ff4df43d3ebbb7c64c8e382e9c0bfc2c583fd83b568718850",
       "component_id": "Ratio",
       "formatter": {
-        "type": "numeric",
-        "scale": 1,
-        "decimal_places": 2
+        "type": "string_exact"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -50,7 +48,10 @@
         "scale": 1,
         "decimal_places": 2,
         "external_percent": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -76,7 +77,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -102,7 +106,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -129,7 +136,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -156,7 +166,10 @@
         "scale": 1000000,
         "decimal_places": 0,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -185,7 +198,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -212,7 +228,10 @@
         "decimal_places": 3,
         "exponent_pad": 2,
         "negative": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -239,7 +258,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -267,7 +289,10 @@
         "scale": 1000,
         "suffix": "/d",
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -292,7 +317,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -318,7 +346,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -344,7 +375,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -368,12 +402,13 @@
       "formatter": {
         "type": "numeric",
         "approx_prefix": "~",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "",
         "literal_suffix": " SHIELDED STOCK",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -398,7 +433,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -425,7 +463,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -451,7 +492,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -477,7 +521,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -504,7 +551,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -530,7 +580,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 4,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -558,7 +611,10 @@
         "scale": 1000,
         "suffix": "/d",
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -580,7 +636,13 @@
       "anchor_sha256": "190512435dd72baa2f5722fe70a6c0315f571d67bb65eada7df9a05482158c67",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -605,7 +667,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -631,7 +696,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -653,7 +721,15 @@
       "anchor_sha256": "f93c4cb58319ee90d37722364743e45b1772ea412c662eba2f46f99ce536bd51",
       "component_id": "7d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "explicit_plus_positive": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -679,7 +755,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -701,8 +780,15 @@
       "anchor_sha256": "3766428f4d162d641262dc59eb7e67914531e1ee65580b1a7ad0755abe0242ea",
       "component_id": "futureEmissions",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " remaining",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -728,7 +814,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -754,7 +843,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -776,8 +868,16 @@
       "anchor_sha256": "6aa6c57e6fed5e90462ccb46c04bce0bb2b6ffbf84af5db07d3fb3392fd58b18",
       "component_id": "Net supply change",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "explicit_plus_positive": true,
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -800,13 +900,14 @@
       "component_id": "Price Trend 30d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 0,
         "literal_prefix": "",
         "literal_suffix": " 30d",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -829,13 +930,14 @@
       "component_id": "Price Trend 7d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 0,
         "literal_prefix": "",
         "literal_suffix": " 7d",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -858,12 +960,13 @@
       "component_id": "Inflation / burn",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 2,
         "literal_prefix": "",
         "literal_suffix": " / burn thin",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -890,7 +993,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -918,7 +1024,10 @@
         "scale": 1,
         "suffix": "/d",
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -940,7 +1049,13 @@
       "anchor_sha256": "b841780f4cee49c415aa88e63b5934f1f7b2439fb057fd031e7e03c11b7361ed",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -965,7 +1080,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -992,7 +1110,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1018,7 +1139,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 4,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1066,7 +1190,10 @@
         "scientific": true,
         "decimal_places": 0,
         "exponent_pad": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1093,7 +1220,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1120,7 +1250,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1146,7 +1279,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1168,7 +1304,15 @@
       "anchor_sha256": "680c1d21bc6174e13998d1651d5ec7724e706b4111457a73e96ac65703a70aa4",
       "component_id": "IO/SOL 30d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1193,7 +1337,12 @@
         "type": "numeric",
         "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "coefficient_override": "1022500.0",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1218,7 +1367,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1243,7 +1395,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1267,12 +1422,13 @@
       "formatter": {
         "type": "numeric",
         "approx_prefix": "~",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 0,
         "literal_prefix": "",
         "literal_suffix": " OF MAX",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1299,7 +1455,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1321,8 +1480,16 @@
       "anchor_sha256": "58e3d54c4a1a12229f026379cb2cd39e03210a7b52383553daaad95070dad27f",
       "component_id": "Ratio",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1344,8 +1511,16 @@
       "anchor_sha256": "04ea017ca17864beefa270da2cf50e37edc2841f9c29d33fcc8194a2d640c096",
       "component_id": "Fut / spot",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1372,7 +1547,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1399,7 +1577,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1421,12 +1602,7 @@
       "anchor_sha256": "829eff3d361042521bebb6c11a036fea5cca60cda0fc0f390dbde71daf818ad2",
       "component_id": "Now",
       "formatter": {
-        "type": "numeric",
-        "approx_prefix": "~",
-        "currency_prefix": "$",
-        "grouping": true,
-        "scale": 1,
-        "decimal_places": 2
+        "type": "string_exact"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1448,7 +1624,15 @@
       "anchor_sha256": "0ebf19fda8bcea4d442ae77f59aece37508d9c4da1416621960860b745a84dbf",
       "component_id": "fut/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1474,7 +1658,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1501,7 +1688,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1529,7 +1719,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1556,7 +1749,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1579,13 +1775,14 @@
       "component_id": "30d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "30d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1608,13 +1805,14 @@
       "component_id": "7d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "7d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1641,7 +1839,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1668,7 +1869,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1695,7 +1899,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1717,7 +1924,15 @@
       "anchor_sha256": "9c54759478c2906cb41d4d1f951244a6969bcc59873c95c05b264054db3bc83f",
       "component_id": "fut/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1744,7 +1959,10 @@
         "scale": 1000,
         "decimal_places": 0,
         "external_scale_suffix": "k",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1771,7 +1989,10 @@
         "scale": 1000000000,
         "decimal_places": 2,
         "external_scale_suffix": "B",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1798,7 +2019,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1824,7 +2048,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1851,7 +2078,10 @@
         "grouping": true,
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1877,7 +2107,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1904,7 +2137,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1930,7 +2166,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1956,7 +2195,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -1982,7 +2224,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2008,7 +2253,10 @@
         "scale": 1,
         "decimal_places": 1,
         "external_percent": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2035,7 +2283,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2057,7 +2308,15 @@
       "anchor_sha256": "837a6b236a11a609d1c0901c22c843412c6b9a1d4c6eb82e1f5ad3292dce1742",
       "component_id": "Futures / spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": " (observed \u2014 no cutoff)",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2079,8 +2338,14 @@
       "anchor_sha256": "53698f864aba4a9bc0ccd5104a788cefd558831c76b8c6c276dd0dfecbed37d4",
       "component_id": "TPS snapshot",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " nv",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2106,7 +2371,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2132,7 +2400,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2160,7 +2431,10 @@
         "scale": 1000000,
         "suffix": "/wk",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2187,7 +2461,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2213,7 +2490,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2240,7 +2520,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2266,7 +2549,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2294,7 +2580,10 @@
         "scale": 1000000,
         "suffix": "/wk",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2321,7 +2610,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2348,7 +2640,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2375,7 +2670,10 @@
         "scale": 1000000,
         "decimal_places": 1,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2399,13 +2697,14 @@
       "formatter": {
         "type": "numeric",
         "approx_prefix": "~",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 4,
         "literal_prefix": "",
         "literal_suffix": "/8h",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2428,13 +2727,14 @@
       "component_id": "Evidence",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "PUMP/BTC 7d ",
         "literal_suffix": " \u00b7 30d +102.3%; PUMP/SOL 7d +27.7% \u00b7 30d +104.7%.",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2456,7 +2756,15 @@
       "anchor_sha256": "60b80fd075d4274aade1366a7436fb452e52c54102f90a2dd0c6b0776121e306",
       "component_id": "fut/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2478,7 +2786,13 @@
       "anchor_sha256": "5c3043cea3bda2e91f63b92471d082290a327c764793ec19fb0b77dc128793e9",
       "component_id": "Beat Bitcoin",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " of 21.",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2500,7 +2814,15 @@
       "anchor_sha256": "0eda954a874a078614d2d903cddb1e95048f1c3ee223af2d7e51f97c46d3e8f9",
       "component_id": "30d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "30d ",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2522,7 +2844,15 @@
       "anchor_sha256": "c0c37b9a5ab3a9ae44194cc64662628d8421cff9847b708bd25e8426ff7c1a4a",
       "component_id": "7d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "explicit_plus_positive": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "7d ",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2544,7 +2874,14 @@
       "anchor_sha256": "3e3f4db9345fb7c3bc84c1e6c1e901489048ea4d658359b6dda69e0039e558ba",
       "component_id": "Staked",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2571,7 +2908,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2598,7 +2938,10 @@
         "decimal_places": 3,
         "exponent_pad": 2,
         "negative": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2621,12 +2964,13 @@
       "component_id": "Live 24h",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 0,
         "literal_prefix": "",
         "literal_suffix": " (row above)",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2655,7 +2999,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2677,7 +3024,15 @@
       "anchor_sha256": "3f3682e042b8ef5b1c761510a20f07fe3af494bfebd921dae0252c3b33f19872",
       "component_id": "DEX latest day",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2704,7 +3059,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2730,7 +3088,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2758,7 +3119,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2784,7 +3148,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2810,7 +3177,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2836,7 +3206,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 5,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2862,7 +3235,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2889,7 +3265,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2916,7 +3295,10 @@
         "scale": 1000000000,
         "decimal_places": 2,
         "external_scale_suffix": "B",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2942,7 +3324,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2970,7 +3355,10 @@
         "scale": 1000000,
         "suffix": "/wk",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -2996,7 +3384,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3023,7 +3414,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3049,7 +3443,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3071,7 +3468,16 @@
       "anchor_sha256": "eb58bf576699eeac9ce1bbbbe7bbe69fff9acb087bc5e02a31c7394b90a467c2",
       "component_id": "Revenue",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "currency_prefix": "$",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "suffix": "/wk",
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " \u00b7 up",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3098,7 +3504,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3120,7 +3529,15 @@
       "anchor_sha256": "da19a2841c85d2fb80afade966f70782cff987e0759452bb1f167d05d1d63a31",
       "component_id": "fut/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3147,7 +3564,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3174,7 +3594,10 @@
         "scale": 1000000000,
         "decimal_places": 2,
         "external_scale_suffix": "B",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3219,13 +3642,14 @@
       "component_id": "30d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "30d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3248,13 +3672,14 @@
       "component_id": "7d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "7d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3280,7 +3705,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3306,7 +3734,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3333,7 +3764,10 @@
         "scale": 1000000000,
         "decimal_places": 1,
         "external_scale_suffix": "B",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3359,7 +3793,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3386,7 +3823,10 @@
         "scale": 1000000,
         "decimal_places": 1,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3412,7 +3852,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3439,7 +3882,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3465,7 +3911,10 @@
         "scientific": true,
         "decimal_places": 3,
         "exponent_pad": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3493,7 +3942,10 @@
         "scale": 1000,
         "suffix": "/d",
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3521,7 +3973,10 @@
         "scale": 1000000,
         "suffix": "/d",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3549,7 +4004,10 @@
         "scale": 1000,
         "suffix": "/d",
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3576,7 +4034,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3602,7 +4063,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3624,8 +4088,16 @@
       "anchor_sha256": "59c0774492037805636e4c039b37985dbc31137fd888dffd5682e842533f34b1",
       "component_id": "Futures vs Spot",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": " fut/spot",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3651,7 +4123,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3677,7 +4152,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3699,7 +4177,15 @@
       "anchor_sha256": "d769c98e3e4d98e689a1547072015fa627a144e98c42c6fad4d4202359e8397c",
       "component_id": "Latest day",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3726,7 +4212,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3752,7 +4241,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3774,7 +4266,15 @@
       "anchor_sha256": "31bf9bb6fbf63edfaf476b728fdf73aa65a5a0de8fa0d8f55c88e907f08ad43f",
       "component_id": "Ratio",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3800,7 +4300,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3828,7 +4331,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3855,7 +4361,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3880,7 +4389,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3902,8 +4414,16 @@
       "anchor_sha256": "6131b83036d101abd69d5b10ed7b31dcb86100f905c789aa32cdde7956d797f7",
       "component_id": "Fut/spot now",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3929,7 +4449,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3955,7 +4478,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -3982,7 +4508,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4009,7 +4538,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4031,7 +4563,15 @@
       "anchor_sha256": "1b6a441c3ebd8c82a804633be5813969b9a16b806206db0750d5c619adb766fe",
       "component_id": "BTC RS",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "30d ",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4059,7 +4599,10 @@
         "scale": 1000000,
         "suffix": "/wk",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4085,7 +4628,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 5,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4107,7 +4653,13 @@
       "anchor_sha256": "994f14345a0f434ec03ea222154e13f4e358272f61e3e1ff0850a158ba1aa797",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4132,7 +4684,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4158,7 +4713,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 5,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4184,7 +4742,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4210,7 +4771,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4237,7 +4801,10 @@
         "scale": 1000000,
         "decimal_places": 0,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4263,7 +4830,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4289,7 +4859,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4315,7 +4888,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4341,7 +4917,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4367,7 +4946,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4389,8 +4971,15 @@
       "anchor_sha256": "58d47174c1b1aa4e6f9081e565af62db4859bbeb5e3f5e64d6228aac9b842f13",
       "component_id": "Level",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale_suffix": "k",
+        "scale": 1000,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " BTC",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4416,7 +5005,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4444,7 +5036,10 @@
         "scale": 1000000,
         "suffix": "/wk",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4466,9 +5061,7 @@
       "anchor_sha256": "aba1f5ca9c6982b6b989c6db36af862f94987ac3db3e6e81f433d942ef2f4372",
       "component_id": "Last-8 ratio",
       "formatter": {
-        "type": "numeric",
-        "scale": 1,
-        "decimal_places": 2
+        "type": "string_exact"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4490,7 +5083,13 @@
       "anchor_sha256": "3da7c5cc788bee2d52a83f38fb2894662cf4f175978bdba3295a96cab00f8bde",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4515,7 +5114,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4537,7 +5139,14 @@
       "anchor_sha256": "66558e03204bd13f5f363b9abf322ac83857ebba6caae52fd48432320f6d6816",
       "component_id": "OI BTC",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale_suffix": "k",
+        "scale": 1000,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " BTC",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4564,7 +5173,10 @@
         "scale": 1000000,
         "decimal_places": 1,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4591,7 +5203,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4618,7 +5233,10 @@
         "scale": 1000000,
         "decimal_places": 1,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4644,7 +5262,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 4,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4666,8 +5287,15 @@
       "anchor_sha256": "a427bb9c5dac378727a3ae70126e1b455b89dc25862bd6fcc28a21a1e07acd98",
       "component_id": "Est. burn",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4693,7 +5321,10 @@
         "scale": 1,
         "decimal_places": 1,
         "external_percent": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4738,12 +5369,13 @@
       "component_id": "Launchpad share",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 0,
         "literal_prefix": "",
         "literal_suffix": " \u00b7 down",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4765,7 +5397,14 @@
       "anchor_sha256": "49db2d34141fab0c625f9413078bfd4b21f42e38ef5cf4f73eec126e2e348f7f",
       "component_id": "Latest",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "decimal_places": 5,
+        "literal_prefix": "",
+        "literal_suffix": " / 8h",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4792,7 +5431,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4818,7 +5460,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4840,8 +5485,15 @@
       "anchor_sha256": "b7997d1ae407ea6299b71b2a58c329c068d67c1298d4382fa3a710811ef56692",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "currency_prefix": "$",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " (spot ZECUSDT)",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4863,7 +5515,15 @@
       "anchor_sha256": "008de9f9204d9e089bf2321d782a86d5d22dd256c412aa90f1e488130845e11e",
       "component_id": "50d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "currency_prefix": "$",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "Above ",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4889,7 +5549,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4915,7 +5578,10 @@
         "grouping": true,
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4941,7 +5607,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4966,7 +5635,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -4991,7 +5663,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5015,13 +5690,14 @@
       "formatter": {
         "type": "numeric",
         "approx_prefix": "~",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 4,
         "literal_prefix": "",
         "literal_suffix": "/8h (mild)",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5043,8 +5719,15 @@
       "anchor_sha256": "cf498b71fd3b6e9938614543adc09e3cb626f071f1d0ef63a0f365e571f1a842",
       "component_id": "OI",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale_suffix": "k",
+        "scale": 1000,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " BTC",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5071,7 +5754,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5099,7 +5785,10 @@
         "scale": 1000000,
         "suffix": "/wk",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5127,7 +5816,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5153,7 +5845,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5180,7 +5875,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5202,8 +5900,15 @@
       "anchor_sha256": "27b0f3f908ba695bc46de7e9776c38759cc26e766b2f9bb183a54623e3cf5d57",
       "component_id": "Est. issuance",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5230,7 +5935,10 @@
         "decimal_places": 3,
         "exponent_pad": 2,
         "negative": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5255,7 +5963,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5277,7 +5988,15 @@
       "anchor_sha256": "c57e43c6daf2c080fa9a41256e9ce598d544be2f224568bdcfb09fcd5b232260",
       "component_id": "NOS/SOL 7d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5299,7 +6018,15 @@
       "anchor_sha256": "7c81a1f93453b51185caffb827dc9d047e310882e89a712e8e4a982ea75e9dbd",
       "component_id": "fut/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5321,7 +6048,14 @@
       "anchor_sha256": "c2faee052f89d0db62d6cfe76a05f1fc90e8653b567ecaed258aa187720790cf",
       "component_id": "OI BTC",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale_suffix": "k",
+        "scale": 1000,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " BTC",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5347,7 +6081,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5373,7 +6110,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5399,7 +6139,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5421,8 +6164,14 @@
       "anchor_sha256": "eaed9af58b80fad7fe89796c66e6555d86232cd6ab0bd4f66d0c243109478a14",
       "component_id": "Nodes Running Jobs",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " WITH RUNNING JOBS",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5448,7 +6197,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5474,7 +6226,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5500,7 +6255,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5527,7 +6285,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5549,7 +6310,13 @@
       "anchor_sha256": "88e595e47f8ce0910f3b614ae3dea095f5ecfb9c0fca29914809ba1871f7724c",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5574,7 +6341,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5601,7 +6371,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5627,7 +6400,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5653,7 +6429,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5678,7 +6457,12 @@
         "type": "numeric",
         "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "coefficient_override": "1022500.0",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5704,7 +6488,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5730,7 +6517,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5752,7 +6542,13 @@
       "anchor_sha256": "dbd315b96af2c982fe538059ffae82f83f4f25616d23ab17f04bb6d5a22d4f83",
       "component_id": "Validators",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " active",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5779,7 +6575,10 @@
         "scale": 1000000000,
         "decimal_places": 2,
         "external_scale_suffix": "B",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5806,7 +6605,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5831,7 +6633,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5853,8 +6658,15 @@
       "anchor_sha256": "1dbc13b25c76163c4a577744953d0a8d99566fa62d29fbbe4ba55d55930e3aa7",
       "component_id": "Burn",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5882,7 +6694,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5908,7 +6723,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5936,7 +6754,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5962,7 +6783,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -5988,7 +6812,10 @@
         "scale": 1,
         "decimal_places": 1,
         "external_percent": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6014,7 +6841,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6037,12 +6867,13 @@
       "component_id": "Unattributed still held",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 2,
         "literal_prefix": "",
         "literal_suffix": " of cohort",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6068,7 +6899,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6093,7 +6927,12 @@
         "type": "numeric",
         "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "coefficient_override": "1022500.0",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6119,7 +6958,10 @@
         "scale": 1,
         "decimal_places": 1,
         "external_percent": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6141,7 +6983,15 @@
       "anchor_sha256": "a8c5ea57ae37162ee9a7c60d05a55454de43598bbb311098ad76ed34a69dc44b",
       "component_id": "30d SOL/BTC",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6167,7 +7017,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6193,7 +7046,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6215,7 +7071,15 @@
       "anchor_sha256": "5ea957ab7a5c98f96da60aba0ac455ee61abc3d268091359043b456e243ec0a0",
       "component_id": "IO/SOL 7d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6237,7 +7101,15 @@
       "anchor_sha256": "d15def70c54f1992a4d93ef32c536921c578b3b4f863238e769bdff675b433f2",
       "component_id": "7d FART/SOL",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6263,7 +7135,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6289,7 +7164,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6311,8 +7189,16 @@
       "anchor_sha256": "b59fb3ff0c028eaab6d3ed6c915df0b6fe12f54c92564b64e853ceafc54aae72",
       "component_id": "Perp vs Binance spot",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6338,7 +7224,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6364,7 +7253,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6390,7 +7282,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6412,7 +7307,13 @@
       "anchor_sha256": "6c9c619a6d4e46b021cbd865d7db786837bcdf161db96bd82cc65e92b95b920d",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6437,7 +7338,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6464,7 +7368,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6490,7 +7397,10 @@
         "grouping": true,
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6516,7 +7426,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6542,7 +7455,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6564,7 +7480,15 @@
       "anchor_sha256": "b3fcae28170cafae5c559797924a381b278ccc33e357c32566e96a808c3b7995",
       "component_id": "NOS/SOL 30d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6586,7 +7510,15 @@
       "anchor_sha256": "dd05cba1a7af3c1bedaeacae936eef6a478e41f7d9005a13fd9bee4ecdb92971",
       "component_id": "fut/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6613,7 +7545,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6639,7 +7574,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6661,8 +7599,15 @@
       "anchor_sha256": "47fbcbf8a71688c037f240ffa574d167e95e49cb91b4d9df9f51309148aebbf7",
       "component_id": "AF inventory",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": ", accumulating in Stage 1",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6684,8 +7629,16 @@
       "anchor_sha256": "a01fc6701208e231ba9b2dd6c851f475b0b8cab6c4b9f5715e45abc004168ad9",
       "component_id": "Net change",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "explicit_plus_positive": true,
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6712,7 +7665,10 @@
         "scale": 1000000,
         "decimal_places": 1,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6738,7 +7694,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6761,13 +7720,14 @@
       "component_id": "OI trend",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "",
         "literal_suffix": " 30d",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6793,7 +7753,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6820,7 +7783,10 @@
         "scale": 1000000000,
         "decimal_places": 1,
         "external_scale_suffix": "B",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6842,9 +7808,7 @@
       "anchor_sha256": "092845cbe14e0abc75bb2fc347821868b58f8b6eec1a282906870e1b2c272200",
       "component_id": "Last-8 ratio",
       "formatter": {
-        "type": "numeric",
-        "scale": 1,
-        "decimal_places": 2
+        "type": "string_exact"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6870,7 +7834,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6896,7 +7863,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6922,7 +7892,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6949,7 +7922,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -6976,7 +7952,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7003,7 +7982,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7026,12 +8008,13 @@
       "component_id": "CG",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "222.45M (",
         "literal_suffix": ")",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7054,12 +8037,13 @@
       "component_id": "AF stock 15.5% HL CIRC",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "",
         "literal_suffix": " HL CIRC",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7088,7 +8072,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7111,13 +8098,14 @@
       "component_id": "Funding",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 3,
         "literal_prefix": "",
         "literal_suffix": " / 8h",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7139,7 +8127,13 @@
       "anchor_sha256": "d4c91f0a1a0a0f7e7d71024155872abb1ab66e4195f3c37c3162de170062a20a",
       "component_id": "50-day average",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " of 21.",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7161,8 +8155,15 @@
       "anchor_sha256": "4c63bd157cad7840365a43bf5541534faf809352065abb6b66fb560bea276e65",
       "component_id": "Issuance",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7184,9 +8185,7 @@
       "anchor_sha256": "3c814f1bd0994a95714c3ca22b478994427635f0f73d2fe94327d02a634f9b7a",
       "component_id": "Last-4 ratio",
       "formatter": {
-        "type": "numeric",
-        "scale": 1,
-        "decimal_places": 2
+        "type": "string_exact"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7212,7 +8211,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7238,7 +8240,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7260,7 +8265,15 @@
       "anchor_sha256": "c55dd63b258167b94f29da09d3862fe630803fe8ac36e9faeb4327b29bb0b88f",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "currency_prefix": "$",
+        "scale": 1,
+        "decimal_places": 1,
+        "literal_prefix": "Above ",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7288,7 +8301,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7310,8 +8326,16 @@
       "anchor_sha256": "a597728bcbc4426db78671a5d91a804e8a5999fe5cafd9d18e9f427aefa231d0",
       "component_id": "Net change",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "explicit_plus_positive": true,
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7333,7 +8357,13 @@
       "anchor_sha256": "24eda47232ac817f3b74a2cd84643bd049a6a991623452ad54794acb4b48f76a",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7358,7 +8388,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 3,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7380,7 +8413,15 @@
       "anchor_sha256": "82c3a35c7cb902632c84db8514abd938eb2488fba5218423cce80bd794024f86",
       "component_id": "fut/spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7402,8 +8443,16 @@
       "anchor_sha256": "304ebc462e128f6451a97b1bb44265e1c63aed9aa6a5830d9daa277c64687833",
       "component_id": "Ratio",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7425,7 +8474,13 @@
       "anchor_sha256": "5bb14e78886b2845d2f613b1198f49b46d32cf2ed0241f2599d2984f7df53781",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7450,7 +8505,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7472,7 +8530,15 @@
       "anchor_sha256": "1cc51716bc829df0e3f7da45bf444e1045c58000539754abe686b818cc346329",
       "component_id": "NOS/SOL 30d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7500,7 +8566,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7527,7 +8596,10 @@
         "decimal_places": 3,
         "exponent_pad": 2,
         "negative": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7553,7 +8625,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 7,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7575,8 +8650,15 @@
       "anchor_sha256": "a50055633d6991709b8cd254bc86fe1a3ffbbe1e69add86372c574ef34ff43bf",
       "component_id": "Burn",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7598,9 +8680,7 @@
       "anchor_sha256": "b035c8ad8d6d2948ee1d246908727dc3dc87f373150c12dd1ef9dc33f250669a",
       "component_id": "Ratio",
       "formatter": {
-        "type": "numeric",
-        "scale": 1,
-        "decimal_places": 2
+        "type": "string_exact"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7629,7 +8709,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7656,7 +8739,10 @@
         "grouping": true,
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7681,7 +8767,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7707,7 +8796,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7734,7 +8826,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7756,7 +8851,16 @@
       "anchor_sha256": "01fe3129990f2e4ba8877dde5cc20a2d7fd9879b2ca5019096bb8f262abba399",
       "component_id": "Weekly",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "currency_prefix": "$",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "suffix": "/wk",
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " burned",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7802,12 +8906,13 @@
       "formatter": {
         "type": "numeric",
         "approx_prefix": "~",
-        "percent": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 0,
         "literal_prefix": "",
         "literal_suffix": " \u00b7 unlock 0",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7829,8 +8934,15 @@
       "anchor_sha256": "c304017c735016ed01e997da3d1d8078ea8dd86f6f156d21a67ba44d64e01fdf",
       "component_id": "Issuance",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "grouping": true,
+        "scale": 1,
+        "decimal_places": 0,
+        "literal_prefix": "",
+        "literal_suffix": " SOL/yr",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7852,7 +8964,13 @@
       "anchor_sha256": "f344803f7dae858c258d51657609ced049da85f021ab883b5a852a3b8f2badc1",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7877,7 +8995,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7903,7 +9024,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7925,7 +9049,15 @@
       "anchor_sha256": "a21567cd0a0413aea0ad5f577f9bb4aac997fffdd8c4e58f30877295d46bcf86",
       "component_id": "DEX SHARE",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7952,7 +9084,10 @@
         "decimal_places": 3,
         "exponent_pad": 2,
         "negative": true,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -7979,7 +9114,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8006,7 +9144,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8033,7 +9174,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8060,7 +9204,10 @@
         "scale": 1000000,
         "decimal_places": 0,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8085,7 +9232,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8110,7 +9260,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8137,7 +9290,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8163,7 +9319,10 @@
         "grouping": true,
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8190,7 +9349,10 @@
         "scale": 1000000,
         "decimal_places": 0,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8212,7 +9374,16 @@
       "anchor_sha256": "962d77948ffb5681dc8abbe02bc5418876bcf83e2f5c60d0a1450febe92ad542",
       "component_id": "Buyback / burn",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "currency_prefix": "$",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "suffix": "/wk",
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " burned \u00b7 up",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8234,8 +9405,16 @@
       "anchor_sha256": "1e363a9347254349a42c359160bc046e1cb3bcc21e3eac66c0877759c752d2df",
       "component_id": "Binance perp/spot",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8260,7 +9439,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8282,8 +9464,16 @@
       "anchor_sha256": "9e3159b5fcaf5e7513e1112c88bedf70fc1b00d472ebafed2bd5f1a866950dfc",
       "component_id": "Perp/spot",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8305,7 +9495,15 @@
       "anchor_sha256": "432c18681cc502ac156257051f510114d965fd641c960c026931494c3550b929",
       "component_id": "30d RS",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8332,7 +9530,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8358,7 +9559,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8380,7 +9584,15 @@
       "anchor_sha256": "b67dd98e61c6370250614521ad00231ddaff3c4c9f6665e256d4d7d0eff0033d",
       "component_id": "50d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "currency_prefix": "$",
+        "scale": 1,
+        "decimal_places": 1,
+        "literal_prefix": "Below ",
+        "literal_suffix": " (perp HYPEUSDT)",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8402,7 +9614,15 @@
       "anchor_sha256": "c3146e4ff4af485ef4495cfb1805cfb402720854a6ebebd322a60e95b3d39f68",
       "component_id": "Futures / spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": " futures/spot",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8428,7 +9648,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 5,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8455,7 +9678,10 @@
         "scale": 1000000000,
         "decimal_places": 1,
         "external_scale_suffix": "B",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8477,7 +9703,15 @@
       "anchor_sha256": "8e5efccec4205db3f842a0890f0f8427054ea8c6464fe9141565d699b0fc3db7",
       "component_id": "SOL / BTC RS",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "30d ",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8503,7 +9737,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8530,7 +9767,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8556,7 +9796,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8578,7 +9821,15 @@
       "anchor_sha256": "f2008eb7dbc846481fddbc66ac40b64a977d2cf237c0d88118c5652f78d09c21",
       "component_id": "Value Capture / Buybacks",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "decimal_places": 1,
+        "literal_prefix": "AF ",
+        "literal_suffix": " HYPE",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8605,7 +9856,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8632,7 +9886,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8659,7 +9916,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8686,7 +9946,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8708,7 +9971,15 @@
       "anchor_sha256": "ecb5e2bc8f62b0315e55ab0210f3e801ae8dbb28124d135ebccc0e172c8ff368",
       "component_id": "30d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "negative": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8730,8 +10001,15 @@
       "anchor_sha256": "fc439b9ec3a65e172491eb66c626e76d821c688eb6d5d1d3fa12a16a2f8a595d",
       "component_id": "OI",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale_suffix": "k",
+        "scale": 1000,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " BTC \u00b7 mild up",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8753,7 +10031,15 @@
       "anchor_sha256": "1a1c4ed31e536eba63556e9b7cd3f56b30a19812ef1c7be2e361f84495dcd517",
       "component_id": "7d RS",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "explicit_plus_positive": true,
+        "scale": 1,
+        "percentage_points": true,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8780,7 +10066,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8807,7 +10096,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8833,7 +10125,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8855,7 +10150,15 @@
       "anchor_sha256": "22a0dd1c44c09022ad21b31b4cda251c2e4235cbcb962df624f63ec3cfbc3acc",
       "component_id": "Futures / spot",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 1,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": " (observed \u2014 no cutoff)",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8881,7 +10184,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8907,7 +10213,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8933,7 +10242,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8955,7 +10267,13 @@
       "anchor_sha256": "1687adeeaf99a7603c7f07ee55c7e4c50582c1183f3421e35b790484f32296ba",
       "component_id": "200d",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": ".",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -8980,7 +10298,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9008,7 +10329,10 @@
         "scale": 1000000,
         "suffix": "/wk",
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9034,7 +10358,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9061,7 +10388,10 @@
         "scale": 1000000,
         "decimal_places": 1,
         "external_scale_suffix": "M",
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9086,7 +10416,12 @@
         "type": "numeric",
         "scale_suffix": "M",
         "scale": 1000000,
-        "decimal_places": 2
+        "decimal_places": 2,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "coefficient_override": "1022500.0",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9112,7 +10447,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9139,7 +10477,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9165,7 +10506,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9191,7 +10535,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9218,7 +10565,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9244,7 +10594,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9271,7 +10624,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9298,7 +10654,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9324,7 +10683,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9350,7 +10712,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9376,7 +10741,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9401,7 +10769,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9428,7 +10799,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9455,7 +10829,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9481,7 +10858,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9508,7 +10888,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9530,8 +10913,15 @@
       "anchor_sha256": "ede9c71a64d6c1b01262e917abac62c8abcfdad0c0d66b1c85c29c6085c08c88",
       "component_id": "AF inventory",
       "formatter": {
-        "type": "string_exact",
-        "approx_prefix": "~"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "decimal_places": 1,
+        "literal_prefix": "",
+        "literal_suffix": " accumulating",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9557,7 +10947,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9583,7 +10976,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9609,7 +11005,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9635,7 +11034,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9661,7 +11063,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9684,13 +11089,14 @@
       "component_id": "OI \u0394 1d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "",
         "literal_suffix": " 1d",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9713,13 +11119,14 @@
       "component_id": "OI \u0394 30d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "",
         "literal_suffix": " 30d",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9742,13 +11149,14 @@
       "component_id": "OI \u0394 7d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "",
         "literal_suffix": " 7d",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9774,7 +11182,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9801,7 +11212,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9827,7 +11241,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 6,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9854,7 +11271,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9880,7 +11300,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9907,7 +11330,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9934,7 +11360,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9960,7 +11389,10 @@
         "grouping": true,
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -9983,13 +11415,14 @@
       "component_id": "30d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "30d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10012,13 +11445,14 @@
       "component_id": "7d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "7d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10045,7 +11479,10 @@
         "scale_suffix": "k",
         "scale": 1000,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10071,7 +11508,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10097,7 +11537,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10119,7 +11562,16 @@
       "anchor_sha256": "6d86767fe76fc373502d42d2f82dbad752eae8d4e4c9651d43ad273b4848107d",
       "component_id": "Open Interest",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "approx_prefix": "~",
+        "currency_prefix": "$",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "decimal_places": 1,
+        "literal_prefix": "OI ",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10145,7 +11597,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10171,7 +11626,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10197,7 +11655,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10224,7 +11685,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10248,13 +11712,14 @@
       "formatter": {
         "type": "numeric",
         "approx_prefix": "~",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 4,
         "literal_prefix": "",
         "literal_suffix": " / 8h",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10280,7 +11745,10 @@
         "currency_prefix": "$",
         "scale": 1,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10304,13 +11772,14 @@
       "formatter": {
         "type": "numeric",
         "approx_prefix": "~",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 4,
         "literal_prefix": "",
         "literal_suffix": " / 8h",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10332,7 +11801,15 @@
       "anchor_sha256": "ae620c572f68a3da4e4248b7114bbadc3b2e5aa77cdb969c7e16e705b8382d83",
       "component_id": "DEX vs ETH L1",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "scale": 1,
+        "decimal_places": 3,
+        "ratio_x": true,
+        "unicode_x": true,
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10358,7 +11835,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10384,7 +11864,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10411,7 +11894,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10437,7 +11923,10 @@
         "grouping": true,
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10462,7 +11951,10 @@
         "type": "numeric",
         "scale": 1,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10485,13 +11977,14 @@
       "component_id": "30d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "30d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10514,13 +12007,14 @@
       "component_id": "7d",
       "formatter": {
         "type": "numeric",
-        "percent": true,
         "explicit_plus_positive": true,
         "scale": 1,
+        "percent": true,
         "decimal_places": 1,
         "literal_prefix": "7d ",
         "literal_suffix": "",
-        "roundtrip_verified": true
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10546,7 +12040,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10572,7 +12069,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10599,7 +12099,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10626,7 +12129,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10655,7 +12161,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10682,7 +12191,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10709,7 +12221,10 @@
         "scale_suffix": "M",
         "scale": 1000000,
         "decimal_places": 1,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10736,7 +12251,10 @@
         "scale": 1,
         "percent": true,
         "decimal_places": 0,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null
@@ -10763,7 +12281,10 @@
         "scale_suffix": "B",
         "scale": 1000000000,
         "decimal_places": 2,
-        "roundtrip_verified": true
+        "literal_prefix": "",
+        "literal_suffix": "",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "OCCURRENCE"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null

@@ -10,11 +10,13 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from renderer.eligibility import eligible_mappings, load_job1_job2
+from renderer.formatter_recovery import is_numeric_raw, select_binding_raw
 
 BANNED_IMPORT_PREFIXES = (
     "renderer.render_report",
@@ -30,6 +32,19 @@ NEGATIVE_OCCURRENCE_IDS = {
     "4d568968d384da40",
     "ad9b911811492672",
     "ce940255df156255",
+}
+
+NONNUMERIC_EXPECTED = {
+    "render.bme.ratio.last4::00a581be80d3bc08",
+    "pump.oi.usd.current::1935aee50ff5615e:oioi664mfunding000",
+    "btc.price.usd.report::24c837b712b58400",
+    "hype.af.buys.usd.30d::4fb9087d25d45f86",
+    "render.bme.ratio.last8::6ab520f912c0df64",
+    "bonk.price.usd.live::73f03441b6c01eac",
+    "render.bme.ratio.last8::a3bea5ef565305ea",
+    "render.bme.ratio.last4::ade009462532f2d3",
+    "render.bme.ratio.last4::b7bd7028b2909464",
+    "render.bme.ratio.last4::bfa9b81a99db1d51",
 }
 
 
@@ -49,6 +64,57 @@ def _assert_no_banned_imports(path: Path) -> int:
             if any(node.module == p or node.module.startswith(p + ".") for p in BANNED_IMPORT_PREFIXES):
                 hits += 1
     return hits
+
+
+def _parse_subprocess_counters(stdout: str) -> dict[str, int]:
+    out: dict[str, int] = {}
+    for line in stdout.splitlines():
+        if "=" in line and not line.startswith(" "):
+            k, v = line.split("=", 1)
+            if v.isdigit() or (v.startswith("-") and v[1:].isdigit()):
+                out[k] = int(v)
+    return out
+
+
+def _nonnumeric_reason(binding: dict[str, Any], reg: dict[str, Any]) -> str:
+    raw, src = select_binding_raw(reg, binding["metric_id"], binding["job1_occurrence_id"])
+    if raw is None:
+        if src == "OCCURRENCE":
+            return "occurrence raw missing or UNKNOWN"
+        return "no occurrence raw and no metric fallback"
+    if raw == "UNKNOWN":
+        return "raw is UNKNOWN"
+    if isinstance(raw, str):
+        try:
+            float(raw)
+        except ValueError:
+            return f"occurrence raw not parseable: {raw!r}"
+    return "not numeric usable"
+
+
+def _compute_numeric_gates(bindings: list[dict[str, Any]], reg: dict[str, Any]) -> dict[str, int]:
+    g = {
+        "total_bindings": len(bindings),
+        "numeric_usable_total": 0,
+        "nonnumeric_total": 0,
+        "roundtrip_verified": 0,
+        "unverified_numeric": 0,
+        "numeric_string_exact": 0,
+    }
+    for b in bindings:
+        raw, _src = select_binding_raw(reg, b["metric_id"], b["job1_occurrence_id"])
+        if raw is None or not is_numeric_raw(raw):
+            g["nonnumeric_total"] += 1
+            continue
+        g["numeric_usable_total"] += 1
+        fmt = b["formatter"]
+        if fmt.get("type") == "string_exact":
+            g["numeric_string_exact"] += 1
+        if fmt.get("roundtrip_verified"):
+            g["roundtrip_verified"] += 1
+        else:
+            g["unverified_numeric"] += 1
+    return g
 
 
 def main() -> int:
@@ -117,9 +183,29 @@ def main() -> int:
             assert fact.get("source_key") is None, mid
             assert isinstance(fact.get("derivation_inputs"), list), mid
 
+    gates = _compute_numeric_gates(bindings, reg)
+    for k, v in gates.items():
+        print(f"{k}={v}")
+
+    assert gates["total_bindings"] == 418
+    assert gates["numeric_usable_total"] == 408
+    assert gates["nonnumeric_total"] == 10
+    assert gates["roundtrip_verified"] == 408
+    assert gates["unverified_numeric"] == 0
+    assert gates["numeric_string_exact"] == 0
+
+    nonnumeric_ids = {b["binding_id"] for b in bindings if b["binding_id"] in NONNUMERIC_EXPECTED}
+    assert nonnumeric_ids == NONNUMERIC_EXPECTED
+    print("nonnumeric_bindings:")
+    for b in bindings:
+        if b["binding_id"] in NONNUMERIC_EXPECTED:
+            print(f"  {b['binding_id']} {b['source_literal']!r} reason={_nonnumeric_reason(b, reg)}")
+
     suites = [
         "tests/job3/test_snapshot_derive.py",
         "tests/job3/test_formatter_roundtrip.py",
+        "tests/job3/test_formatter_dynamicity.py",
+        "tests/job3/test_formatters.py",
         "tests/job3/test_golden_render.py",
         "tests/job3/test_renderer_fail_closed.py",
         "tests/job3/test_writer_quarantine.py",
@@ -127,6 +213,27 @@ def main() -> int:
     for rel in suites:
         rc = subprocess.run([sys.executable, str(ROOT / rel)], capture_output=True, text=True)
         assert rc.returncode == 0, f"{rel} failed:\n{rc.stdout}\n{rc.stderr}"
+
+    rt = _parse_subprocess_counters(
+        subprocess.run(
+            [sys.executable, str(ROOT / "tests/job3/test_formatter_roundtrip.py")],
+            capture_output=True,
+            text=True,
+        ).stdout
+    )
+    dyn = _parse_subprocess_counters(
+        subprocess.run(
+            [sys.executable, str(ROOT / "tests/job3/test_formatter_dynamicity.py")],
+            capture_output=True,
+            text=True,
+        ).stdout
+    )
+    print(f"numeric_dynamicity_checked={dyn.get('numeric_dynamicity_checked', 0)}")
+    print(f"numeric_dynamicity_failures={dyn.get('numeric_dynamicity_failures', 0)}")
+    assert rt.get("roundtrip_verified") == 408
+    assert rt.get("unverified_numeric") == 0
+    assert dyn.get("numeric_dynamicity_checked") == 408
+    assert dyn.get("numeric_dynamicity_failures") == 0
 
     rc = subprocess.run([sys.executable, str(ROOT / "tests/job3/test_writer_quarantine.py")], capture_output=True, text=True)
     m = re.search(r"shadow_nonwallet_current_network_writers=(\d+)", rc.stdout)

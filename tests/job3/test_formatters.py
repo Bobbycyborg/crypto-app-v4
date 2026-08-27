@@ -10,14 +10,7 @@ sys.path.insert(0, str(ROOT))
 from renderer.build_binding_manifest import _infer_literal
 from renderer.formatters import adjust_formatter_for_binding, format_value, infer_formatter
 
-REQUIRED = [
-    ("~−37.1%", -37.1, "~−37.1%"),
-    ("-2.796e-05", -2.796e-05, "-2.796e-05"),
-    ("$516k/d", 516000, "$516k/d"),
-    ("$6.8M/wk", 6800000, "$6.8M/wk"),
-    ("+12.4%", 12.4, "+12.4%"),
-    ("3.7x", 3.7, "3.7x"),
-]
+REQUIRED = []
 
 
 def _fmt(lit: str, effective: str | None = None, manifest_lit: str | None = None, anchor_after: str = "") -> dict:
@@ -32,8 +25,34 @@ def _fmt(lit: str, effective: str | None = None, manifest_lit: str | None = None
 
 
 def test_required_goldens() -> None:
-    for lit, val, want in REQUIRED:
+    direct = [
+        ("~−37.1%", -37.1, "~−37.1%"),
+        ("-2.796e-05", -2.796e-05, "-2.796e-05"),
+        ("$516k/d", 516000, "$516k/d"),
+        ("$6.8M/wk", 6800000, "$6.8M/wk"),
+        ("+12.4%", 12.4, "+12.4%"),
+        ("3.7x", 3.7, "3.7x"),
+        ("+3.7pp", 3.7, "+3.7pp"),
+        ("~9.2×", 9.2, "~9.2×"),
+        ("−8.7M/yr", -8_700_000, "−8.7M/yr"),
+    ]
+    for lit, val, want in direct:
         assert format_value(val, infer_formatter(lit)) == want, lit
+
+    prefix = infer_formatter("9.2x")
+    prefix = dict(prefix)
+    prefix["literal_prefix"] = "Fut/spot "
+    assert format_value(9.2, prefix) == "Fut/spot 9.2x"
+
+    approx_m = infer_formatter("~412M")
+    approx_m = dict(approx_m)
+    approx_m["literal_suffix"] = " remaining"
+    assert format_value(412_000_000, approx_m) == "~412M remaining"
+
+    frac = infer_formatter("2")
+    frac = dict(frac)
+    frac["literal_suffix"] = "/10 beat BTC"
+    assert format_value(2, frac) == "2/10 beat BTC"
 
     split_m = _fmt("$27", effective="$27", manifest_lit="$27<span class='econ-u'>M</span>", anchor_after="<span class='econ-u'>M</span>")
     assert format_value(27_000_000, split_m) == "$27"

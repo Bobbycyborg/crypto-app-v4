@@ -27,6 +27,8 @@ def gates() -> dict[str, int]:
         "ambiguous_anchor", "missing_anchor", "overlapping_binding", "missing_formatter", "unknown_target_kind",
         "markup_inside_HTML_TEXT_binding", "binding_crosses_tag_boundary",
         "formatter_roundtrip_checked", "formatter_roundtrip_mismatch",
+        "numeric_usable_total", "roundtrip_verified", "unverified_numeric", "numeric_string_exact",
+        "numeric_dynamicity_checked", "numeric_dynamicity_failures",
     ]}
     g["eligible_job1_occurrences"] = len(ELIG)
     g["binding_entries"] = len(BINDINGS)
@@ -77,10 +79,20 @@ def gates() -> dict[str, int]:
         text=True,
     )
     for line in rc.stdout.splitlines():
-        if line.startswith("formatter_roundtrip_checked="):
-            g["formatter_roundtrip_checked"] = int(line.split("=", 1)[1])
-        if line.startswith("formatter_roundtrip_mismatch="):
-            g["formatter_roundtrip_mismatch"] = int(line.split("=", 1)[1])
+        if "=" in line:
+            k, _, v = line.partition("=")
+            if k in g and v.isdigit():
+                g[k] = int(v)
+    dyn = __import__("subprocess").run(
+        [sys.executable, str(ROOT / "tests/job3/test_formatter_dynamicity.py")],
+        capture_output=True,
+        text=True,
+    )
+    for line in dyn.stdout.splitlines():
+        if "=" in line:
+            k, _, v = line.partition("=")
+            if v.isdigit():
+                g[k] = int(v)
     return g
 
 
@@ -97,6 +109,9 @@ def main() -> int:
             "eligible_job1_occurrences",
             "binding_entries",
             "formatter_roundtrip_checked",
+            "numeric_usable_total",
+            "roundtrip_verified",
+            "numeric_dynamicity_checked",
         }
     }
     if g["eligible_job1_occurrences"] != g["binding_entries"]:
