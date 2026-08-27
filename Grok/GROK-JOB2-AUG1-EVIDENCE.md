@@ -32,18 +32,18 @@ Helius maxed; public-RPC ATA path. Persist each proof before splice. Sleep/backo
 | IO | 57 | 55 | 0 | 1 | 1 (Jupiter) | walk still running; Jupiter not yet |
 | NOS | 75 | 70 | 3 | 2 | 3 | walked / honest DEFER |
 | RENDER | 62 | 51 | 1 | 10 | 1 (Jupiter) | Jupiter honest gt300 DEFER; left as_of_now |
-| BONK | 73 | 56 | 5 | 2 | 12 | batch 14 +6 Bonk69-71/73-75 + Binance dest-watch; Bonk37/44/49/61/72 gt300; walk on Bonk76 |
+| BONK | 73 | 58 | 5 | 2 | 10 | batch 15 +2 Bonk76-77; Bonk37/44/49/61/72 gt300; walk on Bonk78 |
 | GIGA | 77 | 64 | 1 | 0 | 13 | batch 12 +4 Giga82-85; Giga65 gt300; walk on Giga86 |
 | GRASS | 57 | 0 | 0 | 0 | 57 | SKIP |
-| **total** | **586** | **466 on page** | **19** | **21** | **96 on page** | GRASS 57 of leftover are skip |
+| **total** | **586** | **468 on page** | **19** | **21** | **94 on page** | GRASS 57 of leftover are skip |
 
 PUMP / ORCA / DRIFT no fake27. HOM not present. G2 leftover 16 not walked.
 
-Live page after batch 14: RENDER 85 real / 1 fake27 / 11 dest. BONK 73 real / 12 fake27 / 8 dest. GIGA 81 real / 13 fake27 / 1 dest. IO 71 real / 1 fake27 / 4 dest.
+Live page after batch 15: RENDER 85 real / 1 fake27 / 11 dest. BONK 75 real / 10 fake27 / 8 dest. GIGA 81 real / 13 fake27 / 1 dest. IO 71 real / 1 fake27 / 4 dest.
 
 ## What this resume did / did not
 
-Did: resume persist (no start-over); splice LOCKIN first; walk RETARDIO/SPX/2Z/IO; splice proved RENDER/GIGA/BONK as proofs landed; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff 429; reconstructed 0s only when walk-proved. This pack: splice BONK Bonk69-71/73-75 + Binance dest-watch. RENDER Jupiter honestly DEFERred gt300 (left as_of_now, no UNKNOWN).
+Did: resume persist (no start-over); splice LOCKIN first; walk RETARDIO/SPX/2Z/IO; splice proved RENDER/GIGA/BONK as proofs landed; skip GRASS/DRIFT/PUMP/ORCA; persist each proof; backoff 429; reconstructed 0s only when walk-proved. This pack: splice BONK Bonk76-77. RENDER Jupiter honestly DEFERred gt300 (left as_of_now, no UNKNOWN).
 
 Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card look; start Job 3; FAIL Job 1; walk or splice GRASS.
 
@@ -68,9 +68,10 @@ Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card
 - `ce6e432` / `2795250` batch 11
 - `7854c3a` batch 12 GIGA +4 / BONK +1
 - `4615ae0` batch 13 BONK +4
-- This commit: batch 14 BONK +6 + Binance dest-watch. Hash: read `git log -1`.
+- `e37287f` batch 14 BONK +6 + Binance dest-watch
+- This commit: batch 15 BONK +2 Bonk76-77. Hash: read `git log -1`.
 - Parallel also landed `e657cb5`, `d63223d`, `8b207fc`, `e7dd955`.
 
 ## Status
 
-**NOT DONE.** Live leftover still as_of_now / still walking: RENDER Jupiter 1 (honest gt300 DEFER), BONK 12 (5 honest gt300), GIGA 13 (1 honest gt300), IO Jupiter 1. GRASS skipped. Grok has not marked this complete.
+**NOT DONE.** Live leftover still as_of_now / still walking: RENDER Jupiter 1 (honest gt300 DEFER), BONK 10 (5 honest gt300), GIGA 13 (1 honest gt300), IO Jupiter 1. GRASS skipped. Grok has not marked this complete.
