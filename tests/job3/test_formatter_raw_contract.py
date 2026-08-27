@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Formatter raw-selection safety gates — no calibration, invalid-occurrence fallbacks."""
+"""Formatter raw-selection safety gates — no calibration, no display-value as data."""
 
 from __future__ import annotations
 
 import json
-import subprocess
 import sys
 from pathlib import Path
 
@@ -28,41 +27,60 @@ def _code_refs() -> int:
         text = path.read_text(encoding="utf-8")
         if "coefficient_override" in text:
             hits += text.count("coefficient_override")
+        if "_absolute_from_metric_value" in text:
+            hits += text.count("_absolute_from_metric_value")
+        if "allow_value_parse" in text:
+            hits += text.count("allow_value_parse")
+    return hits
+
+
+def _metric_value_as_numeric_source() -> int:
+    banned = (
+        "_absolute_from_metric_value",
+        "allow_value_parse",
+        'row.get("value")',
+    )
+    hits = 0
+    for path in (ROOT / "renderer").rglob("*.py"):
+        text = path.read_text(encoding="utf-8")
+        for token in banned:
+            hits += text.count(token)
     return hits
 
 
 def main() -> int:
     coef_bindings = 0
-    invalid_fallbacks: list[str] = []
+    presentation_syntax: list[str] = []
     nos_ok = True
     for b in BINDINGS:
         fmt = b["formatter"]
         if "coefficient_override" in fmt:
             coef_bindings += 1
-        if fmt.get("formatter_raw_source") == "METRIC_FALLBACK_INVALID_OCCURRENCE_RAW":
-            invalid_fallbacks.append(b["binding_id"])
+        if fmt.get("formatter_evidence_mode") == "PRESENTATION_SYNTAX_INVALID_OCCURRENCE_RAW":
+            presentation_syntax.append(b["binding_id"])
         if b["binding_id"] in NOS_IDS:
-            if fmt.get("formatter_raw_source") != "METRIC_FALLBACK_INVALID_OCCURRENCE_RAW":
+            if fmt.get("formatter_evidence_mode") != "PRESENTATION_SYNTAX_INVALID_OCCURRENCE_RAW":
                 nos_ok = False
             if fmt.get("rejected_occurrence_raw") != 4.0:
                 nos_ok = False
-            if b.get("binding_raw") != 4090000.0:
+            if b.get("binding_raw") is not None:
+                nos_ok = False
+            if not fmt.get("presentation_syntax_recovered"):
                 nos_ok = False
 
     code_refs = _code_refs()
+    metric_value_hits = _metric_value_as_numeric_source()
     print(f"coefficient_override_bindings={coef_bindings}")
     print(f"coefficient_override_code_refs={code_refs}")
-    print(f"invalid_occurrence_raw_fallbacks={len(invalid_fallbacks)}")
-    print(f"nos_metric_fallback_invalid_occurrence_raw={'YES' if nos_ok else 'NO'}")
-    if invalid_fallbacks != sorted(NOS_IDS):
-        print("invalid_fallback_ids:")
-        for bid in invalid_fallbacks:
-            print(f"  {bid}")
+    print(f"presentation_syntax_recovered={len(presentation_syntax)}")
+    print(f"metric_value_as_numeric_source={metric_value_hits}")
+    print(f"nos_syntax_recovery={'PASS' if nos_ok else 'FAIL'}")
     ok = (
         coef_bindings == 0
         and code_refs == 0
-        and len(invalid_fallbacks) == 4
-        and set(invalid_fallbacks) == NOS_IDS
+        and len(presentation_syntax) == 4
+        and set(presentation_syntax) == NOS_IDS
+        and metric_value_hits == 0
         and nos_ok
     )
     return 0 if ok else 1

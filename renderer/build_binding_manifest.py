@@ -34,7 +34,7 @@ from renderer.anchors import (
     _xpath_score,
 )
 from renderer.eligibility import eligible_mappings, load_job1_job2
-from renderer.formatter_recovery import FormatterRecoveryError, recover_formatter, resolve_binding_raw
+from renderer.formatter_recovery import FormatterRecoveryError, recover_presentation_formatter, recover_formatter, resolve_binding_raw
 
 MANIFEST_PATH = Path(__file__).resolve().parent / "binding-manifest.json"
 HTML_PATH = ROOT / "index-v4.html"
@@ -230,17 +230,24 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
         if selection is None:
             fmt = {"type": "string_exact"}
             raw_value = None
-            raw_source = None
+        elif selection.presentation_only:
+            raw_value = None
+            fmt = recover_presentation_formatter(
+                source_literal=effective,
+                manifest_lit=manifest_lit,
+                anchor_after=anchor["anchor_after"],
+            )
+            fmt["formatter_evidence_mode"] = selection.source
+            fmt["rejected_occurrence_raw"] = selection.rejected_occurrence_raw
         else:
             raw_value = selection.raw
-            raw_source = selection.source
             fmt = recover_formatter(
                 source_literal=effective,
                 raw_value=raw_value,
                 manifest_lit=manifest_lit,
                 anchor_after=anchor["anchor_after"],
             )
-            fmt["formatter_raw_source"] = raw_source
+            fmt["formatter_raw_source"] = selection.source
             if selection.rejected_occurrence_raw is not None:
                 fmt["rejected_occurrence_raw"] = selection.rejected_occurrence_raw
         entry = {

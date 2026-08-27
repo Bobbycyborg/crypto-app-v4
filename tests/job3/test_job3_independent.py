@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from renderer.eligibility import eligible_mappings, load_job1_job2
-from renderer.formatter_recovery import is_numeric_raw, _occurrence_raw
+from renderer.formatter_recovery import is_numeric_binding, is_numeric_raw, _occurrence_raw
 
 BANNED_IMPORT_PREFIXES = (
     "renderer.render_report",
@@ -77,7 +77,7 @@ def _parse_subprocess_counters(stdout: str) -> dict[str, int]:
 
 
 def _nonnumeric_reason(binding: dict[str, Any], reg: dict[str, Any]) -> str:
-    if binding.get("binding_raw") is not None:
+    if is_numeric_binding(binding):
         return "not numeric usable"
     occ_raw = _occurrence_raw(reg.get(binding["metric_id"], {}), binding["job1_occurrence_id"])
     if occ_raw == "UNKNOWN" or occ_raw is None:
@@ -90,22 +90,27 @@ def _nonnumeric_reason(binding: dict[str, Any], reg: dict[str, Any]) -> str:
 def _compute_numeric_gates(bindings: list[dict[str, Any]], reg: dict[str, Any]) -> dict[str, int]:
     g = {
         "total_bindings": len(bindings),
-        "numeric_usable_total": 0,
+        "numeric_bindings": 0,
         "nonnumeric_total": 0,
+        "raw_roundtrip_verified": 0,
+        "presentation_syntax_recovered": 0,
         "roundtrip_verified": 0,
         "unverified_numeric": 0,
         "numeric_string_exact": 0,
     }
     for b in bindings:
-        raw = b.get("binding_raw")
-        if raw is None or not is_numeric_raw(raw):
+        if not is_numeric_binding(b):
             g["nonnumeric_total"] += 1
             continue
-        g["numeric_usable_total"] += 1
+        g["numeric_bindings"] += 1
         fmt = b["formatter"]
         if fmt.get("type") == "string_exact":
             g["numeric_string_exact"] += 1
-        if fmt.get("roundtrip_verified"):
+        if fmt.get("presentation_syntax_recovered"):
+            g["presentation_syntax_recovered"] += 1
+            g["roundtrip_verified"] += 1
+        elif fmt.get("roundtrip_verified"):
+            g["raw_roundtrip_verified"] += 1
             g["roundtrip_verified"] += 1
         else:
             g["unverified_numeric"] += 1
@@ -183,8 +188,10 @@ def main() -> int:
         print(f"{k}={v}")
 
     assert gates["total_bindings"] == 418
-    assert gates["numeric_usable_total"] == 408
+    assert gates["numeric_bindings"] == 408
     assert gates["nonnumeric_total"] == 10
+    assert gates["raw_roundtrip_verified"] == 404
+    assert gates["presentation_syntax_recovered"] == 4
     assert gates["roundtrip_verified"] == 408
     assert gates["unverified_numeric"] == 0
     assert gates["numeric_string_exact"] == 0
