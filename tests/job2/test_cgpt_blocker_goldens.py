@@ -23,23 +23,16 @@ def _plan(mid: str) -> dict:
 
 
 def test_hype_af_buys_daily_holders_revenue_not_daily_fees() -> None:
-    doc = {
-        "protocols": [
-            {"name": "Hyperliquid Perps", "total30d": 999},
-            {"name": "Hyperliquid", "total30d": 43900000},
-        ]
-    }
+    doc = {"name": "Hyperliquid", "total30d": 43900000, "total24h": 2304022}
     sel = _plan("hype.af.buys.usd.30d")["selector"]
     val = extract(doc, sel)
     assert normalize(val, {"type": "identity"}) == Decimal("43900000")
 
-    # Wrong identity: Perps row alone
-    bad = {"protocols": [{"name": "Hyperliquid Perps", "total30d": 87}]}
     try:
-        extract(bad, sel)
-        raise AssertionError("expected schema mismatch")
-    except ExtractError as exc:
-        assert exc.status == "SOURCE_SCHEMA_MISMATCH"
+        extract({"name": "Hyperliquid"}, sel)
+        raise AssertionError("expected missing total30d")
+    except ExtractError:
+        pass
 
 
 def test_io_emissions_preserve_no_requests() -> None:
@@ -49,16 +42,15 @@ def test_io_emissions_preserve_no_requests() -> None:
     assert row["request_key"] is None
 
 
-def test_render_leftover_emissions_html() -> None:
-    html = '<div class="supply"><span>Leftover Emissions</span><span>2,384,638</span></div>'
+def test_render_leftover_emissions_supply_info() -> None:
+    supply = {"leftoverEmissions": 2384638, "circulatingSupply": 555631962}
     sel = _plan("render.emissions.tokens.remaining")["selector"]
-    val = extract({}, sel, html=html)
+    val = extract(supply, sel)
     assert normalize(val, {"type": "identity"}) == Decimal("2384638")
 
-    burn = parse_json_body((FIX / "render.epochBurnStats.body").read_bytes(), "application/json")
     try:
-        extract(burn, sel, html=None)
-        raise AssertionError("epochBurnStats must not feed leftover emissions")
+        extract({}, sel)
+        raise AssertionError("missing leftoverEmissions")
     except ExtractError:
         pass
 
@@ -95,6 +87,6 @@ def test_spx_oi_trailing_change_not_pct_of_max() -> None:
 if __name__ == "__main__":
     test_hype_af_buys_daily_holders_revenue_not_daily_fees()
     test_io_emissions_preserve_no_requests()
-    test_render_leftover_emissions_html()
+    test_render_leftover_emissions_supply_info()
     test_spx_oi_trailing_change_not_pct_of_max()
     print("ok")

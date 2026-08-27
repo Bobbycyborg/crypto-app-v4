@@ -675,11 +675,11 @@ C(
     **{
         "disposition": "COLLECT",
         "source_key": "nosana",
-        "request_key": "nosana.jobs.count",
-        "selector": {"type": "json_key", "key": "last30Days"},
+        "request_key": "nosana.jobs.stats.timestamps",
+        "selector": {"type": "named_record_field", "name": "jobs_timestamps_window_sum", "window_days": 30},
         "normalizer": {"type": "integer"},
         "derivation": None,
-        "notes": "Requires last30Days on jobs/count; else SOURCE_SCHEMA_MISMATCH.",
+        "notes": "Nosana indexer /jobs/stats/timestamps ~30d completed-job sum.",
     },
 )
 C(
@@ -687,11 +687,11 @@ C(
     **{
         "disposition": "COLLECT",
         "source_key": "nosana",
-        "request_key": "nosana.jobs.count",
-        "selector": {"type": "json_key", "key": "distinctNodesWithRunningJobs"},
+        "request_key": "nosana.jobs.running",
+        "selector": {"type": "named_record_field", "name": "running_nodes_distinct_count"},
         "normalizer": {"type": "integer"},
         "derivation": None,
-        "notes": "Field name must exist on jobs/count. Fail closed if renamed.",
+        "notes": "Nosana indexer /jobs/running distinct node addresses with running jobs.",
     },
 )
 

@@ -112,6 +112,7 @@ def independent_fixture_values() -> dict[str, Decimal]:
     btc = next(x for x in cg if x["id"] == "bitcoin")
     fng = json.loads((FIX / "alternative_me.fng.body").read_text())
     jobs = json.loads((FIX / "nosana.jobs.count.body").read_text())
+    running = json.loads((FIX / "nosana.jobs.running.body").read_text())
     rev = json.loads((FIX / "defillama.summary.fees.pump.fun.dailyRevenue.body").read_text())
     tvl = json.loads((FIX / "defillama.historicalChainTvl.Solana.body").read_text())
     stables = json.loads((FIX / "defillama.stablecoinchains.body").read_text())
@@ -125,7 +126,7 @@ def independent_fixture_values() -> dict[str, Decimal]:
         "btc.price.usd.live": _dec(btc["current_price"]),
         "global.fear_greed.index.current": _dec(fng["data"][0]["value"]),
         "nos.jobs.running.count": _dec(jobs["byState"]["RUNNING"]),
-        "nos.nodes.with_running_jobs.count": _dec(jobs["distinctNodesWithRunningJobs"]),
+        "nos.nodes.with_running_jobs.count": _dec(len(running)),
         "pump.revenue.usd.7d": sum((_dec(v) for _, v in rev["totalDataChart"][-7:]), Decimal("0")),
         "sol.tvl.usd.current": _dec(tvl[-1]["tvl"]),
         "sol.stablecoin.usd.current": _dec(sol_st["totalCirculatingUSD"]["peggedUSD"]),

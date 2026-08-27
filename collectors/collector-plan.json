@@ -1603,20 +1603,15 @@
       "disposition": "COLLECT",
       "derivation": null,
       "source_key": "defillama",
-      "request_key": "defillama.overview.fees.dailyHoldersRevenue",
+      "request_key": "defillama.summary.fees.hyperliquid.dailyHoldersRevenue",
       "selector": {
-        "type": "named_record_field",
-        "name": "defillama_hyperliquid_holders_revenue_30d",
-        "identity": {
-          "name": "Hyperliquid"
-        },
-        "field": "total30d",
-        "data_type": "dailyHoldersRevenue"
+        "type": "json_key",
+        "key": "total30d"
       },
       "normalizer": {
         "type": "identity"
       },
-      "notes": "CGPT Job 2B: overview fees dailyHoldersRevenue; identity name=Hyperliquid exact; field total30d.",
+      "notes": "CGPT Job 2B: DefiLlama protocol summary hyperliquid dailyHoldersRevenue total30d.",
       "required": true
     },
     {
@@ -2775,16 +2770,17 @@
       "unit": "text",
       "disposition": "COLLECT",
       "source_key": "nosana",
-      "request_key": "nosana.jobs.count",
+      "request_key": "nosana.jobs.stats.timestamps",
       "selector": {
-        "type": "json_key",
-        "key": "last30Days"
+        "type": "named_record_field",
+        "name": "jobs_timestamps_window_sum",
+        "window_days": 30
       },
       "normalizer": {
         "type": "integer"
       },
       "derivation": null,
-      "notes": "Requires last30Days on jobs/count; else SOURCE_SCHEMA_MISMATCH.",
+      "notes": "Nosana indexer /jobs/stats/timestamps ~30d completed-job sum.",
       "required": true
     },
     {
@@ -2919,16 +2915,16 @@
       "unit": "count",
       "disposition": "COLLECT",
       "source_key": "nosana",
-      "request_key": "nosana.jobs.count",
+      "request_key": "nosana.jobs.running",
       "selector": {
-        "type": "json_key",
-        "key": "distinctNodesWithRunningJobs"
+        "type": "named_record_field",
+        "name": "running_nodes_distinct_count"
       },
       "normalizer": {
         "type": "integer"
       },
       "derivation": null,
-      "notes": "Field name must exist on jobs/count. Fail closed if renamed.",
+      "notes": "Nosana indexer /jobs/running distinct node addresses with running jobs.",
       "required": true
     },
     {
@@ -4138,16 +4134,16 @@
       "disposition": "COLLECT",
       "derivation": null,
       "source_key": "render_foundation",
-      "request_key": "render.epochBurnStats",
+      "request_key": "render.liabilityEpochs",
       "selector": {
         "type": "named_record_field",
-        "name": "epoch_burn_latest_field",
-        "field": "latest_node_operator_due"
+        "name": "render_liability_node_due_latest",
+        "channel": "node_operator"
       },
       "normalizer": {
         "type": "identity"
       },
-      "notes": "V3 render_stage1_loader bme.node_operator_due_per_epoch.",
+      "notes": "Render Foundation dashboard liabilityEpochs latest node_operator amountDue per epoch.",
       "required": true
     },
     {
@@ -4162,12 +4158,13 @@
       "selector": {
         "type": "named_record_field",
         "name": "bme_burn_emit_ratio_last_n",
-        "n": 4
+        "n": 4,
+        "liability_request_key": "render.liabilityEpochs"
       },
       "normalizer": {
         "type": "identity"
       },
-      "notes": "V3 render_stage1_loader bme.last4.ratio.",
+      "notes": "V3 render_stage1_loader bme.last4.ratio; burn epochBurnStats + emit liabilityEpochs.",
       "required": true
     },
     {
@@ -4182,12 +4179,13 @@
       "selector": {
         "type": "named_record_field",
         "name": "bme_burn_emit_ratio_last_n",
-        "n": 8
+        "n": 8,
+        "liability_request_key": "render.liabilityEpochs"
       },
       "normalizer": {
         "type": "identity"
       },
-      "notes": "V3 render_stage1_loader bme.last8.ratio.",
+      "notes": "V3 render_stage1_loader bme.last8.ratio; burn epochBurnStats + emit liabilityEpochs.",
       "required": true
     },
     {
@@ -4198,16 +4196,15 @@
       "disposition": "COLLECT",
       "derivation": null,
       "source_key": "render_foundation",
-      "request_key": "render.dashboard.main",
+      "request_key": "render.supplyInfo",
       "selector": {
-        "type": "explicit_html_selector",
-        "name": "render_leftover_emissions",
-        "label": "Leftover Emissions"
+        "type": "json_key",
+        "key": "leftoverEmissions"
       },
       "normalizer": {
         "type": "identity"
       },
-      "notes": "CGPT Job 2B: render.dashboard.main html selector render_leftover_emissions label Leftover Emissions.",
+      "notes": "CGPT Job 2B: Render Foundation dashboard supplyInfo leftoverEmissions.",
       "required": true
     },
     {

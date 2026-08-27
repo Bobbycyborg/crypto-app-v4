@@ -6,7 +6,7 @@
   "http_status": 200,
   "fetched_at": "2026-08-27T12:00:00Z",
   "content_type": "application/json",
-  "body_sha256": "bbb4aa71449aa09ef3e81ada662a657da764ce8a92da19b2fa79ad4f562b963b",
+  "body_sha256": "a72c960413b4313f747d29a05c3adf7ede3eb75e3ab70f21500618df9fa6b030",
   "raw_body_path": "render.liabilityEpochs.body",
   "attempts": 1
 }

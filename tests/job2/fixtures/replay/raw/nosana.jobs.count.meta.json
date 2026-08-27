@@ -6,7 +6,7 @@
   "http_status": 200,
   "fetched_at": "2026-08-26T12:00:00Z",
   "content_type": "application/json",
-  "body_sha256": "39b0c19a9b7902fd5622583e60ec290792ea0065709c597788c06fef45ba163f",
+  "body_sha256": "1b7dacb8ee499a7bd94239fa0c090125d6320cd976b4b680eba4148c57422963",
   "raw_body_path": "nosana.jobs.count.body",
   "attempts": 1
 }

@@ -5,7 +5,7 @@
     {"metric_id": "btc.funding.rate.latest", "expected_normalized": "0.01", "fixture": "binance.fapi.premiumIndex.BTCUSDT", "independent_path": "lastFundingRate * 100"},
     {"metric_id": "global.fear_greed.index.current", "expected_normalized": 74, "fixture": "alternative_me.fng", "independent_path": "data[0].value"},
     {"metric_id": "nos.jobs.running.count", "expected_normalized": 855, "fixture": "nosana.jobs.count", "independent_path": "byState.RUNNING"},
-    {"metric_id": "nos.nodes.with_running_jobs.count", "expected_normalized": 35, "fixture": "nosana.jobs.count", "independent_path": "distinctNodesWithRunningJobs"},
+    {"metric_id": "nos.nodes.with_running_jobs.count", "expected_normalized": 35, "fixture": "nosana.jobs.running", "independent_path": "len(keys)"},
     {"metric_id": "pump.revenue.usd.7d", "expected_normalized": 7000000, "fixture": "defillama.summary.fees.pump.fun.dailyRevenue", "independent_path": "sum last 7 totalDataChart values"},
     {"metric_id": "pump.buyback.usd.7d", "expected_normalized": 5600000, "fixture": "defillama.summary.fees.pump.fun.dailyHoldersRevenue", "independent_path": "sum last 7 totalDataChart values"},
     {"metric_id": "sol.tvl.usd.current", "expected_normalized": 5650000000, "fixture": "defillama.historicalChainTvl.Solana", "independent_path": "last.tvl"},

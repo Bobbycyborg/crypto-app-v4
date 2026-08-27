@@ -1,1 +1,1 @@
-{"byState": {"RUNNING": 855, "QUEUED": 12, "COMPLETED": 500000}, "last30Days": 119000, "distinctNodesWithRunningJobs": 35}
+{"byState": {"RUNNING": 855, "QUEUED": 12, "COMPLETED": 500000}}

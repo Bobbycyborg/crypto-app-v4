@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
+from collections import defaultdict
 from decimal import Decimal
 from pathlib import Path
 from typing import Any
@@ -224,37 +225,109 @@ def pump_circulating_pct_of_max(cg_doc: Any, supply_doc: Any, selector: dict[str
 def bme_emit_last_n(doc: Any, selector: dict[str, Any]) -> Decimal:
     n = int(selector["n"])
     channel = selector.get("channel", "node_operator")
-    if not isinstance(doc, list):
-        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "epoch list")
-    field = "nodeOperatorReward" if channel == "node_operator" else "burnedRender"
-    total = Decimal("0")
-    for row in doc[-n:]:
-        total += _as_decimal(row.get(field) or 0)
+    rows = doc.get("epochs") if isinstance(doc, dict) else doc
+    if not isinstance(rows, list):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "liabilityEpochs epochs missing")
+    by_epoch: dict[int, Decimal] = defaultdict(lambda: Decimal("0"))
+    for row in rows:
+        if not isinstance(row, dict) or row.get("channel") != channel:
+            continue
+        eid = row.get("epochId")
+        if not isinstance(eid, int) or eid >= 10000:
+            continue
+        by_epoch[eid] += _as_decimal(row.get("amountDue")) / Decimal("1e8")
+    ids = sorted(by_epoch)
+    if len(ids) < n:
+        raise ExtractError("VALUE_MISSING", f"need {n} liability epochs")
+    total = sum((by_epoch[i] for i in ids[-n:]), Decimal("0"))
+    if total <= 0:
+        raise ExtractError("VALUE_INVALID", "zero emit")
     return total
 
 
-def epoch_burn_latest_field(doc: Any, selector: dict[str, Any]) -> Decimal:
-    if not isinstance(doc, list) or not doc:
-        raise ExtractError("VALUE_MISSING", "empty epoch burn")
-    last = doc[-1]
-    field = selector.get("field", "latest_node_operator_due")
-    if field not in last:
-        raise ExtractError("VALUE_MISSING", field)
-    return _as_decimal(last[field])
+def render_liability_node_due_latest(doc: Any, selector: dict[str, Any]) -> Decimal:
+    channel = selector.get("channel", "node_operator")
+    rows = doc.get("epochs") if isinstance(doc, dict) else doc
+    if not isinstance(rows, list):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "liabilityEpochs epochs missing")
+    latest: dict[str, Any] | None = None
+    for row in rows:
+        if not isinstance(row, dict) or row.get("channel") != channel:
+            continue
+        eid = row.get("epochId")
+        if not isinstance(eid, int) or eid >= 10000:
+            continue
+        if latest is None or eid > latest["epochId"]:
+            latest = row
+    if latest is None:
+        raise ExtractError("VALUE_MISSING", "no node_operator liability epoch")
+    return _as_decimal(latest.get("amountDue")) / Decimal("1e8")
 
 
-def bme_burn_emit_ratio_last_n(doc: Any, selector: dict[str, Any]) -> Decimal:
+def _liability_emit_by_epoch(doc: Any, channel: str = "node_operator") -> dict[int, Decimal]:
+    rows = doc.get("epochs") if isinstance(doc, dict) else doc
+    if not isinstance(rows, list):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "liabilityEpochs epochs missing")
+    by_epoch: dict[int, Decimal] = defaultdict(lambda: Decimal("0"))
+    for row in rows:
+        if not isinstance(row, dict) or row.get("channel") != channel:
+            continue
+        eid = row.get("epochId")
+        if not isinstance(eid, int) or eid >= 10000:
+            continue
+        by_epoch[eid] += _as_decimal(row.get("amountDue")) / Decimal("1e8")
+    return by_epoch
+
+
+def bme_burn_emit_ratio_last_n(
+    burn_doc: Any,
+    liab_doc: Any,
+    selector: dict[str, Any],
+) -> Decimal:
     n = int(selector["n"])
-    if not isinstance(doc, list) or len(doc) < n:
-        raise ExtractError("VALUE_MISSING", "epoch rows")
-    burn = Decimal("0")
-    emit = Decimal("0")
-    for row in doc[-n:]:
-        burn += _as_decimal(row.get("burnedRender") or 0)
-        emit += _as_decimal(row.get("nodeOperatorReward") or 0)
-    if emit <= 0:
+    burns = burn_doc if isinstance(burn_doc, list) else (burn_doc.get("data") or burn_doc.get("epochs") or [])
+    if not isinstance(burns, list):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "epochBurnStats not a list")
+    ep = [e for e in burns if isinstance(e, dict) and isinstance(e.get("id"), int) and e["id"] < 10000]
+    ep.sort(key=lambda e: e["id"])
+    last = ep[-n:] if len(ep) >= n else ep
+    if not last:
+        raise ExtractError("VALUE_MISSING", "no epoch burn rows")
+    emit_by_epoch = _liability_emit_by_epoch(liab_doc)
+    burn_sum = Decimal("0")
+    emit_sum = Decimal("0")
+    for row in last:
+        eid = row["id"]
+        burn_sum += _as_decimal(row.get("burnedRender") or row.get("burned") or 0)
+        emit_sum += emit_by_epoch.get(eid, Decimal("0"))
+    if emit_sum <= 0:
         raise ExtractError("VALUE_INVALID", "zero emit")
-    return burn / emit
+    return burn_sum / emit_sum
+
+
+def running_nodes_distinct_count(doc: Any, _selector: dict[str, Any]) -> int:
+    if not isinstance(doc, dict):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "jobs/running expects object map")
+    return len(doc)
+
+
+def jobs_timestamps_window_sum(doc: Any, selector: dict[str, Any]) -> int:
+    if not isinstance(doc, dict):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "jobs/stats/timestamps expects object")
+    if doc.get("total") is not None:
+        return int(doc["total"])
+    window_days = int(selector.get("window_days", 30))
+    data = doc.get("data")
+    if not isinstance(data, list) or not data:
+        raise ExtractError("VALUE_MISSING", "timestamps data missing")
+    import time
+
+    now_ms = int(time.time() * 1000)
+    cut = now_ms - window_days * 86400000
+    total = sum(int(p["y"]) for p in data if isinstance(p, dict) and p.get("x", 0) >= cut)
+    if total <= 0:
+        raise ExtractError("VALUE_INVALID", "zero jobs in window")
+    return total
 
 
 def sol_burn_tokens_per_year(doc: Any, _selector: dict[str, Any]) -> Decimal:
@@ -467,10 +540,14 @@ def dispatch_phase_b_extra(
         return unattributed_still_held_top_pct(doc, selector)
     if name == "bme_emit_last_n":
         return bme_emit_last_n(doc, selector)
-    if name == "epoch_burn_latest_field":
-        return epoch_burn_latest_field(doc, selector)
+    if name == "render_liability_node_due_latest":
+        return render_liability_node_due_latest(doc, selector)
     if name == "bme_burn_emit_ratio_last_n":
-        return bme_burn_emit_ratio_last_n(doc, selector)
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "bme_burn_emit_ratio_last_n requires orchestrator dual capture")
+    if name == "running_nodes_distinct_count":
+        return running_nodes_distinct_count(doc, selector)
+    if name == "jobs_timestamps_window_sum":
+        return jobs_timestamps_window_sum(doc, selector)
     if name == "sol_burn_tokens_per_year":
         return sol_burn_tokens_per_year(doc, selector)
     if name == "sol_issuance_tokens_per_year":

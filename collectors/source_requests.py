@@ -81,6 +81,12 @@ REQUESTS: dict[str, dict[str, Any]] = {
         "url": "https://api.llama.fi/summary/fees/hyperliquid",
         "params": {"dataType": "dailyFees"},
     },
+    "defillama.summary.fees.hyperliquid.dailyHoldersRevenue": {
+        "source_key": "defillama",
+        "method": "GET",
+        "url": "https://api.llama.fi/summary/fees/hyperliquid",
+        "params": {"dataType": "dailyHoldersRevenue"},
+    },
     "defillama.historicalChainTvl.Solana": {
         "source_key": "defillama",
         "method": "GET",
@@ -139,6 +145,16 @@ REQUESTS: dict[str, dict[str, Any]] = {
         "source_key": "nosana",
         "method": "GET",
         "url": "https://blockchain-indexer.k8s.prd.nos.ci/jobs/count",
+    },
+    "nosana.jobs.running": {
+        "source_key": "nosana",
+        "method": "GET",
+        "url": "https://blockchain-indexer.k8s.prd.nos.ci/jobs/running",
+    },
+    "nosana.jobs.stats.timestamps": {
+        "source_key": "nosana",
+        "method": "GET",
+        "url": "https://blockchain-indexer.k8s.prd.nos.ci/jobs/stats/timestamps",
     },
     "render.supplyInfo": {
         "source_key": "render_foundation",

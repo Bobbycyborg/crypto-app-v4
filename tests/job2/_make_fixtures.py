@@ -165,24 +165,46 @@ j(
     "https://blockchain-indexer.k8s.prd.nos.ci/jobs/count",
     {
         "byState": {"RUNNING": 855, "QUEUED": 12, "COMPLETED": 500000},
-        "last30Days": 119000,
-        "distinctNodesWithRunningJobs": 35,
     },
 )
-j("render.supplyInfo", "render_foundation", "https://infra.shikumi.cc/api/v1/supplyInfo", {"circulatingSupply": 518_000_000, "maxSupply": 644_245_094})
+running = {f"node{i}": {"running": 1 + (i % 3)} for i in range(35)}
+j("nosana.jobs.running", "nosana", "https://blockchain-indexer.k8s.prd.nos.ci/jobs/running", running)
+j(
+    "nosana.jobs.stats.timestamps",
+    "nosana",
+    "https://blockchain-indexer.k8s.prd.nos.ci/jobs/stats/timestamps",
+    {"total": 119000, "data": [{"x": 1_700_000_000_000 + i * 86400000, "y": 3800 + i} for i in range(31)]},
+)
+j(
+    "defillama.summary.fees.hyperliquid.dailyHoldersRevenue",
+    "defillama",
+    "https://api.llama.fi/summary/fees/hyperliquid",
+    {"name": "Hyperliquid", "total30d": 43900000, "total24h": 2304022},
+)
+j("render.supplyInfo", "render_foundation", "https://infra.shikumi.cc/api/v1/supplyInfo", {"circulatingSupply": 518_000_000, "maxSupply": 644_245_094, "leftoverEmissions": 2384638})
 j(
     "render.epochBurnStats",
     "render_foundation",
     "https://infra.shikumi.cc/api/v1/epochBurnStats",
     [
-        {
-            "id": i,
-            "burnedRender": 1000,
-            "nodeOperatorReward": 2000,
-            "latest_node_operator_due": 2500 if i == 11 else 0,
-        }
-        for i in range(1, 12)
+        {"id": i, "burnedRender": 1000 + i * 10, "totalRenderUsed": 5000}
+        for i in range(133, 141)
     ],
+)
+j(
+    "render.liabilityEpochs",
+    "render_foundation",
+    "https://infra.shikumi.cc/api/v1/liabilityEpochs",
+    {
+        "epochs": [
+            {
+                "epochId": i,
+                "channel": "node_operator",
+                "amountDue": int(1500 * 1e8),
+            }
+            for i in range(133, 141)
+        ]
+    },
 )
 j("render.nodes_and_frames", "render_foundation", "https://stats.renderfoundation.com/api/nodes_and_frames", {"frames": 123456789, "nodes": 4000})
 j("solana.rpc.getInflationRate", "solana_rpc", "https://api.mainnet-beta.solana.com", {"jsonrpc": "2.0", "result": {"total": 0.0368, "validator": 0.036, "foundation": 0.0008}, "id": 1})

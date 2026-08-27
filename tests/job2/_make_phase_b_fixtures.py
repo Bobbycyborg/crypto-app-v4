@@ -118,6 +118,12 @@ j(
     "https://api.llama.fi/summary/fees/hyperliquid",
     {"totalDataChart": fee_chart, "total24h": 1_350_000},
 )
+j(
+    "defillama.summary.fees.hyperliquid.dailyHoldersRevenue",
+    "defillama",
+    "https://api.llama.fi/summary/fees/hyperliquid",
+    {"name": "Hyperliquid", "total30d": 43900000, "total24h": 2304022},
+)
 
 j("nosana.jobs.timestamps_hours", "nosana", "https://blockchain-indexer.k8s.prd.nos.ci/jobs/stats/timestamps-hours", {"total": 420000})
 
@@ -143,7 +149,12 @@ j(
     "render.liabilityEpochs",
     "render_foundation",
     "https://infra.shikumi.cc/api/v1/liabilityEpochs",
-    [{"nodeOperatorReward": 1500, "burnedRender": 800} for _ in range(12)],
+    {
+        "epochs": [
+            {"epochId": i, "channel": "node_operator", "amountDue": int(1500 * 1e8)}
+            for i in range(133, 141)
+        ]
+    },
 )
 
 for token, mint in [

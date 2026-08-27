@@ -286,6 +286,13 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
         from collectors.phase_b_selectors_extra import participation_above_50d_n
 
         return participation_above_50d_n(cap.parsed, selector, captures[charts_key].parsed), None
+    if name == "bme_burn_emit_ratio_last_n":
+        liab_key = selector.get("liability_request_key", "render.liabilityEpochs")
+        if liab_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing liability capture {liab_key}")
+        from collectors.phase_b_selectors_extra import bme_burn_emit_ratio_last_n
+
+        return bme_burn_emit_ratio_last_n(cap.parsed, captures[liab_key].parsed, selector), None
     raw = extract(cap.parsed, selector, html=cap.html)
     return raw, cap.meta.get("fetched_at")
 
@@ -293,7 +300,7 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
 def extra_request_keys(entry: dict[str, Any]) -> list[str]:
     sel = entry.get("selector") or {}
     extra = []
-    for k in ("bench_request_key", "mark_request_key", "spot_request_key", "den_request_key", "solana_supply_request_key", "charts_request_key"):
+    for k in ("bench_request_key", "mark_request_key", "spot_request_key", "den_request_key", "solana_supply_request_key", "charts_request_key", "liability_request_key"):
         if sel.get(k):
             extra.append(sel[k])
     return extra

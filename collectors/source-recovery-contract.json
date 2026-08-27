@@ -843,16 +843,12 @@
       "resolution": "CGPT_DECISION_COLLECT",
       "recovery_tier": "CGPT_DECISION",
       "source_key": "defillama",
-      "request_key": "defillama.overview.fees.dailyHoldersRevenue",
+      "request_key": "defillama.summary.fees.hyperliquid.dailyHoldersRevenue",
       "provider": "DefiLlama",
-      "endpoint_or_method": "/overview/fees?dataType=dailyHoldersRevenue",
+      "endpoint_or_method": "/summary/fees/hyperliquid?dataType=dailyHoldersRevenue",
       "selector": {
-        "type": "named_record_field",
-        "name": "defillama_hyperliquid_holders_revenue_30d",
-        "identity": {
-          "name": "Hyperliquid"
-        },
-        "field": "total30d"
+        "type": "json_key",
+        "key": "total30d"
       },
       "normalizer": {
         "type": "identity"
@@ -2772,13 +2768,12 @@
       "resolution": "CGPT_DECISION_COLLECT",
       "recovery_tier": "CGPT_DECISION",
       "source_key": "render_foundation",
-      "request_key": "render.dashboard.main",
+      "request_key": "render.supplyInfo",
       "provider": "Render Network Foundation",
-      "endpoint_or_method": "official dashboard / Leftover Emissions",
+      "endpoint_or_method": "stats.renderfoundation.com dashboard supplyInfo leftoverEmissions",
       "selector": {
-        "type": "explicit_html_selector",
-        "name": "render_leftover_emissions",
-        "label": "Leftover Emissions"
+        "type": "json_key",
+        "key": "leftoverEmissions"
       },
       "normalizer": {
         "type": "identity"
