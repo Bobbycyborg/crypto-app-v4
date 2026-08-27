@@ -319,7 +319,7 @@
 | zec.supply.max.tokens | COLLECT | coingecko | True | coingecko.markets.active | V3 zec_stage1_loader supply.max_supply 21M via CG. |
 | zec.threshold.out.usd | PRESERVE | — | False | — | Historical, static, threshold, or dated event. No live collector. |
 | zec.threshold.this_move.usd | PRESERVE | — | False | — | Historical, static, threshold, or dated event. No live collector. |
-| zec.tx.count.24h | COLLECT | zcash_explorer | True | zcash.explorer.blockchain-info | Fail closed if explorer uses a different 24h tx field name. |
+| zec.tx.count.24h | BLOCKED_SOURCE | — | — | CGPT 2026-08-27: zcashexplorer blockchain-info has no transactions24h; UNKNOWN — no replacement in Job 2B. |
 | zec.volume.perp.usd.24h | COLLECT | binance | True | binance.fapi.ticker24h.ZECUSDT | Job 1 names Binance; official futures/spot JSON API. |
 | zec.volume.spot.usd.24h | COLLECT | binance | True | binance.spot.ticker24h.ZECUSDT | Job 1 names Binance; official futures/spot JSON API. |
 

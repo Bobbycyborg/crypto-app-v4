@@ -835,19 +835,6 @@ C(
     },
 )
 C(
-    "zec.tx.count.24h",
-    **{
-        "disposition": "COLLECT",
-        "source_key": "zcash_explorer",
-        "request_key": "zcash.explorer.blockchain-info",
-        "selector": {"type": "json_key", "key": "transactions24h"},
-        "normalizer": {"type": "integer"},
-        "derivation": None,
-        "notes": "Fail closed if explorer uses a different 24h tx field name.",
-    },
-)
-
-C(
     "pump.liquidity.dex.usd.current",
     **{
         "disposition": "COLLECT",
@@ -954,6 +941,16 @@ def main() -> None:
                 "derivation": None,
                 "required": False,
                 "notes": "Historical, static, threshold, or dated event. No live collector.",
+            }
+        elif mid == "zec.tx.count.24h":
+            row = {
+                **base,
+                **blocked(
+                    mid,
+                    "CGPT 2026-08-27: zcashexplorer blockchain-info has no transactions24h field "
+                    "(chain/pool/block data only). BLOCKED_SOURCE/UNKNOWN — no replacement in Job 2B.",
+                ),
+                "required": False,
             }
         elif mid in COLLECT:
             spec = COLLECT[mid]

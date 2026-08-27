@@ -4945,41 +4945,39 @@
     {
       "metric_id": "zec.tx.count.24h",
       "asset": "ZEC",
-      "required": true,
+      "required": false,
       "previous_disposition": "COLLECT",
       "previous_live_status": "LIVE_FAIL",
-      "resolution": "ALREADY_VALID",
-      "recovery_tier": 0,
-      "source_key": "zcash_explorer",
-      "request_key": "zcash.explorer.blockchain-info",
-      "provider": "zcash_explorer",
-      "endpoint_or_method": "zcash.explorer.blockchain-info",
-      "selector": {
-        "type": "json_key",
-        "key": "transactions24h"
-      },
-      "normalizer": {
-        "type": "integer"
-      },
+      "resolution": "CGPT_DECISION_BLOCKED",
+      "recovery_tier": "CGPT_DECISION",
+      "decision_authority": "CGPT",
+      "decision_date": "2026-08-27",
+      "decision_reason": "zcashexplorer blockchain-info has no transactions24h; adapter invalid; BLOCKED_SOURCE/UNKNOWN",
+      "source_key": null,
+      "request_key": null,
+      "provider": null,
+      "endpoint_or_method": null,
+      "selector": null,
+      "normalizer": null,
       "derivation": null,
       "evidence_refs": [
         {
-          "type": "JOB2_PLAN",
-          "path": "collectors/collector-plan.json",
-          "commit_or_ref": "e34452a",
-          "locator": "zec.tx.count.24h",
-          "evidence_summary": "Fail closed if explorer uses a different 24h tx field name."
+          "type": "JOB2B_OUTAGE_EVIDENCE",
+          "path": "reports-NOT-FOR-GH/2026-08-27/job-2b/outage-evidence-correction/JOB-V4-2-OUTAGE-EVIDENCE-CORRECTION-v5-20260827.zip",
+          "commit_or_ref": "1da1f99",
+          "locator": "zec.tx.count.24h genuine replay FAIL — no transactions24h in v3 or live captures",
+          "evidence_summary": "Only synthetic test fixture contained transactions24h; explorer API does not expose 24h tx count"
         }
       ],
       "semantic_match": {
         "asset": true,
-        "measure": true,
-        "scope": true,
+        "measure": false,
+        "scope": false,
         "window": true,
         "unit": true,
         "update_mode": true
       },
-      "notes": "Source contract present in Job 2 plan; live smoke failed \u2014 implementation or operational availability issue."
+      "notes": "CGPT 2026-08-27: COLLECT→BLOCKED_SOURCE/UNKNOWN. Not a live outage. No replacement source in Job 2B."
     },
     {
       "metric_id": "drift.threshold.out.usd",

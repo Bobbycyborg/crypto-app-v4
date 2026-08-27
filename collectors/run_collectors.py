@@ -367,7 +367,7 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
         if disp == "BLOCKED_SOURCE":
             row = fact_error(
                 mid,
-                "BLOCKED_SOURCE",
+                "UNKNOWN",
                 e.get("notes") or "blocked",
                 unit=e.get("unit"),
             )

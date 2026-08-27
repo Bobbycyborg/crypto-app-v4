@@ -31,7 +31,6 @@ LIVE19 = {
     "sol.etf.flow.usd.30d",
     "sol.etf.flow.usd.7d",
     "zec.shielded.tokens.current",
-    "zec.tx.count.24h",
 }
 
 RECOVERED_PREFIX = "RECOVERED_"
@@ -46,6 +45,7 @@ ALLOWED_RESOLUTIONS = {
     "SOURCE_DECISION_CONFLICT",
     "CGPT_DECISION_COLLECT",
     "CGPT_DECISION_PRESERVE",
+    "CGPT_DECISION_BLOCKED",
 }
 
 

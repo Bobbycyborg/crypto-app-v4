@@ -6023,19 +6023,14 @@
       "asset": "ZEC",
       "owner": "CGPT_CURSOR",
       "unit": "count",
-      "disposition": "COLLECT",
-      "source_key": "zcash_explorer",
-      "request_key": "zcash.explorer.blockchain-info",
-      "selector": {
-        "type": "json_key",
-        "key": "transactions24h"
-      },
-      "normalizer": {
-        "type": "integer"
-      },
+      "disposition": "BLOCKED_SOURCE",
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
       "derivation": null,
-      "notes": "Fail closed if explorer uses a different 24h tx field name.",
-      "required": true
+      "notes": "CGPT 2026-08-27: zcashexplorer blockchain-info has no transactions24h field (chain/pool/block data only). BLOCKED_SOURCE/UNKNOWN — no replacement in Job 2B.",
+      "required": false
     },
     {
       "metric_id": "zec.volume.perp.usd.24h",
