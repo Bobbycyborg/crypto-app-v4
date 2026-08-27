@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -33,7 +34,7 @@ from renderer.anchors import (
     _xpath_score,
 )
 from renderer.eligibility import eligible_mappings, load_job1_job2
-from renderer.formatters import adjust_formatter_for_binding, infer_formatter
+from renderer.formatters import adjust_formatter_for_binding, infer_formatter, lock_formatter
 
 MANIFEST_PATH = Path(__file__).resolve().parent / "binding-manifest.json"
 HTML_PATH = ROOT / "index-v4.html"
@@ -80,7 +81,26 @@ def _effective_literal(
     return None
 
 
-def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, Any]) -> list[dict[str, Any]]:
+def _infer_literal(manifest_lit: str, effective: str) -> str:
+    if manifest_lit:
+        plain = re.sub(r"<[^>]+>", "", manifest_lit)
+        if plain and "<" not in plain and ">" not in plain:
+            return plain
+    return effective
+
+
+def _raw_for_binding(reg: dict[str, Any], metric_id: str, occurrence_id: str) -> Any:
+    row = reg.get(metric_id)
+    if not row:
+        return None
+    raw = row.get("raw_value")
+    for ev in row.get("evidence_variants", []):
+        if ev.get("occurrence_id") == occurrence_id:
+            return ev.get("raw_value", raw)
+    return raw
+
+
+def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, Any], reg: dict[str, Any]) -> list[dict[str, Any]]:
     index = build_html_index(html)
     longer_literals = sorted({(m["match"].get("literal") or "") for m in mappings if m["match"].get("literal")}, key=len, reverse=True)
     used: list[tuple[int, int]] = []
@@ -207,7 +227,16 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
         target_kind = classify_target_kind(html, pos, effective)
         if target_kind == "HTML_TEXT" and ("<" in effective or ">" in effective):
             raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER tag crossing {mid} {oid}")
-        fmt = adjust_formatter_for_binding(infer_formatter(manifest_lit or effective), manifest_lit, effective, anchor["anchor_after"])
+        fmt = lock_formatter(
+            adjust_formatter_for_binding(
+                infer_formatter(_infer_literal(manifest_lit, effective)),
+                manifest_lit,
+                effective,
+                anchor["anchor_after"],
+            ),
+            effective,
+            _raw_for_binding(reg, mid, oid),
+        )
         entry = {
             "binding_id": _binding_id(mid, oid),
             "metric_id": mid,
@@ -238,7 +267,7 @@ def build_manifest() -> dict[str, Any]:
     occ = {o["occurrence_id"]: o for o in occ_list}
     elig = eligible_mappings(mappings, reg, plan)
     html = HTML_PATH.read_text(encoding="utf-8")
-    bindings = _assign_bindings(html, elig, occ)
+    bindings = _assign_bindings(html, elig, occ, reg)
     return {
         "schema_version": "job3.binding.v1",
         "source_html": "index-v4.html",

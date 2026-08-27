@@ -13,18 +13,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "tests/job3"))
 
-from _binding_span import rendered_span
 from renderer.eligibility import eligible_mappings, load_job1_job2
 
+BANNED_IMPORT_PREFIXES = (
+    "renderer.render_report",
+    "renderer.build_snapshot",
+    "renderer.formatters",
+    "renderer.build_binding_manifest",
+)
+
 NEGATIVE_OCCURRENCE_IDS = {
-    "143109097f847b67",  # hold-card static threshold
-    "6cef931ee1ef29a2",  # historical tooltip ATH
-    "c6ae973de6959e49",  # GROK wallet siren JSON
-    "4d568968d384da40",  # dormant GRASS legacy inactive
-    "ad9b911811492672",  # qualitative body metric_val
-    "ce940255df156255",  # qualitative body
+    "143109097f847b67",
+    "6cef931ee1ef29a2",
+    "c6ae973de6959e49",
+    "4d568968d384da40",
+    "ad9b911811492672",
+    "ce940255df156255",
 }
 
 
@@ -32,15 +37,28 @@ def _sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
 
-def _rendered_span(html: str, b: dict) -> str:
-    source = (ROOT / "index-v4.html").read_text(encoding="utf-8")
-    return rendered_span(html, b, source=source)
+def _assert_no_banned_imports(path: Path) -> int:
+    tree = ast.parse(path.read_text())
+    hits = 0
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for n in node.names:
+                if any(n.name == p or n.name.startswith(p + ".") for p in BANNED_IMPORT_PREFIXES):
+                    hits += 1
+        if isinstance(node, ast.ImportFrom) and node.module:
+            if any(node.module == p or node.module.startswith(p + ".") for p in BANNED_IMPORT_PREFIXES):
+                hits += 1
+    return hits
 
 
 def main() -> int:
+    self_path = Path(__file__)
+    prod_imports = _assert_no_banned_imports(self_path)
+    print(f"independent_checker_production_imports={prod_imports}")
+    assert prod_imports == 0
+
     manifest = json.loads((ROOT / "renderer/binding-manifest.json").read_text())
     bindings = manifest["bindings"]
-    html = (ROOT / "index-v4.html").read_text(encoding="utf-8")
     reg, plan, _manifest_meta, maps = load_job1_job2()
     elig = eligible_mappings(maps, reg, plan)
     elig_pairs = {(m["metric_id"], m["match"]["occurrence_id"]) for m in elig}
@@ -53,7 +71,6 @@ def main() -> int:
     assert _sha(ROOT / "metrics/metric-registry.json") == manifest["job1_registry_sha256"]
     assert _sha(ROOT / "index-v4.html") == manifest["source_html_sha256"]
 
-    # no Job4/5/6 artifacts
     for rel in ("tests/job4", "tests/job5", "tests/job6", "renderer/job4", "renderer/job5", "renderer/job6"):
         assert not (ROOT / rel).exists(), rel
 
@@ -100,43 +117,23 @@ def main() -> int:
             assert fact.get("source_key") is None, mid
             assert isinstance(fact.get("derivation_inputs"), list), mid
 
-    # production-shape DERIVE regression
-    rc = subprocess.run([sys.executable, str(ROOT / "tests/job3/test_snapshot_derive.py")], check=False)
-    assert rc.returncode == 0
+    suites = [
+        "tests/job3/test_snapshot_derive.py",
+        "tests/job3/test_formatter_roundtrip.py",
+        "tests/job3/test_golden_render.py",
+        "tests/job3/test_renderer_fail_closed.py",
+        "tests/job3/test_writer_quarantine.py",
+    ]
+    for rel in suites:
+        rc = subprocess.run([sys.executable, str(ROOT / rel)], capture_output=True, text=True)
+        assert rc.returncode == 0, f"{rel} failed:\n{rc.stdout}\n{rc.stderr}"
 
-    # mutation fan-out + exact-site golden render
-    rc = subprocess.run([sys.executable, str(ROOT / "tests/job3/test_golden_render.py")], check=False)
-    assert rc.returncode == 0
-
-    # writer quarantine audit
     rc = subprocess.run([sys.executable, str(ROOT / "tests/job3/test_writer_quarantine.py")], capture_output=True, text=True)
-    assert rc.returncode == 0, rc.stdout + rc.stderr
     m = re.search(r"shadow_nonwallet_current_network_writers=(\d+)", rc.stdout)
     assert m and m.group(1) == "0"
 
-    # UNKNOWN fail-closed at exact binding sites
-    from renderer.render_report import render_report
-
-    snap_fc = json.loads((ROOT / "tests/job3/fixtures/snapshot-failclosed.json").read_text())
-    writers = json.loads((ROOT / "renderer/writer-quarantine.json").read_text())
-    out_fc, man_fc, code_fc = render_report(
-        source_html=html,
-        bindings=bindings,
-        snapshot=snap_fc,
-        writer_quarantine=writers,
-        publishable=False,
-    )
-    assert code_fc == 2
-    assert man_fc["publishable"] is False
-    for b in bindings:
-        if snap_fc["metrics"][b["metric_id"]]["status"] != "OK":
-            span = _rendered_span(out_fc, b)
-            assert span == "UNKNOWN", b["binding_id"]
-
-    # no legacy-current fallback strings in renderer
     for py in (ROOT / "renderer").glob("*.py"):
-        text = py.read_text()
-        assert "legacy_current" not in text.lower()
+        assert "legacy_current" not in py.read_text().lower()
 
     print("test_job3_independent OK")
     return 0

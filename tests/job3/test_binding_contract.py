@@ -26,6 +26,7 @@ def gates() -> dict[str, int]:
         "dormant_asset_bound", "preserve_metric_bound", "static_threshold_bound", "historical_bound",
         "ambiguous_anchor", "missing_anchor", "overlapping_binding", "missing_formatter", "unknown_target_kind",
         "markup_inside_HTML_TEXT_binding", "binding_crosses_tag_boundary",
+        "formatter_roundtrip_checked", "formatter_roundtrip_mismatch",
     ]}
     g["eligible_job1_occurrences"] = len(ELIG)
     g["binding_entries"] = len(BINDINGS)
@@ -70,6 +71,16 @@ def gates() -> dict[str, int]:
     for (a0, a1, _), (b0, b1, _) in zip(spans, spans[1:]):
         if not (a1 <= b0 or a0 >= b1):
             g["overlapping_binding"] += 1
+    rc = __import__("subprocess").run(
+        [sys.executable, str(ROOT / "tests/job3/test_formatter_roundtrip.py")],
+        capture_output=True,
+        text=True,
+    )
+    for line in rc.stdout.splitlines():
+        if line.startswith("formatter_roundtrip_checked="):
+            g["formatter_roundtrip_checked"] = int(line.split("=", 1)[1])
+        if line.startswith("formatter_roundtrip_mismatch="):
+            g["formatter_roundtrip_mismatch"] = int(line.split("=", 1)[1])
     return g
 
 
@@ -77,7 +88,17 @@ def main() -> int:
     g = gates()
     for k, v in g.items():
         print(f"{k}={v}")
-    bad = {k: v for k, v in g.items() if v != 0 and k not in {"eligible_job1_occurrences", "binding_entries"}}
+    bad = {
+        k: v
+        for k, v in g.items()
+        if v != 0
+        and k
+        not in {
+            "eligible_job1_occurrences",
+            "binding_entries",
+            "formatter_roundtrip_checked",
+        }
+    }
     if g["eligible_job1_occurrences"] != g["binding_entries"]:
         return 1
     return 1 if bad else 0
