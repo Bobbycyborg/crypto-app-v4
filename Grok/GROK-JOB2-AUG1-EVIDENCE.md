@@ -2,71 +2,78 @@
 
 **Date:** 27 Aug 2026
 **Owner:** Grok
-**Status:** NOT DONE. Grok has not marked this complete. Partial. CGPT reviews pack + diff only.
+**Status:** NOT DONE. Grok has not marked this complete. Partial walk + splice. CGPT reviews pack + diff only.
 
-Official start = 1 Aug 2026 00:00 UTC only. `aug1 = now + this-mint outs − this-mint ins` since that instant, ATA of that coin on that wallet. No 10 Aug fallback. No guessed zeros (0 only when the walk proved the wallet held none on 1 Aug). No UNKNOWN written as a new whale stamp. G2 leftover 16 not walked.
+Dummy objective: official start = 1 Aug 2026 00:00 UTC only. Formula: `aug1 = now + this-mint outs − this-mint ins` since that instant, ATA of that coin on that wallet. No 10 Aug fallback. No guessed zeros. A reconstructed 0 is OK only when the walk proved the wallet held none on 1 Aug and received later. No UNKNOWN written as a new whale stamp. G2 leftover 16 not walked.
 
-Helius key stayed on the Mac (never pasted). Helius hit max usage; walk used the existing public-RPC ATA path from `scripts/backfill_siren_aug1.py`. Persist each proof immediately.
+Oliver 27 Aug:
+- Job 1 is CGPT PASS / CLOSED. Out of scope. Do not FAIL Job 1.
+- 1 Aug stays 1 Aug (start of this move). Do not rename the row 27 Aug.
+- Last sell stays. now / last_out / left_24h kept.
+- % gone since 1 Aug only when both 1 Aug and now are real.
+- GRASS is DEAD (same as DRIFT) — do not walk / splice GRASS. DRIFT stays out.
+- Skip PUMP / ORCA. HOM not present.
 
-Oliver: 1 Aug label stays. Last sell stays. GRASS dead — not walked, not spliced. DRIFT / HOM out. % row only when real 1 Aug AND real now.
+Helius maxed; public-RPC ATA path. Persist each proof before splice. Sleep/backoff on 429.
 
-## Per coin (live page counts, 27 Aug ~13:08 PT)
+## The lie
 
-| Coin | fake27 start | proved 1 Aug this job (on page) | DEFER whale still as_of_now | dest-watch CEX/MM converted | still as_of_now |
-|---|---:|---:|---|---:|---:|
-| FART | 31 | 27 | Fart21, Fart45, Raydium AMM | 1 Wintermute → MM book | 3 |
-| LOCKIN | 31 | 30 | Raydium AMM | 0 | 1 |
-| RETARDIO | 37 | 36 | Raydium AMM | 0 | 1 |
-| SPX | 40 | 38 | Raydium AMM, Orca Whirlpool | 0 | 2 |
-| 2Z | 46 | 39 | Raydium CLMM, TwoZ56 | 7 CEX book | 2 |
-| IO | 57 | 55 | Jupiter (unfinished / thick) | KuCoin + others | 1 |
-| RENDER | 62 | 51 | Jupiter | ~10 CEX book | 1 |
-| BONK | 73 | 60 | Bonk37/44/49/61/72 + Bonk80/81 + Jupiter | several CEX book | 8 |
-| NOS | 75 | 70 | 2× Raydium CLMM, Nos67 | 2 | 3 |
-| GIGA | 77 | 65 | Giga65 + Raydium AMM + Meteora; Giga87–95 still in flight | 0 | 12 |
-| GRASS | 57 | 0 | — | — | 57 SKIP |
-| **total** | **586** | **~471 on page** | honest DEFER / in-flight | desk books | **91 on page** (57 GRASS skip) |
+586 new dest-watch boxes had today pile on the 1 Aug line (`as_of_now` / `2026-08-27`). Existing real 1 Aug left alone.
 
-PUMP / ORCA / DRIFT: no fake27. G2 leftover 16 not walked. No invented wallets.
+## Per coin (this pack)
 
-## Page
+| Coin | fake27 | proved 1 Aug (this job, on page) | DEFER whale (left as_of_now) | DEFER dest-watch | still as_of_now | notes |
+|---|---:|---:|---:|---:|---:|---|
+| FART | 31 | 27 | 3 | 1 | 3 | batch 1. FART real 1 Aug not overwritten. |
+| LOCKIN | 31 | 30 | 1 | 0 | 1 | batch 2 |
+| RETARDIO | 37 | 36 | 1 | 0 | 1 | batch 3 |
+| SPX | 40 | 38 | 2 | 0 | 2 | batch 4 |
+| 2Z | 46 | 39 | 2 | 5 | 2 | batch 5 |
+| IO | 57 | 55 | 0 | 1 | 1 (Jupiter) | walk resumed; Jupiter not yet |
+| NOS | 75 | 70 | 3 | 2 | 3 | walked / honest DEFER |
+| RENDER | 62 | 51 | 1 | 10 | 1 (Jupiter) | Jupiter honest gt300 DEFER; left as_of_now |
+| BONK | 73 | 62 | 6 | 2 | 6 | batch 18 +2 Bonk80-81; leftover all honest gt300 (37/44/49/61/72 + Jupiter) |
+| GIGA | 77 | 64 | 2 | 0 | 13 | Giga86 negative recon unspliced back to as_of_now (defer negative_recon); Giga65 gt300; walk on Giga87 |
+| GRASS | 57 | 0 | 0 | 0 | 57 | SKIP |
+| **total** | **586** | **472 on page** | **21** | **21** | **90 on page** | GRASS 57 of leftover are skip |
 
-- Hardcoded row label still `1 Aug`.
-- JS `since 1 Aug` percent is **live** (status `proved` or `unmoved_equals_now` + `aug1_as_of` 2026-08-01 + real now). Sign is pile change: `−12%` if smaller now, `+8%` if grown. Same `siren-box-row` classes.
-- now / last_out / left_24h kept.
-- Existing real 1 Aug boxes left alone.
+PUMP / ORCA / DRIFT no fake27. HOM not present. G2 leftover 16 not walked.
+
+Live page after batch 18: RENDER 85 real / 1 fake27 / 11 dest. BONK 79 real / 6 fake27 / 8 dest. GIGA 81 real / 13 fake27 / 1 dest. IO 71 real / 1 fake27 / 4 dest.
+
+## What this resume did / did not
+
+Did: splice leftover proved boxes as they landed (batches 12–14, 18); resume dead BONK then dead IO only; skip GRASS/DRIFT/PUMP/ORCA; persist proofs; backoff 429; reconstructed 0s only when walk-proved. This pack: splice BONK Bonk80-81 unmoved. Unsplice Giga86 (walk reconstructed −18.6M; left as_of_now, no UNKNOWN). RENDER Jupiter + BONK leftover honestly DEFERred gt300.
+
+Did not: invent numbers; add wallets; change config lists; touch HOM / hold-card look; start Job 3; FAIL Job 1; walk or splice GRASS.
 
 ## Files touched
 
-- `index-v4.html` — siren-watch-data boxes + JS row only
-- `Grok/GROK-JOB2-AUG1-EVIDENCE.md`
+- `index-v4.html` — siren-watch-data only. JS `since 1 Aug` from batch 1. Label still `1 Aug`.
+- `Grok/GROK-JOB2-AUG1-EVIDENCE.md` — this pack
 
 ## Files left alone
 
-- `config/siren-wallets.json` / `config/siren-wallet-tags.json`
-- HOM, DRIFT, GRASS, PUMP, ORCA
-- `data/cache/job2-aug1-proofs.json` local persist (gitignored)
+- config address lists; HOM; DRIFT; GRASS; PUMP; ORCA; FART real 1 Aug; `data/cache` persist (gitignored)
 
-## Commits
+## Commits (this resume)
 
-- `eb21ce2` batch 1 FART + JS
-- `332acd8` / `e657cb5` batch 2 LOCKIN
-- `2b0c655` batch 3 RETARDIO
-- `84f7e2c` / `1a66bce` batch 4 SPX
-- `bcc4953` / `baf3ee7` / `a625a6a` batch 5 2Z/IO
-- `d63223d` batch 6 IO
-- `e7dd955` / `8b207fc` batch 7
+- `332acd8` batch 2 LOCKIN 30
+- `2b0c655` batch 3 RETARDIO 36
+- `1a66bce` batch 4 SPX 38
+- `a625a6a` batch 5
 - `6496feb` batch 8
-- `a45a9d5` … `5357805` later batches (parallel resumes)
-- `5b5330f` batch 16 GIGA +1
-- this commit: batch 17 BONK +2 Bonk78-79
+- `a45a9d5` batch 9
+- `107083e` batch 10
+- `ce6e432` / `2795250` batch 11
+- `7854c3a` batch 12 GIGA +4 / BONK +1
+- `4615ae0` batch 13 BONK +4
+- `e37287f` batch 14 BONK +6 + Binance dest-watch
+- `5357805` batch 15 BONK +2
+- `5b5330f` batch 16
+- `db0c58b` batch 17 BONK +2 Bonk78-79
+- This commit: batch 18 BONK +2 Bonk80-81; unsplice Giga86 negative. Hash: read `git log -1`.
 
-## What's left
+## Status
 
-Walker still in flight on GIGA Giga82+ and the DEX tail. Live leftover **excluding GRASS skip**:
-
-- Honest DEFER (gt300 / thick book, left as_of_now, no UNKNOWN stamp): FART 3, LOCKIN 1, RETARDIO 1, SPX 2, 2Z 2, NOS 3, IO Jupiter, RENDER Jupiter, several BONK (Bonk37/44/49/61/72), Giga65 / Raydium / Meteora
-- Still walking / unspliced: BONK Bonk80-81 + Jupiter, GIGA Giga87–95 + Raydium/Meteora
-- GRASS 57 skipped (dead)
-
-**NOT DONE.** Grok has not marked this complete.
+**NOT DONE.** BONK leftover (6) + RENDER leftover (1) are honest gt300 DEFER. Still walking / unspliced: GIGA 13 (Giga86 negative_recon + Giga65 gt300 + Giga87–95 + Raydium/Meteora), IO Jupiter 1. GRASS skipped. Grok has not marked this complete.
