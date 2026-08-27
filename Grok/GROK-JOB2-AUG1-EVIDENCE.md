@@ -10,7 +10,7 @@ Helius key stayed on the Mac (never pasted). Helius hit max usage; walk used the
 
 Oliver: 1 Aug label stays. Last sell stays. GRASS dead — not walked, not spliced. DRIFT / HOM out. % row only when real 1 Aug AND real now.
 
-## Per coin (live page counts, 27 Aug ~13:04 PT)
+## Per coin (live page counts, 27 Aug ~13:08 PT)
 
 | Coin | fake27 start | proved 1 Aug this job (on page) | DEFER whale still as_of_now | dest-watch CEX/MM converted | still as_of_now |
 |---|---:|---:|---|---:|---:|
@@ -21,11 +21,11 @@ Oliver: 1 Aug label stays. Last sell stays. GRASS dead — not walked, not splic
 | 2Z | 46 | 39 | Raydium CLMM, TwoZ56 | 7 CEX book | 2 |
 | IO | 57 | 55 | Jupiter (unfinished / thick) | KuCoin + others | 1 |
 | RENDER | 62 | 51 | Jupiter | ~10 CEX book | 1 |
-| BONK | 73 | 58 | Bonk37/44/49/61/72 + some still in flight + Jupiter | several CEX book | 10 |
+| BONK | 73 | 60 | Bonk37/44/49/61/72 + Bonk80/81 + Jupiter | several CEX book | 8 |
 | NOS | 75 | 70 | 2× Raydium CLMM, Nos67 | 2 | 3 |
 | GIGA | 77 | 65 | Giga65 + Raydium AMM + Meteora; Giga87–95 still in flight | 0 | 12 |
 | GRASS | 57 | 0 | — | — | 57 SKIP |
-| **total** | **586** | **~469 on page** | honest DEFER / in-flight | desk books | **93 on page** (57 GRASS skip) |
+| **total** | **586** | **~471 on page** | honest DEFER / in-flight | desk books | **91 on page** (57 GRASS skip) |
 
 PUMP / ORCA / DRIFT: no fake27. G2 leftover 16 not walked. No invented wallets.
 
@@ -58,14 +58,15 @@ PUMP / ORCA / DRIFT: no fake27. G2 leftover 16 not walked. No invented wallets.
 - `e7dd955` / `8b207fc` batch 7
 - `6496feb` batch 8
 - `a45a9d5` … `5357805` later batches (parallel resumes)
-- this commit: current leftover inventory
+- `5b5330f` batch 16 GIGA +1
+- this commit: batch 17 BONK +2 Bonk78-79
 
 ## What's left
 
 Walker still in flight on GIGA Giga82+ and the DEX tail. Live leftover **excluding GRASS skip**:
 
 - Honest DEFER (gt300 / thick book, left as_of_now, no UNKNOWN stamp): FART 3, LOCKIN 1, RETARDIO 1, SPX 2, 2Z 2, NOS 3, IO Jupiter, RENDER Jupiter, several BONK (Bonk37/44/49/61/72), Giga65 / Raydium / Meteora
-- Still walking / unspliced: BONK a few (Bonk78–81), GIGA Giga87–95
+- Still walking / unspliced: BONK Bonk80-81 + Jupiter, GIGA Giga87–95 + Raydium/Meteora
 - GRASS 57 skipped (dead)
 
 **NOT DONE.** Grok has not marked this complete.
