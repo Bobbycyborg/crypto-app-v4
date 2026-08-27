@@ -24,10 +24,10 @@ New dest-watch boxes from Job 1 had `aug1_status=as_of_now` and `aug1_as_of=2026
 
 | Coin | fake27 | proved 1 Aug (this job) | DEFER whale (left as_of_now) | DEFER dest-watch (CEX/MM book) | still as_of_now | notes |
 |---|---:|---:|---:|---:|---:|---|
-| FART | 31 | 27 | 3 (Fart21, Fart45, Raydium AMM Authority) | 1 (Wintermute, 266 txs) | 3 | batch 1 spliced. FART real 1 Aug not overwritten. |
-| LOCKIN | 31 | 30 (Lockin21–50) | 0 | 0 | 1 (Raydium AMM Authority, not yet walked) | batch 2 spliced. 5 reconstructed 0s are walk-proved (held none 1 Aug, received later): Lockin21, 23, 34, 47, 50. |
-| RETARDIO | 37 | 7 walked unspliced (Retardio21–27) | 0 | 0 | 37 | 21–27 proved in persist, not yet on the page. Walk died on 429 at Retardio28. |
-| SPX | 40 | 0 | 0 | 0 | 40 | not walked |
+| FART | 31 | 27 | 3 (Fart21, Fart45, Raydium AMM Authority) | 1 (Wintermute, 266 txs) | 3 | batch 1. FART real 1 Aug not overwritten. |
+| LOCKIN | 31 | 30 (Lockin21–50) | 1 (Raydium AMM Authority, 301 txs) | 0 | 1 | batch 2 splice; Raydium walked this resume and DEFER gt300. Reconstructed 0s (walk-proved): Lockin21, 23, 34, 47, 50. |
+| RETARDIO | 37 | 36 (Retardio21–56) | 1 (Raydium AMM Authority, 301 txs) | 0 | 1 | batch 3 splice. Reconstructed 0s (walk-proved): Retardio31, 46, 52. |
+| SPX | 40 | 0 | 0 | 0 | 40 | walking now |
 | 2Z | 46 | 0 | 0 | 0 | 46 | not walked |
 | GRASS | 57 | 0 | 0 | 0 | 57 | SKIP — Oliver: GRASS dead. Do not walk / splice. |
 | IO | 57 | 0 | 0 | 0 | 57 | not walked |
@@ -35,67 +35,70 @@ New dest-watch boxes from Job 1 had `aug1_status=as_of_now` and `aug1_as_of=2026
 | BONK | 73 | 0 | 0 | 0 | 73 | not walked |
 | NOS | 75 | 0 | 0 | 0 | 75 | not walked |
 | GIGA | 77 | 0 | 0 | 0 | 77 | not walked |
-| **total** | **586** | **57 on page** (27 FART + 30 LOCKIN) | **3** | **1** | **529 on page** (559 − 30 LOCKIN spliced; GRASS 57 of those are skip) | |
+| **total** | **586** | **93 on page** (27 FART + 30 LOCKIN + 36 RETARDIO) | **5** | **1** | **492 on page** | GRASS 57 of the leftover are skip |
 
 PUMP / ORCA / DRIFT had no fake27. HOM not present. G2 leftover 16 not in the fake27 set and not walked.
 
 ## What landed on the page
 
 ### Batch 1 (eb21ce2)
-- FART: 27 new real 1 Aug stamps (`proved` or `unmoved_equals_now`, `aug1_as_of=2026-08-01T00:00:00Z`). Old 16 real 1 Aug kept. 3 thick whales still `as_of_now` (DEFER, no UNKNOWN stamp). Wintermute new box converted to dest-watch `MM book`.
-- Tiny JS row: if a box has a real 1 Aug AND a real now, show `since 1 Aug` with `(now-aug1)/aug1`. Same `siren-box-row` classes. Live.
+- FART: 27 new real 1 Aug stamps. Old 16 real 1 Aug kept. 3 thick whales still `as_of_now` (DEFER, no UNKNOWN stamp). Wintermute new box converted to dest-watch `MM book`.
+- Tiny JS row: real 1 Aug + real now → `since 1 Aug` percent. Same `siren-box-row` classes.
 - Hardcoded row label still `1 Aug` (not renamed 27 Aug).
 
-### Batch 2 (this commit)
-- LOCKIN: 30 new real 1 Aug stamps for Lockin21–50. Old real 1 Aug kept. Raydium AMM Authority still `as_of_now` (not walked this batch; dest-watch thick, will DEFER if >300 txs).
-- FART boxes not touched.
-- RETARDIO 21–27 proofs exist in local persist but were **not** spliced this batch (LOCKIN first).
-- Row label still `1 Aug`. JS row already present; LOCKIN boxes with aug1>0 will show `%` when both numbers are real.
+### Batch 2 (332acd8)
+- LOCKIN: 30 new real 1 Aug stamps for Lockin21–50. Old real 1 Aug kept. FART boxes not touched.
+
+### Batch 3 (this commit)
+- RETARDIO: 36 new real 1 Aug stamps for Retardio21–56. Raydium AMM Authority left `as_of_now` (DEFER gt300, no UNKNOWN).
+- LOCKIN Raydium AMM Authority walked and DEFER gt300 — still `as_of_now` (honest DEFER).
+- FART and LOCKIN spliced boxes not overwritten.
+- Row label still `1 Aug`. JS row already present.
 
 ## What this resume did / did not
 
 Did:
 - Pulled origin/main (already up to date at eb21ce2). No rebase.
-- Read existing persist (`job2-aug1-proofs.json`, queue, walker, walk log). Did not start over.
-- Spliced already-proved unspliced LOCKIN (30) before walking more.
+- Read existing persist. Did not start over. Spliced already-proved LOCKIN first.
+- Walked remaining LOCKIN (Raydium DEFER) then remaining RETARDIO (28–56) plus already-proved 21–27 splice.
 - Skipped GRASS / DRIFT / PUMP / ORCA.
 - Left reconstructed 0s only where the walk proved them.
+- Persist each proof before splice. Sleep/backoff on 429.
 
 Did not:
-- Did not walk more wallets this commit (splice-first).
-- Did not splice RETARDIO 21–27 yet.
 - Did not invent numbers or guess zeros.
 - Did not add wallets or change config address lists.
 - Did not touch HOM or hold-card look.
 - Did not start Job 3.
 - Did not FAIL Job 1.
+- Did not walk or splice GRASS.
 
 ## Files touched
 
-- `index-v4.html` — siren-watch-data LOCKIN boxes only this batch. JS row already present (batch 1).
+- `index-v4.html` — siren-watch-data LOCKIN (batch 2) then RETARDIO (batch 3). JS row already present (batch 1).
 - `Grok/GROK-JOB2-AUG1-EVIDENCE.md` — this pack
 
 ## Files left alone
 
-- `config/siren-wallets.json` / `config/siren-wallet-tags.json` (addresses and tags stay)
+- `config/siren-wallets.json` / `config/siren-wallet-tags.json`
 - HOM (not present)
 - DRIFT / GRASS / PUMP / ORCA
 - FART real 1 Aug stamps
-- Other baked coins’ boxes this batch
+- Other unwalked baked coins this batch
 - No invented wallets
 - `data/cache/job2-aug1-proofs.json` local persist (gitignored)
-- `data/cache/job2_aug1_walk.py` local walker (gitignored; GRASS removed from JOB_COINS)
+- `data/cache/job2_aug1_walk.py` local walker (gitignored)
 
 ## Persist
 
 Each proved 1 Aug written immediately to `data/cache/job2-aug1-proofs.json` before splice.
-Walk log: `data/cache/job2-aug1-walk.log` already PROVED Lockin21–50 and Retardio21–27 then died on 429.
 
 ## Commits
 
 - Batch 1: `eb21ce2` Prove 1 Aug starts on new dest-watch boxes (batch 1).
-- Batch 2: this commit (LOCKIN 30 + pack). Hash: read `git log -1`.
+- Batch 2: `332acd8` Prove 1 Aug starts on new dest-watch boxes (batch 2).
+- Batch 3: this commit (RETARDIO 36 + LOCKIN Raydium DEFER recorded + pack). Hash: read `git log -1`.
 
 ## Status
 
-**NOT DONE.** Live remaining after this splice: LOCKIN Raydium AMM Authority (walk or honest DEFER), then RETARDIO (splice 21–27 after remaining walk), SPX, 2Z, IO, RENDER, BONK, NOS, GIGA. GRASS skipped. Grok has not marked this complete.
+**NOT DONE.** Live remaining: SPX (walking), 2Z, IO, RENDER, BONK, NOS, GIGA. GRASS skipped. Honest DEFERs left as_of_now: FART 3, LOCKIN Raydium, RETARDIO Raydium. Grok has not marked this complete.
