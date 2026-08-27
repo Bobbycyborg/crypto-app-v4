@@ -10,19 +10,26 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from renderer.formatter_recovery import check_dynamicity, is_numeric_raw, select_binding_raw
+from renderer.formatter_recovery import check_dynamicity, is_numeric_raw
 
 MANIFEST = json.loads((ROOT / "renderer/binding-manifest.json").read_text())
 BINDINGS = MANIFEST["bindings"]
-REG, _, _, _ = __import__("renderer.eligibility", fromlist=["load_job1_job2"]).load_job1_job2()
+
+NOS_IDS = {
+    "nos.jobs.completed.cumulative::1d70a41f9cd855bf",
+    "nos.jobs.completed.cumulative::8a7acfe56c2b879d",
+    "nos.jobs.completed.cumulative::90b401930a563bb4",
+    "nos.jobs.completed.cumulative::df45ff651c167316",
+}
 
 
-def gates() -> tuple[int, int, list[str]]:
+def gates() -> tuple[int, int, list[str], str]:
     checked = 0
     failures = 0
     errors: list[str] = []
+    nos_outputs: list[str] = []
     for b in BINDINGS:
-        raw, _src = select_binding_raw(REG, b["metric_id"], b["job1_occurrence_id"])
+        raw = b.get("binding_raw")
         if raw is None or not is_numeric_raw(raw):
             continue
         checked += 1
@@ -30,16 +37,29 @@ def gates() -> tuple[int, int, list[str]]:
             failures += 1
             if len(errors) < 12:
                 errors.append(b["binding_id"])
-    return checked, failures, errors
+        if b["binding_id"] in NOS_IDS:
+            from renderer.formatter_recovery import sentinel_raw
+            from renderer.formatters import format_value
+
+            nos_outputs.append(format_value(sentinel_raw(raw), b["formatter"]))
+    nos_fanout = "PASS"
+    if len(nos_outputs) != 4:
+        nos_fanout = "FAIL"
+    elif len(set(nos_outputs)) != 1:
+        nos_fanout = "FAIL"
+    elif nos_outputs[0] == "4.09M":
+        nos_fanout = "FAIL"
+    return checked, failures, errors, nos_fanout
 
 
 def main() -> int:
-    checked, failures, errors = gates()
+    checked, failures, errors, nos_fanout = gates()
     print(f"numeric_dynamicity_checked={checked}")
     print(f"numeric_dynamicity_failures={failures}")
+    print(f"nos_sentinel_fanout={nos_fanout}")
     for e in errors:
         print(e)
-    ok = checked == 408 and failures == 0
+    ok = checked == 408 and failures == 0 and nos_fanout == "PASS"
     return 0 if ok else 1
 
 

@@ -29,6 +29,8 @@ def gates() -> dict[str, int]:
         "formatter_roundtrip_checked", "formatter_roundtrip_mismatch",
         "numeric_usable_total", "roundtrip_verified", "unverified_numeric", "numeric_string_exact",
         "numeric_dynamicity_checked", "numeric_dynamicity_failures",
+        "coefficient_override_bindings", "coefficient_override_code_refs",
+        "invalid_occurrence_raw_fallbacks",
     ]}
     g["eligible_job1_occurrences"] = len(ELIG)
     g["binding_entries"] = len(BINDINGS)
@@ -88,10 +90,20 @@ def gates() -> dict[str, int]:
         capture_output=True,
         text=True,
     )
+    rawc = __import__("subprocess").run(
+        [sys.executable, str(ROOT / "tests/job3/test_formatter_raw_contract.py")],
+        capture_output=True,
+        text=True,
+    )
     for line in dyn.stdout.splitlines():
         if "=" in line:
             k, _, v = line.partition("=")
             if v.isdigit():
+                g[k] = int(v)
+    for line in rawc.stdout.splitlines():
+        if "=" in line:
+            k, _, v = line.partition("=")
+            if k in g and v.isdigit():
                 g[k] = int(v)
     return g
 
@@ -112,6 +124,7 @@ def main() -> int:
             "numeric_usable_total",
             "roundtrip_verified",
             "numeric_dynamicity_checked",
+            "invalid_occurrence_raw_fallbacks",
         }
     }
     if g["eligible_job1_occurrences"] != g["binding_entries"]:

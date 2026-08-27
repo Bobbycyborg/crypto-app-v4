@@ -183,8 +183,7 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
         d = Decimal("0")
 
     scale = Decimal(str(formatter.get("scale", 1)))
-    coeff = Decimal(str(formatter.get("coefficient_override", "1")))
-    shown = (d * coeff) / scale if scale != 1 else d * coeff
+    shown = d / scale if scale != 1 else d
     places = int(formatter.get("decimal_places", 2))
 
     if formatter.get("scientific"):

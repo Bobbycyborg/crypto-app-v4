@@ -34,7 +34,7 @@ from renderer.anchors import (
     _xpath_score,
 )
 from renderer.eligibility import eligible_mappings, load_job1_job2
-from renderer.formatter_recovery import FormatterRecoveryError, recover_formatter, select_binding_raw
+from renderer.formatter_recovery import FormatterRecoveryError, recover_formatter, resolve_binding_raw
 
 MANIFEST_PATH = Path(__file__).resolve().parent / "binding-manifest.json"
 HTML_PATH = ROOT / "index-v4.html"
@@ -216,20 +216,33 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
         target_kind = classify_target_kind(html, pos, effective)
         if target_kind == "HTML_TEXT" and ("<" in effective or ">" in effective):
             raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER tag crossing {mid} {oid}")
-        raw_value, raw_source = select_binding_raw(reg, mid, oid)
-        if raw_value is None:
-            fmt: dict[str, Any] = {"type": "string_exact"}
+        try:
+            selection = resolve_binding_raw(
+                reg,
+                mid,
+                oid,
+                source_literal=effective,
+                manifest_lit=manifest_lit,
+                anchor_after=anchor["anchor_after"],
+            )
+        except FormatterRecoveryError as exc:
+            raise SystemExit(f"JOB 3 FORMATTER BLOCKER {mid} {oid}: {exc}") from exc
+        if selection is None:
+            fmt = {"type": "string_exact"}
+            raw_value = None
+            raw_source = None
         else:
-            try:
-                fmt = recover_formatter(
-                    source_literal=effective,
-                    raw_value=raw_value,
-                    manifest_lit=manifest_lit,
-                    anchor_after=anchor["anchor_after"],
-                )
-            except FormatterRecoveryError as exc:
-                raise SystemExit(f"JOB 3 FORMATTER BLOCKER {mid} {oid}: {exc}") from exc
+            raw_value = selection.raw
+            raw_source = selection.source
+            fmt = recover_formatter(
+                source_literal=effective,
+                raw_value=raw_value,
+                manifest_lit=manifest_lit,
+                anchor_after=anchor["anchor_after"],
+            )
             fmt["formatter_raw_source"] = raw_source
+            if selection.rejected_occurrence_raw is not None:
+                fmt["rejected_occurrence_raw"] = selection.rejected_occurrence_raw
         entry = {
             "binding_id": _binding_id(mid, oid),
             "metric_id": mid,
@@ -242,6 +255,7 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
             "target_kind": target_kind,
             "field": "value",
             "source_literal": effective,
+            "binding_raw": raw_value,
             "anchor_before": anchor["anchor_before"],
             "anchor_after": anchor["anchor_after"],
             "anchor_sha256": anchor["anchor_sha256"],

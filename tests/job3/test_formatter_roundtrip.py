@@ -6,17 +6,15 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
-from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from renderer.formatter_recovery import is_numeric_raw, select_binding_raw
+from renderer.formatter_recovery import is_numeric_raw
 from renderer.formatters import format_value
 
 MANIFEST = json.loads((ROOT / "renderer/binding-manifest.json").read_text())
 BINDINGS = MANIFEST["bindings"]
-REG, _, _, _ = __import__("renderer.eligibility", fromlist=["load_job1_job2"]).load_job1_job2()
 
 
 def gates() -> dict[str, int | list[str]]:
@@ -28,7 +26,7 @@ def gates() -> dict[str, int | list[str]]:
     errors: list[str] = []
 
     for b in BINDINGS:
-        raw, _src = select_binding_raw(REG, b["metric_id"], b["job1_occurrence_id"])
+        raw = b.get("binding_raw")
         if raw is None or not is_numeric_raw(raw):
             continue
         numeric_usable += 1

@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from renderer.eligibility import eligible_mappings, load_job1_job2
-from renderer.formatter_recovery import is_numeric_raw, select_binding_raw
+from renderer.formatter_recovery import is_numeric_raw, _occurrence_raw
 
 BANNED_IMPORT_PREFIXES = (
     "renderer.render_report",
@@ -77,19 +77,14 @@ def _parse_subprocess_counters(stdout: str) -> dict[str, int]:
 
 
 def _nonnumeric_reason(binding: dict[str, Any], reg: dict[str, Any]) -> str:
-    raw, src = select_binding_raw(reg, binding["metric_id"], binding["job1_occurrence_id"])
-    if raw is None:
-        if src == "OCCURRENCE":
-            return "occurrence raw missing or UNKNOWN"
-        return "no occurrence raw and no metric fallback"
-    if raw == "UNKNOWN":
-        return "raw is UNKNOWN"
-    if isinstance(raw, str):
-        try:
-            float(raw)
-        except ValueError:
-            return f"occurrence raw not parseable: {raw!r}"
-    return "not numeric usable"
+    if binding.get("binding_raw") is not None:
+        return "not numeric usable"
+    occ_raw = _occurrence_raw(reg.get(binding["metric_id"], {}), binding["job1_occurrence_id"])
+    if occ_raw == "UNKNOWN" or occ_raw is None:
+        return "occurrence raw missing or UNKNOWN"
+    if not is_numeric_raw(occ_raw):
+        return f"occurrence raw not parseable: {occ_raw!r}"
+    return "occurrence raw failed natural formatter recovery"
 
 
 def _compute_numeric_gates(bindings: list[dict[str, Any]], reg: dict[str, Any]) -> dict[str, int]:
@@ -102,7 +97,7 @@ def _compute_numeric_gates(bindings: list[dict[str, Any]], reg: dict[str, Any]) 
         "numeric_string_exact": 0,
     }
     for b in bindings:
-        raw, _src = select_binding_raw(reg, b["metric_id"], b["job1_occurrence_id"])
+        raw = b.get("binding_raw")
         if raw is None or not is_numeric_raw(raw):
             g["nonnumeric_total"] += 1
             continue
@@ -205,6 +200,7 @@ def main() -> int:
         "tests/job3/test_snapshot_derive.py",
         "tests/job3/test_formatter_roundtrip.py",
         "tests/job3/test_formatter_dynamicity.py",
+        "tests/job3/test_formatter_raw_contract.py",
         "tests/job3/test_formatters.py",
         "tests/job3/test_golden_render.py",
         "tests/job3/test_renderer_fail_closed.py",
