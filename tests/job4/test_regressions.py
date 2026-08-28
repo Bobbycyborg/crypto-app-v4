@@ -16,12 +16,12 @@ def main() -> int:
     from _helpers import run_checker
     from build_mutations import MUTATION_EXPECTATIONS
 
-    assert len(MUTATION_EXPECTATIONS) == 24
+    assert len(MUTATION_EXPECTATIONS) == 30
     exact = 0
     missing = 0
     wrong_status = 0
     wrong_check_id = 0
-    for mid in [f"M{i:02d}" for i in range(1, 25)]:
+    for mid in [f"M{i:02d}" for i in range(1, 31)]:
         exp = MUTATION_EXPECTATIONS[mid]
         snap = FIX / f"{mid}-snapshot.json"
         html = FIX / f"{mid}-rendered.html"
@@ -53,12 +53,12 @@ def main() -> int:
         if ok:
             exact += 1
     print(
-        f"mutation_total=24 mutation_executed={24 - missing} "
+        f"mutation_total=30 mutation_executed={30 - missing} "
         f"mutation_exact_matches={exact} mutation_missing={missing} "
         f"mutation_wrong_status={wrong_status} mutation_wrong_check_id={wrong_check_id}"
     )
     assert missing == 0
-    assert exact == 24
+    assert exact == 30
     assert wrong_status == 0
     assert wrong_check_id == 0
     print("test_regressions OK")

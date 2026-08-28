@@ -246,6 +246,28 @@ def main() -> int:
     )
     assert proc.returncode == 0
 
+    job5_shadow = ROOT / "runtime-NOT-FOR-GH/job5/review04-shadow.html"
+    job5_snap = ROOT / "runtime-NOT-FOR-GH/job5/review04-render-snapshot.json"
+    if job5_shadow.is_file() and job5_snap.is_file():
+        out_job5 = FIX / "independent-job5-shadow.json"
+        code, job5_report = _run_checker(
+            snapshot=job5_snap,
+            rendered=job5_shadow,
+            contract=contract_path,
+            run_id="independent-job5-shadow",
+            out=out_job5,
+        )
+        assert code == 0, job5_report.get("counts")
+        assert job5_report["counts"]["fail"] == 0
+        assert job5_report["counts"]["coverage_gap"] == 0
+        bind_checks = [
+            c
+            for c in job5_report["checks"]
+            if c["category"] == "04_rendered_binding_consistency"
+            and c["rule_type"] == "anchor_locate"
+        ]
+        assert bind_checks == []
+
     proc = subprocess.run(
         [sys.executable, str(INTEGRITY / "build_report_contract.py"), "--check"],
         cwd=str(ROOT),

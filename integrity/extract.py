@@ -17,9 +17,68 @@ _DISPLAY_TOKEN_RE = re.compile(
     r"(?:\s*/\s*\w+)?"
 )
 
+VALUE_FLEX = (
+    r"(?:UNKNOWN|~?[\+\-−]?(?:\$)?[\d,]+(?:\.\d+)?"
+    r"(?:[eE][+\-−]?\d+)?(?:[kKmMbBtT]|%|pp|×|x)?(?:\s*/\s*\w+)?)"
+)
+MAX_TARGET_CHARS = 240
+SEARCH_PAD = 900
+
 
 def extract_articles(html: str) -> dict[str, str]:
     return {m.group(1): m.group(2) for m in ARTICLE_RE.finditer(html)}
+
+
+def _combo(binding: dict[str, Any]) -> str:
+    return binding["anchor_before"] + binding["source_literal"] + binding["anchor_after"]
+
+
+def _peer_literals(bindings: list[dict[str, Any]], exclude_id: str) -> list[tuple[str, str]]:
+    return sorted(
+        [
+            (b["binding_id"], b["source_literal"])
+            for b in bindings
+            if b.get("owner") == "CGPT_CURSOR"
+            and b.get("field", "value") == "value"
+            and b["binding_id"] != exclude_id
+            and b.get("source_literal")
+        ],
+        key=lambda x: -len(x[1]),
+    )
+
+
+_PERIOD_LABEL_GAP = re.compile(r"(\\ ·\\ )\d+d\\ ")
+
+
+def _relax_period_labels(pattern: str) -> str:
+    """UNKNOWN renders may drop period labels (7d / 30d) before sibling values."""
+    return _PERIOD_LABEL_GAP.sub(r"\1(?:\\d+d\\ )?", pattern)
+
+
+def _mask_fragment_regex(fragment: str, exclude_id: str, bindings: list[dict[str, Any]]) -> str:
+    if not fragment:
+        return ""
+    peers = _peer_literals(bindings, exclude_id)
+    parts: list[str] = []
+    i = 0
+    while i < len(fragment):
+        matched: str | None = None
+        for _bid, lit in peers:
+            if fragment.startswith(lit, i):
+                matched = lit
+                break
+        if matched:
+            parts.append(VALUE_FLEX)
+            i += len(matched)
+            continue
+        nxt = len(fragment)
+        for _bid, lit in peers:
+            j = fragment.find(lit, i + 1)
+            if j >= 0:
+                nxt = min(nxt, j)
+        parts.append(re.escape(fragment[i:nxt]))
+        i = nxt
+    return _relax_period_labels("".join(parts))
 
 
 def _nth_before_index(html: str, before: str, combo_start: int) -> int:
@@ -69,7 +128,6 @@ def _before_search_keys(before: str) -> list[str]:
 
 
 def _flex_anchor_pattern(anchor: str) -> re.Pattern[str]:
-    """Allow numeric tokens in anchors to differ between source and rendered."""
     chunks = re.split(r"(~[\d.]+|\d+\.\d+\.|\$[\d.,]+[kKmMbBtT]?)", anchor)
     parts: list[str] = []
     for ch in chunks:
@@ -87,7 +145,6 @@ def _flex_anchor_pattern(anchor: str) -> re.Pattern[str]:
 
 
 def _skip_leading_sibling(before: str, rendered: str, value_start: int) -> int:
-    """If before ended with a sibling `$N · `, skip that token in rendered too."""
     if not re.search(r"\$[\d.,]+[kKmMbBtT]?\s*·\s*$", before):
         return value_start
     m = re.match(r"\$[\d.,]+[kKmMbBtT]?\s*·\s*", rendered[value_start:])
@@ -95,7 +152,6 @@ def _skip_leading_sibling(before: str, rendered: str, value_start: int) -> int:
 
 
 def _find_before(rendered: str, before: str, start: int = 0) -> tuple[int, int] | None:
-    """Return (match_pos, value_start) for anchor_before, with suffix fallback."""
     for key in _before_search_keys(before):
         pos = rendered.find(key, start)
         if pos >= 0:
@@ -121,14 +177,63 @@ def _find_before(rendered: str, before: str, start: int = 0) -> tuple[int, int] 
     return None
 
 
+def _masked_after_fragment(after: str) -> str:
+    """Use the first closing span — avoids overspan into sibling rows."""
+    if "</span>" in after:
+        return after[: after.index("</span>") + len("</span>")]
+    return after
+
+
+def _masked_window_locate(
+    rendered_html: str,
+    binding: dict[str, Any],
+    *,
+    source_html: str,
+    bindings: list[dict[str, Any]],
+) -> tuple[str | None, str | None]:
+    """Structural masked locate in a source-aligned window — no canonical values."""
+    before = binding["anchor_before"]
+    after = binding["anchor_after"]
+    literal = binding["source_literal"]
+    bid = binding["binding_id"]
+    combo = before + literal + after
+    if combo not in source_html or source_html.count(combo) != 1:
+        return None, "source_combo_missing"
+    src_at = source_html.index(combo)
+    win_start = max(0, src_at - SEARCH_PAD)
+    win_end = min(len(rendered_html), src_at + len(combo) + SEARCH_PAD)
+    window = rendered_html[win_start:win_end]
+    before_pat = _mask_fragment_regex(before, bid, bindings)
+    after_pat = _mask_fragment_regex(_masked_after_fragment(after), bid, bindings)
+    prefix = (binding.get("formatter") or {}).get("literal_prefix") or ""
+    if prefix:
+        capture = rf"(?P<val>(?:{re.escape(prefix)})?{VALUE_FLEX})"
+    else:
+        capture = rf"(?P<val>{VALUE_FLEX})"
+    pattern = before_pat + capture + after_pat
+    try:
+        rx = re.compile(pattern, re.S)
+    except re.error:
+        return None, "pattern_error"
+    matches = list(rx.finditer(window))
+    if len(matches) != 1:
+        return None, "rendered_before_missing" if len(matches) == 0 else "anchor_after_overspan"
+    val = matches[0].group("val")
+    if len(val) > MAX_TARGET_CHARS or "</" in val or "><" in val:
+        return None, "anchor_after_overspan"
+    return val, None
+
+
 def locate_binding_span(
     rendered_html: str,
     binding: dict[str, Any],
     *,
     source_html: str | None = None,
+    bindings: list[dict[str, Any]] | None = None,
     expected_numeric: float | None = None,
 ) -> tuple[str | None, str | None]:
-    """Return (span_text, error). Uses anchor_before + anchor_after."""
+    """Return (span_text, error). Location is structure-only — no canonical values."""
+    _ = expected_numeric
     before = binding["anchor_before"]
     after = binding["anchor_after"]
     literal = binding["source_literal"]
@@ -151,23 +256,52 @@ def locate_binding_span(
         return s.strip()
 
     def _finalize(raw: str) -> str:
+        stripped = raw.strip()
+        if stripped.upper() == "UNKNOWN":
+            return "UNKNOWN"
         if fmt.get("type") == "string_exact":
             return raw
-        stripped = _strip_prefix_suffix(raw)
-        if stripped != raw:
+        prefix = fmt.get("literal_prefix") or ""
+        if " · " in stripped and prefix:
+            tail = stripped.rsplit(" · ", 1)[-1].strip()
+            if tail.upper() == "UNKNOWN":
+                stripped = tail
+        s2 = _strip_prefix_suffix(stripped)
+        if s2 != raw.strip():
+            return s2
+        # Exact token only — never substring-match inside a longer overspan.
+        if _DISPLAY_TOKEN_RE.fullmatch(stripped):
             return stripped
-        return _first_display_token(raw)
+        m = _DISPLAY_TOKEN_RE.match(stripped)
+        if m and m.end() == len(stripped):
+            return m.group(0)
+        return stripped
 
     def _extract_at(start: int) -> tuple[str | None, str | None]:
         end = _find_after(rendered_html, start, after)
+        if end < 0 and bindings is not None:
+            after_pat = _mask_fragment_regex(
+                _masked_after_fragment(after), binding["binding_id"], bindings
+            )
+            m = re.search(after_pat, rendered_html[start : start + MAX_TARGET_CHARS + 200], re.S)
+            if m:
+                end = start + m.start()
         if end < 0:
             return None, "anchor_after_missing"
         raw = rendered_html[start:end]
-        if len(raw) > 300 or "</" in raw or "><" in raw:
+        if len(raw) > MAX_TARGET_CHARS or "</" in raw or "><" in raw:
             return None, "anchor_after_overspan"
         return _finalize(raw), None
 
-    if source_html is not None:
+    if source_html is not None and bindings is not None:
+        masked = _masked_window_locate(
+            rendered_html,
+            binding,
+            source_html=source_html,
+            bindings=bindings,
+        )
+        if masked[0] is not None:
+            return _finalize(masked[0]), None
         combo = before + literal + after
         if combo not in source_html:
             return None, "source_combo_missing"
@@ -191,14 +325,14 @@ def locate_binding_span(
                 nth_span = _extract_at(start)
                 break
             pos = max(match_pos + 1, start)
-        if nth_span is not None:
+        if nth_span is not None and nth_span[0] is not None:
             return nth_span
         if rendered_html.count(before) == 1:
             found = _find_before(rendered_html, before)
             if found:
                 return _extract_at(found[1])
-        return None, "rendered_before_missing"
-    combo = before + literal + after
+        return masked if masked[1] else (None, "rendered_before_missing")
+
     if rendered_html.count(combo) != 1:
         return None, f"combo_count_{rendered_html.count(combo)}"
     start = rendered_html.index(combo) + len(before)

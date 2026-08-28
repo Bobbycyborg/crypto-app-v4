@@ -187,6 +187,48 @@ MUTATION_EXPECTATIONS: dict[str, dict[str, Any]] = {
         "check_status": "PASS",
         "category": "12_permanent_regressions",
     },
+    "M25": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M26": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M27": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M28": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M29": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M30": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023",
+        "check_status": "FAIL",
+        "category": "04_rendered_binding_consistency",
+    },
 }
 
 
@@ -410,6 +452,56 @@ def build_mutations() -> None:
     # M24 wallet mutation — same as M07
     _save("M24-snapshot.json", s07)
     (FIX / "M24-rendered.html").write_text(h07, encoding="utf-8")
+
+    # M25-M28 UNKNOWN-neighbour locator regressions (PUMP/BTC RS 30d row)
+    pump30 = next(
+        b
+        for b in manifest["bindings"]
+        if b["binding_id"] == "pump.rs.vs_btc.pct.30d::28771180a961620c:30d30d1023"
+    )
+    cell = "7d +31.1% · 30d +102.3%"
+    pump_combo = pump30["anchor_before"] + pump30["source_literal"] + pump30["anchor_after"]
+
+    def _mutate_pump30_cells(html_in: str, cell_val: str) -> str:
+        return html_in.replace(cell, cell_val)
+
+    for mid, cell_val, snap_out in (
+        ("M25", "UNKNOWN · 30d +102.3%", snap),
+        ("M26", "7d +31.1% · UNKNOWN", None),
+        ("M27", "UNKNOWN · UNKNOWN", None),
+    ):
+        (FIX / f"{mid}-rendered.html").write_text(_mutate_pump30_cells(html, cell_val), encoding="utf-8")
+        if snap_out is not None:
+            _save(f"{mid}-snapshot.json", snap_out)
+
+    s26 = copy.deepcopy(snap)
+    s27 = copy.deepcopy(snap)
+    s28 = copy.deepcopy(snap)
+    for s in (s26, s27, s28):
+        s["metrics"]["pump.rs.vs_btc.pct.30d"]["status"] = "UNKNOWN"
+    _save("M26-snapshot.json", s26)
+    _save("M27-snapshot.json", s27)
+    _save("M28-snapshot.json", s28)
+
+    dup_row = (
+        '<div class="ev-tip-row"><span class="ev-k">PUMP/BTC</span>'
+        '<span class="ev-v">UNKNOWN · UNKNOWN</span></div>'
+    )
+    combo_unknown = pump_combo.replace(cell, "UNKNOWN · UNKNOWN")
+    h28 = html.replace(pump_combo, dup_row + combo_unknown, 1)
+    (FIX / "M28-rendered.html").write_text(h28, encoding="utf-8")
+
+    # M29 PUMP RS substring decoy — canonical UNKNOWN, neighbour holds +102.3%
+    s29 = copy.deepcopy(snap)
+    s29["metrics"]["pump.rs.vs_btc.pct.30d"]["status"] = "UNKNOWN"
+    _save("M29-snapshot.json", s29)
+    h29 = _mutate_pump30_cells(html, "7d +102.3% · UNKNOWN")
+    (FIX / "M29-rendered.html").write_text(h29, encoding="utf-8")
+
+    # M30 genuine PUMP RS stale value leak on UNKNOWN canonical
+    s30 = copy.deepcopy(s29)
+    _save("M30-snapshot.json", s30)
+    (FIX / "M30-rendered.html").write_text(_mutate_pump30_cells(html, cell), encoding="utf-8")
 
 
 if __name__ == "__main__":

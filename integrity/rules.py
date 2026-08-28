@@ -12,8 +12,6 @@ from integrity.extract import (
     extract_articles,
     extract_visual_bar_width,
     locate_binding_span,
-    _find_before,
-    _find_after,
 )
 from integrity.model import (
     ACTIVE_REPORT_ASSETS,
@@ -28,6 +26,7 @@ from integrity.numeric import (
     derive_subtract,
     display_tolerance,
     drawdown_pct,
+    parse_binding_observed,
     parse_display_token,
     values_compatible,
 )
@@ -244,6 +243,7 @@ def check_binding_consistency(
             rendered_html,
             b,
             source_html=source_html,
+            bindings=bindings,
         )
         if err:
             checks.append(
@@ -337,7 +337,7 @@ def check_binding_consistency(
                 )
             )
             continue
-        observed = parse_display_token(span)
+        observed = parse_binding_observed(span, fmt, canonical=canonical)
         ok = values_compatible(observed, canonical, fmt)
         checks.append(
             CheckResult(
@@ -407,12 +407,21 @@ def check_duplicate_consistency(
             )
             continue
         raw = snap.get("normalized_value")
-        if isinstance(raw, str):
+        fmt0 = by_id[binding_ids[0]].get("formatter") or {}
+        canonical_dec: Decimal | None = None
+        if fmt0.get("type") == "numeric":
+            try:
+                canonical_dec = dec(raw)
+            except Exception:
+                canonical_dec = None
+        if isinstance(raw, str) and canonical_dec is None:
             values = []
             fail = False
             for bid in binding_ids:
                 b = by_id[bid]
-                span, err = locate_binding_span(rendered_html, b, source_html=source_html)
+                span, err = locate_binding_span(
+                    rendered_html, b, source_html=source_html, bindings=bindings
+                )
                 if err or span is None:
                     fail = True
                     values.append((bid, err or "missing"))
@@ -436,16 +445,16 @@ def check_duplicate_consistency(
                 )
             )
             continue
-        canonical = dec(raw)
+        canonical = canonical_dec if canonical_dec is not None else dec(raw)
         values: list[tuple[str, str]] = []
         fail = False
         for bid in binding_ids:
             b = by_id[bid]
-            exp = snap.get("normalized_value")
             span, err = locate_binding_span(
                 rendered_html,
                 b,
                 source_html=source_html,
+                bindings=bindings,
             )
             if err or span is None:
                 fail = True
@@ -455,7 +464,7 @@ def check_duplicate_consistency(
             if fmt.get("type") == "string_exact":
                 ok = span == str(snap.get("normalized_value", ""))
             else:
-                obs = parse_display_token(span)
+                obs = parse_binding_observed(span, fmt, canonical=canonical)
                 ok = values_compatible(obs, canonical, fmt)
             if not ok:
                 fail = True
@@ -742,24 +751,17 @@ def check_freshness(
         related = [b for b in bindings if b["metric_id"] == mid]
         stale_claim = False
         for b in related:
-            span, err = locate_binding_span(rendered_html, b, source_html=source_html)
+            span, err = locate_binding_span(
+                rendered_html, b, source_html=source_html, bindings=bindings
+            )
             if not span:
                 continue
-            found = _find_before(rendered_html, b["anchor_before"])
-            if found:
-                match_pos, val_start = found
-                end = _find_after(rendered_html, val_start + len(span), b["anchor_after"])
-                if end >= 0:
-                    ctx = rendered_html[match_pos : end + len(b["anchor_after"])].lower()
-                else:
-                    ctx = rendered_html[match_pos : val_start + len(span) + 120].lower()
-            else:
-                pos = rendered_html.find(span)
-                ctx = (
-                    rendered_html[max(0, pos - 200) : pos + len(span) + 200].lower()
-                    if pos >= 0
-                    else (b.get("anchor_before", "") + span + b.get("anchor_after", "")).lower()
-                )
+            pos = rendered_html.find(span)
+            ctx = (
+                rendered_html[max(0, pos - 200) : pos + len(span) + 200].lower()
+                if pos >= 0
+                else (b.get("anchor_before", "") + span + b.get("anchor_after", "")).lower()
+            )
             if fresh == "UNKNOWN" and any(
                 tok in ctx for tok in ("freshness · same-day", "fresh today", "freshness · fresh")
             ):
@@ -813,7 +815,7 @@ def _span_value_ok(span: str, binding: dict[str, Any], snap: dict[str, Any]) -> 
         canonical = dec(snap["normalized_value"])
     except Exception:
         return False
-    observed = parse_display_token(span)
+    observed = parse_binding_observed(span, fmt, canonical=canonical)
     return values_compatible(observed, canonical, fmt)
 
 
@@ -875,6 +877,7 @@ def check_surface_agreement(
                 rendered_html,
                 b,
                 source_html=source_html,
+                bindings=bindings,
             )
             if err or span is None:
                 fail = True
@@ -1063,11 +1066,12 @@ def check_permanent_regressions(
                     rendered_html,
                     b,
                     source_html=source_html,
+                    bindings=bindings,
                 )
                 if err:
                     fail = True
                     continue
-                obs = parse_display_token(span or "")
+                obs = parse_binding_observed(span or "", b.get("formatter"), canonical=canonical)
                 if not values_compatible(obs, canonical, b.get("formatter")):
                     fail = True
                 vals.append((bid, span))
@@ -1102,11 +1106,12 @@ def check_permanent_regressions(
                     rendered_html,
                     b,
                     source_html=source_html,
+                    bindings=bindings,
                 )
                 if err:
                     fail = True
                     continue
-                obs = parse_display_token(span or "")
+                obs = parse_binding_observed(span or "", b.get("formatter"), canonical=canonical)
                 if not values_compatible(obs, canonical, b.get("formatter")):
                     fail = True
                 vals.append((bid, span))

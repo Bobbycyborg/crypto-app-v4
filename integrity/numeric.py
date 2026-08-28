@@ -38,6 +38,30 @@ def display_tolerance(formatter: dict[str, Any] | None) -> Decimal:
     return unit / Decimal("2")
 
 
+def parse_binding_observed(
+    text: str,
+    formatter: dict[str, Any] | None,
+    *,
+    canonical: Decimal | None = None,
+) -> Decimal | None:
+    """Parse a located binding span using formatter metadata (validation only)."""
+    val = parse_display_token(text)
+    if val is None or not formatter or formatter.get("type") != "numeric":
+        return val
+    scale = dec(formatter.get("scale", 1))
+    ext = formatter.get("external_scale_suffix")
+    token = text.strip()
+    inline_scale = bool(re.search(r"[kKmMbBtT]$", token.rstrip("%×x")))
+    if not ext or inline_scale or scale <= 1:
+        return val
+    scaled = val * scale
+    if canonical is None:
+        return scaled if val < scale else val
+    if abs(scaled - canonical) <= abs(val - canonical):
+        return scaled
+    return val
+
+
 def parse_display_token(text: str) -> Decimal | None:
     """Parse a rendered numeric token to canonical Decimal base units."""
     raw = text.strip()
