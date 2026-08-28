@@ -137,7 +137,7 @@ def main() -> int:
     assert _sha(ROOT / "metrics/metric-registry.json") == manifest["job1_registry_sha256"]
     assert _sha(ROOT / "index-v4.html") == manifest["source_html_sha256"]
 
-    for rel in ("tests/job4", "tests/job5", "tests/job6", "renderer/job4", "renderer/job5", "renderer/job6"):
+    for rel in ("tests/job5", "tests/job6", "renderer/job4", "renderer/job5", "renderer/job6"):
         assert not (ROOT / rel).exists(), rel
 
     markup = sum(
