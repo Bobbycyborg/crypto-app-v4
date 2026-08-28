@@ -105,10 +105,84 @@ class IntegrityReport:
     checks: list[CheckResult] = field(default_factory=list)
     failures: list[dict[str, Any]] = field(default_factory=list)
     overall_status: str = "FAIL"
+    expected_check_ids: list[str] = field(default_factory=list)
+    executed_check_ids: list[str] = field(default_factory=list)
+    missing_check_ids: list[str] = field(default_factory=list)
+    unexpected_check_ids: list[str] = field(default_factory=list)
 
-    def finalize(self, *, contract_required: tuple[str, ...] | None = None) -> None:
+    def finalize(
+        self,
+        *,
+        contract_required: tuple[str, ...] | None = None,
+        expected_check_ids: list[str] | None = None,
+    ) -> None:
         req = contract_required or REQUIRED_CATEGORIES
         contract_incomplete = set(req) != set(REQUIRED_CATEGORIES)
+        expected = list(expected_check_ids or [])
+        executed_before = [c.check_id for c in self.checks]
+        missing = sorted(set(expected) - set(executed_before))
+        unexpected = sorted(set(executed_before) - set(expected))
+        self.expected_check_ids = expected
+        self.executed_check_ids = list(executed_before)
+        self.missing_check_ids = missing
+        self.unexpected_check_ids = unexpected
+        for cid in missing:
+            cat = cid.split("_")[0]
+            if cid.startswith("01_"):
+                cat = "01_input_lineage"
+            elif cid.startswith("02_"):
+                cat = "02_active_asset_coverage"
+            elif cid.startswith("03_"):
+                cat = "03_canonical_metric_coverage"
+            elif cid.startswith("04_"):
+                cat = "04_rendered_binding_consistency"
+            elif cid.startswith("05_"):
+                cat = "05_duplicate_consistency"
+            elif cid.startswith("06_"):
+                cat = "06_ath_drawdown_arithmetic"
+            elif cid.startswith("07_"):
+                cat = "07_moving_average_language"
+            elif cid.startswith("08_"):
+                cat = "08_relative_strength_language"
+            elif cid.startswith("09_"):
+                cat = "09_freshness_asof_consistency"
+            elif cid.startswith("10_"):
+                cat = "10_tooltip_visible_visual_agreement"
+            elif cid.startswith("11_"):
+                cat = "11_derived_metric_arithmetic"
+            elif cid.startswith("12_"):
+                cat = "12_permanent_regressions"
+            self.checks.append(
+                CheckResult(
+                    check_id=cid,
+                    category=cat,
+                    asset=None,
+                    rule_type="expected_check_missing",
+                    metric_ids=[],
+                    status="COVERAGE_GAP",
+                    assertions_executed=1,
+                    observed=None,
+                    expected_relation="check executed",
+                    evidence={"missing": True},
+                    reason="expected check not executed",
+                )
+            )
+        for cid in unexpected:
+            self.checks.append(
+                CheckResult(
+                    check_id=f"00_unexpected_{cid}",
+                    category="01_input_lineage",
+                    asset=None,
+                    rule_type="unexpected_check",
+                    metric_ids=[],
+                    status="FAIL",
+                    assertions_executed=1,
+                    observed=cid,
+                    expected_relation="check_id in expected_check_ids",
+                    evidence={"unexpected": cid},
+                    reason="unexpected check_id",
+                )
+            )
         self.checks.sort(key=lambda c: c.check_id)
         self.failures = [
             {
@@ -146,7 +220,8 @@ class IntegrityReport:
                 counts["blocked_unknown"] += 1
             elif key == "not_applicable":
                 counts["not_applicable"] += 1
-        counts["expected"] = counts["executed"]
+        counts["executed"] = len(self.executed_check_ids)
+        counts["expected"] = len(expected)
         self.counts = counts
         cats: dict[str, dict[str, Any]] = {}
         for cat in req:
@@ -200,10 +275,18 @@ class IntegrityReport:
         missing_cats = list(set(REQUIRED_CATEGORIES) - set(req)) if contract_incomplete else [
             c for c in req if c not in cats or not cats[c].get("present")
         ]
-        if counts["fail"] or counts["coverage_gap"] or missing_cats:
+        ids_match = bool(expected) and set(self.executed_check_ids) == set(expected)
+        if (
+            counts["fail"]
+            or counts["coverage_gap"]
+            or missing_cats
+            or missing
+            or unexpected
+            or not ids_match
+        ):
             self.overall_status = (
                 "COVERAGE_GAP"
-                if counts["coverage_gap"] or missing_cats
+                if counts["coverage_gap"] or missing_cats or missing
                 else "FAIL"
             )
         else:
@@ -220,19 +303,23 @@ class IntegrityReport:
             "checks": [c.to_dict() for c in self.checks],
             "failures": self.failures,
             "overall_status": self.overall_status,
+            "expected_check_ids": self.expected_check_ids,
+            "executed_check_ids": self.executed_check_ids,
+            "missing_check_ids": self.missing_check_ids,
+            "unexpected_check_ids": self.unexpected_check_ids,
         }
 
     def exit_code(self) -> int:
-        if self.overall_status == "PASS":
-            return EXIT_PASS
-        if self.overall_status == "COVERAGE_GAP":
-            return EXIT_COVERAGE_GAP
         lineage = any(
-            c.category == "01_input_lineage" and c.status == "FAIL"
+            c.check_id.startswith("01_lineage_") and c.status == "FAIL"
             for c in self.checks
         )
         if lineage:
             return EXIT_INPUT_LINEAGE
+        if self.overall_status == "PASS":
+            return EXIT_PASS
+        if self.overall_status == "COVERAGE_GAP" or self.missing_check_ids:
+            return EXIT_COVERAGE_GAP
         if self.counts.get("coverage_gap", 0):
             return EXIT_COVERAGE_GAP
         return EXIT_FAIL

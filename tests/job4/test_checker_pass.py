@@ -22,8 +22,22 @@ def main() -> int:
     assert report["overall_status"] == "PASS"
     assert report["counts"]["fail"] == 0
     assert report["counts"]["coverage_gap"] == 0
+    assert report.get("missing_check_ids") == []
+    assert report.get("unexpected_check_ids") == []
+    assert set(report["executed_check_ids"]) == set(report["expected_check_ids"])
+    summed = (
+        report["counts"]["pass"]
+        + report["counts"]["fail"]
+        + report["counts"]["coverage_gap"]
+        + report["counts"]["blocked_unknown"]
+        + report["counts"]["not_applicable"]
+    )
+    assert report["counts"]["expected"] == summed
     for cat in report["categories"]:
         assert report["categories"][cat].get("present"), cat
+    for c in report["checks"]:
+        if c["status"] == "PASS":
+            assert c["assertions_executed"] >= 1, c["check_id"]
     print("test_checker_pass OK")
     return 0
 

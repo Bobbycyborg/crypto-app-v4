@@ -72,40 +72,52 @@ def check_input_lineage(
     contract: dict[str, Any],
 ) -> list[CheckResult]:
     checks: list[CheckResult] = []
-    pairs = [
-        ("registry", registry_path, contract["job1_registry_sha256"]),
-        ("collector_plan", plan_path, contract["collector_plan_sha256"]),
-        ("binding_manifest", bindings_path, contract["binding_manifest_sha256"]),
-        ("source_html", source_html_path, contract["source_html_sha256"]),
+    actual_source = _sha256_file(source_html_path)
+    specs = [
+        ("01_lineage_01_registry", _sha256_file(registry_path), contract["job1_registry_sha256"], registry_path),
+        ("01_lineage_02_collector_plan", _sha256_file(plan_path), contract["collector_plan_sha256"], plan_path),
         (
-            "snapshot_job1_registry",
-            None,
+            "01_lineage_03_binding_manifest",
+            _sha256_file(bindings_path),
+            contract["binding_manifest_sha256"],
+            bindings_path,
+        ),
+        (
+            "01_lineage_04_source_html_contract",
+            actual_source,
+            contract["source_html_sha256"],
+            source_html_path,
+        ),
+        (
+            "01_lineage_05_snapshot_job1_registry",
+            snapshot.get("job1_registry_sha256"),
             contract["job1_registry_sha256"],
+            None,
         ),
         (
-            "snapshot_collector_plan",
-            None,
+            "01_lineage_06_snapshot_collector_plan",
+            snapshot.get("collector_plan_sha256"),
             contract["collector_plan_sha256"],
+            None,
         ),
         (
-            "manifest_source_html",
-            None,
+            "01_lineage_07_manifest_source_actual",
             manifest.get("source_html_sha256"),
+            actual_source,
+            None,
+        ),
+        (
+            "01_lineage_08_manifest_source_contract",
+            manifest.get("source_html_sha256"),
+            contract["source_html_sha256"],
+            None,
         ),
     ]
-    for idx, (name, path, expected) in enumerate(pairs, 1):
-        if path:
-            actual = _sha256_file(path)
-        elif name == "snapshot_job1_registry":
-            actual = snapshot.get("job1_registry_sha256")
-        elif name == "snapshot_collector_plan":
-            actual = snapshot.get("collector_plan_sha256")
-        else:
-            actual = manifest.get("source_html_sha256")
-        ok = expected and actual == expected
+    for check_id, actual, expected, path in specs:
+        ok = bool(expected) and actual == expected
         checks.append(
             CheckResult(
-                check_id=f"01_lineage_{idx:02d}_{name}",
+                check_id=check_id,
                 category="01_input_lineage",
                 asset=None,
                 rule_type="hash_match",
@@ -114,7 +126,7 @@ def check_input_lineage(
                 assertions_executed=1,
                 observed=actual,
                 expected_relation=f"sha256 == {expected}",
-                evidence={"field": name, "path": path},
+                evidence={"path": path},
                 reason="lineage hash match" if ok else "INPUT_LINEAGE_FAILURE",
             )
         )
@@ -172,17 +184,9 @@ def check_canonical_metric_coverage(
     contract: dict[str, Any],
 ) -> list[CheckResult]:
     checks: list[CheckResult] = []
-    cgpt_bindings = [
-        b for b in bindings if b.get("owner") == "CGPT_CURSOR" and b["asset"] not in EXCLUDED_ASSETS
-    ]
-    seen: set[str] = set()
-    for b in cgpt_bindings:
-        mid = b["metric_id"]
-        if mid in seen:
-            continue
-        seen.add(mid)
-        if _is_grok(reg, mid):
-            continue
+    by_id = {b["metric_id"]: b for b in bindings if b.get("owner") == "CGPT_CURSOR"}
+    for mid in contract["bound_metric_ids"]:
+        b = by_id.get(mid) or next((x for x in bindings if x.get("metric_id") == mid), {})
         row = reg.get(mid)
         snap = _snap_metric(snapshot, mid)
         gap = row is None or snap is None
@@ -217,9 +221,17 @@ def check_binding_consistency(
     snapshot: dict[str, Any],
     bindings: list[dict[str, Any]],
     reg: dict[str, Any],
+    contract: dict[str, Any] | None = None,
 ) -> list[CheckResult]:
     checks: list[CheckResult] = []
-    for b in bindings:
+    by_id = {b["binding_id"]: b for b in bindings}
+    bind_ids = list((contract or {}).get("surface_by_binding", {}).keys()) or [
+        b["binding_id"]
+        for b in bindings
+        if b.get("owner") == "CGPT_CURSOR" and b["asset"] not in EXCLUDED_ASSETS
+    ]
+    for bid in sorted(bind_ids):
+        b = by_id[bid]
         if b.get("owner") != "CGPT_CURSOR":
             continue
         if b["asset"] in EXCLUDED_ASSETS:
@@ -228,12 +240,10 @@ def check_binding_consistency(
             continue
         mid = b["metric_id"]
         snap = _snap_metric(snapshot, mid)
-        exp = snap.get("normalized_value") if snap else None
         span, err = locate_binding_span(
             rendered_html,
             b,
             source_html=source_html,
-            expected_numeric=exp if snap and snap.get("status") == "OK" and isinstance(exp, (int, float)) else None,
         )
         if err:
             checks.append(
@@ -291,7 +301,7 @@ def check_binding_consistency(
         fmt = b.get("formatter") or {}
         if fmt.get("type") == "string_exact":
             expected = str(snap.get("normalized_value", ""))
-            ok = span.strip() == expected or span.strip() == str(b.get("source_literal", "")).strip()
+            ok = span.strip() == expected
             checks.append(
                 CheckResult(
                     check_id=f"04_bind_{b['binding_id']}",
@@ -302,7 +312,7 @@ def check_binding_consistency(
                     status="PASS" if ok else "FAIL",
                     assertions_executed=1,
                     observed=span,
-                    expected_relation="string matches canonical",
+                    expected_relation="rendered text == canonical normalized_value",
                     evidence={},
                     reason="string binding ok" if ok else "string mismatch",
                 )
@@ -329,11 +339,6 @@ def check_binding_consistency(
             continue
         observed = parse_display_token(span)
         ok = values_compatible(observed, canonical, fmt)
-        if not ok:
-            lit_val = parse_display_token(b.get("source_literal", ""))
-            ok = values_compatible(lit_val, canonical, fmt) or span.strip() == str(
-                b.get("source_literal", "")
-            ).strip()
         checks.append(
             CheckResult(
                 check_id=f"04_bind_{b['binding_id']}",
@@ -441,7 +446,6 @@ def check_duplicate_consistency(
                 rendered_html,
                 b,
                 source_html=source_html,
-                expected_numeric=exp if snap.get("status") == "OK" and isinstance(exp, (int, float)) else None,
             )
             if err or span is None:
                 fail = True
@@ -453,11 +457,6 @@ def check_duplicate_consistency(
             else:
                 obs = parse_display_token(span)
                 ok = values_compatible(obs, canonical, fmt)
-                if not ok:
-                    lit_val = parse_display_token(b.get("source_literal", ""))
-                    ok = values_compatible(lit_val, canonical, fmt) or span.strip() == str(
-                        b.get("source_literal", "")
-                    ).strip()
             if not ok:
                 fail = True
             values.append((bid, span))
@@ -809,19 +808,13 @@ def _span_value_ok(span: str, binding: dict[str, Any], snap: dict[str, Any]) -> 
     fmt = binding.get("formatter") or {}
     if fmt.get("type") == "string_exact":
         expected = str(snap.get("normalized_value", ""))
-        return span.strip() == expected or span.strip() == str(binding.get("source_literal", "")).strip()
+        return span.strip() == expected
     try:
         canonical = dec(snap["normalized_value"])
     except Exception:
         return False
     observed = parse_display_token(span)
-    ok = values_compatible(observed, canonical, fmt)
-    if not ok:
-        lit_val = parse_display_token(binding.get("source_literal", ""))
-        ok = values_compatible(lit_val, canonical, fmt) or span.strip() == str(
-            binding.get("source_literal", "")
-        ).strip()
-    return ok
+    return values_compatible(observed, canonical, fmt)
 
 
 def check_surface_agreement(
@@ -838,17 +831,42 @@ def check_surface_agreement(
         if b.get("owner") != "CGPT_CURSOR":
             continue
         by_metric.setdefault(b["metric_id"], []).append(b)
-    for mid, group in sorted(by_metric.items()):
-        if len(group) < 2:
-            continue
-        surfaces = {classify_surface(b) for b in group}
-        if len(surfaces) < 2:
-            continue
+    for mid in contract.get("surface_metric_ids", []):
+        group = by_metric.get(mid, [])
         snap = _snap_metric(snapshot, mid)
-        if not snap or snap.get("status") != "OK":
+        if not group:
+            checks.append(
+                CheckResult(
+                    check_id=f"10_surface_{mid.replace('.', '_')}",
+                    category="10_tooltip_visible_visual_agreement",
+                    asset=None,
+                    rule_type="multi_surface_agreement",
+                    metric_ids=[mid],
+                    status="COVERAGE_GAP",
+                    assertions_executed=1,
+                    observed=None,
+                    expected_relation="surfaces agree",
+                    evidence={},
+                    reason="surface metric has no bindings",
+                )
+            )
             continue
-        raw = snap["normalized_value"]
-        if isinstance(raw, str):
+        if not snap or snap.get("status") != "OK":
+            checks.append(
+                CheckResult(
+                    check_id=f"10_surface_{mid.replace('.', '_')}",
+                    category="10_tooltip_visible_visual_agreement",
+                    asset=group[0].get("asset"),
+                    rule_type="multi_surface_agreement",
+                    metric_ids=[mid],
+                    status="BLOCKED_UNKNOWN" if snap else "COVERAGE_GAP",
+                    assertions_executed=1,
+                    observed=None if not snap else snap.get("status"),
+                    expected_relation="surfaces agree",
+                    evidence={"surfaces": sorted({classify_surface(b) for b in group})},
+                    reason="surface canonical non-OK or missing",
+                )
+            )
             continue
         vals: list[tuple[str, str]] = []
         fail = False
@@ -857,9 +875,6 @@ def check_surface_agreement(
                 rendered_html,
                 b,
                 source_html=source_html,
-                expected_numeric=snap.get("normalized_value")
-                if snap.get("status") == "OK" and isinstance(snap.get("normalized_value"), (int, float))
-                else None,
             )
             if err or span is None:
                 fail = True
@@ -878,7 +893,7 @@ def check_surface_agreement(
                 assertions_executed=max(1, len(group)),
                 observed=vals,
                 expected_relation="surfaces agree",
-                evidence={"surfaces": sorted(surfaces)},
+                evidence={"surfaces": sorted({classify_surface(b) for b in group})},
                 reason="surface agreement ok" if not fail else "surface mismatch",
             )
         )
@@ -992,6 +1007,36 @@ def check_derived_metrics(
     return checks
 
 
+def _identify_grok_wallet_occurrences(rendered_html: str) -> list[dict[str, Any]]:
+    """GROK-owned wallet-lane values in #siren-watch-data. Not non-wallet report metrics."""
+    hits: list[dict[str, Any]] = []
+    m = re.search(
+        r'<script[^>]*id="siren-watch-data"[^>]*>(.*?)</script>',
+        rendered_html,
+        re.S,
+    )
+    if not m:
+        return hits
+    try:
+        import json as _json
+
+        data = _json.loads(m.group(1))
+    except Exception:
+        return [{"owner": "GROK", "source": "siren-watch-data", "parse": "invalid"}]
+    pump = (data.get("PUMP") or {}).get("wallets") or []
+    for w in pump:
+        hits.append(
+            {
+                "owner": "GROK",
+                "source": "siren-watch-data",
+                "wallet": w.get("wallet"),
+                "sent": w.get("sent"),
+                "excluded_from": "pump.buyback.usd.7d",
+            }
+        )
+    return hits
+
+
 def check_permanent_regressions(
     *,
     rendered_html: str,
@@ -1018,7 +1063,6 @@ def check_permanent_regressions(
                     rendered_html,
                     b,
                     source_html=source_html,
-                    expected_numeric=exp if isinstance(exp, (int, float)) else None,
                 )
                 if err:
                     fail = True
@@ -1058,7 +1102,6 @@ def check_permanent_regressions(
                     rendered_html,
                     b,
                     source_html=source_html,
-                    expected_numeric=exp if isinstance(exp, (int, float)) else None,
                 )
                 if err:
                     fail = True
@@ -1082,6 +1125,13 @@ def check_permanent_regressions(
                 reason="PUMP buyback ok" if not fail else "PUMP buyback duplicate mismatch",
             )
         )
+        wallet_hits = _identify_grok_wallet_occurrences(rendered_html)
+        grok_bindings = [b for b in bindings if b.get("owner") == "GROK"]
+        grok_buyback = [b["binding_id"] for b in grok_bindings if b.get("metric_id") == mid]
+        excluded = grok_buyback == []
+        identified = bool(wallet_hits)
+        nonwallet_unchanged = not fail
+        wallet_ok = identified and excluded and nonwallet_unchanged
         checks.append(
             CheckResult(
                 check_id="12_reg_pump_wallet_invariance",
@@ -1089,12 +1139,23 @@ def check_permanent_regressions(
                 asset="pump",
                 rule_type="wallet_lane_exclusion",
                 metric_ids=[mid],
-                status="NOT_APPLICABLE",
-                assertions_executed=1,
-                observed="wallet lane excluded from non-wallet metric",
-                expected_relation="GROK wallet values not conflated",
-                evidence={"note": pump.get("wallet_lane_exclusion")},
-                reason="wallet lane excluded from pump.buyback.usd.7d checks",
+                status="PASS" if wallet_ok else "FAIL",
+                assertions_executed=max(1, len(wallet_hits) + 1),
+                observed={
+                    "wallet_hits": wallet_hits[:8],
+                    "grok_buyback_bindings": grok_buyback,
+                    "nonwallet_binding_ids": pump_ids,
+                },
+                expected_relation="GROK wallet values excluded from pump.buyback.usd.7d",
+                evidence={
+                    "wallet_occurrence_identified_as_grok_owned": bool(wallet_hits) or bool(grok_bindings),
+                    "wallet_occurrence_excluded_from_nonwallet_comparison": excluded,
+                    "non_wallet_binding_set_unchanged": nonwallet_unchanged,
+                    "note": pump.get("wallet_lane_exclusion"),
+                },
+                reason="wallet lane excluded from pump.buyback.usd.7d checks"
+                if wallet_ok
+                else "wallet invariance failed",
             )
         )
     return checks
@@ -1139,6 +1200,7 @@ def run_all_checks(
             snapshot=snapshot,
             bindings=bindings,
             reg=reg,
+            contract=contract,
         )
     )
     checks.extend(

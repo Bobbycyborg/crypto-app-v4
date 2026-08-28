@@ -8,34 +8,59 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 FIX = ROOT / "tests/job4/fixtures"
 sys.path.insert(0, str(ROOT / "tests/job4"))
+sys.path.insert(0, str(FIX))
 
 
 def main() -> int:
-    if not (FIX / "M04-rendered.html").is_file():
-        subprocess.run([sys.executable, str(FIX / "build_mutations.py")], check=True, cwd=str(ROOT))
+    subprocess.run([sys.executable, str(FIX / "build_mutations.py")], check=True, cwd=str(ROOT))
     from _helpers import run_checker
-    sys.path.insert(0, str(FIX))
     from build_mutations import MUTATION_EXPECTATIONS
 
-    caught = 0
-    for mid, exp in MUTATION_EXPECTATIONS.items():
+    assert len(MUTATION_EXPECTATIONS) == 24
+    exact = 0
+    missing = 0
+    wrong_status = 0
+    wrong_check_id = 0
+    for mid in [f"M{i:02d}" for i in range(1, 25)]:
+        exp = MUTATION_EXPECTATIONS[mid]
         snap = FIX / f"{mid}-snapshot.json"
         html = FIX / f"{mid}-rendered.html"
         if not snap.is_file() or not html.is_file():
-            continue
-        code, report = run_checker(snapshot=snap, rendered=html, run_id=mid)
-        if exp["overall"] == "PASS":
-            if report["overall_status"] == "PASS":
-                caught += 1
-        elif exp["overall"] == "FAIL" and code == 2:
-            caught += 1
-        elif exp["overall"] == "COVERAGE_GAP" and code == 3:
-            caught += 1
-        elif exp["overall"] == "FAIL" and exp.get("check_id"):
-            chk = exp["check_id"]
-            if any(c["check_id"] == chk and c["status"] == "FAIL" for c in report["checks"]):
-                caught += 1
-    assert caught >= 20, caught
+            raise FileNotFoundError(f"missing mutation fixture {mid}")
+        kwargs = {"snapshot": snap, "rendered": html, "run_id": mid}
+        if exp.get("contract"):
+            kwargs["contract"] = FIX / exp["contract"]
+        if exp.get("bindings"):
+            kwargs["bindings"] = FIX / exp["bindings"]
+        if exp.get("source_html"):
+            kwargs["source_html"] = FIX / exp["source_html"]
+        code, report = run_checker(**kwargs)
+        ok = True
+        if code != exp["exit_code"]:
+            ok = False
+            wrong_status += 1
+            print(f"{mid} exit {code} != {exp['exit_code']}")
+        if report.get("overall_status") != exp["overall"]:
+            ok = False
+            wrong_status += 1
+            print(f"{mid} overall {report.get('overall_status')} != {exp['overall']}")
+        cid = exp["check_id"]
+        hit = next((c for c in report["checks"] if c["check_id"] == cid), None)
+        if hit is None or hit["status"] != exp["check_status"] or hit["category"] != exp["category"]:
+            ok = False
+            wrong_check_id += 1
+            print(f"{mid} check {cid} {hit}")
+        if ok:
+            exact += 1
+    print(
+        f"mutation_total=24 mutation_executed={24 - missing} "
+        f"mutation_exact_matches={exact} mutation_missing={missing} "
+        f"mutation_wrong_status={wrong_status} mutation_wrong_check_id={wrong_check_id}"
+    )
+    assert missing == 0
+    assert exact == 24
+    assert wrong_status == 0
+    assert wrong_check_id == 0
     print("test_regressions OK")
     return 0
 

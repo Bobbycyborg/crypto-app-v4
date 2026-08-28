@@ -24,10 +24,14 @@ def run_checker(
     snapshot: Path,
     rendered: Path,
     source_html: Path | None = None,
+    bindings: Path | None = None,
+    contract: Path | None = None,
     run_id: str = "test-run",
     out: Path | None = None,
 ) -> tuple[int, dict[str, Any]]:
     source_html = source_html or ROOT / "index-v4.html"
+    bindings = bindings or ROOT / "renderer/binding-manifest.json"
+    contract = contract or CONTRACT
     out = out or FIX / f"out-{run_id}.json"
     cmd = [
         sys.executable,
@@ -39,13 +43,13 @@ def run_checker(
         "--source-html",
         str(source_html),
         "--bindings",
-        str(ROOT / "renderer/binding-manifest.json"),
+        str(bindings),
         "--registry",
         str(ROOT / "metrics/metric-registry.json"),
         "--collector-plan",
         str(ROOT / "collectors/collector-plan.json"),
         "--contract",
-        str(CONTRACT),
+        str(contract),
         "--out",
         str(out),
         "--run-id",

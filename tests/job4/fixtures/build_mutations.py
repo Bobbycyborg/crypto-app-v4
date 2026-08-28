@@ -4,9 +4,9 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -14,31 +14,179 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[3]
 FIX = Path(__file__).resolve().parent
 
-MUTATION_EXPECTATIONS: dict[str, dict[str, str]] = {
-    "M01": {"overall": "COVERAGE_GAP", "category": "02_active_asset_coverage"},
-    "M02": {"overall": "COVERAGE_GAP", "category": "03_canonical_metric_coverage"},
-    "M03": {"overall": "COVERAGE_GAP", "category": "01_input_lineage"},
-    "M04": {"overall": "FAIL", "category": "12_permanent_regressions", "check_id": "12_reg_spx_price_duplicate"},
-    "M05": {"overall": "FAIL", "category": "12_permanent_regressions", "check_id": "12_reg_pump_buyback_duplicate"},
-    "M06": {"overall": "FAIL", "category": "12_permanent_regressions", "check_id": "12_reg_pump_buyback_duplicate"},
-    "M07": {"overall": "PASS", "category": "12_permanent_regressions", "check_id": "12_reg_pump_wallet_invariance"},
-    "M08": {"overall": "FAIL", "category": "06_ath_drawdown_arithmetic"},
-    "M09": {"overall": "FAIL", "category": "06_ath_drawdown_arithmetic"},
-    "M10": {"overall": "FAIL", "category": "07_moving_average_language"},
-    "M11": {"overall": "FAIL", "category": "08_relative_strength_language"},
-    "M12": {"overall": "FAIL", "category": "09_freshness_asof_consistency"},
-    "M13": {"overall": "FAIL", "category": "09_freshness_asof_consistency"},
-    "M14": {"overall": "FAIL", "category": "10_tooltip_visible_visual_agreement"},
-    "M15": {"overall": "FAIL", "category": "05_duplicate_consistency"},
-    "M16": {"overall": "FAIL", "category": "05_duplicate_consistency"},
-    "M17": {"overall": "FAIL", "category": "05_duplicate_consistency"},
-    "M18": {"overall": "FAIL", "category": "11_derived_metric_arithmetic"},
-    "M19": {"overall": "COVERAGE_GAP", "category": "11_derived_metric_arithmetic"},
-    "M20": {"overall": "FAIL", "category": "04_rendered_binding_consistency"},
-    "M21": {"overall": "PASS", "category": "04_rendered_binding_consistency"},
-    "M22": {"overall": "FAIL", "category": "01_input_lineage"},
-    "M23": {"overall": "COVERAGE_GAP", "category": "04_rendered_binding_consistency"},
-    "M24": {"overall": "PASS", "category": "12_permanent_regressions"},
+MUTATION_EXPECTATIONS: dict[str, dict[str, Any]] = {
+    "M01": {
+        "exit_code": 3,
+        "overall": "COVERAGE_GAP",
+        "check_id": "02_asset_zec",
+        "check_status": "COVERAGE_GAP",
+        "category": "02_active_asset_coverage",
+    },
+    "M02": {
+        "exit_code": 3,
+        "overall": "COVERAGE_GAP",
+        "check_id": "03_metric_btc_price_usd_live",
+        "check_status": "COVERAGE_GAP",
+        "category": "03_canonical_metric_coverage",
+    },
+    "M03": {
+        "exit_code": 3,
+        "overall": "COVERAGE_GAP",
+        "check_id": "04_bind_intentionally_absent_probe",
+        "check_status": "COVERAGE_GAP",
+        "category": "04_rendered_binding_consistency",
+        "contract": "M03-contract.json",
+    },
+    "M04": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "12_reg_spx_price_duplicate",
+        "check_status": "FAIL",
+        "category": "12_permanent_regressions",
+    },
+    "M05": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "12_reg_pump_buyback_duplicate",
+        "check_status": "FAIL",
+        "category": "12_permanent_regressions",
+    },
+    "M06": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "12_reg_pump_buyback_duplicate",
+        "check_status": "FAIL",
+        "category": "12_permanent_regressions",
+    },
+    "M07": {
+        "exit_code": 0,
+        "overall": "PASS",
+        "check_id": "12_reg_pump_wallet_invariance",
+        "check_status": "PASS",
+        "category": "12_permanent_regressions",
+    },
+    "M08": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "06_ath_btc",
+        "check_status": "FAIL",
+        "category": "06_ath_drawdown_arithmetic",
+    },
+    "M09": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "06_ath_btc",
+        "check_status": "FAIL",
+        "category": "06_ath_drawdown_arithmetic",
+    },
+    "M10": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "07_ma_btc_ma_language_stance_headline",
+        "check_status": "FAIL",
+        "category": "07_moving_average_language",
+    },
+    "M11": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "08_rs_sol.rs.vs_btc.pp.7d_128b8d765ef15fa0_rs_language",
+        "check_status": "FAIL",
+        "category": "08_relative_strength_language",
+    },
+    "M12": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "09_fresh_btc_price_usd_live",
+        "check_status": "FAIL",
+        "category": "09_freshness_asof_consistency",
+    },
+    "M13": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "09_fresh_btc_price_usd_live",
+        "check_status": "FAIL",
+        "category": "09_freshness_asof_consistency",
+    },
+    "M14": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "10_surface_pump_buyback_usd_7d",
+        "check_status": "FAIL",
+        "category": "10_tooltip_visible_visual_agreement",
+    },
+    "M15": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "05_dup_pump_buyback_usd_7d",
+        "check_status": "FAIL",
+        "category": "05_duplicate_consistency",
+    },
+    "M16": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_btc.inflation.pct.current::01660e6a6d540fca",
+        "check_status": "FAIL",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M17": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_render.bme.ratio.last4::00a581be80d3bc08",
+        "check_status": "FAIL",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M18": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "11_derive_btc_leverage_x_current",
+        "check_status": "FAIL",
+        "category": "11_derived_metric_arithmetic",
+    },
+    "M19": {
+        "exit_code": 3,
+        "overall": "COVERAGE_GAP",
+        "check_id": "11_derive_btc_leverage_x_current",
+        "check_status": "COVERAGE_GAP",
+        "category": "11_derived_metric_arithmetic",
+    },
+    "M20": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_btc.price.usd.live::30f665b010005234",
+        "check_status": "FAIL",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M21": {
+        "exit_code": 0,
+        "overall": "PASS",
+        "check_id": "04_bind_btc.price.usd.live::30f665b010005234",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M22": {
+        "exit_code": 4,
+        "overall": "FAIL",
+        "check_id": "01_lineage_07_manifest_source_actual",
+        "check_status": "FAIL",
+        "category": "01_input_lineage",
+        "bindings": "M22-manifest.json",
+        "contract": "M22-contract.json",
+    },
+    "M23": {
+        "exit_code": 4,
+        "overall": "FAIL",
+        "check_id": "01_lineage_04_source_html_contract",
+        "check_status": "FAIL",
+        "category": "01_input_lineage",
+        "source_html": "M23-source.html",
+    },
+    "M24": {
+        "exit_code": 0,
+        "overall": "PASS",
+        "check_id": "12_reg_pump_wallet_invariance",
+        "check_status": "PASS",
+        "category": "12_permanent_regressions",
+    },
 }
 
 
@@ -75,7 +223,15 @@ def build_mutations() -> None:
     _save("M02-snapshot.json", s02)
     (FIX / "M02-rendered.html").write_text(html, encoding="utf-8")
 
-    # M03 bad contract handled in test via temp contract
+    # M03 extra expected check while category 04 still present
+    c03 = copy.deepcopy(contract)
+    extra = "04_bind_intentionally_absent_probe"
+    c03.setdefault("expected_check_ids", [])
+    if extra not in c03["expected_check_ids"]:
+        c03["expected_check_ids"] = list(c03["expected_check_ids"]) + [extra]
+    _save("M03-contract.json", c03)
+    _save("M03-snapshot.json", snap)
+    (FIX / "M03-rendered.html").write_text(html, encoding="utf-8")
 
     # M04 SPX duplicate — break first SPX regression binding span
     s04 = copy.deepcopy(snap)
@@ -117,18 +273,15 @@ def build_mutations() -> None:
     _save("M08-snapshot.json", s08)
     (FIX / "M08-rendered.html").write_text(html, encoding="utf-8")
 
-    # M09 visual bar mutation — BTC ATH bar only
+    # M09 visual bar mutation — inject a wrong BTC ATH bar
     sys.path.insert(0, str(ROOT))
     from integrity.extract import extract_articles
 
     articles = extract_articles(html)
     btc_art = articles.get("btc", "")
-    btc_art_m = re.sub(
-        r'(<div class="ddbar-fill" style="width:)\d+(%")',
-        r"\g<1>5\2",
-        btc_art,
-        count=1,
-    )
+    marker = '<h2 class="alt-ticker">BTC</h2>'
+    bar = '<div class="ddbar-fill" style="width:5%"></div>'
+    btc_art_m = btc_art.replace(marker, marker + bar, 1) if marker in btc_art else btc_art
     h09 = html.replace(btc_art, btc_art_m, 1) if btc_art_m != btc_art else html
     (FIX / "M09-rendered.html").write_text(h09, encoding="utf-8")
     _save("M09-snapshot.json", snap)
@@ -186,11 +339,24 @@ def build_mutations() -> None:
     (FIX / "M15-rendered.html").write_text(h15, encoding="utf-8")
     _save("M15-snapshot.json", snap)
 
-    # M16/M17 duplicate groups — reuse M05/M15 patterns
-    (FIX / "M16-rendered.html").write_text(h15, encoding="utf-8")
+    # M16 ordinary numeric: mutate one rendered occurrence; source_literal still canonical
+    inf_b = next(
+        b
+        for b in manifest["bindings"]
+        if b["binding_id"] == "btc.inflation.pct.current::01660e6a6d540fca"
+    )
+    needle = inf_b["anchor_before"] + inf_b["source_literal"]
+    h16 = html.replace(needle, inf_b["anchor_before"] + "0.99", 1)
+    (FIX / "M16-rendered.html").write_text(h16, encoding="utf-8")
     _save("M16-snapshot.json", snap)
-    (FIX / "M17-rendered.html").write_text(h15, encoding="utf-8")
-    _save("M17-snapshot.json", snap)
+
+    # M17 string_exact: change snapshot canonical, leave rendered at old source_literal
+    s17 = copy.deepcopy(snap)
+    ratio_mid = "render.bme.ratio.last4"
+    if ratio_mid in s17["metrics"]:
+        s17["metrics"][ratio_mid]["normalized_value"] = "STALE_LITERAL_PROBE"
+    _save("M17-snapshot.json", s17)
+    (FIX / "M17-rendered.html").write_text(html, encoding="utf-8")
 
     # M18 derived mismatch
     s18 = copy.deepcopy(snap)
@@ -211,37 +377,35 @@ def build_mutations() -> None:
     _save("M20-snapshot.json", s20)
     (FIX / "M20-rendered.html").write_text(html, encoding="utf-8")
 
-    # M21 UNKNOWN + UNKNOWN UI — re-render from UNKNOWN snapshot
+    # M21 UNKNOWN + UNKNOWN UI — mutate only the bound live-price occurrence
     s21 = copy.deepcopy(snap)
     s21["metrics"]["btc.price.usd.live"]["status"] = "UNKNOWN"
     _save("M21-snapshot.json", s21)
-    m21_out = FIX / "M21-rendered.html"
-    proc = subprocess.run(
-        [
-            sys.executable,
-            str(ROOT / "renderer/render_report.py"),
-            "--snapshot",
-            str(FIX / "M21-snapshot.json"),
-            "--source",
-            str(ROOT / "index-v4.html"),
-            "--out",
-            str(m21_out),
-        ],
-        cwd=str(ROOT),
-        capture_output=True,
-        text=True,
+    live_b = next(
+        b
+        for b in manifest["bindings"]
+        if b["binding_id"] == "btc.price.usd.live::30f665b010005234"
     )
-    if proc.returncode not in (0, 2):
-        raise RuntimeError(proc.stderr or proc.stdout)
+    live_needle = live_b["anchor_before"] + live_b["source_literal"]
+    h21 = html.replace(live_needle, live_b["anchor_before"] + "UNKNOWN", 1)
+    (FIX / "M21-rendered.html").write_text(h21, encoding="utf-8")
 
-    # M22 hash mismatch handled in test
+    # M22 mutate only manifest-declared source hash
+    man22 = copy.deepcopy(manifest)
+    man22["source_html_sha256"] = "0" * 64
+    man22_path = FIX / "M22-manifest.json"
+    man22_path.write_text(json.dumps(man22, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    c22 = copy.deepcopy(contract)
+    c22["binding_manifest_sha256"] = hashlib.sha256(man22_path.read_bytes()).hexdigest()
+    _save("M22-contract.json", c22)
+    _save("M22-snapshot.json", snap)
+    (FIX / "M22-rendered.html").write_text(html, encoding="utf-8")
 
-    # M23 removed binding occurrence — corrupt anchor context in rendered HTML
-    first = contract["permanent_regressions"]["spx_price_duplicate"]["binding_ids"][0]
-    b = next(x for x in manifest["bindings"] if x["binding_id"] == first)
-    h23 = html.replace(b["anchor_before"], b["anchor_before"][:-12] + "ZZZCORRUPT", 1)
-    (FIX / "M23-rendered.html").write_text(h23, encoding="utf-8")
+    # M23 mutate only actual source file
+    src = (ROOT / "index-v4.html").read_text(encoding="utf-8")
+    (FIX / "M23-source.html").write_text(src + "\n<!-- job4-source-mutation -->\n", encoding="utf-8")
     _save("M23-snapshot.json", snap)
+    (FIX / "M23-rendered.html").write_text(html, encoding="utf-8")
 
     # M24 wallet mutation — same as M07
     _save("M24-snapshot.json", s07)

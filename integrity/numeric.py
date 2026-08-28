@@ -43,7 +43,18 @@ def parse_display_token(text: str) -> Decimal | None:
     raw = text.strip()
     if not raw or raw.upper() == "UNKNOWN":
         return None
-    raw = raw.replace("−", "-").replace("~", "").replace(",", "")
+    raw = raw.replace("−", "-")
+    raw = re.sub(r"\b\d+d\b", " ", raw, flags=re.I)
+    raw = re.sub(r"^(above|below|af|oi)\s+", "", raw, flags=re.I)
+    pct = re.search(r"[~\+\-−]?\$?[\d,]+(?:\.\d+)?%", raw)
+    m = pct or re.search(
+        r"[~+\-−]*\$?[\d,]+(?:\.\d+)?(?:[eE][+\-−]?\d+)?(?:[kKmMbBtT]|%|pp|×|x)?",
+        raw,
+    )
+    if not m:
+        return None
+    raw = m.group(0)
+    raw = raw.replace("~", "").replace(",", "")
     m = re.match(r"^\d+d\s+", raw, re.I)
     if m:
         raw = raw[m.end() :]

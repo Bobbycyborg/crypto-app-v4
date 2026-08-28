@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from integrity.model import EXIT_INTERNAL, IntegrityReport, REQUIRED_CATEGORIES, SCHEMA_VERSION
+from integrity.expected import expected_check_ids
 from integrity.rules import run_all_checks
 
 
@@ -71,7 +72,8 @@ def run_checker(
         manifest=manifest,
     )
     report.finalize(
-        contract_required=tuple(contract.get("required_categories", REQUIRED_CATEGORIES))
+        contract_required=tuple(contract.get("required_categories", REQUIRED_CATEGORIES)),
+        expected_check_ids=expected_check_ids(contract),
     )
     return report
 

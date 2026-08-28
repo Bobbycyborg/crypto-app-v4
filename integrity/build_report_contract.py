@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from integrity.expected import compute_expected_check_ids
 from integrity.extract import classify_surface, extract_articles, extract_stance_headline
 from integrity.model import (
     ACTIVE_REPORT_ASSETS,
@@ -294,9 +295,21 @@ def build_contract(
         )[:3]
 
     surface_map: dict[str, list[str]] = {}
+    by_metric: dict[str, list[dict[str, Any]]] = {}
     for b in cgpt_bindings:
         surf = classify_surface(b)
         surface_map.setdefault(b["binding_id"], surf)
+        by_metric.setdefault(b["metric_id"], []).append(b)
+    surface_metric_ids: list[str] = []
+    for mid, group in sorted(by_metric.items()):
+        if len(group) < 2:
+            continue
+        surfaces = {classify_surface(b) for b in group}
+        if len(surfaces) < 2:
+            continue
+        if all((b.get("formatter") or {}).get("type") == "string_exact" for b in group):
+            continue
+        surface_metric_ids.append(mid)
 
     contract = {
         "schema_version": CONTRACT_SCHEMA_VERSION,
@@ -319,6 +332,7 @@ def build_contract(
         "ath_drawdown_rules": ath_rules,
         "freshness_metric_ids": freshness_metric_ids,
         "surface_by_binding": surface_map,
+        "surface_metric_ids": surface_metric_ids,
         "permanent_regressions": {
             "spx_price_duplicate": {
                 "metric_id": "spx.price.usd.live",
@@ -331,15 +345,23 @@ def build_contract(
             },
         },
         "expected_checks": {
-            "input_lineage": 7,
+            "input_lineage": 8,
             "active_assets": len(ACTIVE_REPORT_ASSETS),
+            "excluded_assets": len(EXCLUDED_ASSETS),
+            "canonical_metrics": len(bound_metric_ids),
             "binding_consistency": len(cgpt_bindings),
+            "duplicate_groups": len(dup_groups),
             "derive_rules": len(derive_rules),
             "ma_claims": len(ma_claims),
             "rs_claims": len(rs_claims),
             "ath_rules": len(ath_rules),
+            "freshness": len(freshness_metric_ids),
+            "surface": len(surface_metric_ids),
+            "permanent_regressions": 3,
         },
     }
+    contract["expected_check_ids"] = compute_expected_check_ids(contract)
+    contract["expected_check_count"] = len(contract["expected_check_ids"])
     return contract
 
 

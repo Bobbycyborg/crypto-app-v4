@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import re
-import re
 from typing import Any
 
 ARTICLE_RE = re.compile(
@@ -87,12 +86,23 @@ def _flex_anchor_pattern(anchor: str) -> re.Pattern[str]:
     return re.compile("".join(parts), re.S)
 
 
+def _skip_leading_sibling(before: str, rendered: str, value_start: int) -> int:
+    """If before ended with a sibling `$N · `, skip that token in rendered too."""
+    if not re.search(r"\$[\d.,]+[kKmMbBtT]?\s*·\s*$", before):
+        return value_start
+    m = re.match(r"\$[\d.,]+[kKmMbBtT]?\s*·\s*", rendered[value_start:])
+    return value_start + m.end() if m else value_start
+
+
 def _find_before(rendered: str, before: str, start: int = 0) -> tuple[int, int] | None:
     """Return (match_pos, value_start) for anchor_before, with suffix fallback."""
     for key in _before_search_keys(before):
         pos = rendered.find(key, start)
         if pos >= 0:
-            return pos, pos + len(key)
+            value_start = pos + len(key)
+            if key != before:
+                value_start = _skip_leading_sibling(before, rendered, value_start)
+            return pos, value_start
     m = _flex_anchor_pattern(before).search(rendered, start)
     if m:
         return m.start(), m.end()
@@ -104,7 +114,10 @@ def _find_before(rendered: str, before: str, start: int = 0) -> tuple[int, int] 
                 continue
             pos = rendered.find(suffix, start)
             if pos >= 0:
-                return pos, pos + len(suffix)
+                value_start = pos + len(suffix)
+                if key != before:
+                    value_start = _skip_leading_sibling(before, rendered, value_start)
+                return pos, value_start
     return None
 
 
@@ -121,6 +134,12 @@ def locate_binding_span(
     literal = binding["source_literal"]
     fmt = binding.get("formatter") or {}
 
+    combo = before + literal + after
+    if rendered_html.count(combo) == 1:
+        start = rendered_html.index(combo) + len(before)
+        end = start + len(literal)
+        return rendered_html[start:end], None
+
     def _strip_prefix_suffix(text: str) -> str:
         s = text.strip()
         prefix = fmt.get("literal_prefix") or ""
@@ -133,8 +152,6 @@ def locate_binding_span(
 
     def _finalize(raw: str) -> str:
         if fmt.get("type") == "string_exact":
-            return raw
-        if raw == literal:
             return raw
         stripped = _strip_prefix_suffix(raw)
         if stripped != raw:
@@ -159,41 +176,33 @@ def locate_binding_span(
             nth = _nth_before_index(source_html, before, src_at)
         except ValueError:
             return None, "before_occurrence_not_found"
-        candidates: list[tuple[str, str | None]] = []
         occ = 0
         pos = 0
+        nth_span: tuple[str | None, str | None] | None = None
         while pos < len(rendered_html):
             found = _find_before(rendered_html, before, pos)
             if found is None:
                 break
             match_pos, start = found
+            if match_pos < pos:
+                break
             occ += 1
-            span, err = _extract_at(start)
-            if err is None and span is not None:
-                candidates.append((span, None))
-            if occ == nth and err is None:
-                return span, None
-            pos = match_pos + 1
-        if expected_numeric is not None and candidates:
-            from integrity.numeric import dec, parse_display_token, values_compatible
-
-            for span, _ in candidates:
-                obs = parse_display_token(span)
-                if values_compatible(obs, dec(expected_numeric), fmt):
-                    return span, None
+            if occ == nth:
+                nth_span = _extract_at(start)
+                break
+            pos = max(match_pos + 1, start)
+        if nth_span is not None:
+            return nth_span
         if rendered_html.count(before) == 1:
             found = _find_before(rendered_html, before)
             if found:
-                start = found[1]
-                return _extract_at(start)
-        if candidates:
-            return candidates[0]
+                return _extract_at(found[1])
         return None, "rendered_before_missing"
     combo = before + literal + after
     if rendered_html.count(combo) != 1:
         return None, f"combo_count_{rendered_html.count(combo)}"
     start = rendered_html.index(combo) + len(before)
-    end = start + len(binding["source_literal"])
+    end = start + len(literal)
     return rendered_html[start:end], None
 
 
