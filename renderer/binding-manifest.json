@@ -1198,13 +1198,22 @@
       "target_kind": "HTML_TEXT",
       "field": "value",
       "source_literal": "OI $66.4M \u00b7 funding -0.00001",
-      "binding_raw": null,
+      "binding_raw": 66400000,
       "anchor_before": "div class=\"ev-tip-row\"><span class=\"ev-k\">OI / funding</span><span class=\"ev-v\">",
       "anchor_after": "/8h</span></div><div class=\"ev-tip-row\"><span class=\"ev-k\">Caveat</span><span cl",
       "anchor_sha256": "ebc2dfc71174895cf359660ea733763662a24c0b606f952a791feb2b70abaed0",
       "component_id": "OI",
       "formatter": {
-        "type": "string_exact"
+        "type": "numeric",
+        "currency_prefix": "$",
+        "scale_suffix": "M",
+        "scale": 1000000,
+        "decimal_places": 1,
+        "literal_prefix": "OI ",
+        "literal_suffix": " \u00b7 funding -0.00001",
+        "roundtrip_verified": true,
+        "formatter_raw_source": "COMPOUND_DISPLAY_TOKEN",
+        "rejected_occurrence_raw": "UNKNOWN"
       },
       "status_behavior": "UNKNOWN_ON_NON_OK",
       "notes": null

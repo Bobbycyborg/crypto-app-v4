@@ -7,7 +7,9 @@ import argparse
 import hashlib
 import html as html_lib
 import json
+import re
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +18,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from renderer.formatters import format_value
+from renderer.semantic_wording import apply_semantic_wording
 
 RENDERER_VERSION = "job3-v1"
 NON_OK = frozenset(
@@ -33,8 +36,56 @@ NON_OK = frozenset(
 )
 
 
+_MONTHS = (
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+)
+
+
 def _sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def _ordinal(day: int) -> str:
+    if 11 <= day <= 13:
+        suf = "th"
+    else:
+        suf = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+    return f"{day}{suf}"
+
+
+def apply_report_header(html: str, snapshot: dict[str, Any], source_html: str) -> str:
+    """Stamp current-week title from snapshot run date. Skip synthetic Job3/Job4 fixtures."""
+    run_id = str(snapshot.get("source_run_id") or "")
+    if "SYNTHETIC" in run_id.upper():
+        return html
+    parsed = re.match(r"^(\d{4})(\d{2})(\d{2})T", run_id)
+    if not parsed:
+        return html
+    dt = date(int(parsed.group(1)), int(parsed.group(2)), int(parsed.group(3)))
+    new_date = f"{_MONTHS[dt.month - 1]} {_ordinal(dt.day)}, {dt.year}"
+    title_m = re.search(r"<title>([^<]+)</title>", source_html)
+    if not title_m:
+        return html
+    old = title_m.group(1).strip()
+    report_m = re.search(r"Report\s+(\d+)", old)
+    if not report_m:
+        return html
+    new_header = f"{new_date} - Report {int(report_m.group(1)) + 1:02d}"
+    if old not in html:
+        return html
+    return html.replace(old, new_header)
+
 
 
 def _sha256_file(path: Path) -> str:
@@ -121,6 +172,9 @@ def render_report(
             raise RuntimeError(f"WRITER_QUARANTINE_MISMATCH:{w['writer_id']}:{count}")
         out = out.replace(frag, w["replacement_fragment"])
         patches += 1
+
+    out = apply_semantic_wording(out, snapshot)
+    out = apply_report_header(out, snapshot, source_html)
 
     for bid, state in style_attrs.items():
         # paired textual UNKNOWN already rendered; mark geometry neutral

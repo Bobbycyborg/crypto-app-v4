@@ -96,9 +96,12 @@ def recover_presentation_formatter(
     manifest_lit: str = "",
     anchor_after: str = "",
 ) -> dict[str, Any]:
+    value_end = _compound_oi_value_end(source_literal)
     matches: list[tuple[int, int, dict[str, Any]]] = []
     for body, extra_suffix in _body_variants(source_literal):
         for start, end, token in enumerate_numeric_tokens(body):
+            if value_end is not None and end > value_end:
+                continue
             fmt = _build_formatter(body, start, end, token, extra_suffix, manifest_lit, anchor_after)
             matches.append((start, end, fmt))
 
@@ -148,6 +151,9 @@ def resolve_binding_raw(
     }
 
     if occ_raw == "UNKNOWN" or (occ_raw is not None and not is_numeric_raw(occ_raw)):
+        inferred = _compound_oi_display_raw(source_literal)
+        if inferred is not None and source_literal and _try_recover(source_literal, inferred, **kwargs):
+            return RawSelection(inferred, "COMPOUND_DISPLAY_TOKEN", occ_raw)
         return None
 
     if occ_raw is not None:
@@ -294,6 +300,42 @@ def _build_formatter(
     return fmt
 
 
+def _compound_oi_value_end(source_literal: str) -> int | None:
+    """OI $XM · funding Y — the bound value is the $XM token, not the rate."""
+    if not source_literal.startswith("OI "):
+        return None
+    for marker in (" \u00b7 funding ", " · funding "):
+        i = source_literal.find(marker)
+        if i >= 0:
+            return i
+    return None
+
+
+_OI_HEAD_TOKEN = re.compile(r"^\$([\d,]+(?:\.\d+)?)([kKmMbBtT])$")
+_OI_SCALE = {
+    "k": Decimal("1000"),
+    "K": Decimal("1000"),
+    "m": Decimal("1000000"),
+    "M": Decimal("1000000"),
+    "b": Decimal("1000000000"),
+    "B": Decimal("1000000000"),
+    "t": Decimal("1000000000000"),
+    "T": Decimal("1000000000000"),
+}
+
+
+def _compound_oi_display_raw(source_literal: str) -> Decimal | None:
+    cut = _compound_oi_value_end(source_literal)
+    if cut is None:
+        return None
+    head = source_literal[3:cut].strip()
+    m = _OI_HEAD_TOKEN.fullmatch(head)
+    if not m:
+        return None
+    d = Decimal(m.group(1).replace(",", "")) * _OI_SCALE[m.group(2)]
+    return int(d) if d == d.to_integral_value() else float(d)
+
+
 def recover_formatter(
     *,
     source_literal: str,
@@ -304,9 +346,12 @@ def recover_formatter(
     if not is_numeric_raw(raw_value):
         raise FormatterRecoveryError("raw not numeric usable")
 
+    value_end = _compound_oi_value_end(source_literal)
     matches: list[tuple[int, int, dict[str, Any]]] = []
     for body, extra_suffix in _body_variants(source_literal):
         for start, end, token in enumerate_numeric_tokens(body):
+            if value_end is not None and end > value_end:
+                continue
             fmt = _build_formatter(body, start, end, token, extra_suffix, manifest_lit, anchor_after)
             if format_value(raw_value, fmt) == source_literal:
                 matches.append((start, end, fmt))

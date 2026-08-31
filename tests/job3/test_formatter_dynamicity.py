@@ -56,7 +56,7 @@ def main() -> int:
     print(f"numeric_dynamicity_failures={failures}")
     print(f"nos_sentinel_fanout={nos_fanout}")
     print(f"nos_1234567_to_1_23M={nos_proof}")
-    ok = checked == 408 and failures == 0 and nos_fanout == "PASS" and nos_proof == "PASS"
+    ok = checked == 409 and failures == 0 and nos_fanout == "PASS" and nos_proof == "PASS"
     return 0 if ok else 1
 
 

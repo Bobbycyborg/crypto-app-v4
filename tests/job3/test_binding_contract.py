@@ -113,7 +113,7 @@ def main() -> int:
     }
     if g["eligible_job1_occurrences"] != g["binding_entries"]:
         return 1
-    if g["numeric_bindings"] != 408 or g["raw_roundtrip_verified"] != 404 or g["presentation_syntax_recovered"] != 4:
+    if g["numeric_bindings"] != 409 or g["raw_roundtrip_verified"] != 405 or g["presentation_syntax_recovered"] != 4:
         return 1
     return 1 if bad else 0
 

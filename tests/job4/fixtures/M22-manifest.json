@@ -1187,11 +1187,20 @@
       "anchor_sha256": "ebc2dfc71174895cf359660ea733763662a24c0b606f952a791feb2b70abaed0",
       "asset": "pump",
       "binding_id": "pump.oi.usd.current::1935aee50ff5615e:oioi664mfunding000",
-      "binding_raw": null,
+      "binding_raw": 66400000,
       "component_id": "OI",
       "field": "value",
       "formatter": {
-        "type": "string_exact"
+        "currency_prefix": "$",
+        "decimal_places": 1,
+        "formatter_raw_source": "COMPOUND_DISPLAY_TOKEN",
+        "literal_prefix": "OI ",
+        "literal_suffix": " \u00b7 funding -0.00001",
+        "rejected_occurrence_raw": "UNKNOWN",
+        "roundtrip_verified": true,
+        "scale": 1000000,
+        "scale_suffix": "M",
+        "type": "numeric"
       },
       "job1_mapping_id": "m0984_1935aee50ff5615e:oioi664mfunding000",
       "job1_occurrence_id": "1935aee50ff5615e:oioi664mfunding000",

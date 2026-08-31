@@ -28,7 +28,7 @@
     }
   ],
   "binding_count": 418,
-  "binding_manifest_sha256": "d3c1d5b9878d032132592d5092c373e4ec6ae9088a9f0507f7768cf805a93ceb",
+  "binding_manifest_sha256": "bb558c04d6c86004cb679fffb11d5164ddd1b36d48f729db3411ee0e6692cf3b",
   "bound_metric_ids": [
     "2z.price.usd.live",
     "bonk.price.usd.live",

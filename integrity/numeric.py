@@ -26,6 +26,19 @@ def dec(v: Any) -> Decimal:
     return Decimal(str(v))
 
 
+def inferred_numeric_formatter(span: str) -> dict[str, Any]:
+    """Build a numeric formatter from a display span's own decimals and scale."""
+    raw = (span or "").strip().replace("−", "-")
+    m = re.search(
+        r"[~+\-]*\$?[\d,]+(?:\.(\d+))?(?:[eE][+\-]?\d+)?([kKmMbBtT])?",
+        raw,
+    )
+    dp = len(m.group(1) or "") if m else 0
+    sfx = m.group(2) if m else None
+    scale = _SCALE.get(sfx or "", Decimal("1"))
+    return {"type": "numeric", "decimal_places": dp, "scale": scale}
+
+
 def display_tolerance(formatter: dict[str, Any] | None) -> Decimal:
     """Half of the smallest displayed unit from formatter metadata."""
     if not formatter or formatter.get("type") != "numeric":

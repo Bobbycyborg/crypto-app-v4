@@ -21,8 +21,14 @@ VALUE_FLEX = (
     r"(?:UNKNOWN|~?[\+\-−]?(?:\$)?[\d,]+(?:\.\d+)?"
     r"(?:[eE][+\-−]?\d+)?(?:[kKmMbBtT]|%|pp|×|x)?(?:\s*/\s*\w+)?)"
 )
+VALUE_FLEX_LABELED = r"(?:(?:\d+d\s+)?" + VALUE_FLEX + r")"
 MAX_TARGET_CHARS = 240
-SEARCH_PAD = 900
+SEARCH_PAD = 8000
+
+_ANCHOR_NUM = re.compile(
+    r"UNKNOWN|"
+    r"~?[\+\-−]?(?:\$)?[\d,]+(?:\.\d+)?(?:[eE][+\-−]?\d+)?(?:[kKmMbBtT]|%|pp|×|x)?"
+)
 
 
 def extract_articles(html: str) -> dict[str, str]:
@@ -56,28 +62,27 @@ def _relax_period_labels(pattern: str) -> str:
 
 
 def _mask_fragment_regex(fragment: str, exclude_id: str, bindings: list[dict[str, Any]]) -> str:
+    """Treat display numbers in anchors as variable — structure-only locate."""
+    _ = exclude_id, bindings
     if not fragment:
         return ""
-    peers = _peer_literals(bindings, exclude_id)
     parts: list[str] = []
-    i = 0
-    while i < len(fragment):
-        matched: str | None = None
-        for _bid, lit in peers:
-            if fragment.startswith(lit, i):
-                matched = lit
-                break
-        if matched:
-            parts.append(VALUE_FLEX)
-            i += len(matched)
+    last = 0
+    for m in _ANCHOR_NUM.finditer(fragment):
+        if re.fullmatch(r"\d+", m.group(0)) and fragment[m.end() :].startswith("d"):
             continue
-        nxt = len(fragment)
-        for _bid, lit in peers:
-            j = fragment.find(lit, i + 1)
-            if j >= 0:
-                nxt = min(nxt, j)
-        parts.append(re.escape(fragment[i:nxt]))
-        i = nxt
+        start = m.start()
+        pre = fragment[last:start]
+        pm = re.search(r"(\d+d\s+)$", pre)
+        if pm:
+            pre = pre[: pm.start()]
+            start = last + len(pre)
+        if start > last:
+            parts.append(re.escape(fragment[last:start]))
+        parts.append(VALUE_FLEX_LABELED)
+        last = m.end()
+    if last < len(fragment):
+        parts.append(re.escape(fragment[last:]))
     return _relax_period_labels("".join(parts))
 
 
@@ -128,20 +133,7 @@ def _before_search_keys(before: str) -> list[str]:
 
 
 def _flex_anchor_pattern(anchor: str) -> re.Pattern[str]:
-    chunks = re.split(r"(~[\d.]+|\d+\.\d+\.|\$[\d.,]+[kKmMbBtT]?)", anchor)
-    parts: list[str] = []
-    for ch in chunks:
-        if not ch:
-            continue
-        if re.fullmatch(r"~[\d.]+", ch):
-            parts.append(r"~[\d.]+")
-        elif re.fullmatch(r"\d+\.\d+\.", ch):
-            parts.append(r"[\d.]+\.?")
-        elif re.match(r"\$[\d.,]+", ch):
-            parts.append(r"\$[\d.,]+[kKmMbBtT]?")
-        else:
-            parts.append(re.escape(ch))
-    return re.compile("".join(parts), re.S)
+    return re.compile(_mask_fragment_regex(anchor, "", []), re.S)
 
 
 def _skip_leading_sibling(before: str, rendered: str, value_start: int) -> int:
@@ -200,28 +192,39 @@ def _masked_window_locate(
     if combo not in source_html or source_html.count(combo) != 1:
         return None, "source_combo_missing"
     src_at = source_html.index(combo)
-    win_start = max(0, src_at - SEARCH_PAD)
-    win_end = min(len(rendered_html), src_at + len(combo) + SEARCH_PAD)
-    window = rendered_html[win_start:win_end]
     before_pat = _mask_fragment_regex(before, bid, bindings)
     after_pat = _mask_fragment_regex(_masked_after_fragment(after), bid, bindings)
     prefix = (binding.get("formatter") or {}).get("literal_prefix") or ""
+    suffix = (binding.get("formatter") or {}).get("literal_suffix") or ""
+    token = VALUE_FLEX_LABELED if re.match(r"\d+d\s+", literal) else VALUE_FLEX
     if prefix:
-        capture = rf"(?P<val>(?:{re.escape(prefix)})?{VALUE_FLEX})"
+        token = rf"(?:{re.escape(prefix)})?{token}"
+    if suffix:
+        capture = rf"(?P<val>UNKNOWN|{token}{re.escape(suffix)})"
     else:
-        capture = rf"(?P<val>{VALUE_FLEX})"
+        capture = rf"(?P<val>{token})"
     pattern = before_pat + capture + after_pat
     try:
         rx = re.compile(pattern, re.S)
     except re.error:
         return None, "pattern_error"
-    matches = list(rx.finditer(window))
-    if len(matches) != 1:
-        return None, "rendered_before_missing" if len(matches) == 0 else "anchor_after_overspan"
-    val = matches[0].group("val")
-    if len(val) > MAX_TARGET_CHARS or "</" in val or "><" in val:
+    win_start = max(0, src_at - SEARCH_PAD)
+    win_end = min(len(rendered_html), src_at + len(combo) + SEARCH_PAD)
+    window = rendered_html[win_start:win_end]
+    good = []
+    for m in rx.finditer(window):
+        i = m.start("val")
+        if i > 0 and window[i - 1].isdigit():
+            continue
+        val = m.group("val")
+        if len(val) > MAX_TARGET_CHARS or "</" in val or "><" in val:
+            continue
+        good.append(val)
+    if len(good) == 1:
+        return good[0], None
+    if len(good) > 1:
         return None, "anchor_after_overspan"
-    return val, None
+    return None, "rendered_before_missing"
 
 
 def locate_binding_span(
@@ -278,14 +281,16 @@ def locate_binding_span(
         return stripped
 
     def _extract_at(start: int) -> tuple[str | None, str | None]:
-        end = _find_after(rendered_html, start, after)
-        if end < 0 and bindings is not None:
+        end = -1
+        if bindings is not None:
             after_pat = _mask_fragment_regex(
                 _masked_after_fragment(after), binding["binding_id"], bindings
             )
             m = re.search(after_pat, rendered_html[start : start + MAX_TARGET_CHARS + 200], re.S)
             if m:
                 end = start + m.start()
+        if end < 0:
+            end = _find_after(rendered_html, start, after)
         if end < 0:
             return None, "anchor_after_missing"
         raw = rendered_html[start:end]

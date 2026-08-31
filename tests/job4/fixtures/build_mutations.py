@@ -229,6 +229,27 @@ MUTATION_EXPECTATIONS: dict[str, dict[str, Any]] = {
         "check_status": "FAIL",
         "category": "04_rendered_binding_consistency",
     },
+    "M31": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_btc.oi.change.pct.30d::e8ccf1b726f518e0:oi30d0630d",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M32": {
+        "exit_code": 2,
+        "overall": "FAIL",
+        "check_id": "04_bind_btc.oi.change.pct.30d::e8ccf1b726f518e0:oi30d0630d",
+        "check_status": "FAIL",
+        "category": "04_rendered_binding_consistency",
+    },
+    "M33": {
+        "exit_code": 0,
+        "overall": "PASS",
+        "check_id": "04_bind_btc.oi.change.pct.30d::e8ccf1b726f518e0:oi30d0630d",
+        "check_status": "PASS",
+        "category": "04_rendered_binding_consistency",
+    },
 }
 
 
@@ -502,6 +523,35 @@ def build_mutations() -> None:
     s30 = copy.deepcopy(s29)
     _save("M30-snapshot.json", s30)
     (FIX / "M30-rendered.html").write_text(_mutate_pump30_cells(html, cell), encoding="utf-8")
+
+    # M31-M33 live-length locator: neighbour digits change; numeric check stays strict.
+    oi30 = next(
+        b
+        for b in manifest["bindings"]
+        if b["binding_id"] == "btc.oi.change.pct.30d::e8ccf1b726f518e0:oi30d0630d"
+    )
+    oi_before = oi30["anchor_before"]
+    oi_before_long = oi_before.replace("+2.5% 1d / +1.6% 7d / ", "+12.55% 1d / +11.60% 7d / ")
+    h31 = html.replace(oi_before + "+0.6% 30d", oi_before_long + "+0.6% 30d", 1)
+    (FIX / "M31-rendered.html").write_text(h31, encoding="utf-8")
+    _save("M31-snapshot.json", snap)
+
+    h32 = html.replace(oi_before + "+0.6% 30d", oi_before_long + "+19.9% 30d", 1)
+    (FIX / "M32-rendered.html").write_text(h32, encoding="utf-8")
+    _save("M32-snapshot.json", snap)
+
+    s33 = copy.deepcopy(snap)
+    s33["metrics"]["btc.oi.change.pct.30d"]["normalized_value"] = 19.9
+    h33 = html
+    for b in manifest["bindings"]:
+        if b.get("metric_id") == "btc.oi.change.pct.30d":
+            h33 = h33.replace(
+                b["anchor_before"] + "+0.6% 30d",
+                b["anchor_before"] + "+19.9% 30d",
+                1,
+            )
+    (FIX / "M33-rendered.html").write_text(h33, encoding="utf-8")
+    _save("M33-snapshot.json", s33)
 
 
 if __name__ == "__main__":

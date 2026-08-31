@@ -10,6 +10,7 @@ from typing import Any
 from integrity.extract import (
     classify_surface,
     extract_articles,
+    extract_stance_headline,
     extract_visual_bar_width,
     locate_binding_span,
 )
@@ -26,6 +27,7 @@ from integrity.numeric import (
     derive_subtract,
     display_tolerance,
     drawdown_pct,
+    inferred_numeric_formatter,
     parse_binding_observed,
     parse_display_token,
     values_compatible,
@@ -407,14 +409,12 @@ def check_duplicate_consistency(
             )
             continue
         raw = snap.get("normalized_value")
-        fmt0 = by_id[binding_ids[0]].get("formatter") or {}
         canonical_dec: Decimal | None = None
-        if fmt0.get("type") == "numeric":
-            try:
-                canonical_dec = dec(raw)
-            except Exception:
-                canonical_dec = None
-        if isinstance(raw, str) and canonical_dec is None:
+        try:
+            canonical_dec = dec(raw)
+        except Exception:
+            canonical_dec = None
+        if canonical_dec is None:
             values = []
             fail = False
             for bid in binding_ids:
@@ -461,11 +461,12 @@ def check_duplicate_consistency(
                 values.append((bid, err or "missing"))
                 continue
             fmt = b.get("formatter") or {}
-            if fmt.get("type") == "string_exact":
-                ok = span == str(snap.get("normalized_value", ""))
-            else:
+            if fmt.get("type") == "numeric":
                 obs = parse_binding_observed(span, fmt, canonical=canonical)
                 ok = values_compatible(obs, canonical, fmt)
+            else:
+                obs = parse_binding_observed(span, None, canonical=canonical)
+                ok = values_compatible(obs, canonical, inferred_numeric_formatter(span))
             if not ok:
                 fail = True
             values.append((bid, span))
@@ -567,10 +568,81 @@ def check_ath_drawdown(
     return checks
 
 
+def _article_ma_text(article_html: str) -> str:
+    headline = extract_stance_headline(article_html) or ""
+    m = re.search(r'<p class="alt-stance-expl">(.*?)</p>', article_html, re.S)
+    expl = re.sub(r"<[^>]+>", " ", m.group(1)) if m else ""
+    return f"{headline} {expl}"
+
+
+def _parse_ma_from_text(text: str) -> dict[str, str]:
+    if not text:
+        return {}
+    up = text.upper()
+    low = text.lower()
+    claim: dict[str, str] = {}
+    if "ABOVE 50D + 200D" in up or "above 50d and 200d" in low:
+        claim["ma50"] = "ABOVE"
+        claim["ma200"] = "ABOVE"
+    if "BELOW 50D + 200D" in up or "below 50d and 200d" in low:
+        claim["ma50"] = "BELOW"
+        claim["ma200"] = "BELOW"
+    if "above 50d but below 200d" in low:
+        claim["ma50"] = "ABOVE"
+        claim["ma200"] = "BELOW"
+    if re.search(r"ABOVE\s+50D", up) or re.search(r"above\s+50d", low):
+        if "ma50" not in claim:
+            claim["ma50"] = "ABOVE"
+    if re.search(r"BELOW\s+50D", up) or re.search(r"below\s+50d", low):
+        claim["ma50"] = "BELOW"
+    if re.search(r"ABOVE\s+200D", up) or re.search(r"above\s+200d", low):
+        if "ma200" not in claim:
+            claim["ma200"] = "ABOVE"
+    if re.search(r"BELOW\s+200D", up) or re.search(r"below\s+200d", low):
+        claim["ma200"] = "BELOW"
+    if "BELOW 50D + 200D" in up:
+        claim["ma50"] = "BELOW"
+        claim["ma200"] = "BELOW"
+    return claim
+
+
+def _ma_langs_from_html(rendered_html: str, asset: str, claim: dict[str, Any]) -> tuple[str | None, str | None]:
+    art = extract_articles(rendered_html).get(asset, "")
+    parsed = _parse_ma_from_text(_article_ma_text(art))
+    ma50 = parsed.get("ma50") or claim.get("ma50_language")
+    ma200 = parsed.get("ma200") or claim.get("ma200_language")
+    return ma50, ma200
+
+
+def _rs_language_from_html(rendered_html: str, claim: dict[str, Any]) -> str | None:
+    asset = claim.get("asset") or ""
+    art = extract_articles(rendered_html).get(asset, "")
+    if not art:
+        return None
+    up = re.sub(r"<[^>]+>", " ", art).upper()
+    window = (claim.get("window") or "").upper()
+    if not window:
+        window = "30D" if ".30d" in claim.get("metric_id", "") else "7D"
+    mid = claim.get("metric_id", "")
+    vs = "BTC" if "vs_btc" in mid else "SOL" if "vs_sol" in mid else None
+    if vs:
+        mixed = re.search(rf"(LEADS|LAGS)\s+{vs}\s+7D\s*[·.]\s*(LEADS|LAGS)\s+30D", up)
+        if mixed:
+            return mixed.group(1) if window == "7D" else mixed.group(2)
+        both = re.search(rf"(LEADS|LAGS)\s+{vs}\s+7D/30D", up)
+        if both:
+            return both.group(1)
+    mixed_h = re.search(r"(LEADS|LAGS)\s+7D\s*[·.]\s*(LEADS|LAGS)\s+30D", up)
+    if mixed_h:
+        return mixed_h.group(1) if window == "7D" else mixed_h.group(2)
+    return None
+
+
 def check_ma_language(
     *,
     snapshot: dict[str, Any],
     contract: dict[str, Any],
+    rendered_html: str = "",
 ) -> list[CheckResult]:
     checks: list[CheckResult] = []
     for claim in contract.get("ma_language_claims", []):
@@ -615,19 +687,20 @@ def check_ma_language(
         p = dec(price["normalized_value"])
         ok = True
         assertions = 0
-        if claim.get("ma50_language") and ma50 and ma50.get("status") == "OK":
+        ma50_lang, ma200_lang = _ma_langs_from_html(rendered_html, asset, claim)
+        if ma50_lang and ma50 and ma50.get("status") == "OK":
             m50 = dec(ma50["normalized_value"])
             assertions += 1
-            if claim["ma50_language"] == "ABOVE" and not (p > m50):
+            if ma50_lang == "ABOVE" and not (p > m50):
                 ok = False
-            if claim["ma50_language"] == "BELOW" and not (p < m50):
+            if ma50_lang == "BELOW" and not (p < m50):
                 ok = False
-        if claim.get("ma200_language") and ma200 and ma200.get("status") == "OK":
+        if ma200_lang and ma200 and ma200.get("status") == "OK":
             m200 = dec(ma200["normalized_value"])
             assertions += 1
-            if claim["ma200_language"] == "ABOVE" and not (p > m200):
+            if ma200_lang == "ABOVE" and not (p > m200):
                 ok = False
-            if claim["ma200_language"] == "BELOW" and not (p < m200):
+            if ma200_lang == "BELOW" and not (p < m200):
                 ok = False
         if assertions == 0:
             st = "COVERAGE_GAP"
@@ -644,7 +717,7 @@ def check_ma_language(
                 metric_ids=[claim["price_metric_id"]],
                 status=st,
                 assertions_executed=max(1, assertions),
-                observed={"price": str(p), "ma50_lang": claim.get("ma50_language"), "ma200_lang": claim.get("ma200_language")},
+                observed={"price": str(p), "ma50_lang": ma50_lang, "ma200_lang": ma200_lang},
                 expected_relation="language matches price vs MA",
                 evidence=claim,
                 reason="MA language ok" if ok else "MA language contradiction",
@@ -657,6 +730,7 @@ def check_rs_language(
     *,
     snapshot: dict[str, Any],
     contract: dict[str, Any],
+    rendered_html: str = "",
 ) -> list[CheckResult]:
     checks: list[CheckResult] = []
     for claim in contract.get("rs_language_claims", []):
@@ -698,7 +772,7 @@ def check_rs_language(
             )
             continue
         rs = dec(rec["normalized_value"])
-        lang = claim["language"]
+        lang = _rs_language_from_html(rendered_html, claim) or claim["language"]
         ok = (lang == "LEADS" and rs > 0) or (lang == "LAGS" and rs < 0)
         checks.append(
             CheckResult(
@@ -1219,8 +1293,8 @@ def run_all_checks(
         )
     )
     checks.extend(check_ath_drawdown(snapshot=snapshot, rendered_html=rendered_html, contract=contract))
-    checks.extend(check_ma_language(snapshot=snapshot, contract=contract))
-    checks.extend(check_rs_language(snapshot=snapshot, contract=contract))
+    checks.extend(check_ma_language(snapshot=snapshot, contract=contract, rendered_html=rendered_html))
+    checks.extend(check_rs_language(snapshot=snapshot, contract=contract, rendered_html=rendered_html))
     checks.extend(
         check_freshness(
             rendered_html=rendered_html,

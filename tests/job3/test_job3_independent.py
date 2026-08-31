@@ -36,7 +36,6 @@ NEGATIVE_OCCURRENCE_IDS = {
 
 NONNUMERIC_EXPECTED = {
     "render.bme.ratio.last4::00a581be80d3bc08",
-    "pump.oi.usd.current::1935aee50ff5615e:oioi664mfunding000",
     "btc.price.usd.report::24c837b712b58400",
     "hype.af.buys.usd.30d::4fb9087d25d45f86",
     "render.bme.ratio.last8::6ab520f912c0df64",
@@ -188,11 +187,11 @@ def main() -> int:
         print(f"{k}={v}")
 
     assert gates["total_bindings"] == 418
-    assert gates["numeric_bindings"] == 408
-    assert gates["nonnumeric_total"] == 10
-    assert gates["raw_roundtrip_verified"] == 404
+    assert gates["numeric_bindings"] == 409
+    assert gates["nonnumeric_total"] == 9
+    assert gates["raw_roundtrip_verified"] == 405
     assert gates["presentation_syntax_recovered"] == 4
-    assert gates["roundtrip_verified"] == 408
+    assert gates["roundtrip_verified"] == 409
     assert gates["unverified_numeric"] == 0
     assert gates["numeric_string_exact"] == 0
 
@@ -233,9 +232,9 @@ def main() -> int:
     )
     print(f"numeric_dynamicity_checked={dyn.get('numeric_dynamicity_checked', 0)}")
     print(f"numeric_dynamicity_failures={dyn.get('numeric_dynamicity_failures', 0)}")
-    assert rt.get("roundtrip_verified") == 408
+    assert rt.get("roundtrip_verified") == 409
     assert rt.get("unverified_numeric") == 0
-    assert dyn.get("numeric_dynamicity_checked") == 408
+    assert dyn.get("numeric_dynamicity_checked") == 409
     assert dyn.get("numeric_dynamicity_failures") == 0
 
     rc = subprocess.run([sys.executable, str(ROOT / "tests/job3/test_writer_quarantine.py")], capture_output=True, text=True)

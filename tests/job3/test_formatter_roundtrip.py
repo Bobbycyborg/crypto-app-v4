@@ -70,8 +70,8 @@ def main() -> int:
     for e in g["errors"]:
         print(e)
     ok = (
-        g["numeric_bindings"] == 408
-        and g["raw_roundtrip_verified"] == 404
+        g["numeric_bindings"] == 409
+        and g["raw_roundtrip_verified"] == 405
         and g["presentation_syntax_recovered"] == 4
         and g["unverified_numeric"] == 0
         and g["numeric_string_exact"] == 0
