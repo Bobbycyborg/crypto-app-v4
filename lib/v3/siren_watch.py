@@ -44,6 +44,7 @@ COINS = [
     "RETARDIO",
     "2Z",
     "DRIFT",
+    "ANSEM",
 ]
 
 MINTS = {
@@ -61,6 +62,7 @@ MINTS = {
     "RETARDIO": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx",
     "2Z": "J6pQQ3FAcJQeWPPGppWRb4nM8jU3wLyYbRrLh7feMfvd",
     "DRIFT": "DriFtupJYLTosbwoN8koMbEYSx54aFAVLddWsbksjwg7",
+    "ANSEM": "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump",
 }
 
 TICKER_TO_KEY = {
@@ -78,6 +80,7 @@ TICKER_TO_KEY = {
     "RETARDIO": "RETARDIO",
     "2Z": "2Z",
     "DRIFT": "DRIFT",
+    "ANSEM": "ANSEM",
 }
 
 WINTERMUTE = "MfDuWeqSHEqTFVYZ7LoexgAK9dxk7cy4DFJWjWMGVWa"

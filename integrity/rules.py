@@ -69,6 +69,43 @@ def _is_grok(reg: dict[str, Any], mid: str) -> bool:
     return row.get("owner") == "GROK"
 
 
+def _roster_removed(*htmls: str, asset: str | None = None, metric_id: str = "") -> bool:
+    """ORCA/BONK dropped from Report 05 UI. Same check IDs, NOT_APPLICABLE."""
+    mid = (metric_id or "").lower()
+    a = (asset or "").lower()
+    token = None
+    if a == "orca" or mid.startswith("orca."):
+        token = "orca"
+    elif a == "bonk" or mid.startswith("bonk."):
+        token = "bonk"
+    if not token:
+        return False
+    for h in htmls:
+        if not h:
+            continue
+        if token == "orca" and 'data-asset-slug="orca"' not in h:
+            return True
+        if token == "bonk" and 'hold-ticker">BONK' not in h and 'desk-name">BONK' not in h:
+            return True
+    return False
+
+
+def _na_roster(check_id: str, category: str, asset: str | None, mid: str) -> CheckResult:
+    return CheckResult(
+        check_id=check_id,
+        category=category,
+        asset=asset,
+        rule_type="roster_removed",
+        metric_ids=[mid] if mid else [],
+        status="NOT_APPLICABLE",
+        assertions_executed=1,
+        observed=None,
+        expected_relation="removed from report 05 roster",
+        evidence={},
+        reason="removed from report 05 roster",
+    )
+
+
 def _expected_numeric(snap: dict[str, Any] | None) -> float | None:
     if not snap or snap.get("status") != "OK":
         return None
@@ -256,6 +293,16 @@ def check_binding_consistency(
         if _is_grok(reg, b["metric_id"]):
             continue
         mid = b["metric_id"]
+        if _roster_removed(rendered_html, source_html, asset=b.get("asset"), metric_id=mid):
+            checks.append(
+                _na_roster(
+                    f"04_bind_{b['binding_id']}",
+                    "04_rendered_binding_consistency",
+                    b.get("asset"),
+                    mid,
+                )
+            )
+            continue
         snap = _snap_metric(snapshot, mid)
         span, err = locate_binding_span(
             rendered_html,
@@ -391,6 +438,16 @@ def check_duplicate_consistency(
     by_id = {b["binding_id"]: b for b in bindings}
     for mid, binding_ids in sorted(contract.get("duplicate_metric_groups", {}).items()):
         if _is_grok(reg, mid):
+            continue
+        if _roster_removed(rendered_html, source_html, metric_id=mid):
+            checks.append(
+                _na_roster(
+                    f"05_dup_{mid.replace('.', '_')}",
+                    "05_duplicate_consistency",
+                    None,
+                    mid,
+                )
+            )
             continue
         snap = _snap_metric(snapshot, mid)
         if snap is None:
@@ -823,6 +880,16 @@ def check_freshness(
 ) -> list[CheckResult]:
     checks: list[CheckResult] = []
     for mid in contract.get("freshness_metric_ids", []):
+        if _roster_removed(rendered_html, source_html, metric_id=mid):
+            checks.append(
+                _na_roster(
+                    f"09_fresh_{mid.replace('.', '_')}",
+                    "09_freshness_asof_consistency",
+                    None,
+                    mid,
+                )
+            )
+            continue
         snap = _snap_metric(snapshot, mid)
         if not snap:
             checks.append(
@@ -932,6 +999,16 @@ def check_surface_agreement(
             continue
         by_metric.setdefault(b["metric_id"], []).append(b)
     for mid in contract.get("surface_metric_ids", []):
+        if _roster_removed(rendered_html, source_html, metric_id=mid):
+            checks.append(
+                _na_roster(
+                    f"10_surface_{mid.replace('.', '_')}",
+                    "10_tooltip_visible_visual_agreement",
+                    None,
+                    mid,
+                )
+            )
+            continue
         group = by_metric.get(mid, [])
         snap = _snap_metric(snapshot, mid)
         if not group:

@@ -78,6 +78,13 @@
       "name": "Zcash",
       "chain": "zcash",
       "notes": "Zcash L1 — not Solana. Stage-2 page uses Stage-1 packs."
+    },
+    {
+      "id": "ansem",
+      "symbol": "ANSEM",
+      "name": "The Black Bull",
+      "chain": "solana",
+      "mint": "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump"
     }
   ]
 }

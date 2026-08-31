@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
 from integrity.numeric import compact_usd_parts, is_etf_flow_metric
 from renderer.formatters import format_value
 from renderer.frozen_reports import refuse_frozen_write
+from renderer.roster import apply_roster
 from renderer.semantic_wording import apply_semantic_wording
 from renderer.week_nav import apply_week_menu
 
@@ -296,6 +297,8 @@ def main() -> int:
 
     out = Path(args.out)
     refuse_frozen_write(out)
+    if out.name == "index-v4.html":
+        rendered = apply_roster(rendered)
     out.parent.mkdir(parents=True, exist_ok=True)
     tmp = out.with_suffix(".tmp")
     tmp.write_text(rendered, encoding="utf-8")

@@ -18,6 +18,7 @@
     "IO": "io",
     "ORCA": null,
     "BONK": null,
+    "ANSEM": "ansem",
     "GIGA": null,
     "LOCKIN": null,
     "RETARDIO": null
@@ -81,6 +82,7 @@
     "GIGA": { "text": "—", "kind": "none" },
     "LOCKIN": { "text": "—", "kind": "none" },
     "RETARDIO": { "text": "—", "kind": "none" },
+    "ANSEM": { "text": "—", "kind": "none" },
     "BTC": { "text": "—", "kind": "none" },
     "HYPE": { "text": "—", "kind": "none" },
     "ZEC": { "text": "—", "kind": "none" }
@@ -98,7 +100,8 @@
     "GRASS": ["perp", "GRASSUSDT"],
     "FART": ["perp", "FARTCOINUSDT"],
     "SPX": ["perp", "SPXUSDT"],
-    "NOS": ["coingecko", "nosana"]
+    "NOS": ["coingecko", "nosana"],
+    "ANSEM": ["dex", "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump"]
   },
   "sirens": {
     "SOL": "",
@@ -113,13 +116,15 @@
     "BONK": "",
     "GIGA": "",
     "LOCKIN": "",
-    "RETARDIO": ""
+    "RETARDIO": "",
+    "ANSEM": ""
   },
   "extra_mints": {
     "ORCA": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
     "BONK": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
     "GIGA": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
     "LOCKIN": "8Ki8DpuWNxu9VsS3kQbarsCWMcFGWkzzA8pUPto9zBd5",
-    "RETARDIO": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx"
+    "RETARDIO": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx",
+    "ANSEM": "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump"
   }
 }
