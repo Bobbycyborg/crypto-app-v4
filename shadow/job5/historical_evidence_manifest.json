@@ -1,0 +1,1290 @@
+{
+  "schema_version": "job5.historical_evidence.v1",
+  "metrics": [
+    {
+      "metric_id": "btc.funding.rate.latest",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/BTC/funding",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/btc/sma200",
+      "fetched_at_field": "/technicals/assets/btc/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/btc/sma50",
+      "fetched_at_field": "/technicals/assets/btc/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.oi.btc.current",
+      "archive_path": "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/oi_btc",
+      "fetched_at_field": "/as_of",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.oi.change.pct.1d",
+      "archive_path": "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/oi_ch/0",
+      "fetched_at_field": "/as_of",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.oi.change.pct.30d",
+      "archive_path": "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/oi_ch/2",
+      "fetched_at_field": "/as_of",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.oi.change.pct.7d",
+      "archive_path": "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/oi_ch/1",
+      "fetched_at_field": "/as_of",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.price.usd.july_2026_low",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/market/data/july_floor/usd",
+      "fetched_at_field": "/market/data/july_floor/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/BTC/price_usd",
+      "fetched_at_field": "/prices/assets/BTC/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "btc.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/BTC/price_usd",
+      "fetched_at_field": "/prices/assets/BTC/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "btc.return.pct.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/BTC/change_30d_pct",
+      "fetched_at_field": "/prices/assets/BTC/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "btc.return.pct.7d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/BTC/change_7d_pct",
+      "fetched_at_field": "/prices/assets/BTC/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "btc.stablecoin.change.pct.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/market/data/stablecoins/change_30d_pct",
+      "fetched_at_field": "/market/data/stablecoins/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "btc.volume.perp.usd.24h",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/BTC/fut_quote_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "btc.volume.spot.usd.24h",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/BTC/spot_quote_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "fart.funding.rate.latest",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/FARTCOIN/funding",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "fart.holders.lp.pct",
+      "archive_path": "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/fart_concentration/result",
+      "fetched_at_field": "/attempted_at_utc",
+      "source_as_of_field": null,
+      "source_as_of_regex": "(2026-08-12)",
+      "status": "OK",
+      "freshness": "STALE",
+      "original_source": "solana_rpc",
+      "extract": {
+        "type": "regex",
+        "pattern": "([0-9.]+)% LP"
+      }
+    },
+    {
+      "metric_id": "fart.holders.unattributed.pct",
+      "archive_path": "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/fart_concentration/result",
+      "fetched_at_field": "/attempted_at_utc",
+      "source_as_of_field": null,
+      "source_as_of_regex": "(2026-08-12)",
+      "status": "OK",
+      "freshness": "STALE",
+      "original_source": "solana_rpc",
+      "extract": {
+        "type": "regex",
+        "pattern": "([0-9.]+)% unattributed"
+      }
+    },
+    {
+      "metric_id": "fart.holders.unit_treasury.pct",
+      "archive_path": "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/fart_concentration/result",
+      "fetched_at_field": "/attempted_at_utc",
+      "source_as_of_field": null,
+      "source_as_of_regex": "(2026-08-12)",
+      "status": "OK",
+      "freshness": "STALE",
+      "original_source": "solana_rpc",
+      "extract": {
+        "type": "regex",
+        "pattern": "([0-9.]+)% Unit"
+      }
+    },
+    {
+      "metric_id": "fart.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/fartcoin/sma200",
+      "fetched_at_field": "/technicals/assets/fartcoin/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "fart.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/fartcoin/sma50",
+      "fetched_at_field": "/technicals/assets/fartcoin/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "fart.oi.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/FARTCOIN/oi_usd",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "fart.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/FARTCOIN/price_usd",
+      "fetched_at_field": "/prices/assets/FARTCOIN/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "fart.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/FARTCOIN/price_usd",
+      "fetched_at_field": "/prices/assets/FARTCOIN/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "fart.return.pct.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/FARTCOIN/change_30d_pct",
+      "fetched_at_field": "/prices/assets/FARTCOIN/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "fart.return.pct.7d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/FARTCOIN/change_7d_pct",
+      "fetched_at_field": "/prices/assets/FARTCOIN/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "fart.supply.circulating.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/FARTCOIN/circulating_supply",
+      "fetched_at_field": "/prices/assets/FARTCOIN/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "fart.volume.perp.usd.24h",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/FARTCOIN/fut_quote_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "global.fear_greed.index.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/market/data/fear_greed/current/value",
+      "fetched_at_field": "/market/data/fear_greed/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "alternative_me"
+    },
+    {
+      "metric_id": "global.participation.above_50dma.count",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/market/data/participation/above_50d_n",
+      "fetched_at_field": "/market/data/participation/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "global.participation.beat_btc.count",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/market/data/participation/beat_btc_n",
+      "fetched_at_field": "/market/data/participation/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "hype.af.buys.usd.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/hype/hold_30d",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "hype.af.inventory.tokens.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/hype/hyperliquid/af_inventory",
+      "fetched_at_field": "/feeds/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "hyperliquid"
+    },
+    {
+      "metric_id": "hype.emissions.tokens.remaining",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/hype/hyperliquid/future_emissions",
+      "fetched_at_field": "/feeds/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "hyperliquid"
+    },
+    {
+      "metric_id": "hype.fees.perps.usd.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/hype/fees_30d",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "hype.fees.usd.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/hype/fees_30d",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "hype.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/hype/sma200",
+      "fetched_at_field": "/technicals/assets/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "hype.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/hype/sma50",
+      "fetched_at_field": "/technicals/assets/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "hype.ncu.hyperlabs.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/hype/hyperliquid/hyperlabs_ncu",
+      "fetched_at_field": "/feeds/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "hyperliquid"
+    },
+    {
+      "metric_id": "hype.oi.binance.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/HYPE/oi_usd",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "hype.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/HYPE/price_usd",
+      "fetched_at_field": "/prices/assets/HYPE/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "hype.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/HYPE/price_usd",
+      "fetched_at_field": "/prices/assets/HYPE/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "hype.return.pct.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/HYPE/change_30d_pct",
+      "fetched_at_field": "/prices/assets/HYPE/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "hype.return.pct.7d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/HYPE/change_7d_pct",
+      "fetched_at_field": "/prices/assets/HYPE/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "hype.supply.circulating.pct",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/hype/hyperliquid/circulating_pct",
+      "fetched_at_field": "/feeds/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "hyperliquid"
+    },
+    {
+      "metric_id": "hype.supply.hl_circulating.pct",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/hype/hyperliquid/circulating_pct",
+      "fetched_at_field": "/feeds/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "hyperliquid"
+    },
+    {
+      "metric_id": "hype.supply.max.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/hype/hyperliquid/max_supply",
+      "fetched_at_field": "/feeds/hype/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "hyperliquid"
+    },
+    {
+      "metric_id": "io.clusters.running.count",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/io_earnings/running_clusters",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "io_explorer"
+    },
+    {
+      "metric_id": "io.leverage.x.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/IO/perp_spot",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "io.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/io/sma200",
+      "fetched_at_field": "/technicals/assets/io/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "io.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/io/sma50",
+      "fetched_at_field": "/technicals/assets/io/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "io.oi.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/IO/oi_usd",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "io.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/IO/price_usd",
+      "fetched_at_field": "/prices/assets/IO/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "io.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/IO/price_usd",
+      "fetched_at_field": "/prices/assets/IO/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "io.revenue.usd.cumulative",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/io_earnings/total_earnings",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "io_explorer"
+    },
+    {
+      "metric_id": "io.revenue.usd_per_day.mean_30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/io_earnings/avg_30d",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "io_explorer"
+    },
+    {
+      "metric_id": "io.supply.circulating.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/IO/circulating_supply",
+      "fetched_at_field": "/prices/assets/IO/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "nos.jobs.completed.cumulative",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/nos_indexer/jobs_completed",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "nosana"
+    },
+    {
+      "metric_id": "nos.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/nos/sma200",
+      "fetched_at_field": "/technicals/assets/nos/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "nos.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/nos/sma50",
+      "fetched_at_field": "/technicals/assets/nos/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "nos.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/NOS/price_usd",
+      "fetched_at_field": "/prices/assets/NOS/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "nos.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/NOS/price_usd",
+      "fetched_at_field": "/prices/assets/NOS/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "nos.stake.ratio.pct",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/nos_indexer/staked_pct",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "nosana"
+    },
+    {
+      "metric_id": "nos.stake.tokens.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/nos_indexer/nos_staked",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "nosana"
+    },
+    {
+      "metric_id": "nos.supply.circulating.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/NOS/circulating_supply",
+      "fetched_at_field": "/prices/assets/NOS/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "pump.buyback.usd.1d",
+      "archive_path": "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/defillama/buyback_burn/total_24h_usd",
+      "fetched_at_field": "/defillama/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "pump.buyback.usd.7d",
+      "archive_path": "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/defillama/buyback_burn/total_7d_usd",
+      "fetched_at_field": "/defillama/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "pump.buyback.usd_per_day.current",
+      "archive_path": "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/defillama/buyback_burn/total_24h_usd",
+      "fetched_at_field": "/defillama/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "pump.fees.usd_per_day.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/pump/data/launchpad_share/pump_fees_24h_usd",
+      "fetched_at_field": "/feeds/llama/pump/data/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "pump.funding.rate.latest",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/PUMP/funding",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "pump.leverage.x.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/PUMP/perp_spot",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "pump.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/pump/sma200",
+      "fetched_at_field": "/technicals/assets/pump/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "pump.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/pump/sma50",
+      "fetched_at_field": "/technicals/assets/pump/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "pump.market_share.pct.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/pump/data/launchpad_share/share_pct_24h",
+      "fetched_at_field": "/feeds/llama/pump/data/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "pump.oi.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/PUMP/oi_usd",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "pump.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/PUMP/price_usd",
+      "fetched_at_field": "/prices/assets/PUMP/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "pump.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/PUMP/price_usd",
+      "fetched_at_field": "/prices/assets/PUMP/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "pump.revenue.usd.7d",
+      "archive_path": "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/defillama/revenue/total_7d_usd",
+      "fetched_at_field": "/defillama/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "pump.revenue.usd_per_day.current",
+      "archive_path": "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+      "archive_field": "/defillama/revenue/total_24h_usd",
+      "fetched_at_field": "/defillama/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "render.bme.burned.tokens.last4",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/render/bme/last4_burned",
+      "fetched_at_field": "/feeds/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "render_foundation"
+    },
+    {
+      "metric_id": "render.bme.node_due.tokens.per_epoch",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/render/bme_emit/last4_emit",
+      "fetched_at_field": "/feeds/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "render_foundation"
+    },
+    {
+      "metric_id": "render.emissions.tokens.remaining",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/render/foundation/raw/leftoverEmissions",
+      "fetched_at_field": "/feeds/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "render_foundation"
+    },
+    {
+      "metric_id": "render.funding.rate.latest",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/RENDER/funding",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "render.leverage.x.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/RENDER/perp_spot",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "render.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/render/sma200",
+      "fetched_at_field": "/technicals/assets/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "render.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/render/sma50",
+      "fetched_at_field": "/technicals/assets/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "render.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/RENDER/price_usd",
+      "fetched_at_field": "/prices/assets/RENDER/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "render.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/RENDER/price_usd",
+      "fetched_at_field": "/prices/assets/RENDER/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "render.supply.circulating.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/render/foundation/circulating",
+      "fetched_at_field": "/feeds/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "render_foundation"
+    },
+    {
+      "metric_id": "render.supply.max.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/render/foundation/raw/maxSupply",
+      "fetched_at_field": "/feeds/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "render_foundation"
+    },
+    {
+      "metric_id": "render.usage.frames.cumulative",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/render/frames/cumulative",
+      "fetched_at_field": "/feeds/render/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "render_foundation"
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.7d.x",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/dex_ratio/ratio_7d",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.latest_day.x",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/dex_ratio/ratio_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "sol.dex_eth_ratio.x.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/llama/dex_ratio/ratio_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "sol.fees.usd_per_day.mean_30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/assets/sol/fees_7d_avg",
+      "fetched_at_field": "/assets/sol/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "sol.funding.rate.latest",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/SOL/funding",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "sol.inflation.pct.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/sol_rpc/inflation_pct",
+      "fetched_at_field": "/feeds/sol_rpc/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "solana_rpc"
+    },
+    {
+      "metric_id": "sol.issuance.tokens.per_year",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/sol_rpc/issuance_yr",
+      "fetched_at_field": "/feeds/sol_rpc/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "solana_rpc"
+    },
+    {
+      "metric_id": "sol.leverage.x.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/SOL/perp_spot",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "sol.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/sol/sma200",
+      "fetched_at_field": "/technicals/assets/sol/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "sol.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/sol/sma50",
+      "fetched_at_field": "/technicals/assets/sol/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "sol.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/SOL/price_usd",
+      "fetched_at_field": "/prices/assets/SOL/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "sol.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/SOL/price_usd",
+      "fetched_at_field": "/prices/assets/SOL/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "sol.stablecoin.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/assets/sol/stables_usd",
+      "fetched_at_field": "/assets/sol/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "sol.stake.ratio.pct",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/sol_rpc/stake_pct",
+      "fetched_at_field": "/feeds/sol_rpc/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "solana_rpc"
+    },
+    {
+      "metric_id": "sol.stake.tokens.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/sol_rpc/staked_sol",
+      "fetched_at_field": "/feeds/sol_rpc/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "solana_rpc"
+    },
+    {
+      "metric_id": "sol.tvl.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/assets/sol/tvl_usd",
+      "fetched_at_field": "/assets/sol/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "defillama"
+    },
+    {
+      "metric_id": "spx.funding.rate.latest",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/SPX6900/funding",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "spx.holders.top20.pct",
+      "archive_path": "reports/2026-08-12/spx-v3.json",
+      "archive_field": "/stage1/holders/solana_top20_pct_of_sol_mint",
+      "fetched_at_field": "/hero/price_as_of",
+      "source_as_of_field": "/hero/price_as_of",
+      "status": "OK",
+      "freshness": "STALE",
+      "original_source": "solana_rpc"
+    },
+    {
+      "metric_id": "spx.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/spx6900/sma200",
+      "fetched_at_field": "/technicals/assets/spx6900/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "spx.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/spx6900/sma50",
+      "fetched_at_field": "/technicals/assets/spx6900/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "spx.oi.binance.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/SPX6900/oi_usd",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "spx.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/SPX6900/price_usd",
+      "fetched_at_field": "/prices/assets/SPX6900/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "spx.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/SPX6900/price_usd",
+      "fetched_at_field": "/prices/assets/SPX6900/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "spx.return.pct.30d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/SPX6900/change_30d_pct",
+      "fetched_at_field": "/prices/assets/SPX6900/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "spx.supply.circulating.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/SPX6900/circulating_supply",
+      "fetched_at_field": "/prices/assets/SPX6900/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "spx.volume.perp.usd.24h",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/SPX6900/fut_quote_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "zec.ma.usd.200d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/zec/sma200",
+      "fetched_at_field": "/technicals/assets/zec/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "zec.ma.usd.50d",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/technicals/assets/zec/sma50",
+      "fetched_at_field": "/technicals/assets/zec/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "zec.oi.binance.usd.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/ZEC/oi_usd",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "zec.price.usd.live",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/ZEC/price_usd",
+      "fetched_at_field": "/prices/assets/ZEC/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "zec.price.usd.report",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/ZEC/price_usd",
+      "fetched_at_field": "/prices/assets/ZEC/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "zec.shielded.share.pct",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/zec/pct",
+      "fetched_at_field": "/feeds/zec/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "zcash_explorer"
+    },
+    {
+      "metric_id": "zec.shielded.tokens.current",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/zec/shielded",
+      "fetched_at_field": "/feeds/zec/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "zcash_explorer"
+    },
+    {
+      "metric_id": "zec.supply.circulating.tokens",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/prices/assets/ZEC/circulating_supply",
+      "fetched_at_field": "/prices/assets/ZEC/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "coingecko"
+    },
+    {
+      "metric_id": "zec.volume.perp.usd.24h",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/ZEC/fut_quote_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    },
+    {
+      "metric_id": "zec.volume.spot.usd.24h",
+      "archive_path": "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+      "archive_field": "/feeds/leverage/ZEC/spot_quote_24h",
+      "fetched_at_field": "/feeds/fetched_at",
+      "source_as_of_field": null,
+      "status": "OK",
+      "freshness": "UNKNOWN",
+      "original_source": "binance"
+    }
+  ]
+}

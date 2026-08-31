@@ -1,0 +1,43 @@
+{
+  "schema_version": "job5.review04_contract.v1",
+  "baseline_html": "baselines/v4-start-from-final-v3.html",
+  "source_html": "index-v4.html",
+  "expected_bound_metrics": 212,
+  "expected_bindings": 418,
+  "expected_job4_checks": 868,
+  "active_assets": [
+    "BTC", "ETH", "SOL", "RENDER", "PUMP", "IO", "NOS", "FART", "SPX", "ZEC", "HYPE",
+    "2Z", "BONK", "GIGA", "LOCKIN", "ORCA", "RETARDIO", "GLOBAL"
+  ],
+  "excluded_assets": ["RAY", "GRASS", "DRIFT"],
+  "allowed_difference_classes": [
+    "PREEXISTING_WALLET_DRIFT",
+    "PREEXISTING_APPROVED_STATIC_V4_DRIFT",
+    "CANONICAL_RECONSTRUCTION",
+    "ARCHIVED_EXTRACTED_RECONSTRUCTION",
+    "ARCHIVED_DERIVED_RECONSTRUCTION",
+    "FAIL_CLOSED_REVIEW04_UNKNOWN",
+    "HISTORICAL_SOURCE_ARCHIVE_GAP",
+    "WRITER_QUARANTINE",
+    "PIPELINE_DEFECT",
+    "UNCLASSIFIED"
+  ],
+  "guardrail_names": [
+    "no_dollar_held_on_hold_cards",
+    "siren_count_box",
+    "ray_dormant_out",
+    "grass_dormant_hidden_article_preserved",
+    "drift_out_inactive",
+    "orca_report_onboarding_absent",
+    "hold_card_layout_unchanged",
+    "market_participation_terminology",
+    "btc_qualitative_stance_unchanged"
+  ],
+  "writer_quarantine_identity": "CGPT_BOUND_WRITER",
+  "review04_cutoff_utc": "2026-08-25T23:59:59Z",
+  "forbidden_html_data_paths": [
+    "index-v4.html",
+    "baselines/v4-start-from-final-v3.html",
+    "baselines/report-04.html"
+  ]
+}

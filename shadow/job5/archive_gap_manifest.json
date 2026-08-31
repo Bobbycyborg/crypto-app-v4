@@ -1,0 +1,1611 @@
+{
+  "schema_version": "job5.archive_gap.v1",
+  "audit_pass": "final_one_pass",
+  "metrics": [
+    {
+      "metric_id": "2z.price.usd.live",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.2z",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "bonk.price.usd.live",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.tickerPrice.BONKUSDT",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.1d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "btc.etf.flow.usd.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.btc",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "btc.inflation.pct.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "btc.price.drawdown_from_ath.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "btc.return.pct.90d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.market_chart.bitcoin.90d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "long-horizon return requires market_chart series not archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "btc.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.1d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "eth.etf.flow.usd.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.eth",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.leverage.perp_spot_notional.x",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.fapi.ticker24h.FARTCOINUSDT",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.liquidity.dex.usd.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.fartcoin",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.market_cap.usd.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.return.pct.90d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.market_chart.fartcoin.90d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "long-horizon return requires market_chart series not archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.rs.vs_sol.pp.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.fapi.klines.FARTCOINUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.supply.max.tokens",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "fart.volume.cg.usd.24h",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "giga.price.usd.live",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.giga",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.af.inventory.share_hl_circ.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.tokenDetails",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.fees.change.pct.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.hyperliquid.dailyFees",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "rolling-window metric requires time series not archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.oi.native.usd.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.metaAndAssetCtxs",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.oi.platform.usd.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.metaAndAssetCtxs",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.oi.token.usd.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.metaAndAssetCtxs",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.stake.tokens.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.validatorSummaries",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.volume.l1_perp.usd.24h",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.metaAndAssetCtxs",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "hype.volume.token.usd.24h",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "hyperliquid",
+      "request_key": "hyperliquid.info.metaAndAssetCtxs",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "io.devices.inventory.count",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "io_explorer",
+      "request_key": "io.inventory",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "io.price.drawdown_from_ath.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "io.rs.vs_sol.pp.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.IOUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "io.rs.vs_sol.pp.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.IOUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "io.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "io.supply.max.tokens",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "lockin.price.usd.live",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.lockin",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.gpu_hours.approx_31d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.timestamps_hours",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.host_rewards.usd.cumulative",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.stats",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.jobs.approx_30d.count",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.stats.timestamps",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.jobs.queued.count",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.jobs.running.count",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.count",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.market_cap.usd.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.nodes.with_running_jobs.count",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "nosana",
+      "request_key": "nosana.jobs.running",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.return.pct.180d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.market_chart.nosana",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "long-horizon return requires market_chart series not archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.rs.vs_sol.pp.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.market_chart.nosana",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.rs.vs_sol.pp.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.market_chart.nosana",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "nos.supply.max.tokens",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "orca.price.usd.live",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.tickerPrice.ORCAUSDT",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "pump.holders.unattributed.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "forensics",
+      "request_key": "forensics.pump.ownership_vesting",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "pump.liquidity.dex.usd.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.pump",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "pump.rs.vs_btc.pct.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "pump.rs.vs_btc.pct.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "pump.rs.vs_sol.pct.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "pump.rs.vs_sol.pct.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.PUMPUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "pump.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "render.bme.burned.tokens.last8",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "render_foundation",
+      "request_key": "render.epochBurnStats",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "render.bme.emissions.tokens.last8",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "render_foundation",
+      "request_key": "render.liabilityEpochs",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "render.bme.ratio.last4",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "render_foundation",
+      "request_key": "render.epochBurnStats",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "render.bme.ratio.last8",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "render_foundation",
+      "request_key": "render.epochBurnStats",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "render.nodes.count.listed",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "render_foundation",
+      "request_key": "render.nodes_and_frames",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "retardio.price.usd.live",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "dexscreener",
+      "request_key": "dexscreener.token.retardio",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.burn.tokens.per_year",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getInflationRate",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.1d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.etf.flow.usd.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "farside",
+      "request_key": "farside.html.sol",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "ETF rolling 1D/7D/30D sums require daily flow series; only HTML snapshots archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.fees.usd_per_day.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.solana.dailyFees",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.funding.rate.mean_7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.fapi.fundingRate.SOLUSDT",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "rolling-window metric requires time series not archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.rs.vs_btc.pp.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.SOLUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.rs.vs_btc.pp.7d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.spot.klines.SOLUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "RS rolling window requires daily kline series not preserved for Review04",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getSupply",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.tps.all.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getRecentPerformanceSamples",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.tps.nonvote.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getRecentPerformanceSamples",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "sol.validators.active.count",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "solana_rpc",
+      "request_key": "solana.rpc.getVoteAccounts",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "spx.oi.change.pct.30d",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "binance",
+      "request_key": "binance.fapi.openInterestHist.SPXUSDT.1d",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "rolling-window metric requires time series not archived",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "spx.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "spx.supply.max.tokens",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "zec.inflation.pct.current",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "zcash_explorer",
+      "request_key": "zcash.explorer.blockchain-info",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "zec.supply.circulating.pct",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    },
+    {
+      "metric_id": "zec.supply.max.tokens",
+      "classification": "HISTORICAL_SOURCE_ARCHIVE_GAP",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "expected_evidence_paths_searched": [
+        "reports/2026-08-25/asset-dynamic-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/top-context-refresh/COLLECT-SNAPSHOT.json",
+        "reports/2026-08-25/btc-leverage-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/pump-market-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/fartcoin-perp-spot-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/spx-fart-risk-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/render-forensics-refresh/FETCH-SNAPSHOT.json",
+        "reports/2026-08-25/etf-flows-refresh/FARSIDE-*-SNAPSHOT-20260825.txt",
+        "runtime/job2 raw HTTP captures (Review04 replay set)"
+      ],
+      "reason_unavailable": "no contemporaneous machine evidence in Review04 archive or replay captures",
+      "html_substitution_forbidden": true,
+      "later_data_substitution_forbidden": true
+    }
+  ],
+  "counts": {
+    "HISTORICAL_SOURCE_ARCHIVE_GAP": 80,
+    "ARCHIVED_EXTRACTED_SOURCE_EVIDENCE": 0,
+    "ARCHIVED_DERIVABLE_MACHINE_EVIDENCE": 0
+  }
+}
