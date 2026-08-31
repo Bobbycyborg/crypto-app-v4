@@ -18,7 +18,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from renderer.formatters import format_value
+from renderer.frozen_reports import refuse_frozen_write
 from renderer.semantic_wording import apply_semantic_wording
+from renderer.week_nav import apply_week_menu
 
 RENDERER_VERSION = "job3-v1"
 NON_OK = frozenset(
@@ -65,7 +67,7 @@ def _ordinal(day: int) -> str:
 
 
 def apply_report_header(html: str, snapshot: dict[str, Any], source_html: str) -> str:
-    """Stamp current-week title from snapshot run date. Skip synthetic Job3/Job4 fixtures."""
+    """Add a new week. Never rename a previous report in the dropdown."""
     run_id = str(snapshot.get("source_run_id") or "")
     if "SYNTHETIC" in run_id.upper():
         return html
@@ -81,10 +83,16 @@ def apply_report_header(html: str, snapshot: dict[str, Any], source_html: str) -
     report_m = re.search(r"Report\s+(\d+)", old)
     if not report_m:
         return html
-    new_header = f"{new_date} - Report {int(report_m.group(1)) + 1:02d}"
-    if old not in html:
-        return html
-    return html.replace(old, new_header)
+    new_n = int(report_m.group(1)) + 1
+    new_header = f"{new_date} - Report {new_n:02d}"
+    html = re.sub(r"<title>[^<]+</title>", f"<title>{new_header}</title>", html, count=1)
+    html = re.sub(
+        r'(<button class="week-btn"[^>]*>\s*<span>)[^<]+(</span>)',
+        rf"\g<1>{new_header}\g<2>",
+        html,
+        count=1,
+    )
+    return apply_week_menu(html, current=f"{new_n:02d}", from_baselines=False)
 
 
 
@@ -232,6 +240,7 @@ def main() -> int:
         return 3
 
     out = Path(args.out)
+    refuse_frozen_write(out)
     out.parent.mkdir(parents=True, exist_ok=True)
     tmp = out.with_suffix(".tmp")
     tmp.write_text(rendered, encoding="utf-8")
