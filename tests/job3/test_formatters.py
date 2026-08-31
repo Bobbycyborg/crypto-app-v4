@@ -61,6 +61,19 @@ def test_required_goldens() -> None:
     assert format_value(0.82, split_pct) == "0.82"
 
 
+def test_compact_usd() -> None:
+    from integrity.numeric import compact_usd_parts
+
+    assert compact_usd_parts(1_219_200_000) == ("$1.22", "B", False)
+    assert compact_usd_parts(-201_800_000) == ("$202", "M", True)
+    assert compact_usd_parts(102_100_000) == ("$102", "M", False)
+    assert compact_usd_parts(167_300_000) == ("$167", "M", False)
+    assert compact_usd_parts(171_400_000) == ("$171", "M", False)
+    assert compact_usd_parts(54_110_000_000) == ("$54.1", "B", False)
+    assert compact_usd_parts(12_270_000_000) == ("$12.3", "B", False)
+    assert compact_usd_parts(1_838_300_000) == ("$1.84", "B", False)
+
+
 def test_unknown_exact() -> None:
     assert format_value(1, {"type": "numeric"}, status="UNKNOWN") == "UNKNOWN"
 
@@ -74,6 +87,7 @@ def main() -> int:
     test_unknown_exact()
     test_required_goldens()
     test_grouping()
+    test_compact_usd()
     print("test_formatters OK")
     return 0
 

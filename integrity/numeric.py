@@ -18,6 +18,68 @@ _SCALE = {
 }
 
 
+def compact_usd_parts(value: Any) -> tuple[str, str, bool]:
+    """Hard display lock: 3 digits max. Never 4-digit millions. Never 0.xx billion. No minus."""
+    mag = abs(dec(value))
+    negative = dec(value) < 0
+    if mag == 0:
+        return "$0", "M", False
+    if mag >= Decimal("1000000000"):
+        unit, sfx = Decimal("1000000000"), "B"
+    else:
+        unit, sfx = Decimal("1000000"), "M"
+    shown = mag / unit
+    if sfx == "M" and shown >= 1000:
+        unit, sfx = Decimal("1000000000"), "B"
+        shown = mag / unit
+    if sfx == "B" and shown < 1:
+        unit, sfx = Decimal("1000000"), "M"
+        shown = mag / unit
+    if shown >= 100:
+        places = 0
+    elif shown >= 10:
+        places = 1
+    else:
+        places = 2
+    shown = shown.quantize(Decimal("1").scaleb(-places), rounding=ROUND_HALF_UP)
+    if sfx == "M" and shown >= 1000:
+        unit, sfx = Decimal("1000000000"), "B"
+        shown = (mag / unit).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        places = 2
+    if sfx == "B" and shown < 1:
+        unit, sfx = Decimal("1000000"), "M"
+        shown = mag / unit
+        places = 0 if shown >= 100 else (1 if shown >= 10 else 2)
+        shown = shown.quantize(Decimal("1").scaleb(-places), rounding=ROUND_HALF_UP)
+    if places == 0:
+        num = str(int(shown))
+    else:
+        num = format(shown, f".{places}f")
+    int_digits = num.split(".", 1)[0]
+    if len(int_digits) > 3:
+        raise RuntimeError(f"ETF_DISPLAY_FOUR_DIGITS:{num}{sfx}")
+    if sfx == "B" and Decimal(num) < 1:
+        raise RuntimeError(f"ETF_DISPLAY_FRACTION_BILLION:{num}{sfx}")
+    return f"${num}", sfx, negative
+
+
+def compact_usd_formatter(value: Any) -> dict[str, Any]:
+    text, sfx, _neg = compact_usd_parts(value)
+    num = text[1:]
+    dp = len(num.split(".", 1)[1]) if "." in num else 0
+    return {
+        "type": "numeric",
+        "currency_prefix": "$",
+        "scale": int(_SCALE[sfx]),
+        "decimal_places": dp,
+        "external_scale_suffix": sfx,
+    }
+
+
+def is_etf_flow_metric(metric_id: str) -> bool:
+    return ".etf.flow.usd." in metric_id
+
+
 def dec(v: Any) -> Decimal:
     if isinstance(v, Decimal):
         return v

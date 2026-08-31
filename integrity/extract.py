@@ -69,7 +69,8 @@ def _mask_fragment_regex(fragment: str, exclude_id: str, bindings: list[dict[str
     parts: list[str] = []
     last = 0
     for m in _ANCHOR_NUM.finditer(fragment):
-        if re.fullmatch(r"\d+", m.group(0)) and fragment[m.end() :].startswith("d"):
+        nxt = fragment[m.end() : m.end() + 1]
+        if re.fullmatch(r"\d+", m.group(0)) and nxt.upper() == "D":
             continue
         start = m.start()
         pre = fragment[last:start]
@@ -83,7 +84,11 @@ def _mask_fragment_regex(fragment: str, exclude_id: str, bindings: list[dict[str
         last = m.end()
     if last < len(fragment):
         parts.append(re.escape(fragment[last:]))
-    return _relax_period_labels("".join(parts))
+    out = _relax_period_labels("".join(parts))
+    out = out.replace("c\\-green", "c-(?:green|red)")
+    out = out.replace("c\\-red", "c-(?:green|red)")
+    out = re.sub(r'(u\\-unit">)[kKmMbBtT]', r'\1[kKmMbBtT]', out)
+    return out
 
 
 def _nth_before_index(html: str, before: str, combo_start: int) -> int:
@@ -144,6 +149,10 @@ def _skip_leading_sibling(before: str, rendered: str, value_start: int) -> int:
 
 
 def _find_before(rendered: str, before: str, start: int = 0) -> tuple[int, int] | None:
+    if "c-green" in before or "c-red" in before:
+        m = _flex_anchor_pattern(before).search(rendered, start)
+        if m:
+            return m.start(), m.end()
     for key in _before_search_keys(before):
         pos = rendered.find(key, start)
         if pos >= 0:

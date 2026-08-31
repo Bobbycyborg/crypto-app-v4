@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from integrity.numeric import compact_usd_parts, is_etf_flow_metric
 from renderer.formatters import format_value
 from renderer.frozen_reports import refuse_frozen_write
 from renderer.semantic_wording import apply_semantic_wording
@@ -109,25 +110,77 @@ def _find_anchor(html: str, binding: dict[str, Any]) -> tuple[int, int]:
     return start, end
 
 
-def _render_text(binding: dict[str, Any], snapshot: dict[str, Any]) -> tuple[str, str]:
+def _render_text(
+    binding: dict[str, Any], snapshot: dict[str, Any]
+) -> tuple[str, str, str | None, bool]:
     mid = binding["metric_id"]
     rec = snapshot["metrics"].get(mid)
     if rec is None:
-        return "UNKNOWN", "missing_metric"
+        return "UNKNOWN", "missing_metric", None, False
     status = rec.get("status", "UNKNOWN")
     if status == "OUT_OF_SCOPE":
         raise RuntimeError(f"BOUND_OUT_OF_SCOPE_METRIC:{mid}")
     if status != "OK":
-        return "UNKNOWN", "unknown_binding"
+        return "UNKNOWN", "unknown_binding", None, False
     val = rec.get("normalized_value")
-    rendered = format_value(val, binding["formatter"], status="OK")
+    unit_sfx: str | None = None
+    negative = False
+    if is_etf_flow_metric(mid):
+        rendered, unit_sfx, negative = compact_usd_parts(val)
+    else:
+        rendered = format_value(val, binding["formatter"], status="OK")
     if binding["target_kind"] in {"HTML_TEXT", "HTML_ATTRIBUTE"}:
         rendered = html_lib.escape(rendered, quote=binding["target_kind"] == "HTML_ATTRIBUTE")
     elif binding["target_kind"] == "JS_LITERAL":
         rendered = json.dumps(rendered)
     elif binding["target_kind"] == "JSON_LITERAL":
         rendered = json.dumps(rendered)
-    return rendered, "ok"
+    return rendered, "ok", unit_sfx, negative
+
+
+def _patch_etf_unit_and_color(html: str, start: int, text: str, unit_sfx: str | None, negative: bool) -> str:
+    new_end = start + len(text)
+    if unit_sfx:
+        unit = re.match(r'(<span class="u-unit">)[kKmMbBtT](</span>)', html[new_end:])
+        if unit:
+            html = html[:new_end] + unit.group(1) + unit_sfx + unit.group(2) + html[new_end + unit.end() :]
+    look = 90
+    left = max(0, start - look)
+    prefix = html[left:start]
+    cls = "c-red" if negative else "c-green"
+    prefix = re.sub(r"c-(?:green|red)(?=\">\s*$)", cls, prefix)
+    return html[:left] + prefix + html[start:]
+
+
+def _recompact_etf_alltime(html: str) -> str:
+    from decimal import Decimal
+
+    def repl(m: re.Match[str]) -> str:
+        raw = Decimal(m.group(2).replace("$", "").replace(",", ""))
+        scale = Decimal("1000000000") if m.group(4) == "B" else Decimal("1000000")
+        text, sfx, _ = compact_usd_parts(raw * scale)
+        return f"{m.group(1)}{text}{m.group(3)}{sfx}{m.group(5)}"
+
+    return re.sub(
+        r'(<span class="ev-k">ALL-TIME</span><span class="ev-v c-green">)(\$[\d.]+)(<span class="u-unit">)([MB])(</span>)',
+        repl,
+        html,
+    )
+
+
+def _refuse_bad_etf_display(html: str) -> None:
+    i = html.find("ETF FLOWS")
+    if i < 0:
+        return
+    block = html[i : i + 8000]
+    if re.search(r'c-green">\$[\-−]', block):
+        raise RuntimeError("ETF_DISPLAY_GREEN_MINUS")
+    if re.search(r"\$[\-−]\d", block):
+        raise RuntimeError("ETF_DISPLAY_MINUS_IN_NUMBER")
+    if re.search(r"\$\d{4,}", block):
+        raise RuntimeError("ETF_DISPLAY_FOUR_DIGITS")
+    if re.search(r'\$0\.\d+<span class="u-unit">B', block):
+        raise RuntimeError("ETF_DISPLAY_FRACTION_BILLION")
 
 
 def render_report(
@@ -147,30 +200,30 @@ def render_report(
         start, end = _find_anchor(source_html, b)
         if start == end and b["target_kind"] != "STYLE_NUMBER":
             raise RuntimeError(f"zero-width binding {b['binding_id']}")
-        text, kind = _render_text(b, snapshot)
+        text, kind, unit_sfx, negative = _render_text(b, snapshot)
         if kind == "unknown_binding":
             unknown_bindings += 1
         if b["target_kind"] == "STYLE_NUMBER":
             if kind != "ok":
                 visual_unknown_bindings += 1
                 text = "0"
-            spans.append((start, end, text, b, kind))
-        else:
-            spans.append((start, end, text, b, kind))
+        spans.append((start, end, text, b, kind, unit_sfx, negative))
 
     spans.sort(key=lambda x: x[0], reverse=True)
     used: list[tuple[int, int]] = []
-    for start, end, _text, _b, _k in spans:
+    for start, end, _text, _b, _k, _u, _n in spans:
         if any(not (end <= u[0] or start >= u[1]) for u in used):
             raise RuntimeError("overlapping_binding during render")
         used.append((start, end))
 
     out = source_html
     style_attrs: dict[str, str] = {}
-    for start, end, text, binding, kind in spans:
+    for start, end, text, binding, kind, unit_sfx, negative in spans:
         if binding["target_kind"] == "STYLE_NUMBER" and kind != "ok":
             style_attrs[binding["binding_id"]] = "UNKNOWN"
         out = out[:start] + text + out[end:]
+        if kind == "ok" and unit_sfx is not None:
+            out = _patch_etf_unit_and_color(out, start, text, unit_sfx, negative)
 
     patches = 0
     for w in writer_quarantine.get("writers", []):
@@ -183,6 +236,8 @@ def render_report(
 
     out = apply_semantic_wording(out, snapshot)
     out = apply_report_header(out, snapshot, source_html)
+    out = _recompact_etf_alltime(out)
+    _refuse_bad_etf_display(out)
 
     for bid, state in style_attrs.items():
         # paired textual UNKNOWN already rendered; mark geometry neutral

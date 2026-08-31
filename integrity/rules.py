@@ -22,16 +22,32 @@ from integrity.model import (
     CheckResult,
 )
 from integrity.numeric import (
+    compact_usd_formatter,
     dec,
     derive_ratio,
     derive_subtract,
     display_tolerance,
     drawdown_pct,
     inferred_numeric_formatter,
+    is_etf_flow_metric,
     parse_binding_observed,
     parse_display_token,
     values_compatible,
 )
+
+
+def _fmt_for_metric(metric_id: str, binding_fmt: dict[str, Any] | None, canonical: Decimal) -> dict[str, Any]:
+    if is_etf_flow_metric(metric_id):
+        return compact_usd_formatter(canonical)
+    return binding_fmt or {}
+
+
+def _signed_etf_obs(metric_id: str, observed: Decimal | None, canonical: Decimal) -> Decimal | None:
+    if observed is None:
+        return None
+    if is_etf_flow_metric(metric_id) and canonical < 0 and observed > 0:
+        return -observed
+    return observed
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -339,7 +355,10 @@ def check_binding_consistency(
                 )
             )
             continue
-        observed = parse_binding_observed(span, fmt, canonical=canonical)
+        fmt = _fmt_for_metric(mid, fmt, canonical)
+        parse_can = abs(canonical) if is_etf_flow_metric(mid) else canonical
+        observed = parse_binding_observed(span, fmt, canonical=parse_can)
+        observed = _signed_etf_obs(mid, observed, canonical)
         ok = values_compatible(observed, canonical, fmt)
         checks.append(
             CheckResult(
@@ -460,9 +479,11 @@ def check_duplicate_consistency(
                 fail = True
                 values.append((bid, err or "missing"))
                 continue
-            fmt = b.get("formatter") or {}
+            fmt = _fmt_for_metric(mid, b.get("formatter") or {}, canonical)
             if fmt.get("type") == "numeric":
-                obs = parse_binding_observed(span, fmt, canonical=canonical)
+                parse_can = abs(canonical) if is_etf_flow_metric(mid) else canonical
+                obs = parse_binding_observed(span, fmt, canonical=parse_can)
+                obs = _signed_etf_obs(mid, obs, canonical)
                 ok = values_compatible(obs, canonical, fmt)
             else:
                 obs = parse_binding_observed(span, None, canonical=canonical)
@@ -889,7 +910,10 @@ def _span_value_ok(span: str, binding: dict[str, Any], snap: dict[str, Any]) -> 
         canonical = dec(snap["normalized_value"])
     except Exception:
         return False
-    observed = parse_binding_observed(span, fmt, canonical=canonical)
+    fmt = _fmt_for_metric(binding["metric_id"], fmt, canonical)
+    parse_can = abs(canonical) if is_etf_flow_metric(binding["metric_id"]) else canonical
+    observed = parse_binding_observed(span, fmt, canonical=parse_can)
+    observed = _signed_etf_obs(binding["metric_id"], observed, canonical)
     return values_compatible(observed, canonical, fmt)
 
 
