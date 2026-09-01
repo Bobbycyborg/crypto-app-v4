@@ -70,7 +70,7 @@ def _is_grok(reg: dict[str, Any], mid: str) -> bool:
 
 
 def _roster_removed(*htmls: str, asset: str | None = None, metric_id: str = "") -> bool:
-    """ORCA/BONK dropped from Report 05 UI. Same check IDs, NOT_APPLICABLE."""
+    """ORCA/BONK hidden (or absent) on Report 05 UI. Same check IDs, NOT_APPLICABLE."""
     mid = (metric_id or "").lower()
     a = (asset or "").lower()
     token = None
@@ -83,10 +83,21 @@ def _roster_removed(*htmls: str, asset: str | None = None, metric_id: str = "") 
     for h in htmls:
         if not h:
             continue
-        if token == "orca" and 'data-asset-slug="orca"' not in h:
-            return True
-        if token == "bonk" and 'hold-ticker">BONK' not in h and 'desk-name">BONK' not in h:
-            return True
+        if token == "orca":
+            if 'data-asset-slug="orca"' not in h:
+                return True
+            m = re.search(r'<[^>]*data-asset-slug="orca"[^>]*>', h)
+            if m and "is-hidden" in m.group(0):
+                return True
+        if token == "bonk":
+            if 'hold-ticker">BONK' not in h and 'desk-name">BONK' not in h:
+                return True
+            m = re.search(r'<[^>]*data-feed="spot:BONKUSDT"[^>]*>', h)
+            if m and "is-hidden" in m.group(0):
+                return True
+            m = re.search(r'<div class="desk-row[^"]*"[^>]*>\s*<span class="desk-name">BONK</span>', h)
+            if m and "is-hidden" in m.group(0):
+                return True
     return False
 
 
@@ -100,9 +111,9 @@ def _na_roster(check_id: str, category: str, asset: str | None, mid: str) -> Che
         status="NOT_APPLICABLE",
         assertions_executed=1,
         observed=None,
-        expected_relation="removed from report 05 roster",
+        expected_relation="hidden on report 05 roster",
         evidence={},
-        reason="removed from report 05 roster",
+        reason="hidden on report 05 roster",
     )
 
 
