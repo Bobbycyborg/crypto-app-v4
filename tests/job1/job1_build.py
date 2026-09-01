@@ -37,7 +37,7 @@ HTML = ROOT / "index-v4.html"
 METRICS = ROOT / "metrics"
 SCHEMA_PATH = METRICS / "metric-schema.json"
 
-DORMANT_SLUGS = {"ray", "grass"}
+DORMANT_SLUGS = {"ray", "grass", "orca", "bonk"}
 ACTIVE_REPORT_SLUGS = [
     "btc", "fartcoin", "hype", "io", "nos",
     "pump", "render", "sol", "spx6900", "zec",

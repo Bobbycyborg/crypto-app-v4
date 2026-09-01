@@ -47,7 +47,7 @@ def gates() -> dict[str, int]:
             g["unknown_metric_ids"] += 1
         if b.get("owner") == "GROK":
             g["owner_grok_bound"] += 1
-        if (b.get("asset") or "").upper() in {"RAY", "GRASS", "DRIFT"}:
+        if (b.get("asset") or "").upper() in {"RAY", "GRASS", "DRIFT", "ORCA", "BONK"}:
             g["dormant_asset_bound"] += 1
         cls = b.get("occurrence_classification")
         if cls == "PRESERVE":

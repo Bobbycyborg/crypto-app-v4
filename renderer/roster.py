@@ -1,14 +1,10 @@
-"""Report 05 roster: hide GRASS/RAY/ORCA/BONK (never delete). Add Black Bull (ANSEM). Never run on frozen 01-04."""
+"""Report 05 roster: paused GRASS/RAY/ORCA/BONK stay dormant (hide if present, never rewrite). Add ANSEM. Never run on frozen 01-04."""
 
 from __future__ import annotations
 
 import json
 import re
-from pathlib import Path
 from typing import Any
-
-ROOT = Path(__file__).resolve().parents[1]
-FROZEN_04 = ROOT / "baselines/report-04.html"
 
 ANSEM_MINT = "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump"
 ANSEM_POOL = "FnzKY6x7entQ1eR3D225dQyT7ybfka4PskBMQhb8L3CC"
@@ -193,63 +189,6 @@ def _watch_blob() -> dict[str, Any]:
     }
 
 
-def _grab(src: str, pat: str) -> str | None:
-    m = re.search(pat, src, flags=re.S)
-    return m.group(0) if m else None
-
-
-def _restore_orca_bonk_if_missing(html: str) -> str:
-    """If a prior strip deleted ORCA/BONK, put them back from frozen Report 04. Never invent."""
-    if 'data-asset-slug="orca"' in html and 'desk-name">BONK' in html and 'data-asset="orca"' in html:
-        return html
-    if not FROZEN_04.exists():
-        raise RuntimeError("ROSTER_FROZEN_04_MISSING")
-    frozen = FROZEN_04.read_text(encoding="utf-8")
-    if 'data-asset-slug="orca"' not in html:
-        desk = _grab(frozen, r'<button class="desk-row has-article" type="button" data-asset-slug="orca">.*?</button>')
-        hold = _grab(frozen, r'<button class="hold" type="button" data-asset-slug="orca"[^>]*>.*?</button>')
-        if not desk or not hold:
-            raise RuntimeError("ROSTER_ORCA_BOARD_MISSING_FROM_FROZEN")
-        desk_at = '<button class="desk-row has-article" type="button" data-asset-slug="ansem">'
-        if desk_at not in html:
-            desk_at = '<div class="desk-row no-article"><span class="desk-name">GIGA</span>'
-        html = html.replace(desk_at, desk + "\n" + desk_at, 1)
-        hold_at = '<button class="hold" type="button" data-asset-slug="ansem"'
-        if hold_at not in html:
-            hold_at = '<button class="hold hold-no-article" type="button" data-feed="dex:63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9">'
-        html = html.replace(hold_at, hold + "\n" + hold_at, 1)
-    if 'data-asset="orca"' not in html:
-        art = _grab(frozen, r'<article class="report asset-v3-report is-hidden" data-asset="orca">.*?</article>')
-        if not art:
-            raise RuntimeError("ROSTER_ORCA_ARTICLE_MISSING_FROM_FROZEN")
-        html = html.replace(
-            '<article class="report asset-v3-report is-hidden" data-asset="2z">',
-            art + "\n" + '<article class="report asset-v3-report is-hidden" data-asset="2z">',
-            1,
-        )
-    if 'desk-name">BONK' not in html:
-        desk = _grab(frozen, r'<div class="desk-row no-article"><span class="desk-name">BONK</span>.*?</div>')
-        if not desk:
-            raise RuntimeError("ROSTER_BONK_DESK_MISSING_FROM_FROZEN")
-        giga = _grab(html, r'<div class="desk-row no-article(?: is-hidden)?"><span class="desk-name">GIGA</span>.*?</div>')
-        if not giga:
-            raise RuntimeError("ROSTER_GIGA_DESK_MISSING")
-        html = html.replace(giga, giga + "\n" + desk, 1)
-    if 'hold-ticker">BONK' not in html:
-        hold = _grab(
-            frozen,
-            r'<button class="hold hold-no-article" type="button" data-feed="spot:BONKUSDT">.*?</button>',
-        )
-        if not hold:
-            raise RuntimeError("ROSTER_BONK_HOLD_MISSING_FROM_FROZEN")
-        html = html.replace(
-            '<button class="hold" type="button" data-asset-slug="ansem"',
-            hold + "\n" + '<button class="hold" type="button" data-asset-slug="ansem"',
-            1,
-        )
-    return html
-
-
 def _ensure_hidden_all(html: str, unique: str) -> str:
     start_search = 0
     while True:
@@ -345,18 +284,11 @@ def _patch_siren(html: str) -> str:
 
 
 def apply_roster(html: str) -> str:
-    """Hide GRASS/RAY/ORCA/BONK (never delete). Add ANSEM. Report 05 only."""
-    html = _restore_orca_bonk_if_missing(html)
+    """Hide paused coins if present. Never rewrite them. Add ANSEM. Report 05 only."""
     html = _insert_ansem(html)
     html = _hide_r05_out(html)
     html = _patch_hash_js(html)
     html = _patch_siren(html)
-    if 'data-asset="grass"' not in html or 'data-asset="ray"' not in html:
-        raise RuntimeError("ROSTER_GRASS_RAY_DELETED")
-    if 'data-asset-slug="orca"' not in html or 'data-asset="orca"' not in html:
-        raise RuntimeError("ROSTER_ORCA_DELETED")
-    if 'desk-name">BONK' not in html or 'hold-ticker">BONK' not in html:
-        raise RuntimeError("ROSTER_BONK_DELETED")
     if 'data-asset="ansem"' not in html or 'data-siren-key="ANSEM"' not in html:
         raise RuntimeError("ROSTER_ANSEM_MISSING")
     return html

@@ -8,7 +8,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 
-DORMANT_ASSETS = frozenset({"RAY", "GRASS", "DRIFT"})
+DORMANT_ASSETS = frozenset({"RAY", "GRASS", "DRIFT", "ORCA", "BONK"})
 BINDABLE_DISPOSITIONS = frozenset({"COLLECT", "DERIVE", "BLOCKED_SOURCE"})
 NON_BINDABLE_CLASSIFICATIONS = frozenset(
     {

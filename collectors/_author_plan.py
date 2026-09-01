@@ -913,7 +913,7 @@ def main() -> None:
                 "required": False,
                 "notes": "Job 1 owner=GROK. Cursor does not collect.",
             }
-        elif m["asset"] in {"RAY", "GRASS"} or m.get("surface") == "LEGACY_INACTIVE":
+        elif m["asset"] in {"RAY", "GRASS", "DRIFT", "ORCA", "BONK"} or m.get("surface") == "LEGACY_INACTIVE":
             row = {
                 **base,
                 "disposition": "LEGACY_INACTIVE",
@@ -923,7 +923,7 @@ def main() -> None:
                 "normalizer": None,
                 "derivation": None,
                 "required": False,
-                "notes": "Dormant RAY/GRASS. No collector.",
+                "notes": "Dormant. No collector.",
             }
         elif (
             m["metric_type"] in {"HISTORICAL", "STATIC_DECISION_THRESHOLD", "STATIC_REFERENCE"}

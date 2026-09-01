@@ -153,7 +153,7 @@ def main() -> int:
 
     for b in bindings:
         assert b.get("owner") != "GROK"
-        assert (b.get("asset") or "").upper() not in {"RAY", "GRASS", "DRIFT"}
+        assert (b.get("asset") or "").upper() not in {"RAY", "GRASS", "DRIFT", "ORCA", "BONK"}
         cls = b.get("occurrence_classification")
         assert cls not in {"HISTORICAL", "STATIC_DECISION_THRESHOLD", "WALLET_OWNED", "PRESERVE"}
 

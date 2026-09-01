@@ -40,7 +40,7 @@ def sha256_file(path: Path) -> str:
 def required_for(m: dict) -> bool:
     if m["owner"] == "GROK" or m.get("wallet_or_non_wallet") == "WALLET":
         return False
-    if m["asset"] in {"RAY", "GRASS", "DRIFT"}:
+    if m["asset"] in {"RAY", "GRASS", "DRIFT", "ORCA", "BONK"}:
         return False
     if m["metric_id"] == "io.emissions.tokens.remaining":
         return False
@@ -76,7 +76,7 @@ def main() -> None:
             row = {**base, "disposition": "GROK_WALLET", "source_key": None, "request_key": None,
                    "selector": None, "normalizer": None, "derivation": None, "required": False,
                    "notes": "Job 1 owner=GROK. Cursor does not collect."}
-        elif m["asset"] in {"RAY", "GRASS", "DRIFT"}:
+        elif m["asset"] in {"RAY", "GRASS", "DRIFT", "ORCA", "BONK"}:
             row = {**base, "disposition": "LEGACY_INACTIVE", "source_key": None, "request_key": None,
                    "selector": None, "normalizer": None, "derivation": None, "required": False,
                    "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."}

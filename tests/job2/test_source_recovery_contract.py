@@ -140,7 +140,13 @@ def main() -> int:
     for k, v in gates.items():
         print(f"  {k}: {v}")
 
-    assert overrides == {"RAY": "LEGACY_INACTIVE", "GRASS": "LEGACY_INACTIVE", "DRIFT": "LEGACY_INACTIVE"}
+    assert overrides == {
+        "RAY": "LEGACY_INACTIVE",
+        "GRASS": "LEGACY_INACTIVE",
+        "DRIFT": "LEGACY_INACTIVE",
+        "ORCA": "LEGACY_INACTIVE",
+        "BONK": "LEGACY_INACTIVE",
+    }
 
     # Phase A must clear after CGPT decisions (Phase B authorised)
     phase_a_block = required_true_blocker > 0 or required_source_decision_conflict > 0

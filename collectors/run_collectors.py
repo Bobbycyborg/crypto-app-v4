@@ -113,7 +113,7 @@ def validate_contract(plan: dict[str, Any], registry: dict[str, Any]) -> None:
             raise RuntimeError(f"wallet_collector mis-tagged {mid}")
         if disp == "COLLECT" and m["owner"] == "GROK":
             raise RuntimeError(f"wallet_collector {mid}")
-        if disp == "COLLECT" and m["asset"] in {"RAY", "GRASS", "DRIFT"}:
+        if disp == "COLLECT" and m["asset"] in {"RAY", "GRASS", "DRIFT", "ORCA", "BONK"}:
             raise RuntimeError(f"dormant_asset_collector {mid}")
         if disp == "BLOCKED_SOURCE" and e.get("required"):
             raise RuntimeError(f"required_blocked_source {mid}")

@@ -8,7 +8,7 @@ from copy import deepcopy
 from pathlib import Path
 
 BANNED_FAMILIES = {"captured", "usd_figure", "pct_figure", "pp_figure"}
-DORMANT_SLUGS = {"ray", "grass"}
+DORMANT_SLUGS = {"ray", "grass", "orca", "bonk"}
 META_KEYS = {
     "evidence", "confidence", "freshness", "caveat", "unknown", "detail",
     "sample", "discipline", "label", "scope", "rule", "status", "read",

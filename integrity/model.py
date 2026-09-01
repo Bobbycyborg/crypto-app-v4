@@ -21,7 +21,7 @@ ACTIVE_REPORT_ASSETS: tuple[str, ...] = (
     "hype",
 )
 
-EXCLUDED_ASSETS: tuple[str, ...] = ("ray", "grass", "drift")
+EXCLUDED_ASSETS: tuple[str, ...] = ("ray", "grass", "drift", "orca", "bonk")
 
 REQUIRED_CATEGORIES: tuple[str, ...] = (
     "01_input_lineage",

@@ -84,75 +84,70 @@
       "asset": "BONK",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "COLLECT",
+      "disposition": "LEGACY_INACTIVE",
       "derivation": null,
-      "source_key": "binance",
-      "request_key": "binance.spot.tickerPrice.BONKUSDT",
-      "selector": {
-        "type": "json_pointer",
-        "pointer": "/price"
-      },
-      "normalizer": {
-        "type": "identity"
-      },
-      "notes": "index-v4.html data-feed spot:BONKUSDT; Binance spot ticker price.",
-      "required": true
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B).",
+      "required": false
     },
     {
       "metric_id": "bonk.siren.supply.tokens.current",
       "asset": "BONK",
       "owner": "GROK",
       "unit": "tokens",
-      "disposition": "GROK_WALLET",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Job 1 owner=GROK. Cursor does not collect."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "bonk.siren.tracked.tokens.current",
       "asset": "BONK",
       "owner": "GROK",
       "unit": "tokens",
-      "disposition": "GROK_WALLET",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Job 1 owner=GROK. Cursor does not collect."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "bonk.threshold.out.usd",
       "asset": "BONK",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "PRESERVE",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Historical, static, threshold, or dated event. No live collector."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "bonk.threshold.this_move.usd",
       "asset": "BONK",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "PRESERVE",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Historical, static, threshold, or dated event. No live collector."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "btc.etf.flow.usd.1d",
@@ -3235,89 +3230,84 @@
       "asset": "ORCA",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "COLLECT",
+      "disposition": "LEGACY_INACTIVE",
       "derivation": null,
-      "source_key": "binance",
-      "request_key": "binance.spot.tickerPrice.ORCAUSDT",
-      "selector": {
-        "type": "json_pointer",
-        "pointer": "/price"
-      },
-      "normalizer": {
-        "type": "identity"
-      },
-      "notes": "index-v4.html data-feed spot:ORCAUSDT; Binance spot ticker price.",
-      "required": true
+      "source_key": null,
+      "request_key": null,
+      "selector": null,
+      "normalizer": null,
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B).",
+      "required": false
     },
     {
       "metric_id": "orca.siren.supply.tokens.current",
       "asset": "ORCA",
       "owner": "GROK",
       "unit": "tokens",
-      "disposition": "GROK_WALLET",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Job 1 owner=GROK. Cursor does not collect."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "orca.siren.tracked.tokens.current",
       "asset": "ORCA",
       "owner": "GROK",
       "unit": "tokens",
-      "disposition": "GROK_WALLET",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Job 1 owner=GROK. Cursor does not collect."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "orca.siren.watched_wallet_count.current",
       "asset": "ORCA",
       "owner": "GROK",
       "unit": "count",
-      "disposition": "GROK_WALLET",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Job 1 owner=GROK. Cursor does not collect."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "orca.threshold.out.usd",
       "asset": "ORCA",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "PRESERVE",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Historical, static, threshold, or dated event. No live collector."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "orca.threshold.this_move.usd",
       "asset": "ORCA",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "PRESERVE",
+      "disposition": "LEGACY_INACTIVE",
       "source_key": null,
       "request_key": null,
       "selector": null,
       "normalizer": null,
       "derivation": null,
       "required": false,
-      "notes": "Historical, static, threshold, or dated event. No live collector."
+      "notes": "LEGACY_INACTIVE per asset-state-overrides.json (Job 2B)."
     },
     {
       "metric_id": "portfolio.portfolio.value.usd.current",
@@ -6029,7 +6019,7 @@
       "selector": null,
       "normalizer": null,
       "derivation": null,
-      "notes": "CGPT 2026-08-27: zcashexplorer blockchain-info has no transactions24h field (chain/pool/block data only). BLOCKED_SOURCE/UNKNOWN — no replacement in Job 2B.",
+      "notes": "CGPT 2026-08-27: zcashexplorer blockchain-info has no transactions24h field (chain/pool/block data only). BLOCKED_SOURCE/UNKNOWN \u2014 no replacement in Job 2B.",
       "required": false
     },
     {
