@@ -713,7 +713,7 @@ def run_check() -> dict[str, Any]:
     day_dir.mkdir(parents=True, exist_ok=True)
     (day_dir / "siren-watch.json").write_text(json.dumps(out, indent=2) + "\n")
     lines = [f"siren-watch {now} since {gte}"]
-    for coin in COINS:
+    for coin in coins_out:
         c = coins_out[coin]
         coin_tags = tags.get(coin) or {}
         lines.append(f"== {coin} summary: {c['summary'] or '(blank)'} loud={c.get('loud')}")

@@ -76,6 +76,22 @@ def test_proved_start_is_kept() -> None:
     assert fresh["aug1_status"] == "inconsistent"
 
 
+def test_unwalked_coins_survive_a_save() -> None:
+    import tempfile
+    from lib.v3.siren_state import load_state, save_state
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "siren-state.json"
+        save_state(
+            {"coins": {"IO": {"wallets": [{"wallet": "io1", "aug1": 1, "aug1_status": "proved"}]}, "PUMP": {"wallets": [{"wallet": "p1", "aug1": 2}]}}},
+            path,
+        )
+        save_state({"coins": {"PUMP": {"wallets": [{"wallet": "p1", "aug1": 2, "balance": 9}]}}}, path)
+        coins = load_state(path)["coins"]
+        assert coins["IO"]["wallets"][0]["aug1"] == 1
+        assert coins["PUMP"]["wallets"][0]["balance"] == 9
+
+
 def test_manual_zone_uses_the_report_number() -> None:
     html = wrap_manual_zones('<p class="alt-stance-expl">Leave this.</p>', "06")
     assert "report=06" in html
@@ -90,6 +106,7 @@ def main() -> int:
     test_long_decimal_is_rounded()
     test_stale_date_fails_the_gate()
     test_proved_start_is_kept()
+    test_unwalked_coins_survive_a_save()
     test_manual_zone_uses_the_report_number()
     print("test_report_pipeline OK")
     return 0

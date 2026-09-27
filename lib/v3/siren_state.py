@@ -10,19 +10,46 @@ ROOT = Path(__file__).resolve().parents[2]
 STATE_PATH = ROOT / "state" / "siren-state.json"
 
 
-def load_state() -> dict[str, Any]:
-    if not STATE_PATH.exists():
+def load_state(path: Path | None = None) -> dict[str, Any]:
+    target = path or STATE_PATH
+    if not target.exists():
         return {}
-    return json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    return json.loads(target.read_text(encoding="utf-8"))
 
 
-def save_state(bundle: dict[str, Any]) -> None:
-    if not isinstance(bundle, dict) or not (bundle.get("coins") or {}):
+def merge_state(existing: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
+    """Update coins and wallets that were walked. Leave every other coin in place."""
+    if not isinstance(incoming, dict):
         raise RuntimeError("refuse to save empty siren state")
-    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    tmp = STATE_PATH.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(bundle, indent=2) + "\n", encoding="utf-8")
-    tmp.replace(STATE_PATH)
+    out = dict(existing or {})
+    coins = {name: dict(block) for name, block in (out.get("coins") or {}).items()}
+    for coin, block in (incoming.get("coins") or {}).items():
+        prev = dict(coins.get(coin) or {})
+        by_wallet = {row.get("wallet"): row for row in (prev.get("wallets") or []) if row.get("wallet")}
+        for row in block.get("wallets") or []:
+            if row.get("wallet"):
+                by_wallet[row["wallet"]] = row
+        merged = dict(prev)
+        merged.update({key: value for key, value in block.items() if key != "wallets"})
+        merged["wallets"] = list(by_wallet.values())
+        coins[coin] = merged
+    for key, value in incoming.items():
+        if key != "coins":
+            out[key] = value
+    out["coins"] = coins
+    if not coins:
+        raise RuntimeError("refuse to save empty siren state")
+    return out
+
+
+def save_state(bundle: dict[str, Any], path: Path | None = None) -> None:
+    target = path or STATE_PATH
+    existing = load_state(target)
+    merged = merge_state(existing, bundle)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    tmp = target.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(merged, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(target)
 
 
 def prior_row(state: dict[str, Any], coin: str, wallet: str) -> dict[str, Any] | None:
