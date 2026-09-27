@@ -292,7 +292,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path, walk: bool = False) 
         f"Candidate sha256 {digest}",
         f"Checker {report.overall_status}. Stale lines {len(problems)}. Critical misses {len(critical)}.",
     ]
-    for asset in ("eth", "sol"):
+    for asset in ("btc", "eth", "sol"):
         for window in ("1d", "7d", "30d"):
             mid = f"{asset}.etf.flow.usd.{window}"
             row = (snap.get("metrics") or {}).get(mid) or {}
