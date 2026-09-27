@@ -63,17 +63,6 @@ def _zone(mapping: dict[str, Any], occ_row: dict[str, Any], hint: str | None, xp
     return "article"
 
 
-_PRICE_NODE = re.compile(r'class="(?:alt-price|desk-px|hold-px)">([^<]+)')
-
-
-def _price_literal(html: str, regions: list[tuple[int, int]]) -> str | None:
-    for start, end in regions:
-        match = _PRICE_NODE.search(html, start, end)
-        if match and match.group(1).strip():
-            return match.group(1).strip()
-    return None
-
-
 def _etf_literal(html: str, asset: str, metric_id: str) -> tuple[str, list[tuple[int, int]]] | None:
     ticker = (asset or "").upper()
     if not ticker:
@@ -99,57 +88,6 @@ def _etf_literal(html: str, asset: str, metric_id: str) -> tuple[str, list[tuple
     if not match:
         return None
     return match.group(1), [(row.start(), row.end())]
-
-
-def _dial_literal(html: str, regions: list[tuple[int, int]], label: str) -> tuple[str, list[tuple[int, int]]] | None:
-    key = re.sub(r"[^a-z0-9]", "", (label or "").lower())
-    if len(key) < 4:
-        return None
-    for start, end in regions:
-        chunk = html[start:end]
-        for match in re.finditer(r">([^<]{2,48})<", chunk):
-            got = re.sub(r"[^a-z0-9]", "", match.group(1).lower())
-            if not got or got not in key and key not in got:
-                continue
-            rest = chunk[match.end() : match.end() + 900]
-            num = re.search(r'class="econ-dial-num[^"]*">([^<]+)', rest)
-            if not num or not num.group(1).strip():
-                continue
-            abs_start = start + match.end() + num.start(1)
-            text = num.group(1).strip()
-            if not re.fullmatch(r"[+\-~−$]?[\d,.]+[%kKmMbBx×]?", text):
-                return ("__NOT_NUMERIC__", [])
-            return text, [(abs_start, abs_start + len(text))]
-    return None
-
-
-def _amount_near_label(html: str, regions: list[tuple[int, int]], label: str) -> tuple[str, list[tuple[int, int]]] | None:
-    key = (label or "").strip()
-    if len(re.sub(r"[^a-z0-9]", "", key.lower())) < 4:
-        return None
-    for start, end in regions:
-        if not html[start : start + 8].lower().startswith("<article"):
-            continue
-        chunk = html[start:end]
-        match = re.search(re.escape(key), chunk, re.I)
-        if not match:
-            continue
-        window = chunk[match.end() : match.end() + 160]
-        num = re.search(r"\$[\d,.]+[kKmMbB]?", window)
-        if not num:
-            continue
-        abs_start = start + match.end() + num.start()
-        text = num.group(0)
-        return text, [(abs_start, abs_start + len(text))]
-    return None
-
-
-def _oneday_literal(html: str, regions: list[tuple[int, int]]) -> str | None:
-    for start, end in regions:
-        match = re.search(r"1d\s+[+−\-]*(\$[\d,.]+[MB]?)", html[start:end], re.I)
-        if match:
-            return match.group(1)
-    return None
 
 
 def _critical(zone: str, metric_id: str) -> bool:
@@ -243,42 +181,10 @@ def _assign_bindings(
         effective = _effective_literal(html, manifest_lit, regions, longer_literals=longer_literals) if regions else None
         extra: list[tuple[int, int]] = []
         refreshed = False
-        if ".price.usd" in mid:
-            price = _price_literal(html, regions)
-            if price:
-                effective = price
-                refreshed = True
-        if ".etf.flow." in mid and (".7d" in mid or ".30d" in mid):
+        if not effective and ".etf.flow." in mid and (".7d" in mid or ".30d" in mid):
             found = _etf_literal(html, mapping.get("asset") or "", mid)
             if found:
                 effective, extra = found
-                refreshed = True
-        elif not effective and ".etf.flow." in mid:
-            one = _oneday_literal(html, regions)
-            if one:
-                effective = one
-                refreshed = True
-        if not effective and hint:
-            dial = _dial_literal(html, regions, hint)
-            if dial and dial[0] == "__NOT_NUMERIC__":
-                blockers.append(
-                    {
-                        "metric_id": mid,
-                        "occurrence_id": oid,
-                        "asset": mapping.get("asset") or "",
-                        "zone": zone,
-                        "critical": False,
-                        "reason": "label is not a number",
-                    }
-                )
-                continue
-            if dial:
-                effective, extra = dial
-                refreshed = True
-        if not effective and hint:
-            near = _amount_near_label(html, regions, hint)
-            if near:
-                effective, extra = near
                 refreshed = True
         if not effective and ".etf.flow." in mid and ".1d" in mid:
             found = _etf_literal(html, mapping.get("asset") or "", mid)
