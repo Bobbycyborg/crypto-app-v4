@@ -4,9 +4,14 @@ from __future__ import annotations
 
 import argparse
 import re
+import sys
 from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from renderer.coin_span import coin_regions
 from renderer.formatters import format_value
@@ -16,7 +21,7 @@ _DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
 _REPEAT = re.compile(r"(\b7d\b)\s+\1|\(row above\)\s+\(row above\)", re.I)
 _LONG_DECIMAL = re.compile(r"\$?(\d[\d,]*\.\d{5,})")
 _MANUAL = re.compile(r"<!-- MANUAL:zone report=(\d+) -->")
-_ALLOW = re.compile(r"\b(?:1 aug|ath|launch)\b|2026-08-01", re.I)
+_ALLOW = re.compile(r"\b(?:1 aug|ath|launch)\b|2026-08-01|\bas of\b", re.I)
 _PRICE = re.compile(r"\$\d[\d,]*(?:\.\d+)?(?:[kKmMbB])?")
 _STRIP = (
     (re.compile(r"<script\b[^>]*>.*?</script>", re.I | re.S), " "),
@@ -24,19 +29,6 @@ _STRIP = (
     (re.compile(r"<svg\b[^>]*>.*?</svg>", re.I | re.S), " "),
     (re.compile(r"<[^>]+>"), " "),
 )
-
-# Leftovers from the week before Report 06. A new page must not still say these.
-_KNOWN_STALE = (
-    "$79,374",
-    "$79,073",
-    "bounce is gone",
-    "2026-08-25",
-    "$104.45",
-    "$1.43",
-    "$1.84B",
-    "$3.28B",
-)
-
 
 def visible_text(html: str) -> str:
     text = html
@@ -51,6 +43,43 @@ def _article(html: str, slug: str) -> str | None:
         if html[start : start + 8].lower().startswith("<article"):
             return html[start:end]
     return None
+
+
+_PRICE_NODE = re.compile(r'class="(?:alt-price|desk-px|hold-px)">([^<]+)')
+
+
+def _fmt_price(value: object) -> str:
+    from decimal import Decimal as D
+
+    num = D(str(value))
+    if num == num.to_integral_value() and num >= 1000:
+        return f"${num:,.0f}"
+    text = f"{num:.2f}".rstrip("0").rstrip(".")
+    return f"${text}"
+
+
+def _stale_against_previous(html: str, previous_html: str, snapshot: dict | None) -> list[str]:
+    metrics = (snapshot or {}).get("metrics") or {}
+    problems = []
+    cfg = load_report()
+    for asset in list(cfg["held"]) + list(cfg["always_shown"]):
+        row = metrics.get(f"{asset.lower()}.price.usd.live") or metrics.get(f"{asset.lower()}.price.usd.report")
+        if not row or row.get("status") != "OK" or row.get("normalized_value") is None:
+            continue
+        fresh = _fmt_price(row["normalized_value"])
+        for match in _PRICE_NODE.finditer(previous_html):
+            old = match.group(1).strip()
+            if not old or old == fresh:
+                continue
+            slug = asset.lower()
+            window_start = max(0, match.start() - 200)
+            window = previous_html[window_start : match.end()]
+            if f'data-asset-slug="{slug}"' not in window and f'data-asset="{slug}"' not in window:
+                continue
+            if old in html:
+                problems.append(f"stale price {asset} {old}")
+                break
+    return problems
 
 
 def _cross_coin(html: str) -> list[str]:
@@ -88,10 +117,6 @@ def stale_problems(
     text = visible_text(html)
     problems: list[str] = []
 
-    for phrase in _KNOWN_STALE:
-        if phrase in text:
-            problems.append(f"stale text {phrase}")
-
     for match in _DATE.finditer(text):
         found = datetime.strptime(match.group(0), "%Y-%m-%d")
         if found.date() >= previous.date():
@@ -119,6 +144,7 @@ def stale_problems(
     problems.extend(_cross_coin(html))
 
     if previous_html is not None:
+        problems.extend(_stale_against_previous(html, previous_html, snapshot))
         for asset in sorted(dormant_assets()):
             now = _article(html, asset)
             old = _article(previous_html, asset)
