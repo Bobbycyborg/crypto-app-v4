@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -96,6 +97,36 @@ def test_proved_start_is_kept() -> None:
     assert quiet["balance_mismatch"] is False
 
 
+def test_rebuilt_contract_uses_this_weeks_bindings() -> None:
+    import tempfile
+    from integrity.build_report_contract import build_contract
+    from integrity.rules import check_binding_consistency
+
+    page = Path(tempfile.mkdtemp()) / "page.html"
+    page.write_text("<p>SOL is $120.45 this week.</p>", encoding="utf-8")
+    contract = build_contract(
+        registry_path=ROOT / "metrics/metric-registry.json",
+        plan_path=ROOT / "collectors/collector-plan.json",
+        bindings_path=ROOT / "renderer/binding-manifest.json",
+        source_html_path=page,
+    )
+    manifest_ids = {b["binding_id"] for b in json.loads((ROOT / "renderer/binding-manifest.json").read_text())["bindings"]}
+    assert set(contract["surface_by_binding"]) <= manifest_ids
+    checks = check_binding_consistency(
+        rendered_html=page.read_text(encoding="utf-8"),
+        source_html=page.read_text(encoding="utf-8"),
+        snapshot={"metrics": {}},
+        bindings=[],
+        reg={},
+        contract={"surface_by_binding": {"not-this-week::1": ["hero"]}},
+    )
+    assert any(c.status == "COVERAGE_GAP" for c in checks)
+    assert stale_problems(page.read_text(encoding="utf-8")) == []
+    planted = stale_problems("<p>BEAR MARKET $79,374. The bounce is gone.</p>")
+    assert any("$79,374" in item for item in planted)
+    assert any("bounce is gone" in item for item in planted)
+
+
 def test_unwalked_coins_survive_a_save() -> None:
     import tempfile
     from lib.v3.siren_state import load_state, save_state
@@ -126,6 +157,7 @@ def main() -> int:
     test_long_decimal_is_rounded()
     test_stale_date_fails_the_gate()
     test_proved_start_is_kept()
+    test_rebuilt_contract_uses_this_weeks_bindings()
     test_unwalked_coins_survive_a_save()
     test_manual_zone_uses_the_report_number()
     print("test_report_pipeline OK")
