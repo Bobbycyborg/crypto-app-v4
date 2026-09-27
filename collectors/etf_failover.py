@@ -202,7 +202,7 @@ def _from_reader(request_key: str) -> HttpResponse | None:
         return None
     text = resp.body.decode("utf-8", "replace")
     rows = rows_from_markdown(text) or rows_from_stacked(text)
-    if len(rows) < 30:
+    if not rows:
         return None
     spec = SPECS[request_key]
     html = _html_page(spec["title"], spec["tickers"], rows)
@@ -229,7 +229,7 @@ def farside_failover(request_key: str) -> HttpResponse:
     via = _from_reader(request_key)
     if via is not None:
         return via
-    last = "reader returned fewer than 30 trading days"
+    last = "reader returned no trading days"
     if request_key == "farside.html.btc":
         resp = request("GET", TFTC_BTC, extra_headers={"Accept": "application/json"})
         payload = json.loads(resp.body.decode("utf-8"))
