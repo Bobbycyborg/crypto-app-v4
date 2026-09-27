@@ -1,9 +1,12 @@
-"""Fail the build when the page still shows last week's numbers or junk."""
+"""Fail the build when visible text still shows last week's numbers or junk."""
 
 from __future__ import annotations
 
+import argparse
 import re
 from datetime import datetime
+from decimal import Decimal
+from pathlib import Path
 
 from renderer.coin_span import coin_regions
 from renderer.formatters import format_value
@@ -11,17 +14,64 @@ from renderer.report_config import dormant_assets, load_report
 
 _DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
 _REPEAT = re.compile(r"(\b7d\b)\s+\1|\(row above\)\s+\(row above\)", re.I)
-_LONG_DECIMAL = re.compile(r"\d+\.\d{5,}")
+_LONG_DECIMAL = re.compile(r"\$?(\d[\d,]*\.\d{5,})")
 _MANUAL = re.compile(r"<!-- MANUAL:zone report=(\d+) -->")
-_ALLOW = ("1 aug", "2026-08-01", "ath", "launch")
+_ALLOW = re.compile(r"\b(?:1 aug|ath|launch)\b|2026-08-01", re.I)
+_PRICE = re.compile(r"\$\d[\d,]*(?:\.\d+)?(?:[kKmMbB])?")
+_STRIP = (
+    (re.compile(r"<script\b[^>]*>.*?</script>", re.I | re.S), " "),
+    (re.compile(r"<style\b[^>]*>.*?</style>", re.I | re.S), " "),
+    (re.compile(r"<svg\b[^>]*>.*?</svg>", re.I | re.S), " "),
+    (re.compile(r"<[^>]+>"), " "),
+)
+
+# Leftovers from the week before Report 06. A new page must not still say these.
+_KNOWN_STALE = (
+    "$79,374",
+    "$79,073",
+    "bounce is gone",
+    "2026-08-25",
+    "$104.45",
+    "$1.43",
+    "$1.84B",
+    "$3.28B",
+)
+
+
+def visible_text(html: str) -> str:
+    text = html
+    for pattern, repl in _STRIP:
+        text = pattern.sub(repl, text)
+    return text
 
 
 def _article(html: str, slug: str) -> str | None:
     regions = coin_regions(html, slug)
     for start, end in regions:
-        if html[start:start + 8].lower().startswith("<article"):
+        if html[start : start + 8].lower().startswith("<article"):
             return html[start:end]
     return None
+
+
+def _cross_coin(html: str) -> list[str]:
+    cfg = load_report()
+    names = list(cfg["held"]) + list(cfg["always_shown"]) + list(cfg["hidden"])
+    found: dict[str, set[str]] = {}
+    for asset in names:
+        art = _article(html, asset)
+        if not art:
+            continue
+        prices = {token for token in _PRICE.findall(visible_text(art)) if len(token) >= 5 and ("." in token or "," in token)}
+        found[asset.upper()] = prices
+    problems = []
+    assets = list(found)
+    for i, left in enumerate(assets):
+        for right in assets[i + 1 :]:
+            shared = found[left] & found[right]
+            if shared:
+                sample = sorted(shared)[0]
+                problems.append(f"{sample} is in both {left} and {right}")
+    return problems
 
 
 def stale_problems(
@@ -35,26 +85,38 @@ def stale_problems(
     cfg = load_report()
     previous = datetime.strptime(cfg["previous_report_date"], "%Y-%m-%d")
     number = report_number or cfg["report_number"]
+    text = visible_text(html)
     problems: list[str] = []
 
-    for match in _DATE.finditer(html):
+    for phrase in _KNOWN_STALE:
+        if phrase in text:
+            problems.append(f"stale text {phrase}")
+
+    for match in _DATE.finditer(text):
         found = datetime.strptime(match.group(0), "%Y-%m-%d")
         if found.date() >= previous.date():
             continue
-        window = html[max(0, match.start() - 40) : match.end() + 40].lower()
-        if any(word in window for word in _ALLOW):
+        window = text[max(0, match.start() - 48) : match.end() + 48]
+        if _ALLOW.search(window):
             continue
-        problems.append(f"stale date {match.group(0)}")
-        break
+        if f"stale text {match.group(0)}" not in problems:
+            problems.append(f"stale date {match.group(0)}")
 
-    if _REPEAT.search(html):
+    if _REPEAT.search(text):
         problems.append("repeated token")
-    if _LONG_DECIMAL.search(html):
+
+    for match in _LONG_DECIMAL.finditer(text):
+        number_text = match.group(1).replace(",", "")
+        if Decimal(number_text) < Decimal("0.01"):
+            continue
         problems.append("more than 4 decimal places")
+        break
 
     for match in _MANUAL.finditer(html):
         if match.group(1) != number:
             problems.append(f"manual zone report={match.group(1)}")
+
+    problems.extend(_cross_coin(html))
 
     if previous_html is not None:
         for asset in sorted(dormant_assets()):
@@ -71,8 +133,8 @@ def stale_problems(
         if asset not in held:
             continue
         art = _article(html, asset)
-        if art and art.count("UNKNOWN") > 0:
-            unknown += art.count("UNKNOWN")
+        if art and "UNKNOWN" in visible_text(art):
+            unknown += 1
         metric = metrics.get(binding.get("metric_id"))
         if not metric or metric.get("status") != "OK":
             continue
@@ -89,3 +151,24 @@ def stale_problems(
     if unknown:
         problems.append(f"UNKNOWN in a held coin article ({unknown})")
     return problems
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Fail if the page still shows stale text")
+    parser.add_argument("--html", required=True)
+    parser.add_argument("--previous-html", default="")
+    args = parser.parse_args()
+    html = Path(args.html).read_text(encoding="utf-8")
+    previous = Path(args.previous_html).read_text(encoding="utf-8") if args.previous_html else None
+    problems = stale_problems(html, previous_html=previous)
+    if not problems:
+        print("stale gate PASS")
+        return 0
+    print("stale gate FAIL")
+    for item in problems:
+        print(item)
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

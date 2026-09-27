@@ -64,7 +64,19 @@ def test_stale_date_fails_the_gate() -> None:
     problems = stale_problems("<p>As of 2026-08-25</p>")
     assert any("2026-08-25" in item for item in problems)
     allowed = stale_problems("<p>1 Aug start 2026-08-01</p>")
-    assert not any("stale date" in item for item in allowed)
+    assert not any(item.startswith("stale") for item in allowed)
+    hidden = stale_problems('<p>As of 2026-08-20</p><svg><path d="M ath z"/></svg>')
+    assert any("2026-08-20" in item for item in hidden)
+    ath = stale_problems("<p>ATH on 2025-10-06</p>")
+    assert not any(item.startswith("stale date") for item in ath)
+    assert not any("more than 4" in item for item in stale_problems("<p>$0.00215321</p>"))
+    assert any("more than 4" in item for item in stale_problems("<p>$1.167965779</p>"))
+    for phrase in ("$79,374", "$79,073", "bounce is gone", "$104.45", "$1.43", "$1.84B", "$3.28B"):
+        assert any(phrase in item for item in stale_problems(f"<p>{phrase}</p>")), phrase
+    crossed = stale_problems(
+        '<article data-asset="pump">$0.463713</article><article data-asset="sol">$0.463713</article>'
+    )
+    assert any("both" in item for item in crossed)
 
 
 def test_proved_start_is_kept() -> None:
