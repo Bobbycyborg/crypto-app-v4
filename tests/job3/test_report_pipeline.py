@@ -152,6 +152,18 @@ def test_unwalked_coins_survive_a_save() -> None:
         assert coins["PUMP"]["wallets"][0]["balance"] == 9
 
 
+def test_roster_hides_config_coins() -> None:
+    import re
+    from renderer.roster import apply_roster
+
+    html = '<button class="hold" data-asset-slug="fart">FART</button><button class="hold" data-asset-slug="sol">SOL</button>'
+    out = apply_roster(html)
+    tags = re.findall(r'<button class="([^"]*)"[^>]*data-asset-slug="([^"]+)"', out)
+    by = {slug: cls for cls, slug in tags}
+    assert "is-hidden" in by["fart"]
+    assert "is-hidden" not in by["sol"]
+
+
 def test_manual_zone_uses_the_report_number() -> None:
     html = wrap_manual_zones('<p class="alt-stance-expl">Leave this.</p>', "06")
     assert "report=06" in html
@@ -168,6 +180,7 @@ def main() -> int:
     test_proved_start_is_kept()
     test_rebuilt_contract_uses_this_weeks_bindings()
     test_unwalked_coins_survive_a_save()
+    test_roster_hides_config_coins()
     test_manual_zone_uses_the_report_number()
     print("test_report_pipeline OK")
     return 0

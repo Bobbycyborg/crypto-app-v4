@@ -212,15 +212,19 @@ def _ensure_hidden_all(html: str, unique: str) -> str:
     return html
 
 
-def _hide_r05_out(html: str) -> str:
-    """Keep dormant coins in the file. Hide them on the board."""
-    from renderer.report_config import dormant_assets
+def _hide_configured(html: str) -> str:
+    """Hide coins the config marks hidden or dormant. Do not delete their pages."""
+    from renderer.report_config import dormant_assets, load_report
 
-    for asset in sorted(dormant_assets()):
-        slug = asset.lower()
-        html = _ensure_hidden_all(html, f'data-asset-slug="{slug}"')
-    html = _ensure_hidden_all(html, '<div class="desk-row no-article"><span class="desk-name">BONK</span>')
-    html = _ensure_hidden_all(html, 'data-feed="spot:BONKUSDT"')
+    cfg = load_report()
+    names = {asset.upper() for asset in cfg["hidden"]} | set(dormant_assets())
+    aliases = cfg.get("desk_names") or {}
+    for asset in sorted(names):
+        slugs = {asset.lower()}
+        for alias in aliases.get(asset, []):
+            slugs.add(alias.lower())
+        for slug in slugs:
+            html = _ensure_hidden_all(html, f'data-asset-slug="{slug}"')
     return html
 
 
@@ -282,11 +286,5 @@ def _patch_siren(html: str) -> str:
 
 
 def apply_roster(html: str) -> str:
-    """Hide paused coins if present. Never rewrite them. Add ANSEM. Report 05 only."""
-    html = _insert_ansem(html)
-    html = _hide_r05_out(html)
-    html = _patch_hash_js(html)
-    html = _patch_siren(html)
-    if 'data-asset="ansem"' not in html or 'data-siren-key="ANSEM"' not in html:
-        raise RuntimeError("ROSTER_ANSEM_MISSING")
-    return html
+    """Hide coins from config/report.json. Never rewrite a dormant article."""
+    return _hide_configured(html)
