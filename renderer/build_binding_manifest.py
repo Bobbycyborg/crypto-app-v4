@@ -195,8 +195,6 @@ def _assign_bindings(
 ) -> list[dict[str, Any]]:
     index = build_html_index(html)
     region_cache: dict[str, list[tuple[int, int]]] = {}
-    bound_once: set[str] = set()
-    priced: set[str] = set()
     longer_literals = sorted({(m["match"].get("literal") or "") for m in mappings if m["match"].get("literal")}, key=len, reverse=True)
     used: list[tuple[int, int]] = []
     out: list[dict[str, Any]] = []
@@ -220,8 +218,6 @@ def _assign_bindings(
         occ_row = occ.get(oid, {})
         hint = occ_row.get("ui_location_identifier")
         manifest_lit = match.get("literal") or ""
-        if mid in bound_once and (".price.usd" in mid or ".etf.flow." in mid or "fear_greed" in mid):
-            continue
         asset_key = mapping.get("asset") or ""
         if asset_key not in region_cache:
             region_cache[asset_key] = coin_regions(html, asset_key)
@@ -230,16 +226,13 @@ def _assign_bindings(
         critical = _critical(zone, mid)
 
         def _miss(reason: str, *, _mid: str = mid, _oid: str = oid, _zone: str = zone) -> None:
-            crit = _critical(_zone, _mid)
-            if ".price.usd" in _mid and asset_key.upper() in priced:
-                crit = False
             blockers.append(
                 {
                     "metric_id": _mid,
                     "occurrence_id": _oid,
                     "asset": mapping.get("asset") or "",
                     "zone": _zone,
-                    "critical": crit,
+                    "critical": _critical(_zone, _mid),
                     "reason": reason,
                 }
             )
@@ -402,10 +395,6 @@ def _assign_bindings(
             "status_behavior": "UNKNOWN_ON_NON_OK",
             "notes": None,
         }
-        if ".price.usd" in mid or ".etf.flow." in mid or "fear_greed" in mid:
-            bound_once.add(mid)
-        if ".price.usd" in mid:
-            priced.add(asset_key.upper())
         out.append(entry)
     return out
 
