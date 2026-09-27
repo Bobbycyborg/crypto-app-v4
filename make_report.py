@@ -161,8 +161,8 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     if render_code != 0:
         print(f"render exit {render_code}", file=sys.stderr)
     rendered = apply_known_slots(rendered, snap)
-    rendered = restore_dormant_articles(rendered, _report_05_page().read_text(encoding="utf-8"))
     rendered = apply_roster(rendered)
+    rendered = restore_dormant_articles(rendered, _report_05_page().read_text(encoding="utf-8"))
     rendered = wrap_manual_zones(rendered, number)
     candidate = RUNTIME / f"candidate-{number}.html"
     candidate.write_text(rendered, encoding="utf-8")

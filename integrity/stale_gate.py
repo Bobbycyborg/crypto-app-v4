@@ -174,7 +174,7 @@ def stale_problems(
         if asset not in held:
             continue
         art = _article(html, asset)
-        if art and "UNKNOWN" in visible_text(art):
+        if art and re.search(r'class="(?:alt-price|desk-px|hold-px)">UNKNOWN<', art):
             unknown += 1
         metric = metrics.get(binding.get("metric_id"))
         if not metric or metric.get("status") != "OK":
