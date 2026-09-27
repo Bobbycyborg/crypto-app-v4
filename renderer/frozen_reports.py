@@ -11,6 +11,7 @@ FROZEN_REPORTS = (
     ROOT / "baselines/report-02.html",
     ROOT / "baselines/report-03.html",
     ROOT / "baselines/report-04.html",
+    ROOT / "baselines/report-05.html",
 )
 
 
