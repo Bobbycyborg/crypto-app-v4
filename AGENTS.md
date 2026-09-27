@@ -1,3 +1,5 @@
+# Read RUNBOOK.md first
+
 # GitHub is the bible
 
 Repo: https://github.com/Bobbycyborg/crypto-app-v4
