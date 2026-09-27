@@ -3,6 +3,9 @@
     {
       "metric_id": "pump.buyback.usd.7d",
       "value": 6800000,
+      "pulled_value": 5668793,
+      "author": "Oliver",
+      "source": "MANUAL",
       "reason": "Oliver's hand figure",
       "report": "06"
     }

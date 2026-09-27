@@ -116,26 +116,22 @@ def _as_response(url: str, html: str) -> HttpResponse:
 
 
 def farside_failover(request_key: str) -> HttpResponse:
+    """Live backup only. The August markdown files are not this week's flows."""
     spec = SPECS[request_key]
-    rows: list[tuple[str, str]] = []
-    used = ""
-    if spec["use_tftc"]:
-        try:
-            resp = request("GET", TFTC_BTC, extra_headers={"Accept": "application/json"})
-            payload = json.loads(resp.body.decode("utf-8"))
-            rows = rows_from_tftc(payload)
-            used = TFTC_BTC
-        except Exception:
-            rows = []
-    if not rows:
-        for fallback_dir in FALLBACK_DIRS:
-            md_path = fallback_dir / spec["md_name"]
-            if md_path.is_file():
-                rows = rows_from_markdown(md_path.read_text(encoding="utf-8"))
-                used = str(md_path)
-                break
+    if not spec["use_tftc"]:
+        raise HttpError(
+            "STALE",
+            f"{request_key} has no live backup. Refusing collectors/etf-fallback.",
+            http_status=403,
+        )
+    resp = request("GET", TFTC_BTC, extra_headers={"Accept": "application/json"})
+    payload = json.loads(resp.body.decode("utf-8"))
+    rows = rows_from_tftc(payload)
     if not rows:
         raise HttpError("SOURCE_UNAVAILABLE", f"ETF failover empty for {request_key}")
+    through = str(payload.get("updatedThrough") or "")
     html = _html_page(spec["title"], spec["tickers"], rows)
+    if through:
+        html = html.replace("<head>", f'<head><meta name="v4-updated-through" content="{escape(through)}">', 1)
     _ = body_sha256(html.encode("utf-8"))
-    return _as_response(used or request_key, html)
+    return _as_response(TFTC_BTC, html)

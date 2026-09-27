@@ -96,20 +96,19 @@ def _stale_against_previous(html: str, previous_html: str, snapshot: dict | None
     return problems
 
 
-def _cross_coin(html: str) -> list[str]:
-    cfg = load_report()
-    names = list(cfg["held"]) + list(cfg["always_shown"]) + list(cfg["hidden"])
+def _cross_coin(html: str, bindings: list | None) -> list[str]:
+    """Only values a binding wrote. Shared prose that is not a bound value stays out."""
     found: dict[str, set[str]] = {}
-    for asset in names:
-        art = _article(html, asset)
-        if not art:
+    for binding in bindings or []:
+        asset = (binding.get("asset") or "").upper()
+        literal = (binding.get("source_literal") or "").strip()
+        if not asset or len(literal) < 4:
             continue
-        prices = {
-            token
-            for token in _PRICE.findall(visible_text(art))
-            if len(token) >= 5 and ("." in token or "," in token)
-        }
-        found[asset.upper()] = prices
+        if literal not in html:
+            continue
+        art = _article(html, asset)
+        if art and literal in art:
+            found.setdefault(asset, set()).add(literal)
     problems = []
     assets = list(found)
     for i, left in enumerate(assets):
@@ -121,12 +120,41 @@ def _cross_coin(html: str) -> list[str]:
     return problems
 
 
+def _copied_phrases(html: str, earlier: str | None, label: str) -> list[str]:
+    """Numbered lines copied from an earlier page. Not a fixed list of words."""
+    if not earlier:
+        return []
+    problems = []
+    seen: set[str] = set()
+    text = visible_text(html)
+    for chunk in re.split(r"\.\s+|\n|·", visible_text(earlier)):
+        phrase = " ".join(chunk.split())
+        words = phrase.split()
+        has_number = "$" in phrase or "%" in phrase or re.search(r"\d", phrase)
+        claim = "bounce is gone" in phrase.lower() or "bear market" in phrase.lower()
+        if len(phrase) < 8 or len(phrase) > 140:
+            continue
+        if not has_number and not claim:
+            continue
+        if len(words) < 3 and not ("$" in phrase or "%" in phrase):
+            continue
+        if _ALLOW.search(phrase) or re.search(r"Report 0\d", phrase):
+            continue
+        if phrase in text and phrase not in seen:
+            seen.add(phrase)
+            problems.append(f"stale phrase from {label}: {phrase[:90]}")
+            if len(problems) >= 40:
+                break
+    return problems
+
+
 def stale_problems(
     html: str,
     *,
     snapshot: dict | None = None,
     bindings: list | None = None,
     previous_html: str | None = None,
+    base_html: str | None = None,
     report_number: str | None = None,
 ) -> list[str]:
     cfg = load_report()
@@ -135,9 +163,9 @@ def stale_problems(
     text = visible_text(html)
     problems: list[str] = []
 
-    for phrase in _KNOWN_STALE:
-        if phrase in text:
-            problems.append(f"stale text {phrase}")
+    problems.extend(_copied_phrases(html, previous_html, "last week"))
+    if base_html and base_html != previous_html:
+        problems.extend(_copied_phrases(html, base_html, "the base page"))
 
     seen_dates: set[str] = set()
     for match in _DATE.finditer(text):
@@ -166,7 +194,7 @@ def stale_problems(
         if match.group(1) != number:
             problems.append(f"manual zone report={match.group(1)}")
 
-    problems.extend(_cross_coin(html))
+    problems.extend(_cross_coin(html, bindings))
 
     problems.extend(_old_stamps_on_changed_cards(html, snapshot, previous))
     if previous_html is not None:

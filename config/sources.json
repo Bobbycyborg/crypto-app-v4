@@ -1,0 +1,1089 @@
+{
+  "metrics": {
+    "2z.price.usd.live": {
+      "primary": "dexscreener.token.2z",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.etf.flow.usd.1d": {
+      "primary": "farside.html.btc",
+      "fallbacks": [
+        "tftc:https://www.tftc.io/bitcoin-etf-flows/data.json"
+      ],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "btc.etf.flow.usd.30d": {
+      "primary": "farside.html.btc",
+      "fallbacks": [
+        "tftc:https://www.tftc.io/bitcoin-etf-flows/data.json"
+      ],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "btc.etf.flow.usd.7d": {
+      "primary": "farside.html.btc",
+      "fallbacks": [
+        "tftc:https://www.tftc.io/bitcoin-etf-flows/data.json"
+      ],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "btc.funding.rate.latest": {
+      "primary": "binance.fapi.premiumIndex.BTCUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.inflation.pct.current": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.ma.usd.200d": {
+      "primary": "binance.spot.klines.BTCUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.ma.usd.50d": {
+      "primary": "binance.spot.klines.BTCUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.oi.btc.current": {
+      "primary": "binance.fapi.openInterest.BTCUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.oi.change.pct.1d": {
+      "primary": "binance.fapi.openInterestHist.BTCUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.oi.change.pct.30d": {
+      "primary": "binance.fapi.openInterestHist.BTCUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.oi.change.pct.7d": {
+      "primary": "binance.fapi.openInterestHist.BTCUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.price.ath.usd": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.price.drawdown_from_ath.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.price.usd.july_2026_low": {
+      "primary": "binance.spot.klines.BTCUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [
+        "binance.spot.ticker24h.BTCUSDT"
+      ],
+      "never": []
+    },
+    "btc.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.return.pct.30d": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.return.pct.7d": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.return.pct.90d": {
+      "primary": "coingecko.market_chart.bitcoin.90d",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.stablecoin.change.pct.30d": {
+      "primary": "defillama.stablecoincharts.all",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.volume.perp.usd.24h": {
+      "primary": "binance.fapi.ticker24h.BTCUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "btc.volume.spot.usd.24h": {
+      "primary": "binance.spot.ticker24h.BTCUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "eth.etf.flow.usd.1d": {
+      "primary": "farside.html.eth",
+      "fallbacks": [],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "eth.etf.flow.usd.30d": {
+      "primary": "farside.html.eth",
+      "fallbacks": [],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "eth.etf.flow.usd.7d": {
+      "primary": "farside.html.eth",
+      "fallbacks": [],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "fart.funding.rate.latest": {
+      "primary": "binance.fapi.premiumIndex.FARTCOINUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.holders.lp.pct": {
+      "primary": "stage1.fart.top20_classified",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.holders.unattributed.pct": {
+      "primary": "stage1.fart.top20_classified",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.holders.unit_treasury.pct": {
+      "primary": "stage1.fart.top20_classified",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.leverage.perp_spot_notional.x": {
+      "primary": "binance.fapi.ticker24h.FARTCOINUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.liquidity.dex.usd.current": {
+      "primary": "dexscreener.token.fartcoin",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.ma.usd.200d": {
+      "primary": "binance.fapi.klines.FARTCOINUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.ma.usd.50d": {
+      "primary": "binance.fapi.klines.FARTCOINUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.market_cap.usd.current": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.oi.usd.current": {
+      "primary": "binance.fapi.openInterest.FARTCOINUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [
+        "dexscreener.token.fartcoin"
+      ],
+      "never": []
+    },
+    "fart.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.return.pct.30d": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.return.pct.7d": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.return.pct.90d": {
+      "primary": "coingecko.market_chart.fartcoin.90d",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.rs.vs_sol.pp.7d": {
+      "primary": "binance.fapi.klines.FARTCOINUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.supply.circulating.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.supply.max.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.volume.cg.usd.24h": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "fart.volume.perp.usd.24h": {
+      "primary": "binance.fapi.ticker24h.FARTCOINUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "giga.price.usd.live": {
+      "primary": "dexscreener.token.giga",
+      "fallbacks": [],
+      "never": []
+    },
+    "global.fear_greed.index.current": {
+      "primary": "alternative_me.fng",
+      "fallbacks": [],
+      "never": []
+    },
+    "global.participation.above_50dma.count": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "global.participation.beat_btc.count": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.af.buys.usd.30d": {
+      "primary": "defillama.summary.fees.hyperliquid.dailyHoldersRevenue",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.af.inventory.share_hl_circ.pct": {
+      "primary": "hyperliquid.info.tokenDetails",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.af.inventory.tokens.current": {
+      "primary": "hyperliquid.info.tokenDetails",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.emissions.tokens.remaining": {
+      "primary": "hyperliquid.info.tokenDetails",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.fees.change.pct.30d": {
+      "primary": "defillama.summary.fees.hyperliquid.dailyFees",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.fees.perps.usd.30d": {
+      "primary": "defillama.summary.fees.hyperliquid.dailyFees",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.fees.usd.30d": {
+      "primary": "defillama.summary.fees.hyperliquid.dailyFees",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.ma.usd.200d": {
+      "primary": "binance.fapi.klines.HYPEUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.ma.usd.50d": {
+      "primary": "binance.fapi.klines.HYPEUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.ncu.hyperlabs.tokens": {
+      "primary": "hyperliquid.info.tokenDetails",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.oi.binance.usd.current": {
+      "primary": "binance.fapi.openInterest.HYPEUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.oi.native.usd.current": {
+      "primary": "hyperliquid.info.metaAndAssetCtxs",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.oi.platform.usd.current": {
+      "primary": "hyperliquid.info.metaAndAssetCtxs",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.oi.token.usd.current": {
+      "primary": "hyperliquid.info.metaAndAssetCtxs",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.return.pct.30d": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.return.pct.7d": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.stake.tokens.current": {
+      "primary": "hyperliquid.info.validatorSummaries",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.supply.hl_circulating.pct": {
+      "primary": "hyperliquid.info.tokenDetails",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.supply.max.tokens": {
+      "primary": "hyperliquid.info.tokenDetails",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.volume.l1_perp.usd.24h": {
+      "primary": "hyperliquid.info.metaAndAssetCtxs",
+      "fallbacks": [],
+      "never": []
+    },
+    "hype.volume.token.usd.24h": {
+      "primary": "hyperliquid.info.metaAndAssetCtxs",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.clusters.running.count": {
+      "primary": "io.clusters",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.devices.inventory.count": {
+      "primary": "io.inventory",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.leverage.x.current": {
+      "primary": "binance.fapi.ticker24h.IOUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.ma.usd.200d": {
+      "primary": "binance.spot.klines.IOUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.ma.usd.50d": {
+      "primary": "binance.spot.klines.IOUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.oi.usd.current": {
+      "primary": "binance.fapi.openInterest.IOUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.price.ath.usd": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.price.drawdown_from_ath.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.revenue.usd.cumulative": {
+      "primary": "io.clusters",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.revenue.usd_per_day.mean_30d": {
+      "primary": "io.total_earnings_summary",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.rs.vs_sol.pp.30d": {
+      "primary": "binance.spot.klines.IOUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.rs.vs_sol.pp.7d": {
+      "primary": "binance.spot.klines.IOUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.supply.circulating.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "io.supply.max.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "lockin.price.usd.live": {
+      "primary": "dexscreener.token.lockin",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.gpu_hours.approx_31d": {
+      "primary": "nosana.jobs.timestamps_hours",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.host_rewards.usd.cumulative": {
+      "primary": "nosana.jobs.stats",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.jobs.approx_30d.count": {
+      "primary": "nosana.jobs.stats.timestamps",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.jobs.completed.cumulative": {
+      "primary": "nosana.jobs.count",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.jobs.queued.count": {
+      "primary": "nosana.jobs.count",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.jobs.running.count": {
+      "primary": "nosana.jobs.count",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.ma.usd.200d": {
+      "primary": "coingecko.market_chart.nosana",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.ma.usd.50d": {
+      "primary": "coingecko.market_chart.nosana",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.market_cap.usd.current": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.nodes.with_running_jobs.count": {
+      "primary": "nosana.jobs.running",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.return.pct.180d": {
+      "primary": "coingecko.market_chart.nosana",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.rs.vs_sol.pp.30d": {
+      "primary": "coingecko.market_chart.nosana",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.rs.vs_sol.pp.7d": {
+      "primary": "coingecko.market_chart.nosana",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.stake.ratio.pct": {
+      "primary": "nosana.stats",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.stake.tokens.current": {
+      "primary": "nosana.stats",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.supply.circulating.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "nos.supply.max.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.buyback.usd.1d": {
+      "primary": "defillama.summary.fees.pump.fun.dailyHoldersRevenue",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.buyback.usd.7d": {
+      "primary": "defillama.summary.fees.pump.fun.dailyHoldersRevenue",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.buyback.usd_per_day.current": {
+      "primary": "defillama.summary.fees.pump.fun.dailyHoldersRevenue",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.fees.usd_per_day.current": {
+      "primary": "defillama.summary.fees.pump.fun.dailyFees",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.funding.rate.latest": {
+      "primary": "binance.fapi.premiumIndex.PUMPUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.holders.unattributed.pct": {
+      "primary": "forensics.pump.ownership_vesting",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.leverage.x.current": {
+      "primary": "binance.fapi.ticker24h.PUMPUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.liquidity.dex.usd.current": {
+      "primary": "dexscreener.token.pump",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.ma.usd.200d": {
+      "primary": "binance.spot.klines.PUMPUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.ma.usd.50d": {
+      "primary": "binance.spot.klines.PUMPUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.market_share.pct.current": {
+      "primary": "defillama.overview.fees",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.oi.usd.current": {
+      "primary": "binance.fapi.openInterest.PUMPUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [
+        "dexscreener.token.pump"
+      ],
+      "never": []
+    },
+    "pump.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.revenue.usd.7d": {
+      "primary": "defillama.summary.fees.pump.fun.dailyRevenue",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.revenue.usd_per_day.current": {
+      "primary": "defillama.summary.fees.pump.fun.dailyRevenue",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.rs.vs_btc.pct.30d": {
+      "primary": "binance.spot.klines.PUMPUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.rs.vs_btc.pct.7d": {
+      "primary": "binance.spot.klines.PUMPUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.rs.vs_sol.pct.30d": {
+      "primary": "binance.spot.klines.PUMPUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.rs.vs_sol.pct.7d": {
+      "primary": "binance.spot.klines.PUMPUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "pump.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.bme.burned.tokens.last4": {
+      "primary": "render.epochBurnStats",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.bme.burned.tokens.last8": {
+      "primary": "render.epochBurnStats",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.bme.emissions.tokens.last8": {
+      "primary": "render.liabilityEpochs",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.bme.node_due.tokens.per_epoch": {
+      "primary": "render.liabilityEpochs",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.bme.ratio.last4": {
+      "primary": "render.epochBurnStats",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.bme.ratio.last8": {
+      "primary": "render.epochBurnStats",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.emissions.tokens.remaining": {
+      "primary": "render.supplyInfo",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.funding.rate.latest": {
+      "primary": "binance.fapi.premiumIndex.RENDERUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.leverage.x.current": {
+      "primary": "binance.fapi.ticker24h.RENDERUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.ma.usd.200d": {
+      "primary": "binance.spot.klines.RENDERUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.ma.usd.50d": {
+      "primary": "binance.spot.klines.RENDERUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.nodes.count.listed": {
+      "primary": "render.nodes_and_frames",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.supply.circulating.tokens": {
+      "primary": "render.supplyInfo",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.supply.max.tokens": {
+      "primary": "render.supplyInfo",
+      "fallbacks": [],
+      "never": []
+    },
+    "render.usage.frames.cumulative": {
+      "primary": "render.nodes_and_frames",
+      "fallbacks": [],
+      "never": []
+    },
+    "retardio.price.usd.live": {
+      "primary": "dexscreener.token.retardio",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.burn.tokens.per_year": {
+      "primary": "defillama.summary.fees.solana.dailyRevenue",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.dex_eth_ratio.7d.x": {
+      "primary": "defillama.overview.dexs.solana",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.dex_eth_ratio.latest_day.x": {
+      "primary": "defillama.overview.dexs.solana",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.dex_eth_ratio.x.current": {
+      "primary": "defillama.overview.dexs.solana",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.etf.flow.usd.1d": {
+      "primary": "farside.html.sol",
+      "fallbacks": [],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "sol.etf.flow.usd.30d": {
+      "primary": "farside.html.sol",
+      "fallbacks": [],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "sol.etf.flow.usd.7d": {
+      "primary": "farside.html.sol",
+      "fallbacks": [],
+      "never": [
+        "collectors/etf-fallback"
+      ]
+    },
+    "sol.fees.usd_per_day.current": {
+      "primary": "defillama.summary.fees.solana.dailyFees",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.fees.usd_per_day.mean_30d": {
+      "primary": "defillama.summary.fees.solana.dailyFees",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.funding.rate.latest": {
+      "primary": "binance.fapi.premiumIndex.SOLUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.funding.rate.mean_7d": {
+      "primary": "binance.fapi.fundingRate.SOLUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.inflation.pct.current": {
+      "primary": "solana.rpc.getInflationRate",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "sol.issuance.tokens.per_year": {
+      "primary": "solana.rpc.getInflationRate",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "sol.leverage.x.current": {
+      "primary": "binance.fapi.ticker24h.SOLUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.ma.usd.200d": {
+      "primary": "binance.spot.klines.SOLUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.ma.usd.50d": {
+      "primary": "binance.spot.klines.SOLUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.rs.vs_btc.pp.30d": {
+      "primary": "binance.spot.klines.SOLUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.rs.vs_btc.pp.7d": {
+      "primary": "binance.spot.klines.SOLUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.stablecoin.usd.current": {
+      "primary": "defillama.stablecoinchains",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.stake.ratio.pct": {
+      "primary": "solana.rpc.getVoteAccounts",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "sol.stake.tokens.current": {
+      "primary": "solana.rpc.getVoteAccounts",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "sol.supply.circulating.pct": {
+      "primary": "solana.rpc.getSupply",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "sol.tps.all.current": {
+      "primary": "solana.rpc.getRecentPerformanceSamples",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "sol.tps.nonvote.current": {
+      "primary": "solana.rpc.getRecentPerformanceSamples",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "sol.tvl.usd.current": {
+      "primary": "defillama.historicalChainTvl.Solana",
+      "fallbacks": [],
+      "never": []
+    },
+    "sol.validators.active.count": {
+      "primary": "solana.rpc.getVoteAccounts",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "spx.funding.rate.latest": {
+      "primary": "binance.fapi.premiumIndex.SPXUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.holders.top20.pct": {
+      "primary": "solana.rpc.getTokenLargestAccounts.spx",
+      "fallbacks": [
+        "https://solana-rpc.publicnode.com"
+      ],
+      "never": []
+    },
+    "spx.ma.usd.200d": {
+      "primary": "binance.fapi.klines.SPXUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.ma.usd.50d": {
+      "primary": "binance.fapi.klines.SPXUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.oi.binance.usd.current": {
+      "primary": "binance.fapi.openInterest.SPXUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.oi.change.pct.30d": {
+      "primary": "binance.fapi.openInterestHist.SPXUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.return.pct.30d": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.supply.circulating.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.supply.max.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "spx.volume.perp.usd.24h": {
+      "primary": "binance.fapi.ticker24h.SPXUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.inflation.pct.current": {
+      "primary": "zcash.explorer.blockchain-info",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.ma.usd.200d": {
+      "primary": "binance.spot.klines.ZECUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.ma.usd.50d": {
+      "primary": "binance.spot.klines.ZECUSDT.1d",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.oi.binance.usd.current": {
+      "primary": "binance.fapi.openInterest.ZECUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.price.usd.live": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [
+        "binance.spot.ticker24h.ZECUSDT"
+      ],
+      "never": []
+    },
+    "zec.price.usd.report": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.shielded.share.pct": {
+      "primary": "zcash.explorer.blockchain-info",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.shielded.tokens.current": {
+      "primary": "zcash.explorer.blockchain-info",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.supply.circulating.pct": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.supply.circulating.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.supply.max.tokens": {
+      "primary": "coingecko.markets.active",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.volume.perp.usd.24h": {
+      "primary": "binance.fapi.ticker24h.ZECUSDT",
+      "fallbacks": [],
+      "never": []
+    },
+    "zec.volume.spot.usd.24h": {
+      "primary": "binance.spot.ticker24h.ZECUSDT",
+      "fallbacks": [],
+      "never": []
+    }
+  }
+}

@@ -492,14 +492,19 @@
       "asset": "BTC",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "PRESERVE",
-      "source_key": null,
-      "request_key": null,
-      "selector": null,
-      "normalizer": null,
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {"id": "bitcoin"},
+        "field": "ath"
+      },
+      "normalizer": {"type": "identity"},
       "derivation": null,
-      "required": false,
-      "notes": "Historical, static, threshold, or dated event. No live collector."
+      "required": true,
+      "notes": "CoinGecko markets ath for bitcoin. Manual only if that field is missing."
     },
     {
       "metric_id": "btc.price.drawdown_from_ath.pct",
@@ -2307,14 +2312,19 @@
       "asset": "IO",
       "owner": "CGPT_CURSOR",
       "unit": "USD",
-      "disposition": "PRESERVE",
-      "source_key": null,
-      "request_key": null,
-      "selector": null,
-      "normalizer": null,
+      "disposition": "COLLECT",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
+      "selector": {
+        "type": "named_record_field",
+        "records_pointer": "/",
+        "identity": {"id": "io"},
+        "field": "ath"
+      },
+      "normalizer": {"type": "identity"},
       "derivation": null,
-      "required": false,
-      "notes": "Historical, static, threshold, or dated event. No live collector."
+      "required": true,
+      "notes": "CoinGecko markets ath for io. Manual only if that field is missing."
     },
     {
       "metric_id": "io.price.drawdown_from_ath.pct",
@@ -4826,7 +4836,7 @@
         "pointer": "/lastFundingRate"
       },
       "normalizer": {
-        "type": "decimal_as_percent"
+        "type": "identity"
       },
       "derivation": null,
       "notes": "Job 1 URL is fundingRate; V3 live feed uses premiumIndex lastFundingRate on the same Binance USDT-M product.",

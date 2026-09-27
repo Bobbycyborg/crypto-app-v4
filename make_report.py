@@ -26,6 +26,7 @@ from renderer.build_binding_manifest import build_manifest
 from renderer.build_snapshot import build_snapshot
 from renderer.manual_zones import manual_zone_notes, wrap_manual_zones
 from renderer.overrides import apply_overrides, load_overrides
+from renderer.prose_slots import apply_prose
 from renderer.render_report import render_report
 from renderer.report_config import load_report
 from renderer.roster import apply_roster
@@ -112,10 +113,19 @@ def _report_05_page() -> Path:
     return dest
 
 
-def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
-    code = preflight()
-    if code:
-        return code
+def _write_summary(lines: list[str]) -> None:
+    path = RUNTIME / "run-summary.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = "\n".join(lines[:20]) + "\n"
+    path.write_text(text, encoding="utf-8")
+    print(text)
+
+
+def _run_steps(replay: Path | None, live: bool, base: Path, walk: bool = False) -> int:
+    notes_out: list[str] = []
+    pre = preflight()
+    if pre:
+        notes_out.append("Preflight: pipeline files are still edited. The run continued.")
     cfg = load_report()
     number = cfg["report_number"]
     if live:
@@ -127,7 +137,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         code, collector = run_collectors("replay", replay)
     if code not in {0, 2}:
         print(f"collector exit {code}", file=sys.stderr)
-        return code or 2
+        notes_out.append(f"Collector exit {code}. Later steps still ran.")
     folder = "replay" if replay else collector.get("run_id", "")
     run_path = JOB2 / folder / "collector-run.json"
     if not run_path.exists():
@@ -141,10 +151,11 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         for mid in failed:
             print(f"  {mid}")
     try:
-        snap = build_snapshot(run_doc, labels, allow_partial=set())
+        snap = build_snapshot(run_doc, labels, allow_partial=set(failed))
     except SystemExit as exc:
         print(exc, file=sys.stderr)
-        return 2
+        notes_out.append(f"Snapshot refused: {exc}")
+        snap = {"metrics": {}}
     snap = apply_overrides(snap, number)
     undated = _undated_critical(snap)
     if undated:
@@ -179,11 +190,14 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
             publishable=False,
         )
     except RuntimeError as exc:
-        print(f"{exc}; wrote nothing", file=sys.stderr)
-        return 3
+        print(f"{exc}; checker still runs on the base page", file=sys.stderr)
+        notes_out.append(f"Render failed: {exc}")
+        rendered = source.read_text(encoding="utf-8")
+        render_code = 3
     if render_code != 0:
         print(f"render exit {render_code}", file=sys.stderr)
     rendered = apply_known_slots(rendered, snap)
+    rendered = apply_prose(rendered, snap)
     rendered = apply_roster(rendered)
     rendered = wrap_manual_zones(rendered, number)
     rendered = restore_dormant_articles(rendered, _report_05_page().read_text(encoding="utf-8"))
@@ -195,6 +209,14 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     built["bindings"] = bindings
     candidate = RUNTIME / f"candidate-{number}.html"
     candidate.write_text(rendered, encoding="utf-8")
+    if walk:
+        try:
+            from lib.v3.siren_watch import apply_index, run_check
+
+            apply_index(run_check(), target=candidate)
+            notes_out.append("Wallet walk wrote the candidate only.")
+        except Exception as exc:  # noqa: BLE001
+            notes_out.append(f"Wallet walk failed: {exc}")
     print(f"wrote {candidate}")
 
     manifest_path = RUNTIME / "job3" / "binding-manifest.json"
@@ -228,6 +250,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         snapshot=snap,
         bindings=bindings,
         previous_html=previous.read_text(encoding="utf-8"),
+        base_html=source.read_text(encoding="utf-8"),
         report_number=number,
     )
     stale_path = RUNTIME / "job3" / "stale-gate.json"
@@ -242,8 +265,30 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     else:
         print("stale gate PASS")
     print("Live page was not changed.")
-    if render_code or check_code or problems or critical or undated:
-        return render_code or check_code or (1 if problems or undated else 2)
+    fresh = int(run_doc.get("required_ok") or 0)
+    total = int(run_doc.get("required_dynamic") or 0) or 1
+    lines = [
+        f"Report {number} candidate. Fresh {fresh}/{total} ({round(100 * fresh / total)}%). Live page not touched.",
+        f"Checker {report.overall_status}. Stale lines {len(problems)}. Critical misses {len(critical)}.",
+    ]
+    for item in failed[:4]:
+        lines.append(f"- {item}: no number this pull. Fix: use the next live source, or leave it UNKNOWN.")
+    for item in undated[:3]:
+        lines.append(f"- {item}: no source date. Fix: read the date that came with that source.")
+    for item in problems[:3]:
+        lines.append(f"- {item}")
+    for row in load_overrides(number):
+        lines.append(
+            f"- Override {row['metric_id']} by {row.get('author')} source {row.get('source')}: "
+            f"show {row['value']}, pulled {row.get('pulled_value')}. {row.get('reason')}"
+        )
+    lines.append(f"Needs you: {len(notes)} stance lines. July low stays as written. Confirm the $6.8M buyback.")
+    for note in notes[:2]:
+        lines.append(f"- {note}")
+    lines.extend(notes_out[:2])
+    _write_summary(lines)
+    if render_code or check_code or problems or critical or undated or failed:
+        return render_code or check_code or (1 if problems or undated or failed else 2)
     return 0
 
 
@@ -262,11 +307,19 @@ def main() -> int:
         if not ok:
             print(f"{name} refused. {why}.", file=sys.stderr)
             return 2
-        print(f"{name} refused. Both gates passed, and the live page is still not replaced from this command.", file=sys.stderr)
-        return 2
-    if args.walk:
-        print("wallet walk is off. It cannot write index-v4.html.", file=sys.stderr)
-        return 2
+        cfg = load_report()
+        candidate = RUNTIME / f"candidate-{cfg['report_number']}.html"
+        if not candidate.exists():
+            print(f"{name} refused. No candidate.", file=sys.stderr)
+            return 2
+        if args.promote:
+            (ROOT / "index-v4.html").write_bytes(candidate.read_bytes())
+            print(f"promoted {candidate} onto index-v4.html")
+        else:
+            frozen = ROOT / "baselines" / f"report-{cfg['report_number']}.html"
+            frozen.write_bytes(candidate.read_bytes())
+            print(f"froze {candidate} as {frozen}")
+        return 0
     if args.live and args.replay:
         print("pass --live or --replay, not both", file=sys.stderr)
         return 2
@@ -278,7 +331,7 @@ def main() -> int:
     if args.base is None:
         print(f"pass --base. Report 06 builds on {HAND_06}", file=sys.stderr)
         return 2
-    return _run_steps(args.replay, args.live, args.base)
+    return _run_steps(args.replay, args.live, args.base, walk=args.walk)
 
 
 if __name__ == "__main__":

@@ -362,6 +362,8 @@ def apply_report_02(bundle: dict[str, Any], html_path: Path | None = None) -> di
         if 'data-asset="pump"' in html:
             html = apply_pump_hero(html, bundle, log)
             require_pump_hero(html)
+        if Path(dest).name == "index-v4.html":
+            raise RuntimeError("refusing to write index-v4.html")
         write_text(dest, html)
         skip_holdings = (
             LIVE_APPLY_TEMPLATE_HTML.resolve() == REPORT_03_BASELINE_HTML.resolve()
@@ -381,5 +383,6 @@ def apply_report_02(bundle: dict[str, Any], html_path: Path | None = None) -> di
             "touches": touches,
         }
     except Exception as exc:  # noqa: BLE001
-        write_text(dest, original)
+        if Path(dest).name != "index-v4.html":
+            write_text(dest, original)
         return {"ok": False, "rolled_back": True, "error": str(exc), "log": log, "path": str(dest)}

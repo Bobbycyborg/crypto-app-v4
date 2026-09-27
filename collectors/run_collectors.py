@@ -249,7 +249,37 @@ def payload_as_of(entry: dict[str, Any], cap: Capture) -> str | None:
             return when.strftime("%Y-%m-%dT%H:%M:%SZ")
         if parsed.get("last_updated"):
             return str(parsed["last_updated"])
+        meta = re.search(r'name="v4-updated-through" content="(20\d\d-\d\d-\d\d)"', cap.html or "")
+        if meta:
+            return meta.group(1) + "T00:00:00Z"
+    if cap.html and "ETF Flow" in cap.html:
+        table = re.search(r"<table\b[^>]*>.*?</table>", cap.html, re.I | re.S)
+        blob = table.group(0) if table else ""
+        found = re.search(r"(\d{1,2}) ([A-Z][a-z]{2}) (20\d\d)", blob)
+        if found:
+            try:
+                when = datetime.strptime(found.group(0), "%d %b %Y")
+            except ValueError:
+                return None
+            return when.strftime("%Y-%m-%dT00:00:00Z")
     return None
+
+
+def _mark_old_etf(row: dict[str, Any]) -> dict[str, Any]:
+    """An ETF total from before last report is not this week's number."""
+    if ".etf.flow." not in row.get("metric_id", ""):
+        return row
+    stamp = str(row.get("source_as_of") or "")
+    if not re.match(r"20\d\d-\d\d-\d\d", stamp):
+        return row
+    from renderer.report_config import load_report
+
+    previous = load_report()["previous_report_date"]
+    if stamp[:10] <= previous:
+        row = dict(row)
+        row["status"] = "STALE"
+        row["error"] = f"ETF row {stamp[:10]} is older than last report {previous}"
+    return row
 
 
 def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple[Any, str | None]:
@@ -332,6 +362,23 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
     return raw, cap.meta.get("fetched_at")
 
 
+def _price_backup(entry: dict[str, Any], captures: dict[str, Capture]):
+    if not str(entry.get("metric_id") or "").endswith(".price.usd.live"):
+        return None
+    from decimal import Decimal
+
+    from collectors.source_catalog import fallbacks_for
+
+    for key in fallbacks_for(entry["metric_id"]):
+        cap = captures.get(key)
+        if not cap or not isinstance(cap.parsed, dict):
+            continue
+        raw = cap.parsed.get("lastPrice") or cap.parsed.get("price")
+        if raw is not None:
+            return Decimal(str(raw))
+    return None
+
+
 def extra_request_keys(entry: dict[str, Any]) -> list[str]:
     sel = entry.get("selector") or {}
     extra = []
@@ -383,6 +430,20 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
                     auth_fail = True
             except ExtractError as exc:
                 fetch_errors[rk] = f"{exc.status}: {exc.message}"
+        from collectors.source_catalog import fallbacks_for
+
+        for entry in collect_entries:
+            if entry["request_key"] not in fetch_errors:
+                continue
+            for alt in fallbacks_for(entry["metric_id"]):
+                if alt.startswith("http") or alt.startswith("tftc:"):
+                    continue
+                if alt in captures or alt in fetch_errors:
+                    continue
+                try:
+                    captures[alt] = fetch_live(alt, run_dir)
+                except (HttpError, ExtractError) as exc:
+                    fetch_errors[alt] = f"{getattr(exc, 'status', 'SOURCE_UNAVAILABLE')}: {exc}"
     else:
         for rk in needed_unique:
             if rk not in captures:
@@ -412,6 +473,27 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
         if disp == "COLLECT":
             rk = e["request_key"]
             if rk in fetch_errors or any(x in fetch_errors for x in extra_request_keys(e)):
+                backup = _price_backup(e, captures)
+                if backup is not None:
+                    row = {
+                        "metric_id": mid,
+                        "status": "OK",
+                        "raw_source_value": str(backup),
+                        "normalized_value": encode_value(backup),
+                        "unit": e.get("unit"),
+                        "source_key": "binance",
+                        "request_key": rk,
+                        "source_field": "fallback",
+                        "source_as_of": "UNKNOWN",
+                        "fetched_at": None,
+                        "raw_capture_sha256": None,
+                        "calculation_version": None,
+                        "derivation_inputs": None,
+                        "error": None,
+                    }
+                    facts.append(row)
+                    by_id[mid] = row
+                    continue
                 err = fetch_errors.get(rk) or next(fetch_errors[x] for x in extra_request_keys(e) if x in fetch_errors)
                 status = "AUTH_MISSING" if err.startswith("AUTH_MISSING") else "SOURCE_UNAVAILABLE"
                 row = fact_error(
@@ -440,7 +522,7 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
                         as_of = "UNKNOWN"
                 if as_of == "UNKNOWN":
                     as_of = payload_as_of(e, cap) or "UNKNOWN"
-                row = {
+                row = _mark_old_etf({
                     "metric_id": mid,
                     "status": "OK",
                     "raw_source_value": str(raw),
@@ -455,7 +537,7 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
                     "calculation_version": None,
                     "derivation_inputs": None,
                     "error": None,
-                }
+                })
             except ExtractError as exc:
                 row = fact_error(
                     mid,

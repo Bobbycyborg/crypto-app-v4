@@ -73,8 +73,13 @@ def test_long_decimal_is_rounded() -> None:
 
 
 def test_known_stale_strings_must_fail() -> None:
-    for sample in ("BEAR MARKET $79,374", "As of 2026-08-25", "bounce is gone", "$1.84B/$3.28B"):
-        assert stale_problems(f"<p>{sample}</p>"), sample
+    earlier = (
+        "<p>BEAR MARKET $79,374. bounce is gone. As of 2026-08-25. "
+        "ETF was $1.84B/$3.28B.</p>"
+    )
+    problems = " ".join(stale_problems(earlier, previous_html=earlier))
+    for sample in ("BEAR MARKET $79,374", "bounce is gone", "$1.84B/$3.28B", "2026-08-25"):
+        assert sample in problems, sample
 
 
 def test_stale_date_fails_the_gate() -> None:
@@ -100,7 +105,11 @@ def test_stale_date_fails_the_gate() -> None:
     assert any("$104.45" in item for item in still)
     crossed = stale_problems(
         '<article data-asset="pump"><span class="alt-price">$0.463713</span></article>'
-        '<article data-asset="sol"><span class="alt-price">$0.463713</span></article>'
+        '<article data-asset="sol"><span class="alt-price">$0.463713</span></article>',
+        bindings=[
+            {"asset": "pump", "source_literal": "$0.463713"},
+            {"asset": "sol", "source_literal": "$0.463713"},
+        ],
     )
     assert any("both" in item for item in crossed)
 

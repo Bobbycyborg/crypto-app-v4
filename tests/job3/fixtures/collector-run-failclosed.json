@@ -2,7 +2,7 @@
   "_fixture_kind": "SYNTHETIC_TEST_ONLY",
   "run_id": "SYNTHETIC_FAILCLOSED_JOB3",
   "job1_registry_sha256": "19061e193b5946477592ce01d670ec2f4d8bf67a4bf811cf1a5f61df70f381b1",
-  "collector_plan_sha256": "ef14f8cd596c0dffce25ed49a2921cb4dc07590b235c00d46a84339a03dd3c73",
+  "collector_plan_sha256": "df49546efcf84a65583f61a3f5a3e893bd34f30e4174117a5b41e9c21d8bdff6",
   "facts": [
     {
       "metric_id": "2z.price.usd.live",

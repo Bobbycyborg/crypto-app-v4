@@ -103,6 +103,7 @@ def main() -> int:
         print(f"{k}={v}")
     gaps = json.loads((ROOT / "config" / "binding-gaps.json").read_text(encoding="utf-8"))
     listed: set[tuple[str, str]] = set()
+    reasons = []
     for group in gaps["groups"]:
         reason = (group.get("reason") or "").strip()
         if not reason:
@@ -110,6 +111,14 @@ def main() -> int:
             return 1
         for mid, oid in group["pairs"]:
             pair = (mid, oid)
+            own = (group.get("reasons") or {}).get(oid) or ""
+            if oid not in own:
+                print(f"binding gap {mid} {oid} has no reason of its own")
+                return 1
+            if own in reasons:
+                print(f"binding gap reason reused for {oid}")
+                return 1
+            reasons.append(own)
             if pair in listed:
                 print(f"binding gap listed twice: {mid} {oid}")
                 return 1
