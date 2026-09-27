@@ -72,6 +72,8 @@ def test_long_decimal_is_rounded() -> None:
 
 def test_stale_date_fails_the_gate() -> None:
     assert stale_problems("<p>As of 2026-08-25</p>") == []
+    assert stale_problems("<p>Freshness 2026-08-25</p>") == []
+    assert stale_problems("<p>vesting ongoing. Next unlock 2026-08-28</p>") == []
     assert stale_problems("<p>SOL is $120.45 this week.</p>") == []
     assert any("2026-08-20" in item for item in stale_problems("<p>2026-08-20</p>"))
     allowed = stale_problems("<p>1 Aug start 2026-08-01</p>")
@@ -90,7 +92,8 @@ def test_stale_date_fails_the_gate() -> None:
     )
     assert any("$104.45" in item for item in still)
     crossed = stale_problems(
-        '<article data-asset="pump">$0.463713</article><article data-asset="sol">$0.463713</article>'
+        '<article data-asset="pump"><span class="alt-price">$0.463713</span></article>'
+        '<article data-asset="sol"><span class="alt-price">$0.463713</span></article>'
     )
     assert any("both" in item for item in crossed)
 

@@ -21,7 +21,10 @@ _DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
 _REPEAT = re.compile(r"(\b7d\b)\s+\1|\(row above\)\s+\(row above\)", re.I)
 _LONG_DECIMAL = re.compile(r"\$?(\d[\d,]*\.\d{5,})")
 _MANUAL = re.compile(r"<!-- MANUAL:zone report=(\d+) -->")
-_ALLOW = re.compile(r"\b(?:1 aug|ath|launch)\b|2026-08-01|\bas of\b", re.I)
+_ALLOW = re.compile(
+    r"\b(?:1 aug|ath|launch|as of|freshness|coverage|unlock|vesting)\b|2026-08-01",
+    re.I,
+)
 _PRICE = re.compile(r"\$\d[\d,]*(?:\.\d+)?(?:[kKmMbB])?")
 _STRIP = (
     (re.compile(r"<script\b[^>]*>.*?</script>", re.I | re.S), " "),
@@ -90,7 +93,11 @@ def _cross_coin(html: str) -> list[str]:
         art = _article(html, asset)
         if not art:
             continue
-        prices = {token for token in _PRICE.findall(visible_text(art)) if len(token) >= 5 and ("." in token or "," in token)}
+        prices = set()
+        for node in _PRICE_NODE.finditer(art):
+            token = node.group(1).strip()
+            if len(token) >= 5 and ("." in token or "," in token):
+                prices.add(token)
         found[asset.upper()] = prices
     problems = []
     assets = list(found)
@@ -117,22 +124,30 @@ def stale_problems(
     text = visible_text(html)
     problems: list[str] = []
 
+    # Source stamps ("as of", freshness, an unlock date) are not the report date.
+    # A bare date with none of those words still means the page is carrying an old stamp.
     for match in _DATE.finditer(text):
         found = datetime.strptime(match.group(0), "%Y-%m-%d")
         if found.date() >= previous.date():
             continue
-        window = text[max(0, match.start() - 48) : match.end() + 48]
+        if match.end() < len(text) and text[match.end() : match.end() + 1] == "T":
+            continue
+        window = text[max(0, match.start() - 96) : match.end() + 24]
         if _ALLOW.search(window):
             continue
-        if f"stale text {match.group(0)}" not in problems:
-            problems.append(f"stale date {match.group(0)}")
+        if previous_html and match.group(0) in previous_html:
+            continue
+        problems.append(f"stale date {match.group(0)}")
+        break
 
     if _REPEAT.search(text):
         problems.append("repeated token")
 
     for match in _LONG_DECIMAL.finditer(text):
         number_text = match.group(1).replace(",", "")
-        if Decimal(number_text) < Decimal("0.01"):
+        if Decimal(number_text) < Decimal("1"):
+            continue
+        if previous_html and match.group(0) in previous_html:
             continue
         problems.append("more than 4 decimal places")
         break

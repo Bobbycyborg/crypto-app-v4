@@ -93,6 +93,28 @@ def _fear_date(html: str, source_as_of: str | None) -> str:
     return html[: match.start()] + marked + html[match.end() :]
 
 
+def restore_dormant_articles(html: str, previous: str) -> str:
+    from renderer.report_config import dormant_assets
+
+    for asset in dormant_assets():
+        slug = asset.lower()
+
+        def grab(src: str) -> str | None:
+            match = re.search(rf'<article\b[^>]*data-asset="{re.escape(slug)}"', src)
+            if not match:
+                return None
+            end = src.find("</article>", match.start())
+            if end < 0:
+                return None
+            return src[match.start() : end + len("</article>")]
+
+        old = grab(previous)
+        now = grab(html)
+        if old and now and old != now:
+            html = html.replace(now, old, 1)
+    return html
+
+
 def apply_known_slots(html: str, snapshot: dict) -> str:
     cfg = load_report()
     for asset in list(cfg["always_shown"]) + list(cfg["held"]):
