@@ -60,6 +60,24 @@ def preflight() -> int:
     return 0
 
 
+def _undated_critical(snap: dict) -> list[str]:
+    cfg = load_report()
+    wanted = [f"{asset.lower()}.price.usd.live" for asset in list(cfg["always_shown"]) + list(cfg["held"])]
+    wanted.append("global.fear_greed.index.current")
+    for slug in ("btc", "eth", "sol"):
+        wanted.append(f"{slug}.etf.flow.usd.7d")
+        wanted.append(f"{slug}.etf.flow.usd.30d")
+    missing = []
+    metrics = snap.get("metrics") or {}
+    for mid in wanted:
+        row = metrics.get(mid)
+        if not row or row.get("status") != "OK":
+            continue
+        if not row.get("source_as_of") or row.get("source_as_of") == "UNKNOWN":
+            missing.append(mid)
+    return missing
+
+
 def _report_05_page() -> Path:
     dest = RUNTIME / "previous-report.html"
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -104,6 +122,11 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     except SystemExit as exc:
         print(exc, file=sys.stderr)
         return 2
+    undated = _undated_critical(snap)
+    if undated:
+        print("critical numbers with no source date:")
+        for mid in undated:
+            print(f"  {mid}")
     snap_path = RUNTIME / "job3" / "render-snapshot.json"
     snap_path.parent.mkdir(parents=True, exist_ok=True)
     snap_path.write_text(json.dumps(snap, indent=2) + "\n")
@@ -183,8 +206,8 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     else:
         print("stale gate PASS")
     print("Live page was not changed.")
-    if render_code or check_code or problems or critical:
-        return render_code or check_code or (1 if problems else 2)
+    if render_code or check_code or problems or critical or undated:
+        return render_code or check_code or (1 if problems or undated else 2)
     return 0
 
 

@@ -7,9 +7,11 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import secrets
 import sys
 import time
+from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 from typing import Any
@@ -224,6 +226,40 @@ def fetch_live(request_key: str, run_dir: Path) -> Capture:
     return Capture(meta, resp.body, parsed, html)
 
 
+def payload_as_of(entry: dict[str, Any], cap: Capture) -> str | None:
+    """A date that came with the data. Not the time we asked for it."""
+    parsed = cap.parsed
+    ident = (entry.get("selector") or {}).get("identity") or {}
+    if isinstance(parsed, list):
+        want = ident.get("id")
+        for row in parsed:
+            if not isinstance(row, dict):
+                continue
+            if want and row.get("id") != want:
+                continue
+            stamp = row.get("last_updated")
+            if stamp:
+                return str(stamp)
+            if want:
+                break
+    if isinstance(parsed, dict):
+        data = parsed.get("data")
+        if isinstance(data, list) and data and isinstance(data[0], dict) and data[0].get("timestamp"):
+            when = datetime.fromtimestamp(int(data[0]["timestamp"]), timezone.utc)
+            return when.strftime("%Y-%m-%dT%H:%M:%SZ")
+        if parsed.get("last_updated"):
+            return str(parsed["last_updated"])
+    if cap.html:
+        found = re.search(r"(\d{1,2}) ([A-Z][a-z]{2}) (20\d\d)", cap.html)
+        if found:
+            try:
+                when = datetime.strptime(found.group(0), "%d %b %Y")
+            except ValueError:
+                return None
+            return when.strftime("%Y-%m-%dT00:00:00Z")
+    return None
+
+
 def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple[Any, str | None]:
     selector = entry["selector"]
     request_key = entry["request_key"]
@@ -410,6 +446,8 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
                         as_of = str(extract(cap.parsed, as_sel, html=cap.html))
                     except ExtractError:
                         as_of = "UNKNOWN"
+                if as_of == "UNKNOWN":
+                    as_of = payload_as_of(e, cap) or "UNKNOWN"
                 row = {
                     "metric_id": mid,
                     "status": "OK",
