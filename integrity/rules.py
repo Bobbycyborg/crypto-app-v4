@@ -279,6 +279,22 @@ def check_canonical_metric_coverage(
     return checks
 
 
+def _missing_binding(bid: str, category: str) -> CheckResult:
+    return CheckResult(
+        check_id=f"gap_{bid}",
+        category=category,
+        asset=None,
+        rule_type="missing_binding",
+        metric_ids=[],
+        status="COVERAGE_GAP",
+        assertions_executed=1,
+        observed=None,
+        expected_relation="binding id present in this week's manifest",
+        evidence={"binding_id": bid},
+        reason=f"contract id missing from this week: {bid}",
+    )
+
+
 def check_binding_consistency(
     *,
     rendered_html: str,
@@ -296,7 +312,10 @@ def check_binding_consistency(
         if b.get("owner") == "CGPT_CURSOR" and b["asset"] not in EXCLUDED_ASSETS
     ]
     for bid in sorted(bind_ids):
-        b = by_id[bid]
+        b = by_id.get(bid)
+        if b is None:
+            checks.append(_missing_binding(bid, "04_rendered_binding_consistency"))
+            continue
         if b.get("owner") != "CGPT_CURSOR":
             continue
         if b["asset"] in EXCLUDED_ASSETS:
@@ -505,7 +524,12 @@ def check_duplicate_consistency(
             values = []
             fail = False
             for bid in binding_ids:
-                b = by_id[bid]
+                b = by_id.get(bid)
+                if b is None:
+                    fail = True
+                    values.append((bid, "missing binding"))
+                    checks.append(_missing_binding(bid, "05_duplicate_consistency"))
+                    continue
                 span, err = locate_binding_span(
                     rendered_html, b, source_html=source_html, bindings=bindings
                 )
@@ -520,7 +544,7 @@ def check_duplicate_consistency(
                 CheckResult(
                     check_id=f"05_dup_{mid.replace('.', '_')}",
                     category="05_duplicate_consistency",
-                    asset=by_id[binding_ids[0]].get("asset") if binding_ids else None,
+                    asset=(by_id.get(binding_ids[0]) or {}).get("asset") if binding_ids else None,
                     rule_type="duplicate_group_string",
                     metric_ids=[mid],
                     status="FAIL" if fail else "PASS",
@@ -536,7 +560,12 @@ def check_duplicate_consistency(
         values: list[tuple[str, str]] = []
         fail = False
         for bid in binding_ids:
-            b = by_id[bid]
+            b = by_id.get(bid)
+            if b is None:
+                fail = True
+                values.append((bid, "missing binding"))
+                checks.append(_missing_binding(bid, "05_duplicate_consistency"))
+                continue
             span, err = locate_binding_span(
                 rendered_html,
                 b,
@@ -563,7 +592,7 @@ def check_duplicate_consistency(
             CheckResult(
                 check_id=f"05_dup_{mid.replace('.', '_')}",
                 category="05_duplicate_consistency",
-                asset=by_id[binding_ids[0]].get("asset") if binding_ids else None,
+                asset=(by_id.get(binding_ids[0]) or {}).get("asset") if binding_ids else None,
                 rule_type="duplicate_group",
                 metric_ids=[mid],
                 status="FAIL" if fail else "PASS",
@@ -1246,7 +1275,11 @@ def check_permanent_regressions(
         if snap and snap.get("status") == "OK":
             canonical = dec(snap["normalized_value"])
             for bid in spx_ids:
-                b = by_id[bid]
+                b = by_id.get(bid)
+                if b is None:
+                    fail = True
+                    checks.append(_missing_binding(bid, "12_permanent_regressions"))
+                    continue
                 exp = snap.get("normalized_value")
                 span, err = locate_binding_span(
                     rendered_html,
@@ -1286,7 +1319,11 @@ def check_permanent_regressions(
         if snap and snap.get("status") == "OK":
             canonical = dec(snap["normalized_value"])
             for bid in pump_ids:
-                b = by_id[bid]
+                b = by_id.get(bid)
+                if b is None:
+                    fail = True
+                    checks.append(_missing_binding(bid, "12_permanent_regressions"))
+                    continue
                 exp = snap.get("normalized_value")
                 span, err = locate_binding_span(
                     rendered_html,
