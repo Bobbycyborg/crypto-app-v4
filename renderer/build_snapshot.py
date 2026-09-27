@@ -61,7 +61,19 @@ def _derived_as_of(inputs: list[Any], facts_by_id: dict[str, dict[str, Any]]) ->
     return "UNKNOWN"
 
 
-def build_snapshot(collector_run: dict[str, Any], labels: dict[str, str]) -> dict[str, Any]:
+def refuse_partial(collector_run: dict[str, Any], allow: set[str]) -> None:
+    if collector_run.get("overall_status") != "PARTIAL_FAIL":
+        return
+    failed = list(collector_run.get("required_failed_ids") or [])
+    missing = [mid for mid in failed if mid not in allow]
+    if missing or not failed:
+        raise SystemExit(
+            "SNAPSHOT_PARTIAL_FAIL:" + ",".join(missing or failed or ["unnamed"])
+        )
+
+
+def build_snapshot(collector_run: dict[str, Any], labels: dict[str, str], *, allow_partial: set[str] | None = None) -> dict[str, Any]:
+    refuse_partial(collector_run, allow_partial or set())
     reg_path = ROOT / "metrics/metric-registry.json"
     plan_path = ROOT / "collectors/collector-plan.json"
     reg_sha = _sha256_file(reg_path)
@@ -97,7 +109,7 @@ def build_snapshot(collector_run: dict[str, Any], labels: dict[str, str]) -> dic
             source_as_of = _derived_as_of(derivation_inputs or [], facts_by_id)
         else:
             source_label = _source_label(source_key, labels) if status == "OK" else "UNKNOWN"
-            source_as_of = fact.get("source_as_of") or "UNKNOWN"
+            source_as_of = fact.get("source_as_of") or fact.get("fetched_at") or "UNKNOWN"
         metrics[mid] = {
             "metric_id": mid,
             "status": status,
@@ -130,11 +142,13 @@ def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--collector-run", required=True)
     p.add_argument("--out", required=True)
+    p.add_argument("--allow-partial", default="", help="Comma-separated metric ids allowed to fail")
     args = p.parse_args()
     run_path = Path(args.collector_run)
     labels = json.loads((ROOT / "renderer/source-labels.json").read_text())
     run = json.loads(run_path.read_text())
-    snap = build_snapshot(run, labels)
+    allow = {part.strip() for part in args.allow_partial.split(",") if part.strip()}
+    snap = build_snapshot(run, labels, allow_partial=allow)
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     tmp = out.with_suffix(".tmp")

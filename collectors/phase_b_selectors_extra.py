@@ -167,7 +167,11 @@ def earnings_mean_last_n(doc: Any, selector: dict[str, Any]) -> Decimal:
     rows = doc.get("data") if isinstance(doc, dict) else doc
     if not isinstance(rows, list) or len(rows) < n:
         raise ExtractError("VALUE_MISSING", "insufficient earnings rows")
-    vals = [_as_decimal(r.get("earnings") or r.get("total_earnings") or 0) for r in rows[-n:]]
+    vals = []
+    for row in rows[-n:]:
+        if not isinstance(row, dict) or row.get("daily_earnings") is None:
+            raise ExtractError("VALUE_MISSING", "daily_earnings")
+        vals.append(_as_decimal(row["daily_earnings"]))
     return sum(vals, Decimal("0")) / Decimal(n)
 
 
@@ -330,11 +334,22 @@ def jobs_timestamps_window_sum(doc: Any, selector: dict[str, Any]) -> int:
     return total
 
 
-def sol_burn_tokens_per_year(doc: Any, _selector: dict[str, Any]) -> Decimal:
-    rate = json_pointer(doc, "/result/total")
-    circ = Decimal("500000000")
-    annual_burn = _as_decimal(rate) * circ
-    return annual_burn
+def sol_burn_tokens_per_year(fees_doc: Any, price_doc: Any, selector: dict[str, Any] | None = None) -> Decimal:
+    """Annual SOL burned from daily USD fees. The inflation rate is issuance, not burn."""
+    if selector is None:
+        raise ExtractError(
+            "SOURCE_SCHEMA_MISMATCH",
+            "sol burn needs daily fees and the SOL price, not the inflation rate",
+        )
+    if not isinstance(fees_doc, dict) or fees_doc.get("total24h") is None:
+        raise ExtractError("VALUE_MISSING", "daily fees total24h")
+    if not isinstance(price_doc, dict):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "SOL price object")
+    px = price_doc.get("lastPrice") or price_doc.get("price")
+    price = _as_decimal(px)
+    if price <= 0:
+        raise ExtractError("VALUE_INVALID", "zero SOL price")
+    return _as_decimal(fees_doc["total24h"]) * Decimal("365") / price
 
 
 def sol_issuance_tokens_per_year(doc: Any, _selector: dict[str, Any]) -> Decimal:
@@ -350,7 +365,7 @@ def dex_chain_ratio(num_doc: Any, den_doc: Any, selector: dict[str, Any]) -> Dec
     den = _as_decimal(den_doc.get(den_field) if isinstance(den_doc, dict) else json_pointer(den_doc, f"/{den_field}"))
     if den <= 0:
         raise ExtractError("VALUE_INVALID", "zero denominator")
-    return num / den * Decimal("100")
+    return num / den
 
 
 def funding_rate_mean_last_n(doc: Any, selector: dict[str, Any]) -> Decimal:

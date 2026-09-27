@@ -1996,18 +1996,22 @@
       "unit": "%",
       "disposition": "COLLECT",
       "derivation": null,
-      "source_key": "hyperliquid",
-      "request_key": "hyperliquid.info.tokenDetails",
+      "source_key": "coingecko",
+      "request_key": "coingecko.markets.active",
       "selector": {
         "type": "named_record_field",
         "name": "ratio_pct",
-        "num_key": "circulatingSupply",
-        "den_key": "maxSupply"
+        "records_pointer": "/",
+        "identity": {
+          "id": "hyperliquid"
+        },
+        "num_field": "circulating_supply",
+        "den_field": "max_supply"
       },
       "normalizer": {
         "type": "identity"
       },
-      "notes": "V3 hype conflict preserved: HL circulatingSupply/maxSupply*100.",
+      "notes": "CoinGecko circulating supply over max supply. The Hyperliquid figure is hype.supply.hl_circulating.pct.",
       "required": true
     },
     {
@@ -4554,16 +4558,17 @@
       "unit": "tokens",
       "disposition": "COLLECT",
       "derivation": null,
-      "source_key": "solana_rpc",
-      "request_key": "solana.rpc.getInflationRate",
+      "source_key": "defillama",
+      "request_key": "defillama.summary.fees.solana.dailyFees",
       "selector": {
         "type": "named_record_field",
-        "name": "sol_burn_tokens_per_year"
+        "name": "sol_burn_tokens_per_year",
+        "price_request_key": "binance.spot.ticker24h.SOLUSDT"
       },
       "normalizer": {
         "type": "identity"
       },
-      "notes": "V3 sol_intel staking_inflation_burn estimated burn tokens/yr.",
+      "notes": "Daily SOL fees times 365, divided by the SOL price. Not the inflation rate.",
       "required": true
     },
     {

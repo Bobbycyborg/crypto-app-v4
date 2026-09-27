@@ -258,6 +258,13 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
         from collectors.phase_b_selectors_extra import perp_vs_coinbase_spot_ratio
 
         return perp_vs_coinbase_spot_ratio(cap.parsed, captures[spot_key].parsed, selector), None
+    if name == "sol_burn_tokens_per_year":
+        price_key = selector["price_request_key"]
+        if price_key not in captures:
+            raise ExtractError("SOURCE_UNAVAILABLE", f"missing SOL price capture {price_key}")
+        from collectors.phase_b_selectors_extra import sol_burn_tokens_per_year
+
+        return sol_burn_tokens_per_year(cap.parsed, captures[price_key].parsed, selector), None
     if name == "dex_chain_ratio":
         den_key = selector["den_request_key"]
         if den_key not in captures:
@@ -300,7 +307,7 @@ def extract_metric(entry: dict[str, Any], captures: dict[str, Capture]) -> tuple
 def extra_request_keys(entry: dict[str, Any]) -> list[str]:
     sel = entry.get("selector") or {}
     extra = []
-    for k in ("bench_request_key", "mark_request_key", "spot_request_key", "den_request_key", "solana_supply_request_key", "charts_request_key", "liability_request_key"):
+    for k in ("bench_request_key", "mark_request_key", "spot_request_key", "den_request_key", "solana_supply_request_key", "charts_request_key", "liability_request_key", "price_request_key"):
         if sel.get(k):
             extra.append(sel[k])
     return extra
@@ -403,6 +410,8 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
                         as_of = str(extract(cap.parsed, as_sel, html=cap.html))
                     except ExtractError:
                         as_of = "UNKNOWN"
+                if as_of == "UNKNOWN":
+                    as_of = cap.meta.get("fetched_at") or "UNKNOWN"
                 row = {
                     "metric_id": mid,
                     "status": "OK",
