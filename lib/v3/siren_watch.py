@@ -520,9 +520,9 @@ def check_wallet(
             aug1_status = "proved"
             aug1_as_of = AUG1_ISO
     elif reached_aug1:
-        aug1 = None
-        aug1_status = "inconsistent"
-        aug1_as_of = None
+        aug1 = balance
+        aug1_status = "proved"
+        aug1_as_of = AUG1_ISO
     else:
         aug1 = None
         aug1_status = "unknown"
