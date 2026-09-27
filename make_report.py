@@ -20,12 +20,14 @@ if str(ROOT) not in sys.path:
 from collectors.run_collectors import RUNTIME as JOB2
 from collectors.run_collectors import run as run_collectors
 from integrity.build_report_contract import build_contract
+from integrity.check_report import run_checker
 from integrity.stale_gate import stale_problems
 from renderer.build_binding_manifest import build_manifest
 from renderer.build_snapshot import build_snapshot
 from renderer.manual_zones import wrap_manual_zones
 from renderer.render_report import render_report
 from renderer.report_config import load_report
+from renderer.roster import apply_roster
 
 RUNTIME = ROOT / "runtime-NOT-FOR-GH"
 PIPELINE = ("collectors", "renderer", "integrity", "lib", "config", "make_report.py")
@@ -114,8 +116,9 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     critical = [row for row in blockers if row.get("critical")]
     (RUNTIME / "job3" / "blockers.json").write_text(json.dumps(blockers, indent=2) + "\n")
     if critical:
-        print(f"critical misses {len(critical)}; wrote nothing", file=sys.stderr)
-        return 2
+        print(f"critical misses {len(critical)}")
+        for row in critical[:20]:
+            print(f"  {row['metric_id']} {row['reason']}")
     # The displayed weekly buyback stays $6.8M. The pulled wallet figure is a different number.
     bindings = [row for row in built["bindings"] if row.get("metric_id") != "pump.buyback.usd.7d"]
     print(f"bindings {len(bindings)}")
@@ -132,8 +135,8 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         print(f"{exc}; wrote nothing", file=sys.stderr)
         return 3
     if render_code != 0:
-        print(f"render exit {render_code}; wrote nothing", file=sys.stderr)
-        return render_code
+        print(f"render exit {render_code}", file=sys.stderr)
+    rendered = apply_roster(rendered)
     rendered = wrap_manual_zones(rendered, number)
     candidate = RUNTIME / f"candidate-{number}.html"
     candidate.write_text(rendered, encoding="utf-8")
@@ -145,19 +148,41 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         registry_path=ROOT / "metrics/metric-registry.json",
         plan_path=ROOT / "collectors/collector-plan.json",
         bindings_path=manifest_path,
-        source_html_path=candidate,
+        source_html_path=source,
     )
-    (RUNTIME / "job3" / "report-contract.json").write_text(json.dumps(contract, indent=2) + "\n")
-    print(f"contract checks {contract['expected_check_count']}")
-    problems = stale_problems(rendered, snapshot=snap, bindings=bindings, report_number=number)
+    contract_path = RUNTIME / "job3" / "report-contract.json"
+    contract_path.write_text(json.dumps(contract, indent=2) + "\n")
+    report = run_checker(
+        snapshot_path=snap_path,
+        rendered_html_path=candidate,
+        source_html_path=source,
+        bindings_path=manifest_path,
+        registry_path=ROOT / "metrics/metric-registry.json",
+        plan_path=ROOT / "collectors/collector-plan.json",
+        contract_path=contract_path,
+        run_id=str(collector.get("run_id") or "replay"),
+    )
+    check_path = RUNTIME / "job3" / "check-report.json"
+    check_path.write_text(json.dumps(report.to_dict(), indent=2) + "\n")
+    check_code = report.exit_code()
+    print(f"checker {report.overall_status} exit {check_code}")
+    previous = _report_05_page()
+    problems = stale_problems(
+        rendered,
+        snapshot=snap,
+        bindings=bindings,
+        previous_html=previous.read_text(encoding="utf-8"),
+        report_number=number,
+    )
     if problems:
         print("stale gate FAIL")
         for item in problems[:20]:
             print(f"  {item}")
-        print("candidate kept for review. Live page was not changed.")
-        return 1
-    print("stale gate PASS")
+    else:
+        print("stale gate PASS")
     print("Live page was not changed.")
+    if render_code or check_code or problems or critical:
+        return render_code or check_code or (1 if problems else 2)
     return 0
 
 
