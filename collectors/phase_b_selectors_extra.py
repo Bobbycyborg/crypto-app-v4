@@ -335,21 +335,26 @@ def jobs_timestamps_window_sum(doc: Any, selector: dict[str, Any]) -> int:
 
 
 def sol_burn_tokens_per_year(fees_doc: Any, price_doc: Any, selector: dict[str, Any] | None = None) -> Decimal:
-    """Annual SOL burned from daily USD fees. The inflation rate is issuance, not burn."""
+    """Annual SOL burned from DefiLlama daily revenue, not total fees and not issuance."""
     if selector is None:
         raise ExtractError(
             "SOURCE_SCHEMA_MISMATCH",
-            "sol burn needs daily fees and the SOL price, not the inflation rate",
+            "sol burn needs daily revenue and the SOL price, not the inflation rate",
         )
-    if not isinstance(fees_doc, dict) or fees_doc.get("total24h") is None:
-        raise ExtractError("VALUE_MISSING", "daily fees total24h")
+    if not isinstance(fees_doc, dict):
+        raise ExtractError("SOURCE_SCHEMA_MISMATCH", "daily revenue object")
+    if fees_doc.get("dailyRevenue") is not None:
+        revenue = fees_doc["dailyRevenue"]
+    elif selector.get("field") == "dailyRevenue" and fees_doc.get("total24h") is not None:
+        revenue = fees_doc["total24h"]
+    else:
+        raise ExtractError("VALUE_MISSING", "dailyRevenue")
     if not isinstance(price_doc, dict):
         raise ExtractError("SOURCE_SCHEMA_MISMATCH", "SOL price object")
-    px = price_doc.get("lastPrice") or price_doc.get("price")
-    price = _as_decimal(px)
+    price = _as_decimal(price_doc.get("lastPrice") or price_doc.get("price"))
     if price <= 0:
         raise ExtractError("VALUE_INVALID", "zero SOL price")
-    return _as_decimal(fees_doc["total24h"]) * Decimal("365") / price
+    return _as_decimal(revenue) * Decimal("365") / price
 
 
 def sol_issuance_tokens_per_year(doc: Any, _selector: dict[str, Any]) -> Decimal:

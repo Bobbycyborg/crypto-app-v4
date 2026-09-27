@@ -56,8 +56,14 @@ def test_burn_is_not_the_inflation_copy() -> None:
         assert "inflation" in str(exc)
     else:
         raise AssertionError("burn accepted the inflation rate")
-    got = sol_burn_tokens_per_year({"total24h": 100}, {"lastPrice": "10"}, {"price_request_key": "x"})
-    assert got == 3650
+    try:
+        sol_burn_tokens_per_year({"total24h": 100}, {"lastPrice": "10"}, {"price_request_key": "x"})
+    except ExtractError as exc:
+        assert "dailyRevenue" in str(exc)
+    else:
+        raise AssertionError("burn accepted total fees")
+    got = sol_burn_tokens_per_year({"dailyRevenue": 50}, {"lastPrice": "10"}, {"field": "dailyRevenue"})
+    assert got == 1825
 
 
 def test_long_decimal_is_rounded() -> None:

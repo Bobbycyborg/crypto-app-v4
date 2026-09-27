@@ -109,7 +109,7 @@ def build_snapshot(collector_run: dict[str, Any], labels: dict[str, str], *, all
             source_as_of = _derived_as_of(derivation_inputs or [], facts_by_id)
         else:
             source_label = _source_label(source_key, labels) if status == "OK" else "UNKNOWN"
-            source_as_of = fact.get("source_as_of") or fact.get("fetched_at") or "UNKNOWN"
+            source_as_of = fact.get("source_as_of") or "UNKNOWN"
         metrics[mid] = {
             "metric_id": mid,
             "status": status,

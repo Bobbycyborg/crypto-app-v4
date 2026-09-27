@@ -92,6 +92,12 @@ REQUESTS: dict[str, dict[str, Any]] = {
         "method": "GET",
         "url": "https://api.llama.fi/v2/historicalChainTvl/Solana",
     },
+    "defillama.summary.fees.solana.dailyRevenue": {
+        "source_key": "defillama",
+        "method": "GET",
+        "url": "https://api.llama.fi/summary/fees/solana",
+        "params": {"dataType": "dailyRevenue"},
+    },
     "defillama.summary.fees.solana.dailyFees": {
         "source_key": "defillama",
         "method": "GET",

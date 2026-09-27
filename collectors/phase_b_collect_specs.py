@@ -902,14 +902,15 @@ _c('sol.burn.tokens.per_year',
     disposition='COLLECT',
     derivation=None,
     source_key='defillama',
-    request_key='defillama.summary.fees.solana.dailyFees',
+    request_key='defillama.summary.fees.solana.dailyRevenue',
     selector={
         'type': 'named_record_field',
         'name': 'sol_burn_tokens_per_year',
+        'field': 'dailyRevenue',
         'price_request_key': 'binance.spot.ticker24h.SOLUSDT',
     },
     normalizer={'type': 'identity'},
-    notes='Daily SOL fees times 365, divided by the SOL price. Not the inflation rate.',
+    notes='DefiLlama dailyRevenue times 365, divided by the SOL price. Not total fees.',
 )
 
 _c('sol.dex_eth_ratio.7d.x',

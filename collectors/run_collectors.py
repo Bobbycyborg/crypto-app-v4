@@ -410,8 +410,6 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
                         as_of = str(extract(cap.parsed, as_sel, html=cap.html))
                     except ExtractError:
                         as_of = "UNKNOWN"
-                if as_of == "UNKNOWN":
-                    as_of = cap.meta.get("fetched_at") or "UNKNOWN"
                 row = {
                     "metric_id": mid,
                     "status": "OK",
