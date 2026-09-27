@@ -5,13 +5,14 @@
   "previous_report_number": "05",
   "previous_report_date": "2026-08-31",
   "previous_report_label": "August 31st, 2026 - Report 05",
-  "live_number": "05",
+  "live_number": "06",
   "weeks": [
     ["01", "August 14th, 2026 - Report 01"],
     ["02", "August 17th, 2026 - Report 02"],
     ["03", "August 20th, 2026 - Report 03"],
     ["04", "August 25th, 2026 - Report 04"],
-    ["05", "August 31st, 2026 - Report 05"]
+    ["05", "August 31st, 2026 - Report 05"],
+    ["06", "September 26th, 2026 - Report 06"]
   ],
   "always_shown": ["BTC", "SOL", "ZEC", "HYPE"],
   "held": ["PUMP", "RENDER", "NOS", "SPX", "GIGA", "2Z"],
