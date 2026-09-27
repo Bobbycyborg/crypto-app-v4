@@ -1,0 +1,19 @@
+{
+  "btc": {
+    "title": "BACK ABOVE THE 200D · ETF BID STRONG · LEVERAGE HEAVY",
+    "summary": "BTC has climbed back above its 50d and 200d averages, and ETF buyers are back in size. It's pushing the ~$82k level that marked the end of the bear, but a daily close holding above it isn't confirmed yet, and leverage is maybe doing a lot of the lifting.",
+    "why": "BTC is still about a third off its high, but it has reclaimed both key averages, which the July–August range never managed. Spot ETF demand is the strongest it's been in weeks. Leverage is still heavy, so the move isn't clean.",
+    "supports": [
+      "It's back above the 50d and 200d. ETFs took in nearly $3B in a week. Funding is calm, so longs aren't paying up yet."
+    ],
+    "holds_back": [
+      "Perps trade about 7x spot, so the move is leverage-led. There's no confirmed hold above ~$82k yet. It's still a third below the high."
+    ],
+    "stronger": [
+      "Daily closes hold above ~$82k while ETF buying continues, and spot catches up with perps."
+    ],
+    "weaker": [
+      "It falls back under ~$82k into the old range while perps dominate, or ETFs print a run of outflow days."
+    ]
+  }
+}

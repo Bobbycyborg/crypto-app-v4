@@ -238,6 +238,28 @@ def test_fart_leverage_uses_24h_dollars() -> None:
     assert ratio > 10
 
 
+def test_approved_btc_stance_replaces_the_number_dump() -> None:
+    from renderer.stance_copy import apply_approved_stances
+
+    html = (
+        '<article data-asset="btc"><div class="alt-stance">'
+        '<div class="alt-stance-headline">7D UP</div>'
+        '<p class="alt-stance-expl">BTC $1 (+1% / 7d, +1% / 30d). '
+        '<button type="button" class="stance-see-more">(see more)</button></p>'
+        '<div class="stance-modal-src" hidden>'
+        "<p class='stance-conf'>Evidence confidence · MEDIUM</p>"
+        "<p class='stance-p'>old</p>"
+        "<ul class='stance-list'><li>ETF flows were not re-fetched this pass</li>"
+        "<li>30d is +4.6% and 7d is +3.3%</li></ul>"
+        '</div></div><div class="econ-dash"></div></article>'
+    )
+    out = apply_approved_stances(html)
+    assert "BACK ABOVE THE 200D" in out
+    assert "not re-fetched" not in out
+    assert "+4.6%" not in out
+    assert "ETF buyers are back in size" in out
+
+
 def test_sol_chart_supplies_30d_without_stopping() -> None:
     from datetime import date
     from decimal import Decimal
@@ -292,6 +314,7 @@ def main() -> int:
     test_manual_zone_is_not_stamped_as_this_week()
     test_funding_mean_is_the_raw_rate()
     test_fart_leverage_uses_24h_dollars()
+    test_approved_btc_stance_replaces_the_number_dump()
     test_sol_chart_supplies_30d_without_stopping()
     test_wallet_walk_refuses_the_live_page()
     print("test_report_pipeline OK")

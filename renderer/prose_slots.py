@@ -58,8 +58,23 @@ def _in_articles(html: str, asset: str, repl) -> str:
     return html
 
 
+def _stance_ranges(html: str) -> list[tuple[int, int]]:
+    ranges = []
+    for match in re.finditer(r'class="alt-stance"', html):
+        end = html.find('class="econ-dash"', match.start())
+        article_end = html.find("</article>", match.start())
+        stops = [pos for pos in (end, article_end) if pos > match.start()]
+        if stops:
+            ranges.append((match.start(), min(stops)))
+    return ranges
+
+
 def _prose_prices(html: str, snapshot: dict) -> str:
+    ranges = _stance_ranges(html)
+
     def repl(match: re.Match[str]) -> str:
+        if any(start <= match.start() < end for start, end in ranges):
+            return match.group(0)
         ticker = match.group(1)
         slug = _TICKER[ticker]
         price = _metric(snapshot, f"{slug}.price.usd.live", f"{slug}.price.usd.report")
@@ -350,4 +365,7 @@ def apply_prose(html: str, snapshot: dict, previous_html: str | None = None) -> 
     html = _fart_lines(html, snapshot)
     html = _one_io_price(html, snapshot)
     html = _mark_copied_detail(html, previous_html)
+    from renderer.stance_copy import apply_approved_stances
+
+    html = apply_approved_stances(html)
     return _clean_unknown(html)
