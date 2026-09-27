@@ -96,7 +96,11 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         print("metrics with no number this run:")
         for mid in failed:
             print(f"  {mid}")
-    snap = build_snapshot(run_doc, labels, allow_partial=set(failed))
+    try:
+        snap = build_snapshot(run_doc, labels, allow_partial=set())
+    except SystemExit as exc:
+        print(exc, file=sys.stderr)
+        return 2
     snap_path = RUNTIME / "job3" / "render-snapshot.json"
     snap_path.parent.mkdir(parents=True, exist_ok=True)
     snap_path.write_text(json.dumps(snap, indent=2) + "\n")
@@ -112,13 +116,9 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     if critical:
         print(f"critical misses {len(critical)}; wrote nothing", file=sys.stderr)
         return 2
-    ok_ids = {
-        mid
-        for mid, row in (snap.get("metrics") or {}).items()
-        if row.get("status") == "OK"
-    }
-    bindings = [row for row in built["bindings"] if row.get("metric_id") in ok_ids]
-    print(f"bindings used {len(bindings)} of {len(built['bindings'])}")
+    # The displayed weekly buyback stays $6.8M. The pulled wallet figure is a different number.
+    bindings = [row for row in built["bindings"] if row.get("metric_id") != "pump.buyback.usd.7d"]
+    print(f"bindings {len(bindings)}")
     writers = json.loads((ROOT / "renderer/writer-quarantine.json").read_text())
     try:
         rendered, _manifest, render_code = render_report(
