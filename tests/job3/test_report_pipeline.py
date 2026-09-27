@@ -242,7 +242,7 @@ def test_sol_chart_supplies_30d_without_stopping() -> None:
     from datetime import date
     from decimal import Decimal
 
-    from collectors.etf_backups import farside_windows, fill_missing_etf
+    from collectors.etf_backups import farside_windows, fill_missing_etf, flows_from_inflow_html
 
     series = ",".join(str(i) for i in range(100, 140))
     html = f"<td>25 Sep 2026</td><script>const totalData = [{series}];</script>"
@@ -250,6 +250,18 @@ def test_sol_chart_supplies_30d_without_stopping() -> None:
     assert got["30d"] == Decimal("30")
     assert got["all_time"] == Decimal("139")
     fill_missing_etf([], {})
+    funds = ",".join("1" for _ in range(31))
+    summed = farside_windows(
+        f'<td>25 Sep 2026</td><script>const seriesData = {{"A":[{funds}],"B":[{funds}]}};</script>',
+        date(2026, 9, 26),
+    )
+    assert summed["30d"] == Decimal("0")
+    assert summed["all_time"] == Decimal("2")
+    flows = flows_from_inflow_html(
+        "<td>Sep 25, 2026</td><td class=\"num flow pos\">+$10.0M</td>"
+        "<td>Sep 24, 2026</td><td class=\"num flow neg\">-$2.0M</td>"
+    )
+    assert flows == [(date(2026, 9, 24), Decimal("-2000000")), (date(2026, 9, 25), Decimal("10000000"))]
 
 
 def test_wallet_walk_refuses_the_live_page() -> None:

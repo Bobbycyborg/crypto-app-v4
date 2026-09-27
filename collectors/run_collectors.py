@@ -612,18 +612,23 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
         facts.append(row)
         by_id[mid] = row
 
+    etf_fail: list[str] = []
     try:
         from collectors.etf_backups import fill_missing_etf
 
-        fill_missing_etf(facts, captures)
+        etf_fail = fill_missing_etf(facts, captures)
     except Exception as exc:
-        print(f"etf backups skipped: {exc}")
+        print(f"ETF BOX FAIL: backup step broke ({exc})", file=sys.stderr)
+        etf_fail = ["etf box"]
 
     required_all = [e for e in entries if e.get("required")]
     required_dynamic = [e for e in required_all if e["disposition"] in {"COLLECT", "DERIVE"}]
     required_blocked = [e for e in required_all if e["disposition"] == "BLOCKED_SOURCE"]
     req_ok = sum(1 for e in required_dynamic if by_id.get(e["metric_id"], {}).get("status") == "OK")
     req_fail = [e["metric_id"] for e in required_dynamic if by_id.get(e["metric_id"], {}).get("status") != "OK"]
+    for mid in etf_fail:
+        if mid not in req_fail:
+            req_fail.append(mid)
     required_unaccounted = [
         e["metric_id"]
         for e in required_all

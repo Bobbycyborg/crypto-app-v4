@@ -1,13 +1,15 @@
 """Fill ETF box cells that Farside's short table cannot.
 
-Order for each cell: Farside chart or Total row, SoSoValue, CoinGlass,
-ETFDB, then The Block. A dead source is skipped. This never raises.
+Order for each cell: Farside chart, SoSoValue, InflowScan per fund,
+The Block, CoinGlass, then ETFDB. One dead source is skipped.
+If every source misses a cell, that cell is reported and the run fails.
 """
 
 from __future__ import annotations
 
 import json
 import re
+import sys
 from datetime import date, datetime, timezone
 from decimal import Decimal, InvalidOperation
 from typing import Any
@@ -67,14 +69,62 @@ def _num(raw: str) -> Decimal | None:
     return -val if neg else val
 
 
+def _json_object(html: str, marker: str) -> dict | None:
+    start_at = html.find(marker)
+    if start_at < 0:
+        return None
+    start = html.find("{", start_at)
+    if start < 0:
+        return None
+    depth = 0
+    for index, char in enumerate(html[start:], start):
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                try:
+                    loaded = json.loads(html[start : index + 1])
+                except json.JSONDecodeError:
+                    return None
+                return loaded if isinstance(loaded, dict) else None
+    return None
+
+
+def series_cumulative(html: str) -> list[Decimal] | None:
+    """Sum Farside seriesData. Each fund is cumulative millions, oldest first."""
+    data = _json_object(html, "seriesData")
+    if not data:
+        return None
+    funds = [value for value in data.values() if isinstance(value, list) and value]
+    if len(funds) < 2:
+        return None
+    width = min(len(value) for value in funds)
+    if width < 2:
+        return None
+    totals: list[Decimal] = []
+    for index in range(width):
+        point = Decimal("0")
+        for fund in funds:
+            raw = fund[index]
+            if raw is None:
+                continue
+            point += Decimal(str(raw))
+        totals.append(point)
+    return totals or None
+
+
 def chart_cumulative(html: str) -> list[Decimal] | None:
-    """Farside chart Total line. Cumulative millions, oldest first."""
+    """Cumulative millions, oldest first. Fund series first, then the Total line."""
+    summed = series_cumulative(html)
+    if summed and len(summed) >= 31:
+        return summed
     match = re.search(r"totalData\s*=\s*\[([^\]]+)\]", html)
     if not match:
-        return None
+        return summed
     nums = [_num(part) for part in match.group(1).split(",")]
     series = [n for n in nums if n is not None]
-    return series or None
+    return series or summed
 
 
 def window_from_cumulative(series: list[Decimal], days: int) -> Decimal | None:
@@ -258,6 +308,73 @@ def _etfdb(asset: str) -> dict[str, Decimal]:
     return {"7d": total * _MILLION}
 
 
+_FUNDS = {
+    "btc": ("IBIT", "FBTC", "BITB", "ARKB", "BTCO", "EZBC", "BRRR", "HODL", "BTCW", "GBTC", "MSBT"),
+    "eth": ("ETHA", "FETH", "ETHW", "CETH", "TETH", "ETHV", "QETH", "EZET", "ETHE"),
+    "sol": ("BSOL", "VSOL", "FSOL", "TSOL", "GSOL", "SOEZ", "MSOL"),
+}
+
+
+def _flow_usd(text: str) -> Decimal | None:
+    raw = text.replace("+", "").replace(",", "").replace("−", "-").strip()
+    neg = raw.startswith("-")
+    raw = raw.lstrip("-").lstrip("$")
+    scale = Decimal("1")
+    if raw.endswith("B"):
+        scale, raw = Decimal("1000000000"), raw[:-1]
+    elif raw.endswith("M"):
+        scale, raw = Decimal("1000000"), raw[:-1]
+    elif raw.endswith("K"):
+        scale, raw = Decimal("1000"), raw[:-1]
+    val = _num(raw)
+    if val is None:
+        return None
+    val *= scale
+    return -val if neg else val
+
+
+def flows_from_inflow_html(html: str) -> list[tuple[date, Decimal]]:
+    """One fund page. Daily net flow in USD, newest last."""
+    rows: list[tuple[date, Decimal]] = []
+    for label, raw in re.findall(
+        r"<td>([A-Z][a-z]{2} \d{1,2}, 20\d\d)</td>\s*<td class=\"num flow[^\"]*\">([^<]+)</td>",
+        html,
+    ):
+        try:
+            when = datetime.strptime(label, "%b %d, %Y").date()
+        except ValueError:
+            continue
+        flow = _flow_usd(raw)
+        if flow is None:
+            continue
+        rows.append((when, flow))
+    rows.sort(key=lambda item: item[0])
+    return rows
+
+
+def _inflowscan(asset: str, report_day: date) -> dict[str, Decimal]:
+    """Sum each fund's own daily flow. A missing fund page is skipped."""
+    by_day: dict[date, Decimal] = {}
+    for ticker in _FUNDS.get(asset, ()):
+        text = _get(f"https://inflowscan.com/etf/{ticker}")
+        if not text:
+            continue
+        for when, flow in flows_from_inflow_html(text):
+            if when > report_day:
+                continue
+            by_day[when] = by_day.get(when, Decimal("0")) + flow
+    days = sorted(by_day, reverse=True)
+    if not days:
+        return {}
+    flows = [by_day[day] for day in days]
+    out: dict[str, Decimal] = {"1d": flows[0]}
+    if len(flows) >= 7:
+        out["7d"] = sum(flows[:7], Decimal("0"))
+    if len(flows) >= 30:
+        out["30d"] = sum(flows[:30], Decimal("0"))
+    return out
+
+
 def _theblock(asset: str, report_day: date) -> dict[str, Decimal]:
     text = _get(_BLOCK.get(asset, ""))
     if not text:
@@ -318,9 +435,10 @@ def _books(asset: str, captures: dict[str, Any], report_day: date) -> list[tuple
 def _later_books(asset: str, report_day: date) -> list[tuple[str, str, dict[str, Decimal]]]:
     loaders = (
         ("sosovalue", "sosovalue", lambda: _sosovalue(asset, report_day)),
+        ("inflowscan", "inflowscan", lambda: _inflowscan(asset, report_day)),
+        ("theblock", "theblock", lambda: _theblock(asset, report_day)),
         ("coinglass", "coinglass", lambda: _coinglass(asset, report_day)),
         ("etfdb", "etfdb", lambda: _etfdb(asset)),
-        ("theblock", "theblock", lambda: _theblock(asset, report_day)),
     )
     books = []
     for key, used, loader in loaders:
@@ -344,14 +462,16 @@ def _apply(fact: dict[str, Any], usd: Decimal, source_key: str, source_used: str
     fact["error"] = None
 
 
-def fill_missing_etf(facts: list[dict[str, Any]], captures: dict[str, Any]) -> None:
-    """Write a number into any empty BTC/ETH/SOL ETF cell. Never raises."""
+def fill_missing_etf(facts: list[dict[str, Any]], captures: dict[str, Any]) -> list[str]:
+    """Write a number into any empty BTC/ETH/SOL ETF cell. Returns cells still empty."""
+    failed: list[str] = []
     try:
         from renderer.report_config import load_report
 
         report_day = datetime.strptime(load_report()["report_date"], "%Y-%m-%d").date()
-    except Exception:
-        return
+    except Exception as exc:
+        print(f"ETF BOX FAIL: report date unreadable ({exc})", file=sys.stderr)
+        return [f"{asset}.etf.flow.usd.{window}" for asset in ("btc", "eth", "sol") for window in _WINDOWS]
     by_id = {row.get("metric_id"): row for row in facts}
     as_of = report_day.strftime("%Y-%m-%dT00:00:00Z")
     for asset in ("btc", "eth", "sol"):
@@ -363,16 +483,27 @@ def fill_missing_etf(facts: list[dict[str, Any]], captures: dict[str, Any]) -> N
             missing.append((window, row))
         if not missing:
             continue
+        books: list[tuple[str, str, dict[str, Decimal]]] = []
         try:
             books = _books(asset, captures, report_day)
-            if any(window not in {k for _s, _u, book in books for k in book} for window, _row in missing):
+            covered = {key for _source, _used, book in books for key in book}
+            if any(window not in covered for window, _row in missing):
                 books.extend(_later_books(asset, report_day))
-        except Exception:
-            continue
+        except Exception as exc:
+            print(f"ETF BOX FAIL: {asset} backup lookup broke ({exc})", file=sys.stderr)
         for window, row in missing:
+            mid = f"{asset}.etf.flow.usd.{window}"
             for source_key, source_used, book in books:
                 usd = book.get(window)
                 if usd is None:
                     continue
                 _apply(row, usd, source_key, source_used, as_of)
                 break
+            else:
+                failed.append(mid)
+                print(
+                    f"ETF BOX FAIL: {mid}. Every source failed: "
+                    "farside, sosovalue, inflowscan, theblock, coinglass, etfdb",
+                    file=sys.stderr,
+                )
+    return failed
