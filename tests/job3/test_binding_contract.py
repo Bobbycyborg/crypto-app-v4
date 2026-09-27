@@ -109,7 +109,6 @@ def main() -> int:
         not in {
             "eligible_job1_occurrences",
             "binding_entries",
-            "eligible_unbound",
             "formatter_roundtrip_checked",
             "numeric_bindings",
             "raw_roundtrip_verified",
@@ -118,6 +117,10 @@ def main() -> int:
             "numeric_dynamicity_checked",
         }
     }
+    if g["eligible_job1_occurrences"] != g["binding_entries"]:
+        return 1
+    if g["numeric_bindings"] != 409 or g["raw_roundtrip_verified"] != 405 or g["presentation_syntax_recovered"] != 4:
+        return 1
     return 1 if bad else 0
 
 

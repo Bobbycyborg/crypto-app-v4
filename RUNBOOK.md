@@ -13,13 +13,13 @@ Edit `config/report.json` only: report number, date, previous date, held coins, 
 Offline, from a saved pull:
 
 ```bash
-python3 make_report.py --replay runtime-NOT-FOR-GH/job2/20260926T103538Z_3e1c5167
+python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --replay runtime-NOT-FOR-GH/job2/20260926T103538Z_3e1c5167
 ```
 
 A new pull (this uses the network):
 
 ```bash
-python3 make_report.py --live
+python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --live
 ```
 
 Both write `runtime-NOT-FOR-GH/candidate-NN.html`. They do not replace the live page.
