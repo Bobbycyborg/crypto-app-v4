@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from collectors.run_collectors import RUNTIME as JOB2
 from collectors.run_collectors import run as run_collectors
 from integrity.build_report_contract import build_contract
 from integrity.stale_gate import stale_problems
@@ -78,8 +79,8 @@ def _run_steps(replay: Path | None, live: bool) -> int:
     if code not in {0, 2}:
         print(f"collector exit {code}", file=sys.stderr)
         return code or 2
-    run_dir = RUNTIME / ("replay" if replay else collector.get("run_id", "live"))
-    run_path = run_dir / "collector-run.json"
+    folder = "replay" if replay else collector.get("run_id", "")
+    run_path = JOB2 / folder / "collector-run.json"
     if not run_path.exists():
         print(f"no collector run at {run_path}", file=sys.stderr)
         return 2
