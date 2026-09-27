@@ -61,21 +61,27 @@ def prior_row(state: dict[str, Any], coin: str, wallet: str) -> dict[str, Any] |
 
 
 def protect_row(prior: dict[str, Any] | None, fresh: dict[str, Any]) -> dict[str, Any]:
-    """A proved 1 Aug start is never replaced. No transfer plus a changed balance is inconsistent."""
+    """A proved 1 Aug start stays proved. A balance change is a separate flag."""
     if prior and prior.get("aug1_status") == "proved" and prior.get("aug1") is not None:
         fresh["aug1"] = prior.get("aug1")
         fresh["aug1_as_of"] = prior.get("aug1_as_of")
         fresh["aug1_status"] = "proved"
-        balance = fresh.get("balance")
+        last = prior.get("balance")
+        now = fresh.get("balance")
         sent = float(fresh.get("sent") or 0)
         received = float(fresh.get("received") or 0)
-        if balance is not None and abs(float(balance) - float(prior["aug1"])) > 1e-6 and sent == 0 and received == 0:
-            fresh["aug1_status"] = "inconsistent"
-            fresh["aug1"] = prior.get("aug1")
+        mismatch = (
+            last is not None
+            and now is not None
+            and abs(float(now) - float(last)) > 1e-6
+            and sent == 0
+            and received == 0
+        )
+        fresh["balance_mismatch"] = mismatch
         return fresh
     if fresh.get("aug1_status") == "unmoved_equals_now":
         fresh["aug1"] = None
-        fresh["aug1_status"] = "inconsistent"
+        fresh["aug1_status"] = "unknown"
     return fresh
 
 

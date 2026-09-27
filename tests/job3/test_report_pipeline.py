@@ -69,11 +69,19 @@ def test_stale_date_fails_the_gate() -> None:
 
 def test_proved_start_is_kept() -> None:
     fresh = protect_row(
-        {"aug1": 500_000_000, "aug1_status": "proved", "aug1_as_of": "2026-08-01T00:00:00Z"},
+        {"aug1": 500_000_000, "aug1_status": "proved", "aug1_as_of": "2026-08-01T00:00:00Z", "balance": 500_000_000},
         {"balance": 728_000_000, "sent": 0, "received": 0, "aug1": 728_000_000, "aug1_status": "proved"},
     )
     assert fresh["aug1"] == 500_000_000
-    assert fresh["aug1_status"] == "inconsistent"
+    assert fresh["aug1_status"] == "proved"
+    assert fresh["balance_mismatch"] is True
+    quiet = protect_row(
+        {"aug1": 500_000_000, "aug1_status": "proved", "balance": 500_000_000},
+        {"balance": 500_000_000, "sent": 0, "received": 0, "aug1_status": "unmoved_equals_now"},
+    )
+    assert quiet["aug1"] == 500_000_000
+    assert quiet["aug1_status"] == "proved"
+    assert quiet["balance_mismatch"] is False
 
 
 def test_unwalked_coins_survive_a_save() -> None:
