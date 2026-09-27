@@ -612,6 +612,13 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
         facts.append(row)
         by_id[mid] = row
 
+    try:
+        from collectors.etf_backups import fill_missing_etf
+
+        fill_missing_etf(facts, captures)
+    except Exception as exc:
+        print(f"etf backups skipped: {exc}")
+
     required_all = [e for e in entries if e.get("required")]
     required_dynamic = [e for e in required_all if e["disposition"] in {"COLLECT", "DERIVE"}]
     required_blocked = [e for e in required_all if e["disposition"] == "BLOCKED_SOURCE"]

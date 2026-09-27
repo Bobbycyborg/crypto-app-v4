@@ -56,6 +56,11 @@ def _replace_etf(html: str, ticker: str, window: str, amount: str, unit: str) ->
     if not row:
         return html
     body = row.group(0)
+    blank = re.search(rf'(?:UNKNOWN|STALE)(\s*)(?=<span class="u">{window}</span>)', body)
+    if blank:
+        unit_span = f'<span class="u-unit">{unit}</span> ' if unit else ""
+        new_body = body[: blank.start()] + amount + unit_span + body[blank.end() :]
+        return html[: row.start()] + new_body + html[row.end() :]
     found = re.search(
         rf'\$[\d,.]+(?=<span class="u-unit">[^<]*</span>\s*<span class="u">{window}</span>)',
         body,

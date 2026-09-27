@@ -238,6 +238,20 @@ def test_fart_leverage_uses_24h_dollars() -> None:
     assert ratio > 10
 
 
+def test_sol_chart_supplies_30d_without_stopping() -> None:
+    from datetime import date
+    from decimal import Decimal
+
+    from collectors.etf_backups import farside_windows, fill_missing_etf
+
+    series = ",".join(str(i) for i in range(100, 140))
+    html = f"<td>25 Sep 2026</td><script>const totalData = [{series}];</script>"
+    got = farside_windows(html, date(2026, 9, 26))
+    assert got["30d"] == Decimal("30")
+    assert got["all_time"] == Decimal("139")
+    fill_missing_etf([], {})
+
+
 def test_wallet_walk_refuses_the_live_page() -> None:
     from lib.v3.siren_watch import apply_index
 
@@ -266,6 +280,7 @@ def main() -> int:
     test_manual_zone_is_not_stamped_as_this_week()
     test_funding_mean_is_the_raw_rate()
     test_fart_leverage_uses_24h_dollars()
+    test_sol_chart_supplies_30d_without_stopping()
     test_wallet_walk_refuses_the_live_page()
     print("test_report_pipeline OK")
     return 0

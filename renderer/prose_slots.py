@@ -113,23 +113,17 @@ def _etf_cells(html: str, snapshot: dict) -> str:
             ("1D", f"{slug}.etf.flow.usd.1d"),
             ("7D", f"{slug}.etf.flow.usd.7d"),
             ("30D", f"{slug}.etf.flow.usd.30d"),
+            ("ALL-TIME", f"{slug}.etf.flow.usd.all_time"),
         ):
             row = (snapshot.get("metrics") or {}).get(metric) or {}
-            if row.get("status") == "OK" and row.get("normalized_value") is not None:
-                amount, unit, _neg = compact_usd_parts(row["normalized_value"])
-                shown = amount
-            else:
-                shown, unit = "STALE", ""
-            html = _replace_tip(html, ticker, window, shown, unit)
-            if window == "30D" and slug in {"eth", "sol"}:
-                html = _replace_tip(html, ticker, "ALL-TIME", "STALE", "")
+            if row.get("status") != "OK" or row.get("normalized_value") is None:
+                continue
+            amount, unit, _neg = compact_usd_parts(row["normalized_value"])
+            html = _replace_tip(html, ticker, window, amount, unit)
             if window in {"7D", "30D"}:
                 from renderer.surface_slots import _replace_etf
 
-                if shown == "STALE":
-                    html = _replace_etf(html, ticker, window, "STALE", "")
-                elif row.get("status") == "OK":
-                    html = _replace_etf(html, ticker, window, amount, unit)
+                html = _replace_etf(html, ticker, window, amount, unit)
     return html
 
 
@@ -141,7 +135,7 @@ def _replace_tip(html: str, ticker: str, window: str, amount: str, unit: str) ->
     end = nxt if nxt > 0 else start + 1200
     block = html[start:end]
     found = re.search(
-        rf'(<span class="ev-k">{window}</span><span class="ev-v[^"]*">)\$[\d,.]+(?:<span class="u-unit">[^<]*</span>)?',
+        rf'(<span class="ev-k">{window}</span><span class="ev-v[^"]*">)(?:\$[\d,.]+(?:<span class="u-unit">[^<]*</span>)?|STALE|UNKNOWN)',
         block,
     )
     if not found:
