@@ -24,8 +24,16 @@ def wrap_manual_zones(html: str, report_number: str | None = None) -> str:
 
 
 def manual_zone_notes(html: str) -> list[str]:
+    from renderer.report_config import dormant_assets
+
+    dormant = {asset.lower() for asset in dormant_assets()}
     notes = []
     for match in _STANCE.finditer(html):
+        start = html.rfind("<article", 0, match.start())
+        tag = html[start : start + 180] if start >= 0 else ""
+        owner = re.search(r'data-asset="([^"]+)"', tag)
+        if owner and owner.group(1).lower() in dormant:
+            continue
         text = re.sub(r"<[^>]+>", " ", match.group(2))
         text = re.sub(r"\s+", " ", text).strip()
         if text:

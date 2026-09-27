@@ -314,7 +314,7 @@
         "pointer": "/lastFundingRate"
       },
       "normalizer": {
-        "type": "decimal_as_percent"
+        "type": "identity"
       },
       "derivation": null,
       "notes": "Job 1 names Binance; official futures/spot JSON API.",

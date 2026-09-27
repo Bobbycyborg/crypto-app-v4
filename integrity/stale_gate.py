@@ -120,12 +120,34 @@ def _cross_coin(html: str, bindings: list | None) -> list[str]:
     return problems
 
 
-def _copied_phrases(html: str, earlier: str | None, label: str) -> list[str]:
+def _quiet_slugs() -> set[str]:
+    from renderer.coin_span import _slugs
+
+    cfg = load_report()
+    slugs: set[str] = set()
+    for asset in list(cfg.get("dormant") or []) + list(cfg.get("hidden") or []):
+        slugs.update(name.lower() for name in _slugs(asset))
+    return slugs
+
+
+def _without_quiet_pages(html: str) -> str:
+    """Dormant and hidden coin pages are not this week's stale count."""
+    for slug in _quiet_slugs():
+        html = re.sub(
+            rf'<article\b[^>]*\bdata-asset="{re.escape(slug)}".*?</article>',
+            " ",
+            html,
+            count=1,
+            flags=re.I | re.S,
+        )
+    return html
+
+
+def _copied_phrases(html: str, earlier: str | None, label: str, seen: set[str]) -> list[str]:
     """Numbered lines copied from an earlier page. Not a fixed list of words."""
     if not earlier:
         return []
     problems = []
-    seen: set[str] = set()
     text = visible_text(html)
     for chunk in re.split(r"\.\s+|\n|·", visible_text(earlier)):
         phrase = " ".join(chunk.split())
@@ -143,8 +165,6 @@ def _copied_phrases(html: str, earlier: str | None, label: str) -> list[str]:
         if phrase in text and phrase not in seen:
             seen.add(phrase)
             problems.append(f"stale phrase from {label}: {phrase[:90]}")
-            if len(problems) >= 40:
-                break
     return problems
 
 
@@ -160,12 +180,14 @@ def stale_problems(
     cfg = load_report()
     previous = datetime.strptime(cfg["previous_report_date"], "%Y-%m-%d")
     number = report_number or cfg["report_number"]
-    text = visible_text(html)
+    scoped = _without_quiet_pages(html)
+    text = visible_text(scoped)
     problems: list[str] = []
+    seen_phrases: set[str] = set()
 
-    problems.extend(_copied_phrases(html, previous_html, "last week"))
+    problems.extend(_copied_phrases(scoped, _without_quiet_pages(previous_html) if previous_html else None, "last week", seen_phrases))
     if base_html and base_html != previous_html:
-        problems.extend(_copied_phrases(html, base_html, "the base page"))
+        problems.extend(_copied_phrases(scoped, _without_quiet_pages(base_html), "the base page", seen_phrases))
 
     seen_dates: set[str] = set()
     for match in _DATE.finditer(text):

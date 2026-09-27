@@ -616,9 +616,21 @@ def run_check() -> dict[str, Any]:
     state = load_state()
     wanted = siren_walk_coins()
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    ckpt_path = ROOT / "state" / "siren-walk-checkpoint.json"
+    done: set[str] = set()
+    if ckpt_path.exists():
+        saved = json.loads(ckpt_path.read_text(encoding="utf-8"))
+        if str(saved.get("day") or "") == now[:10]:
+            done = set(saved.get("done") or [])
     coins_out: dict[str, Any] = {}
     errors: list[str] = []
     for coin in wanted:
+        if coin in done:
+            previous = (state.get("coins") or {}).get(coin)
+            if previous:
+                coins_out[coin] = previous
+                print(f"siren {coin} resumed", flush=True)
+                continue
         if coin not in wallets:
             raise RuntimeError(f"no wallet list for {coin}")
         addrs = wallets[coin]
@@ -701,6 +713,9 @@ def run_check() -> dict[str, Any]:
             "loud": loud,
             "popup": [f"{b['tag']} · {r['line']}" for b, r in zip(boxes, sorted_rows)],
         }
+        done.add(coin)
+        ckpt_path.parent.mkdir(parents=True, exist_ok=True)
+        ckpt_path.write_text(json.dumps({"day": now[:10], "done": sorted(done)}) + "\n", encoding="utf-8")
     out = {
         "as_of": now,
         "since": gte,
@@ -708,6 +723,8 @@ def run_check() -> dict[str, Any]:
         "errors": errors,
     }
     persist_bundle(out)
+    if set(wanted) <= done and ckpt_path.exists():
+        ckpt_path.unlink()
     day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     day_dir = ROOT / "reports" / day / "siren-watch"
     day_dir.mkdir(parents=True, exist_ok=True)

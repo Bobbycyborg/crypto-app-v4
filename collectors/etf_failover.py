@@ -115,23 +115,78 @@ def _as_response(url: str, html: str) -> HttpResponse:
     )
 
 
-def farside_failover(request_key: str) -> HttpResponse:
-    """Live backup only. The August markdown files are not this week's flows."""
+_ALL_DATA = {
+    "farside.html.btc": (
+        "https://farside.co.uk/bitcoin-etf-flow-all-data/",
+        "https://farside.co.uk/btc/",
+    ),
+    "farside.html.eth": (
+        "https://farside.co.uk/ethereum-etf-flow-all-data/",
+        "https://farside.co.uk/eth/",
+    ),
+    "farside.html.sol": ("https://farside.co.uk/sol/",),
+}
+_BROWSER = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml",
+}
+
+
+def _from_reader(request_key: str, page: str) -> HttpResponse | None:
+    """A public reader of the live Farside page. Not the August file."""
+    url = f"https://r.jina.ai/https://farside.co.uk/{page}"
+    try:
+        resp = request("GET", url, extra_headers={"User-Agent": "Mozilla/5.0", "Accept": "text/plain"})
+    except HttpError:
+        return None
+    text = resp.body.decode("utf-8", "replace")
+    rows = rows_from_markdown(text)
+    if len(rows) < 7:
+        return None
     spec = SPECS[request_key]
-    if not spec["use_tftc"]:
-        raise HttpError(
-            "STALE",
-            f"{request_key} has no live backup. Refusing collectors/etf-fallback.",
-            http_status=403,
-        )
-    resp = request("GET", TFTC_BTC, extra_headers={"Accept": "application/json"})
-    payload = json.loads(resp.body.decode("utf-8"))
-    rows = rows_from_tftc(payload)
-    if not rows:
-        raise HttpError("SOURCE_UNAVAILABLE", f"ETF failover empty for {request_key}")
-    through = str(payload.get("updatedThrough") or "")
     html = _html_page(spec["title"], spec["tickers"], rows)
-    if through:
-        html = html.replace("<head>", f'<head><meta name="v4-updated-through" content="{escape(through)}">', 1)
-    _ = body_sha256(html.encode("utf-8"))
-    return _as_response(TFTC_BTC, html)
+    html = html.replace("<head>", '<head><meta name="v4-etf-source" content="jina-farside">', 1)
+    out = _as_response(url, html)
+    out.headers["X-V4-Etf-Source"] = "jina-farside"
+    return out
+
+
+def farside_failover(request_key: str) -> HttpResponse:
+    """Live Farside pages only. The August markdown files are not used."""
+    last = "no live Farside page"
+    for url in _ALL_DATA.get(request_key, ()):
+        try:
+            resp = request("GET", url, extra_headers=_BROWSER)
+        except HttpError as exc:
+            last = str(exc)
+            continue
+        if b"Just a moment" in resp.body or b"etf-fallback" in resp.body:
+            last = f"blocked page {url}"
+            continue
+        resp.headers["X-V4-Etf-Source"] = "farside"
+        return resp
+    page = {"farside.html.btc": "btc/", "farside.html.eth": "eth/", "farside.html.sol": "sol/"}.get(request_key)
+    if page:
+        via = _from_reader(request_key, page)
+        if via is not None:
+            return via
+        last = "reader returned too few rows"
+    if request_key == "farside.html.btc":
+        resp = request("GET", TFTC_BTC, extra_headers={"Accept": "application/json"})
+        payload = json.loads(resp.body.decode("utf-8"))
+        rows = rows_from_tftc(payload)
+        if rows:
+            spec = SPECS[request_key]
+            html = _html_page(spec["title"], spec["tickers"], rows)
+            through = str(payload.get("updatedThrough") or "")
+            if through:
+                html = html.replace(
+                    "<head>",
+                    f'<head><meta name="v4-updated-through" content="{escape(through)}">',
+                    1,
+                )
+            return _as_response(TFTC_BTC, html)
+    raise HttpError("SOURCE_UNAVAILABLE", f"{request_key}: {last}. Refusing collectors/etf-fallback.")

@@ -6,7 +6,7 @@ Run the weekly crypto report. Do not promote. Do not push.
 2. Run:
 
 ```bash
-python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --live --walk
+python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --live
 ```
 
 3. Print `runtime-NOT-FOR-GH/run-summary.md`.

@@ -209,6 +209,7 @@ def fetch_live(request_key: str, run_dir: Path) -> Capture:
         "body_sha256": body_sha256(resp.body),
         "raw_body_path": f"{request_key.replace('/', '_')}.body",
         "attempts": resp.attempts,
+        "source_used": resp.headers.get("X-V4-Etf-Source") or spec.get("source_key"),
     }
     persist_capture(run_dir, request_key, meta, resp.body)
     kind = spec.get("response_kind", "json")
@@ -529,6 +530,7 @@ def run(mode: str, replay_path: Path | None) -> tuple[int, dict[str, Any]]:
                     "normalized_value": encode_value(norm),
                     "unit": e.get("unit"),
                     "source_key": e.get("source_key"),
+                    "source_used": cap.meta.get("source_used") or e.get("source_key"),
                     "request_key": rk,
                     "source_field": json.dumps(e.get("selector")),
                     "source_as_of": as_of,

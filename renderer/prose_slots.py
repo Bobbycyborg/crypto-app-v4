@@ -66,12 +66,12 @@ def _prose_prices(html: str, snapshot: dict) -> str:
         if not price:
             return match.group(0)
         text = f"{ticker} {one_price(price['normalized_value'])}"
-        week = _metric(snapshot, f"{slug}.return.pct.7d")
-        month = _metric(snapshot, f"{slug}.return.pct.30d")
-        if match.group(2) and week and month:
-            text += f" ({_pct(week['normalized_value'])} / 7d, {_pct(month['normalized_value'])} / 30d)"
-        elif match.group(2):
-            return match.group(0)
+        if match.group(2):
+            week = _metric(snapshot, f"{slug}.return.pct.7d")
+            month = _metric(snapshot, f"{slug}.return.pct.30d")
+            week_txt = _pct(week["normalized_value"]) if week else "UNKNOWN"
+            month_txt = _pct(month["normalized_value"]) if month else "UNKNOWN"
+            text += f" ({week_txt} / 7d, {month_txt} / 30d)"
         return text
 
     return _PROSE.sub(repl, html)
@@ -121,6 +121,8 @@ def _etf_cells(html: str, snapshot: dict) -> str:
             else:
                 shown, unit = "STALE", ""
             html = _replace_tip(html, ticker, window, shown, unit)
+            if window == "30D" and slug in {"eth", "sol"}:
+                html = _replace_tip(html, ticker, "ALL-TIME", "STALE", "")
             if window in {"7D", "30D"}:
                 from renderer.surface_slots import _replace_etf
 
@@ -150,6 +152,47 @@ def _replace_tip(html: str, ticker: str, window: str, amount: str, unit: str) ->
     return html[:start] + block + html[end:]
 
 
+def _flow_phrase(row: dict) -> str:
+    if row.get("status") != "OK" or row.get("normalized_value") is None:
+        return "UNKNOWN"
+    amount, unit, negative = compact_usd_parts(row["normalized_value"])
+    sign = "−" if negative else "+"
+    return f"{sign}{amount}{unit}"
+
+
+def _stance_etf(html: str, snapshot: dict) -> str:
+    """Stance copies of the ETF box. A missing pull becomes UNKNOWN, not last month."""
+    windows = (("1d", "1d"), ("7d", "7d"), ("30d", "30d"))
+
+    def repl(slug: str):
+        def one(block: str) -> str:
+            for label, key in windows:
+                row = (snapshot.get("metrics") or {}).get(f"{slug}.etf.flow.usd.{key}") or {}
+                phrase = _flow_phrase(row)
+                block = re.sub(
+                    rf"{label} \+?\$[\d.,]+[MB]",
+                    f"{label} {phrase}",
+                    block,
+                    flags=re.I,
+                )
+            return block
+
+        return one
+
+    for ticker, slug in (("BTC", "btc"), ("ETH", "eth"), ("SOL", "sol")):
+        html = _in_articles(html, ticker, repl(slug))
+    return html
+
+
+def _clean_unknown(html: str) -> str:
+    html = html.replace("+UNKNOWN", "UNKNOWN").replace("−UNKNOWN", "UNKNOWN")
+    html = re.sub(r"(?<![A-Za-z])UNKNOWNM(?!M)", "UNKNOWN", html)
+    html = re.sub(r"(?<![A-Za-z])UNKNOWN M(?=\s|,|\.|<|$)", "UNKNOWN", html)
+    html = re.sub(r"UNKNOWN<span class=\"u-unit\">[^<]*</span>", "UNKNOWN", html)
+    html = re.sub(r"(%/8h)(?:\.01%/8h)+", r"\1", html)
+    return html
+
+
 def _sol_lines(html: str, snapshot: dict) -> str:
     metrics = snapshot.get("metrics") or {}
     inf = _metric(snapshot, "sol.inflation.pct.current")
@@ -167,27 +210,32 @@ def _sol_lines(html: str, snapshot: dict) -> str:
 
         html = _in_articles(html, "sol", one)
     net = metrics.get("sol.supply.net_change.tokens.per_year") or {}
-    if net.get("status") != "OK":
-        html = html.replace("net ~+20,281,672", "net UNKNOWN")
-    mean = _metric(snapshot, "sol.funding.rate.mean_7d")
+    html = html.replace("net ~+20,281,672", "net UNKNOWN")
+    html = html.replace("burn ~255,690 SOL/yr", "burn UNKNOWN")
+    html = html.replace("burn ~255,690", "burn UNKNOWN")
     latest = _metric(snapshot, "sol.funding.rate.latest")
-    if mean or latest:
+    if latest:
+        sci = format_value(
+            latest["normalized_value"],
+            {"type": "numeric", "scientific": True, "decimal_places": 3, "exponent_pad": 2},
+        )
+
         def fund(block: str) -> str:
-            if mean:
-                sci = format_value(
-                    mean["normalized_value"],
-                    {"type": "numeric", "scientific": True, "decimal_places": 3, "exponent_pad": 2},
-                )
-                block = re.sub(r"(7d mean\s+)[-+0-9.e]+", lambda m, sci=sci: m.group(1) + sci, block)
-            if latest:
-                sci = format_value(
-                    latest["normalized_value"],
-                    {"type": "numeric", "scientific": True, "decimal_places": 3, "exponent_pad": 2},
-                )
-                block = re.sub(r"(latest funding print\s+)[-+0-9.e]+", lambda m, sci=sci: m.group(1) + sci, block)
-            return block
+            return re.sub(
+                r"(latest funding print\s+)[-+0-9.e]+",
+                lambda m, sci=sci: m.group(1) + sci,
+                block,
+            )
 
         html = _in_articles(html, "sol", fund)
+    lev = _metric(snapshot, "sol.leverage.x.current")
+    if lev:
+        shown = f"~{Decimal(str(lev['normalized_value'])).quantize(Decimal('0.1'))}×"
+
+        def spot(block: str) -> str:
+            return block.replace("perps ~6.8×", f"perps {shown}")
+
+        html = _in_articles(html, "sol", spot)
     return html
 
 
@@ -216,12 +264,28 @@ def _render_lines(html: str, snapshot: dict) -> str:
 
 def _btc_lines(html: str, snapshot: dict) -> str:
     lev = _metric(snapshot, "btc.leverage.x.current")
-    if not lev:
-        return html
-    shown = Decimal(str(lev["normalized_value"])).quantize(Decimal("0.1"))
+    latest = _metric(snapshot, "btc.funding.rate.latest")
+    mean = _metric(snapshot, "btc.funding.rate.mean_7d")
 
     def one(block: str) -> str:
-        return re.sub(r"fut/spot ~[\d.]+×", f"fut/spot ~{shown}×", block)
+        if lev:
+            shown = Decimal(str(lev["normalized_value"])).quantize(Decimal("0.1"))
+            block = re.sub(r"fut/spot ~[\d.]+×", f"fut/spot ~{shown}×", block)
+        if latest:
+            sci = format_value(
+                latest["normalized_value"],
+                {"type": "numeric", "scientific": True, "decimal_places": 3, "exponent_pad": 2},
+            )
+            block = block.replace("2.274e-03", sci)
+        if mean:
+            sci = format_value(
+                mean["normalized_value"],
+                {"type": "numeric", "scientific": True, "decimal_places": 3, "exponent_pad": 2},
+            )
+            block = block.replace("5.367e-05", sci)
+        block = block.replace("As of 25 Aug · FRESH", "As of UNKNOWN")
+        block = block.replace("As of · 25 Aug 2026 · FRESH", "As of · UNKNOWN")
+        return block
 
     return _in_articles(html, "btc", one)
 
@@ -241,12 +305,53 @@ def _fart_lines(html: str, snapshot: dict) -> str:
     return _in_articles(html, "fart", one)
 
 
-def apply_prose(html: str, snapshot: dict) -> str:
+def _one_io_price(html: str, snapshot: dict) -> str:
+    row = _metric(snapshot, "io.price.usd.live", "io.price.usd.report")
+    if not row:
+        return html
+    text = one_price(row["normalized_value"])
+
+    def one(block: str) -> str:
+        return re.sub(r"\bIO \$[\d,.]+", f"IO {text}", block)
+
+    return _in_articles(html, "io", one)
+
+
+def _mark_copied_detail(html: str, previous_html: str | None) -> str:
+    """Click-open pages that still say last week's line are marked, not left looking current."""
+    if not previous_html:
+        return html
+    cfg = load_report()
+    shown = list(cfg["always_shown"]) + list(cfg["held"])
+    for asset in shown:
+        regions = [span for span in coin_regions(html, asset) if html[span[0]:span[0] + 8].lower().startswith("<article")]
+        prev_regions = [span for span in coin_regions(previous_html, asset) if previous_html[span[0]:span[0] + 8].lower().startswith("<article")]
+        if not regions or not prev_regions:
+            continue
+        prev = previous_html[prev_regions[0][0]:prev_regions[0][1]]
+        start, end = regions[0]
+        block = html[start:end]
+        for chunk in re.split(r"(?<=\.)\s+", re.sub(r"<[^>]+>", " ", prev)):
+            phrase = " ".join(chunk.split())
+            if len(phrase) < 24 or "STALE" in phrase:
+                continue
+            if "bounce" not in phrase.lower() and not re.search(r"\d", phrase):
+                continue
+            if phrase in re.sub(r"<[^>]+>", " ", block) and f"{phrase} · STALE" not in re.sub(r"<[^>]+>", " ", block):
+                block = block.replace(phrase, f"{phrase} · STALE", 1)
+        html = html[:start] + block + html[end:]
+    return html
+
+
+def apply_prose(html: str, snapshot: dict, previous_html: str | None = None) -> str:
     html = _prose_prices(html, snapshot)
     html = _as_of_stamps(html, snapshot)
     html = _etf_cells(html, snapshot)
+    html = _stance_etf(html, snapshot)
     html = _sol_lines(html, snapshot)
     html = _render_lines(html, snapshot)
     html = _btc_lines(html, snapshot)
     html = _fart_lines(html, snapshot)
-    return html
+    html = _one_io_price(html, snapshot)
+    html = _mark_copied_detail(html, previous_html)
+    return _clean_unknown(html)

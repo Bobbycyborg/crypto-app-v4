@@ -16,15 +16,21 @@ Offline, from a saved pull:
 python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --replay runtime-NOT-FOR-GH/job2/20260926T103538Z_3e1c5167
 ```
 
-A new pull (this uses the network) and a wallet walk onto the candidate only:
+A new pull (this uses the network). No wallet walk:
 
 ```bash
-python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --live --walk
+python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --live
 ```
 
-Both write `runtime-NOT-FOR-GH/candidate-NN.html` and `runtime-NOT-FOR-GH/run-summary.md`. They do not replace the live page.
+`/report` runs the tests, then that command, then prints the summary. It does not walk wallets.
 
-`/report` runs the tests, then the live command above, then prints the summary. Promote and freeze stay off until the checker and the stale gate both pass.
+A wallet walk is separate. It updates `state/siren-state.json` (the shared wallet file) and writes the candidate only, never `index-v4.html`. If it stops halfway, the next `--walk` resumes coins already saved in `state/siren-walk-checkpoint.json`.
+
+```bash
+python3 make_report.py --base reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html --replay runtime-NOT-FOR-GH/job2/20260926T103538Z_3e1c5167 --walk
+```
+
+Both write `runtime-NOT-FOR-GH/candidate-NN.html` and `runtime-NOT-FOR-GH/run-summary.md`. They do not replace the live page. Promote and freeze run only when the checker and the stale gate both passed on that exact candidate file.
 
 Check the page:
 

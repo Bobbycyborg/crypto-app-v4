@@ -8,6 +8,7 @@ Does not push. Does not walk wallets unless --walk is passed.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -95,6 +96,13 @@ def _gates_clear() -> tuple[bool, str]:
         return False, "checker and stale gate have not both been run"
     report = json.loads(check_path.read_text(encoding="utf-8"))
     gate = json.loads(stale_path.read_text(encoding="utf-8"))
+    cfg = load_report()
+    candidate = RUNTIME / f"candidate-{cfg['report_number']}.html"
+    if not candidate.exists():
+        return False, "no candidate"
+    digest = hashlib.sha256(candidate.read_bytes()).hexdigest()
+    if report.get("candidate_sha256") != digest or gate.get("candidate_sha256") != digest:
+        return False, "the page was not the one that was checked"
     if report.get("overall_status") != "PASS":
         return False, f"checker is {report.get('overall_status')}"
     if gate.get("status") != "PASS":
@@ -116,7 +124,7 @@ def _report_05_page() -> Path:
 def _write_summary(lines: list[str]) -> None:
     path = RUNTIME / "run-summary.md"
     path.parent.mkdir(parents=True, exist_ok=True)
-    text = "\n".join(lines[:20]) + "\n"
+    text = "\n".join(lines[:24]) + "\n"
     path.write_text(text, encoding="utf-8")
     print(text)
 
@@ -197,7 +205,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path, walk: bool = False) 
     if render_code != 0:
         print(f"render exit {render_code}", file=sys.stderr)
     rendered = apply_known_slots(rendered, snap)
-    rendered = apply_prose(rendered, snap)
+    rendered = apply_prose(rendered, snap, previous_html=_report_05_page().read_text(encoding="utf-8"))
     rendered = apply_roster(rendered)
     rendered = wrap_manual_zones(rendered, number)
     rendered = restore_dormant_articles(rendered, _report_05_page().read_text(encoding="utf-8"))
@@ -240,8 +248,6 @@ def _run_steps(replay: Path | None, live: bool, base: Path, walk: bool = False) 
         contract_path=contract_path,
         run_id=str(collector.get("run_id") or "replay"),
     )
-    check_path = RUNTIME / "job3" / "check-report.json"
-    check_path.write_text(json.dumps(report.to_dict(), indent=2) + "\n")
     check_code = report.exit_code()
     print(f"checker {report.overall_status} exit {check_code}")
     previous = _report_05_page()
@@ -253,11 +259,25 @@ def _run_steps(replay: Path | None, live: bool, base: Path, walk: bool = False) 
         base_html=source.read_text(encoding="utf-8"),
         report_number=number,
     )
+    digest = hashlib.sha256(candidate.read_bytes()).hexdigest()
     stale_path = RUNTIME / "job3" / "stale-gate.json"
     stale_path.write_text(
-        json.dumps({"status": "PASS" if not problems else "FAIL", "problems": problems}, indent=2) + "\n",
+        json.dumps(
+            {
+                "status": "PASS" if not problems else "FAIL",
+                "count": len(problems),
+                "candidate_sha256": digest,
+                "problems": problems,
+            },
+            indent=2,
+        )
+        + "\n",
         encoding="utf-8",
     )
+    checked = report.to_dict()
+    checked["candidate_sha256"] = digest
+    check_path = RUNTIME / "job3" / "check-report.json"
+    check_path.write_text(json.dumps(checked, indent=2) + "\n")
     if problems:
         print("stale gate FAIL")
         for item in problems:
@@ -269,10 +289,22 @@ def _run_steps(replay: Path | None, live: bool, base: Path, walk: bool = False) 
     total = int(run_doc.get("required_dynamic") or 0) or 1
     lines = [
         f"Report {number} candidate. Fresh {fresh}/{total} ({round(100 * fresh / total)}%). Live page not touched.",
+        f"Candidate sha256 {digest}",
         f"Checker {report.overall_status}. Stale lines {len(problems)}. Critical misses {len(critical)}.",
     ]
-    for item in failed[:4]:
+    for asset in ("eth", "sol"):
+        for window in ("1d", "7d", "30d"):
+            mid = f"{asset}.etf.flow.usd.{window}"
+            row = (snap.get("metrics") or {}).get(mid) or {}
+            if row.get("status") != "OK":
+                used = row.get("source_used") or "none"
+                lines.append(f"- {mid}: missing ({row.get('status') or 'absent'}, source {used}). Fix: the next live ETF source, or leave UNKNOWN.")
+    for item in failed:
+        if ".etf.flow." in item:
+            continue
         lines.append(f"- {item}: no number this pull. Fix: use the next live source, or leave it UNKNOWN.")
+        if len(lines) > 16:
+            break
     for item in undated[:3]:
         lines.append(f"- {item}: no source date. Fix: read the date that came with that source.")
     for item in problems[:3]:

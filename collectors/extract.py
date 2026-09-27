@@ -212,15 +212,13 @@ def explicit_html_selector(html: str, selector: dict[str, Any]) -> Any:
     # Farside tables are typically newest-first
     newest_first = daily
     if window == "7d":
-        chunk = newest_first[:7]
-        if len(chunk) < 1:
+        if len(newest_first) < 7:
             raise ExtractError("VALUE_MISSING", "need 7 daily ETF rows")
-        return sum(chunk, Decimal("0"))
+        return sum(newest_first[:7], Decimal("0"))
     if window == "30d":
-        chunk = newest_first[:30]
-        if len(chunk) < 1:
+        if len(newest_first) < 30:
             raise ExtractError("VALUE_MISSING", "need 30 daily ETF rows")
-        return sum(chunk, Decimal("0"))
+        return sum(newest_first[:30], Decimal("0"))
     raise ExtractError("SOURCE_SCHEMA_MISMATCH", f"unknown farside window {window}")
 
 

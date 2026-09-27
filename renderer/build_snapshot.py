@@ -116,6 +116,7 @@ def build_snapshot(collector_run: dict[str, Any], labels: dict[str, str], *, all
             "normalized_value": fact.get("normalized_value"),
             "unit": unit,
             "source_key": source_key,
+            "source_used": fact.get("source_used") or source_key,
             "source_label": source_label,
             "source_as_of": source_as_of,
             "fetched_at": fact.get("fetched_at") or "UNKNOWN",

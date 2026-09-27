@@ -246,6 +246,11 @@ def _assign_bindings(
         score, pos, end = cands[0]
         used.append((pos, end))
         anchor = build_anchor(html, pos, effective)
+        if ".etf.flow." in mid:
+            ticker = (mapping.get("asset") or "").upper()
+            mark = html.rfind(f">{ticker}<", max(0, pos - 500), pos)
+            if mark >= 0:
+                anchor["anchor_before"] = html[mark : pos]
         target_kind = classify_target_kind(html, pos, effective)
         if target_kind == "HTML_TEXT" and ("<" in effective or ">" in effective):
             _miss("tag crossing")
@@ -330,6 +335,8 @@ def _wrong_slot(mid: str, html: str, pos: int, end: int) -> str | None:
         return "remaining supply was aimed at an emissions line"
     if mid == "pump.holders.unattributed.pct" and "still_held" in ctx:
         return "unattributed percent was aimed at STILL_HELD"
+    if "funding" in mid and "dex" in ctx:
+        return "funding was aimed at the DEX line"
     return None
 
 
