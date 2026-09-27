@@ -237,13 +237,21 @@ _DEAD_RPC: set[str] = set()
 
 
 def _rpc_urls() -> list[str]:
-    urls: list[str] = []
+    urls: list[str] = [PUBLIC_RPC]
     try:
-        urls.append(rpc_url())
+        helius = rpc_url()
+        if helius not in urls:
+            urls.append(helius)
     except Exception:
         pass
-    urls.append(PUBLIC_RPC)
     return [u for u in urls if u not in _DEAD_RPC]
+
+
+def _permanent_rpc_error(exc: Exception) -> bool:
+    text = str(exc).lower()
+    if "429" in text or "timeout" in text or "temporar" in text:
+        return False
+    return True
 
 
 def _rpc_retry(method: str, params: list) -> Any:
@@ -259,6 +267,8 @@ def _rpc_retry(method: str, params: list) -> Any:
                 if "429" in str(e):
                     _DEAD_RPC.add(url)
                     continue
+                if _permanent_rpc_error(e):
+                    raise
                 last_err = e
                 continue
         if not _rpc_urls():
@@ -470,7 +480,7 @@ def check_wallet(
             continue
         tx = _rpc_retry(
             "getTransaction",
-            [sig, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 0}],
+            [sig, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 1}],
         )
         time.sleep(0.28)
         ds, dr, dh = _tx_mint_delta(tx, address, mint)
@@ -510,9 +520,9 @@ def check_wallet(
             aug1_status = "proved"
             aug1_as_of = AUG1_ISO
     elif reached_aug1:
-        aug1 = balance
-        aug1_status = "unmoved_equals_now"
-        aug1_as_of = AUG1_ISO
+        aug1 = None
+        aug1_status = "inconsistent"
+        aug1_as_of = None
     else:
         aug1 = None
         aug1_status = "unknown"
@@ -586,15 +596,31 @@ def coin_summary(
     return f"{n} watched · no MM/CEX send"
 
 
+def _window_start() -> int:
+    from datetime import datetime
+
+    from renderer.report_config import load_report
+
+    day = load_report()["previous_report_date"]
+    return int(datetime.strptime(day, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp())
+
+
 def run_check() -> dict[str, Any]:
+    from renderer.report_config import siren_walk_coins
+    from lib.v3.siren_state import load_state, prior_row, protect_row, unread_row
+
     wallets = load_wallets()
     tags = load_tags()
     cex, mm = _load_dest_tags()
-    gte = yesterday_start_unix()
+    gte = _window_start()
+    state = load_state()
+    wanted = siren_walk_coins()
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     coins_out: dict[str, Any] = {}
     errors: list[str] = []
-    for coin in COINS:
+    for coin in wanted:
+        if coin not in wallets:
+            raise RuntimeError(f"no wallet list for {coin}")
         addrs = wallets[coin]
         mint = MINTS.get(coin)
         watched = set(addrs)
@@ -612,31 +638,14 @@ def run_check() -> dict[str, Any]:
             raise RuntimeError(f"no mint for {coin}")
         for i, addr in enumerate(addrs, 1):
             print(f"siren {coin} {i}/{len(addrs)}", flush=True)
+            prior = prior_row(state, coin, addr)
             try:
                 row = check_wallet(addr, mint, watched, gte, cex, mm)
+                row = protect_row(prior, row)
             except Exception as e:
                 if "429" in str(e):
                     raise RuntimeError(f"429 abort at {coin} {addr}: {e}") from e
-                row = {
-                    "wallet": addr,
-                    "status": "error",
-                    "line": f"error {e}",
-                    "sent": None,
-                    "received": None,
-                    "new_hops": [],
-                    "balance": None,
-                    "aug1": None,
-                    "aug1_status": "unknown",
-                    "last_transfer_amount": 0.0,
-                    "last_transfer_ts": None,
-                    "last_out_amount": 0.0,
-                    "last_out_ts": None,
-                    "last_out_status": "unknown",
-                    "last_out_dest_tag": "",
-                    "last_dest": "",
-                    "sent_dest": "",
-                    "error": str(e),
-                }
+                row = unread_row(prior, addr, "unread this week")
                 errors.append(f"{coin} {addr}: {e}")
             rows.append(row)
             time.sleep(0.28)
@@ -911,13 +920,20 @@ def persist_bundle(bundle: dict[str, Any], stamp_index: bool = False) -> None:
     tmp = CACHE_PATH.with_name("siren-watch.json.tmp")
     tmp.write_text(json.dumps(bundle, indent=2) + "\n")
     tmp.replace(CACHE_PATH)
+    from lib.v3.siren_state import save_state
+
+    save_state(bundle)
     if stamp_index:
         apply_index(bundle)
 
 
 def apply_index(bundle: dict[str, Any] | None = None) -> None:
     if bundle is None:
-        if not CACHE_PATH.exists():
+        from lib.v3.siren_state import STATE_PATH, load_state
+
+        if STATE_PATH.exists():
+            bundle = load_state()
+        elif not CACHE_PATH.exists():
             bundle = {
                 "coins": {k: {"summary": "", "loud": False, "popup": [], "wallets": [], "boxes": []} for k in COINS}
             }
