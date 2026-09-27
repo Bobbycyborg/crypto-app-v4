@@ -227,6 +227,18 @@ def _assign_bindings(
         if not cands:
             _miss("no anchor")
             continue
+        kept: list[tuple[int, int, int]] = []
+        slot_reason = "no anchor"
+        for score, pos, end in cands:
+            problem = _wrong_slot(mid, html, pos, end)
+            if problem:
+                slot_reason = problem
+                continue
+            kept.append((score, pos, end))
+        if not kept:
+            _miss(slot_reason)
+            continue
+        cands = kept
         if "<" in effective or ">" in effective:
             _miss("markup literal")
             continue
@@ -303,6 +315,22 @@ def _assign_bindings(
         }
         out.append(entry)
     return out
+
+
+def _wrong_slot(mid: str, html: str, pos: int, end: int) -> str | None:
+    """Refuse a match that would write one metric into another metric's sentence."""
+    if (pos and html[pos - 1] == ":") or (end < len(html) and html[end] == ":"):
+        return "number sits inside a timestamp"
+    try:
+        anchor = build_anchor(html, pos, html[pos:end])
+    except ValueError:
+        return None
+    ctx = (anchor["anchor_before"] + anchor["anchor_after"]).lower()
+    if mid == "render.emissions.tokens.remaining" and ("node emissions" in ctx or "emit" in ctx):
+        return "remaining supply was aimed at an emissions line"
+    if mid == "pump.holders.unattributed.pct" and "still_held" in ctx:
+        return "unattributed percent was aimed at STILL_HELD"
+    return None
 
 
 def build_manifest(html_path: Path | None = None) -> dict[str, Any]:

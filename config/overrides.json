@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "metric_id": "pump.buyback.usd.7d",
+      "value": 6800000,
+      "reason": "Oliver's hand figure",
+      "report": "06"
+    }
+  ]
+}

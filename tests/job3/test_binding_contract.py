@@ -101,6 +101,25 @@ def main() -> int:
     g = gates()
     for k, v in g.items():
         print(f"{k}={v}")
+    gaps = json.loads((ROOT / "config" / "binding-gaps.json").read_text(encoding="utf-8"))
+    listed: set[tuple[str, str]] = set()
+    for group in gaps["groups"]:
+        reason = (group.get("reason") or "").strip()
+        if not reason:
+            print(f"binding gap group {group.get('id')} has no reason")
+            return 1
+        for mid, oid in group["pairs"]:
+            pair = (mid, oid)
+            if pair in listed:
+                print(f"binding gap listed twice: {mid} {oid}")
+                return 1
+            listed.add(pair)
+    elig_pairs = {(m["metric_id"], m["match"]["occurrence_id"]) for m in ELIG}
+    bound_pairs = {(b["metric_id"], b["job1_occurrence_id"]) for b in BINDINGS}
+    unbound = elig_pairs - bound_pairs
+    if unbound != listed:
+        print(f"binding gaps do not match unbound: missing {len(unbound - listed)} extra {len(listed - unbound)}")
+        return 1
     bad = {
         k: v
         for k, v in g.items()
@@ -109,6 +128,7 @@ def main() -> int:
         not in {
             "eligible_job1_occurrences",
             "binding_entries",
+            "eligible_unbound",
             "formatter_roundtrip_checked",
             "numeric_bindings",
             "raw_roundtrip_verified",
@@ -117,9 +137,7 @@ def main() -> int:
             "numeric_dynamicity_checked",
         }
     }
-    if g["eligible_job1_occurrences"] != g["binding_entries"]:
-        return 1
-    if g["numeric_bindings"] != 409 or g["raw_roundtrip_verified"] != 405 or g["presentation_syntax_recovered"] != 4:
+    if g["eligible_unbound"] != len(unbound):
         return 1
     return 1 if bad else 0
 

@@ -249,14 +249,6 @@ def payload_as_of(entry: dict[str, Any], cap: Capture) -> str | None:
             return when.strftime("%Y-%m-%dT%H:%M:%SZ")
         if parsed.get("last_updated"):
             return str(parsed["last_updated"])
-    if cap.html:
-        found = re.search(r"(\d{1,2}) ([A-Z][a-z]{2}) (20\d\d)", cap.html)
-        if found:
-            try:
-                when = datetime.strptime(found.group(0), "%d %b %Y")
-            except ValueError:
-                return None
-            return when.strftime("%Y-%m-%dT00:00:00Z")
     return None
 
 

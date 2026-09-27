@@ -196,7 +196,7 @@ _c('fart.leverage.perp_spot_notional.x',
     derivation=None,
     source_key='binance',
     request_key='binance.fapi.ticker24h.FARTCOINUSDT',
-    selector={'type': 'named_record_field', 'name': 'perp_vs_coinbase_spot_ratio', 'perp_pointer': '/quoteVolume', 'spot_request_key': 'coinbase.spot.stats.FARTCOIN-USD', 'spot_pointer': '/volume_30day'},
+    selector={'type': 'named_record_field', 'name': 'perp_vs_coinbase_spot_ratio', 'perp_pointer': '/quoteVolume', 'spot_request_key': 'coinbase.spot.stats.FARTCOIN-USD', 'spot_pointer': '/volume'},
     normalizer={'type': 'identity'},
     notes='V3 fartcoin_stage1_loader leverage.perp_vs_coinbase_spot_ratio.',
 )
@@ -959,7 +959,7 @@ _c('sol.funding.rate.mean_7d',
     source_key='binance',
     request_key='binance.fapi.fundingRate.SOLUSDT',
     selector={'type': 'named_record_field', 'name': 'funding_rate_mean_last_n', 'n': 7},
-    normalizer={'type': 'decimal_as_percent'},
+    normalizer={'type': 'identity'},
     notes='V3 sol_intel funding 7d mean from Binance fundingRate history.',
 )
 

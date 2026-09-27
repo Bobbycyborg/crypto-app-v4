@@ -912,7 +912,14 @@ SIREN_BOX_CSS = """
 """
 
 
-def persist_bundle(bundle: dict[str, Any], stamp_index: bool = False) -> None:
+def _refuse_live_page(target: Path) -> Path:
+    path = Path(target).resolve()
+    if path.name == "index-v4.html" or path == INDEX.resolve():
+        raise RuntimeError("refusing to write index-v4.html")
+    return path
+
+
+def persist_bundle(bundle: dict[str, Any], stamp_index: bool = False, target: Path | None = None) -> None:
     """Atomic cache write. Never replace last-good with an empty object."""
     if not isinstance(bundle, dict) or not (bundle.get("coins") or {}):
         raise RuntimeError("refuse to persist empty siren bundle")
@@ -924,10 +931,10 @@ def persist_bundle(bundle: dict[str, Any], stamp_index: bool = False) -> None:
 
     save_state(bundle)
     if stamp_index:
-        apply_index(bundle)
+        apply_index(bundle, target=target)
 
 
-def apply_index(bundle: dict[str, Any] | None = None) -> None:
+def apply_index(bundle: dict[str, Any] | None = None, target: Path | None = None) -> None:
     if bundle is None:
         from lib.v3.siren_state import STATE_PATH, load_state
 
@@ -943,8 +950,11 @@ def apply_index(bundle: dict[str, Any] | None = None) -> None:
     wallets_cfg = load_wallets()
     from lib.v3.write_guard import refuse_frozen_v3_live_write
 
-    refuse_frozen_v3_live_write(INDEX)
-    html = INDEX.read_text()
+    if target is None:
+        raise RuntimeError("refusing to write index-v4.html. Pass a candidate file.")
+    page = _refuse_live_page(target)
+    refuse_frozen_v3_live_write(page)
+    html = page.read_text()
     marker = ".hold-siren-ico.is-on { animation: siren-pulse 1.35s ease-in-out infinite; }"
     if ".hold-siren-ico.has-watch" not in html:
         html = html.replace(
@@ -1000,4 +1010,4 @@ def apply_index(bundle: dict[str, Any] | None = None) -> None:
         SIREN_BOX_JS + "\n  document.addEventListener('click', function (e) {\n    var btn = e.target.closest('.stance-see-more');",
         1,
     )
-    INDEX.write_text(html)
+    page.write_text(html)

@@ -26,6 +26,8 @@ def test_number_does_not_match_inside_a_longer_number() -> None:
     price = "$79,374"
     assert number_bounded(price, 0, "$79") is False
     assert number_bounded(price, 0, "$79,374") is True
+    stamp = "As of · 2026-08-12T16:23:47Z"
+    assert number_bounded(stamp, stamp.index("T") + 1, "16") is False
 
 
 def test_match_stays_inside_the_coin() -> None:
@@ -70,10 +72,15 @@ def test_long_decimal_is_rounded() -> None:
     assert format_value(1.167965779, {"type": "string_exact"}) == "1.168"
 
 
+def test_known_stale_strings_must_fail() -> None:
+    for sample in ("BEAR MARKET $79,374", "As of 2026-08-25", "bounce is gone", "$1.84B/$3.28B"):
+        assert stale_problems(f"<p>{sample}</p>"), sample
+
+
 def test_stale_date_fails_the_gate() -> None:
-    assert stale_problems("<p>As of 2026-08-25</p>") == []
-    assert stale_problems("<p>Freshness 2026-08-25</p>") == []
-    assert stale_problems("<p>vesting ongoing. Next unlock 2026-08-28</p>") == []
+    assert stale_problems("<p>As of 2026-08-25</p>")
+    assert stale_problems("<p>Freshness 2026-08-25</p>")
+    assert stale_problems("<p>vesting ongoing. Next unlock 2026-08-28</p>")
     assert stale_problems("<p>SOL is $120.45 this week.</p>") == []
     assert any("2026-08-20" in item for item in stale_problems("<p>2026-08-20</p>"))
     allowed = stale_problems("<p>1 Aug start 2026-08-01</p>")
@@ -171,13 +178,14 @@ def test_price_slots_use_the_snapshot_not_a_nearby_low() -> None:
         '<article data-asset="btc"><span class="alt-price">$83,934</span>'
         'Price $83,934 (Binance spot). Binance daily low ~$57.8k</article>'
         '<button data-asset-slug="btc"><span class="desk-px">$83,934</span></button>'
+        '<button data-asset-slug="btc"><span class="hold-px" data-live-px>$83,934</span></button>'
     )
     # The trend helper looks for BTC TREND. This snippet only checks price nodes.
     out = apply_known_slots(
         html,
         {"metrics": {"btc.price.usd.live": {"status": "OK", "normalized_value": 84128}}},
     )
-    assert out.count("$84,128") == 2
+    assert out.count("$84,128") == 3
     assert "~$57.8k" in out
 
 
@@ -193,9 +201,43 @@ def test_roster_hides_config_coins() -> None:
     assert "is-hidden" not in by["sol"]
 
 
-def test_manual_zone_uses_the_report_number() -> None:
+def test_manual_zone_is_not_stamped_as_this_week() -> None:
+    from renderer.manual_zones import manual_zone_notes
+
     html = wrap_manual_zones('<p class="alt-stance-expl">Leave this.</p>', "06")
-    assert "report=06" in html
+    assert "report=06" not in html
+    assert "needs-human-edit" in html
+    assert manual_zone_notes(html) == ["Leave this."]
+
+
+def test_funding_mean_is_the_raw_rate() -> None:
+    from decimal import Decimal
+    from collectors.phase_b_selectors_extra import funding_rate_mean_last_n
+
+    rows = [{"fundingRate": "0.00003045"}] * 7
+    assert funding_rate_mean_last_n(rows, {"n": 7}) == Decimal("0.00003045")
+
+
+def test_fart_leverage_uses_24h_dollars() -> None:
+    from collectors.phase_b_selectors_extra import perp_vs_coinbase_spot_ratio
+
+    ratio = perp_vs_coinbase_spot_ratio(
+        {"quoteVolume": "43896117.97"},
+        {"volume": "16703146.91", "volume_30day": "572832360.76", "last": "0.19403"},
+        {"perp_pointer": "/quoteVolume", "spot_pointer": "/volume_30day"},
+    )
+    assert ratio > 10
+
+
+def test_wallet_walk_refuses_the_live_page() -> None:
+    from lib.v3.siren_watch import apply_index
+
+    try:
+        apply_index({"coins": {"PUMP": {"wallets": []}}}, target=ROOT / "index-v4.html")
+    except RuntimeError as exc:
+        assert "index-v4.html" in str(exc)
+    else:
+        raise AssertionError("walk accepted the live page")
 
 
 def main() -> int:
@@ -205,13 +247,17 @@ def main() -> int:
     test_earnings_use_daily_not_the_cumulative_total()
     test_burn_is_not_the_inflation_copy()
     test_long_decimal_is_rounded()
+    test_known_stale_strings_must_fail()
     test_stale_date_fails_the_gate()
     test_proved_start_is_kept()
     test_rebuilt_contract_uses_this_weeks_bindings()
     test_unwalked_coins_survive_a_save()
     test_price_slots_use_the_snapshot_not_a_nearby_low()
     test_roster_hides_config_coins()
-    test_manual_zone_uses_the_report_number()
+    test_manual_zone_is_not_stamped_as_this_week()
+    test_funding_mean_is_the_raw_rate()
+    test_fart_leverage_uses_24h_dollars()
+    test_wallet_walk_refuses_the_live_page()
     print("test_report_pipeline OK")
     return 0
 

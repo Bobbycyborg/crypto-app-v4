@@ -1027,7 +1027,7 @@
         "name": "perp_vs_coinbase_spot_ratio",
         "perp_pointer": "/quoteVolume",
         "spot_request_key": "coinbase.spot.stats.FARTCOIN-USD",
-        "spot_pointer": "/volume_30day"
+        "spot_pointer": "/volume"
       },
       "normalizer": {
         "type": "identity"
@@ -4847,7 +4847,7 @@
         "n": 7
       },
       "normalizer": {
-        "type": "decimal_as_percent"
+        "type": "identity"
       },
       "notes": "V3 sol_intel funding 7d mean from Binance fundingRate history.",
       "required": true

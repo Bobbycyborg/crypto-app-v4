@@ -24,11 +24,12 @@ from integrity.check_report import run_checker
 from integrity.stale_gate import stale_problems
 from renderer.build_binding_manifest import build_manifest
 from renderer.build_snapshot import build_snapshot
-from renderer.manual_zones import wrap_manual_zones
+from renderer.manual_zones import manual_zone_notes, wrap_manual_zones
+from renderer.overrides import apply_overrides, load_overrides
 from renderer.render_report import render_report
 from renderer.report_config import load_report
 from renderer.roster import apply_roster
-from renderer.surface_slots import apply_known_slots, restore_dormant_articles
+from renderer.surface_slots import apply_known_slots, price_slot_bindings, restore_dormant_articles
 
 RUNTIME = ROOT / "runtime-NOT-FOR-GH"
 PIPELINE = ("collectors", "renderer", "integrity", "lib", "config", "make_report.py")
@@ -62,20 +63,42 @@ def preflight() -> int:
 
 def _undated_critical(snap: dict) -> list[str]:
     cfg = load_report()
-    wanted = [f"{asset.lower()}.price.usd.live" for asset in list(cfg["always_shown"]) + list(cfg["held"])]
-    wanted.append("global.fear_greed.index.current")
-    for slug in ("btc", "eth", "sol"):
-        wanted.append(f"{slug}.etf.flow.usd.7d")
-        wanted.append(f"{slug}.etf.flow.usd.30d")
+    board = {asset.lower() for asset in list(cfg["always_shown"]) + list(cfg["held"]) + list(cfg["hidden"])}
     missing = []
-    metrics = snap.get("metrics") or {}
-    for mid in wanted:
-        row = metrics.get(mid)
+    for mid, row in (snap.get("metrics") or {}).items():
         if not row or row.get("status") != "OK":
+            continue
+        asset = mid.split(".", 1)[0]
+        interesting = (
+            mid.endswith(".price.usd.live")
+            or ".etf.flow." in mid
+            or "fear_greed" in mid
+            or mid.endswith(".funding.rate.mean_7d")
+            or mid.endswith(".funding.rate.latest")
+            or mid.endswith(".buyback.usd.7d")
+            or mid.endswith(".inflation.pct.current")
+        )
+        if asset not in board and "fear_greed" not in mid:
+            continue
+        if not interesting:
             continue
         if not row.get("source_as_of") or row.get("source_as_of") == "UNKNOWN":
             missing.append(mid)
     return missing
+
+
+def _gates_clear() -> tuple[bool, str]:
+    check_path = RUNTIME / "job3" / "check-report.json"
+    stale_path = RUNTIME / "job3" / "stale-gate.json"
+    if not check_path.exists() or not stale_path.exists():
+        return False, "checker and stale gate have not both been run"
+    report = json.loads(check_path.read_text(encoding="utf-8"))
+    gate = json.loads(stale_path.read_text(encoding="utf-8"))
+    if report.get("overall_status") != "PASS":
+        return False, f"checker is {report.get('overall_status')}"
+    if gate.get("status") != "PASS":
+        return False, "stale gate failed"
+    return True, "ok"
 
 
 def _report_05_page() -> Path:
@@ -122,6 +145,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     except SystemExit as exc:
         print(exc, file=sys.stderr)
         return 2
+    snap = apply_overrides(snap, number)
     undated = _undated_critical(snap)
     if undated:
         print("critical numbers with no source date:")
@@ -143,8 +167,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         print(f"critical misses {len(critical)}")
         for row in critical[:20]:
             print(f"  {row['metric_id']} {row['reason']}")
-    # The displayed weekly buyback stays $6.8M. The pulled wallet figure is a different number.
-    bindings = [row for row in built["bindings"] if row.get("metric_id") != "pump.buyback.usd.7d"]
+    bindings = list(built["bindings"])
     print(f"bindings {len(bindings)}")
     writers = json.loads((ROOT / "renderer/writer-quarantine.json").read_text())
     try:
@@ -164,6 +187,12 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     rendered = apply_roster(rendered)
     rendered = wrap_manual_zones(rendered, number)
     rendered = restore_dormant_articles(rendered, _report_05_page().read_text(encoding="utf-8"))
+    notes = manual_zone_notes(rendered)
+    print(f"needs human edit: {len(notes)} stance lines")
+    for note in notes:
+        print(f"  needs human edit: {note}")
+    bindings.extend(price_slot_bindings(rendered, snap))
+    built["bindings"] = bindings
     candidate = RUNTIME / f"candidate-{number}.html"
     candidate.write_text(rendered, encoding="utf-8")
     print(f"wrote {candidate}")
@@ -176,6 +205,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         bindings_path=manifest_path,
         source_html_path=source,
     )
+    contract["overrides"] = load_overrides(number)
     contract_path = RUNTIME / "job3" / "report-contract.json"
     contract_path.write_text(json.dumps(contract, indent=2) + "\n")
     report = run_checker(
@@ -200,9 +230,14 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         previous_html=previous.read_text(encoding="utf-8"),
         report_number=number,
     )
+    stale_path = RUNTIME / "job3" / "stale-gate.json"
+    stale_path.write_text(
+        json.dumps({"status": "PASS" if not problems else "FAIL", "problems": problems}, indent=2) + "\n",
+        encoding="utf-8",
+    )
     if problems:
         print("stale gate FAIL")
-        for item in problems[:20]:
+        for item in problems:
             print(f"  {item}")
     else:
         print("stale gate PASS")
@@ -218,13 +253,19 @@ def main() -> int:
     parser.add_argument("--replay", type=Path, help="Raw capture folder. No network.")
     parser.add_argument("--live", action="store_true", help="Pull new numbers. Uses the network.")
     parser.add_argument("--walk", action="store_true", help="Walk held wallets. Off unless you pass this.")
-    parser.add_argument("--promote", action="store_true", help="Refused. The live page is not replaced here.")
+    parser.add_argument("--promote", action="store_true", help="Copy the candidate onto the live page. Refused until both gates pass.")
+    parser.add_argument("--freeze", action="store_true", help="Save the candidate as a frozen report. Refused until both gates pass.")
     args = parser.parse_args()
-    if args.promote:
-        print("promote is off. The live page stays index-v4.html.", file=sys.stderr)
+    if args.promote or args.freeze:
+        ok, why = _gates_clear()
+        name = "promote" if args.promote else "freeze"
+        if not ok:
+            print(f"{name} refused. {why}.", file=sys.stderr)
+            return 2
+        print(f"{name} refused. Both gates passed, and the live page is still not replaced from this command.", file=sys.stderr)
         return 2
     if args.walk:
-        print("wallet walk is off in this command until you ask for it on its own.", file=sys.stderr)
+        print("wallet walk is off. It cannot write index-v4.html.", file=sys.stderr)
         return 2
     if args.live and args.replay:
         print("pass --live or --replay, not both", file=sys.stderr)

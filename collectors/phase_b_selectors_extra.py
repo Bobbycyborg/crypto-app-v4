@@ -378,7 +378,8 @@ def funding_rate_mean_last_n(doc: Any, selector: dict[str, Any]) -> Decimal:
     if not isinstance(doc, list) or len(doc) < n:
         raise ExtractError("VALUE_MISSING", "funding history")
     vals = [_as_decimal(row.get("fundingRate")) for row in doc[-n:]]
-    return sum(vals, Decimal("0")) / Decimal(n) * Decimal("100")
+    # Binance fundingRate is already the rate the page prints (about 0.00003).
+    return sum(vals, Decimal("0")) / Decimal(n)
 
 
 def stake_ratio_pct(doc: Any, _selector: dict[str, Any]) -> Decimal:
@@ -460,8 +461,14 @@ def shielded_pct_of_chain(doc: Any, selector: dict[str, Any]) -> Decimal:
 
 def perp_vs_coinbase_spot_ratio(perp_doc: Any, spot_doc: Any, selector: dict[str, Any]) -> Decimal:
     perp = json_pointer(perp_doc, selector.get("perp_pointer", "/quoteVolume"))
-    spot = json_pointer(spot_doc, selector.get("spot_pointer", "/quote_24h"))
+    pointer = selector.get("spot_pointer", "/quote_24h")
+    spot = json_pointer(spot_doc, pointer)
     spot_d = _as_decimal(spot)
+    # Coinbase "volume" is a token count. A 30-day token count against 24h dollars
+    # turns a real multiple into a fraction. Use 24h tokens times the last price.
+    if isinstance(spot_doc, dict) and pointer in {"/volume", "/volume_30day"} and spot_doc.get("last"):
+        base = spot_doc.get("volume") if pointer == "/volume_30day" else spot
+        spot_d = _as_decimal(base) * _as_decimal(spot_doc["last"])
     if spot_d <= 0:
         raise ExtractError("VALUE_INVALID", "zero spot volume")
     return _as_decimal(perp) / spot_d

@@ -208,13 +208,14 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
 
     q = Decimal("1").scaleb(-places)
     shown = shown.quantize(q, rounding=ROUND_HALF_UP)
+    group = bool(formatter.get("grouping") or (formatter.get("currency_prefix") and abs(shown) >= 1000))
     if places > 0:
-        s = format(shown, f",.{places}f") if formatter.get("grouping") else format(shown, f".{places}f")
+        s = format(shown, f",.{places}f") if group else format(shown, f".{places}f")
     elif shown == shown.to_integral_value():
         shown = shown.to_integral_value()
-        s = f"{shown:,}" if formatter.get("grouping") else str(shown)
+        s = f"{shown:,}" if group else str(shown)
     else:
-        s = f"{shown:,}" if formatter.get("grouping") else str(shown)
+        s = f"{shown:,}" if group else str(shown)
 
     out = ""
     if formatter.get("literal_prefix"):

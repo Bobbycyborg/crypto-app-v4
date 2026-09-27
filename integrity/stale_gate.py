@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from datetime import datetime
@@ -21,9 +22,19 @@ _DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
 _REPEAT = re.compile(r"(\b7d\b)\s+\1|\(row above\)\s+\(row above\)", re.I)
 _LONG_DECIMAL = re.compile(r"\$?(\d[\d,]*\.\d{5,})")
 _MANUAL = re.compile(r"<!-- MANUAL:zone report=(\d+) -->")
-_ALLOW = re.compile(
-    r"\b(?:1 aug|ath|launch|as of|freshness|coverage|unlock|vesting)\b|2026-08-01",
-    re.I,
+_ALLOW = re.compile(r"\b(?:1 aug|ath|launch)\b|2026-08-01", re.I)
+# Leftovers from the week before this report. A new page must not still say these.
+_KNOWN_STALE = (
+    "BEAR MARKET",
+    "$79,374",
+    "$79,073",
+    "bounce is gone",
+    "2026-08-25",
+    "As of 2026-08-25",
+    "$104.45",
+    "$1.43",
+    "$1.84B",
+    "$3.28B",
 )
 _PRICE = re.compile(r"\$\d[\d,]*(?:\.\d+)?(?:[kKmMbB])?")
 _STRIP = (
@@ -48,7 +59,7 @@ def _article(html: str, slug: str) -> str | None:
     return None
 
 
-_PRICE_NODE = re.compile(r'class="(?:alt-price|desk-px|hold-px)">([^<]+)')
+_PRICE_NODE = re.compile(r'class="(?:alt-price|desk-px|hold-px)"[^>]*>([^<]+)')
 
 
 def _fmt_price(value: object) -> str:
@@ -93,11 +104,11 @@ def _cross_coin(html: str) -> list[str]:
         art = _article(html, asset)
         if not art:
             continue
-        prices = set()
-        for node in _PRICE_NODE.finditer(art):
-            token = node.group(1).strip()
-            if len(token) >= 5 and ("." in token or "," in token):
-                prices.add(token)
+        prices = {
+            token
+            for token in _PRICE.findall(visible_text(art))
+            if len(token) >= 5 and ("." in token or "," in token)
+        }
         found[asset.upper()] = prices
     problems = []
     assets = list(found)
@@ -124,30 +135,29 @@ def stale_problems(
     text = visible_text(html)
     problems: list[str] = []
 
-    # Source stamps ("as of", freshness, an unlock date) are not the report date.
-    # A bare date with none of those words still means the page is carrying an old stamp.
+    for phrase in _KNOWN_STALE:
+        if phrase in text:
+            problems.append(f"stale text {phrase}")
+
+    seen_dates: set[str] = set()
     for match in _DATE.finditer(text):
         found = datetime.strptime(match.group(0), "%Y-%m-%d")
         if found.date() >= previous.date():
             continue
-        if match.end() < len(text) and text[match.end() : match.end() + 1] == "T":
-            continue
-        window = text[max(0, match.start() - 96) : match.end() + 24]
+        window = text[max(0, match.start() - 48) : match.end() + 48]
         if _ALLOW.search(window):
             continue
-        if previous_html and match.group(0) in previous_html:
-            continue
-        problems.append(f"stale date {match.group(0)}")
-        break
+        stamp = match.group(0)
+        if stamp not in seen_dates:
+            seen_dates.add(stamp)
+            problems.append(f"stale date {stamp}")
 
     if _REPEAT.search(text):
         problems.append("repeated token")
 
     for match in _LONG_DECIMAL.finditer(text):
         number_text = match.group(1).replace(",", "")
-        if Decimal(number_text) < Decimal("1"):
-            continue
-        if previous_html and match.group(0) in previous_html:
+        if Decimal(number_text) < Decimal("0.01"):
             continue
         problems.append("more than 4 decimal places")
         break
@@ -158,6 +168,7 @@ def stale_problems(
 
     problems.extend(_cross_coin(html))
 
+    problems.extend(_old_stamps_on_changed_cards(html, snapshot, previous))
     if previous_html is not None:
         problems.extend(_stale_against_previous(html, previous_html, snapshot))
         for asset in sorted(dormant_assets()):
@@ -174,7 +185,7 @@ def stale_problems(
         if asset not in held:
             continue
         art = _article(html, asset)
-        if art and re.search(r'class="(?:alt-price|desk-px|hold-px)">UNKNOWN<', art):
+        if art and re.search(r'class="(?:alt-price|desk-px|hold-px)"[^>]*>UNKNOWN<', art):
             unknown += 1
         metric = metrics.get(binding.get("metric_id"))
         if not metric or metric.get("status") != "OK":
@@ -194,14 +205,44 @@ def stale_problems(
     return problems
 
 
+def _old_stamps_on_changed_cards(html: str, snapshot: dict | None, previous: datetime) -> list[str]:
+    """A card we just refreshed must not still carry last week's source date."""
+    metrics = (snapshot or {}).get("metrics") or {}
+    cfg = load_report()
+    problems = []
+    for asset in list(cfg["held"]) + list(cfg["always_shown"]):
+        row = metrics.get(f"{asset.lower()}.price.usd.live")
+        if not row or row.get("status") != "OK":
+            continue
+        art = _article(html, asset)
+        if not art:
+            continue
+        for match in _DATE.finditer(visible_text(art)):
+            found = datetime.strptime(match.group(0), "%Y-%m-%d")
+            if found.date() >= previous.date():
+                continue
+            window = visible_text(art)[max(0, match.start() - 48) : match.end() + 48]
+            if _ALLOW.search(window):
+                continue
+            problems.append(f"old source stamp {asset} {match.group(0)}")
+            break
+    return problems
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Fail if the page still shows stale text")
     parser.add_argument("--html", required=True)
     parser.add_argument("--previous-html", default="")
+    parser.add_argument("--snapshot", required=True)
+    parser.add_argument("--bindings", required=True)
     args = parser.parse_args()
     html = Path(args.html).read_text(encoding="utf-8")
     previous = Path(args.previous_html).read_text(encoding="utf-8") if args.previous_html else None
-    problems = stale_problems(html, previous_html=previous)
+    snapshot = json.loads(Path(args.snapshot).read_text(encoding="utf-8"))
+    bindings = json.loads(Path(args.bindings).read_text(encoding="utf-8"))
+    if isinstance(bindings, dict):
+        bindings = bindings.get("bindings") or []
+    problems = stale_problems(html, snapshot=snapshot, bindings=bindings, previous_html=previous)
     if not problems:
         print("stale gate PASS")
         return 0
