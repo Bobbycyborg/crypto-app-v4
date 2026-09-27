@@ -176,7 +176,17 @@ def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -
     if status != "OK":
         return "UNKNOWN"
     if formatter.get("type") == "string_exact":
-        return str(value) if value is not None else "UNKNOWN"
+        if value is None:
+            return "UNKNOWN"
+        if isinstance(value, bool):
+            return str(value)
+        if isinstance(value, (int, float, Decimal)):
+            shown = _dec(value).quantize(Decimal("0.0001"), rounding=ROUND_HALF_UP)
+            text = format(shown, "f")
+            if "." in text:
+                text = text.rstrip("0").rstrip(".")
+            return text
+        return str(value)
 
     d = _dec(value)
     if d == 0 or d == Decimal("0"):

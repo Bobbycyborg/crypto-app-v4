@@ -289,14 +289,29 @@ def _build_formatter(
 ) -> dict[str, Any]:
     from renderer.formatters import adjust_formatter_for_binding
 
-    hint = _manifest_token_hint(manifest_lit, source_literal, start, token)
-    inner = infer_formatter(hint)
+    inner = infer_formatter(token)
     if inner.get("type") != "numeric":
         raise FormatterRecoveryError(f"non-numeric token {token!r}")
-    fmt = adjust_formatter_for_binding(inner, manifest_lit, token, anchor_after)
+    fmt = adjust_formatter_for_binding(inner, token, token, anchor_after)
     fmt = dict(fmt)
-    fmt["literal_prefix"] = source_literal[:start]
-    fmt["literal_suffix"] = source_literal[end:] + extra_suffix
+    prefix = source_literal[:start]
+    suffix = source_literal[end:] + extra_suffix
+    fmt["literal_prefix"] = prefix
+    fmt["literal_suffix"] = suffix
+    for key in ("approx_prefix", "comparison_prefix", "currency_prefix"):
+        val = str(fmt.get(key) or "")
+        if val and prefix.endswith(val):
+            fmt.pop(key, None)
+    for key in ("scale_suffix", "suffix"):
+        val = str(fmt.get(key) or "")
+        if val and suffix.startswith(val):
+            fmt.pop(key, None)
+    if fmt.get("percent") and suffix.startswith("%"):
+        fmt.pop("percent", None)
+    if fmt.get("percentage_points") and suffix.startswith("pp"):
+        fmt.pop("percentage_points", None)
+    if fmt.get("ratio_x") and (suffix.startswith("×") or suffix.startswith("x")):
+        fmt.pop("ratio_x", None)
     return fmt
 
 

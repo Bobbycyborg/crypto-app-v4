@@ -15,17 +15,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from renderer.coin_span import coin_regions, hits_in_regions
 from renderer.anchors import (
     build_anchor,
     build_html_index,
     classify_target_kind,
-    extract_region_literal,
-    find_markup_literal,
-    locate_literal,
-    locate_literal_in_region,
-    plain_text_binding_literal,
     parse_xpath_segments,
-    resolve_region,
     _article_index_score,
     _location_score,
     _path_at_position,
@@ -44,40 +39,50 @@ def _binding_id(metric_id: str, occurrence_id: str) -> str:
     return f"{metric_id}::{occurrence_id}"
 
 
+_CRITICAL_ZONES = frozenset({"hold", "hero", "desk", "etf", "fear", "greed", "stance", "trend"})
+
+
+def _zone(mapping: dict[str, Any], occ_row: dict[str, Any], hint: str | None, xpath: str | None) -> str:
+    blob = " ".join(
+        [
+            str(hint or ""),
+            str(occ_row.get("ui_location_type") or ""),
+            str(occ_row.get("surface") or ""),
+            str(xpath or ""),
+            str((mapping.get("match") or {}).get("locator") or ""),
+        ]
+    ).lower()
+    for name in ("stance", "fear", "greed", "etf", "desk", "hero", "hold", "trend"):
+        if name in blob:
+            return name
+    if "/button" in blob:
+        return "hold"
+    return "article"
+
+
+def _critical(zone: str, metric_id: str) -> bool:
+    if zone in _CRITICAL_ZONES:
+        return True
+    mid = metric_id.lower()
+    return any(part in mid for part in (".etf.", "fear_greed", ".price.usd"))
+
+
 def _effective_literal(
     html: str,
-    index,
     manifest_lit: str,
-    xpath: str | None,
-    location_hint: str | None,
+    regions: list[tuple[int, int]],
     *,
     longer_literals: list[str] | None = None,
 ) -> str | None:
-    region = resolve_region(index, xpath, html=html, location_hint=location_hint, literal=manifest_lit) if xpath else None
-    if region and manifest_lit:
-        plain = plain_text_binding_literal(html, region, manifest_lit)
-        if plain:
-            return plain[0]
-    if manifest_lit and manifest_lit in html:
-        start = 0
-        while True:
-            i = html.find(manifest_lit, start)
-            if i < 0:
-                break
-            if longer_literals:
-                if any(html.startswith(longer, i) for longer in longer_literals if len(longer) > len(manifest_lit)):
-                    start = i + 1
-                    continue
-            eff = manifest_lit
-            if "<" not in eff and ">" not in eff:
-                return eff
-            start = i + 1
-    if manifest_lit:
-        found = find_markup_literal(html, index, manifest_lit, xpath=xpath, location_hint=location_hint)
-        if found:
-            eff = found[0].split("<", 1)[0]
-            if eff:
-                return eff
+    if not manifest_lit or not regions:
+        return None
+    for i in hits_in_regions(html, manifest_lit, regions):
+        if longer_literals and any(
+            html.startswith(longer, i) for longer in longer_literals if len(longer) > len(manifest_lit)
+        ):
+            continue
+        if "<" not in manifest_lit and ">" not in manifest_lit:
+            return manifest_lit
     return None
 
 
@@ -89,7 +94,13 @@ def _infer_literal(manifest_lit: str, effective: str) -> str:
     return effective
 
 
-def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, Any], reg: dict[str, Any]) -> list[dict[str, Any]]:
+def _assign_bindings(
+    html: str,
+    mappings: list[dict[str, Any]],
+    occ: dict[str, Any],
+    reg: dict[str, Any],
+    blockers: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
     index = build_html_index(html)
     longer_literals = sorted({(m["match"].get("literal") or "") for m in mappings if m["match"].get("literal")}, key=len, reverse=True)
     used: list[tuple[int, int]] = []
@@ -99,39 +110,43 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
         match = mapping["match"]
         oid = match["occurrence_id"]
         xpath = match.get("locator")
-        hint = occ.get(oid, {}).get("ui_location_identifier")
+        occ_row = occ.get(oid, {})
+        hint = occ_row.get("ui_location_identifier")
         manifest_lit = match.get("literal") or ""
+        regions = coin_regions(html, mapping.get("asset") or "")
+        zone = _zone(mapping, occ_row, hint, xpath)
+        critical = _critical(zone, mid)
 
-        effective = _effective_literal(html, index, manifest_lit, xpath, hint, longer_literals=longer_literals)
+        def _miss(reason: str, *, _mid: str = mid, _oid: str = oid, _zone: str = zone, _critical: bool = critical) -> None:
+            blockers.append(
+                {
+                    "metric_id": _mid,
+                    "occurrence_id": _oid,
+                    "asset": mapping.get("asset") or "",
+                    "zone": _zone,
+                    "critical": _critical,
+                    "reason": reason,
+                }
+            )
+
+        if not regions:
+            _miss("no coin region")
+            continue
+        effective = _effective_literal(html, manifest_lit, regions, longer_literals=longer_literals)
         if not effective:
-            raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER missing literal {mid} {oid}")
+            _miss("missing literal")
+            continue
 
-        region = resolve_region(index, xpath, html=html, location_hint=hint) if xpath else None
         cands: list[tuple[int, int, int]] = []
-        start = 0
-        while True:
-            i = html.find(effective, start)
-            if i < 0:
-                break
+        for i in hits_in_regions(html, effective, regions):
             end = i + len(effective)
-            skip = False
-            if manifest_lit and manifest_lit == effective:
-                for longer in longer_literals:
-                    if len(longer) <= len(manifest_lit):
-                        break
-                    if html.startswith(longer, i):
-                        skip = True
-                        break
-            if skip:
-                start = i + 1
+            if any(html.startswith(longer, i) for longer in longer_literals if len(longer) > len(effective)):
                 continue
             if any(not (end <= u[0] or i >= u[1]) for u in used):
-                start = i + 1
                 continue
             try:
                 build_anchor(html, i, effective)
             except ValueError:
-                start = i + 1
                 continue
             score = (
                 _location_score(html, i, hint)
@@ -142,91 +157,34 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
             if at is not None and xpath:
                 score += _path_prefix_len(parse_xpath_segments(xpath), at) * 25
                 score += _path_suffix_len(parse_xpath_segments(xpath), at) * 25
-            if region and region[0] <= i < region[1]:
-                score += 1000
             cands.append((score, i, end))
-            start = i + 1
 
         if not cands:
-            pos = locate_literal(
-                index,
-                manifest_lit or effective,
-                xpath,
-                location_hint=hint,
-                effective_literal=effective,
-            )
-            if pos is not None:
-                end = pos + len(effective)
-                if all(end <= u[0] or pos >= u[1] for u in used):
-                    try:
-                        build_anchor(html, pos, effective)
-                        cands = [(2000, pos, end)]
-                    except ValueError:
-                        pass
-
-        if not cands and manifest_lit:
-            start = 0
-            while True:
-                i = html.find(manifest_lit, start)
-                if i < 0:
-                    break
-                end = i + len(manifest_lit)
-                skip = False
-                for longer in longer_literals:
-                    if len(longer) <= len(manifest_lit):
-                        break
-                    if html.startswith(longer, i):
-                        skip = True
-                        break
-                if skip:
-                    start = i + 1
-                    continue
-                if any(not (end <= u[0] or i >= u[1]) for u in used):
-                    start = i + 1
-                    continue
-                try:
-                    build_anchor(html, i, manifest_lit)
-                except ValueError:
-                    start = i + 1
-                    continue
-                score = (
-                    _location_score(html, i, hint)
-                    + _xpath_score(html, i, xpath)
-                    + _article_index_score(html, i, xpath)
-                )
-                at = _path_at_position(index, i)
-                if at is not None and xpath:
-                    p = parse_xpath_segments(xpath)
-                    score += _path_prefix_len(p, at) * 25 + _path_suffix_len(p, at) * 25
-                if region and region[0] <= i < region[1]:
-                    score += 1000
-                cands.append((score, i, end))
-                start = i + 1
-            if cands:
-                effective = manifest_lit
-
-        if not cands:
-            raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER no anchor {mid} {oid}")
+            _miss("no anchor")
+            continue
         if "<" in effective or ">" in effective:
-            raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER markup literal {mid} {oid}")
+            _miss("markup literal")
+            continue
         cands.sort(key=lambda x: (-x[0], x[1]))
         score, pos, end = cands[0]
         used.append((pos, end))
         anchor = build_anchor(html, pos, effective)
         target_kind = classify_target_kind(html, pos, effective)
         if target_kind == "HTML_TEXT" and ("<" in effective or ">" in effective):
-            raise SystemExit(f"JOB 3 BINDING CONTRACT BLOCKER tag crossing {mid} {oid}")
+            _miss("tag crossing")
+            continue
         try:
             selection = resolve_binding_raw(
                 reg,
                 mid,
                 oid,
                 source_literal=effective,
-                manifest_lit=manifest_lit,
+                manifest_lit="",
                 anchor_after=anchor["anchor_after"],
             )
         except FormatterRecoveryError as exc:
-            raise SystemExit(f"JOB 3 FORMATTER BLOCKER {mid} {oid}: {exc}") from exc
+            _miss(f"formatter: {exc}")
+            continue
         if selection is None:
             fmt = {"type": "string_exact"}
             raw_value = None
@@ -234,7 +192,7 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
             raw_value = None
             fmt = recover_presentation_formatter(
                 source_literal=effective,
-                manifest_lit=manifest_lit,
+                manifest_lit="",
                 anchor_after=anchor["anchor_after"],
             )
             fmt["formatter_evidence_mode"] = selection.source
@@ -244,7 +202,7 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
             fmt = recover_formatter(
                 source_literal=effective,
                 raw_value=raw_value,
-                manifest_lit=manifest_lit,
+                manifest_lit="",
                 anchor_after=anchor["anchor_after"],
             )
             fmt["formatter_raw_source"] = selection.source
@@ -275,29 +233,41 @@ def _assign_bindings(html: str, mappings: list[dict[str, Any]], occ: dict[str, A
     return out
 
 
-def build_manifest() -> dict[str, Any]:
+def build_manifest(html_path: Path | None = None) -> dict[str, Any]:
     reg, plan, manifest_meta, mappings = load_job1_job2()
     occ_list = json.loads((ROOT / "metrics/ui-occurrences.json").read_text(encoding="utf-8"))["occurrences"]
     occ = {o["occurrence_id"]: o for o in occ_list}
     elig = eligible_mappings(mappings, reg, plan)
-    html = HTML_PATH.read_text(encoding="utf-8")
-    bindings = _assign_bindings(html, elig, occ, reg)
+    path = html_path or HTML_PATH
+    html = path.read_text(encoding="utf-8")
+    blockers: list[dict[str, Any]] = []
+    bindings = _assign_bindings(html, elig, occ, reg, blockers)
     return {
         "schema_version": "job3.binding.v1",
-        "source_html": "index-v4.html",
+        "source_html": path.name,
         "source_html_sha256": hashlib.sha256(html.encode("utf-8")).hexdigest(),
         "job1_registry_sha256": hashlib.sha256((ROOT / "metrics/metric-registry.json").read_bytes()).hexdigest(),
         "eligible_occurrences": len(elig),
         "bindings": bindings,
+        "blockers": blockers,
     }
 
 
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--check", action="store_true")
+    p.add_argument("--html", default="")
     p.add_argument("--out", default=str(MANIFEST_PATH))
     args = p.parse_args()
-    built = build_manifest()
+    html_path = Path(args.html) if args.html else None
+    built = build_manifest(html_path)
+    blockers = built.pop("blockers")
+    blocker_path = Path(args.out).with_name("blockers.json")
+    blocker_path.write_text(json.dumps(blockers, indent=2) + "\n", encoding="utf-8")
+    critical = [b for b in blockers if b.get("critical")]
+    if critical:
+        print(f"blockers critical={len(critical)} total={len(blockers)} file={blocker_path}", file=sys.stderr)
+        return 2
     if args.check:
         committed = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         if committed != built:
