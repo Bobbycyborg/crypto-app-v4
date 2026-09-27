@@ -28,6 +28,7 @@ from renderer.manual_zones import wrap_manual_zones
 from renderer.render_report import render_report
 from renderer.report_config import load_report
 from renderer.roster import apply_roster
+from renderer.surface_slots import apply_known_slots
 
 RUNTIME = ROOT / "runtime-NOT-FOR-GH"
 PIPELINE = ("collectors", "renderer", "integrity", "lib", "config", "make_report.py")
@@ -136,6 +137,7 @@ def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
         return 3
     if render_code != 0:
         print(f"render exit {render_code}", file=sys.stderr)
+    rendered = apply_known_slots(rendered, snap)
     rendered = apply_roster(rendered)
     rendered = wrap_manual_zones(rendered, number)
     candidate = RUNTIME / f"candidate-{number}.html"

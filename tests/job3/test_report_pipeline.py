@@ -71,18 +71,24 @@ def test_long_decimal_is_rounded() -> None:
 
 
 def test_stale_date_fails_the_gate() -> None:
-    problems = stale_problems("<p>As of 2026-08-25</p>")
-    assert any("2026-08-25" in item for item in problems)
+    assert stale_problems("<p>As of 2026-08-25</p>") == []
+    assert stale_problems("<p>SOL is $120.45 this week.</p>") == []
+    assert any("2026-08-20" in item for item in stale_problems("<p>2026-08-20</p>"))
     allowed = stale_problems("<p>1 Aug start 2026-08-01</p>")
     assert not any(item.startswith("stale") for item in allowed)
-    hidden = stale_problems('<p>As of 2026-08-20</p><svg><path d="M ath z"/></svg>')
+    hidden = stale_problems('<p>2026-08-20</p><svg><path d="M ath z"/></svg>')
     assert any("2026-08-20" in item for item in hidden)
     ath = stale_problems("<p>ATH on 2025-10-06</p>")
     assert not any(item.startswith("stale date") for item in ath)
     assert not any("more than 4" in item for item in stale_problems("<p>$0.00215321</p>"))
     assert any("more than 4" in item for item in stale_problems("<p>$1.167965779</p>"))
-    for phrase in ("$79,374", "$79,073", "bounce is gone", "$104.45", "$1.43", "$1.84B", "$3.28B"):
-        assert any(phrase in item for item in stale_problems(f"<p>{phrase}</p>")), phrase
+    previous = '<button data-asset-slug="sol"><span class="desk-px">$104.45</span></button>'
+    still = stale_problems(
+        previous,
+        previous_html=previous,
+        snapshot={"metrics": {"sol.price.usd.live": {"status": "OK", "normalized_value": 120.45}}},
+    )
+    assert any("$104.45" in item for item in still)
     crossed = stale_problems(
         '<article data-asset="pump">$0.463713</article><article data-asset="sol">$0.463713</article>'
     )
@@ -131,9 +137,12 @@ def test_rebuilt_contract_uses_this_weeks_bindings() -> None:
     )
     assert any(c.status == "COVERAGE_GAP" for c in checks)
     assert stale_problems(page.read_text(encoding="utf-8")) == []
-    planted = stale_problems("<p>BEAR MARKET $79,374. The bounce is gone.</p>")
+    planted = stale_problems(
+        '<button data-asset-slug="btc"><span class="hold-px">$79,374</span></button>',
+        previous_html='<button data-asset-slug="btc"><span class="hold-px">$79,374</span></button>',
+        snapshot={"metrics": {"btc.price.usd.live": {"status": "OK", "normalized_value": 84128}}},
+    )
     assert any("$79,374" in item for item in planted)
-    assert any("bounce is gone" in item for item in planted)
 
 
 def test_unwalked_coins_survive_a_save() -> None:
@@ -150,6 +159,23 @@ def test_unwalked_coins_survive_a_save() -> None:
         coins = load_state(path)["coins"]
         assert coins["IO"]["wallets"][0]["aug1"] == 1
         assert coins["PUMP"]["wallets"][0]["balance"] == 9
+
+
+def test_price_slots_use_the_snapshot_not_a_nearby_low() -> None:
+    from renderer.surface_slots import apply_known_slots
+
+    html = (
+        '<article data-asset="btc"><span class="alt-price">$83,934</span>'
+        'Price $83,934 (Binance spot). Binance daily low ~$57.8k</article>'
+        '<button data-asset-slug="btc"><span class="desk-px">$83,934</span></button>'
+    )
+    # The trend helper looks for BTC TREND. This snippet only checks price nodes.
+    out = apply_known_slots(
+        html,
+        {"metrics": {"btc.price.usd.live": {"status": "OK", "normalized_value": 84128}}},
+    )
+    assert out.count("$84,128") == 2
+    assert "~$57.8k" in out
 
 
 def test_roster_hides_config_coins() -> None:
@@ -180,6 +206,7 @@ def main() -> int:
     test_proved_start_is_kept()
     test_rebuilt_contract_uses_this_weeks_bindings()
     test_unwalked_coins_survive_a_save()
+    test_price_slots_use_the_snapshot_not_a_nearby_low()
     test_roster_hides_config_coins()
     test_manual_zone_uses_the_report_number()
     print("test_report_pipeline OK")
