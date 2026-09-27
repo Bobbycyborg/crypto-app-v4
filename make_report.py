@@ -30,6 +30,7 @@ from renderer.report_config import load_report
 RUNTIME = ROOT / "runtime-NOT-FOR-GH"
 PIPELINE = ("collectors", "renderer", "integrity", "lib", "config", "make_report.py")
 REPLAY_26 = ROOT / "runtime-NOT-FOR-GH/job2/20260926T103538Z_3e1c5167"
+HAND_06 = ROOT / "reports-NOT-FOR-GH/HAND-report-06-before-coded-render.html"
 
 
 def _git_dirty() -> list[str]:
@@ -56,14 +57,18 @@ def preflight() -> int:
     return 0
 
 
-def _previous_page() -> Path:
+def _report_05_page() -> Path:
     dest = RUNTIME / "previous-report.html"
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_bytes(subprocess.check_output(["git", "show", "HEAD:index-v4.html"], cwd=ROOT))
+    frozen = ROOT / "baselines/report-05.html"
+    if frozen.exists():
+        dest.write_bytes(frozen.read_bytes())
+    else:
+        dest.write_bytes(subprocess.check_output(["git", "show", "HEAD:index-v4.html"], cwd=ROOT))
     return dest
 
 
-def _run_steps(replay: Path | None, live: bool) -> int:
+def _run_steps(replay: Path | None, live: bool, base: Path) -> int:
     code = preflight()
     if code:
         return code
@@ -96,7 +101,10 @@ def _run_steps(replay: Path | None, live: bool) -> int:
     snap_path.parent.mkdir(parents=True, exist_ok=True)
     snap_path.write_text(json.dumps(snap, indent=2) + "\n")
 
-    source = _previous_page()
+    if not base.exists():
+        print(f"missing base page: {base}", file=sys.stderr)
+        return 2
+    source = base
     built = build_manifest(source)
     blockers = built.pop("blockers")
     critical = [row for row in blockers if row.get("critical")]
@@ -155,6 +163,7 @@ def _run_steps(replay: Path | None, live: bool) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Issue the next crypto report")
+    parser.add_argument("--base", type=Path, help="Page to build on. Report 06 uses the hand page.")
     parser.add_argument("--replay", type=Path, help="Raw capture folder. No network.")
     parser.add_argument("--live", action="store_true", help="Pull new numbers. Uses the network.")
     parser.add_argument("--walk", action="store_true", help="Walk held wallets. Off unless you pass this.")
@@ -170,11 +179,14 @@ def main() -> int:
         print("pass --live or --replay, not both", file=sys.stderr)
         return 2
     if not args.live and args.replay is None:
-        print("Run one of:")
-        print(f"  python3 make_report.py --replay {REPLAY_26}")
-        print("  python3 make_report.py --live")
+        print("Run:")
+        print(f"  python3 make_report.py --base {HAND_06} --replay {REPLAY_26}")
+        print(f"  python3 make_report.py --base {HAND_06} --live")
         return 2
-    return _run_steps(args.replay, args.live)
+    if args.base is None:
+        print(f"pass --base. Report 06 builds on {HAND_06}", file=sys.stderr)
+        return 2
+    return _run_steps(args.replay, args.live, args.base)
 
 
 if __name__ == "__main__":
