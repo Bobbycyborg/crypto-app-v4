@@ -1,0 +1,26 @@
+{
+  "report_number": "06",
+  "report_date": "2026-09-26",
+  "report_label": "September 26th, 2026 - Report 06",
+  "previous_report_number": "05",
+  "previous_report_date": "2026-08-31",
+  "previous_report_label": "August 31st, 2026 - Report 05",
+  "live_number": "05",
+  "weeks": [
+    ["01", "August 14th, 2026 - Report 01"],
+    ["02", "August 17th, 2026 - Report 02"],
+    ["03", "August 20th, 2026 - Report 03"],
+    ["04", "August 25th, 2026 - Report 04"],
+    ["05", "August 31st, 2026 - Report 05"]
+  ],
+  "always_shown": ["BTC", "SOL", "ZEC", "HYPE"],
+  "held": ["PUMP", "RENDER", "NOS", "SPX", "GIGA", "2Z"],
+  "hidden": ["FART", "IO", "ANSEM", "LOCKIN", "RETARDIO"],
+  "dormant": ["RAY", "GRASS", "DRIFT", "ORCA", "BONK"],
+  "siren_walk": ["PUMP", "RENDER", "NOS", "SPX", "GIGA", "2Z"],
+  "desk_names": {
+    "SPX": ["SPX", "SPX6900"],
+    "FART": ["FART", "FARTCOIN"]
+  },
+  "wallet": "AyoTEz2X2hQMDTXbpD3W9QZThtwUJqui34uHSeUw2TzJ"
+}

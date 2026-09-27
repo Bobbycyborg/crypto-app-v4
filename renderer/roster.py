@@ -1,4 +1,4 @@
-"""Report 05 roster: paused GRASS/RAY/ORCA/BONK stay dormant (hide if present, never rewrite). Add ANSEM. Never run on frozen 01-04."""
+"""Hide dormant coins from config/report.json. Never rewrite a dormant article. Never run on a frozen report."""
 
 from __future__ import annotations
 
@@ -213,16 +213,14 @@ def _ensure_hidden_all(html: str, unique: str) -> str:
 
 
 def _hide_r05_out(html: str) -> str:
-    """Keep GRASS/RAY/ORCA/BONK in the file. Hide them on the Report 05 board."""
-    for unique in (
-        'data-asset-slug="grass"',
-        'data-asset-slug="orca"',
-        '<div class="desk-row no-article"><span class="desk-name">BONK</span>',
-        '<div class="desk-row no-article is-hidden"><span class="desk-name">BONK</span>',
-        'data-feed="spot:BONKUSDT"',
-        'data-asset-slug="ray"',
-    ):
-        html = _ensure_hidden_all(html, unique)
+    """Keep dormant coins in the file. Hide them on the board."""
+    from renderer.report_config import dormant_assets
+
+    for asset in sorted(dormant_assets()):
+        slug = asset.lower()
+        html = _ensure_hidden_all(html, f'data-asset-slug="{slug}"')
+    html = _ensure_hidden_all(html, '<div class="desk-row no-article"><span class="desk-name">BONK</span>')
+    html = _ensure_hidden_all(html, 'data-feed="spot:BONKUSDT"')
     return html
 
 

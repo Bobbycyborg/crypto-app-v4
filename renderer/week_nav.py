@@ -1,16 +1,18 @@
-"""Week dropdown for every report page. Report 05 is live index-v4.html."""
+"""Week dropdown. The live week comes from config/report.json."""
 
 from __future__ import annotations
 
 import re
 
-WEEKS = (
-    ("01", "August 14th, 2026 - Report 01"),
-    ("02", "August 17th, 2026 - Report 02"),
-    ("03", "August 20th, 2026 - Report 03"),
-    ("04", "August 25th, 2026 - Report 04"),
-    ("05", "August 31st, 2026 - Report 05"),
-)
+from renderer.report_config import load_report
+
+
+def _weeks() -> tuple[tuple[str, str], ...]:
+    return tuple((num, label) for num, label in load_report()["weeks"])
+
+
+def live_number() -> str:
+    return str(load_report()["live_number"])
 
 _MENU_RE = re.compile(
     r'(<div class="week-menu" role="listbox">)\s*.*?(</div>)',
@@ -19,14 +21,15 @@ _MENU_RE = re.compile(
 
 
 def href_for(num: str, *, from_baselines: bool) -> str:
+    live = live_number()
     if from_baselines:
-        return "../index-v4.html" if num == "05" else f"report-{num}.html"
-    return "index-v4.html" if num == "05" else f"baselines/report-{num}.html"
+        return "../index-v4.html" if num == live else f"report-{num}.html"
+    return "index-v4.html" if num == live else f"baselines/report-{num}.html"
 
 
 def menu_inner(*, current: str, from_baselines: bool) -> str:
     lines = []
-    for num, label in WEEKS:
+    for num, label in _weeks():
         cls = ' class="week-opt is-current"' if num == current else ' class="week-opt"'
         href = href_for(num, from_baselines=from_baselines)
         lines.append(

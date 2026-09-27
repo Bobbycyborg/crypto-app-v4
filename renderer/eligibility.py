@@ -6,9 +6,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+from renderer.report_config import dormant_assets
+
 ROOT = Path(__file__).resolve().parents[1]
 
-DORMANT_ASSETS = frozenset({"RAY", "GRASS", "DRIFT", "ORCA", "BONK"})
+DORMANT_ASSETS = dormant_assets()
 BINDABLE_DISPOSITIONS = frozenset({"COLLECT", "DERIVE", "BLOCKED_SOURCE"})
 NON_BINDABLE_CLASSIFICATIONS = frozenset(
     {
