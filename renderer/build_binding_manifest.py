@@ -186,9 +186,9 @@ def _assign_bindings(
             _miss(f"formatter: {exc}")
             continue
         if selection is None:
-            fmt = {"type": "string_exact"}
-            raw_value = None
-        elif selection.presentation_only:
+            _miss("no formatter")
+            continue
+        if selection.presentation_only:
             raw_value = None
             fmt = recover_presentation_formatter(
                 source_literal=effective,

@@ -172,21 +172,25 @@ def _format_scientific(shown: Decimal, places: int, exp_pad: int) -> str:
     return f"{sign}{coeff_s}e{exp_sign}{exp_s}"
 
 
+def _four_sig(value: Any) -> str:
+    d = _dec(value)
+    if d == 0:
+        return "0"
+    quant = Decimal(1).scaleb(d.adjusted() - 3)
+    shown = d.quantize(quant, rounding=ROUND_HALF_UP)
+    text = format(shown, "f")
+    if "." in text:
+        text = text.rstrip("0").rstrip(".")
+    return text
+
+
 def format_value(value: Any, formatter: dict[str, Any], *, status: str = "OK") -> str:
     if status != "OK":
         return "UNKNOWN"
     if formatter.get("type") == "string_exact":
-        if value is None:
-            return "UNKNOWN"
-        if isinstance(value, bool):
-            return str(value)
-        if isinstance(value, (int, float, Decimal)):
-            shown = _dec(value).quantize(Decimal("0.0001"), rounding=ROUND_HALF_UP)
-            text = format(shown, "f")
-            if "." in text:
-                text = text.rstrip("0").rstrip(".")
-            return text
-        return str(value)
+        if isinstance(value, bool) or not isinstance(value, (int, float, Decimal)):
+            return "UNKNOWN" if value is None else str(value)
+        return _four_sig(value)
 
     d = _dec(value)
     if d == 0 or d == Decimal("0"):

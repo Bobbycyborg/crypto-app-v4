@@ -21,6 +21,10 @@ def number_bounded(html: str, pos: int, literal: str) -> bool:
         return False
     if after == "." and literal[-1:].isdigit():
         return False
+    if after == "," and pos + len(literal) + 1 < len(html) and html[pos + len(literal) + 1].isdigit():
+        return False
+    if before == "," and pos >= 2 and html[pos - 2].isdigit():
+        return False
     return True
 
 

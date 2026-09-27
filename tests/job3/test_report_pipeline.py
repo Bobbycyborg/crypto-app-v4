@@ -23,6 +23,9 @@ def test_number_does_not_match_inside_a_longer_number() -> None:
     html = '<article data-asset="pump">$0.00215</article>'
     assert number_bounded(html, html.index("0.002"), "0.002") is False
     assert number_bounded(html, html.index("$0.00215") , "$0.00215") is True
+    price = "$79,374"
+    assert number_bounded(price, 0, "$79") is False
+    assert number_bounded(price, 0, "$79,374") is True
 
 
 def test_match_stays_inside_the_coin() -> None:
