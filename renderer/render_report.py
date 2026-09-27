@@ -20,7 +20,6 @@ if str(ROOT) not in sys.path:
 from integrity.numeric import compact_usd_parts, is_etf_flow_metric
 from renderer.formatters import format_value
 from renderer.frozen_reports import refuse_frozen_write
-from renderer.roster import apply_roster
 from renderer.semantic_wording import apply_semantic_wording
 from renderer.week_nav import apply_week_menu
 
@@ -271,7 +270,7 @@ def render_report(
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--snapshot", required=True)
-    p.add_argument("--source", default=str(ROOT / "index-v4.html"))
+    p.add_argument("--source", required=True)
     p.add_argument("--bindings", default=str(ROOT / "renderer/binding-manifest.json"))
     p.add_argument("--writers", default=str(ROOT / "renderer/writer-quarantine.json"))
     p.add_argument("--out", required=True)
@@ -279,6 +278,11 @@ def main() -> int:
     p.add_argument("--publishable", action="store_true")
     args = p.parse_args()
 
+    out = Path(args.out)
+    if out.resolve() == (ROOT / "index-v4.html").resolve():
+        print("refuse to write index-v4.html", file=sys.stderr)
+        return 3
+    refuse_frozen_write(out)
     source_html = Path(args.source).read_text(encoding="utf-8")
     bindings = json.loads(Path(args.bindings).read_text())["bindings"]
     snapshot = json.loads(Path(args.snapshot).read_text())
@@ -294,11 +298,10 @@ def main() -> int:
     except RuntimeError as e:
         print(str(e), file=sys.stderr)
         return 3
+    if code != 0:
+        print(f"render exit {code}; wrote nothing", file=sys.stderr)
+        return code
 
-    out = Path(args.out)
-    refuse_frozen_write(out)
-    if out.name == "index-v4.html":
-        rendered = apply_roster(rendered)
     out.parent.mkdir(parents=True, exist_ok=True)
     tmp = out.with_suffix(".tmp")
     tmp.write_text(rendered, encoding="utf-8")

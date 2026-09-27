@@ -62,7 +62,7 @@ def main() -> int:
     print("  1. collectors/run_collectors.py --live")
     print("  2. renderer/build_snapshot.py  (refuses a partial pull unless you name the failed metrics)")
     print(f"  3. renderer/build_binding_manifest.py --html the previous report --out the candidate manifest")
-    print(f"  4. renderer/render_report.py --out {candidate}")
+    print(f"  4. renderer/render_report.py --source <previous report> --snapshot <snapshot> --bindings <manifest> --out {candidate}")
     print("  5. wrap stance paragraphs as MANUAL zones")
     if args.walk:
         print("  6. wallet walk into state/siren-state.json, then embed that file")
