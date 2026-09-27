@@ -1,30 +1,37 @@
 # Weekly report
 
-Read this before touching the page. The live file stays `index-v4.html`.
+The live file stays `index-v4.html`. Do not push from this command.
 
 ## Before you start
 
-1. Edit `config/report.json` only: report number, report date, previous report date, held coins, hidden coins, dormant coins, siren-walk coins.
-2. The pipeline files must be committed. `python3 make_report.py` stops if they are still edited.
-3. Do not edit `renderer/`, `integrity/`, `collectors/`, or `lib/` to force a report through. A failed check is a stop.
+Edit `config/report.json` only: report number, date, previous date, held coins, hidden coins, dormant coins, siren-walk coins.
+
+`python3 make_report.py` stops if the pipeline files are still edited. Do not edit `renderer/`, `integrity/`, `collectors/`, or `lib/` to force a pass.
 
 ## Run
 
+Offline, from a saved pull:
+
 ```bash
-python3 make_report.py
+python3 make_report.py --replay runtime-NOT-FOR-GH/job2/20260926T103538Z_3e1c5167
 ```
 
-That checks the tree. It does not change the live page.
+A new pull (this uses the network):
 
-When the tree is clean and you want the next report, the same command's `--run` is not switched on yet. Do not type numbers in. Do not open a browser to fetch them. A candidate file, if rendered, goes to `runtime-NOT-FOR-GH/candidate-NN.html`.
+```bash
+python3 make_report.py --live
+```
 
-## After the candidate exists
+Both write `runtime-NOT-FOR-GH/candidate-NN.html`. They do not replace the live page.
 
-1. Fill only the lines marked `MANUAL:zone` for this report number. Do not invent the others.
-2. Run the checker and `integrity/stale_gate.py`. Both must pass.
-3. A stale date, a repeated "7d 7d", a raw long decimal, or a changed dormant coin fails the build.
-4. Promote the candidate onto `index-v4.html` only after that. Then review. Push is separate and manual.
+Check the page:
+
+```bash
+python3 integrity/stale_gate.py --html runtime-NOT-FOR-GH/candidate-NN.html
+```
+
+A stale line fails that check. Fill only the lines marked `MANUAL:zone`. Do not invent the others.
 
 ## Wallet
 
-Held coins only, from `config/report.json`. Proved 1 Aug starts live in `state/siren-state.json`. The page is a copy of that file. Do not walk sold coins. Plain Solana reads only. Public RPC first. No expensive Helius history.
+Held coins only, from `config/report.json`. Proved 1 Aug starts live in `state/siren-state.json`. A walk merges into that file. It does not replace it. Plain Solana reads only. Public RPC first. No expensive Helius history.
