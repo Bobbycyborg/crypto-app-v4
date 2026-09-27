@@ -229,6 +229,8 @@ def render_report(
     for w in writer_quarantine.get("writers", []):
         frag = w["source_fragment"]
         count = out.count(frag)
+        if count == 0 and w["replacement_fragment"] in out:
+            continue
         if count != w["expected_match_count"]:
             raise RuntimeError(f"WRITER_QUARANTINE_MISMATCH:{w['writer_id']}:{count}")
         out = out.replace(frag, w["replacement_fragment"])

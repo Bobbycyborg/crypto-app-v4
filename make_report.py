@@ -112,13 +112,17 @@ def _run_steps(replay: Path | None, live: bool) -> int:
     bindings = [row for row in built["bindings"] if row.get("metric_id") in ok_ids]
     print(f"bindings used {len(bindings)} of {len(built['bindings'])}")
     writers = json.loads((ROOT / "renderer/writer-quarantine.json").read_text())
-    rendered, _manifest, render_code = render_report(
-        source_html=source.read_text(encoding="utf-8"),
-        bindings=bindings,
-        snapshot=snap,
-        writer_quarantine=writers,
-        publishable=False,
-    )
+    try:
+        rendered, _manifest, render_code = render_report(
+            source_html=source.read_text(encoding="utf-8"),
+            bindings=bindings,
+            snapshot=snap,
+            writer_quarantine=writers,
+            publishable=False,
+        )
+    except RuntimeError as exc:
+        print(f"{exc}; wrote nothing", file=sys.stderr)
+        return 3
     if render_code != 0:
         print(f"render exit {render_code}; wrote nothing", file=sys.stderr)
         return render_code
