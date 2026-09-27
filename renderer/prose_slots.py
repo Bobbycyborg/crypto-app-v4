@@ -283,8 +283,10 @@ def _btc_lines(html: str, snapshot: dict) -> str:
                 {"type": "numeric", "scientific": True, "decimal_places": 3, "exponent_pad": 2},
             )
             block = block.replace("5.367e-05", sci)
-        block = block.replace("As of 25 Aug · FRESH", "As of UNKNOWN")
-        block = block.replace("As of · 25 Aug 2026 · FRESH", "As of · UNKNOWN")
+        pretty = _pretty((lev or {}).get("source_as_of")) or "UNKNOWN"
+        block = block.replace("As of 25 Aug · FRESH", f"As of {pretty}")
+        block = block.replace("As of · 25 Aug 2026 · FRESH", f"As of · {pretty}")
+        block = block.replace("25 Aug 2026 · FRESH", pretty)
         return block
 
     return _in_articles(html, "btc", one)

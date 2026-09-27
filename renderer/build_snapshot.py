@@ -7,7 +7,7 @@ import argparse
 import hashlib
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -58,6 +58,14 @@ def _derived_as_of(inputs: list[Any], facts_by_id: dict[str, dict[str, Any]]) ->
         as_ofs.add(as_of)
     if len(as_ofs) == 1:
         return next(iter(as_ofs))
+    parsed = []
+    for stamp in as_ofs:
+        try:
+            parsed.append(datetime.strptime(stamp[:19], "%Y-%m-%dT%H:%M:%S"))
+        except ValueError:
+            return "UNKNOWN"
+    if max(parsed) - min(parsed) <= timedelta(hours=6):
+        return max(parsed).strftime("%Y-%m-%dT%H:%M:%SZ")
     return "UNKNOWN"
 
 

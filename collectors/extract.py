@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
@@ -195,7 +196,10 @@ def explicit_html_selector(html: str, selector: dict[str, Any]) -> Any:
             raise ExtractError("VALUE_INVALID", f"unparseable flow cell {raw!r}") from exc
         return -val if neg else val
 
-    daily: list[Decimal] = []
+    dated: list[tuple] = []
+    from renderer.report_config import load_report
+
+    cutoff = datetime.strptime(load_report()["report_date"], "%Y-%m-%d").date()
     for row in best:
         label = (row[0] or "").strip()
         if not date_re.match(label):
@@ -204,13 +208,19 @@ def explicit_html_selector(html: str, selector: dict[str, Any]) -> Any:
         parsed = parse_millions(total_cell)
         if parsed is None:
             continue
-        daily.append(parsed)
-    if not daily:
+        try:
+            when = datetime.strptime(label, "%d %b %Y").date()
+        except ValueError:
+            continue
+        if when > cutoff:
+            continue
+        dated.append((when, parsed))
+    if not dated:
         raise ExtractError("VALUE_MISSING", "no numeric daily ETF totals")
+    dated.sort(key=lambda item: item[0], reverse=True)
+    newest_first = [value for _, value in dated]
     if window == "latest":
-        return daily[0] if selector.get("order") == "newest_first" else daily[-1]
-    # Farside tables are typically newest-first
-    newest_first = daily
+        return newest_first[0]
     if window == "7d":
         if len(newest_first) < 7:
             raise ExtractError("VALUE_MISSING", "need 7 daily ETF rows")

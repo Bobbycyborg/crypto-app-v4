@@ -117,14 +117,14 @@ REQUESTS: dict[str, dict[str, Any]] = {
     "farside.html.btc": {
         "source_key": "farside",
         "method": "GET",
-        "url": "https://farside.co.uk/btc/",
+        "url": "https://farside.co.uk/bitcoin-etf-flow-all-data/",
         "headers": FARSIDE_HEADERS,
         "response_kind": "html",
     },
     "farside.html.eth": {
         "source_key": "farside",
         "method": "GET",
-        "url": "https://farside.co.uk/eth/",
+        "url": "https://farside.co.uk/ethereum-etf-flow-all-data/",
         "headers": FARSIDE_HEADERS,
         "response_kind": "html",
     },

@@ -65,6 +65,54 @@ def _skip_placeholder(date_label: str, total: str, cells: list[str]) -> bool:
     return False
 
 
+def _cutoff_date():
+    from datetime import datetime
+
+    from renderer.report_config import load_report
+
+    return datetime.strptime(load_report()["report_date"], "%Y-%m-%d").date()
+
+
+def _keep_through_report(rows: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    from datetime import datetime
+
+    cutoff = _cutoff_date()
+    kept = []
+    for label, total in rows:
+        try:
+            when = datetime.strptime(label, "%d %b %Y").date()
+        except ValueError:
+            continue
+        if when <= cutoff:
+            kept.append((label, total))
+    return kept
+
+
+def rows_from_stacked(text: str) -> list[tuple[str, str]]:
+    """Full-history pages via the reader put the date on its own line and the total last."""
+    lines = text.splitlines()
+    rows: list[tuple[str, str]] = []
+    i = 0
+    while i < len(lines):
+        label = lines[i].strip().rstrip("\t")
+        if not _DATE_RE.match(label):
+            i += 1
+            continue
+        nums: list[str] = []
+        i += 1
+        while i < len(lines) and not _DATE_RE.match(lines[i].strip().rstrip("\t")):
+            token = lines[i].strip().rstrip("\t")
+            if token.lower().startswith("total"):
+                break
+            if token and re.fullmatch(r"\(?[\d,.]+\)?", token):
+                nums.append(token)
+            i += 1
+        if nums:
+            rows.append((label, nums[-1]))
+    rows.reverse()
+    return _keep_through_report(rows)
+
+
 def rows_from_markdown(text: str) -> list[tuple[str, str]]:
     parsed: list[tuple[str, str]] = []
     for line in text.splitlines():
@@ -79,7 +127,7 @@ def rows_from_markdown(text: str) -> list[tuple[str, str]]:
             continue
         parsed.append((cells[0], total))
     parsed.reverse()
-    return parsed
+    return _keep_through_report(parsed)
 
 
 def rows_from_tftc(payload: dict) -> list[tuple[str, str]]:
@@ -135,16 +183,26 @@ _BROWSER = {
 }
 
 
-def _from_reader(request_key: str, page: str) -> HttpResponse | None:
-    """A public reader of the live Farside page. Not the August file."""
+_READER_PAGES = {
+    "farside.html.btc": "bitcoin-etf-flow-all-data/",
+    "farside.html.eth": "ethereum-etf-flow-all-data/",
+    "farside.html.sol": "sol/",
+}
+
+
+def _from_reader(request_key: str) -> HttpResponse | None:
+    """Public reader of the full-history page. Not the August file."""
+    page = _READER_PAGES.get(request_key)
+    if not page:
+        return None
     url = f"https://r.jina.ai/https://farside.co.uk/{page}"
     try:
         resp = request("GET", url, extra_headers={"User-Agent": "Mozilla/5.0", "Accept": "text/plain"})
     except HttpError:
         return None
     text = resp.body.decode("utf-8", "replace")
-    rows = rows_from_markdown(text)
-    if len(rows) < 7:
+    rows = rows_from_markdown(text) or rows_from_stacked(text)
+    if len(rows) < 30:
         return None
     spec = SPECS[request_key]
     html = _html_page(spec["title"], spec["tickers"], rows)
@@ -166,14 +224,12 @@ def farside_failover(request_key: str) -> HttpResponse:
         if b"Just a moment" in resp.body or b"etf-fallback" in resp.body:
             last = f"blocked page {url}"
             continue
-        resp.headers["X-V4-Etf-Source"] = "farside"
+        resp.headers["X-V4-Etf-Source"] = "farside-direct"
         return resp
-    page = {"farside.html.btc": "btc/", "farside.html.eth": "eth/", "farside.html.sol": "sol/"}.get(request_key)
-    if page:
-        via = _from_reader(request_key, page)
-        if via is not None:
-            return via
-        last = "reader returned too few rows"
+    via = _from_reader(request_key)
+    if via is not None:
+        return via
+    last = "reader returned fewer than 30 trading days"
     if request_key == "farside.html.btc":
         resp = request("GET", TFTC_BTC, extra_headers={"Accept": "application/json"})
         payload = json.loads(resp.body.decode("utf-8"))

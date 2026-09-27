@@ -250,6 +250,11 @@ def payload_as_of(entry: dict[str, Any], cap: Capture) -> str | None:
             return when.strftime("%Y-%m-%dT%H:%M:%SZ")
         if parsed.get("last_updated"):
             return str(parsed["last_updated"])
+        for key in ("time", "closeTime"):
+            raw = parsed.get(key)
+            if isinstance(raw, (int, float)) and raw > 10**11:
+                when = datetime.fromtimestamp(int(raw) / 1000, timezone.utc)
+                return when.strftime("%Y-%m-%dT%H:%M:%SZ")
         meta = re.search(r'name="v4-updated-through" content="(20\d\d-\d\d-\d\d)"', cap.html or "")
         if meta:
             return meta.group(1) + "T00:00:00Z"
