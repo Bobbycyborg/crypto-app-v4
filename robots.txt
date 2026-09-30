@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Disallow: /cade973a9354217f.html
