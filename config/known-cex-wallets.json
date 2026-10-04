@@ -2060,6 +2060,13 @@
       "source": "https://blockchainreporter.net/dwf-labs-unveils-official-wallets-used-for-buyouts-on-secondary-marketplaces/",
       "confidence": "HIGH",
       "g1_seeded": "2026-08-26"
+    },
+    "u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w": {
+      "label": "Gate.io deposit/hot wallet (Jupiter CEX:GATE.IO)",
+      "type": "cex",
+      "entity": "Gate.io",
+      "source": "Jupiter CEX:GATE.IO label",
+      "confidence": "MEDIUM"
     }
   },
   "_changelog_2026-08-21": "Added official OKX/Bybit/Bitfinex Solana PoR keys as type=cex dests. Transfer != sale.",

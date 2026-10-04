@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -300,10 +301,42 @@ def _tx_mint_delta(tx: dict, wallet: str, mint: str) -> tuple[float, float, list
     return sent, received, hops
 
 
+def _tx_mmcex_in(tx: dict, wallet: str, mint: str, cex: dict[str, str], mm: dict[str, str]) -> float:
+    """Tokens a CEX/MM-labelled receiver gained in a tx where `wallet` sent."""
+    meta = (tx or {}).get("meta") or {}
+    bal: dict[str, float] = {}
+    for key, sign in (("preTokenBalances", -1.0), ("postTokenBalances", 1.0)):
+        for b in meta.get(key) or []:
+            if b.get("mint") == mint:
+                o = b.get("owner") or ""
+                bal[o] = bal.get(o, 0.0) + sign * float((b.get("uiTokenAmount") or {}).get("uiAmount") or 0)
+    if bal.get(wallet, 0.0) >= 0:
+        return 0.0
+    return sum(d for o, d in bal.items() if o != wallet and d > 0 and _dest_label(o, cex, mm))
+
+
+_POOL_TAG_RE = re.compile(r"whirlpool|raydium|meteora|dlmm|clmm|\bamm\b|pumpswap|\bpool\b", re.I)
+_POOL_WALLETS: set[str] | None = None
+
+
+def _is_pool_wallet(addr: str) -> bool:
+    """DEX pool / pool authority sends are swap flow, not a holder selling."""
+    global _POOL_WALLETS
+    if _POOL_WALLETS is None:
+        _POOL_WALLETS = {
+            a for tags in load_tags().values() for a, name in tags.items() if _POOL_TAG_RE.search(name or "")
+        }
+    return addr in _POOL_WALLETS
+
+
 def _sent_dest_mmcex(
     row: dict[str, Any], watched: set[str], cex: dict[str, str], mm: dict[str, str]
 ) -> str:
     if float(row.get("sent") or 0) <= 0:
+        return ""
+    if _is_pool_wallet(row.get("wallet") or ""):
+        return ""
+    if _dest_label(row.get("wallet") or "", cex, mm):
         return ""
     return _last_outbound_dest(row.get("new_hops") or [], watched, cex, mm)
 
@@ -322,8 +355,6 @@ def _coin_loud(
 
 def _last_outbound_dest(hops: list[str], watched: set[str], cex: dict[str, str], mm: dict[str, str]) -> str:
     for h in hops:
-        if h in watched:
-            continue
         lab = _dest_label(h, cex, mm)
         if lab:
             return lab
@@ -465,7 +496,7 @@ def check_wallet(
     balance = _token_balance(address, mint)
     time.sleep(0.28)
     sigs, reached_aug1 = _page_signatures(address)
-    sent = received = 0.0
+    sent = received = sent_mmcex = 0.0
     hops: list[str] = []
     last_out_amt = 0.0
     last_out_ts: int | None = None
@@ -492,6 +523,8 @@ def check_wallet(
             sent += ds
             received += dr
             hops.extend(dh)
+            if ds > 0:
+                sent_mmcex += _tx_mmcex_in(tx, address, mint, cex, mm)
         if ds > 0 or dr > 0:
             mint_after.append((ts, tx))
 
@@ -530,7 +563,7 @@ def check_wallet(
     seen_h: set[str] = set()
     uniq: list[str] = []
     for h in hops:
-        if h in watched or h in seen_h:
+        if h in seen_h or (h in watched and not _dest_label(h, cex, mm)):
             continue
         seen_h.add(h)
         uniq.append(h)
@@ -559,6 +592,7 @@ def check_wallet(
         "status": status,
         "line": line,
         "sent": sent,
+        "sent_mmcex": sent_mmcex,
         "received": received,
         "new_hops": uniq,
         "balance": balance,
@@ -591,7 +625,7 @@ def coin_summary(
         return ""
     loud_rows = [r for r in rows if _is_loud_row(r, watched, cex, mm)]
     if loud_rows:
-        total = sum(float(r.get("sent") or 0) for r in loud_rows)
+        total = sum(float(r.get("sent_mmcex", r.get("sent")) or 0) for r in loud_rows)
         return f"{len(loud_rows)} to MM/CEX · {fmt_tokens(total)} {coin}"
     return f"{n} watched · no MM/CEX send"
 
@@ -690,6 +724,7 @@ def run_check() -> dict[str, Any]:
                     "line": r["line"],
                     "status": r["status"],
                     "sent": r["sent"],
+                    "sent_mmcex": r.get("sent_mmcex", r["sent"]),
                     "received": r["received"],
                     "new_hops": r["new_hops"],
                     "balance": r.get("balance"),
