@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synopsis rules</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --card: #fff;
+    --ink: #1a1a1a;
+    --soft: #3a3733;
+    --muted: #6b6560;
+    --line: #e4ddd4;
+    --orange: #c45a00;
+    --no: #9b4040;
+    --shadow: 0 3px 14px rgba(26,26,26,0.08);
+    --display: Futura, "Futura PT", Jost, sans-serif;
+    --body: "DM Sans", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: var(--body);
+    color: var(--ink);
+    font-size: 1.2rem;
+    line-height: 1.45;
+  }
+  header, main {
+    width: 85%;
+    margin: 0 auto;
+  }
+  header { padding: 2rem 0 0; }
+  .kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.4rem;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: 2.28rem;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0;
+    align-self: center;
+  }
+  h1 span {
+    background: linear-gradient(100deg, #c45a00 0%, #9b4040 55%, #2d6b4f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .lede { margin: 0; color: var(--soft); max-width: 38rem; }
+  main { padding: 0 0 4rem; }
+  h2 {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    margin: 1.1rem 0 0.8rem;
+    text-align: center;
+    opacity: 0.5;
+  }
+  .rule-row {
+    display: grid;
+    grid-template-columns: 14% 1fr 1fr 1fr 1fr;
+    gap: 0.65rem;
+    align-items: stretch;
+  }
+  .rule-card {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 0.9rem 0.75rem;
+    font-size: 1.14rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .rule-card .n {
+    display: block;
+    font-family: var(--display);
+    font-style: normal;
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 1.28rem;
+    margin-bottom: 0.15rem;
+  }
+  .films { display: grid; gap: 0.7rem; }
+  @media (min-width: 720px) {
+    .films { grid-template-columns: 1fr 1fr; }
+  }
+  .block {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 1rem 1.15rem 0.4rem;
+  }
+  .block h3 {
+    margin: 0 0 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .block ol, .block ul { margin: 0; padding: 0 0 0.6rem 1.15rem; }
+  .block li { margin: 0 0 0.35rem; }
+  .miss { color: var(--no); font-weight: 600; }
+  article {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 1.15rem 1.2rem 0.4rem;
+    margin: 0 0 0.9rem;
+  }
+  article h3 {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    margin: 0 0 0.8rem;
+  }
+  .ex { margin: 0 0 0.85rem; }
+  .tag {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+  .tag.no { color: var(--no); }
+  .ex p { margin: 0; color: var(--soft); }
+  .grid-wrap {
+    overflow: auto;
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+  table.demos {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 1rem;
+  }
+  table.demos th, table.demos td {
+    vertical-align: top;
+    text-align: left;
+    padding: 0.85rem 0.75rem;
+    border-bottom: 1px solid var(--line);
+    word-wrap: break-word;
+  }
+  table.demos th {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #faf8f4;
+    position: sticky;
+    top: 0;
+  }
+  table.demos th:first-child,
+  table.demos td:first-child {
+    width: 14%;
+    font-weight: 700;
+    color: var(--ink);
+    position: sticky;
+    left: 0;
+    background: #faf8f4;
+    z-index: 1;
+  }
+  table.demos th:first-child { z-index: 2; }
+  table.demos td { color: var(--soft); font-weight: 400; }
+  table.demos td.c1, table.demos th.c1 { background: #f6ebe3; }
+  table.demos td.c2, table.demos th.c2 { background: #e7f0ea; }
+  table.demos td.c3, table.demos th.c3 { background: #ece8f4; }
+  table.demos td.c4, table.demos th.c4 { background: #f8ebe8; }
+  table.demos td.star { color: var(--no); }
+  .stop {
+    margin: 0.8rem 0 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  table.demos tr.out td,
+  table.demos tr.out td:first-child {
+    color: #b0aaa4;
+    background: #f3f1ee;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="rule-row">
+    <h1><span>Synopsis<br>rules</span></h1>
+    <div class="rule-card"><span class="n">1</span>Who is it about?</div>
+    <div class="rule-card"><span class="n">2</span>What is their life before the change?</div>
+    <div class="rule-card"><span class="n">3</span>What changes that life?</div>
+    <div class="rule-card"><span class="n">4</span>What does that force them into?</div>
+  </div>
+</header>
+<main>
+  <h2>Demos</h2>
+  <div class="grid-wrap">
+  <table class="demos">
+    <thead>
+      <tr>
+        <th>Film</th>
+        <th class="c1">1. Who is it about?</th>
+        <th class="c2">2. What is their life before the change?</th>
+        <th class="c3">3. What changes that life?</th>
+        <th class="c4">4. What does that force them into?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Incendies</td>
+        <td class="c1">A mother's dying wish creates a painful puzzle her children are forced to solve.</td>
+        <td class="c2">At the reading of their mother's will, twins Jeanne and Simon are given instructions to locate the father they believed was dead and the brother neither knew existed.</td>
+        <td class="c3">They travel to the Middle East to piece together the story of the woman who brought them into the world,</td>
+        <td class="c4">only to make a shocking discovery.</td>
+      </tr>
+      <tr>
+        <td>The Lives of Others</td>
+        <td class="c1">In 1984 East Berlin, dedicated Stasi officer Gerd Wiesler,</td>
+        <td class="c2">doubting that a famous playwright is loyal to the Communist Party,</td>
+        <td class="c3">receives approval to spy on the man and his actress-lover Christa-Maria.</td>
+        <td class="c4">Wiesler becomes unexpectedly sympathetic to the couple, then faces conflicting loyalties when his superior takes a liking to Christa-Maria and orders Wiesler to get the playwright out of the way.</td>
+      </tr>
+      <tr>
+        <td>Manchester by the Sea</td>
+        <td class="c1">Lee's spare existence</td>
+        <td class="c2">is suddenly ruptured when the death of his brother Joe forces him to return to the hometown he abandoned years before.</td>
+        <td class="c3">Rocked by contact with his estranged ex-wife and the revelation that Joe has made him guardian of his teenage son,</td>
+        <td class="c4">Lee is forced to face up to painful memories and new-found levels of responsibility as he reconnects with his family.</td>
+      </tr>
+      <tr>
+        <td>There Will Be Blood</td>
+        <td class="c1">Daniel Plainview and son</td>
+        <td class="c2">are independent oil men, looking for prospects in California at the turn of the 20th century.</td>
+        <td class="c3">They are challenged by a young preacher, Eli Sunday, whose own ambition is matched by Plainview's.</td>
+        <td class="c4">Their battle forms the center of a scary, darkly-comic historical journey into an abyss of madness.</td>
+      </tr>
+      <tr>
+        <td>The Secret in Their Eyes</td>
+        <td class="c1">Recently retired criminal court investigator Benjamin</td>
+        <td class="c2">decides to write a novel based on a twenty-five-year-old unresolved rape and murder case which still haunts him. Sharing his plans with Irene, the beautiful judge and former colleague he has secretly been in love with for years,</td>
+        <td class="c3">Benjamin's initial involvement with the case is shown through flashbacks, as he sets out to identify the murderer.</td>
+        <td class="c4">But Benjamin's search for the truth will put him at the center of a judicial nightmare, as the mystery of the heinous crime continues to unfold in the present, testing the limits of a man seeking justice and personal fulfillment at last.</td>
+      </tr>
+      <tr>
+        <td>Never Let Me Go</td>
+        <td class="c1">Friends Kathy, Tommy and Ruth</td>
+        <td class="c2">grow up together at a seemingly idyllic boarding school in the English countryside.</td>
+        <td class="c3">When they leave the school and the horrible truth of their true purpose is revealed to them,</td>
+        <td class="c4">they must simultaneously confront deep-seated feelings of love, jealousy and betrayal that threaten to tear their friendship asunder.</td>
+      </tr>
+      <tr>
+        <td>Good Will Hunting</td>
+        <td class="c1">Will has a genius-level IQ</td>
+        <td class="c2">but chooses to work as a janitor at MIT.</td>
+        <td class="c3">When he solves a difficult graduate-level math problem, his talents are discovered by a Professor Lambeau, who decides to help the misguided youth reach his potential. When Will is arrested for attacking a police officer,</td>
+        <td class="c4">Professor Lambeau makes a deal to get leniency for him if he will get treatment from a therapist.</td>
+      </tr>
+      <tr>
+        <td>Parasite</td>
+        <td class="c1">Meet the Park family, the picture of aspirational wealth. And the Kim family, rich in street smarts but not much else.</td>
+        <td class="c2">Be it chance or fate, these two houses are brought together and the Kims sense a golden opportunity. Masterminded by college-aged Ki-woo, the Kim children expediently install themselves as tutor and art therapist to the Parks. Soon, a symbiotic relationship forms between the two families. The Kims provide "indispensable" luxury services while the Parks obliviously bankroll their entire household.</td>
+        <td class="c3">When a parasitic interloper threatens the Kims' newfound comfort,</td>
+        <td class="c4">a savage, underhanded battle for dominance breaks out, threatening to destroy the fragile ecosystem between the Kims and the Parks. By turns darkly hilarious and heart-wrenching, Parasite showcases a modern master at the top of his game.</td>
+      </tr>
+      <tr>
+        <td>You Can Count On Me</td>
+        <td class="c1">Grown-up siblings who couldn't be more different,</td>
+        <td class="c2">conservative Sammy stayed in her quiet hometown while rebellious Terry was on the road, drifting in and out of trouble.</td>
+        <td class="c3">When Terry suddenly comes to visit, his presence has a profound influence on Sammy's world. As Terry forms a special friendship with Sammy's precocious eight-year-old son, Rudy, Sammy rediscovers her passion for life, entertaining a marriage proposal from her boyfriend while having a fling with her boss.</td>
+        <td class="c4">But when Terry's behavior becomes disruptive, Sammy must finally confront the choices of the past...and make new ones to renew her family's future.</td>
+      </tr>
+      <tr>
+        <td>Y Tu Mamá También</td>
+        <td class="c1">Julio and Tenoch are typical over-sexed and under-occupied teenagers.</td>
+        <td class="c2">During a festive afternoon with their families they meet Luisa, a twenty eight year old Spaniard, and flirt with her with all the style and grace seventeen year old boys are known for.</td>
+        <td class="c3">As a joke, they invite her to accompany them on a road trip to a beach called Boca del Cielo ("Heaven's Mouth"), neglecting to mention that they wouldn't know where to find it, even if it did actually exist.</td>
+        <td class="c4">To their astonishment, she accepts.</td>
+      </tr>
+      <tr>
+        <td>The Magician</td>
+        <td class="c1">The Magician follows charismatic, yet volatile hitman Ray Shoesmith around Melbourne while he is being filmed by his neighbour and film student Massimo.</td>
+        <td class="c2">As he goes about his chilling business — threatening violence and in some cases making good on those threats — the camera continues to roll. Fuelled by offbeat conversation, dark humour and emotional crises - the character is a killer, a man who would as soon pat the dog as shoot it, but without smoothing out any of the rough edges.</td>
+        <td class="c3">Under contract to kill a low life of the Melbourne underworld</td>
+        <td class="c4">he receives a more tempting offer.</td>
+      </tr>
+      <tr>
+        <td>What We Do in the Shadows</td>
+        <td class="c1">Flatmates Viago, Deacon, and Vladislav are three vampires who are just trying to get by in modern society;</td>
+        <td class="c2">from paying rent and sticking to the housework roster to trying to get invited in to nightclubs, they're just like anyone else – except they're immortal and must feast on human blood.</td>
+        <td class="c3">When their 8,000 year old flatmate, Petyr, turns 20-something human hipster, Nick, into a vampire, the guys must teach him the ropes and guide him through his new-found eternal life. In return they are forced to learn about modern society, fashions, and technology. But it's the introduction of Nick's human friend, Stu, that really changes the vampire's lives and attitudes towards the ever-changing world around them.</td>
+        <td class="c4">When Stu's life is threatened, the vamps show us that even though your heart may be cold and dead, it doesn't mean you have no feelings.</td>
+      </tr>
+      <tr>
+        <td>Four Lions</td>
+        <td class="c1">FOUR LIONS tells an authentic and startlingly funny story of four wannabe jihadis</td>
+        <td class="c2">caught in a spiral of ideology, squabbles and lethal errors. Omar wants to "bring havoc to this torture endorsing Disneyland", Barry wants to bring on Armageddon by bombing a mosque.</td>
+        <td class="c3">Sent home in disgrace from training camp, Omar takes on the mission himself so Barry does everything in his power to trip him up.</td>
+        <td class="c4">In a hilarious and breathtaking climax Omar finds himself hurtling towards the London Marathon in a van full of explosives, fancy dress costumes and a cell of berks who all want to strike a blow for the cause but can't strike a match without punching themselves in the face.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</main>
+</body>
+</html>

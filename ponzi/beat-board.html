@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ponzi — beat board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f1ec;
+      --surface: rgba(255,255,255,0.62);
+      --surface-strong: #ffffff;
+      --ink: #1a1a1a;
+      --body-soft: #3a3733;
+      --muted: #6b6560;
+      --faint: #d8d2c8;
+      --orange: #c45a00;
+      --shadow: 0 3px 14px rgba(26,26,26,0.09);
+      --display: Futura, "Futura PT", Jost, sans-serif;
+      --bodyfont: "DM Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html {
+      font-size: min(1.15vw, 2.05vh);
+    }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--bodyfont);
+    }
+    .circle {
+      container-type: inline-size;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0.45rem;
+      padding: 0.7rem 0.7rem 0.75rem;
+      border-bottom: 0.06rem solid var(--faint);
+    }
+    .step {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      column-gap: 0.28rem;
+      background: var(--surface-strong);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 0.4rem 0.5rem 0.45rem;
+      min-width: 0;
+    }
+    .step .n {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: baseline;
+      font-family: var(--display);
+      font-size: 0.54rem;
+      font-weight: 700;
+      font-variant-numeric: lining-nums;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: rgb(255 255 255 / 0.6);
+    }
+    .step strong {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: baseline;
+      min-width: 0;
+      font-family: var(--display);
+      font-size: 0.54rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: #fff;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .step p {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      margin: 0.15rem 0 0;
+      min-width: 0;
+      font-size: 0.68rem;
+      line-height: 1.25;
+      color: rgb(255 255 255 / 0.8);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .step .who {
+      grid-column: 3;
+      grid-row: 1;
+      align-self: baseline;
+      font-family: var(--display);
+      font-size: 0.54rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: rgb(255 255 255 / 0.6);
+    }
+    .harmon .step,
+    .daniel .step {
+      --track: 100cqi;
+      --gap: 0.45rem;
+      --w: calc((var(--track) - 7 * var(--gap)) / 8);
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: var(--track) 100%;
+    }
+    .harmon .step {
+      background-image: linear-gradient(100deg, rgb(196 90 0 / 0.6) 0%, rgb(155 64 64 / 0.6) 48%, rgb(45 107 79 / 0.6) 100%);
+    }
+    .daniel .step {
+      background-image: linear-gradient(280deg, rgb(196 90 0 / 0.6) 0%, rgb(155 64 64 / 0.6) 48%, rgb(45 107 79 / 0.6) 100%);
+    }
+    .harmon .step:nth-child(1),
+    .daniel .step:nth-child(1) { background-position: 0 0; }
+    .harmon .step:nth-child(2),
+    .daniel .step:nth-child(2) { background-position: calc(-1 * (var(--w) + var(--gap))) 0; }
+    .harmon .step:nth-child(3),
+    .daniel .step:nth-child(3) { background-position: calc(-2 * (var(--w) + var(--gap))) 0; }
+    .harmon .step:nth-child(4),
+    .daniel .step:nth-child(4) { background-position: calc(-3 * (var(--w) + var(--gap))) 0; }
+    .harmon .step:nth-child(5),
+    .daniel .step:nth-child(5) { background-position: calc(-4 * (var(--w) + var(--gap))) 0; }
+    .harmon .step:nth-child(6),
+    .daniel .step:nth-child(6) { background-position: calc(-5 * (var(--w) + var(--gap))) 0; }
+    .harmon .step:nth-child(7),
+    .daniel .step:nth-child(7) { background-position: calc(-6 * (var(--w) + var(--gap))) 0; }
+    .harmon .step:nth-child(8),
+    .daniel .step:nth-child(8) { background-position: calc(-7 * (var(--w) + var(--gap))) 0; }
+    .board {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      column-gap: 0.45rem;
+      align-items: start;
+      padding: 0 0.7rem 1.4rem;
+    }
+    .act {
+      min-width: 0;
+      padding-bottom: 1.4rem;
+    }
+    .act.a1,
+    .act.a3 { grid-column: span 2; }
+    .act.a2 { grid-column: span 4; }
+    .act h2 {
+      margin: 0;
+      padding: 1.1rem 0 0;
+      font-family: var(--display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .cols {
+      display: grid;
+      gap: 0.45rem;
+      align-items: start;
+      padding: 1rem 0 0;
+    }
+    .act.a1 .cols,
+    .act.a3 .cols { grid-template-columns: 1fr 1fr; }
+    .act.a2 .cols { grid-template-columns: repeat(4, 1fr); }
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      min-width: 0;
+    }
+    .card {
+      width: 100%;
+      background: var(--surface-strong);
+      border: 0;
+      border-radius: 12px;
+      padding: 0.45rem 0.6rem 0.5rem;
+      box-shadow: var(--shadow);
+    }
+    .act.a1 .card { background: #fffcf8; }
+    .act.a2 .card { background: #f3efe8; }
+    .act.a3 .card { background: #e7e1d8; }
+    .act .card.mp {
+      background: rgba(196, 90, 0, 0.16);
+    }
+    .card .num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-right: 0.35rem;
+    }
+    .card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      color: var(--body-soft);
+    }
+    .arrow {
+      display: block;
+      width: 0.32rem;
+      height: 0.32rem;
+      margin: 0.15rem auto 0.05rem;
+      border-right: 0.09rem solid rgba(107, 101, 96, 0.45);
+      border-bottom: 0.09rem solid rgba(107, 101, 96, 0.45);
+      transform: rotate(45deg);
+    }
+    .arrow.up-right {
+      width: 0.85rem;
+      height: 0.85rem;
+      margin: 0.1rem auto 0.05rem;
+      border: 0;
+      transform: none;
+      color: var(--muted);
+    }
+    .arrow.up-right svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .midpoint {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      border-left: 0.12rem solid var(--orange);
+      pointer-events: none;
+    }
+    .midpoint span {
+      position: absolute;
+      top: 1.1rem;
+      left: 0.7rem;
+      color: var(--orange);
+      font-family: var(--display);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.62rem;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="circle harmon">
+    <div class="step"><span class="n">1</span><strong>You</strong><p>A zone of comfort</p></div>
+    <div class="step"><span class="n">2</span><strong>Need</strong><p>But they want something</p></div>
+    <div class="step"><span class="n">3</span><strong>Go</strong><p>Into an unfamiliar situation</p></div>
+    <div class="step"><span class="n">4</span><strong>Search</strong><p>Adapt to it</p></div>
+    <div class="step"><span class="n">5</span><strong>Find</strong><p>Get what they wanted</p></div>
+    <div class="step"><span class="n">6</span><strong>Take</strong><p>Pay a heavy price</p></div>
+    <div class="step"><span class="n">7</span><strong>Return</strong><p>Back to the familiar</p></div>
+    <div class="step"><span class="n">8</span><strong>Change</strong><span class="who">DH</span><p>Having changed</p></div>
+  </div>
+  <div class="circle daniel">
+    <div class="step"><span class="n">1</span><strong>Status quo</strong><p>The world, then the inciting incident</p></div>
+    <div class="step"><span class="n">2</span><strong>Predicament</strong><p>Lock-in. No turning back</p></div>
+    <div class="step"><span class="n">3</span><strong>First obstacles</strong><p>The first plan hits a reversal</p></div>
+    <div class="step"><span class="n">4</span><strong>Midpoint</strong><p>The story turns</p></div>
+    <div class="step"><span class="n">5</span><strong>Rising action</strong><p>The midpoint bites back</p></div>
+    <div class="step"><span class="n">6</span><strong>Main culmination</strong><p>All is lost</p></div>
+    <div class="step"><span class="n">7</span><strong>Climax</strong><p>The final confrontation</p></div>
+    <div class="step"><span class="n">8</span><strong>Resolution</strong><span class="who">FD</span><p>A new status quo</p></div>
+  </div>
+  <div class="board">
+    <section class="act a1">
+      <h2>Act 1</h2>
+      <div class="cols">
+        <div class="col">
+          <article class="card"><p><span class="num">01</span> Sits with a homeless man and takes details of his life.</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">02</span> John introduces himself as Matthew Wiseman to an investor, pitches him and gives him a jaw dropping demo</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">03</span> A Reveal</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">04</span> All the World’s…</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">05</span> A Stage</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">06</span> The Product Film</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">07</span> The Influencers</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">08</span> Company Update, VC’s and Hire’s.</p></article><span class="arrow up-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+        </div>
+        <div class="col">
+          <article class="card"><p><span class="num">09</span> Feeders</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">10</span> Chance encounter</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">11</span> An Experience</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">12</span> The Board</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">13</span> The New Team</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">14</span> The Bigger Piece</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">15</span> Just Fake It</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">16</span> The Fake Works</p></article><span class="arrow up-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+        </div>
+      </div>
+    </section>
+    <section class="act a2">
+      <h2>Act 2</h2>
+      <div class="cols">
+        <div class="col">
+          <article class="card"><p><span class="num">19</span> The Wrong Attention</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">20</span> Enough</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">21</span> Runway</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">22</span> Boring Work</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">23</span> The Old Masters</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">24</span> Steal the Crowd</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">25</span> Fine. I’ll Take Your Money</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">26</span> Re-pump the Story — MONTAGE</p></article><span class="arrow up-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+        </div>
+        <div class="col">
+          <article class="card"><p><span class="num">27</span> The Regulator</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">28</span> Truman Starts Asking Questions</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">29</span> Break out the shovels</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">30</span> Keynote Rehearsal</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">31</span> Behind the Curtain</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">32</span> Two Can Play That Game</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">33</span> Playback</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">34</span> The Engineer</p></article><span class="arrow up-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+        </div>
+        <div class="col">
+          <article class="card mp"><p><span class="num">35</span> Disappearing Act</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">36</span> Something’s Come Up</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">37</span> Welcome to Paradise</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">38</span> scene to break up Truman</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">39</span> Office Paradise</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">40</span> You’ve Got This</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">41</span> Build the Office</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">42</span> The Wild Goose Chase</p></article><span class="arrow up-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+        </div>
+        <div class="col">
+          <article class="card"><p><span class="num">43</span> next SEC beat</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">44</span> Truman Needs You</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">45</span> Fucking Do It</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">46</span> Flights Booked</p></article><span class="arrow"></span>
+          <article class="card mp"><p><span class="num">47</span> Three-Week Problem</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">48</span> The SEC returns the bug</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">49</span> Film within a Film</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">50</span> A Scam no more</p></article><span class="arrow up-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+        </div>
+      </div>
+    </section>
+    <section class="act a3">
+      <h2>Act 3</h2>
+      <div class="cols">
+        <div class="col">
+          <article class="card"><p><span class="num">??</span> The Raid of space</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">48</span> Legit Success</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">50</span> Scapegoat</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">51</span> Google Meet Keynote</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">52</span> Late announcement</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">55</span> Keynote inversion</p></article><span class="arrow up-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+        </div>
+        <div class="col">
+          <article class="card"><p><span class="num">56</span> Losing is Winning</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">57</span> Journo Flip</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">58</span> Keynote collapse</p></article><span class="arrow"></span>
+          <article class="card"><p><span class="num">59</span> Masterpiece of fraud</p></article><span class="arrow"></span>
+          <article class="card"><p>Keyser Söze</p></article>
+        </div>
+      </div>
+    </section>
+    <div class="midpoint"><span>mid-point</span></div>
+  </div>
+</body>
+</html>

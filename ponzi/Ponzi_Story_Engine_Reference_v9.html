@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ponzi Story Engine Reference v9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --surface: rgba(255,255,255,0.62);
+    --surface-strong: #ffffff;
+    --ink: #1a1a1a;
+    --body-soft: #3a3733;
+    --muted: #6b6560;
+    --faint: #d8d2c8;
+    --orange: #c45a00;
+    --shadow: 0 3px 14px rgba(26,26,26,0.09);
+    --display: Futura, "Futura PT", Jost, sans-serif;
+    --bodyfont: "DM Sans", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: var(--bodyfont);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  header {
+    padding: 1.6rem 1.5rem 0;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 4;
+  }
+  .kicker {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.35rem;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  h1 .back {
+    color: var(--muted);
+    display: flex;
+    line-height: 0;
+  }
+  h1 .back:hover { color: var(--ink); }
+  h1 .proj {
+    background: linear-gradient(100deg, #c45a00 0%, #9b4040 48%, #2d6b4f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .lede {
+    margin: 0 0 1.1rem;
+    color: var(--muted);
+    max-width: 36rem;
+    font-size: 0.86rem;
+  }
+  .tabs {
+    display: flex;
+    gap: 0.4rem;
+    padding-bottom: 0.9rem;
+  }
+  .tabs button {
+    border: 0;
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    font-family: var(--bodyfont);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .tabs button:hover { background: var(--surface-strong); color: var(--ink); }
+  .tabs button[aria-selected="true"] {
+    background: var(--surface-strong);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+  .wrap { padding: 0 1.25rem 4rem; overflow: auto; }
+  .panel { display: none; }
+  .panel.on { display: block; }
+  .sheet {
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .panel.notes {
+    display: none;
+    padding: 0.25rem 0.15rem;
+  }
+  .panel.notes.on {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .rules-frame {
+    width: 100%;
+    height: calc(100vh - 7.5rem);
+    border: 0;
+    background: transparent;
+  }
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+  }
+  th, td {
+    vertical-align: top;
+    padding: 0.85rem 0.85rem;
+    text-align: left;
+    border-bottom: 1px solid var(--faint);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  th {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: rgba(255,255,255,0.72);
+    position: sticky;
+    top: 0;
+  }
+  td { color: var(--body-soft); }
+  td:first-child, th:first-child {
+    position: sticky;
+    left: 0;
+    background: #faf8f4;
+    color: var(--ink);
+    font-weight: 600;
+    z-index: 2;
+  }
+  th:first-child {
+    z-index: 3;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.6rem;
+  }
+  /* Questions: label + bigger Ponzi, four refs share the rest */
+  .qs col.q { width: 16%; }
+  .qs col.ponzi { width: 24%; }
+  .qs col.ref { width: 15%; }
+  /* Beats: label + wider Ponzi, four refs share the rest */
+  .core col.label { width: 11%; }
+  .core col.ponzi { width: 25%; }
+  .core col.film { width: 16%; }
+  .syn col.label { width: 10%; }
+  .syn col.ponzi, .syn col.film { width: 18%; }
+  .core th:nth-child(2), .core td:nth-child(2) { background: rgba(196, 90, 0, 0.10); }
+  .core th:nth-child(3), .core td:nth-child(3) { background: rgba(196, 90, 0, 0.07); }
+  .core th:nth-child(4), .core td:nth-child(4) { background: rgba(155, 64, 64, 0.07); }
+  .core th:nth-child(5), .core td:nth-child(5) { background: rgba(74, 111, 165, 0.07); }
+  .core th:nth-child(6), .core td:nth-child(6) { background: rgba(45, 107, 79, 0.07); }
+  .core tbody tr:hover td:nth-child(2) { background: rgba(196, 90, 0, 0.16); }
+  .core tbody tr:hover td:nth-child(3) { background: rgba(196, 90, 0, 0.12); }
+  .core tbody tr:hover td:nth-child(4) { background: rgba(155, 64, 64, 0.12); }
+  .core tbody tr:hover td:nth-child(5) { background: rgba(74, 111, 165, 0.12); }
+  .core tbody tr:hover td:nth-child(6) { background: rgba(45, 107, 79, 0.12); }
+  .qs th:nth-child(3), .qs td:nth-child(3) { background: rgba(196, 90, 0, 0.07); }
+  .qs th:nth-child(4), .qs td:nth-child(4) { background: rgba(155, 64, 64, 0.07); }
+  .qs th:nth-child(5), .qs td:nth-child(5) { background: rgba(74, 111, 165, 0.07); }
+  .qs th:nth-child(6), .qs td:nth-child(6) { background: rgba(45, 107, 79, 0.07); }
+  .qs tbody tr:hover td:nth-child(3) { background: rgba(196, 90, 0, 0.12); }
+  .qs tbody tr:hover td:nth-child(4) { background: rgba(155, 64, 64, 0.12); }
+  .qs tbody tr:hover td:nth-child(5) { background: rgba(74, 111, 165, 0.12); }
+  .qs tbody tr:hover td:nth-child(6) { background: rgba(45, 107, 79, 0.12); }
+  .qnote {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.76rem;
+    margin-top: 0.4rem;
+    line-height: 1.4;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: rgba(255,255,255,0.7); }
+  tbody tr:hover td:first-child { background: #fff; }
+  h2 {
+    font-family: var(--display);
+    margin: 1.6rem 0 0.7rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h2:first-child { margin-top: 0.4rem; }
+  .note-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 1rem 1.15rem 0.4rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 0;
+  }
+  ul { margin: 0 0 0.8rem; padding-left: 1.15em; }
+  li { margin: 0 0 0.7rem; color: var(--body-soft); }
+  li strong { color: var(--ink); font-weight: 600; }
+</style>
+
+
+</head>
+<body>
+<header>
+  <h1><span class="proj">Ponzi</span> Story Engine<a class="back" href="index.html" aria-label="Back"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg></a></h1>
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" aria-selected="true" aria-controls="tab-s" id="btn-s">Synopsis</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="tab-q" id="btn-q">Questions</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="tab-b" id="btn-b">Core</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="tab-n" id="btn-n">Notes</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="tab-r" id="btn-r">Rules</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="tab-bb" id="btn-bb">BeatBoard</button>
+  </div>
+</header>
+<div class="wrap">
+  <div id="tab-q" class="panel" role="tabpanel">
+    <div class="sheet"><table class="qs">
+      <colgroup><col class="q"><col class="ponzi"><col class="ref"><col class="ref"><col class="ref"><col class="ref"></colgroup>
+      <thead><tr><th>Question</th><th>Ponzi</th><th>The Magician</th><th>Man Bites Dog</th><th>What We Do in the Shadows</th><th>Four Lions</th></tr></thead>
+      <tbody>
+        <tr><td>1. Who are we following?</td><td>Matthew, through Casey's camera. A financial fraudster building a fraudulent investment company. On screen he is Matthew Wiseman — a stolen identity.</td><td>Ray, a working hitman.</td><td>Ben, an unapologetic serial killer.</td><td>Viago and his vampire household.</td><td>Omar and his terrorist cell.</td></tr><tr><td>2. What are we watching them do?</td><td>Move through VCs, bankers, journalists, exchanges, influencers — pitching and fleecing each one. With Casey, manufacture content, fake metrics, and hype. Keep the numbers climbing: money, views, influencers, backers.</td><td>Ray keeps doing the jobs with Max filming. Each job makes the next problem.</td><td>Ben keeps killing on camera. The crew stays, so the next killing is also the next film.</td><td>They keep living as vampires. Feed, go out, household crap. Nick and Stu kick the next one.</td><td>They keep trying to make the attack real. Train, argue, build a bomb, screw it up, try again.</td></tr><tr><td>3. What repeatedly generates scenes?</td><td>Each new person or institution pulled into the scheme — investor, journalist, influencer, regulator, employee. Each encounter tests whether the lie still breathes.</td><td>Each job makes the next problem.</td><td>Each killing is also the next film.</td><td>Nick and Stu kick the next disruption.</td><td>Each failed attempt makes the mission more dangerous.</td></tr><tr><td>4. What is the central dramatic conflict or pressure?</td><td>Can he keep the fiction convincing as more people, documents and claims pile up? How does he bury the truth while exposing enough to sell the idea?</td><td>Ray has Tony: kill him or let him go, and Max keeps getting dirtier.</td><td>Ben keeps killing as the crew become accomplices.</td><td>Nick wrecks the house, then Stu opens it further.</td><td>Omar trying to force a useless group into a real attack.</td></tr><tr><td>5. What makes each new step escalate?</td><td>Each success brings more people actively pursuing him — check-ins, updates, proof demanded. A growing web expecting the lie to keep performing.</td><td>Every delay with Tony makes it worse.</td><td>Each crossing makes the blowback bigger.</td><td>Recklessness compounds — Petyr dies, Nick is kicked out.</td><td>Failures become exposure, a death, a real target.</td></tr><tr><td>6. What stops them simply succeeding or walking away?</td><td>Casey says they have enough; Matthew does not. Regulators on the scent. The documentary crew becoming complicit. He studies Ponzi and Madoff and tries not to repeat their mistakes. Internal team mistakes as the machine grows.</td><td>Freddy's order, Tony bargaining, Ray's code, Max getting in deeper.</td><td>Police and retaliation. The crew is trapped by its own complicity.</td><td>Their own dysfunction, and what happens if the vampire world is exposed.</td><td>Incompetence, the group fighting itself, police, Waj's doubt.</td></tr><tr><td>7. Is there one central relationship, or is it ensemble-driven?</td><td>Pair. Matthew through Casey's camera. Hans, Truman, the journalist and regulator orbit the machine. AI Bernie Madoff is a recurring device — confidant, not a second protagonist.</td><td>Ray–Max holds the film. Ray–Tony holds the journey.</td><td>Ben and the crew. Not a two-hander.</td><td>Viago-led ensemble. No one pair runs it.</td><td>Ensemble. Omar and Waj is the strongest pair inside it.</td></tr><tr><td>8. What is this actually getting at?<span class="qnote">Satire — central comic or satirical contradiction or target.</span></td><td>Not crypto is bad. Continuity between crypto and trad-fi. Hype, greed, manufactured legitimacy, media and influencer complicity. The fraud looks like a real company. The camera and content apparatus are part of how the con runs.</td><td>Murder treated as ordinary work. Moral codes operating inside amorality.</td><td>Violence, media voyeurism, and documentary complicity.</td><td>Immortal monsters dealing with petty everyday domestic and social problems.</td><td>Extremism and ideological certainty colliding with stupidity, ego and incompetence.</td></tr><tr><td>9. What is the natural end-state of the journey?<span class="qnote">Not one ending. Not the last ten minutes. Soft. Options allowed.</span></td><td>Matthew does not get caught. Options: Keyser Söze vanish; wind down looking legitimate; implode and leave others holding the bag (Truman as scapegoat). He may profit from the collapse (short / deliberate fall). Engineer may make something real. Final image still open.</td><td>Tony's fate is decided. The film is only meant to exist after Ray is dead. Ray later dies.</td><td>The violence rebounds. Ben and the crew share the same fate.</td><td>The household settles into a changed rest.</td><td>The attack becomes real and destroys the cell. Omar dies in what he set in motion.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div id="tab-b" class="panel" role="tabpanel">
+    <div class="sheet"><table class="core">
+      <colgroup><col class="label"><col class="ponzi"><col class="film"><col class="film"><col class="film"><col class="film"></colgroup>
+      <thead><tr><th>Core</th><th>Ponzi</th><th>The Magician</th><th>Man Bites Dog</th><th>What We Do in the Shadows</th><th>Four Lions</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Captivation</td>
+          <td>Matthew sits with a homeless man and treats him like a person — then steals his identity.</td>
+          <td>Ray shoots a man in a garage while Max films. The job is the open.</td>
+          <td>A crew is already with Ben. He is fine with that.</td>
+          <td>Viago gets up. The house is ordinary and undead.</td>
+          <td>Martyrdom videos. They are already ridiculous and committed.</td>
+        </tr>
+        <tr>
+          <td>Inciting Incident</td>
+          <td>Hard cut — he uses that man's name on a VC. Casey is revealed as the camera. The con is now a company.</td>
+          <td>Ray takes Tony for Freddy and brings Max on the road.</td>
+          <td>They keep filming killings as the work of the film.</td>
+          <td>Petyr turns Nick. Stu comes with him.</td>
+          <td>Omar and Waj go to Pakistan to make it real.</td>
+        </tr>
+        <tr>
+          <td>Midpoint</td>
+          <td>The fake company has to run like a real one. Runway burning, staff, website, boring work. Casey says walk. Matthew won't. He talks to AI Bernie Madoff.</td>
+          <td>Max has Ray go after Edna. Ray beats him. Max is in it now.</td>
+          <td>They help catch a child who runs. They have crossed.</td>
+          <td>Nick gets reckless. Petyr dies. Nick is kicked out.</td>
+          <td>Faisal dies. Omar calls it off. Sofia says hit the right target.</td>
+        </tr>
+        <tr>
+          <td>Final turn</td>
+          <td>Matthew stops managing the rise and builds the fall. Truman moved to the visible centre — offshore, keynote, CEO announcement. Regulator pressure, planted bug, theatrical decoy office.</td>
+          <td>Tony's cash is cocaine. Ray lets him live. The film only screens after Ray is dead.</td>
+          <td>They join a home invasion. Then the blowback comes for all of them.</td>
+          <td>The Masquerade. Stu is in real danger.</td>
+          <td>The marathon. Omar tries to unwind it.</td>
+        </tr>
+        <tr>
+          <td>Change</td>
+          <td>Matthew is not caught. Truman holds the body. Casey may film covertly. Matthew may profit from the collapse. Engineer may make the product real. How he leaves is still open.</td>
+          <td>They part. Ray is shot five months later. The film exists because he is dead.</td>
+          <td>Ben and the crew are killed. The camera keeps going.</td>
+          <td>Stu lives as a werewolf. The house comes back together.</td>
+          <td>Waj blows the shop. Omar walks away and does the same.</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div id="tab-s" class="panel on" role="tabpanel">
+    <div class="sheet"><table class="core syn">
+      <colgroup><col class="label"><col class="ponzi"><col class="film"><col class="film"><col class="film"><col class="film"></colgroup>
+      <thead><tr><th></th><th>Ponzi</th><th>The Magician</th><th>Man Bites Dog</th><th>What We Do in the Shadows</th><th>Four Lions</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Logline</td>
+          <td>Apparent Tech Genius and his content-creator accomplice candidly document the rise of a fake revolutionary product, until a jobsworth engineer unexpectedly makes the bloody thing real.</td>
+          <td>A film student follows his ruthless but caring hitman neighbour Ray, for a university assignment, as he goes about his everyday business - making threats and meting out violence - while he explains his off-beat philosophy of life.<!-- A film student follows his ruthless but caring Melbourne hitman neighbour Ray, for a university assignment, whilst he's under contract to kill a low life of the Melbourne underworld when a more tempting offer is made. --></td>
+          <td>A film crew follows a ruthless thief and heartless killer as he goes about his daily routine. But complications set in when the film crew lose their objectivity and begin lending a hand.</td>
+          <td>A documentary crew follows four vampire housemates—Viago, Vladislav, Deacon, and Petyr as they struggle with the mundane aspects of modern life.</td>
+          <td>Four incompetent British terrorists from Sheffield, set out to train for and commit an act of terror.</td>
+        </tr>
+        <tr>
+          <td>Synopsis</td>
+          <td>Self-proclaimed tech visionary Matthew Wiseman and his content-creator accomplice, Casey, film everything without permission as they attempt to pull off the greatest fraud of all time.<br><br>Brazenly lying about a product that doesn’t exist to investors terrified of missing out, journalists desperate to discover the next genius, influencers eager to dress sponsorship up as belief, and staff certain somebody else must have checked.<br><br>The more successful the lie becomes, the more reality it requires. Forcing them into the irritating business of employing real people, placating regulators and maintaining the appearance of a functioning company.<br><br>And then one of the jobsworth engineers makes the product real, leaving Matthew with an even more irritating problem: legitimacy.</td>
+          <td>The Magician follows charismatic, yet volatile hitman Ray Shoesmith around Melbourne while he is being filmed by his neighbour and film student Massimo. As he goes about his chilling business — threatening violence and in some cases making good on those threats — the camera continues to roll. Fuelled by offbeat conversation, dark humour and emotional crises - the character is a killer, a man who would as soon pat the dog as shoot it, but without smoothing out any of the rough edges. Under contract to kill a low life of the Melbourne underworld he receives a more tempting offer.<!-- The Magician follows charismatic, yet volatile hitman Ray Shoesmith around Melbourne while he is being filmed by a friend and neighbour. As he goes about his chilling business — threatening violence and in some cases making good on those threats — the camera continues to roll. Fuelled by offbeat conversation, dark humour and emotional crises - the character is a killer, a man who would as soon pat the dog as shoot it, but without smoothing out any of the rough edges. Ryan makes you like him when what you should be feeling is utter loathing. --></td>
+          <td>The activities of rampaging, indiscriminate serial killer Ben are recorded by a willingly complicit documentary team, who eventually become his accomplices and active participants. Ben provides casual commentary on the nature of his work and arbitrary musings on topics of interest to him, such as music or the conditions of low-income housing, and even goes so far as to introduce the documentary crew to his family. But their reckless indulgences soon get the better of them.</td>
+          <td>Flatmates Viago, Deacon, and Vladislav are three vampires who are just trying to get by in modern society; from paying rent and sticking to the housework roster to trying to get invited in to nightclubs, they’re just like anyone else – except they’re immortal and must feast on human blood. When their 8,000 year old flatmate, Petyr, turns 20-something human hipster, Nick, into a vampire, the guys must teach him the ropes and guide him through his new-found eternal life. In return they are forced to learn about modern society, fashions, and technology. But it’s the introduction of Nick’s human friend, Stu, that really changes the vampire’s lives and attitudes towards the ever-changing world around them. When Stu’s life is threatened, the vamps show us that even though your heart may be cold and dead, it doesn’t mean you have no feelings.</td>
+          <td>FOUR LIONS tells an authentic and startlingly funny story of four wannabe jihadis caught in a spiral of ideology, squabbles and lethal errors. Omar wants to “bring havoc to this torture endorsing Disneyland”, Barry wants to bring on Armageddon by bombing a mosque. Sent home in disgrace from training camp, Omar takes on the mission himself so Barry does everything in his power to trip him up. In a hilarious and breathtaking climax Omar finds himself hurtling towards the London Marathon in a van full of explosives, fancy dress costumes and a cell of berks who all want to strike a blow for the cause but can’t strike a match without punching themselves in the face.</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div id="tab-n" class="panel notes" role="tabpanel">
+    <div class="note-card"><h2>What appears to drive each film</h2>
+    <ul><li><strong>Ponzi.</strong> Kindness as identity theft → sell the lie on camera → success becomes a company he has to operate → regulator and Truman pressure → he builds a scapegoat and a deliberate fall rather than a business → collapse may be the score.</li><li><strong>The Magician.</strong> Tony's abduction and journey provide the main narrative spine; Benny, Edna and Ray's private-life material are threaded through it.</li><li><strong>Man Bites Dog.</strong> Observation → participation → complicity → consequences.</li><li><strong>What We Do in the Shadows.</strong> Viago-led household → Nick arrives and destabilises it → Stu expands their world → Nick's recklessness creates consequences → household fractures / reforms.</li><li><strong>Four Lions.</strong> Omar tries to steer a divided, incompetent cell toward a real attack → each mistake makes the mission more dangerous and irreversible → he finally tries to undo what he set in motion.</li></ul></div>
+    <div class="note-card"><h2>Working cautions</h2>
+    <ul><li>Four Lions is not a mockumentary with an observing documentary crew. The characters do film themselves, notably their martyrdom videos, but the film itself uses conventional narrative filmmaking.</li><li>The Magician column is based on the supplied scene-by-scene: Tony is introduced near the start and provides the main continuing spine, with Benny, Edna and Ray's private-life material threaded through that journey.</li><li>For Ponzi, this sheet is a reading lens — not a beat list. Full material is in GitHub <code>story/</code> (59 beats as of v9). Do not imitate ref beats; ask what repeatedly changes the situation, increases exposure, or makes the scheme harder to unwind.</li><li>Protagonist on screen is <strong>Matthew</strong> / Matthew Wiseman. <code>00-STORY-ANCHORS.md</code> still uses JOHN in character blocks — story beats use Matthew.</li><li>v8 is superseded by v9. Canonical story edits happen in <code>story/</code> only.</li></ul></div>
+  </div>
+  <div id="tab-r" class="panel" role="tabpanel">
+    <iframe class="rules-frame" src="synopsis-rules.html" title="Synopsis rules"></iframe>
+  </div>
+  <div id="tab-bb" class="panel" role="tabpanel">
+    <iframe class="rules-frame" src="beat-board.html" title="Beat board"></iframe>
+  </div>
+</div>
+<script>
+  const tabs = [...document.querySelectorAll('[role=tab]')];
+  const panels = {
+    'btn-q': document.getElementById('tab-q'),
+    'btn-b': document.getElementById('tab-b'),
+    'btn-s': document.getElementById('tab-s'),
+    'btn-n': document.getElementById('tab-n'),
+    'btn-r': document.getElementById('tab-r'),
+    'btn-bb': document.getElementById('tab-bb'),
+  };
+  tabs.forEach(btn => btn.addEventListener('click', () => {
+    tabs.forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+    Object.entries(panels).forEach(([id, el]) => el.classList.toggle('on', id === btn.id));
+  }));
+</script>
+</body>
+</html>
