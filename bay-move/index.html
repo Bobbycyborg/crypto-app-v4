@@ -6,20 +6,20 @@
 <title>Bay Area Move</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-#bam-load{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:#FBF7F1;transition:opacity .4s ease,visibility .4s}
+#bam-load{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#FBF7F1;transition:opacity .4s,visibility .4s;font:700 26px Futura,"Century Gothic","Avenir Next",system-ui,sans-serif;color:#3D3833}
 #bam-load.out{opacity:0;visibility:hidden;pointer-events:none}
-#bam-load h1{margin:0;font:700 26px/1.15 Futura,"Century Gothic","Avenir Next",system-ui,sans-serif;color:#3D3833;letter-spacing:-.02em}
+#bam-load h1{margin:0;letter-spacing:-.02em}
 #bam-bars{display:flex;align-items:flex-end;gap:7px;height:54px}
-#bam-bars i{display:block;width:13px;border-radius:999px;height:12px;transform-origin:bottom;animation:bamB 1.05s ease-in-out infinite}
-#bam-bars i:nth-child(1){background:#E08A7A}
-#bam-bars i:nth-child(2){background:#7BA3C9;animation-delay:.08s}
-#bam-bars i:nth-child(3){background:#F3E6C8;animation-delay:.16s}
-#bam-bars i:nth-child(4){background:#9B8EC4;animation-delay:.24s}
-#bam-bars i:nth-child(5){background:#D0849A;animation-delay:.32s}
-#bam-bars i:nth-child(6){background:#6F9BC2;animation-delay:.4s}
-@keyframes bamB{0%,100%{height:12px}50%{height:52px}}
-@media (prefers-reduced-motion:reduce){#bam-bars i{animation:none;height:28px}#bam-load{transition:none}}
+#bam-bars i{width:13px;border-radius:999px;height:10px;display:block;transition:height .28s}
+#bam-bars i:nth-child(1){background:#E08A7A}#bam-bars i:nth-child(2){background:#7BA3C9}#bam-bars i:nth-child(3){background:#F3E6C8}#bam-bars i:nth-child(4){background:#9B8EC4}#bam-bars i:nth-child(5){background:#D0849A}#bam-bars i:nth-child(6){background:#6F9BC2}
+#bam-msg{font:400 14px/1.45 Futura,system-ui,sans-serif;text-align:center}#bam-eta{color:#8A8178;font-size:12px}
+@media (prefers-reduced-motion:reduce){#bam-load,#bam-bars i{transition:none}}
 </style>
+
+</head>
+<body>
+<div id="bam-load" aria-busy="true" aria-live="polite"><h1>Bay Area Move</h1><div id="bam-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="bam-msg">Loading the homes and their photos <span id="bam-eta"></span></div></div>
+<script>(function(){var T=Date.now(),L=document.getElementById("bam-load"),B=[].slice.call(L.querySelectorAll("#bam-bars i")),E=document.getElementById("bam-eta"),D=0,N=0;function hide(){if(D)return;D=1;clearInterval(I);L.classList.add("out");L.setAttribute("aria-busy","false")}function need(){var a=window.BAY_LISTINGS||[],n=0,i=0;for(;i<a.length&&n<10;i++)if(a[i].photos&&a[i].photos[0])n++;return n||8}function snap(){var im=[].slice.call(document.querySelectorAll(".rpin img,.card img.thumb,img.thumb")),ok=0;im.forEach(function(x){if(x.complete&&x.naturalWidth)ok++});return{ok:ok,have:im.length}}function tick(){var el=Date.now()-T,s=snap(),n=need(),r=!!window.BAY_LISTINGS,p=!r?Math.min(.4,el/1e4):s.have<1?Math.min(.55,.4+el/2e4):Math.min(.99,.55+.45*(s.ok/Math.max(n,s.have)));for(var i=0;i<6;i++)B[i].style.height=10+Math.max(0,Math.min(1,p*6-i))*42+"px";if(r&&s.ok>=n&&s.ok){hide();return}var sec=el>800&&p>.08?Math.ceil((1-p)/(p/el)/1e3):0;E.textContent=sec>0&&sec<45?"· about "+sec+"s left":el>2e3?(N=(N+1)%4,"· Almost there"+".".repeat(N)):""}var I=setInterval(tick,200);setTimeout(hide,15e3)})();</script>
 <style>
 
 :root{
@@ -382,10 +382,6 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .ppin.nursery{background:#E08A7A}
 .map-toggles label.pgr-on{background:var(--accent-soft);color:var(--accent-deep)}
 </style>
-</head>
-<body>
-<div id="bam-load" aria-busy="true" aria-label="Loading"><h1>Bay Area Move</h1><div id="bam-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-<script>(function(){function h(){var e=document.getElementById("bam-load");if(e&&!e.classList.contains("out"))e.classList.add("out")}window.addEventListener("load",h);setTimeout(h,8000)})();</script>
 
 <header>
   <div class="brand"><h1>Bay Area Move</h1><div class="save-note" id="saveNote"></div></div>
