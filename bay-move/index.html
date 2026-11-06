@@ -26,7 +26,7 @@ button.chip.more{background:#fff;border-style:dashed}
 main{display:flex;height:calc(100vh - 108px);position:relative}
 .mapwrap{flex:1;min-width:0;min-height:420px;position:relative;background:#e8ebe7}
 #map{position:absolute;inset:0}
-.map-toggles{position:absolute;top:12px;left:12px;z-index:500;display:flex;gap:8px;flex-wrap:wrap}
+.map-toggles{position:absolute;top:12px;right:12px;justify-content:flex-end;z-index:500;display:flex;gap:8px;flex-wrap:wrap}
 .map-toggles label{display:flex;align-items:center;gap:6px;background:rgba(255,253,249,.94);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:650;box-shadow:var(--shadow);cursor:pointer}
 .side{width:400px;max-width:100%;display:flex;flex-direction:column;border-left:1px solid var(--line);background:var(--card);z-index:20;position:relative}
 #list{flex:1;overflow:auto}
@@ -136,7 +136,7 @@ input[type=range]{width:100%}
 </head>
 <body>
 <header>
-  <div class="brand"><h1>Bay Area Move</h1><p>Homes &amp; schools · Apple Park commute · under $15k/mo</p><div class="save-note" id="saveNote"></div></div>
+  <div class="brand"><h1>Bay Area Move</h1><div class="save-note" id="saveNote"></div></div>
   <div class="controls">
     <div class="row" id="listMode">
       <button class="chip list-rentals on" data-list="rentals">Rentals</button>
