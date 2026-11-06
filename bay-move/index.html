@@ -6,6 +6,21 @@
 <title>Bay Area Move</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
+#bam-load{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:#FBF7F1;transition:opacity .4s ease,visibility .4s}
+#bam-load.out{opacity:0;visibility:hidden;pointer-events:none}
+#bam-load h1{margin:0;font:700 26px/1.15 Futura,"Century Gothic","Avenir Next",system-ui,sans-serif;color:#3D3833;letter-spacing:-.02em}
+#bam-bars{display:flex;align-items:flex-end;gap:7px;height:54px}
+#bam-bars i{display:block;width:13px;border-radius:999px;height:12px;transform-origin:bottom;animation:bamB 1.05s ease-in-out infinite}
+#bam-bars i:nth-child(1){background:#E08A7A}
+#bam-bars i:nth-child(2){background:#7BA3C9;animation-delay:.08s}
+#bam-bars i:nth-child(3){background:#F3E6C8;animation-delay:.16s}
+#bam-bars i:nth-child(4){background:#9B8EC4;animation-delay:.24s}
+#bam-bars i:nth-child(5){background:#D0849A;animation-delay:.32s}
+#bam-bars i:nth-child(6){background:#6F9BC2;animation-delay:.4s}
+@keyframes bamB{0%,100%{height:12px}50%{height:52px}}
+@media (prefers-reduced-motion:reduce){#bam-bars i{animation:none;height:28px}#bam-load{transition:none}}
+</style>
+<style>
 
 :root{
   --bg:#FBF7F1;
@@ -339,6 +354,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 </style>
 </head>
 <body>
+<div id="bam-load" aria-busy="true" aria-label="Loading"><h1>Bay Area Move</h1><div id="bam-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<script>(function(){function h(){var e=document.getElementById("bam-load");if(e&&!e.classList.contains("out"))e.classList.add("out")}window.addEventListener("load",h);setTimeout(h,8000)})();</script>
+
 <header>
   <div class="brand"><h1>Bay Area Move</h1><div class="save-note" id="saveNote"></div></div>
   <div class="controls">
