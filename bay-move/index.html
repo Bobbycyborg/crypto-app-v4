@@ -383,7 +383,10 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .stokey .pl b{font-weight:700}
 .stokey .pl .k{color:var(--muted);font-weight:650;margin-right:4px}
 .stokey a{color:var(--accent-deep);font-weight:650;text-decoration:none}
-.ppin{background:#E08A7A;color:#fff;border-radius:999px;padding:4px 9px;font:700 11px Futura,system-ui,sans-serif;white-space:nowrap;box-shadow:0 3px 10px rgba(224,138,122,.35);border:2px solid #fff}
+.plab{position:absolute;left:0;bottom:0;transform:translateX(-50%)}
+.ppin{background:#E08A7A;color:#fff;border-radius:7px;padding:3px 7px;font:700 11px/1.15 Futura,system-ui,sans-serif;white-space:nowrap;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.18);border:1.5px solid #fff;display:inline-block}
+.ppin small{display:block;font-weight:300;font-size:7.7px;letter-spacing:.06em;text-transform:uppercase;opacity:.95}
+.ppin.apple{background:#2a312e}
 .ppin.park{background:#7BA3C9}
 .ppin.cafe{background:#D0849A}
 .ppin.pub{background:#6F9BC2}
@@ -511,7 +514,7 @@ let filters = { maxRent: 15000, minBeds: 3, houseOnly: false, garden: false, are
 const map = L.map('map', { zoomControl: true }).setView([37.55, -122.2], 10);
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles © Esri', maxZoom: 16 }).addTo(map);
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 }).addTo(map);
-L.marker(APPLE, { icon: L.divIcon({ className: '', html: '<div style="background:#2a312e;color:#fff;border-radius:8px;padding:4px 9px;font:650 12px system-ui;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)">Apple Park</div>', iconAnchor: [40, 14] }) }).addTo(map);
+L.marker(APPLE, { icon: pgrLabelIcon('ppin apple', 'Apple Park', 'WORK') }).addTo(map);
 
 const rentalLayer = L.layerGroup().addTo(map);
 const schoolLayer = L.layerGroup().addTo(map);
@@ -675,6 +678,17 @@ function stokeyHtml(areaId) {
   h += '</div></div>';
   return h;
 }
+function pgrShort(n) {
+  const t = n.replace(/\s+(Craft Coffee|Coffee|Brewing Company|Brewing Co\.?|Cafe|Café|Park|Recreation Grove|Courts|Plaza|Square)$/i, '').trim();
+  return (t.length >= 4 && !/^(The|Saint|Town|Great|Red)$/i.test(t)) ? t : n;
+}
+function pgrType(p) {
+  const k = ((p.kind || '') + ' ' + p.name).toLowerCase();
+  return /yoga/.test(k) ? 'YOGA' : /bak/.test(k) ? 'BAKERY' : /pub|beer|brew|bar/.test(k) ? 'PUB' : /park|play|plaza|square|grove|courts/.test(k) ? 'PARK' : /coffee|caf/.test(k) ? 'CAFE' : (p.kind || '').toUpperCase();
+}
+function pgrLabelIcon(cls, name, type) {
+  return L.divIcon({ className: '', iconSize: null, iconAnchor: [0, 0], html: '<div class="plab"><div class="' + cls + '">' + name + '<small>' + type + '</small></div></div>' });
+}
 function pgrEmoji(k) {
   k = (k || '').toLowerCase();
   return /coffee|caf/.test(k) ? '☕' : /pub|beer|brew|bar/.test(k) ? '🍺' : /park|play|green/.test(k) ? '🌳' : /yoga/.test(k) ? '🧘' : /bak/.test(k) ? '🥐' : '📍';
@@ -693,7 +707,7 @@ function rebuildPgrMarkers() {
       if (p.lat == null || p.lng == null) return;
       const cls = 'ppin ' + (p.kind || '');
       const m = L.marker([p.lat, p.lng], {
-        icon: L.divIcon({ className: '', html: '<div class="' + cls + '">' + p.name + '</div>', iconAnchor: [40, 12] }),
+        icon: pgrLabelIcon(cls, pgrShort(p.name), pgrType(p)),
         riseOnHover: true
       }).bindTooltip((p.kind ? p.kind + ' · ' : '') + p.name)
         .bindPopup(pgrPopupHtml(p), { maxWidth: 240 });
