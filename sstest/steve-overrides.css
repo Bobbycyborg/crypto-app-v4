@@ -803,3 +803,73 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   letter-spacing: -0.02em !important;
   text-transform: uppercase !important;
 }
+
+/* Desktop — lock header/footer centre (Chrome + SB line-height:0) */
+@media (min-width: 720px) {
+  :root {
+    --sh-header-band: max(30px, 3dvh, 3vh);
+    --sh-band: max(30px, 3dvh, 3vh);
+  }
+
+  #homepage.page-wrapper .homeHeader.homeHeader--nonFixed {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 var(--sh-gutter) !important;
+    line-height: normal !important;
+    overflow: visible !important;
+  }
+
+  #homepage .homeHeader .headerContent {
+    display: block !important;
+    line-height: 1.12 !important;
+    max-width: none !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    flex: 1 1 auto !important;
+    align-self: center !important;
+    overflow: visible !important;
+  }
+
+  #homepage .homeHeader .headerContent .shHeader--desktop {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 0.1em !important;
+    line-height: 1.12 !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  #homepage .homeHeader .headerContent h1,
+  #homepage .homeHeader .headerContent h2 {
+    display: block !important;
+    line-height: 1.12 !important;
+    font-size: 12px !important;
+    color: #111 !important;
+  }
+
+  #homepage .homeHeader__burger {
+    display: flex !important;
+    align-items: center !important;
+    align-self: center !important;
+    height: auto !important;
+    line-height: normal !important;
+  }
+
+  #homepage .indexToggle.view-switch {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: normal !important;
+  }
+
+  #homepage .indexToggle.view-switch .indexToggle__button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    height: 100% !important;
+  }
+}
