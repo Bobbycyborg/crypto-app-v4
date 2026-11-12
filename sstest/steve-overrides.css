@@ -415,45 +415,26 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   display: flex !important;
 }
 
+/* view-switch: Full-view | Grid-view (names in data-view / data-home-view only) */
 .view-switch {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: clamp(1rem, 6vw, 2rem) !important;
+  gap: 12px !important;
 }
 
 .view-switch .indexToggle__button {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
-  gap: 0.4em !important;
+  justify-content: center !important;
+  width: 44px !important;
   height: 100% !important;
-  width: auto !important;
-  min-width: 0 !important;
-  flex: 0 1 auto !important;
-  padding: 0 0.15em !important;
+  padding: 0 !important;
 }
 
 .view-switch .indexToggle__button::before {
   display: none !important;
   content: none !important;
-}
-
-.view-switch__label {
-  font-family: HelveticaNowText, Helvetica, Arial, sans-serif !important;
-  font-size: clamp(0.55rem, 2.8vw, 0.78rem) !important;
-  white-space: nowrap !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
-  text-transform: uppercase !important;
-  opacity: 0.4;
-  color: #000 !important;
-}
-
-.view-switch[data-active-view="full-view"] [data-view="full-view"] .view-switch__label,
-.view-switch[data-active-view="full-view"] [data-view="full-view"] svg,
-.view-switch[data-active-view="grid-view"] [data-view="grid-view"] .view-switch__label,
-.view-switch[data-active-view="grid-view"] [data-view="grid-view"] svg {
-  opacity: 1 !important;
 }
 
 .view-switch[data-active-view="full-view"] [data-view="grid-view"] svg *,

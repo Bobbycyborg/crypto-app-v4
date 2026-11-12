@@ -1,3 +1,4 @@
+/** Home views (locked names): Full-view = list fade; Grid-view = grid. */
 document.addEventListener('DOMContentLoaded', () => {
   const menu = document.querySelector('.menu');
   const menuBtn = document.querySelector('.menu__button');
