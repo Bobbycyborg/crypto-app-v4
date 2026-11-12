@@ -804,11 +804,16 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   text-transform: uppercase !important;
 }
 
-/* Desktop — tall enough for 2-line 12px header; centre in band */
+/* Desktop — 3vh-class bands, wider side inset, 2-line type still fits */
 @media (min-width: 720px) {
   :root {
-    --sh-header-band: clamp(40px, 4.25dvh, 4.25vh);
-    --sh-band: clamp(36px, 3.5dvh, 3.5vh);
+    --sh-gutter: 3vw;
+    --sh-header-band: clamp(34px, 3.25dvh, 3.25vh);
+    --sh-band: clamp(32px, 3dvh, 3dvh);
+  }
+
+  .menu__button {
+    padding: 0 !important;
   }
 
   .homeHeader,
@@ -863,9 +868,14 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   #homepage .homeHeader .headerContent h1,
   #homepage .homeHeader .headerContent h2 {
     display: block !important;
-    line-height: 1.12 !important;
+    line-height: 1.06 !important;
     font-size: 12px !important;
     color: #111 !important;
+  }
+
+  #homepage .homeHeader .headerContent .shHeader--desktop {
+    gap: 0.04em !important;
+    line-height: 1.06 !important;
   }
 
   #homepage .homeHeader__burger {
