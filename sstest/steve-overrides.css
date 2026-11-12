@@ -105,6 +105,13 @@ body.sh-menu-open .menu__button {
     transform: none !important;
     min-height: 12rem !important;
   }
+
+  .homeHeader .headerContent h1,
+  .homeHeader .headerContent h2,
+  #homepage .headerContent h1,
+  #homepage .headerContent h2 {
+    font-size: 18px !important;
+  }
 }
 
 .menu__button {
