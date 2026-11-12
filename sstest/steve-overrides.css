@@ -1,0 +1,147 @@
+/* Stephen Howse — surgical diffs only (not a redesign). */
+
+@font-face {
+  font-display: swap;
+  font-family: HelveticaNowText;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://www.sarah-bassett.com/assets/fonts/HelveticaNowText-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: HelveticaNowText;
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://www.sarah-bassett.com/assets/fonts/HelveticaNowText-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Caslon 540 LT Std';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://www.sarah-bassett.com/assets/fonts/Caslon540LTStd-Roman.woff2) format('woff2');
+}
+
+.menu,
+.indexToggle {
+  box-shadow: none !important;
+}
+
+.menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.introduction {
+  display: none !important;
+}
+
+.homeHeader .headerInfo {
+  display: none !important;
+}
+
+.homeHeader.homeHeader--themeBlendMode {
+  mix-blend-mode: normal !important;
+}
+
+.homeHeader .headerContent h1,
+.homeHeader .headerContent h2,
+.featureProject--bright .homeHeader .headerContent h1,
+.featureProject--bright .homeHeader .headerContent h2 {
+  color: #111 !important;
+  opacity: 1 !important;
+}
+
+.homeHeader .headerContent h2 {
+  color: #1a1a1a !important;
+}
+
+.featureProject--FullViewport.featureProject--bright .featureProject__assets {
+  width: 94vw;
+  margin-left: 3vw;
+  height: calc(92vh - var(--featureProjectDescriptionHeight)) !important;
+  background: #fff;
+}
+
+#shFadeStage {
+  background: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+#shFadeStage .sh-frame {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 0 !important;
+  background: #fff;
+  transition: opacity 1.7s ease-in-out !important;
+  will-change: opacity;
+  pointer-events: none;
+}
+
+#shFadeStage .sh-frame.is-current {
+  opacity: 1 !important;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+#shFadeStage .sh-frame.is-entering {
+  opacity: 1 !important;
+  z-index: 3;
+}
+
+#shFadeStage .sh-frame.responsive-image,
+#shFadeStage .sh-frame picture {
+  opacity: 1 !important;
+}
+
+#shFadeStage .sh-frame img {
+  max-width: 92%;
+  max-height: 92%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 1 !important;
+}
+
+.featureProject__descriptionMain h3,
+.featureProject__descriptionMain h4,
+.featureProject__descriptionSticky .featureProject__descriptionMain h3,
+.featureProject__descriptionSticky .featureProject__descriptionMain h4,
+.featureProject__descriptionCount {
+  display: none !important;
+}
+
+.page-wrapper {
+  opacity: 1 !important;
+}
+
+body[data-home-view="grid"] .homepageView--list-view {
+  display: none !important;
+}
+
+body[data-home-view="grid"] .homepageView--grid-view {
+  display: block !important;
+}
+
+.homepageView--grid-view {
+  display: none;
+}
+
+.homepageView--grid-view .headerInfo {
+  display: none !important;
+}
+
+.gridViewProject__asset img {
+  opacity: 1 !important;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
