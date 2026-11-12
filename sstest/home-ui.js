@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!menu.classList.contains('menu--isExpanded')) menu.classList.add('menu--isExpanded');
       const loc = btn.dataset.submenuLocation;
       if (loc) showSubNavPanel(loc);
+      syncMenuOpen();
     });
   });
 
