@@ -27,57 +27,38 @@
   box-shadow: none !important;
 }
 
+/* Menu shell: SB layout when open; hidden when closed (burger lives in header) */
 .menu:not(.menu--isExpanded) {
-  overflow: visible !important;
-  contain: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
   width: 0 !important;
   height: 0 !important;
-  min-height: 0 !important;
-}
-
-.menu:not(.menu--isExpanded) .topMenu,
-.menu:not(.menu--isExpanded) .nav__container {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
+  overflow: hidden !important;
 }
 
 .menu.menu--isExpanded {
-  width: calc(100vw - (2 * var(--sh-gutter))) !important;
-  max-width: 420px !important;
-  height: auto !important;
-  min-width: 0 !important;
-  left: 50% !important;
-  top: calc(var(--sh-header-band) + 6px) !important;
-  transform: translateX(-50%) !important;
-  overflow: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
   z-index: 100 !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  background: hsla(0, 0%, 97%, 0.98) !important;
-  border-radius: 10px !important;
   pointer-events: auto !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
-}
-
-.menu.menu--isExpanded .topMenu {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.menu.menu--isExpanded .nav__container {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  width: unset !important;
+  height: unset !important;
+  min-width: unset !important;
+  min-height: unset !important;
+  max-width: unset !important;
+  max-height: unset !important;
+  left: unset !important;
+  top: unset !important;
+  right: unset !important;
+  transform: unset !important;
+  overflow: unset !important;
+  contain: unset !important;
+  background: unset !important;
+  box-shadow: unset !important;
+  border-radius: unset !important;
+  -webkit-backdrop-filter: unset !important;
+  backdrop-filter: unset !important;
 }
 
 body.sh-menu-open #page-overlay {
@@ -103,13 +84,6 @@ body.sh-menu-open .menu__button {
   :root {
     --sh-band: 4vh;
     --sh-header-band: 4vh;
-  }
-
-  .menu.menu--isExpanded {
-    left: auto !important;
-    right: var(--sh-gutter) !important;
-    transform: none !important;
-    min-height: 12rem !important;
   }
 
   .shHeader--desktop h1,
@@ -620,34 +594,6 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 @media (max-width: 719px) {
   :root {
     --sh-header-band: max(5vh, 3.6rem);
-  }
-
-  .menu {
-    position: fixed !important;
-  }
-
-  .menu:not(.menu--isExpanded) {
-    top: -100vh !important;
-    left: -100vw !important;
-    transform: none !important;
-  }
-
-  .menu.menu--isExpanded {
-    left: var(--sh-gutter) !important;
-    right: var(--sh-gutter) !important;
-    width: auto !important;
-    max-width: none !important;
-    transform: none !important;
-    top: calc(var(--sh-header-band) + 4px) !important;
-    max-height: calc(100dvh - var(--sh-header-band) - var(--sh-band) - 12px) !important;
-  }
-
-  .menu.menu--isExpanded .subNav {
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-    width: 100% !important;
   }
 
   .shHeader--desktop {

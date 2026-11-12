@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.body.dataset.homeView = 'full-view';
   if (viewSwitch) viewSwitch.dataset.activeView = 'full-view';
+  if (menu) menu.classList.remove('js-loading');
 
   function burgerSlot() {
     const grid = document.body.dataset.homeView === 'grid-view';
