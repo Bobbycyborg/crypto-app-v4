@@ -353,85 +353,67 @@ body[data-home-view="grid"] .homepageView--grid-view {
   height: 100%;
 }
 
-/* Mobile: 4vh header + 4vh footer, photo fills the rest */
+/* Mobile: 4vh header, 4vh footer (fixed), photo fills middle */
 @media (max-width: 719px) {
   html,
   body,
   #content,
   #homepage.page-wrapper,
-  .homepageView--list-view {
+  .homepageView--list-view,
+  .homepageView__selectedProjects {
     height: 100dvh !important;
     max-height: 100dvh !important;
     overflow: hidden !important;
   }
 
-  .homepageView--list-view .featureProject.featureProject--FullViewport {
-    display: grid !important;
-    grid-template-rows: 4vh minmax(0, 1fr) !important;
+  body #homepage .featureProject--FullViewport {
     height: calc(100dvh - 4vh) !important;
     max-height: calc(100dvh - 4vh) !important;
-    width: 100% !important;
-  }
-
-  .homepageView--list-view .homeHeader {
-    grid-row: 1 !important;
   }
 
   #shFadeLink {
-    grid-row: 2 !important;
-    min-height: 0 !important;
-    height: 100% !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
   }
 
   .homeHeader .headerContent {
-    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
     white-space: nowrap !important;
-    gap: 0.35em !important;
+    gap: 0.3em !important;
   }
 
   .homeHeader .headerContent h1,
   .homeHeader .headerContent h2,
   #homepage .headerContent h1,
   #homepage .headerContent h2 {
-    font-family: HelveticaNowText, Helvetica, Arial, sans-serif !important;
-    font-size: clamp(0.58rem, 2.65vw, 0.82rem) !important;
+    font-size: clamp(0.48rem, 2.35vw, 0.7rem) !important;
   }
 
-  .featureProject--FullViewport.featureProject--bright .featureProject__assets,
   #shFadeLink .featureProject__assets {
     width: 100% !important;
     height: 100% !important;
     max-width: 100% !important;
-    max-height: none !important;
+    max-height: 100% !important;
+    flex: 1 1 auto !important;
     margin: 0 !important;
   }
 
   #shFadeStage.featureProject__asset {
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
+    inset: auto !important;
     width: 100% !important;
     height: 100% !important;
-    min-height: calc(100dvh - 8vh) !important;
-    max-height: none !important;
-  }
-
-  .featureProject--FullViewport .featureProject__asset .responsive-image img,
-  #shFadeStage .sh-frame img {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-width: 100% !important;
-    min-height: 100% !important;
-    max-width: none !important;
-    max-height: none !important;
-    object-fit: cover !important;
-    -o-object-fit: cover !important;
+    min-height: 0 !important;
   }
 
   .homepageView--grid-view .homeHeader {
     min-height: 0 !important;
     max-height: 4vh !important;
+  }
+
+  .indexToggle {
+    padding-bottom: env(safe-area-inset-bottom, 0) !important;
   }
 }
 
