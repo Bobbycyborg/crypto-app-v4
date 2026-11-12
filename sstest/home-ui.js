@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const menu = document.querySelector('.menu');
   const menuBtn = document.querySelector('.menu__button');
-  const indexToggle = document.querySelector('.indexToggle');
-  const listBtn = indexToggle && indexToggle.querySelector('a[aria-label="Featured Projects"]');
-  const gridBtn = indexToggle && indexToggle.querySelector('a[aria-label="All Projects"]');
+  const viewSwitch = document.querySelector('.view-switch');
+  const fullViewBtn = viewSwitch && viewSwitch.querySelector('[data-view="full-view"]');
+  const gridViewBtn = viewSwitch && viewSwitch.querySelector('[data-view="grid-view"]');
   const gridRoot = document.getElementById('homeGridGrid');
 
   const images = [
@@ -28,24 +28,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  document.body.dataset.homeView = 'list';
-  if (indexToggle) indexToggle.dataset.activeIndex = 'list';
+  document.body.dataset.homeView = 'full-view';
+  if (viewSwitch) viewSwitch.dataset.activeView = 'full-view';
 
   function setView(view) {
-    document.body.dataset.homeView = view;
-    if (indexToggle) indexToggle.dataset.activeIndex = view === 'grid' ? 'grid' : 'list';
+    const next = view === 'grid-view' ? 'grid-view' : 'full-view';
+    document.body.dataset.homeView = next;
+    if (viewSwitch) viewSwitch.dataset.activeView = next;
   }
 
-  listBtn &&
-    listBtn.addEventListener('click', (e) => {
+  fullViewBtn &&
+    fullViewBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      setView('list');
+      setView('full-view');
     });
 
-  gridBtn &&
-    gridBtn.addEventListener('click', (e) => {
+  gridViewBtn &&
+    gridViewBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      setView('grid');
+      setView('grid-view');
     });
 
   function showSubNavPanel(loc) {

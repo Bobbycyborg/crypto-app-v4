@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function fadeTo(next) {
-    if (document.body.dataset.homeView === 'grid') return;
+    if (document.body.dataset.homeView === 'grid-view') return;
     if (busy) return;
 
     const target = ((next % frames.length) + frames.length) % frames.length;
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener(
     'wheel',
     (e) => {
-      if (document.body.dataset.homeView === 'grid') return;
+      if (document.body.dataset.homeView === 'grid-view') return;
       if (Math.abs(e.deltaY) < 10) return;
       e.preventDefault();
       fadeTo(index + (e.deltaY > 0 ? 1 : -1));
