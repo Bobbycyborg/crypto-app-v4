@@ -168,34 +168,25 @@ body {
 }
 
 .homeHeader .headerContent {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
   max-width: none !important;
   width: 100% !important;
-  line-height: 1.15 !important;
-  white-space: nowrap !important;
-}
-
-.homeHeader .headerContent h1,
-.homeHeader .headerContent h2 {
-  white-space: nowrap !important;
-}
-
-@media (max-width: 479px) {
-  .homeHeader .headerContent {
-    white-space: normal !important;
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow: hidden !important;
-  }
+  line-height: 1.1 !important;
+  gap: 0.12em !important;
+  white-space: normal !important;
 }
 
 .homeHeader .headerContent h1,
 .homeHeader .headerContent h2,
 .featureProject--bright .homeHeader .headerContent h1,
 .featureProject--bright .homeHeader .headerContent h2 {
-  display: inline !important;
+  display: block !important;
+  width: 100% !important;
   font-family: HelveticaNowText, Helvetica, Arial, sans-serif !important;
-  font-size: 1.1rem !important;
+  font-size: 1.4rem !important;
   font-style: normal !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;
@@ -474,15 +465,17 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   }
 
   .homeHeader .headerContent {
-    display: flex !important;
-    align-items: center !important;
     flex: 1 1 auto !important;
     min-width: 0 !important;
     height: 100% !important;
     overflow: hidden !important;
+  }
+
+  .homeHeader .headerContent h1,
+  .homeHeader .headerContent h2 {
+    overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
-    gap: 0.3em !important;
   }
   html,
   body,
@@ -509,7 +502,7 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   .homeHeader .headerContent h2,
   #homepage .headerContent h1,
   #homepage .headerContent h2 {
-    font-size: clamp(0.48rem, 2.35vw, 0.7rem) !important;
+    font-size: clamp(0.62rem, 3.05vw, 0.9rem) !important;
   }
 
   #shFadeLink .featureProject__assets {
