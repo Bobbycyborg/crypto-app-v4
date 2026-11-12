@@ -69,7 +69,10 @@ body.sh-menu-open #page-overlay {
   display: block !important;
   top: var(--sh-header-band) !important;
   height: calc(100% - var(--sh-header-band)) !important;
-  opacity: 0.35 !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  opacity: 1 !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.15) !important;
+  backdrop-filter: blur(14px) saturate(1.15) !important;
   pointer-events: auto !important;
   z-index: 90 !important;
 }
