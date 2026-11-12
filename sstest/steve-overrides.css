@@ -131,14 +131,6 @@ body.sh-menu-open .menu__button {
   padding: 0 !important;
 }
 
-.homeHeader .headerContent {
-  position: relative !important;
-  z-index: 1 !important;
-  height: 100% !important;
-  justify-content: center !important;
-  align-self: center !important;
-}
-
 .menu__button .menu__buttonBar {
   display: block !important;
   width: 18px !important;
@@ -196,6 +188,15 @@ body {
   background: #fff !important;
 }
 
+.homeHeader,
+.homeHeader.homeHeader--nonFixed,
+#homepage .homeHeader {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
 .homepageView--list-view .homeHeader {
   position: relative !important;
   top: auto !important;
@@ -239,15 +240,21 @@ body {
 }
 
 .homeHeader .headerContent {
+  flex: 1 1 auto !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
   justify-content: center !important;
+  align-self: stretch !important;
   max-width: none !important;
   width: 100% !important;
-  line-height: 1.1 !important;
-  gap: 0.12em !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  line-height: 1.08 !important;
+  gap: 0.08em !important;
   white-space: normal !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .shHeader--desktop {
@@ -420,17 +427,17 @@ body #homepage .featureProject--FullViewport {
   position: fixed !important;
   left: 0 !important;
   right: 0 !important;
-  bottom: 0 !important;
+  bottom: env(safe-area-inset-bottom, 0px) !important;
   margin: 0 !important;
   transform: none !important;
   width: 100% !important;
   max-width: none !important;
-  height: calc(var(--sh-band) + env(safe-area-inset-bottom, 0px)) !important;
-  min-height: 0 !important;
-  max-height: calc(var(--sh-band) + env(safe-area-inset-bottom, 0px)) !important;
+  height: var(--sh-band) !important;
+  min-height: var(--sh-band) !important;
+  max-height: var(--sh-band) !important;
   border-radius: 0 !important;
   background: #fff !important;
-  padding: 0 var(--sh-gutter) env(safe-area-inset-bottom, 0px) !important;
+  padding: 0 var(--sh-gutter) !important;
   box-sizing: border-box !important;
   display: flex !important;
   align-items: center !important;
@@ -439,6 +446,18 @@ body #homepage .featureProject--FullViewport {
   backdrop-filter: none !important;
   box-shadow: none !important;
   z-index: 2 !important;
+}
+
+.indexToggle.view-switch::after {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 100% !important;
+  height: env(safe-area-inset-bottom, 0px) !important;
+  background: #fff !important;
+  pointer-events: none !important;
 }
 
 .homepageView--grid-view {
