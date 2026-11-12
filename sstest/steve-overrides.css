@@ -473,16 +473,7 @@ body #homepage .featureProject--FullViewport {
 }
 
 .homepageView--grid-view .homeHeader {
-  position: relative !important;
   flex: 0 0 var(--sh-header-band) !important;
-  height: var(--sh-header-band) !important;
-  min-height: 0 !important;
-  max-height: var(--sh-header-band) !important;
-  padding: 0 var(--sh-gutter) !important;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  background: #fff !important;
 }
 
 /* Grid-view: tight columns, flexible row heights (not SB’s 120px gaps) */
