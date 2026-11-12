@@ -269,6 +269,19 @@ body {
   white-space: normal !important;
 }
 
+.shHeader--mobile {
+  display: none !important;
+}
+
+.shHeader--desktop {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 0.12em !important;
+  width: 100% !important;
+}
+
 .homeHeader .headerContent h1,
 .homeHeader .headerContent h2,
 .featureProject--bright .homeHeader .headerContent h1,
@@ -627,6 +640,19 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
     left: auto !important;
     top: auto !important;
     transform: none !important;
+    width: 100% !important;
+  }
+
+  .shHeader--desktop {
+    display: none !important;
+  }
+
+  .shHeader--mobile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 0.12em !important;
     width: 100% !important;
   }
 
