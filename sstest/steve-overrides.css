@@ -94,6 +94,15 @@ body.sh-menu-open .menu__button {
     font-size: 12px !important;
     line-height: 1.12 !important;
   }
+
+  /* Burger lives header-right — panel opens from that corner, not page centre */
+  .menu.menu--isExpanded {
+    left: auto !important;
+    right: var(--sh-gutter) !important;
+    top: 10px !important;
+    transform: none !important;
+    transform-origin: top right !important;
+  }
 }
 
 .menu__button {
