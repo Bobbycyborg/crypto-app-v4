@@ -250,12 +250,7 @@ body {
   white-space: normal !important;
 }
 
-.shHeader--mobile {
-  display: none !important;
-}
-
-.shHeader--desktop,
-.shHeader--mobile {
+.shHeader--desktop {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
@@ -266,7 +261,16 @@ body {
   margin: 0 !important;
 }
 
-.shHeader--desktop {
+.shHeader--mobile {
+  display: none !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 0.1em !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
 
 .homeHeader .headerContent h1,
 .homeHeader .headerContent h2,
