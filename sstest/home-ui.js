@@ -32,11 +32,34 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.dataset.homeView = 'full-view';
   if (viewSwitch) viewSwitch.dataset.activeView = 'full-view';
 
+  function burgerSlot() {
+    const grid = document.body.dataset.homeView === 'grid-view';
+    return document.querySelector(
+      grid ? '.homepageView--grid-view .homeHeader__burger' : '.homepageView--list-view .homeHeader__burger'
+    );
+  }
+
+  function parkBurgerInHeader() {
+    const slot = burgerSlot();
+    if (menuBtn && slot && menu && !menu.classList.contains('menu--isExpanded')) {
+      slot.appendChild(menuBtn);
+    }
+  }
+
+  function parkBurgerInMenu() {
+    if (menuBtn && menu && menu.classList.contains('menu--isExpanded')) {
+      menu.insertBefore(menuBtn, menu.firstChild);
+    }
+  }
+
   function setView(view) {
     const next = view === 'grid-view' ? 'grid-view' : 'full-view';
     document.body.dataset.homeView = next;
     if (viewSwitch) viewSwitch.dataset.activeView = next;
+    parkBurgerInHeader();
   }
+
+  parkBurgerInHeader();
 
   fullViewBtn &&
     fullViewBtn.addEventListener('click', (e) => {
@@ -71,8 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!menu.classList.contains('menu--isExpanded')) {
         menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
         delete menu.dataset.subMenuLocation;
-      } else if (!menu.dataset.subMenuLocation) {
-        menu.dataset.subMenuLocation = 'pages';
+        parkBurgerInHeader();
+      } else {
+        if (!menu.dataset.subMenuLocation) {
+          menu.dataset.subMenuLocation = 'pages';
+        }
+        parkBurgerInMenu();
       }
     });
 

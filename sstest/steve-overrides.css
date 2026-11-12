@@ -74,12 +74,14 @@
 }
 
 .menu__button {
-  position: fixed !important;
-  top: 0 !important;
-  left: var(--sh-gutter) !important;
-  z-index: 30 !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  z-index: 20 !important;
   width: 44px !important;
-  height: var(--sh-band) !important;
+  height: 100% !important;
+  min-height: var(--sh-header-band) !important;
   padding: 0 10px !important;
   margin: 0 !important;
   display: flex !important;
@@ -88,6 +90,24 @@
   gap: 5px !important;
   background: transparent !important;
   border: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.homeHeader__burger {
+  flex: 0 0 44px !important;
+  align-self: stretch !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  position: relative !important;
+  z-index: 20 !important;
+  height: 100% !important;
+  margin-left: auto !important;
+}
+
+.homeHeader .headerContent {
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 .menu__button .menu__buttonBar {
@@ -159,9 +179,11 @@ body {
   padding: 0 var(--sh-gutter) !important;
   box-sizing: border-box !important;
   display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center !important;
   background: #fff !important;
-  z-index: 1 !important;
+  z-index: 5 !important;
   overflow: hidden !important;
 }
 
@@ -382,7 +404,10 @@ body #homepage .featureProject--FullViewport {
   height: var(--sh-header-band) !important;
   min-height: 0 !important;
   max-height: var(--sh-header-band) !important;
-  padding: 0 var(--sh-gutter) 0 calc(var(--sh-gutter) + 48px) !important;
+  padding: 0 var(--sh-gutter) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
   background: #fff !important;
 }
 
@@ -462,30 +487,9 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   height: 100%;
 }
 
-@media (min-width: 720px) {
-  .menu__button {
-    left: var(--sh-gutter) !important;
-    right: auto !important;
-  }
-}
-
-/* Mobile header: name left, burger right */
 @media (max-width: 719px) {
   :root {
     --sh-header-band: max(6vh, 3.85rem);
-  }
-
-  .menu__button {
-    position: fixed !important;
-    top: 0 !important;
-    right: var(--sh-gutter) !important;
-    left: auto !important;
-    z-index: 30 !important;
-  }
-
-  .homepageView--list-view .homeHeader,
-  .homepageView--grid-view .homeHeader {
-    padding: 0 calc(var(--sh-gutter) + 44px) 0 var(--sh-gutter) !important;
   }
 
   .homeHeader .headerContent {
