@@ -48,28 +48,21 @@
 }
 
 .menu.menu--isExpanded {
+  position: fixed !important;
   opacity: 1 !important;
   visibility: visible !important;
   z-index: 200 !important;
   pointer-events: auto !important;
   clip: auto !important;
-  width: unset !important;
-  height: unset !important;
-  min-width: unset !important;
-  min-height: unset !important;
-  max-width: unset !important;
-  max-height: unset !important;
-  left: unset !important;
-  top: unset !important;
-  right: unset !important;
-  transform: unset !important;
-  overflow: unset !important;
-  contain: unset !important;
-  background: unset !important;
-  box-shadow: unset !important;
-  border-radius: unset !important;
-  -webkit-backdrop-filter: unset !important;
-  backdrop-filter: unset !important;
+  width: 320px !important;
+  height: auto !important;
+  min-height: 190px !important;
+  left: 50% !important;
+  top: 10px !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  overflow: hidden !important;
+  contain: layout !important;
 }
 
 body.sh-menu-open #page-overlay {
@@ -636,6 +629,12 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
     --sh-gutter: 2.5vw;
     --sh-band: 3.5vh;
     --sh-header-band: 3.5vh;
+  }
+
+  .menu.menu--isExpanded {
+    top: calc(var(--sh-header-band) + 8px) !important;
+    width: min(360px, calc(100vw - (2 * var(--sh-gutter)))) !important;
+    max-width: calc(100vw - (2 * var(--sh-gutter))) !important;
   }
 
   .shHeader--desktop {
