@@ -48,8 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
       setView('grid');
     });
 
+  function showSubNavPanel(loc) {
+    menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
+    menu.dataset.subMenuLocation = loc;
+    if (loc === 'info') menu.classList.add('menu--isAboutVisible');
+    else if (loc === 'notes') menu.classList.add('menu--isNotesVisible');
+  }
+
   menuBtn &&
     menuBtn.addEventListener('click', () => {
+      const onAbout = menu.classList.contains('menu--isAboutVisible');
+      const onNotes = menu.classList.contains('menu--isNotesVisible');
+
+      if (menu.classList.contains('menu--isExpanded') && (onAbout || onNotes)) {
+        showSubNavPanel('pages');
+        return;
+      }
+
       menu.classList.toggle('menu--isExpanded');
       if (!menu.classList.contains('menu--isExpanded')) {
         menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
@@ -62,11 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.subNav__menuItem').forEach((btn) => {
     btn.addEventListener('click', () => {
       if (!menu.classList.contains('menu--isExpanded')) menu.classList.add('menu--isExpanded');
-      menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
       const loc = btn.dataset.submenuLocation;
-      if (loc) menu.dataset.subMenuLocation = loc;
-      if (loc === 'info') menu.classList.add('menu--isAboutVisible');
-      if (loc === 'notes') menu.classList.add('menu--isNotesVisible');
+      if (loc) showSubNavPanel(loc);
     });
   });
 
