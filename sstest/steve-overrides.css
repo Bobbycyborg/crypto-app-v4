@@ -1,8 +1,8 @@
 /* Stephen Howse — surgical diffs only (not a redesign). */
 
 :root {
-  --sh-band: 6vh;
-  --sh-header-band: 6vh;
+  --sh-band: 5vh;
+  --sh-header-band: 5vh;
   --sh-gutter: 3vw;
 }
 
@@ -489,7 +489,7 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 
 @media (max-width: 719px) {
   :root {
-    --sh-header-band: max(6vh, 3.85rem);
+    --sh-header-band: max(5vh, 3.6rem);
   }
 
   .homeHeader .headerContent {
