@@ -81,7 +81,7 @@
   justify-content: center !important;
   opacity: 0 !important;
   background: #fff;
-  transition: opacity 1.7s ease-in-out !important;
+  transition: opacity 2s ease-in-out !important;
   will-change: opacity;
   pointer-events: none;
 }
@@ -95,11 +95,6 @@
 #shFadeStage .sh-frame.is-entering {
   opacity: 1 !important;
   z-index: 3;
-}
-
-#shFadeStage .sh-frame.responsive-image,
-#shFadeStage .sh-frame picture {
-  opacity: 1 !important;
 }
 
 #shFadeStage .sh-frame img {

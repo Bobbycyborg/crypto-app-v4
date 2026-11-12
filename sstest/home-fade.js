@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const frames = [...stage.querySelectorAll('.sh-frame')];
   if (frames.length < 2) return;
 
-  const fadeMs = 1700;
+  const fadeMs = 2000;
+  const autoMs = 5000;
   let index = 0;
   let busy = false;
   let autoTimer = null;
@@ -25,28 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const to = frames[target];
 
     to.classList.add('is-entering');
+    void to.offsetWidth;
     to.classList.add('is-current');
-
-    requestAnimationFrame(() => {
-      from.classList.remove('is-current');
-    });
+    from.classList.remove('is-current');
 
     window.setTimeout(() => {
       from.classList.remove('is-entering');
       to.classList.remove('is-entering');
       index = target;
       busy = false;
-    }, fadeMs + 50);
+    }, fadeMs + 80);
   }
 
   window.shFadeTo = fadeTo;
 
   function bumpAuto() {
     if (autoTimer) window.clearInterval(autoTimer);
-    autoTimer = window.setInterval(() => fadeTo(index + 1), 14000);
+    autoTimer = window.setInterval(() => fadeTo(index + 1), autoMs);
   }
 
-  window.setTimeout(bumpAuto, 5000);
+  bumpAuto();
 
   stage.addEventListener('click', (e) => {
     e.preventDefault();
