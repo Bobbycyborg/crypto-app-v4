@@ -123,18 +123,24 @@ body {
 }
 
 .homeHeader .headerContent {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: baseline !important;
-  gap: 0.45em !important;
+  display: block !important;
   max-width: none !important;
+  width: 100% !important;
   line-height: 1.15 !important;
+  white-space: nowrap !important;
 }
 
-@media (min-width: 720px) {
+.homeHeader .headerContent h1,
+.homeHeader .headerContent h2 {
+  white-space: nowrap !important;
+}
+
+@media (max-width: 479px) {
   .homeHeader .headerContent {
+    white-space: normal !important;
+    display: flex !important;
     flex-wrap: nowrap !important;
-    white-space: nowrap !important;
+    overflow: hidden !important;
   }
 }
 
