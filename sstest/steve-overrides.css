@@ -100,6 +100,11 @@ body.sh-menu-open .menu__button {
 }
 
 @media (min-width: 720px) {
+  :root {
+    --sh-band: 4vh;
+    --sh-header-band: 4vh;
+  }
+
   .menu.menu--isExpanded {
     left: auto !important;
     right: var(--sh-gutter) !important;
@@ -107,11 +112,14 @@ body.sh-menu-open .menu__button {
     min-height: 12rem !important;
   }
 
+  .shHeader--desktop h1,
+  .shHeader--desktop h2,
   .homeHeader .headerContent h1,
   .homeHeader .headerContent h2,
   #homepage .headerContent h1,
   #homepage .headerContent h2 {
     font-size: 18px !important;
+    line-height: 1.12 !important;
   }
 }
 
@@ -289,7 +297,6 @@ body {
   display: block !important;
   width: 100% !important;
   font-family: HelveticaNowText, Helvetica, Arial, sans-serif !important;
-  font-size: 1.4rem !important;
   font-style: normal !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;
