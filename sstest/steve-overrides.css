@@ -633,7 +633,9 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 
 @media (max-width: 719px) {
   :root {
-    --sh-header-band: max(3vh, 3.2rem);
+    --sh-gutter: 2.5vw;
+    --sh-band: 3.5vh;
+    --sh-header-band: 3.5vh;
   }
 
   .menu.menu--isExpanded {
