@@ -425,14 +425,16 @@ body #homepage .featureProject--FullViewport {
   transform: none !important;
   width: 100% !important;
   max-width: none !important;
-  height: var(--sh-band) !important;
+  height: calc(var(--sh-band) + env(safe-area-inset-bottom, 0px)) !important;
   min-height: 0 !important;
-  max-height: var(--sh-band) !important;
-  margin: 0 !important;
+  max-height: calc(var(--sh-band) + env(safe-area-inset-bottom, 0px)) !important;
   border-radius: 0 !important;
   background: #fff !important;
-  padding: 0 var(--sh-gutter) !important;
+  padding: 0 var(--sh-gutter) env(safe-area-inset-bottom, 0px) !important;
   box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   box-shadow: none !important;
@@ -557,9 +559,6 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 
 /* view-switch: Full-view | Grid-view (names in data-view / data-home-view only) */
 .view-switch {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
   gap: 12px !important;
 }
 
@@ -568,7 +567,9 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   align-items: center !important;
   justify-content: center !important;
   width: 44px !important;
-  height: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: center !important;
   padding: 0 !important;
 }
 
@@ -690,9 +691,6 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
     max-height: var(--sh-header-band) !important;
   }
 
-  .indexToggle {
-    padding-bottom: env(safe-area-inset-bottom, 0) !important;
-  }
 }
 
 .shName,
