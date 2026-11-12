@@ -122,18 +122,6 @@ body.sh-menu-open .menu__button {
   box-sizing: content-box !important;
 }
 
-.homeHeader__burger {
-  flex: 0 0 auto !important;
-  align-self: center !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  position: relative !important;
-  z-index: 20 !important;
-  height: auto !important;
-  margin-left: auto !important;
-  padding: 0 !important;
-}
 
 .menu__button .menu__buttonBar {
   display: block !important;
@@ -194,31 +182,31 @@ body {
 
 .homeHeader,
 .homeHeader.homeHeader--nonFixed,
-#homepage .homeHeader {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-}
-
-.homepageView--list-view .homeHeader {
+#homepage .homeHeader,
+.homepageView--list-view .homeHeader,
+.homepageView--grid-view .homeHeader {
   position: relative !important;
   top: auto !important;
   left: auto !important;
-  flex: 0 0 var(--sh-header-band) !important;
-  height: var(--sh-header-band) !important;
-  min-height: 0 !important;
-  max-height: var(--sh-header-band) !important;
-  width: 100% !important;
-  padding: 0 var(--sh-gutter) !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
   align-items: center !important;
+  align-content: center !important;
+  justify-content: stretch !important;
+  width: 100% !important;
+  height: var(--sh-header-band) !important;
+  min-height: var(--sh-header-band) !important;
+  max-height: var(--sh-header-band) !important;
+  padding-block: 0 !important;
+  padding-inline: var(--sh-gutter) !important;
+  box-sizing: border-box !important;
   background: #fff !important;
   z-index: 5 !important;
   overflow: hidden !important;
+}
+
+.homepageView--list-view .homeHeader {
+  flex: 0 0 var(--sh-header-band) !important;
 }
 
 .homeHeader .headerInfo {
@@ -244,21 +232,27 @@ body {
 }
 
 .homeHeader .headerContent {
-  flex: 1 1 auto !important;
+  grid-column: 1 !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
   justify-content: center !important;
-  align-self: stretch !important;
+  align-self: center !important;
   max-width: none !important;
   width: 100% !important;
-  height: 100% !important;
-  min-height: 0 !important;
+  height: auto !important;
+  max-height: 100% !important;
   line-height: 1.08 !important;
-  gap: 0.08em !important;
+  gap: 0.06em !important;
   white-space: normal !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+.homeHeader__burger {
+  grid-column: 2 !important;
+  align-self: center !important;
+  justify-self: end !important;
 }
 
 .shHeader--desktop {
@@ -293,11 +287,12 @@ body {
   font-style: normal !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;
-  line-height: 1.15 !important;
+  line-height: 1.08 !important;
   text-transform: uppercase !important;
   color: #111 !important;
   opacity: 1 !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 #shFadeLink {
@@ -441,16 +436,19 @@ body #homepage .featureProject--FullViewport {
   max-height: var(--sh-band) !important;
   border-radius: 0 !important;
   background: #fff !important;
-  padding: 0 var(--sh-gutter) !important;
+  padding-block: 0 !important;
+  padding-inline: var(--sh-gutter) !important;
   box-sizing: border-box !important;
-  display: flex !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto auto 1fr !important;
   align-items: center !important;
-  justify-content: center !important;
+  align-content: center !important;
+  justify-items: center !important;
+  line-height: 0 !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   box-shadow: none !important;
   z-index: 2 !important;
-  position: fixed !important;
 }
 
 .indexToggle.view-switch::after {
@@ -582,19 +580,29 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 }
 
 /* view-switch: Full-view | Grid-view (names in data-view / data-home-view only) */
-.view-switch {
-  gap: 12px !important;
-}
-
 .view-switch .indexToggle__button {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 44px !important;
-  height: auto !important;
-  min-height: 0 !important;
-  align-self: center !important;
+  height: var(--sh-band) !important;
+  max-height: var(--sh-band) !important;
   padding: 0 !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+}
+
+.view-switch .indexToggle__button[data-view="full-view"] {
+  grid-column: 2 !important;
+}
+
+.view-switch .indexToggle__button[data-view="grid-view"] {
+  grid-column: 3 !important;
+  margin-left: 12px !important;
+}
+
+.view-switch .indexToggle__button svg {
+  display: block !important;
 }
 
 .view-switch .indexToggle__button::before {
