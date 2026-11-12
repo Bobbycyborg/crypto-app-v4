@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function parkBurgerInHeader() {
     const slot = burgerSlot();
-    if (menuBtn && slot && menu && !menu.classList.contains('menu--isExpanded')) {
+    if (menuBtn && slot) {
       slot.appendChild(menuBtn);
     }
   }
@@ -79,25 +79,33 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (loc === 'notes') menu.classList.add('menu--isNotesVisible');
   }
 
-  menuBtn &&
-    menuBtn.addEventListener('click', () => {
-      const onAbout = menu.classList.contains('menu--isAboutVisible');
-      const onNotes = menu.classList.contains('menu--isNotesVisible');
+  function toggleMainMenu() {
+    if (!menu) return;
+    const onAbout = menu.classList.contains('menu--isAboutVisible');
+    const onNotes = menu.classList.contains('menu--isNotesVisible');
 
-      if (menu.classList.contains('menu--isExpanded') && (onAbout || onNotes)) {
-        showSubNavPanel('pages');
-        return;
-      }
-
-      menu.classList.toggle('menu--isExpanded');
-      if (!menu.classList.contains('menu--isExpanded')) {
-        menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
-        delete menu.dataset.subMenuLocation;
-      } else if (!menu.dataset.subMenuLocation) {
-        menu.dataset.subMenuLocation = 'pages';
-      }
+    if (menu.classList.contains('menu--isExpanded') && (onAbout || onNotes)) {
+      showSubNavPanel('pages');
       syncMenuOpen();
-    });
+      return;
+    }
+
+    menu.classList.toggle('menu--isExpanded');
+    if (!menu.classList.contains('menu--isExpanded')) {
+      menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
+      delete menu.dataset.subMenuLocation;
+    } else if (!menu.dataset.subMenuLocation) {
+      menu.dataset.subMenuLocation = 'pages';
+    }
+    syncMenuOpen();
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.menu__button')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    toggleMainMenu();
+  });
 
   const pageOverlay = document.getElementById('page-overlay');
   pageOverlay &&

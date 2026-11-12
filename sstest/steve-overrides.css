@@ -81,9 +81,30 @@
 
 body.sh-menu-open #page-overlay {
   display: block !important;
+  top: var(--sh-header-band) !important;
+  height: calc(100% - var(--sh-header-band)) !important;
   opacity: 0.35 !important;
   pointer-events: auto !important;
   z-index: 90 !important;
+}
+
+body.sh-menu-open .homeHeader {
+  position: relative !important;
+  z-index: 110 !important;
+}
+
+body.sh-menu-open .menu__button {
+  z-index: 111 !important;
+  cursor: pointer !important;
+}
+
+@media (min-width: 720px) {
+  .menu.menu--isExpanded {
+    left: auto !important;
+    right: var(--sh-gutter) !important;
+    transform: none !important;
+    min-height: 12rem !important;
+  }
 }
 
 .menu__button {
