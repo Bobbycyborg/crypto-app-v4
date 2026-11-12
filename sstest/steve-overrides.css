@@ -2,6 +2,7 @@
 
 :root {
   --sh-band: 6vh;
+  --sh-header-band: 6vh;
   --sh-gutter: 3vw;
 }
 
@@ -45,12 +46,31 @@
   pointer-events: auto !important;
 }
 
+.menu:not(.menu--isExpanded) .topMenu,
+.menu:not(.menu--isExpanded) .nav__container {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 .menu.menu--isExpanded {
+  width: auto !important;
+  height: auto !important;
+  min-width: 266px !important;
+  left: 50% !important;
+  top: 10px !important;
+  transform: translateX(-50%) !important;
+  overflow: hidden !important;
+  z-index: 50 !important;
+  background: hsla(0, 0%, 97%, 0.96) !important;
+  border-radius: 10px !important;
   pointer-events: auto !important;
 }
 
-.menu:not(.menu--isExpanded) .topMenu {
-  display: none !important;
+.menu.menu--isExpanded .nav__container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .menu__button {
@@ -119,7 +139,7 @@ body {
 
 .homepageView--list-view .featureProject--FullViewport {
   display: grid !important;
-  grid-template-rows: var(--sh-band) minmax(0, 1fr) !important;
+  grid-template-rows: var(--sh-header-band) minmax(0, 1fr) !important;
   min-height: 0 !important;
   height: calc(100dvh - var(--sh-band)) !important;
   max-height: calc(100dvh - var(--sh-band)) !important;
@@ -131,10 +151,10 @@ body {
   position: relative !important;
   top: auto !important;
   left: auto !important;
-  flex: 0 0 var(--sh-band) !important;
-  height: var(--sh-band) !important;
+  flex: 0 0 var(--sh-header-band) !important;
+  height: var(--sh-header-band) !important;
   min-height: 0 !important;
-  max-height: var(--sh-band) !important;
+  max-height: var(--sh-header-band) !important;
   width: 100% !important;
   padding: 0 var(--sh-gutter) !important;
   box-sizing: border-box !important;
@@ -318,12 +338,21 @@ body #homepage .featureProject--FullViewport {
   opacity: 1 !important;
 }
 
+.indexToggle.view-switch::before,
+.indexToggle.view-switch::after {
+  display: none !important;
+  content: none !important;
+}
+
 .indexToggle {
   position: fixed !important;
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
+  margin: 0 !important;
+  transform: none !important;
   width: 100% !important;
+  max-width: none !important;
   height: var(--sh-band) !important;
   min-height: 0 !important;
   max-height: var(--sh-band) !important;
@@ -349,10 +378,10 @@ body #homepage .featureProject--FullViewport {
 
 .homepageView--grid-view .homeHeader {
   position: relative !important;
-  flex: 0 0 var(--sh-band) !important;
-  height: var(--sh-band) !important;
+  flex: 0 0 var(--sh-header-band) !important;
+  height: var(--sh-header-band) !important;
   min-height: 0 !important;
-  max-height: var(--sh-band) !important;
+  max-height: var(--sh-header-band) !important;
   padding: 0 var(--sh-gutter) 0 calc(var(--sh-gutter) + 48px) !important;
   background: #fff !important;
 }
@@ -398,11 +427,21 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   align-items: center !important;
   gap: 0.4em !important;
   height: 100% !important;
+  width: auto !important;
+  min-width: 0 !important;
+  flex: 0 1 auto !important;
+  padding: 0 0.15em !important;
+}
+
+.view-switch .indexToggle__button::before {
+  display: none !important;
+  content: none !important;
 }
 
 .view-switch__label {
   font-family: HelveticaNowText, Helvetica, Arial, sans-serif !important;
-  font-size: clamp(0.48rem, 2.35vw, 0.7rem) !important;
+  font-size: clamp(0.55rem, 2.8vw, 0.78rem) !important;
+  white-space: nowrap !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;
   text-transform: uppercase !important;
@@ -449,8 +488,12 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   }
 }
 
-/* Mobile header: name left, burger right, 6vh band */
+/* Mobile header: name left, burger right */
 @media (max-width: 719px) {
+  :root {
+    --sh-header-band: max(6vh, 3.85rem);
+  }
+
   .menu__button {
     position: fixed !important;
     top: 0 !important;
@@ -471,11 +514,19 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
     overflow: hidden !important;
   }
 
-  .homeHeader .headerContent h1,
-  .homeHeader .headerContent h2 {
+  .homeHeader .headerContent h1 {
+    white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    white-space: nowrap !important;
+  }
+
+  .homeHeader .headerContent h2 {
+    white-space: normal !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    line-height: 1.08 !important;
   }
   html,
   body,
@@ -523,8 +574,10 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   }
 
   .homepageView--grid-view .homeHeader {
+    flex: 0 0 var(--sh-header-band) !important;
+    height: var(--sh-header-band) !important;
     min-height: 0 !important;
-    max-height: var(--sh-band) !important;
+    max-height: var(--sh-header-band) !important;
   }
 
   .indexToggle {
