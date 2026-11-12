@@ -46,10 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function parkBurgerInMenu() {
-    if (menuBtn && menu && menu.classList.contains('menu--isExpanded')) {
-      menu.insertBefore(menuBtn, menu.firstChild);
-    }
+  function syncMenuOpen() {
+    const open = menu && menu.classList.contains('menu--isExpanded');
+    document.body.classList.toggle('sh-menu-open', !!open);
   }
 
   function setView(view) {
@@ -94,13 +93,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!menu.classList.contains('menu--isExpanded')) {
         menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
         delete menu.dataset.subMenuLocation;
-        parkBurgerInHeader();
-      } else {
-        if (!menu.dataset.subMenuLocation) {
-          menu.dataset.subMenuLocation = 'pages';
-        }
-        parkBurgerInMenu();
+      } else if (!menu.dataset.subMenuLocation) {
+        menu.dataset.subMenuLocation = 'pages';
       }
+      syncMenuOpen();
+    });
+
+  const pageOverlay = document.getElementById('page-overlay');
+  pageOverlay &&
+    pageOverlay.addEventListener('click', () => {
+      if (!menu.classList.contains('menu--isExpanded')) return;
+      menu.classList.remove('menu--isExpanded', 'menu--isAboutVisible', 'menu--isNotesVisible');
+      delete menu.dataset.subMenuLocation;
+      syncMenuOpen();
     });
 
   document.querySelectorAll('.subNav__menuItem').forEach((btn) => {

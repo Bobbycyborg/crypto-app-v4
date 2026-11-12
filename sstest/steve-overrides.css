@@ -42,10 +42,6 @@
   min-height: 0 !important;
 }
 
-.menu:not(.menu--isExpanded) .menu__button {
-  pointer-events: auto !important;
-}
-
 .menu:not(.menu--isExpanded) .topMenu,
 .menu:not(.menu--isExpanded) .nav__container {
   display: none !important;
@@ -54,23 +50,40 @@
 }
 
 .menu.menu--isExpanded {
-  width: auto !important;
+  width: calc(100vw - (2 * var(--sh-gutter))) !important;
+  max-width: 420px !important;
   height: auto !important;
-  min-width: 266px !important;
+  min-width: 0 !important;
   left: 50% !important;
-  top: 10px !important;
+  top: calc(var(--sh-header-band) + 6px) !important;
   transform: translateX(-50%) !important;
-  overflow: hidden !important;
-  z-index: 50 !important;
-  background: hsla(0, 0%, 97%, 0.96) !important;
+  overflow: auto !important;
+  z-index: 100 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background: hsla(0, 0%, 97%, 0.98) !important;
   border-radius: 10px !important;
   pointer-events: auto !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+.menu.menu--isExpanded .topMenu {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .menu.menu--isExpanded .nav__container {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+body.sh-menu-open #page-overlay {
+  display: block !important;
+  opacity: 0.35 !important;
+  pointer-events: auto !important;
+  z-index: 90 !important;
 }
 
 .menu__button {
