@@ -67,27 +67,117 @@
   clip: auto !important;
   width: 320px !important;
   height: auto !important;
-  min-height: 190px !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 20px) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
   left: 50% !important;
   top: 10px !important;
   right: auto !important;
   transform: translateX(-50%) !important;
   overflow: hidden !important;
   isolation: isolate !important;
+  transition:
+    width var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1),
+    border-radius var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1) !important;
 }
 
-.menu.menu--isExpanded .topMenu,
-.menu.menu--isExpanded .nav__container,
-.menu.menu--isExpanded .subNav,
-.menu.menu--isExpanded .subNav__container {
-  z-index: 1 !important;
+.menu.menu--isExpanded {
+  display: flex !important;
+  flex-direction: column !important;
+  padding-bottom: 12px !important;
+}
+
+.menu.menu--isExpanded .topMenu {
   position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  overflow: hidden !important;
+  flex: 0 0 32px !important;
+  z-index: 1 !important;
+}
+
+.menu.menu--isExpanded .nav__container {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+  flex: 0 0 auto !important;
+  height: auto !important;
+  z-index: 1 !important;
+}
+
+.menu.menu--isExpanded .subNav--mainMenu {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.menu.menu--isExpanded .subNav__container {
+  position: relative !important;
+}
+
+.menu.menu--isExpanded .subNav--about {
+  display: none !important;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .subNav--mainMenu {
+  display: none !important;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .subNav--about {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 20px !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  padding: 12px 18px 18px !important;
+  visibility: visible !important;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .subNav--about p {
+  margin: 0 !important;
+  line-height: 1.35 !important;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .subNav--about .menuAbout {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin-top: 4px !important;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .menuAbout__contactList {
+  gap: 8px !important;
+}
+
+/* SB fixed heights (190px+) — shrink-wrap to visible panel */
+.menu.menu--isExpanded,
+.menu.menu--isExpanded.menu--isAboutVisible,
+.menu.menu--isExpanded.menu--isNotesVisible,
+.menu.menu--isExpanded[data-sub-menu-location="collaborators"],
+.menu.menu--isExpanded[data-sub-menu-location="playlists"],
+.menu.menu--isExpanded[data-sub-menu-location="notes"] {
+  height: auto !important;
+  min-height: 0 !important;
 }
 
 body.sh-menu-open #page-overlay {
   display: block !important;
-  top: var(--sh-header-band) !important;
-  height: calc(100% - var(--sh-header-band)) !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   background: rgba(255, 255, 255, 0.12) !important;
   opacity: 1 !important;
   -webkit-backdrop-filter: blur(14px) saturate(1.15) !important;
@@ -97,12 +187,14 @@ body.sh-menu-open #page-overlay {
 }
 
 body.sh-menu-open .homeHeader {
-  position: relative !important;
-  z-index: var(--sh-z-header) !important;
+  z-index: 1 !important;
 }
 
 body.sh-menu-open .menu__button {
-  position: relative !important;
+  position: fixed !important;
+  top: calc((var(--sh-header-band) - 13px) / 2) !important;
+  right: var(--sh-gutter) !important;
+  left: auto !important;
   z-index: var(--sh-z-burger) !important;
   cursor: pointer !important;
 }
@@ -808,14 +900,14 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 @media (min-width: 720px) {
   :root {
     --sh-gutter: 2vw;
-    --sh-header-band: 3vh;
-    --sh-band: 3vh;
+    --sh-header-band: 4vh;
+    --sh-band: 4vh;
   }
 
   @supports (height: 1dvh) {
     :root {
-      --sh-header-band: 3dvh;
-      --sh-band: 3dvh;
+      --sh-header-band: 4dvh;
+      --sh-band: 4dvh;
     }
   }
 
