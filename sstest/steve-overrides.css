@@ -16,14 +16,6 @@
   src: url(https://www.sarah-bassett.com/assets/fonts/HelveticaNowText-Bold.woff2) format('woff2');
 }
 
-@font-face {
-  font-display: swap;
-  font-family: 'Caslon 540 LT Std';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://www.sarah-bassett.com/assets/fonts/Caslon540LTStd-Roman.woff2) format('woff2');
-}
-
 .menu,
 .indexToggle {
   box-shadow: none !important;
@@ -443,4 +435,16 @@ body[data-home-view="grid"] .homepageView--grid-view {
     min-height: 0 !important;
     max-height: 4vh !important;
   }
+}
+
+.shName,
+.homeHeader h1,
+.homeHeader h1 .shName,
+.featureProject--bright .homeHeader h1,
+.featureProject--bright .homeHeader h1 .shName {
+  font-family: HelveticaNowText, Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  letter-spacing: -0.02em !important;
+  text-transform: uppercase !important;
 }
