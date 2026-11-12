@@ -6,6 +6,13 @@
   --sh-gutter: 2vw;
 }
 
+@supports (height: 1dvh) {
+  :root {
+    --sh-band: 3dvh;
+    --sh-header-band: 3dvh;
+  }
+}
+
 @font-face {
   font-display: swap;
   font-family: HelveticaNowText;
@@ -105,6 +112,42 @@ body.sh-menu-open .menu__button {
     top: 10px !important;
     transform: none !important;
     transform-origin: top right !important;
+  }
+
+  /* Chrome: SB sets headerContent line-height:0 — breaks vertical centre */
+  #homepage .homeHeader {
+    align-items: center !important;
+    padding: 0 var(--sh-gutter) !important;
+    line-height: normal !important;
+  }
+
+  #homepage .homeHeader .headerContent {
+    line-height: 1.12 !important;
+    height: auto !important;
+    max-height: none !important;
+    align-self: center !important;
+    justify-content: center !important;
+  }
+
+  #homepage .homeHeader .headerContent h1,
+  #homepage .homeHeader .headerContent h2 {
+    display: block !important;
+    line-height: 1.12 !important;
+  }
+
+  #homepage .homeHeader__burger {
+    height: auto !important;
+    align-self: center !important;
+  }
+
+  #homepage .indexToggle.view-switch {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .view-switch .indexToggle__button {
+    height: auto !important;
+    align-self: center !important;
   }
 }
 
