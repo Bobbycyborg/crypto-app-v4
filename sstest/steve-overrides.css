@@ -1,9 +1,9 @@
 /* Stephen Howse — surgical diffs only (not a redesign). */
 
 :root {
-  --sh-band: 5vh;
-  --sh-header-band: 5vh;
-  --sh-gutter: 3vw;
+  --sh-band: 3vh;
+  --sh-header-band: 3vh;
+  --sh-gutter: 2vw;
 }
 
 @font-face {
@@ -81,11 +81,6 @@ body.sh-menu-open .menu__button {
 }
 
 @media (min-width: 720px) {
-  :root {
-    --sh-band: 4vh;
-    --sh-header-band: 4vh;
-  }
-
   .shHeader--desktop h1,
   .shHeader--desktop h2,
   .homeHeader .headerContent h1,
@@ -593,7 +588,7 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 
 @media (max-width: 719px) {
   :root {
-    --sh-header-band: max(5vh, 3.6rem);
+    --sh-header-band: max(3vh, 3.2rem);
   }
 
   .shHeader--desktop {
