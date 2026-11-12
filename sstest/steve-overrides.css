@@ -35,13 +35,24 @@
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+.menu:not(.menu--isExpanded) .topMenu,
+.menu:not(.menu--isExpanded) .nav__container,
+.menu:not(.menu--isExpanded) .subNav {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .menu.menu--isExpanded {
   opacity: 1 !important;
   visibility: visible !important;
-  z-index: 100 !important;
+  z-index: 200 !important;
   pointer-events: auto !important;
+  clip: auto !important;
   width: unset !important;
   height: unset !important;
   min-width: unset !important;
@@ -72,7 +83,7 @@ body.sh-menu-open #page-overlay {
 
 body.sh-menu-open .homeHeader {
   position: relative !important;
-  z-index: 110 !important;
+  z-index: 120 !important;
 }
 
 body.sh-menu-open .menu__button {
@@ -446,6 +457,7 @@ body #homepage .featureProject--FullViewport {
   backdrop-filter: none !important;
   box-shadow: none !important;
   z-index: 2 !important;
+  position: fixed !important;
 }
 
 .indexToggle.view-switch::after {
@@ -622,6 +634,46 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 @media (max-width: 719px) {
   :root {
     --sh-header-band: max(3vh, 3.2rem);
+  }
+
+  .menu.menu--isExpanded {
+    position: fixed !important;
+    top: calc(var(--sh-header-band) + 6px) !important;
+    left: var(--sh-gutter) !important;
+    right: var(--sh-gutter) !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 280px !important;
+    max-width: none !important;
+    min-height: 10rem !important;
+    max-height: min(72dvh, calc(100dvh - var(--sh-header-band) - var(--sh-band) - 16px)) !important;
+    transform: none !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 200 !important;
+  }
+
+  .menu.menu--isExpanded .topMenu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .menu.menu--isExpanded .nav__container {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .menu.menu--isExpanded .subNav {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
   }
 
   .shHeader--desktop {
