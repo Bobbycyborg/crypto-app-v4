@@ -102,9 +102,10 @@ body.sh-menu-open .menu__button {
   box-shadow: none !important;
   -webkit-tap-highlight-color: transparent !important;
   width: 18px !important;
-  height: 100% !important;
-  min-height: var(--sh-header-band) !important;
+  height: auto !important;
+  min-height: 0 !important;
   padding: 0 0 0 20px !important;
+  align-self: center !important;
   margin: 0 !important;
   display: flex !important;
   flex-direction: column !important;
@@ -119,13 +120,13 @@ body.sh-menu-open .menu__button {
 
 .homeHeader__burger {
   flex: 0 0 auto !important;
-  align-self: stretch !important;
+  align-self: center !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
   position: relative !important;
   z-index: 20 !important;
-  height: 100% !important;
+  height: auto !important;
   margin-left: auto !important;
   padding: 0 !important;
 }
@@ -133,6 +134,9 @@ body.sh-menu-open .menu__button {
 .homeHeader .headerContent {
   position: relative !important;
   z-index: 1 !important;
+  height: 100% !important;
+  justify-content: center !important;
+  align-self: center !important;
 }
 
 .menu__button .menu__buttonBar {
@@ -250,14 +254,19 @@ body {
   display: none !important;
 }
 
-.shHeader--desktop {
+.shHeader--desktop,
+.shHeader--mobile {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
   justify-content: center !important;
-  gap: 0.12em !important;
+  gap: 0.1em !important;
   width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
 }
+
+.shHeader--desktop {
 
 .homeHeader .headerContent h1,
 .homeHeader .headerContent h2,
