@@ -87,7 +87,7 @@ body.sh-menu-open .menu__button {
   .homeHeader .headerContent h2,
   #homepage .headerContent h1,
   #homepage .headerContent h2 {
-    font-size: 14px !important;
+    font-size: 12px !important;
     line-height: 1.12 !important;
   }
 }
