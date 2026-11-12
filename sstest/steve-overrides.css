@@ -150,21 +150,26 @@ body {
   width: 100% !important;
   height: 100% !important;
   opacity: 0 !important;
+  filter: blur(14px) !important;
   background: #000;
-  transition: opacity 2s ease-in-out !important;
-  will-change: opacity;
+  transition:
+    opacity 2s ease-in-out,
+    filter 2s ease-in-out !important;
+  will-change: opacity, filter;
   pointer-events: none;
   overflow: hidden !important;
 }
 
 #shFadeStage .sh-frame.is-current {
   opacity: 1 !important;
+  filter: blur(0) !important;
   pointer-events: auto;
   z-index: 2;
 }
 
 #shFadeStage .sh-frame.is-entering {
   opacity: 1 !important;
+  filter: blur(0) !important;
   z-index: 3;
 }
 
