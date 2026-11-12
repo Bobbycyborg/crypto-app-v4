@@ -30,10 +30,11 @@
 .menu:not(.menu--isExpanded) {
   overflow: visible !important;
   contain: none !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
   pointer-events: none !important;
   background: transparent !important;
+  border: none !important;
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
@@ -120,6 +121,9 @@ body.sh-menu-open .menu__button {
   left: auto !important;
   right: auto !important;
   z-index: 20 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
   width: 18px !important;
   height: 100% !important;
   min-height: var(--sh-header-band) !important;
@@ -596,6 +600,34 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 @media (max-width: 719px) {
   :root {
     --sh-header-band: max(5vh, 3.6rem);
+  }
+
+  .menu {
+    position: fixed !important;
+  }
+
+  .menu:not(.menu--isExpanded) {
+    top: -100vh !important;
+    left: -100vw !important;
+    transform: none !important;
+  }
+
+  .menu.menu--isExpanded {
+    left: var(--sh-gutter) !important;
+    right: var(--sh-gutter) !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+    top: calc(var(--sh-header-band) + 4px) !important;
+    max-height: calc(100dvh - var(--sh-header-band) - var(--sh-band) - 12px) !important;
+  }
+
+  .menu.menu--isExpanded .subNav {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
   }
 
   .homeHeader .headerContent {
