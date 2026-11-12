@@ -4,6 +4,10 @@
   --sh-band: 3vh;
   --sh-header-band: 3vh;
   --sh-gutter: 2vw;
+  --sh-z-overlay: 100;
+  --sh-z-header: 110;
+  --sh-z-menu: 10000;
+  --sh-z-burger: 10001;
 }
 
 @supports (height: 1dvh) {
@@ -58,7 +62,7 @@
   position: fixed !important;
   opacity: 1 !important;
   visibility: visible !important;
-  z-index: 200 !important;
+  z-index: var(--sh-z-menu) !important;
   pointer-events: auto !important;
   clip: auto !important;
   width: 320px !important;
@@ -69,7 +73,15 @@
   right: auto !important;
   transform: translateX(-50%) !important;
   overflow: hidden !important;
-  contain: layout !important;
+  isolation: isolate !important;
+}
+
+.menu.menu--isExpanded .topMenu,
+.menu.menu--isExpanded .nav__container,
+.menu.menu--isExpanded .subNav,
+.menu.menu--isExpanded .subNav__container {
+  z-index: 1 !important;
+  position: relative !important;
 }
 
 body.sh-menu-open #page-overlay {
@@ -81,16 +93,17 @@ body.sh-menu-open #page-overlay {
   -webkit-backdrop-filter: blur(14px) saturate(1.15) !important;
   backdrop-filter: blur(14px) saturate(1.15) !important;
   pointer-events: auto !important;
-  z-index: 90 !important;
+  z-index: var(--sh-z-overlay) !important;
 }
 
 body.sh-menu-open .homeHeader {
   position: relative !important;
-  z-index: 120 !important;
+  z-index: var(--sh-z-header) !important;
 }
 
 body.sh-menu-open .menu__button {
-  z-index: 111 !important;
+  position: relative !important;
+  z-index: var(--sh-z-burger) !important;
   cursor: pointer !important;
 }
 
