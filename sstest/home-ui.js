@@ -7,24 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridViewBtn = viewSwitch && viewSwitch.querySelector('[data-view="grid-view"]');
   const gridRoot = document.getElementById('homeGridGrid');
 
-  const images = [
-    'img/011.jpg',
-    'img/15554201594_76a210c28c_h.jpg',
-    'img/21tg.jpeg',
-    'img/25964819690_1e5c16a845_b.jpg',
-    'img/45e16cd1270e43cbecc850c85fd688e8.jpg',
-    'img/5964610613_e9c1c4c127_b.jpg',
-    'img/KyleThompson_metalmagazine_7.jpg',
-    'img/original.jpg',
-    'img/tumblr_o1ad8krEfs1ukenxjo1_1280.jpg',
-    'img/tumblr_o2jq6sS0V91th0flao1_1280.jpg'
-  ];
-
-  if (gridRoot) {
-    images.forEach((src) => {
+  if (gridRoot && window.shHomeGalleryItems) {
+    window.shHomeGalleryItems().forEach((item) => {
       const article = document.createElement('article');
       article.className = 'gridViewProject';
-      article.innerHTML = `<a href="#"><div class="gridViewProject__asset"><div class="responsive-image"><img src="${src}" alt="" loading="lazy"></div></div><div class="gridViewProject__description"><h3></h3><h4></h4></div></a>`;
+      const projectAttr = ` data-project="${item.project || 'dungeness'}"`;
+      const title = item.title ? `<h3>${item.title}</h3>` : '<h3></h3>';
+      article.innerHTML = `<a href="#"${projectAttr}><div class="gridViewProject__asset"><div class="responsive-image"><img src="${item.src}" alt="${item.title || ''}" loading="lazy"></div></div><div class="gridViewProject__description">${title}<h4></h4></div></a>`;
       gridRoot.appendChild(article);
     });
   }
@@ -50,6 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function syncMenuOpen() {
     const open = menu && menu.classList.contains('menu--isExpanded');
     document.body.classList.toggle('sh-menu-open', !!open);
+    document.body.classList.toggle(
+      'sh-menu-about',
+      !!(open && menu.classList.contains('menu--isAboutVisible'))
+    );
+    document.body.classList.toggle(
+      'sh-menu-notes',
+      !!(open && menu.classList.contains('menu--isNotesVisible'))
+    );
   }
 
   function setView(view) {
