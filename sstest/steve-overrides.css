@@ -1356,7 +1356,16 @@ body.sh-project-panel-info #shProjectInfo .projectInfo__content {
   }
 
   #shProjectOverview .sh-overview-hover-focus {
-    z-index: 30;
+    z-index: 300 !important;
+  }
+
+  #shProjectOverview .sh-overview-hover-neighbour {
+    z-index: 1;
+  }
+
+  #shProjectOverview .sh-overview-shrink-fast .responsive-image {
+    transition-duration: 0.14s !important;
+    transition-delay: 0ms !important;
   }
 
   #shProjectOverview .sh-overview-hover-focus .responsive-image {

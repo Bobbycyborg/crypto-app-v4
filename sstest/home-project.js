@@ -269,8 +269,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetOverviewLayout() {
     overview?.classList.remove('sh-overview-is-hovering');
     overview?.querySelectorAll('.projectOverview__asset').forEach((el) => {
-      el.classList.remove('sh-overview-enter', 'sh-overview-hover-focus', 'sh-overview-hover-neighbour');
+      el.classList.remove(
+        'sh-overview-enter',
+        'sh-overview-hover-focus',
+        'sh-overview-hover-neighbour',
+        'sh-overview-shrink-fast'
+      );
       el.style.removeProperty('--sh-hover-delay');
+      el.style.removeProperty('z-index');
+      delete el.dataset.shHoverBound;
       el.style.removeProperty('--sh-stagger-delay');
       el.style.removeProperty('margin-left');
       el.style.removeProperty('width');
@@ -334,11 +341,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const WAVE_MS = 52;
     const MAX_DELAY = 420;
 
+    let prevFocus = null;
+
     function clearHoverState() {
       overview?.classList.remove('sh-overview-is-hovering');
+      prevFocus = null;
       grid.querySelectorAll('.projectOverview__asset').forEach((el) => {
-        el.classList.remove('sh-overview-hover-focus', 'sh-overview-hover-neighbour');
+        el.classList.remove(
+          'sh-overview-hover-focus',
+          'sh-overview-hover-neighbour',
+          'sh-overview-shrink-fast'
+        );
         el.style.removeProperty('--sh-hover-delay');
+        el.style.removeProperty('z-index');
       });
     }
 
@@ -355,6 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyHoverRipple(focus) {
+      if (prevFocus && prevFocus !== focus) {
+        prevFocus.classList.add('sh-overview-shrink-fast');
+        window.setTimeout(() => prevFocus?.classList.remove('sh-overview-shrink-fast'), 220);
+      }
+      prevFocus = focus;
       overview?.classList.add('sh-overview-is-hovering');
       const items = [...grid.querySelectorAll('.projectOverview__asset')];
       const nodes = items.map(centre);
@@ -392,24 +412,37 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       items.forEach((el) => {
-        el.classList.remove('sh-overview-hover-focus', 'sh-overview-hover-neighbour');
+        el.classList.remove(
+          'sh-overview-hover-focus',
+          'sh-overview-hover-neighbour',
+          'sh-overview-shrink-fast'
+        );
         const delay = delayByEl.get(el) ?? 0;
         el.style.setProperty('--sh-hover-delay', `${delay}ms`);
-        if (el === focus) el.classList.add('sh-overview-hover-focus');
-        else el.classList.add('sh-overview-hover-neighbour');
+        if (el === focus) {
+          el.classList.add('sh-overview-hover-focus');
+          el.style.zIndex = '300';
+        } else {
+          el.classList.add('sh-overview-hover-neighbour');
+          const layer = Math.max(1, 120 - Math.floor(delay / WAVE_MS) * 8);
+          el.style.zIndex = String(layer);
+        }
       });
     }
 
-    grid.addEventListener('pointerover', (e) => {
-      const el = e.target.closest('.projectOverview__asset');
-      if (!el || !grid.contains(el)) return;
-      applyHoverRipple(el);
-    });
+    function bindHoverTargets() {
+      grid.querySelectorAll('.projectOverview__asset').forEach((el) => {
+        if (el.dataset.shHoverBound === '1') return;
+        el.dataset.shHoverBound = '1';
+        el.addEventListener('mouseenter', () => applyHoverRipple(el));
+      });
+    }
 
-    grid.addEventListener('pointerleave', (e) => {
-      if (e.relatedTarget && grid.contains(e.relatedTarget)) return;
-      clearHoverState();
-    });
+    bindHoverTargets();
+    const hoverMo = new MutationObserver(() => bindHoverTargets());
+    hoverMo.observe(grid, { childList: true, subtree: true });
+
+    grid.addEventListener('mouseleave', () => clearHoverState());
   }
 
   setupOverviewHoverRipple();
