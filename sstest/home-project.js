@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const below = n - hover - 1;
     const above = hover;
     const minH = 2;
-    let hoverH = Math.min(maxW * rH, baseH * 2.85);
+    let hoverH = Math.min(maxW * rH * 1.08, baseH * 5.7);
     if (below > 0) {
       const maxHover = H - above * baseH - below * minH;
       hoverH = Math.min(hoverH, Math.max(baseH, maxHover));
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hoverH = Math.min(hoverH, Math.max(baseH, maxHover));
     }
 
-  const heights = new Array(n).fill(baseH);
+    const heights = new Array(n).fill(baseH);
     heights[hover] = hoverH;
     if (below > 0) {
       const belowH = (H - above * baseH - hoverH) / below;
