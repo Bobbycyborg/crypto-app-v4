@@ -1346,17 +1346,17 @@ body.sh-project-panel-info #shProjectInfo .projectInfo__content {
   }
 
   #shProjectOverview .projectOverview__assetGrid:has(.projectOverview__asset:hover) {
-    gap: 11px !important;
+    gap: 16px !important;
     overflow: visible !important;
   }
 
   #shProjectOverview .projectOverview__assetGrid:has(.projectOverview__asset:hover) .sh-overview-row {
-    gap: 11px !important;
+    gap: 16px !important;
   }
 
   #shProjectOverview .projectOverview__assetGrid:has(.projectOverview__asset:hover) .projectOverview__asset:not(:hover) .responsive-image {
-    transform: scale(0.78);
-    opacity: 0.52;
+    transform: scale(0.62);
+    opacity: 0.45;
   }
 
   #shProjectOverview .projectOverview__asset:hover {
@@ -1364,8 +1364,8 @@ body.sh-project-panel-info #shProjectInfo .projectInfo__content {
   }
 
   #shProjectOverview .projectOverview__asset:hover .responsive-image {
-    transform: scale(1.75);
+    transform: scale(3.5);
     opacity: 1;
-    filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.22));
+    filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.24));
   }
 }
