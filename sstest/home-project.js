@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     if (!scrollTray) return;
     const active = galleryTrayScroll.querySelector('.sh-gallery-tray__item.is-active');
-    active?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    active?.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 
   function rebuildGalleryTray() {

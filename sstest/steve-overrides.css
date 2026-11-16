@@ -1133,11 +1133,12 @@ body.sh-project-panel-open .sh-gallery-tray {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 5px;
+  gap: 0;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 2px 0;
+  padding: 0;
+  line-height: 0;
 }
 
 .sh-gallery-tray__scroll::-webkit-scrollbar {
@@ -1146,35 +1147,38 @@ body.sh-project-panel-open .sh-gallery-tray {
 
 .sh-gallery-tray__item {
   flex: 0 0 auto;
+  display: block;
   padding: 0;
+  margin: 0;
   border: none;
   background: transparent;
   cursor: pointer;
-  transition: margin 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sh-gallery-tray__item.is-active {
-  margin: 9px 0;
+  line-height: 0;
 }
 
 .sh-gallery-tray__frame {
-  --sh-tray-rest-h: 34px;
+  --sh-tray-idle-h: 42px;
+  --sh-tray-rest-h: 42px;
   --sh-tray-active-h: 120px;
   display: block;
   width: 100%;
   height: var(--sh-tray-rest-h);
   overflow: hidden;
-  border-radius: 1px;
-  opacity: 0.62;
+  border-radius: 0;
+  opacity: 1;
   transition:
-    height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.45s ease-in-out;
-  transition-delay: calc(var(--sh-tray-wave, 0) * 38ms);
+    height 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.52s ease-in-out;
+  transition-delay: calc(var(--sh-tray-wave, 0) * 48ms);
+}
+
+.sh-gallery-tray__scroll:not(:has(.is-active)) .sh-gallery-tray__frame {
+  height: var(--sh-tray-idle-h);
 }
 
 .sh-gallery-tray__scroll:has(.is-active) .sh-gallery-tray__item:not(.is-active) .sh-gallery-tray__frame {
-  height: 28px;
-  opacity: 0.5;
+  height: 22px;
+  opacity: 0.72;
 }
 
 .sh-gallery-tray__item.is-active .sh-gallery-tray__frame {
