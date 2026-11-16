@@ -267,8 +267,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function resetOverviewLayout() {
+    overview?.classList.remove('sh-overview-is-hovering');
     overview?.querySelectorAll('.projectOverview__asset').forEach((el) => {
-      el.classList.remove('sh-overview-enter');
+      el.classList.remove('sh-overview-enter', 'sh-overview-hover-focus', 'sh-overview-hover-neighbour');
+      el.style.removeProperty('--sh-hover-delay');
       el.style.removeProperty('--sh-stagger-delay');
       el.style.removeProperty('margin-left');
       el.style.removeProperty('width');
@@ -329,8 +331,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     grid.dataset.shHoverRipple = '1';
 
-    const MAX_DELAY = 340;
-    const MS_PER_PX = 0.58;
+    const WAVE_MS = 52;
+    const MAX_DELAY = 420;
 
     function clearHoverState() {
       overview?.classList.remove('sh-overview-is-hovering');
@@ -340,23 +342,61 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    function centre(el) {
+      return {
+        el,
+        x: el.offsetLeft + el.offsetWidth * 0.5,
+        y: el.offsetTop + el.offsetHeight * 0.5,
+      };
+    }
+
+    function neighbourLink(a, b, linkMax) {
+      return Math.hypot(a.x - b.x, a.y - b.y) <= linkMax;
+    }
+
     function applyHoverRipple(focus) {
       overview?.classList.add('sh-overview-is-hovering');
-      const fx = focus.offsetLeft + focus.offsetWidth * 0.5;
-      const fy = focus.offsetTop + focus.offsetHeight * 0.5;
-      grid.querySelectorAll('.projectOverview__asset').forEach((el) => {
-        el.classList.remove('sh-overview-hover-focus', 'sh-overview-hover-neighbour');
-        if (el === focus) {
-          el.classList.add('sh-overview-hover-focus');
-          el.style.setProperty('--sh-hover-delay', '0ms');
-          return;
+      const items = [...grid.querySelectorAll('.projectOverview__asset')];
+      const nodes = items.map(centre);
+      const focusNode = nodes.find((n) => n.el === focus);
+      if (!focusNode) return;
+
+      const linkMax =
+        Math.max(focus.offsetWidth, focus.offsetHeight, 48) * 1.55 + 6;
+      const delayByEl = new Map([[focus, 0]]);
+      let waveFront = [focusNode];
+      let wave = 0;
+      const rest = new Set(items.filter((el) => el !== focus));
+
+      while (rest.size && wave < 80) {
+        wave += 1;
+        const nextFront = [];
+        for (const node of nodes) {
+          if (!rest.has(node.el)) continue;
+          const touch = waveFront.some((f) => neighbourLink(node, f, linkMax));
+          if (!touch) continue;
+          delayByEl.set(node.el, Math.min(MAX_DELAY, wave * WAVE_MS));
+          rest.delete(node.el);
+          nextFront.push(node);
         }
-        const cx = el.offsetLeft + el.offsetWidth * 0.5;
-        const cy = el.offsetTop + el.offsetHeight * 0.5;
-        const dist = Math.hypot(cx - fx, cy - fy);
-        const delay = Math.min(MAX_DELAY, Math.round(dist * MS_PER_PX));
-        el.classList.add('sh-overview-hover-neighbour');
+        if (!nextFront.length) break;
+        waveFront = nextFront;
+      }
+
+      const fx = focusNode.x;
+      const fy = focusNode.y;
+      for (const el of rest) {
+        const n = centre(el);
+        const dist = Math.hypot(n.x - fx, n.y - fy);
+        delayByEl.set(el, Math.min(MAX_DELAY, wave * WAVE_MS + Math.round(dist * 0.35)));
+      }
+
+      items.forEach((el) => {
+        el.classList.remove('sh-overview-hover-focus', 'sh-overview-hover-neighbour');
+        const delay = delayByEl.get(el) ?? 0;
         el.style.setProperty('--sh-hover-delay', `${delay}ms`);
+        if (el === focus) el.classList.add('sh-overview-hover-focus');
+        else el.classList.add('sh-overview-hover-neighbour');
       });
     }
 

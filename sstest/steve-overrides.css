@@ -1340,24 +1340,19 @@ body.sh-project-panel-info #shProjectInfo .projectInfo__content {
   padding: 0 !important;
 }
 
-/* Overview hover — ripple shrink by distance; focus grows from centre (JS sets delays) */
+/* Overview hover — wave shrink; gaps unchanged; focus grows from centre */
 @media (hover: hover) and (pointer: fine) {
   #shProjectOverview.sh-overview-is-hovering {
     overflow: visible !important;
   }
 
   #shProjectOverview.sh-overview-is-hovering .projectOverview__assetGrid {
-    gap: 16px !important;
     overflow: visible !important;
   }
 
-  #shProjectOverview.sh-overview-is-hovering .sh-overview-row {
-    gap: 16px !important;
-  }
-
   #shProjectOverview .sh-overview-hover-neighbour .responsive-image {
-    transform: scale(0.62);
-    opacity: 0.45;
+    transform: scale(0.78);
+    opacity: 1;
   }
 
   #shProjectOverview .sh-overview-hover-focus {
