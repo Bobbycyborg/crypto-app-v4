@@ -1165,9 +1165,13 @@ body.sh-project-panel-open .sh-gallery-tray {
   border-radius: 0;
   opacity: 0.78;
   transition:
-    height 0.62s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.48s ease-in-out;
-  transition-delay: calc(var(--sh-tray-wave, 0) * 52ms);
+    height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease-in-out;
+  transition-delay:
+    0ms,
+    0ms,
+    calc(var(--sh-tray-wave, 0) * 36ms);
 }
 
 .sh-gallery-tray__item.is-hover .sh-gallery-tray__frame {

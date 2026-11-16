@@ -154,14 +154,28 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    let otherH = Math.max(3, Math.min(7, H / (n * 2.5)));
+    const baseH = H / n;
     const rH = trayRatios[hover] || 1.35;
-    let hoverH = Math.min(maxW * rH, H * 0.5);
-    let total = hoverH + otherH * (n - 1);
-    if (total > H) {
-      const scale = H / total;
-      hoverH *= scale;
-      otherH *= scale;
+    const below = n - hover - 1;
+    const above = hover;
+    const minH = 2;
+    let hoverH = Math.min(maxW * rH, baseH * 2.85);
+    if (below > 0) {
+      const maxHover = H - above * baseH - below * minH;
+      hoverH = Math.min(hoverH, Math.max(baseH, maxHover));
+    } else if (above > 0) {
+      const maxHover = H - (above - 1) * minH;
+      hoverH = Math.min(hoverH, Math.max(baseH, maxHover));
+    }
+
+  const heights = new Array(n).fill(baseH);
+    heights[hover] = hoverH;
+    if (below > 0) {
+      const belowH = (H - above * baseH - hoverH) / below;
+      for (let i = hover + 1; i < n; i++) heights[i] = belowH;
+    } else if (above > 0) {
+      const aboveH = (H - hoverH) / above;
+      for (let i = 0; i < hover; i++) heights[i] = aboveH;
     }
 
     items.forEach((el, i) => {
@@ -169,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.toggle('is-active', i === currentIndex());
       el.classList.toggle('is-hover', i === hover);
       el.style.setProperty('--sh-tray-wave', String(wave));
-      applyFrame(el.querySelector('.sh-gallery-tray__frame'), i, i === hover ? hoverH : otherH);
+      applyFrame(el.querySelector('.sh-gallery-tray__frame'), i, heights[i]);
     });
 
     if (scrollTray) items[hover]?.scrollIntoView({ block: 'center', behavior: 'smooth' });
