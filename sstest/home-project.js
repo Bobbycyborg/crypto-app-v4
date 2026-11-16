@@ -98,7 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function goToIndex(idx) {
     const next = Math.max(0, Math.min(assets.length - 1, idx));
     scroller.scrollTo({ left: next * slideWidth(), behavior: 'smooth' });
-    syncProgress();
+    if (progressCurrent) progressCurrent.textContent = pad2(next + 1);
+    setGalleryTrayActive(next, true);
   }
 
   function syncProgress() {
@@ -109,13 +110,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function toOverviewSrc(src) {
     if (!src || src.includes('/overview/')) return src;
-    return src.replace(/(\/img\/[^/]+\/)/, '$1overview/');
+    return src.replace(/^(img\/[^/]+\/)(?!overview\/)/, '$1overview/');
+  }
+
+  function fitTrayFrame(frame, img) {
+    const w = frame.clientWidth || galleryTrayScroll?.clientWidth || 120;
+    const ratio =
+      img.naturalWidth > 0 ? img.naturalHeight / img.naturalWidth : 1.35;
+    const activeH = Math.min(220, Math.max(64, Math.round(w * ratio)));
+    frame.style.setProperty('--sh-tray-active-h', `${activeH}px`);
   }
 
   function setGalleryTrayActive(idx, scrollTray) {
     if (!galleryTrayScroll) return;
     galleryTrayScroll.querySelectorAll('.sh-gallery-tray__item').forEach((el, i) => {
+      const wave = Math.abs(i - idx);
       el.classList.toggle('is-active', i === idx);
+      el.style.setProperty('--sh-tray-wave', String(wave));
+      const frame = el.querySelector('.sh-gallery-tray__frame');
+      const img = frame?.querySelector('img');
+      if (i === idx && frame && img) fitTrayFrame(frame, img);
     });
     if (!scrollTray) return;
     const active = galleryTrayScroll.querySelector('.sh-gallery-tray__item.is-active');
@@ -132,7 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.type = 'button';
       btn.className = 'sh-gallery-tray__item';
       btn.dataset.assetIndex = String(i);
-      btn.innerHTML = `<span class="sh-gallery-tray__frame"><img src="${src}" alt="" loading="lazy" decoding="async"></span>`;
+      btn.innerHTML = `<span class="sh-gallery-tray__frame"><img src="${src}" alt="" decoding="async"></span>`;
+      const frame = btn.querySelector('.sh-gallery-tray__frame');
+      const thumb = btn.querySelector('img');
+      thumb?.addEventListener('load', () => fitTrayFrame(frame, thumb), { once: true });
+      if (thumb?.complete && thumb.naturalWidth) fitTrayFrame(frame, thumb);
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -141,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       galleryTrayScroll.appendChild(btn);
     });
-    setGalleryTrayActive(currentIndex(), false);
+    setGalleryTrayActive(currentIndex(), true);
   }
 
   function isGalleryView() {
@@ -488,6 +506,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setupOverviewHoverRipple();
+
+  galleryTrayScroll?.addEventListener(
+    'wheel',
+    (e) => {
+      e.stopPropagation();
+    },
+    { passive: true }
+  );
 
   let overviewResizeTimer = 0;
   window.addEventListener('resize', () => {
