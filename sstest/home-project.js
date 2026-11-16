@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (hover < 0) {
-      const rowH = Math.max(3, Math.min(9, H / n));
+      const rowH = H / n;
       items.forEach((el, i) => {
         el.classList.toggle('is-active', i === currentIndex());
         el.classList.remove('is-hover');
