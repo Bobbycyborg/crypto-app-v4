@@ -21,6 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const manifestCache = {};
+  const OVERVIEW_DIR = 'overview/';
+
+  function gallerySrc(projectId, file) {
+    return `img/${projectId}/${file}`;
+  }
+
+  function overviewSrc(projectId, file) {
+    return `img/${projectId}/${OVERVIEW_DIR}${file}`;
+  }
 
   function refreshAssets() {
     assets = [...scroller.querySelectorAll('.asset')];
@@ -36,18 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function mountFromManifest(manifest) {
-    const base = `img/${manifest.id}/`;
+    const id = manifest.id;
     scroller.innerHTML = manifest.images
       .map(
         (file, i) =>
-          `<div class="asset asset--image asset--fullscreen" data-asset-index="${i}"><div class="responsive-image"><img src="${base}${file}" alt="" loading="lazy" decoding="async"></div></div>`
+          `<div class="asset asset--image asset--fullscreen" data-asset-index="${i}"><div class="responsive-image"><img src="${gallerySrc(id, file)}" alt="" loading="lazy" decoding="async"></div></div>`
       )
       .join('');
     if (overviewGrid) {
       const thumbs = manifest.images
         .map(
           (file, i) =>
-            `<button type="button" class="projectOverview__button projectOverview__asset" data-asset-index="${i}"><div class="responsive-image"><img src="${base}${file}" alt="" loading="lazy"></div></button>`
+            `<button type="button" class="projectOverview__button projectOverview__asset" data-asset-index="${i}"><div class="responsive-image"><img src="${overviewSrc(id, file)}" alt="" loading="lazy" decoding="async"></div></button>`
         )
         .join('');
       overviewGrid.innerHTML = `${thumbs}<span class="projectOverview__overlay"></span>`;
