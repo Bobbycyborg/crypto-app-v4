@@ -593,7 +593,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   project?.addEventListener('mousemove', (e) => {
     if (!isGalleryView()) return;
-    if (e.target.closest('button, a, [data-action], .projectTopNav, .projectBottomNav, .projectNavCloseButton')) {
+    if (
+      e.target.closest(
+        'button, a, [data-action], .projectTopNav, .projectBottomNav, .projectNavCloseButton, .sh-gallery-tray'
+      )
+    ) {
       clearGalleryNavSide();
       return;
     }
