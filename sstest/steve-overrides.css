@@ -1104,6 +1104,102 @@ body.sh-project-panel-overview #shGalleryNav {
   z-index: 1;
 }
 
+/* Gallery side tray — click to jump; accordion expand on active thumb */
+.sh-gallery-tray {
+  position: absolute;
+  left: 0;
+  top: calc(var(--sh-header-band, 3vh) + 8px);
+  bottom: calc(var(--sh-band, 3vh) + 52px);
+  width: clamp(76px, 9.5vw, 140px);
+  z-index: 6;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 6px 8px;
+  box-sizing: border-box;
+  transition: opacity 0.35s ease;
+}
+
+body.sh-project-panel-open .sh-gallery-tray {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sh-gallery-tray__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sh-gallery-tray__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.sh-gallery-tray__item {
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: margin 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sh-gallery-tray__item.is-active {
+  margin: 7px 0;
+}
+
+.sh-gallery-tray__frame {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  max-height: 26px;
+  opacity: 0.5;
+  transition:
+    max-height 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.42s ease-in-out,
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center center;
+}
+
+.sh-gallery-tray__scroll:has(.is-active) .sh-gallery-tray__item:not(.is-active) .sh-gallery-tray__frame {
+  max-height: 20px;
+  opacity: 0.38;
+  transform: scale(0.94);
+}
+
+.sh-gallery-tray__item.is-active .sh-gallery-tray__frame {
+  max-height: min(32vh, 168px);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sh-gallery-tray__frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+  pointer-events: none;
+}
+
+@media (max-width: 719px) {
+  .sh-gallery-tray {
+    width: clamp(64px, 18vw, 92px);
+  }
+
+  .sh-gallery-tray__item.is-active .sh-gallery-tray__frame {
+    max-height: min(24vh, 120px);
+  }
+}
+
 #project #shProjectScroller,
 #project .project-wrapper.projectWrapper {
   position: relative !important;

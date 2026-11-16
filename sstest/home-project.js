@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressTotal = project?.querySelector('.projectTopNav__progressTotal');
   const projectName = project?.querySelector('.projectTopNav__name');
   const overviewGrid = overview?.querySelector('.projectOverview__assetGrid');
+  const galleryTray = document.getElementById('shGalleryTray');
+  const galleryTrayScroll = document.getElementById('shGalleryTrayScroll');
   let assets = scroller ? [...scroller.querySelectorAll('.asset')] : [];
 
   if (!project || !scroller) return;
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (projectName) projectName.textContent = dungenessStore.title;
     if (progressTotal) progressTotal.textContent = dungenessStore.total;
     project.dataset.shProject = 'dungeness';
+    rebuildGalleryTray();
   }
 
   function mountFromManifest(manifest) {
@@ -65,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (projectName) projectName.textContent = manifest.title;
     if (progressTotal) progressTotal.textContent = pad2(manifest.images.length);
     project.dataset.shProject = manifest.id;
+    rebuildGalleryTray();
   }
 
   async function ensureManifest(projectId) {
@@ -100,6 +104,44 @@ document.addEventListener('DOMContentLoaded', () => {
   function syncProgress() {
     if (!progressCurrent || !assets.length) return;
     progressCurrent.textContent = pad2(Math.min(assets.length, currentIndex() + 1));
+    setGalleryTrayActive(currentIndex(), false);
+  }
+
+  function toOverviewSrc(src) {
+    if (!src || src.includes('/overview/')) return src;
+    return src.replace(/(\/img\/[^/]+\/)/, '$1overview/');
+  }
+
+  function setGalleryTrayActive(idx, scrollTray) {
+    if (!galleryTrayScroll) return;
+    galleryTrayScroll.querySelectorAll('.sh-gallery-tray__item').forEach((el, i) => {
+      el.classList.toggle('is-active', i === idx);
+    });
+    if (!scrollTray) return;
+    const active = galleryTrayScroll.querySelector('.sh-gallery-tray__item.is-active');
+    active?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  function rebuildGalleryTray() {
+    if (!galleryTrayScroll) return;
+    galleryTrayScroll.innerHTML = '';
+    assets.forEach((asset, i) => {
+      const img = asset.querySelector('img');
+      const src = img ? toOverviewSrc(img.getAttribute('src') || '') : '';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'sh-gallery-tray__item';
+      btn.dataset.assetIndex = String(i);
+      btn.innerHTML = `<span class="sh-gallery-tray__frame"><img src="${src}" alt="" loading="lazy" decoding="async"></span>`;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        goToIndex(i);
+        setGalleryTrayActive(i, true);
+      });
+      galleryTrayScroll.appendChild(btn);
+    });
+    setGalleryTrayActive(currentIndex(), false);
   }
 
   function isGalleryView() {
@@ -484,6 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('sh-project-open');
         project.classList.add('sh-project-is-open');
         syncProgress();
+        if (galleryTray) galleryTray.hidden = false;
         overview?.querySelectorAll('.projectOverview__asset img').forEach((img) => {
           img.loading = 'eager';
         });
@@ -497,6 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('type', 'homepage');
     document.documentElement.setAttribute('location', 'index');
     project.hidden = true;
+    if (galleryTray) galleryTray.hidden = true;
     setPanel(null);
   }
 
