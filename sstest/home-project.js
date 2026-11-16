@@ -323,6 +323,57 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(layoutOnce, 800);
   }
 
+  function setupOverviewHoverRipple() {
+    const grid = overview?.querySelector('.projectOverview__assetGrid');
+    if (!grid || grid.dataset.shHoverRipple === '1') return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    grid.dataset.shHoverRipple = '1';
+
+    const MAX_DELAY = 340;
+    const MS_PER_PX = 0.58;
+
+    function clearHoverState() {
+      overview?.classList.remove('sh-overview-is-hovering');
+      grid.querySelectorAll('.projectOverview__asset').forEach((el) => {
+        el.classList.remove('sh-overview-hover-focus', 'sh-overview-hover-neighbour');
+        el.style.removeProperty('--sh-hover-delay');
+      });
+    }
+
+    function applyHoverRipple(focus) {
+      overview?.classList.add('sh-overview-is-hovering');
+      const fx = focus.offsetLeft + focus.offsetWidth * 0.5;
+      const fy = focus.offsetTop + focus.offsetHeight * 0.5;
+      grid.querySelectorAll('.projectOverview__asset').forEach((el) => {
+        el.classList.remove('sh-overview-hover-focus', 'sh-overview-hover-neighbour');
+        if (el === focus) {
+          el.classList.add('sh-overview-hover-focus');
+          el.style.setProperty('--sh-hover-delay', '0ms');
+          return;
+        }
+        const cx = el.offsetLeft + el.offsetWidth * 0.5;
+        const cy = el.offsetTop + el.offsetHeight * 0.5;
+        const dist = Math.hypot(cx - fx, cy - fy);
+        const delay = Math.min(MAX_DELAY, Math.round(dist * MS_PER_PX));
+        el.classList.add('sh-overview-hover-neighbour');
+        el.style.setProperty('--sh-hover-delay', `${delay}ms`);
+      });
+    }
+
+    grid.addEventListener('pointerover', (e) => {
+      const el = e.target.closest('.projectOverview__asset');
+      if (!el || !grid.contains(el)) return;
+      applyHoverRipple(el);
+    });
+
+    grid.addEventListener('pointerleave', (e) => {
+      if (e.relatedTarget && grid.contains(e.relatedTarget)) return;
+      clearHoverState();
+    });
+  }
+
+  setupOverviewHoverRipple();
+
   let overviewResizeTimer = 0;
   window.addEventListener('resize', () => {
     if (!document.body.classList.contains('sh-project-panel-overview')) return;
