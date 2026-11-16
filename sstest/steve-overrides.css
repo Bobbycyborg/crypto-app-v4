@@ -1115,7 +1115,7 @@ body.sh-project-panel-overview #shGalleryNav {
   pointer-events: auto;
   display: flex;
   flex-direction: column;
-  padding: 0 10px 6px 8px;
+  padding: 0;
   box-sizing: border-box;
   transition: opacity 0.35s ease;
 }
@@ -1132,11 +1132,12 @@ body.sh-project-panel-open .sh-gallery-tray {
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 0;
   padding: 0;
   line-height: 0;
+  width: 100%;
 }
 
 .sh-gallery-tray__scroll::-webkit-scrollbar {
@@ -1146,6 +1147,8 @@ body.sh-project-panel-open .sh-gallery-tray {
 .sh-gallery-tray__item {
   flex: 0 0 auto;
   display: block;
+  width: auto;
+  max-width: 100%;
   padding: 0;
   margin: 0;
   border: none;
@@ -1156,7 +1159,7 @@ body.sh-project-panel-open .sh-gallery-tray {
 
 .sh-gallery-tray__frame {
   display: block;
-  width: 100%;
+  width: auto;
   height: 0;
   overflow: hidden;
   border-radius: 0;
@@ -1167,10 +1170,13 @@ body.sh-project-panel-open .sh-gallery-tray {
   transition-delay: calc(var(--sh-tray-wave, 0) * 52ms);
 }
 
-.sh-gallery-tray__item.is-active .sh-gallery-tray__frame,
 .sh-gallery-tray__item.is-hover .sh-gallery-tray__frame {
   opacity: 1;
   transition-delay: 0ms;
+}
+
+.sh-gallery-tray__item.is-active:not(.is-hover) .sh-gallery-tray__frame {
+  opacity: 0.92;
 }
 
 .sh-gallery-tray__frame img {
@@ -1178,7 +1184,7 @@ body.sh-project-panel-open .sh-gallery-tray {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: center center;
+  object-position: left center;
   pointer-events: none;
 }
 

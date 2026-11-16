@@ -126,42 +126,63 @@ document.addEventListener('DOMContentLoaded', () => {
     return galleryTrayScroll?.clientHeight || 1;
   }
 
-  function layoutGalleryTray(focusIdx, scrollTray) {
+  function layoutGalleryTray(scrollTray) {
     if (!galleryTrayScroll) return;
     const items = [...galleryTrayScroll.querySelectorAll('.sh-gallery-tray__item')];
     if (!items.length) return;
 
-    const w = trayThumbW();
+    const maxW = trayThumbW();
     const H = trayAvailH();
-    const fi = focusIdx >= 0 ? focusIdx : currentIndex();
-    const bases = items.map((_, i) => w * (trayRatios[i] || 1.35));
-    const focusW = 1;
-    const otherW = 0.18;
-    let heights = bases.map((b, i) => b * (i === fi ? focusW : otherW));
-    const sum = heights.reduce((a, b) => a + b, 0);
-    const scale = sum > H ? H / sum : 1;
-    heights = heights.map((h) => h * scale);
+    const n = items.length;
+    const hover = trayCanHover && trayHoverIdx !== null ? trayHoverIdx : -1;
+
+    const applyFrame = (frame, i, height) => {
+      const r = trayRatios[i] || 1.35;
+      const width = Math.min(maxW, height / r);
+      frame.style.width = `${Math.max(1, width)}px`;
+      frame.style.height = `${Math.max(1, height)}px`;
+    };
+
+    if (hover < 0) {
+      const rowH = Math.max(3, Math.min(9, H / n));
+      items.forEach((el, i) => {
+        el.classList.toggle('is-active', i === currentIndex());
+        el.classList.remove('is-hover');
+        el.style.setProperty('--sh-tray-wave', '0');
+        applyFrame(el.querySelector('.sh-gallery-tray__frame'), i, rowH);
+      });
+      return;
+    }
+
+    let otherH = Math.max(3, Math.min(7, H / (n * 2.5)));
+    const rH = trayRatios[hover] || 1.35;
+    let hoverH = Math.min(maxW * rH, H * 0.5);
+    let total = hoverH + otherH * (n - 1);
+    if (total > H) {
+      const scale = H / total;
+      hoverH *= scale;
+      otherH *= scale;
+    }
 
     items.forEach((el, i) => {
-      const wave = Math.abs(i - fi);
+      const wave = Math.abs(i - hover);
       el.classList.toggle('is-active', i === currentIndex());
-      el.classList.toggle('is-hover', trayCanHover && i === trayHoverIdx);
+      el.classList.toggle('is-hover', i === hover);
       el.style.setProperty('--sh-tray-wave', String(wave));
-      const frame = el.querySelector('.sh-gallery-tray__frame');
-      if (frame) frame.style.height = `${Math.max(1, heights[i])}px`;
+      applyFrame(el.querySelector('.sh-gallery-tray__frame'), i, i === hover ? hoverH : otherH);
     });
 
-    if (scrollTray) items[fi]?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    if (scrollTray) items[hover]?.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 
-  function setGalleryTrayActive(idx, scrollTray) {
+  function setGalleryTrayActive(_idx, scrollTray) {
     trayHoverIdx = null;
-    layoutGalleryTray(idx, scrollTray);
+    layoutGalleryTray(scrollTray);
   }
 
   function onTrayThumbLoaded(i, img) {
     if (img.naturalWidth > 0) trayRatios[i] = img.naturalHeight / img.naturalWidth;
-    layoutGalleryTray(trayHoverIdx ?? currentIndex(), false);
+    layoutGalleryTray(false);
   }
 
   function rebuildGalleryTray() {
@@ -184,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (trayCanHover) {
         btn.addEventListener('mouseenter', () => {
           trayHoverIdx = i;
-          layoutGalleryTray(i, false);
+          layoutGalleryTray(false);
         });
       }
       btn.addEventListener('click', (e) => {
@@ -195,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       galleryTrayScroll.appendChild(btn);
     });
-    requestAnimationFrame(() => layoutGalleryTray(currentIndex(), true));
+    requestAnimationFrame(() => layoutGalleryTray(false));
   }
 
   function isGalleryView() {
@@ -554,14 +575,14 @@ document.addEventListener('DOMContentLoaded', () => {
   galleryTrayScroll?.addEventListener('mouseleave', () => {
     if (trayHoverIdx === null) return;
     trayHoverIdx = null;
-    layoutGalleryTray(currentIndex(), false);
+    layoutGalleryTray(false);
   });
 
   window.addEventListener('resize', () => {
     if (!document.body.classList.contains('sh-project-open')) return;
     window.clearTimeout(trayResizeTimer);
     trayResizeTimer = window.setTimeout(
-      () => layoutGalleryTray(trayHoverIdx ?? currentIndex(), false),
+      () => layoutGalleryTray(false),
       80
     );
   });
