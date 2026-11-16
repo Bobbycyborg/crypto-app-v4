@@ -1129,14 +1129,12 @@ body.sh-project-panel-open .sh-gallery-tray {
   flex: 1 1 auto;
   min-height: 0;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  justify-content: flex-start;
   gap: 0;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   padding: 0;
   line-height: 0;
 }
@@ -1157,32 +1155,20 @@ body.sh-project-panel-open .sh-gallery-tray {
 }
 
 .sh-gallery-tray__frame {
-  --sh-tray-idle-h: 42px;
-  --sh-tray-rest-h: 42px;
-  --sh-tray-active-h: 120px;
   display: block;
   width: 100%;
-  height: var(--sh-tray-rest-h);
+  height: 0;
   overflow: hidden;
   border-radius: 0;
-  opacity: 1;
+  opacity: 0.78;
   transition:
-    height 0.68s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.52s ease-in-out;
-  transition-delay: calc(var(--sh-tray-wave, 0) * 48ms);
+    height 0.62s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.48s ease-in-out;
+  transition-delay: calc(var(--sh-tray-wave, 0) * 52ms);
 }
 
-.sh-gallery-tray__scroll:not(:has(.is-active)) .sh-gallery-tray__frame {
-  height: var(--sh-tray-idle-h);
-}
-
-.sh-gallery-tray__scroll:has(.is-active) .sh-gallery-tray__item:not(.is-active) .sh-gallery-tray__frame {
-  height: 22px;
-  opacity: 0.72;
-}
-
-.sh-gallery-tray__item.is-active .sh-gallery-tray__frame {
-  height: var(--sh-tray-active-h);
+.sh-gallery-tray__item.is-active .sh-gallery-tray__frame,
+.sh-gallery-tray__item.is-hover .sh-gallery-tray__frame {
   opacity: 1;
   transition-delay: 0ms;
 }
@@ -1191,7 +1177,7 @@ body.sh-project-panel-open .sh-gallery-tray {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
   pointer-events: none;
 }

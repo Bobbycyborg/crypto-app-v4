@@ -113,44 +113,80 @@ document.addEventListener('DOMContentLoaded', () => {
     return src.replace(/^(img\/[^/]+\/)(?!overview\/)/, '$1overview/');
   }
 
-  function fitTrayFrame(frame, img) {
-    const w = frame.clientWidth || galleryTrayScroll?.clientWidth || 120;
-    const ratio =
-      img.naturalWidth > 0 ? img.naturalHeight / img.naturalWidth : 1.35;
-    const activeH = Math.min(220, Math.max(64, Math.round(w * ratio)));
-    frame.style.setProperty('--sh-tray-active-h', `${activeH}px`);
+  const trayRatios = [];
+  let trayHoverIdx = null;
+  let trayResizeTimer = 0;
+  const trayCanHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  function trayThumbW() {
+    return galleryTrayScroll?.clientWidth || 120;
+  }
+
+  function trayAvailH() {
+    return galleryTrayScroll?.clientHeight || 1;
+  }
+
+  function layoutGalleryTray(focusIdx, scrollTray) {
+    if (!galleryTrayScroll) return;
+    const items = [...galleryTrayScroll.querySelectorAll('.sh-gallery-tray__item')];
+    if (!items.length) return;
+
+    const w = trayThumbW();
+    const H = trayAvailH();
+    const fi = focusIdx >= 0 ? focusIdx : currentIndex();
+    const bases = items.map((_, i) => w * (trayRatios[i] || 1.35));
+    const focusW = 1;
+    const otherW = 0.18;
+    let heights = bases.map((b, i) => b * (i === fi ? focusW : otherW));
+    const sum = heights.reduce((a, b) => a + b, 0);
+    const scale = sum > H ? H / sum : 1;
+    heights = heights.map((h) => h * scale);
+
+    items.forEach((el, i) => {
+      const wave = Math.abs(i - fi);
+      el.classList.toggle('is-active', i === currentIndex());
+      el.classList.toggle('is-hover', trayCanHover && i === trayHoverIdx);
+      el.style.setProperty('--sh-tray-wave', String(wave));
+      const frame = el.querySelector('.sh-gallery-tray__frame');
+      if (frame) frame.style.height = `${Math.max(1, heights[i])}px`;
+    });
+
+    if (scrollTray) items[fi]?.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 
   function setGalleryTrayActive(idx, scrollTray) {
-    if (!galleryTrayScroll) return;
-    galleryTrayScroll.querySelectorAll('.sh-gallery-tray__item').forEach((el, i) => {
-      const wave = Math.abs(i - idx);
-      el.classList.toggle('is-active', i === idx);
-      el.style.setProperty('--sh-tray-wave', String(wave));
-      const frame = el.querySelector('.sh-gallery-tray__frame');
-      const img = frame?.querySelector('img');
-      if (i === idx && frame && img) fitTrayFrame(frame, img);
-    });
-    if (!scrollTray) return;
-    const active = galleryTrayScroll.querySelector('.sh-gallery-tray__item.is-active');
-    active?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    trayHoverIdx = null;
+    layoutGalleryTray(idx, scrollTray);
+  }
+
+  function onTrayThumbLoaded(i, img) {
+    if (img.naturalWidth > 0) trayRatios[i] = img.naturalHeight / img.naturalWidth;
+    layoutGalleryTray(trayHoverIdx ?? currentIndex(), false);
   }
 
   function rebuildGalleryTray() {
     if (!galleryTrayScroll) return;
+    trayRatios.length = 0;
+    trayHoverIdx = null;
     galleryTrayScroll.innerHTML = '';
     assets.forEach((asset, i) => {
       const img = asset.querySelector('img');
       const src = img ? toOverviewSrc(img.getAttribute('src') || '') : '';
+      trayRatios[i] = 1.35;
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'sh-gallery-tray__item';
       btn.dataset.assetIndex = String(i);
       btn.innerHTML = `<span class="sh-gallery-tray__frame"><img src="${src}" alt="" decoding="async"></span>`;
-      const frame = btn.querySelector('.sh-gallery-tray__frame');
       const thumb = btn.querySelector('img');
-      thumb?.addEventListener('load', () => fitTrayFrame(frame, thumb), { once: true });
-      if (thumb?.complete && thumb.naturalWidth) fitTrayFrame(frame, thumb);
+      thumb?.addEventListener('load', () => onTrayThumbLoaded(i, thumb), { once: true });
+      if (thumb?.complete && thumb.naturalWidth) onTrayThumbLoaded(i, thumb);
+      if (trayCanHover) {
+        btn.addEventListener('mouseenter', () => {
+          trayHoverIdx = i;
+          layoutGalleryTray(i, false);
+        });
+      }
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -159,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       galleryTrayScroll.appendChild(btn);
     });
-    setGalleryTrayActive(currentIndex(), true);
+    requestAnimationFrame(() => layoutGalleryTray(currentIndex(), true));
   }
 
   function isGalleryView() {
@@ -514,6 +550,21 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     { passive: true }
   );
+
+  galleryTrayScroll?.addEventListener('mouseleave', () => {
+    if (trayHoverIdx === null) return;
+    trayHoverIdx = null;
+    layoutGalleryTray(currentIndex(), false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (!document.body.classList.contains('sh-project-open')) return;
+    window.clearTimeout(trayResizeTimer);
+    trayResizeTimer = window.setTimeout(
+      () => layoutGalleryTray(trayHoverIdx ?? currentIndex(), false),
+      80
+    );
+  });
 
   let overviewResizeTimer = 0;
   window.addEventListener('resize', () => {
