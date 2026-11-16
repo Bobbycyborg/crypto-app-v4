@@ -1,5 +1,11 @@
 /* Stephen Howse — surgical diffs only (not a redesign). */
 
+/* Menu — hidden until Steve wants them */
+.subNav__menuItem[data-submenu-location="playlists"],
+.subNav__group--playlists {
+  display: none !important;
+}
+
 :root {
   --sh-band: 3vh;
   --sh-header-band: 3vh;
