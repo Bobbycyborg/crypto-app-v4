@@ -1286,6 +1286,8 @@ body.sh-project-panel-info #shProjectInfo .projectInfo__content {
   padding: 0 !important;
   cursor: pointer;
   background: transparent !important;
+  position: relative;
+  z-index: 1;
 }
 
 #shProjectOverview .projectOverview__asset .responsive-image {
@@ -1294,6 +1296,8 @@ body.sh-project-panel-info #shProjectInfo .projectInfo__content {
   aspect-ratio: unset !important;
   line-height: 0 !important;
   background: transparent !important;
+  transform-origin: center bottom;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease, filter 0.28s ease;
 }
 
 #shProjectOverview .projectOverview__asset .responsive-image img {
@@ -1331,4 +1335,35 @@ body.sh-project-panel-info #shProjectInfo .projectInfo__content {
   display: none !important;
   content: none !important;
   padding: 0 !important;
+}
+
+/* Overview hover — site default: neighbours shrink & spread; active thumb grows on top */
+@media (hover: hover) and (pointer: fine) {
+  #shProjectOverview:has(.projectOverview__asset:hover) {
+    overflow: visible !important;
+  }
+
+  #shProjectOverview .projectOverview__assetGrid:has(.projectOverview__asset:hover) {
+    gap: 11px !important;
+    overflow: visible !important;
+  }
+
+  #shProjectOverview .projectOverview__assetGrid:has(.projectOverview__asset:hover) .sh-overview-row {
+    gap: 11px !important;
+  }
+
+  #shProjectOverview .projectOverview__assetGrid:has(.projectOverview__asset:hover) .projectOverview__asset:not(:hover) .responsive-image {
+    transform: scale(0.78);
+    opacity: 0.52;
+  }
+
+  #shProjectOverview .projectOverview__asset:hover {
+    z-index: 30;
+  }
+
+  #shProjectOverview .projectOverview__asset:hover .responsive-image {
+    transform: scale(1.75);
+    opacity: 1;
+    filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.22));
+  }
 }
