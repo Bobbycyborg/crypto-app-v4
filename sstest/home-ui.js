@@ -1,5 +1,6 @@
 /** Home views (locked names): Full-view = list fade; Grid-view = grid. */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  if (window.SH_SANITY_READY) await window.SH_SANITY_READY;
   const menu = document.querySelector('.menu');
   const menuBtn = document.querySelector('.menu__button');
   const viewSwitch = document.querySelector('.view-switch');
@@ -8,12 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridRoot = document.getElementById('homeGridGrid');
 
   if (gridRoot && window.shHomeGalleryItems) {
-    window.shHomeGalleryItems().forEach((item) => {
+    window.shHomeGalleryItems().forEach((item, i) => {
       const article = document.createElement('article');
       article.className = 'gridViewProject';
       const projectAttr = ` data-project="${item.project || 'dungeness'}"`;
       const title = item.title ? `<h3>${item.title}</h3>` : '<h3></h3>';
-      article.innerHTML = `<a href="#"${projectAttr}><div class="gridViewProject__asset"><div class="responsive-image"><img src="${item.src}" alt="${item.title || ''}" loading="lazy"></div></div><div class="gridViewProject__description">${title}<h4></h4></div></a>`;
+      const img =
+        (window.shImgTag &&
+          window.shImgTag(item.src, 'grid', { eager: i === 0, alt: item.title || '' })) ||
+        `<img src="${item.src}" alt="${item.title || ''}" loading="lazy">`;
+      article.innerHTML = `<a href="#"${projectAttr}><div class="gridViewProject__asset"><div class="responsive-image">${img}</div></div><div class="gridViewProject__description">${title}<h4></h4></div></a>`;
       gridRoot.appendChild(article);
     });
   }

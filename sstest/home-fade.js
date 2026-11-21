@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  if (window.SH_SANITY_READY) await window.SH_SANITY_READY;
   const stage = document.getElementById('shFadeStage');
   if (!stage) return;
 
@@ -7,10 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (items.length < 2) return null;
 
     stage.innerHTML = items
-      .map(
-        (item) =>
-          `<div class="responsive-image sh-frame" data-src="${item.src}" data-project="${item.project || 'dungeness'}"><img src="${item.src}" alt="" decoding="async" loading="lazy"></div>`
-      )
+      .map((item, i) => {
+        const img =
+          (window.shImgTag && window.shImgTag(item.src, 'gallery', { eager: i === 0 })) ||
+          `<img src="${item.src}" alt="" decoding="async" loading="lazy">`;
+        return `<div class="responsive-image sh-frame" data-src="${item.src}" data-project="${item.project || 'dungeness'}">${img}</div>`;
+      })
       .join('');
     return [...stage.querySelectorAll('.sh-frame')];
   }

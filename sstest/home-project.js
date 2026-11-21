@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  if (window.SH_SANITY_READY) await window.SH_SANITY_READY;
   const project = document.getElementById('project');
   const scroller = document.getElementById('shProjectScroller');
   const overlay = document.getElementById('page-overlay');
@@ -14,22 +15,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!project || !scroller) return;
 
-  const dungenessStore = {
-    scrollerHTML: scroller.innerHTML,
-    overviewGridHTML: overviewGrid?.innerHTML || '',
-    title: projectName?.textContent || 'Dungeness',
-    total: progressTotal?.textContent || '46',
-    location: 'dungeness',
-  };
+  const infoContent = info?.querySelector('.projectInfo__content');
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function renderInfo(manifest) {
+    if (!infoContent) return;
+    if (!manifest.text && !manifest.link) return;
+    const bits = [`<b>${escapeHtml(manifest.title || '')}</b>`];
+    if (manifest.text) bits.push(escapeHtml(manifest.text).replace(/\n/g, '<br>'));
+    if (manifest.link) {
+      bits.push(
+        `<a href="${escapeHtml(manifest.link)}" target="_blank" rel="noopener">${escapeHtml(manifest.link)}</a>`
+      );
+    }
+    infoContent.innerHTML = `<p>${bits.join('<br>')}</p>`;
+  }
 
   const manifestCache = {};
   const OVERVIEW_DIR = 'overview/';
 
+  function isRemote(file) {
+    return typeof file === 'string' && /^https?:\/\//.test(file);
+  }
+
+  function imgTag(url, kind, eager) {
+    return (window.shImgTag && window.shImgTag(url, kind, { eager })) || '';
+  }
+
   function gallerySrc(projectId, file) {
+    if (isRemote(file)) return file;
+    if (window.SH_SANITY_ONLY) throw new Error(`Local img blocked: ${projectId}/${file}`);
     return `img/${projectId}/${file}`;
   }
 
   function overviewSrc(projectId, file) {
+    if (isRemote(file)) return file;
+    if (window.SH_SANITY_ONLY) throw new Error(`Local overview blocked: ${projectId}/${file}`);
     return `img/${projectId}/${OVERVIEW_DIR}${file}`;
   }
 
@@ -37,30 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
     assets = [...scroller.querySelectorAll('.asset')];
   }
 
-  function mountDungeness() {
-    scroller.innerHTML = dungenessStore.scrollerHTML;
-    if (overviewGrid) overviewGrid.innerHTML = dungenessStore.overviewGridHTML;
-    refreshAssets();
-    if (projectName) projectName.textContent = dungenessStore.title;
-    if (progressTotal) progressTotal.textContent = dungenessStore.total;
-    project.dataset.shProject = 'dungeness';
-    rebuildGalleryTray();
-  }
-
   function mountFromManifest(manifest) {
     const id = manifest.id;
     scroller.innerHTML = manifest.images
-      .map(
-        (file, i) =>
-          `<div class="asset asset--image asset--fullscreen" data-asset-index="${i}"><div class="responsive-image"><img src="${gallerySrc(id, file)}" alt="" loading="lazy" decoding="async"></div></div>`
-      )
+      .map((file, i) => {
+        const src = gallerySrc(id, file);
+        const img =
+          imgTag(src, 'gallery', i === 0) ||
+          `<img src="${src}" alt="" loading="lazy" decoding="async">`;
+        return `<div class="asset asset--image asset--fullscreen" data-asset-index="${i}"><div class="responsive-image">${img}</div></div>`;
+      })
       .join('');
     if (overviewGrid) {
       const thumbs = manifest.images
-        .map(
-          (file, i) =>
-            `<button type="button" class="projectOverview__button projectOverview__asset" data-asset-index="${i}"><div class="responsive-image"><img src="${overviewSrc(id, file)}" alt="" loading="lazy" decoding="async"></div></button>`
-        )
+        .map((file, i) => {
+          const src = overviewSrc(id, file);
+          const img =
+            imgTag(src, 'overview', i === 0) ||
+            `<img src="${src}" alt="" loading="lazy" decoding="async">`;
+          return `<button type="button" class="projectOverview__button projectOverview__asset" data-asset-index="${i}"><div class="responsive-image">${img}</div></button>`;
+        })
         .join('');
       overviewGrid.innerHTML = `${thumbs}<span class="projectOverview__overlay"></span>`;
     }
@@ -68,19 +92,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (projectName) projectName.textContent = manifest.title;
     if (progressTotal) progressTotal.textContent = pad2(manifest.images.length);
     project.dataset.shProject = manifest.id;
+    if (manifest.perRow) project.dataset.shPerRow = String(manifest.perRow);
+    else delete project.dataset.shPerRow;
+    renderInfo(manifest);
     rebuildGalleryTray();
   }
 
   async function ensureManifest(projectId) {
     if (manifestCache[projectId]) return manifestCache[projectId];
-    if (window.SH_PROJECT_MANIFESTS?.[projectId]) {
-      manifestCache[projectId] = window.SH_PROJECT_MANIFESTS[projectId];
-      return manifestCache[projectId];
+    const m = window.SH_PROJECT_MANIFESTS?.[projectId];
+    if (!m?.images?.length) throw new Error(`No Sanity project: ${projectId}`);
+    if (window.SH_SANITY_ONLY && !isRemote(m.images[0])) {
+      throw new Error(`Project not from Sanity: ${projectId}`);
     }
-    const res = await fetch(`img/${projectId}/manifest.json`);
-    if (!res.ok) throw new Error(`manifest ${projectId}`);
-    manifestCache[projectId] = await res.json();
-    return manifestCache[projectId];
+    manifestCache[projectId] = m;
+    return m;
+  }
+
+  function defaultProjectId() {
+    const order = window.SH_PROJECT_ORDER || [];
+    if (order.length) return order[0];
+    const ids = Object.keys(window.SH_PROJECT_MANIFESTS || {});
+    return ids[0] || 'dungeness';
   }
 
   function pad2(n) {
@@ -109,7 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function toOverviewSrc(src) {
-    if (!src || src.includes('/overview/')) return src;
+    if (!src) return src;
+    if (isRemote(src)) return src;
+    if (window.SH_SANITY_ONLY) throw new Error(`Local tray src blocked: ${src}`);
+    if (src.includes('/overview/')) return src;
     return src.replace(/^(img\/[^/]+\/)(?!overview\/)/, '$1overview/');
   }
 
@@ -212,7 +248,9 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.type = 'button';
       btn.className = 'sh-gallery-tray__item';
       btn.dataset.assetIndex = String(i);
-      btn.innerHTML = `<span class="sh-gallery-tray__frame"><img src="${src}" alt="" decoding="async"></span>`;
+      const thumbTag =
+        imgTag(src, 'tray', i === 0) || `<img src="${src}" alt="" decoding="async">`;
+      btn.innerHTML = `<span class="sh-gallery-tray__frame">${thumbTag}</span>`;
       const thumb = btn.querySelector('img');
       thumb?.addEventListener('load', () => onTrayThumbLoaded(i, thumb), { once: true });
       if (thumb?.complete && thumb.naturalWidth) onTrayThumbLoaded(i, thumb);
@@ -357,9 +395,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function fitOverviewPerRow(grid, perRow) {
+    const gap = 6;
+    const bandH = overviewBandHeight();
+    flattenOverviewRows();
+    const items = [...grid.querySelectorAll('.projectOverview__asset')].sort(
+      (a, b) => Number(a.dataset.assetIndex) - Number(b.dataset.assetIndex)
+    );
+    let idx = 0;
+    let rows = 0;
+    while (idx < items.length) {
+      const row = document.createElement('div');
+      row.className = 'sh-overview-row';
+      for (let k = 0; k < perRow && idx < items.length; k += 1, idx += 1) {
+        row.appendChild(items[idx]);
+      }
+      if (row.childElementCount) {
+        grid.appendChild(row);
+        rows += 1;
+      }
+    }
+    grid.style.setProperty('--sh-overview-cluster-w', '88%');
+    let h = Math.floor((bandH - Math.max(rows - 1, 0) * gap) / Math.max(rows, 1));
+    h = Math.max(48, Math.min(150, h));
+    grid.style.setProperty('--sh-overview-thumb-h', `${h}px`);
+    shrinkOverviewToBand(grid);
+  }
+
   function refitOverviewLayout() {
     const grid = overview?.querySelector('.projectOverview__assetGrid');
     if (!grid) return;
+    const perRow = Number(project.dataset.shPerRow);
+    if (perRow >= 2 && perRow <= 8) {
+      fitOverviewPerRow(grid, perRow);
+      return;
+    }
     if (project.dataset.shProject === 'misc') {
       fitOverviewMiscPack(grid);
       return;
@@ -619,15 +689,11 @@ document.addEventListener('DOMContentLoaded', () => {
     else resetOverviewLayout();
   }
 
-  async function openProject(projectId = 'dungeness') {
+  async function openProject(projectId) {
+    const pid = projectId || defaultProjectId();
     setPanel('gallery');
-    if (projectId === 'dungeness') {
-      mountDungeness();
-      document.documentElement.setAttribute('location', 'dungeness');
-    } else {
-      mountFromManifest(await ensureManifest(projectId));
-      document.documentElement.setAttribute('location', projectId);
-    }
+    mountFromManifest(await ensureManifest(pid));
+    document.documentElement.setAttribute('location', pid);
     scroller.scrollLeft = 0;
     document.documentElement.setAttribute('type', 'project');
     document.body.classList.remove('sh-project-open');
@@ -663,7 +729,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     e.stopPropagation();
     const frame = document.querySelector('#shFadeStage .sh-frame.is-current');
-    const pid = frame?.dataset.project || 'dungeness';
+    const pid = frame?.dataset.project || defaultProjectId();
     openProject(pid);
   });
 
@@ -672,7 +738,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!link) return;
     e.preventDefault();
     e.stopPropagation();
-    const pid = link.dataset.project || 'dungeness';
+    const pid = link.dataset.project || defaultProjectId();
     openProject(pid).catch(() => {});
   });
 

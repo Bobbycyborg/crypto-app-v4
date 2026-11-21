@@ -1,24 +1,17 @@
 window.shHomeGalleryItems = function shHomeGalleryItems() {
   const items = [];
-  const scroller = document.getElementById('shProjectScroller');
-  const dungenessSrc = scroller?.querySelector('.asset img[src]')?.getAttribute('src');
-  if (dungenessSrc) {
-    items.push({ src: dungenessSrc, project: 'dungeness', title: 'Dungeness' });
-  }
-
   const manifests = window.SH_PROJECT_MANIFESTS || {};
-  Object.keys(manifests)
-    .sort()
-    .forEach((id) => {
-      const m = manifests[id];
-      if (!m?.hero) return;
-      items.push({
-        src: `img/${id}/${m.hero}`,
-        project: id,
-        title: m.title || id,
-      });
+  const order = window.SH_PROJECT_ORDER || [];
+  const ids = order.length ? order : Object.keys(manifests).sort();
+  ids.forEach((id) => {
+    const m = manifests[id];
+    if (!m?.hero || !/^https?:\/\//.test(m.hero)) return;
+    items.push({
+      src: m.hero,
+      project: id,
+      title: m.title || id,
     });
-
+  });
   return items;
 };
 
