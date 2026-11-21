@@ -418,7 +418,7 @@ body.sh-menu-open .menu__button {
   .homeHeader .headerContent h2,
   #homepage .headerContent h1,
   #homepage .headerContent h2 {
-    font-size: 11px !important;
+    font-size: 12px !important;
     line-height: 1.12 !important;
   }
 
@@ -450,6 +450,15 @@ body.sh-menu-open .menu__button {
   #homepage .homeHeader .headerContent h2 {
     display: block !important;
     line-height: 1.12 !important;
+  }
+
+  .shHeader--desktop h1,
+  .shHeader--desktop h1 .shName {
+    font-weight: 700 !important;
+  }
+
+  .shHeader--desktop h2 {
+    font-weight: 400 !important;
   }
 
   #homepage .homeHeader__burger {
@@ -1151,15 +1160,15 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
 /* Desktop — exact 3vh bands; type + icons centred in bar; photo centred in stage */
 @media (min-width: 720px) {
   :root {
-    --sh-gutter: 2vw;
-    --sh-header-band: 4vh;
-    --sh-band: 4vh;
+    --sh-gutter: 3vw;
+    --sh-header-band: 6vh;
+    --sh-band: 6vh;
   }
 
   @supports (height: 1dvh) {
     :root {
-      --sh-header-band: 4dvh;
-      --sh-band: 4dvh;
+      --sh-header-band: 6dvh;
+      --sh-band: 6dvh;
     }
   }
 
@@ -1180,7 +1189,7 @@ body[data-home-view="grid-view"] .homepageView--grid-view {
   }
 
   .shHeader--desktop {
-    gap: 0.0378em !important;
+    gap: 0.06em !important;
     line-height: 1.12 !important;
   }
 
@@ -1288,7 +1297,7 @@ body.sh-project-panel-overview #shGalleryNav {
   flex: 1;
   display: flex;
   align-items: center;
-  padding: 0 2vw;
+  padding: 0 var(--sh-gutter);
   color: #bcbcbc;
 }
 
@@ -1523,7 +1532,7 @@ body.sh-project-panel-open .shProjectPanelBackdrop {
   align-items: stretch !important;
   justify-content: center !important;
   overflow: hidden !important;
-  padding: calc(var(--sh-header-band, 4dvh) + 12px) 2vw calc(var(--sh-band, 4dvh) + 60px) !important;
+  padding: calc(var(--sh-header-band, 6dvh) + 12px) var(--sh-gutter) calc(var(--sh-band, 6dvh) + 60px) !important;
 }
 
 #shProjectInfo .projectInfo__overlay,
