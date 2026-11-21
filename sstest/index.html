@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
   <title>Stephen Howse</title>
   <link rel="stylesheet" href="assets/sb-main.css?v=sh1">
-  <link rel="stylesheet" href="steve-overrides.css?v=layout138">
+  <link rel="stylesheet" href="steve-overrides.css?v=menu7">
   <link rel="preload" href="https://www.sarah-bassett.com/assets/fonts/HelveticaNowText-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="https://www.sarah-bassett.com/assets/fonts/HelveticaNowText-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="https://www.sarah-bassett.com/assets/fonts/Caslon540LTStd-Roman.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,12 +19,18 @@
   </button>
 
   <div class="topMenu">
+    <button type="button" class="menuAboutBack" aria-label="Back to menu"><span aria-hidden="true">‹</span></button>
+    <button type="button" class="menuPanelClose" aria-label="Close menu"><span aria-hidden="true">×</span></button>
     <div class="pagesMenu__wrapper">
-      <div class="topMenu__wrapper">
-        <span class="topMenu__item topMenu__item--pages">Selected Work</span>
-        <span class="topMenu__item topMenu__item--pages">Series</span>
-        <span class="topMenu__item topMenu__item--pages">Archive</span>
-        <span class="topMenu__item topMenu__item--pages">About</span>
+      <div class="shTopMenuStage">
+        <div class="shTopMenuStage__track" id="shTopMenuTitleTrack">
+          <div class="shTopMenuStage__panel">
+            <span class="topMenu__item topMenu__item--pages" id="shMenuTitleMain">Selected Work</span>
+          </div>
+          <div class="shTopMenuStage__panel">
+            <span class="topMenu__item topMenu__item--pages">About</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="notesMenu__wrapper">
@@ -34,33 +40,36 @@
     </div>
   </div>
   <div class="nav__container">
+    <div class="shMenuStage">
+      <div class="shMenuStage__track" id="shMenuStageTrack">
     <div class="subNav subNav--mainMenu">
       <div class="subNav__menu">
-        <button class="subNav__menuItem" data-submenu-location="pages">
-          Pages
+        <button type="button" class="subNav__menuItem is-active" data-submenu-location="projects">
+          Projects
         </button>
-        <button class="subNav__menuItem" data-submenu-location="info">
+        <button type="button" class="subNav__menuItem" data-submenu-location="tierra">
+          Tierra Adentro
+        </button>
+        <button type="button" class="subNav__menuItem" data-submenu-location="info">
           About
         </button>
-        <button class="subNav__menuItem" data-submenu-location="collaborators">
-          Clients
-        </button>
-        <button class="subNav__menuItem" data-submenu-location="notes">
-          Notes
-        </button>
-        <button class="subNav__menuItem" data-submenu-location="playlists">
-          Sounds
+        <button type="button" class="subNav__menuItem" data-submenu-location="archive">
+          Archive
         </button>
       </div>
       <div class="subNav__container">
-        <div class="subNav__group subNav__group--pages">
-          <a class="subNavPages__groupItem" href="/"><span>Selected</span> </a>
-          <a class="subNavPages__groupItem" href="/projects"><span>Projects</span>
-          </a>
-          <a class="subNavPages__groupItem" href="/archive"><span>Archive</span>
-          </a>
-          <a class="subNavPages__groupItem" href="/about"><span>About</span>
-          </a>
+        <div class="subNav__group subNav__group--projects">
+          <div id="shMenuProjectsList" class="subNavPages__list"></div>
+          <span class="subNavPages__groupItemActive"></span>
+        </div>
+        <div class="subNav__group subNav__group--tierra">
+          <div id="shMenuTierraList" class="subNavPages__list"></div>
+          <span class="subNavPages__groupItemActive"></span>
+        </div>
+        <div class="subNav__group subNav__group--archive">
+          <div id="shMenuArchiveList" class="subNavPages__list">
+            <span class="subNavPages__groupItem subNavPages__groupItem--muted"><span>Coming soon</span></span>
+          </div>
           <span class="subNavPages__groupItemActive"></span>
         </div>
         <div class="subNav__group subNav__group--collaborators">
@@ -785,7 +794,7 @@
         </div>
       </div>
     </div>
-    <div class="subNav subNav--about">
+    <div class="subNav subNav--about shMenuStage__panel">
       <p>Stephen Howse is a British photographer working across performance, documentary and portrait. He is based on the south coast and travels for commissions, festivals and long form stories. The work is quiet and patient: arrive early, stay late, and let people forget the camera is there.
 
 Stephen began assisting theatre photographers before moving into editorial and charity campaigns. His pictures favour available light, close distance and honesty over styling. Recent work includes lifeboat crews, backstage rehearsal rooms, touring musicians and portraits of people who would rather be doing something else than sitting for a photograph.
@@ -801,7 +810,9 @@ He has worked with theatres, newspapers, galleries and NGOs. Prints are availabl
           
         </div>
       </div>
-    </div></div>
+    </div>
+      </div>
+    </div>
   </div>
 </nav>
 <div id="content">
@@ -960,12 +971,12 @@ Documentary study on the Kent coast.</p>
 
 </div>
 <div id="page-overlay"></div>
-<script src="image-delivery.js?v=sanity5"></script>
-<script src="projects-manifest.js?v=sanity5"></script>
-<script src="sanity-projects.js?v=sanity5"></script>
-<script src="home-catalog.js?v=sanity5"></script>
-<script src="home-fade.js?v=sanity5"></script>
-<script src="home-ui.js?v=sanity5"></script>
-<script src="home-project.js?v=sanity5"></script>
+<script src="image-delivery.js?v=sanity6"></script>
+<script src="projects-manifest.js?v=sanity6"></script>
+<script src="sanity-projects.js?v=sanity6"></script>
+<script src="home-catalog.js?v=sanity6"></script>
+<script src="home-fade.js?v=sanity6"></script>
+<script src="home-ui.js?v=menu6"></script>
+<script src="home-project.js?v=sanity6"></script>
 </body>
 </html>

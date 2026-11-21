@@ -1,8 +1,13 @@
 /* Stephen Howse — surgical diffs only (not a redesign). */
 
-/* Menu — hidden until Steve wants them */
+/* Legacy SB panels — off for Steve menu */
 .subNav__menuItem[data-submenu-location="playlists"],
-.subNav__group--playlists {
+.subNav__menuItem[data-submenu-location="collaborators"],
+.subNav__menuItem[data-submenu-location="notes"],
+.subNav__group--playlists,
+.subNav__group--collaborators,
+.subNav__group--notes,
+.subNav__group--pages {
   display: none !important;
 }
 
@@ -44,6 +49,15 @@
   box-shadow: none !important;
 }
 
+/* SB animates height 32px → expanded; we use auto — skip height transition */
+.menu {
+  transition:
+    width var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1),
+    border-radius var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1),
+    visibility var(--menu-transition-duration, 500ms) step-end !important;
+}
+
 /* Menu shell: SB layout when open; hidden when closed (burger lives in header) */
 .menu:not(.menu--isExpanded) {
   opacity: 0 !important;
@@ -71,17 +85,15 @@
   z-index: var(--sh-z-menu) !important;
   pointer-events: auto !important;
   clip: auto !important;
-  width: 320px !important;
+  width: 640px !important;
   height: auto !important;
   min-height: 0 !important;
-  max-height: calc(100dvh - 20px) !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
   left: 50% !important;
   top: 10px !important;
   right: auto !important;
   transform: translateX(-50%) !important;
-  overflow: hidden !important;
   isolation: isolate !important;
   transition:
     width var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1),
@@ -122,58 +134,252 @@
   top: auto !important;
   left: auto !important;
   transform: none !important;
+  display: grid !important;
+  grid-template-columns: minmax(168px, 38%) 1fr !important;
+  gap: 10px !important;
   width: 100% !important;
+  max-width: 640px !important;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible {
+  width: 420px !important;
 }
 
 .menu.menu--isExpanded .subNav__container {
   position: relative !important;
 }
 
-.menu.menu--isExpanded .subNav--about {
+.menu.menu--isExpanded .nav__container {
+  position: relative !important;
+  padding-top: 0 !important;
+}
+
+.menuPanelClose {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  z-index: 6;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font-family: HelveticaNowText, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  color: #7b7b7a;
+  cursor: pointer;
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+.menuPanelClose:hover {
+  opacity: 1;
+}
+
+.menu.menu--isExpanded .menuPanelClose {
+  display: block;
+}
+
+.menu.menu--isExpanded .topMenu {
+  position: relative !important;
+}
+
+.subNav__menuItem {
+  white-space: nowrap !important;
+}
+
+.subNavPages__groupItem,
+.subNavPages__groupItem span {
+  white-space: nowrap !important;
+}
+
+.menuAboutBack {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  z-index: 6;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font-family: HelveticaNowText, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  color: #7b7b7a;
+  cursor: pointer;
+  transform: translateY(-58%);
+  opacity: 1;
+}
+
+.menuAboutBack:hover {
+  color: #000;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .menuAboutBack {
+  display: block !important;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .menuPanelClose {
   display: none !important;
 }
 
-.menu.menu--isExpanded.menu--isAboutVisible .subNav--mainMenu {
-  display: none !important;
+.shMenuStage {
+  width: 100%;
+  overflow: hidden;
+}
+
+.shMenuStage__track {
+  display: flex;
+  align-items: flex-start;
+  width: 200%;
+  transition: transform var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1);
+  will-change: transform;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .shMenuStage__track {
+  transform: translateX(-50%);
+}
+
+.shMenuStage__track > .subNav--mainMenu,
+.shMenuStage__track > .subNav--about {
+  flex: 0 0 50%;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+/* SB defaults: groups visibility:hidden; about at left:100%; nav slides -100% on About */
+.menu.menu--isExpanded.menu--isAboutVisible .nav__container {
+  transform: none !important;
+}
+
+.menu.menu--isExpanded .shMenuStage__track > .subNav--about {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Off-screen About still had SB height:418px — inflated open height */
+.menu.menu--isExpanded:not(.menu--isAboutVisible) .shMenuStage__track > .subNav--about {
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.menu.menu--isExpanded .pagesMenu__wrapper {
+  overflow: hidden !important;
+  height: 32px !important;
+}
+
+.menu.menu--isExpanded .shTopMenuStage {
+  width: 100%;
+  height: 32px;
+  overflow: hidden;
+}
+
+.menu.menu--isExpanded .shTopMenuStage__track {
+  display: flex;
+  width: 200%;
+  height: 32px;
+  transition: transform var(--menu-transition-duration, 500ms) cubic-bezier(0.645, 0.045, 0.355, 1);
+  will-change: transform;
+}
+
+.menu.menu--isExpanded .shTopMenuStage__panel {
+  flex: 0 0 50%;
+  width: 50%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .shTopMenuStage__track {
+  transform: translateX(-50%);
 }
 
 .menu.menu--isExpanded.menu--isAboutVisible .subNav--about {
   display: flex !important;
   flex-direction: column !important;
-  justify-content: flex-start !important;
-  gap: 20px !important;
+  justify-content: space-between !important;
+  gap: 0 !important;
   position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  width: 100% !important;
-  height: auto !important;
-  padding: 12px 18px 18px !important;
+  padding: 8px 20px 20px !important;
+  min-height: 418px !important;
+  box-sizing: border-box !important;
   visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 960px) {
+  .menu.menu--isExpanded.menu--isAboutVisible .subNav--about {
+    min-height: 468px !important;
+    padding: 8px 10px 10px !important;
+  }
+}
+
+.menu.menu--isExpanded.menu--isAboutVisible .subNav--mainMenu .subNav__container {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.menu.menu--isExpanded .subNav__group--projects,
+.menu.menu--isExpanded .subNav__group--tierra,
+.menu.menu--isExpanded .subNav__group--archive {
+  display: none !important;
+}
+
+.menu.menu--isExpanded[data-sub-menu-location="projects"] .subNav__group--projects,
+.menu.menu--isExpanded[data-sub-menu-location="tierra"] .subNav__group--tierra,
+.menu.menu--isExpanded[data-sub-menu-location="archive"] .subNav__group--archive {
+  display: flex !important;
+  visibility: visible !important;
+  position: relative !important;
+}
+
+.subNavPages__groupItem--muted {
+  opacity: 0.45;
+  pointer-events: none;
 }
 
 .menu.menu--isExpanded.menu--isAboutVisible .subNav--about p {
   margin: 0 !important;
-  line-height: 1.35 !important;
+  white-space: pre-line !important;
 }
 
 .menu.menu--isExpanded.menu--isAboutVisible .subNav--about .menuAbout {
   display: flex !important;
   flex-direction: column !important;
-  gap: 10px !important;
-  margin-top: 4px !important;
+  gap: 0 !important;
+  margin-top: 0 !important;
 }
 
 .menu.menu--isExpanded.menu--isAboutVisible .menuAbout__contactList {
-  gap: 8px !important;
+  gap: 0 !important;
 }
 
 /* SB fixed heights (190px+) — shrink-wrap to visible panel */
 .menu.menu--isExpanded,
 .menu.menu--isExpanded.menu--isAboutVisible,
 .menu.menu--isExpanded.menu--isNotesVisible,
-.menu.menu--isExpanded[data-sub-menu-location="collaborators"],
-.menu.menu--isExpanded[data-sub-menu-location="playlists"],
-.menu.menu--isExpanded[data-sub-menu-location="notes"] {
+.menu.menu--isExpanded[data-sub-menu-location="projects"],
+.menu.menu--isExpanded[data-sub-menu-location="tierra"],
+.menu.menu--isExpanded[data-sub-menu-location="archive"] {
   height: auto !important;
   min-height: 0 !important;
 }
@@ -291,12 +497,16 @@ body.sh-menu-open .menu__button {
 
 .menu__button .menu__buttonBar {
   display: block !important;
-  width: 18px !important;
+  width: 100% !important;
   height: 1px !important;
-  background: #000 !important;
+  background: #7b7b7a !important;
   margin: 0 !important;
   transition: transform 500ms cubic-bezier(0.65, 0, 0.35, 1) !important;
   transform-origin: center !important;
+}
+
+body.sh-menu-open:not(.sh-menu-about):not(.sh-menu-notes) .menu__button .menu__buttonBar {
+  background: #7b7b7a !important;
 }
 
 /* Burger in header — mirror SB X + About/Notes back icon */

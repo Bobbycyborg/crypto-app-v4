@@ -3,10 +3,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (window.SH_SANITY_READY) await window.SH_SANITY_READY;
   const menu = document.querySelector('.menu');
   const menuBtn = document.querySelector('.menu__button');
+  const menuPanelClose = document.querySelector('.menuPanelClose');
+  const menuAboutBack = document.querySelector('.menuAboutBack');
+  const menuStageTrack = document.getElementById('shMenuStageTrack');
   const viewSwitch = document.querySelector('.view-switch');
   const fullViewBtn = viewSwitch && viewSwitch.querySelector('[data-view="full-view"]');
   const gridViewBtn = viewSwitch && viewSwitch.querySelector('[data-view="grid-view"]');
   const gridRoot = document.getElementById('homeGridGrid');
+
+  const TIERRA_SLUGS = ['charro-pre-23', 'escaramuza', 'charreada-maptia-2015'];
+  const TIERRA_TBC = ['Location — TBC', 'Location — TBC', 'Location — TBC', 'Location — TBC'];
 
   if (gridRoot && window.shHomeGalleryItems) {
     window.shHomeGalleryItems().forEach((item, i) => {
@@ -43,16 +49,109 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function syncMenuOpen() {
     const open = menu && menu.classList.contains('menu--isExpanded');
+    const about = !!(open && menu.classList.contains('menu--isAboutVisible'));
     document.body.classList.toggle('sh-menu-open', !!open);
-    document.body.classList.toggle(
-      'sh-menu-about',
-      !!(open && menu.classList.contains('menu--isAboutVisible'))
-    );
-    document.body.classList.toggle(
-      'sh-menu-notes',
-      !!(open && menu.classList.contains('menu--isNotesVisible'))
-    );
+    document.body.classList.toggle('sh-menu-about', about);
+    document.body.classList.remove('sh-menu-notes');
+    if (menu) {
+      menu.classList.toggle('menu--isExpandedList', !!open && !about);
+      if (open && !menu.dataset.subMenuLocation && !about) {
+        menu.dataset.subMenuLocation = 'projects';
+      }
+    }
   }
+
+  function closeMenu() {
+    if (!menu) return;
+    menu.classList.remove('menu--isExpanded', 'menu--isAboutVisible');
+    delete menu.dataset.subMenuLocation;
+    syncMenuOpen();
+  }
+
+  const MENU_TITLES = {
+    projects: 'Selected Work',
+    tierra: 'Tierra Adentro',
+    archive: 'Archive',
+  };
+
+  function setMenuTitle(loc) {
+    const el = document.getElementById('shMenuTitleMain');
+    if (!el || loc === 'info') return;
+    if (MENU_TITLES[loc]) el.textContent = MENU_TITLES[loc];
+  }
+
+  function setCol1Active(loc) {
+    menu?.querySelectorAll('.subNav__menuItem').forEach((btn) => {
+      btn.classList.toggle('is-active', btn.dataset.submenuLocation === loc);
+    });
+  }
+
+  function showSubNavPanel(loc) {
+    if (!menu) return;
+    if (loc === 'info') {
+      menu.dataset.subMenuLocation = 'info';
+      menu.classList.add('menu--isAboutVisible');
+      setCol1Active('info');
+    } else {
+      menu.classList.remove('menu--isAboutVisible');
+      menu.dataset.subMenuLocation = loc;
+      setCol1Active(loc);
+      setMenuTitle(loc);
+    }
+    syncMenuOpen();
+  }
+
+  function menuListItem(title, projectId, muted) {
+    if (muted) {
+      return `<span class="subNavPages__groupItem subNavPages__groupItem--muted"><span>${title}</span></span>`;
+    }
+    const id = projectId || '';
+    return `<a class="subNavPages__groupItem" href="#" data-project="${id}"><span>${title}</span></a>`;
+  }
+
+  function buildMenuLists() {
+    const manifests = window.SH_PROJECT_MANIFESTS || {};
+    const order = window.SH_PROJECT_ORDER || Object.keys(manifests).sort();
+    const projectsRoot = document.getElementById('shMenuProjectsList');
+    const tierraRoot = document.getElementById('shMenuTierraList');
+    if (projectsRoot) {
+      projectsRoot.innerHTML = order
+        .map((id) => {
+          const m = manifests[id];
+          if (!m?.title) return '';
+          return menuListItem(m.title, id, false);
+        })
+        .join('');
+    }
+    if (tierraRoot) {
+      const tierraItems = TIERRA_SLUGS.map((id) => {
+        const m = manifests[id];
+        const title = m?.title || id;
+        return m ? menuListItem(title, id, false) : menuListItem(title, id, true);
+      });
+      TIERRA_TBC.forEach((t) => tierraItems.push(menuListItem(t, '', true)));
+      tierraRoot.innerHTML = tierraItems.join('');
+    }
+  }
+
+  buildMenuLists();
+
+  function openProjectFromMenu(projectId) {
+    if (!projectId || !window.shOpenProject) return;
+    closeMenu();
+    window.shOpenProject(projectId).catch(() => {});
+  }
+
+  function onMenuProjectClick(e) {
+    const link = e.target.closest('[data-project]');
+    if (!link || link.classList.contains('subNavPages__groupItem--muted')) return;
+    const pid = link.dataset.project;
+    if (!pid) return;
+    e.preventDefault();
+    openProjectFromMenu(pid);
+  }
+
+  menu?.querySelector('.subNav__container')?.addEventListener('click', onMenuProjectClick);
 
   function setView(view) {
     const next = view === 'grid-view' ? 'grid-view' : 'full-view';
@@ -75,30 +174,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       setView('grid-view');
     });
 
-  function showSubNavPanel(loc) {
-    menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
-    menu.dataset.subMenuLocation = loc;
-    if (loc === 'info') menu.classList.add('menu--isAboutVisible');
-    else if (loc === 'notes') menu.classList.add('menu--isNotesVisible');
-  }
-
   function toggleMainMenu() {
     if (!menu) return;
-    const onAbout = menu.classList.contains('menu--isAboutVisible');
-    const onNotes = menu.classList.contains('menu--isNotesVisible');
-
-    if (menu.classList.contains('menu--isExpanded') && (onAbout || onNotes)) {
-      showSubNavPanel('pages');
-      syncMenuOpen();
+    if (menu.classList.contains('menu--isAboutVisible')) {
+      showSubNavPanel('projects');
       return;
     }
-
     menu.classList.toggle('menu--isExpanded');
     if (!menu.classList.contains('menu--isExpanded')) {
-      menu.classList.remove('menu--isAboutVisible', 'menu--isNotesVisible');
+      menu.classList.remove('menu--isAboutVisible');
       delete menu.dataset.subMenuLocation;
-    } else if (!menu.dataset.subMenuLocation) {
-      menu.dataset.subMenuLocation = 'pages';
+    } else {
+      if (!menu.dataset.subMenuLocation) {
+        menu.dataset.subMenuLocation = 'projects';
+        setCol1Active('projects');
+        setMenuTitle('projects');
+      }
+      buildMenuLists();
     }
     syncMenuOpen();
   }
@@ -110,25 +202,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     toggleMainMenu();
   });
 
-  const pageOverlay = document.getElementById('page-overlay');
-  pageOverlay &&
-    pageOverlay.addEventListener('click', () => {
-      if (!menu.classList.contains('menu--isExpanded')) return;
-      menu.classList.remove('menu--isExpanded', 'menu--isAboutVisible', 'menu--isNotesVisible');
-      delete menu.dataset.subMenuLocation;
-      syncMenuOpen();
-    });
+  menuPanelClose?.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeMenu();
+  });
+
+  menuAboutBack?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showSubNavPanel('projects');
+  });
+
+  document.getElementById('page-overlay')?.addEventListener('click', () => {
+    if (!menu?.classList.contains('menu--isExpanded')) return;
+    closeMenu();
+  });
 
   document.querySelectorAll('.subNav__menuItem').forEach((btn) => {
     btn.addEventListener('click', () => {
       if (!menu.classList.contains('menu--isExpanded')) menu.classList.add('menu--isExpanded');
       const loc = btn.dataset.submenuLocation;
       if (loc) showSubNavPanel(loc);
+      if (!menu.dataset.subMenuLocation && loc !== 'info') {
+        menu.dataset.subMenuLocation = loc;
+      }
+      if (!menu.classList.contains('menu--isExpanded')) {
+        menu.dataset.subMenuLocation = loc || 'projects';
+      }
       syncMenuOpen();
     });
-  });
-
-  document.querySelectorAll('.subNav a[href]').forEach((a) => {
-    a.addEventListener('click', (e) => e.preventDefault());
   });
 });

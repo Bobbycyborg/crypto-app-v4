@@ -12,36 +12,11 @@ function shLoadSanitySnapshot() {
       return;
     }
     const s = document.createElement('script');
-    s.src = 'sanity-snapshot.js?v=sanity5';
+    s.src = 'sanity-snapshot.js?v=sanity6';
     s.onload = () => resolve(shApplySanitySnapshot(window.SH_SANITY_SNAPSHOT));
     s.onerror = () => resolve(false);
     document.head.appendChild(s);
   });
-}
-
-function shSanityBanner(msg) {
-  let el = document.getElementById('shSanityBanner');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'shSanityBanner';
-    el.setAttribute('role', 'status');
-    Object.assign(el.style, {
-      position: 'fixed',
-      bottom: '12px',
-      left: '12px',
-      right: '12px',
-      maxWidth: '520px',
-      margin: '0 auto',
-      padding: '10px 14px',
-      font: '13px/1.35 system-ui,sans-serif',
-      background: 'rgba(0,0,0,0.82)',
-      color: '#fff',
-      zIndex: '99999',
-      borderRadius: '6px',
-    });
-    document.body.appendChild(el);
-  }
-  el.textContent = msg;
 }
 
 window.SH_SANITY_READY = (async () => {
@@ -97,14 +72,9 @@ window.SH_SANITY_READY = (async () => {
   const snapOk = await shLoadSanitySnapshot();
   if (snapOk) {
     window.SH_SANITY_SOURCE = 'snapshot';
-    if (location.protocol === 'file:') {
-      shSanityBanner(
-        'Local file mode: using saved Sanity snapshot. Images are still from Sanity CDN. Run scripts/refresh-sanity-snapshot.sh to refresh.'
-      );
-    }
     return;
   }
 
   window.SH_SANITY_SOURCE = 'failed';
-  shSanityBanner('Sanity did not load. You need internet. If this persists, run scripts/refresh-sanity-snapshot.sh in SteveStills.');
+  console.error('Sanity did not load — check internet or run scripts/refresh-sanity-snapshot.sh');
 })();
